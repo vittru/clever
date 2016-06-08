@@ -1,6 +1,0 @@
-[28/May/2016:11:49:13] (index) Error when getting news from DB
-[28/May/2016:11:49:13] (index) SQLSTATE[42S22]: Column not found: 1054 Unknown column 'headr' in 'field list'
-[28/May/2016:11:49:17] (index) Error when getting news from DB
-[28/May/2016:11:49:17] (index) SQLSTATE[42S22]: Column not found: 1054 Unknown column 'headr' in 'field list'
-[28/May/2016:11:49:21] (index) Error when getting news from DB
-[28/May/2016:11:49:21] (index) SQLSTATE[42S22]: Column not found: 1054 Unknown column 'headr' in 'field list'
