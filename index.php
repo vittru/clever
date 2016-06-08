@@ -110,10 +110,19 @@
               <!-- / header top left -->
               <div class="aa-header-top-right">
                 <ul class="aa-head-top-nav-right">
-                  <li><a href="account.html">Мой профиль</a></li>
-                  <li class="hidden-xs"><a href="cart.html">Корзина</a></li>
-                  <li class="hidden-xs"><a href="checkout.html">Купить</a></li>
+                  <?php
+                  if ($registry['userName']) {
+                  ?>
+                  <li><a href="account.html">Добро пожаловать <?php echo $registry['userName']  ?>!</a></li>
+                  <?php
+                  } else {
+                  ?>
                   <li><a href="" data-toggle="modal" data-target="#login-modal">Войти</a></li>
+                  <?php
+                  }
+                  ?>
+                  <li class="hidden-xs"><a href="cart.html">Корзина</a></li>
+                  <li class="hidden-xs"><a href="checkout.html">Отследить заказ</a></li>
                 </ul>
               </div>
             </div>
