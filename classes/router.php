@@ -23,13 +23,20 @@ Class Router {
     function delegate() {
         $this->getController($file, $controller, $action, $args);
         if (is_readable($file) == false) {
-                die ('404 Not Found');
+            $file = $this->path . '404.php';
+            $controller = '404';
         }
         include ($file);
         $class = 'Controller_' . $controller;
         $controller = new $class($this->registry);
         if (is_callable(array($controller, $action)) == false) {
-                die ('404 Not Found');
+            echo $action;
+            $file = $this->path . '404.php';
+            include($file);
+            $controller = '404';
+            $action = 'index';
+            $class = 'Controller_' . $controller;
+            $controller = new $class($this->registry);
         }
         $controller->$action();
     }    

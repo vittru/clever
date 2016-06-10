@@ -10,7 +10,7 @@ Abstract Class Controller_Base {
             $this->registry['template']->set ('userName', $this->registry['userName']);
             $this->registry['template']->set ('lastVisit', $this->registry['lastVisit']);
             $this->registry['template']->set ('userEmail', $this->registry['userEmail']);
-            $this->registry['template']->set ('isClient', $this->registry['isClient']);
+        //    $this->registry['template']->set ('isClient', $this->registry['isClient']);
             $this->registry['template']->set ('password', $this->registry['password']);
             $this->registry['template']->set ('spam', $this->registry['isSpam']);
         
