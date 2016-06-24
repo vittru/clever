@@ -89,10 +89,11 @@ include 'header.php';
                 <div class="aa-subscribe-area">
                     <h3>Подпишитесь на нашу рассылку </h3>
                     <p>Это позволит Вам первыми узнавать обо всех наших акциях и новинках!</p>
-                    <form action="" class="aa-subscribe-form" id="subscribe-form">
+                    <form action="" class="aa-subscribe-form" id="subscribe-form" novalidate>
                         <input type="email" name="" id="subscribe-email" placeholder="Ваша почта" value="<?php echo $this->registry['userEmail'];?>">
                         <input type="submit" value="ОК">
                     </form>
+                    <div id="subscribe-error" display="none"></div>
                 </div>
             </div>
         </div>

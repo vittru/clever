@@ -19,3 +19,7 @@ $("#subscribe-form").submit(function(e) {
         }
     });
 });
+
+$("#subscribe-email").focus(function(){
+    $('#subscribe-error').css("display", "none");
+});
