@@ -33,6 +33,8 @@ Class Model {
             . "WHERE email = :userEmail";
     private $getAllNews = "select header, time, text from news order by time desc limit 10";
     private $getNonClientNews = "select headr, time, text from news where forClients=0 order by time desc limit 10";
+    private $addQuestion = "INSERT INTO questions(user, question, date) VALUES(:userId, :question, NOW())";
+    
     
     function __construct($registry) {
         $this->registry = $registry;
@@ -158,8 +160,14 @@ Class Model {
             $sqlCreate = $this->db->prepare($this->createProfile);
             $sqlCreate->bindParam(':userName', $this->registry['userName']);
             $sqlCreate->bindParam(':userEmail', $this->registry['userEmail']);
+            if (!$this->registry['isClient']){
+                $this->registry->set('isClient', 0);
+            }
             $sqlCreate->bindParam(':isClient', $this->registry['isClient'], PDO::PARAM_INT);
             $sqlCreate->bindParam(':userPassword', $this->registry['userPassword']);
+            if (!$this->registry['isSpam']){
+                $this->registry->set('isSpam', 0);
+            }
             $sqlCreate->bindParam(':spam', $this->registry['isSpam'], PDO::PARAM_INT);
             try {
                 $sqlCreate->execute();
@@ -264,7 +272,7 @@ Class Model {
         if ($this->registry['isClient'])
             $sqlSelect = $this->db->prepare($this->getAllNews);
         else 
-            $sqlSelect = $this->db->prepare ($this->getNonClientNews);
+            $sqlSelect = $this->db->prepare($this->getNonClientNews);
         try{
             $sqlSelect->execute();
         } catch (Exception $e) {
@@ -279,6 +287,19 @@ Class Model {
                 array_push($newsArray, $news);
         }
         $this->registry['news']= $newsArray;
+        $sqlSelect->closeCursor();
+    }
+    
+    function addQuestion($userId, $question) {
+        $sqlSelect = $this->db->prepare($this->addQuestion);
+        $sqlSelect->bindParam(':userId', $userId);
+        $sqlSelect->bindParam(':question', $question); 
+        try{
+            $sqlSelect->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when adding a question');
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }
         $sqlSelect->closeCursor();
     }
 }

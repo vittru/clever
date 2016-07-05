@@ -1,6 +1,6 @@
-$("question-form").submit(function(e) {
+$("#question-form").submit(function(e) {
     e.preventDefault();
-    var email = $("#question-email").val,
+    var email = $("#question-email").val(),
         name = $("#question-name").val(),
         question = $("#question-text").val();
     $.ajax({
@@ -19,7 +19,18 @@ $("question-form").submit(function(e) {
                 $("#question-error").html(a);
             }
         }
-    })    
-    
-})
+    }) ;   
+});
+
+$("#question-email").focus(function(){
+    $('#question-error').css("display", "none");
+});
+
+$("#question-name").focus(function(){
+    $('#question-error').css("display", "none");
+});
+
+$("#question-text").focus(function(){
+    $('#question-error').css("display", "none");
+});
 

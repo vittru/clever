@@ -38,7 +38,7 @@ include 'header.php';
                             <div class="col-md-8">
                                 <div class="aa-contact-address-left">
                                     <h4>Задайте нам вопрос</h4>
-                                    <form class="comments-form contact-form" action="" id="question-form">
+                                    <form class="comments-form contact-form" action="" id="question-form" novalidate>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">                        
@@ -57,6 +57,7 @@ include 'header.php';
                                             <textarea class="form-control" rows="3" placeholder="Вопрос" id="question-text"></textarea>
                                         </div>
                                         <button class="aa-secondary-btn">Задать</button>
+                                        <div id="question-error" display="none"></div>
                                     </form>
                                 </div>
                             </div>
@@ -108,3 +109,4 @@ include 'footer.php';
 
 <!-- subscribe js -->
 <script src="js/subscribe.js"></script>
+<script src="js/question.js"></script>
