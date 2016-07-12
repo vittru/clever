@@ -11,6 +11,15 @@
     $registry->set('effects', $model->getCatalog('effects'));
     $registry->set('problems', $model->getCatalog('problems'));
     
+    //This is a temporary init for basket - SHOULD BE REMOVED
+    $basketItem = new BasketItem();
+    $basketItem->goodId=13;
+    $basketItem->name="Мыло хозяйственное";
+    $basketItem->size=100;
+    $basketItem->price=50;
+    $basketItem->quantity=2;
+    $registry->set('basket', array($basketItem));
+    
 
     $template = new Template($registry);
     $registry->set('template', $template);

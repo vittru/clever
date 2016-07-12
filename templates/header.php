@@ -63,35 +63,42 @@
             <div class="aa-header-top-area">
               <!-- start header top left -->
               <div class="aa-header-top-left">
-                <!-- start language -->
                 <div class="aa-language">
-                  <div class="dropdown">
-                    <a class="btn dropdown-toggle" href="#" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                      <img src="img/flag/english.jpg" alt="english flag">ENGLISH
-                      <span class="caret"></span>
+                    <a class="btn" href="about" type="button" id="about">
+                      О нас
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                      <li><a href="#"><img src="img/flag/french.jpg" alt="">FRENCH</a></li>
-                      <li><a href="#"><img src="img/flag/english.jpg" alt="">ENGLISH</a></li>
-                    </ul>
-                  </div>
                 </div>
-                <!-- / language -->
+                <div class="aa-language">
+                    <a class="btn" href="brands" type="button" id="brands">
+                      Бренды
+                    </a>
+                </div>
+                <div class="aa-language">
+                    <a class="btn" href="delivery" type="button" id="delivery">
+                       Доставка
+                    </a>
+                </div>
+                <div class="aa-language">
+                    <a class="btn" href="payment" type="button" id="payment">
+                       Оплата
+                    </a>
+                </div>
+                <div class="aa-language">
+                    <a class="btn" href="services" type="button" id="services">
+                       Сервисы
+                    </a>
+                </div>
+                <div class="aa-language">
+                    <a class="btn" href="actions" type="button" id="actions">
+                       Акции
+                    </a>
+                </div>
+                <div class="aa-language">
+                    <a class="btn" href="contacts" type="button" id="contacts">
+                       Контакты
+                    </a>
+                </div>
 
-                <!-- start currency -->
-                <div class="aa-currency">
-                  <div class="dropdown">
-                    <a class="btn dropdown-toggle" href="#" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                      <i class="fa fa-usd"></i>USD
-                      <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                      <li><a href="#"><i class="fa fa-euro"></i>EURO</a></li>
-                      <li><a href="#"><i class="fa fa-jpy"></i>YEN</a></li>
-                    </ul>
-                  </div>
-                </div>
-                <!-- / currency -->
                 <!-- start cellphone -->
                 <div class="cellphone hidden-xs">
                   <p><span class="fa fa-phone"></span>+7 (927) 658-27-15</p>
@@ -142,39 +149,47 @@
               <!-- / logo  -->
                <!-- cart box -->
               <div class="aa-cartbox">
-                <a class="aa-cart-link" href="#">
+                <a class="aa-cart-link" href="basket">
                   <span class="fa fa-shopping-basket"></span>
                   <span class="aa-cart-title">Корзина</span>
-                  <span class="aa-cart-notify">2</span>
+                  <span class="aa-cart-notify"><?php echo count($this->registry['basket'])+1; ?></span>
                 </a>
                 <div class="aa-cartbox-summary">
                   <ul>
                     <li>
-                      <a class="aa-cartbox-img" href="#"><img src="img/woman-small-2.jpg" alt="img"></a>
+                      <img class="aa-cartbox-img" src="" alt="Подарок">
                       <div class="aa-cartbox-info">
-                        <h4><a href="#">Мыло</a></h4>
-                        <p>1 x 250&#8381;</p>
+                        <h4>Подарок</h4>
+                        <p>0&#8381;</p>
                       </div>
-                      <a class="aa-remove-product" href="#"><span class="fa fa-times"></span></a>
                     </li>
-                    <li>
-                      <a class="aa-cartbox-img" href="#"><img src="img/woman-small-1.jpg" alt="img"></a>
-                      <div class="aa-cartbox-info">
-                        <h4><a href="#">Шампунь</a></h4>
-                        <p>1 x 250&#8381;</p>
-                      </div>
-                      <a class="aa-remove-product" href="#"><span class="fa fa-times"></span></a>
-                    </li>                    
+                    <?php
+                    $total = 0;
+                    foreach ($this->registry['basket'] as $basketItem) {
+                        $total = $total + $basketItem->quantity * $basketItem->price;
+                        ?>
+                        <li>
+                          <a class="aa-cartbox-img" href="product?id=<?php echo $basketItem->goodId ?>"><img src="good<?php echo $basketItem->goodId ?>" alt="<?php echo $basketItem->name ?>"></a>
+                          <div class="aa-cartbox-info">
+                            <h4><?php echo $basketItem->name ?> <?php echo $basketItem->size ?>мл</h4>
+                            <p><?php echo $basketItem->quantity ?> x <?php echo $basketItem->price ?>&#8381;</p>
+                          </div>
+                        </li>
+                        <?php
+                    }
+                    ?>
                     <li>
                       <span class="aa-cartbox-total-title">
                         Всего покупок
                       </span>
                       <span class="aa-cartbox-total-price">
-                        500&#8381;
+                        <?php echo $total ?>&#8381;
                       </span>
                     </li>
                   </ul>
-                  <a class="aa-cartbox-checkout aa-primary-btn" href="checkout.html">Купить</a>
+                  <?php if (count($this->registry['basket']) > 0) { ?>  
+                  <a class="aa-cartbox-checkout aa-primary-btn" href="buy">Купить</a>
+                  <?php } ?>
                 </div>
               </div>
               <!-- / cart box -->
