@@ -34,6 +34,15 @@ Class Model {
     private $getAllNews = "select header, time, text from news order by time desc limit 10";
     private $getNonClientNews = "select headr, time, text from news where forClients=0 order by time desc limit 10";
     private $addQuestion = "INSERT INTO questions(user, question, date) VALUES(:userId, :question, NOW())";
+    private $selectCatalog = "SELECT id, name FROM ";
+    private $updateGood = "UPDATE goods SET name=:name, description=:description, firmId=:firmId, sale=:sale, howTo=:howTo, madeOf=:madeOf WHERE id=:id";
+    private $addGood = "INSERT INTO goods (name, description, firmId, sale, howTo, madeOf) VALUES (:name, :description, :firmId, :sale, :howTo, :madeOf)";
+    private $linkGoodCat = "INSERT INTO `goods-categories` (goodId, categoryId) VALUES(:goodId, :catId)";
+    private $linkGoodProb = "INSERT INTO `goods-problems` (goodId, problemId) VALUES(:goodId, :probId)";
+    private $linkGoodEff = "INSERT INTO `goods-effects` (goodId, effectId) VALUES(:goodId, :effId)";
+    private $linkGoodST = "INSERT INTO `goods-skintypes` (goodId, skintypeId) VALUES(:goodId, :skintypeId)";
+    private $linkGoodHT = "INSERT INTO `goods-hairtypes` (goodId, hairtypeId) VALUES(:goodId, :hairtypeId)";
+    private $selectGood = "SELECT * FROM goods WHERE id=:goodId";
     
     
     function __construct($registry) {
@@ -42,6 +51,7 @@ Class Model {
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     
+    //Gets userId from DB or creates a new one if not exists
     function getUserId() {
         $userId = $this->registry['userId'];
         //First of all we're trying to get User ID from DB
@@ -103,6 +113,7 @@ Class Model {
         return $userId;
     }
     
+    //Gets user's last visit from DB
     function getLastVisit() {
         $sqlLastVisit = $this->db->prepare($this->lastVisit);
         $sqlLastVisit->bindParam(':userId', $this->registry['userId']);
@@ -117,6 +128,7 @@ Class Model {
         return $visit;
     }
     
+    //Adds a record about visit
     function logVisit($pageId) {
         $time = date("Y-m-d H:i:s");
         $sqlLog = $this->db->prepare($this->addVisit);
@@ -302,5 +314,230 @@ Class Model {
         }
         $sqlSelect->closeCursor();
     }
+    
+    function getCatalog($catName) {
+        $sqlSelect = $this->db->prepare($this->selectCatalog . $catName);
+        try{
+            $sqlSelect->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when getting ' . $catName);
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }
+        $catsArray=array();
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $catsArray[$data['id']]=$data['name'];
+        }
+        $sqlSelect->closeCursor();    
+        return $catsArray;       
+    }
+    
+    function addGood($id, $name, $description, $firmId, $sale, $howTo, $madeOf) {
+        if ($id) {
+            $sqlInsert = $this->db->prepare($this->updateGood);
+            $sqlInsert->bindParam(':id', $id);
+        } else {
+            $sqlInsert = $this->db->prepare($this->addGood);
+        }
+        $sqlInsert->bindParam(':name', $name);
+        $sqlInsert->bindParam(':description', $description);
+        $sqlInsert->bindParam(':firmId', $firmId);
+        $sqlInsert->bindParam(':sale', $sale);
+        $sqlInsert->bindParam(':howTo', $howTo);
+        $sqlInsert->bindParam(':madeOf', $madeOf);
+        try{
+            $sqlInsert->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when adding/updating a good');
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }
+        if ($id) {
+            $goodId=$id;
+        } else {
+            $goodId = $this->db->lastInsertId();
+        }
+        $sqlInsert->closeCursor();
+        return $goodId;
+    }
+
+    function linkGoodCat($goodId, $catId) {
+        $sqlInsert = $this->db->prepare($this->linkGoodCat);
+        $sqlInsert->bindParam(':goodId', $goodId);
+        $sqlInsert->bindParam(':catId', $catId);
+        try{
+            $sqlInsert->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when linking good and category');
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }    
+        $sqlInsert->closeCursor();
+    }
+    
+    function linkGoodProb($goodId, $probId) {
+        $sqlInsert = $this->db->prepare($this->linkGoodProb);
+        $sqlInsert->bindParam(':goodId', $goodId);
+        $sqlInsert->bindParam(':probId', $probId);
+            try{
+            $sqlInsert->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when linking good and problem');
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }    
+        $sqlInsert->closeCursor();
+    }
+    
+    function linkGoodEff($goodId, $effId) {
+        $sqlInsert = $this->db->prepare($this->linkGoodEff);
+        $sqlInsert->bindParam(':goodId', $goodId);
+        $sqlInsert->bindParam(':effId', $effId);
+            try{
+            $sqlInsert->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when linking good and effect');
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }    
+        $sqlInsert->closeCursor();
+    }
+
+    function linkGoodST($goodId, $skintypeId) {
+        $sqlInsert = $this->db->prepare($this->linkGoodST);
+        $sqlInsert->bindParam(':goodId', $goodId);
+        $sqlInsert->bindParam(':skintypeId', $skintypeId);
+            try{
+            $sqlInsert->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when linking good and skintype');
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }    
+        $sqlInsert->closeCursor();
+    }
+
+    function linkGoodHT($goodId, $hairtypeId) {
+        $sqlInsert = $this->db->prepare($this->linkGoodHT);
+        $sqlInsert->bindParam(':goodId', $goodId);
+        $sqlInsert->bindParam(':hairtypeId', $hairtypeId);
+            try{
+            $sqlInsert->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when linking good and hairtype');
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }    
+        $sqlInsert->closeCursor();
+    }
+    
+    function getGood($goodId) {
+        $sqlSelect = $this->db->prepare($this->selectGood);
+        $sqlSelect->bindParam(':goodId', $goodId);
+        try{
+            $sqlSelect->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when selecting a product');
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }
+        $data = $sqlSelect->fetch();
+        $good=new Good($goodId, $data['name'], $data['description'], $data['howTo'], $data['madeOf'], $data['sale'], $data['firmId']);
+        $good->cats = $this->getGoodCats($goodId);
+        $good->probs = $this->getGoodProbs($goodId);
+        $good->effs = $this->getGoodEffs($goodId);
+        $good->skintypes = $this->getGoodSTs($goodId);
+        $good->hairtypes = $this->getGoodHTs($goodId);
+        
+        $sqlSelect->closeCursor();    
+        return $good;
+    }
+    
+    function getGoodCats($goodId) {
+        $sqlSelect = $this->db->prepare('SELECT categoryId FROM `goods-categories` WHERE goodId=' . $goodId);
+        try{
+            $sqlSelect->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when selecting product categories');
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }
+        $catsArray=array();
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $catsArray[$data['categoryId']]=$data['categoryId'];
+        }
+        $sqlSelect->closeCursor();
+        return $catsArray;
+    }
+    
+    function getGoodProbs($goodId) {
+        $sqlSelect = $this->db->prepare('SELECT problemId FROM `goods-problems` WHERE goodId=' . $goodId);
+        try{
+            $sqlSelect->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when selecting product problems');
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }
+        $catsArray=array();
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $catsArray[$data['problemId']]=$data['problemId'];
+        }
+        $sqlSelect->closeCursor();
+        return $catsArray;
+    }
+    
+    function getGoodEffs($goodId) {
+        $sqlSelect = $this->db->prepare('SELECT effectId FROM `goods-effects` WHERE goodId=' . $goodId);
+        try{
+            $sqlSelect->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when selecting product effects');
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }
+        $catsArray=array();
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $catsArray[$data['effectId']]=$data['effectId'];
+        }
+        $sqlSelect->closeCursor();
+        return $catsArray;
+    }
+
+    function getGoodSTs($goodId) {
+        $sqlSelect = $this->db->prepare('SELECT skintypeId FROM `goods-skintypes` WHERE goodId=' . $goodId);
+        try{
+            $sqlSelect->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when selecting product skintypes');
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }
+        $catsArray=array();
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $catsArray[$data['skintypeId']]=$data['skintypeId'];
+        }
+        $sqlSelect->closeCursor();
+        return $catsArray;
+    }
+
+        function getGoodHTs($goodId) {
+        $sqlSelect = $this->db->prepare('SELECT hairtypeId FROM `goods-hairtypes` WHERE goodId=' . $goodId);
+        try{
+            $sqlSelect->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when selecting product hairtypes');
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }
+        $catsArray=array();
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $catsArray[$data['hairtypeId']]=$data['hairtypeId'];
+        }
+        $sqlSelect->closeCursor();
+        return $catsArray;
+    }
+    
+    function deleteGoodCat($goodId) {
+        $sqlDelete = $this->db->prepare('DELETE FROM `goods-categories` WHERE goodId=' . $goodId);
+        $sqlDelete->execute();
+        $sqlDelete = $this->db->prepare('DELETE FROM `goods-effects` WHERE goodId=' . $goodId);
+        $sqlDelete->execute();
+        $sqlDelete = $this->db->prepare('DELETE FROM `goods-hairtypes` WHERE goodId=' . $goodId);
+        $sqlDelete->execute();
+        $sqlDelete = $this->db->prepare('DELETE FROM `goods-problems` WHERE goodId=' . $goodId);
+        $sqlDelete->execute();
+        $sqlDelete = $this->db->prepare('DELETE FROM `goods-skintypes` WHERE goodId=' . $goodId);
+        $sqlDelete->execute();
+        $sqlDelete->closeCursor();
+    }
+    
 }
 

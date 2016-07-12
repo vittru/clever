@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">    
-    <title>Клевер - Магазин натуральной косметики</title>
+    <title>Клевер экомаркет</title>
     
     <!-- Font awesome -->
     <link href="css/font-awesome.css" rel="stylesheet">
@@ -203,7 +203,7 @@
         <div class="navbar navbar-default" role="navigation">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
+              <span class="sr-only">Показать меню</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
@@ -212,27 +212,91 @@
           <div class="navbar-collapse collapse">
             <!-- Left nav -->
             <ul class="nav navbar-nav">
-              <li><a href="#">Каталог <span class="caret"></span></a>
-                <ul class="dropdown-menu">                
-                  <li><a href="#">Для мужчин</a></li>
-                  <li><a href="#">Для женщин</a></li>
-                  <li><a href="#">Для детей</a></li>
-                  <li><a href="#">И больше.. <span class="caret"></span></a>
+                <li><a href="catalog">Каталог:</a></li>
+                <li><a href="catalog/firm">По производителям<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                      <li><a href="#">Для бабушек</a></li>
-                      <li><a href="#">Для дедушек</a></li>
+                      <?php foreach ($this->registry['firms'] as $key => $value) {
+                          ?>
+                          <li><a href="catalog/firm?id=<?php echo $key; ?>">
+                          <?php
+                          echo $value;
+                          ?>
+                              </a>
+                          </li>        
+                          <?php        
+                      } ?>  
                     </ul>
-                  </li>
-                </ul>
-              </li>
-              <li><a href="#">О нас <span class="caret"></span></a>
-                <ul class="dropdown-menu">  
-                  <li><a href="#">Кто мы</a></li>                                                                
-                  <li><a href="#">Что мы продаем</a></li>              
-                </ul>
-              </li>
-              <li><a href="#">Оплата и доставка</a></li>
-              <li><a href="contacts">Контакты</a></li>
+                </li>
+                <li><a href="catalog/category">По категориям<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <?php foreach ($this->registry['categories'] as $key => $value) {
+                          ?>
+                          <li><a href="catalog/category?id=<?php echo $key; ?>">
+                          <?php
+                          echo $value;
+                          ?>
+                              </a>
+                          </li>        
+                          <?php        
+                      } ?>  
+                    </ul>
+                </li>
+                <li><a href="catalog/effect">По эффектам<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <?php foreach ($this->registry['effects'] as $key => $value) {
+                          ?>
+                          <li><a href="catalog/effect?id=<?php echo $key; ?>">
+                          <?php
+                          echo $value;
+                          ?>
+                              </a>
+                          </li>        
+                          <?php        
+                      } ?>  
+                    </ul>
+                </li>
+                <li><a href="catalog/problem">По проблемам<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <?php foreach ($this->registry['problems'] as $key => $value) {
+                          ?>
+                          <li><a href="catalog/problem?id=<?php echo $key; ?>">
+                          <?php
+                          echo $value;
+                          ?>
+                              </a>
+                          </li>        
+                          <?php        
+                      } ?>  
+                    </ul>
+                </li>
+                <li><a href="catalog/skintype">По типу кожи<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <?php foreach ($this->registry['skintypes'] as $key => $value) {
+                          ?>
+                          <li><a href="catalog/skintype?id=<?php echo $key; ?>">
+                          <?php
+                          echo $value;
+                          ?>
+                              </a>
+                          </li>        
+                          <?php        
+                      } ?>  
+                    </ul>
+                </li>
+                <li><a href="catalog/hairtype">По типу волос<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <?php foreach ($this->registry['hairtypes'] as $key => $value) {
+                          ?>
+                          <li><a href="catalog/hairtype?id=<?php echo $key; ?>">
+                          <?php
+                          echo $value;
+                          ?>
+                              </a>
+                          </li>        
+                          <?php        
+                      } ?> 
+                    </ul>
+                </li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

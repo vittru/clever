@@ -30,7 +30,6 @@ Class Router {
         $class = 'Controller_' . $controller;
         $controller = new $class($this->registry);
         if (is_callable(array($controller, $action)) == false) {
-            echo $action;
             $file = $this->path . '404.php';
             include($file);
             $controller = '404';
