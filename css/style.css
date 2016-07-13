@@ -37,7 +37,8 @@
 
 /* BASE - Base tyles, Variables, Mixins, etc. */
 body {
-  background-color: #ffffff;
+  background-image: url('../images/design/background.jpg');
+/*  background-color: #ffffff;*/
   font-family: "Lato", sans-serif;
   color: #333333;
   font-size: 16px;
@@ -333,7 +334,6 @@ img {
   margin-left: -2px;
 }
 #aa-header .aa-header-top .aa-header-top-left .cellphone {
-  border-right: 1px solid #ddd;
   float: left;
 }
 #aa-header .aa-header-top .aa-header-top-left .cellphone p {
@@ -3348,7 +3348,7 @@ img {
 ====================*/
 
 #aa-footer {
-  background-color: #222;
+/*  background-color: #222;  */
   display: inline;
   float: left;
   width: 100%;
@@ -3369,7 +3369,7 @@ img {
   display: block;
 }
 #aa-footer .aa-footer-top .aa-footer-top-area .aa-footer-widget h3 {
-  color: #fff;
+/*  color: #fff; */
 }
 #aa-footer .aa-footer-top .aa-footer-top-area .aa-footer-widget .aa-footer-nav li a {
   color: #888;

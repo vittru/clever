@@ -22,19 +22,18 @@ Class Router {
 
     function delegate() {
         $this->getController($file, $controller, $action, $args);
-        if (is_readable($file) == false) {
-            $file = $this->path . '404.php';
-            $controller = '404';
-        }
+//        if (is_readable($file) == false) {
+//            $file = $this->path . '404.php';
+//            $controller = '404';
+//        }
         include ($file);
         $class = 'Controller_' . $controller;
         $controller = new $class($this->registry);
         if (is_callable(array($controller, $action)) == false) {
             $file = $this->path . '404.php';
             include($file);
-            $controller = '404';
             $action = 'index';
-            $class = 'Controller_' . $controller;
+            $class = 'Controller_404';
             $controller = new $class($this->registry);
         }
         $controller->$action();
