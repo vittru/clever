@@ -11,7 +11,7 @@
             <h2>404</h2>
             <span>Извините! У нас нет запрашиваемой Вами страницы.</span>
             <p>Уточните вашу ссылку или напишите нам <a class="email" href="mailto:clever@clubclever.ru">clever@clubclever.ru</a></p>
-            <a href="index.php"> На главную</a>
+            <a href="/"> На главную</a>
           </div>
         </div>
       </div>

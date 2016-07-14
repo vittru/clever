@@ -3197,7 +3197,7 @@ img {
 ====================*/
 
 #aa-contact {
-  background: #ccc none repeat scroll 0 0;
+/*  background: #ccc none repeat scroll 0 0; */
   display: inline;
   float: left;
   width: 100%;
@@ -3209,7 +3209,7 @@ img {
   width: 100%;
 }
 #aa-contact .aa-contact-area .aa-contact-top {
-  background-color: #FFF;
+/*  background-color: #FFF; */
   display: inline;
   float: left;
   padding: 50px 100px;
@@ -3232,7 +3232,7 @@ img {
   margin-bottom: -6px;
 }
 #aa-contact .aa-contact-area .aa-contact-address {
-  background-color: #FFF;
+/*  background-color: #FFF; */
   display: inline;
   float: left;
   padding: 50px;

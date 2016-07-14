@@ -174,6 +174,7 @@
                             <h4><?php echo $basketItem->name ?> <?php echo $basketItem->size ?>мл</h4>
                             <p><?php echo $basketItem->quantity ?> x <?php echo $basketItem->price ?>&#8381;</p>
                           </div>
+                          <a class="aa-remove-product" href="#"><span class="fa fa-times"></span></a>
                         </li>
                         <?php
                     }
