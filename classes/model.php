@@ -509,7 +509,7 @@ Class Model {
         return $catsArray;
     }
 
-        function getGoodHTs($goodId) {
+    function getGoodHTs($goodId) {
         $sqlSelect = $this->db->prepare('SELECT hairtypeId FROM `goods-hairtypes` WHERE goodId=' . $goodId);
         try{
             $sqlSelect->execute();
@@ -537,6 +537,57 @@ Class Model {
         $sqlDelete = $this->db->prepare('DELETE FROM `goods-skintypes` WHERE goodId=' . $goodId);
         $sqlDelete->execute();
         $sqlDelete->closeCursor();
+    }
+    
+    function getFirm($firmId) {
+        $sqlSelect = $this->db->prepare('SELECT name, description FROM firms WHERE id=' . $firmId);
+        try{
+            $sqlSelect->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when getting a firm with id=' . $firmId);
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }
+        $data = $sqlSelect->fetch();
+        $firm = new Firm($firmId, $data['name'], $data['description']);
+        $firm->goods = $this->getGoodsByFirm($firmId);
+        $firm->categories = $this->getFirmCats($firmId);
+        $sqlSelect->closeCursor();
+        return $firm;
+    }
+    
+    function getGoodsByFirm($firmId) {
+        $sqlSelect = $this->db->prepare('SELECT id FROM goods WHERE firmId=' . $firmId);
+        try{
+            $sqlSelect->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when getting goods of firm with id=' . $firmId);
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }   
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $good = $this->getGood($data['id']);
+            if (!$goods)
+                $goods = [$good];
+            else
+                array_push($goods, $good);
+        }
+        $sqlSelect->closeCursor();
+        return $goods;
+    }
+    
+    function getFirmCats($firmId) {
+        $sqlSelect = $this->db->prepare('SELECT DISTINCT cat.id, cat.name FROM categories cat, `goods-categories` gc, goods g WHERE cat.id=gc.categoryid AND gc.goodId=g.id and g.firmId=' . $firmId);
+        try{
+            $sqlSelect->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when getting categories of firm with id=' . $firmId);
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }
+        $catsArray=array();
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $catsArray[$data['id']]=$data['name'];
+        }
+        $sqlSelect->closeCursor();
+        return $catsArray;
     }
     
 }

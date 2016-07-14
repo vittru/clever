@@ -15,7 +15,6 @@ include 'header.php';
                     <!-- contact map -->
                     <div class="aa-contact-map">
                         <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=3Z04yabmOvp2FZ3pW8QyO_fTbB6Y_MFy&width=100%&height=450&lang=ru_RU&sourceType=constructor&scroll=true"></script>
-                        <!--iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3902.3714257064535!2d-86.7550931378034!3d34.66757706940219!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8862656f8475892d%3A0xf3b1aee5313c9d4d!2sHuntsville%2C+AL+35813%2C+USA!5e0!3m2!1sen!2sbd!4v1445253385137" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe-->
                     </div>
                     <!-- Contact address -->
                     <div class="aa-contact-address">
@@ -93,5 +92,5 @@ include 'footer.php';
 ?>
 
 <!-- subscribe js -->
-<script src="js/subscribe.js"></script>
-<script src="js/question.js"></script>
+<script src="/js/subscribe.js"></script>
+<script src="/js/question.js"></script>

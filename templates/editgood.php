@@ -7,7 +7,7 @@ if ($goodId) {
 ?>
 
 
-<form method="post" action="editgood/save">
+<form method="post" action="/editgood/save">
     <input hidden name='id' value='<?php echo $goodId ?>'>
     <div class="form-group">
         <label for="name">Имя:</label>

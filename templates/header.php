@@ -197,7 +197,7 @@
               <!-- search box -->
               <div class="aa-search-box">
                 <form action="">
-                  <input type="text" name="" id="" placeholder="Поиск по каталогу">
+                  <input type="text" name="" id="search" placeholder="Поиск по каталогу">
                   <button type="submit"><span class="fa fa-search"></span></button>
                 </form>
               </div>
