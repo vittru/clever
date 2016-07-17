@@ -69,11 +69,6 @@
                     </a>
                 </div>
                 <div class="aa-header-top-left">
-                    <a class="btn" href="/brands" type="button" id="brands">
-                      Бренды
-                    </a>
-                </div>
-                <div class="aa-header-top-left">
                     <a class="btn" href="/delivery" type="button" id="delivery">
                        Доставка
                     </a>
@@ -81,16 +76,6 @@
                 <div class="aa-header-top-left">
                     <a class="btn" href="/payment" type="button" id="payment">
                        Оплата
-                    </a>
-                </div>
-                <div class="aa-header-top-left">
-                    <a class="btn" href="/services" type="button" id="services">
-                       Сервисы
-                    </a>
-                </div>
-                <div class="aa-header-top-left">
-                    <a class="btn" href="/actions" type="button" id="actions">
-                       Акции
                     </a>
                 </div>
                 <div class="aa-header-top-left">
@@ -228,8 +213,8 @@
           <div class="navbar-collapse collapse">
             <!-- Left nav -->
             <ul class="nav navbar-nav">
-                <li><a href="/catalog">Каталог:</a></li>
-                <li><a href="/catalog/firm">По производителям<span class="caret"></span></a>
+                <li><a href="/catalog">Каталог</a></li>
+                <li><a href="/catalog/firm">Бренды<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                       <?php foreach ($this->registry['firms'] as $key => $value) {
                           ?>
@@ -243,75 +228,9 @@
                       } ?>  
                     </ul>
                 </li>
-                <li><a href="/catalog/category">По категориям<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <?php foreach ($this->registry['categories'] as $key => $value) {
-                          ?>
-                          <li><a href="/catalog/category?id=<?php echo $key; ?>">
-                          <?php
-                          echo $value;
-                          ?>
-                              </a>
-                          </li>        
-                          <?php        
-                      } ?>  
-                    </ul>
+                <li><a href="/actions">Акции</a>
                 </li>
-                <li><a href="/catalog/effect">По эффектам<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <?php foreach ($this->registry['effects'] as $key => $value) {
-                          ?>
-                          <li><a href="/catalog/effect?id=<?php echo $key; ?>">
-                          <?php
-                          echo $value;
-                          ?>
-                              </a>
-                          </li>        
-                          <?php        
-                      } ?>  
-                    </ul>
-                </li>
-                <li><a href="/catalog/problem">По проблемам<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <?php foreach ($this->registry['problems'] as $key => $value) {
-                          ?>
-                          <li><a href="/catalog/problem?id=<?php echo $key; ?>">
-                          <?php
-                          echo $value;
-                          ?>
-                              </a>
-                          </li>        
-                          <?php        
-                      } ?>  
-                    </ul>
-                </li>
-                <li><a href="/catalog/skintype">По типу кожи<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <?php foreach ($this->registry['skintypes'] as $key => $value) {
-                          ?>
-                          <li><a href="/catalog/skintype?id=<?php echo $key; ?>">
-                          <?php
-                          echo $value;
-                          ?>
-                              </a>
-                          </li>        
-                          <?php        
-                      } ?>  
-                    </ul>
-                </li>
-                <li><a href="/catalog/hairtype">По типу волос<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <?php foreach ($this->registry['hairtypes'] as $key => $value) {
-                          ?>
-                          <li><a href="/catalog/hairtype?id=<?php echo $key; ?>">
-                          <?php
-                          echo $value;
-                          ?>
-                              </a>
-                          </li>        
-                          <?php        
-                      } ?> 
-                    </ul>
+                <li><a href="/additional">Прочее</a>
                 </li>
             </ul>
           </div><!--/.nav-collapse -->

@@ -11,12 +11,14 @@ Class Good {
     public $sale;
     public $firmId;
     public $cats;
-    public $probs;
+    public $problem;
     public $effs;
     public $skintypes;
     public $hairtypes;
+    public $sizes;
+    public $types;
    
-    function __construct($id, $name, $description, $howTo, $madeOf, $sale, $firmId) {
+    function __construct($id, $name, $description, $howTo, $madeOf, $sale, $firmId, $problem) {
        $this->id = $id;
        $this->name = $name;
        $this->description = $description;
@@ -24,6 +26,15 @@ Class Good {
        $this->madeOf = $madeOf;
        $this->sale = $sale;
        $this->firmId = $firmId;
+       $this->problem = $problem;
+    }
+    
+    function getPrice() {
+        return reset($this->sizes)->price * (100-$this->sale)/100;
+    }
+    
+    function getOldPrice() {
+        return reset($this->sizes)->price;
     }
     
 }

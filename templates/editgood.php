@@ -7,7 +7,7 @@ if ($goodId) {
 ?>
 
 
-<form method="post" action="/editgood/save">
+<form method="post" action="/editgood/save" enctype="multipart/form-data">
     <input hidden name='id' value='<?php echo $goodId ?>'>
     <div class="form-group">
         <label for="name">Имя:</label>
@@ -33,7 +33,19 @@ if ($goodId) {
     </div>
 
     <div class="form-group">
-        <label for="">Категория:</label>
+        <label>Для кого:</label>
+        <?php
+        foreach ($this->registry['types'] as $key => $value) {
+            ?>
+            <label class="checkbox-inline"><input type="checkbox" value="" name="mentype<?php echo $key ?>" <?php if (in_array($value, $good->types)) echo "checked" ?>><?php echo $value ?></label>
+            <?php
+        }
+        ?>
+    </div>
+    
+    
+    <div class="form-group">
+        <label>Категория:</label>
         <?php
         foreach ($this->registry['categories'] as $key => $value) {
             ?>
@@ -42,20 +54,9 @@ if ($goodId) {
         }
         ?>
     </div>
-
-    <div class="form-group">
-        <label for="">Проблема:</label>    
-        <?php
-        foreach ($this->registry['problems'] as $key => $value) {
-            ?>
-            <label class="checkbox-inline"><input type="checkbox" value="" name="prob<?php echo $key ?>" <?php if (in_array($key, $good->probs)) echo "checked" ?>><?php echo $value ?></label>
-            <?php
-        }
-        ?>
-    </div>
         
     <div class="form-group">
-        <label for="">Эффект:</label>    
+        <label>Эффект:</label>    
         <?php
         foreach ($this->registry['effects'] as $key => $value) {
             ?>
@@ -66,7 +67,7 @@ if ($goodId) {
     </div>
 
     <div class="form-group">
-        <label for="">Тип кожи:</label>    
+        <label>Тип кожи:</label>    
         <?php
         foreach ($this->registry['skintypes'] as $key => $value) {
             ?>
@@ -77,7 +78,7 @@ if ($goodId) {
     </div>
 
     <div class="form-group">
-        <label for="">Тип волос:</label>    
+        <label>Тип волос:</label>    
         <?php
         foreach ($this->registry['hairtypes'] as $key => $value) {
             ?>
@@ -96,6 +97,11 @@ if ($goodId) {
         <label for="howTo">Способ применения:</label>
         <textarea class="form-control" rows="3" id="howTo" name="howTo"><?php if ($good) echo $good->howTo ?></textarea>
     </div>
+
+    <div class="form-group">
+        <label for="problem">Проблема:</label>
+        <textarea class="form-control" rows="3" id="howTo" name="problem"><?php if ($good) echo $good->problem ?></textarea>
+    </div>
     
     <div class="form-group">
         <label for="sale">Скидка:</label>
@@ -107,7 +113,133 @@ if ($goodId) {
             }  ?>'>
         <label>%</label>
     </div>
+      
     
+    <table class="table">
+    <thead>
+      <tr>
+        <th>Размер</th>
+        <th>Цена</th>
+        <th>Артикул</th>
+        <th>На складе</th>
+        <th>Скидка</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+            <input class="form-control" type="hidden" id="sizeId1" name="sizeId1" value="<?php 
+            if ($good) {
+                echo $good->sizes[0]->id;
+            }?>">
+            <input class="form-control" type="text" id="size1" name="size1" value='<?php 
+            if ($good) {
+                echo $good->sizes[0]->size;
+            }?>'>
+        </td>
+        <td><input class="form-control" type="text" id="price1" name="price1" value='<?php 
+            if ($good) {
+                echo $good->sizes[0]->price;
+            }?>'>
+        </td>
+        <td><input class="form-control" type="text" id="code1" name="code1" value='<?php 
+            if ($good) {
+                echo $good->sizes[0]->code;
+            }?>'>
+        </td>
+        <td><input class="form-control" type="text" id="instock1" name="instock1" value='<?php 
+            if ($good and $good->sizes[0]) {
+                echo $good->sizes[0]->instock;
+            }else {
+                echo 0;
+            } ?>'>
+        </td>
+        <td><input class="form-control" type="text" id="sale1" name="sale1" value='<?php 
+            if ($good and $good->sizes[0]) {
+                echo $good->sizes[0]->sale;
+            }else {
+                echo 0;
+            } ?>'>
+        </td>
+      </tr>
+      <tr>
+        <td>
+            <input class="form-control" type="hidden" id="sizeId2" name="sizeId2" value="<?php 
+            if ($good) {
+                echo $good->sizes[1]->id;
+            }?>">
+            <input class="form-control" type="text" id="size2" name="size2" value='<?php 
+            if ($good) {
+                echo $good->sizes[1]->size;
+            }?>'>
+        </td>
+        <td><input class="form-control" type="text" id="price2" name="price2" value='<?php 
+            if ($good) {
+                echo $good->sizes[1]->price;
+            }?>'>
+        </td>
+        <td><input class="form-control" type="text" id="code2" name="code2" value='<?php 
+            if ($good) {
+                echo $good->sizes[1]->code;
+            }?>'>
+        </td>
+        <td><input class="form-control" type="text" id="instock2" name="instock2" value='<?php 
+            if ($good and $good->sizes[1]) {
+                echo $good->sizes[1]->instock;
+            }else {
+                echo 0;
+            } ?>'>
+        </td>
+        <td><input class="form-control" type="text" id="sale2" name="sale2" value='<?php 
+            if ($good and $good->sizes[1]) {
+                echo $good->sizes[1]->sale;
+            }else {
+                echo 0;
+            } ?>'>
+        </td>
+      </tr>
+      <tr>
+        <td>
+            <input class="form-control" type="hidden" id="sizeId3" name="sizeId3" value="<?php 
+            if ($good) {
+                echo $good->sizes[2]->id;
+            }?>">
+            <input class="form-control" type="text" id="size3" name="size3" value='<?php 
+            if ($good) {
+                echo $good->sizes[2]->size;
+            }?>'>
+        </td>
+        <td><input class="form-control" type="text" id="price3" name="price3" value='<?php 
+            if ($good) {
+                echo $good->sizes[2]->price;
+            }?>'>
+        </td>
+        <td><input class="form-control" type="text" id="code3" name="code3" value='<?php 
+            if ($good) {
+                echo $good->sizes[2]->code;
+            }?>'>
+        </td>
+        <td><input class="form-control" type="text" id="instock3" name="instock3" value='<?php 
+            if ($good and $good->sizes[2]) {
+                echo $good->sizes[2]->instock;
+            }else {
+                echo 0;
+            } ?>'>
+        </td>
+        <td><input class="form-control" type="text" id="sale3" name="sale3" value='<?php 
+            if ($good and $good->sizes[2]) {
+                echo $good->sizes[2]->sale;
+            }else {
+                echo 0;
+            } ?>'>
+        </td>
+      </tr>
+    </tbody>
+  </table>        
+  <input class="form-control" type="file" name="image1" id="image1">          
+  <input class="form-control" type="file" name="image2" id="image2">          
+  <input class="form-control" type="file" name="image3" id="image3">          
+            
     <button type="submit" class="btn btn-success">Сохранить</button>
     
 </form>

@@ -1019,7 +1019,7 @@ img {
   width: 100%;
 }
 #aa-product .aa-product-area .aa-product-inner .aa-product-catg {
-  float: left;
+/*  float: left; */
 }
 #aa-product .aa-product-area .aa-product-inner {
   text-align: center;
@@ -1100,7 +1100,7 @@ img {
   background-color: inherit;
 }
 .aa-product-catg {
-  margin-left: -54px;
+/*  margin-left: -54px;*/
 }
 .aa-product-catg li {
   display: block;
@@ -1108,12 +1108,12 @@ img {
   height: 380px;
   text-align: center;
   margin: 0 0 20px 55px;
-  width: 20.5%;
+ /* width: 20.5%;*/
   position: relative;
   overflow: hidden;
 }
 .aa-product-catg li:hover figure .aa-product-img {
-  background-color: rgba(0, 0, 0, 0.5);
+/*  background-color: rgba(0, 0, 0, 0.5);*/
 }
 .aa-product-catg li:hover figure .aa-add-card-btn {
   -moz-transform: scale(1);
@@ -1214,7 +1214,7 @@ img {
 .aa-product-catg li .aa-badge {
   position: absolute;
   top: 5%;
-  left: 0;
+  left: 15px;
   padding: 5px 10px;
   color: #fff;
   font-size: 15px;

@@ -9,7 +9,8 @@
     $registry->set('categories', $model->getCatalog('categories'));
     $registry->set('firms', $model->getCatalog('firms'));
     $registry->set('effects', $model->getCatalog('effects'));
-    $registry->set('problems', $model->getCatalog('problems'));
+    $registry->set('types', $model->getCatalog('types'));
+    $registry->set('goods', $model->getAllGoods());
     
     //This is a temporary init for basket - SHOULD BE REMOVED
     $basketItem = new BasketItem();

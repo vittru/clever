@@ -35,14 +35,13 @@ Class Model {
     private $getNonClientNews = "select headr, time, text from news where forClients=0 order by time desc limit 10";
     private $addQuestion = "INSERT INTO questions(user, question, date) VALUES(:userId, :question, NOW())";
     private $selectCatalog = "SELECT id, name FROM ";
-    private $updateGood = "UPDATE goods SET name=:name, description=:description, firmId=:firmId, sale=:sale, howTo=:howTo, madeOf=:madeOf WHERE id=:id";
-    private $addGood = "INSERT INTO goods (name, description, firmId, sale, howTo, madeOf) VALUES (:name, :description, :firmId, :sale, :howTo, :madeOf)";
+    private $updateGood = "UPDATE goods SET name=:name, description=:description, firmId=:firmId, sale=:sale, howTo=:howTo, madeOf=:madeOf, problem=:problem WHERE id=:id";
+    private $addGood = "INSERT INTO goods (name, description, firmId, sale, howTo, madeOf, problem) VALUES (:name, :description, :firmId, :sale, :howTo, :madeOf, :problem)";
     private $linkGoodCat = "INSERT INTO `goods-categories` (goodId, categoryId) VALUES(:goodId, :catId)";
-    private $linkGoodProb = "INSERT INTO `goods-problems` (goodId, problemId) VALUES(:goodId, :probId)";
+    private $linkGoodType = "INSERT INTO `goods-types` (goodId, typeId) VALUES(:goodId, :typeId)";
     private $linkGoodEff = "INSERT INTO `goods-effects` (goodId, effectId) VALUES(:goodId, :effId)";
     private $linkGoodST = "INSERT INTO `goods-skintypes` (goodId, skintypeId) VALUES(:goodId, :skintypeId)";
     private $linkGoodHT = "INSERT INTO `goods-hairtypes` (goodId, hairtypeId) VALUES(:goodId, :hairtypeId)";
-    private $selectGood = "SELECT * FROM goods WHERE id=:goodId";
     
     
     function __construct($registry) {
@@ -331,7 +330,7 @@ Class Model {
         return $catsArray;       
     }
     
-    function addGood($id, $name, $description, $firmId, $sale, $howTo, $madeOf) {
+    function addGood($id, $name, $description, $firmId, $sale, $madeOf, $howTo, $problem) {
         if ($id) {
             $sqlInsert = $this->db->prepare($this->updateGood);
             $sqlInsert->bindParam(':id', $id);
@@ -344,6 +343,7 @@ Class Model {
         $sqlInsert->bindParam(':sale', $sale);
         $sqlInsert->bindParam(':howTo', $howTo);
         $sqlInsert->bindParam(':madeOf', $madeOf);
+        $sqlInsert->bindParam(':problem', $problem);
         try{
             $sqlInsert->execute();
         } catch (Exception $e) {
@@ -359,6 +359,19 @@ Class Model {
         return $goodId;
     }
 
+    function linkGoodType($goodId, $typeId) {
+        $sqlInsert = $this->db->prepare($this->linkGoodType);
+        $sqlInsert->bindParam(':goodId', $goodId);
+        $sqlInsert->bindParam(':typeId', $typeId);
+        try{
+            $sqlInsert->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when linking good '.$goodId.' and type '.$typeId);
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }    
+        $sqlInsert->closeCursor();
+    }    
+    
     function linkGoodCat($goodId, $catId) {
         $sqlInsert = $this->db->prepare($this->linkGoodCat);
         $sqlInsert->bindParam(':goodId', $goodId);
@@ -371,20 +384,7 @@ Class Model {
         }    
         $sqlInsert->closeCursor();
     }
-    
-    function linkGoodProb($goodId, $probId) {
-        $sqlInsert = $this->db->prepare($this->linkGoodProb);
-        $sqlInsert->bindParam(':goodId', $goodId);
-        $sqlInsert->bindParam(':probId', $probId);
-            try{
-            $sqlInsert->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when linking good and problem');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }    
-        $sqlInsert->closeCursor();
-    }
-    
+        
     function linkGoodEff($goodId, $effId) {
         $sqlInsert = $this->db->prepare($this->linkGoodEff);
         $sqlInsert->bindParam(':goodId', $goodId);
@@ -425,8 +425,7 @@ Class Model {
     }
     
     function getGood($goodId) {
-        $sqlSelect = $this->db->prepare($this->selectGood);
-        $sqlSelect->bindParam(':goodId', $goodId);
+        $sqlSelect = $this->db->prepare("SELECT * FROM goods WHERE id=" . $goodId);
         try{
             $sqlSelect->execute();
         } catch (Exception $e) {
@@ -434,15 +433,51 @@ Class Model {
             $this->registry['logger']->lwrite($e->getMessage()); 
         }
         $data = $sqlSelect->fetch();
-        $good=new Good($goodId, $data['name'], $data['description'], $data['howTo'], $data['madeOf'], $data['sale'], $data['firmId']);
+        $good=new Good($goodId, $data['name'], $data['description'], $data['howTo'], $data['madeOf'], $data['sale'], $data['firmId'], $data['problem']);
         $good->cats = $this->getGoodCats($goodId);
-        $good->probs = $this->getGoodProbs($goodId);
         $good->effs = $this->getGoodEffs($goodId);
         $good->skintypes = $this->getGoodSTs($goodId);
         $good->hairtypes = $this->getGoodHTs($goodId);
+        $good->sizes = $this->getGoodSizes($goodId);
+        $good->types = $this->getGoodTypes($goodId);
         
         $sqlSelect->closeCursor();    
         return $good;
+    }
+    
+    function getGoodTypes($goodId) {
+        $sqlSelect = $this->db->prepare('SELECT t.id, t.name FROM types t, `goods-types` gt WHERE t.id=gt.typeId AND gt.goodId='.$goodId);
+        try{
+            $sqlSelect->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when selecting product types');
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }
+        $types = array();
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $types[$data['id']]=$data['name'];
+        }
+        $sqlSelect->closeCursor();
+        return $types;        
+    }
+    
+    function getGoodSizes($goodId) {
+        $sqlSelect = $this->db->prepare('SELECT gs.id, gs.size, w.price, w.instock, w.onhold, gs.code, gs.sale FROM `goods-sizes` gs LEFT JOIN warehouse w ON gs.Id=w.psId WHERE gs.goodId='.$goodId.' ORDER BY w.price');
+        try{
+            $sqlSelect->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when selecting product sizes');
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $size = new Size($data['id'], $data['size'], $data['price'], $data['sale'], $data['code'], $data['instock'], $data['onhold']);
+            if (!$sizes) 
+                $sizes=[$size];
+            else
+                array_push($sizes, $size);
+        }
+        $sqlSelect->closeCursor();
+        return $sizes;
     }
     
     function getGoodCats($goodId) {
@@ -456,22 +491,6 @@ Class Model {
         $catsArray=array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $catsArray[$data['categoryId']]=$data['categoryId'];
-        }
-        $sqlSelect->closeCursor();
-        return $catsArray;
-    }
-    
-    function getGoodProbs($goodId) {
-        $sqlSelect = $this->db->prepare('SELECT problemId FROM `goods-problems` WHERE goodId=' . $goodId);
-        try{
-            $sqlSelect->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when selecting product problems');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }
-        $catsArray=array();
-        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $catsArray[$data['problemId']]=$data['problemId'];
         }
         $sqlSelect->closeCursor();
         return $catsArray;
@@ -526,13 +545,13 @@ Class Model {
     }
     
     function deleteGoodCat($goodId) {
+        $sqlDelete = $this->db->prepare('DELETE FROM `goods-types` WHERE goodId=' . $goodId);
+        $sqlDelete->execute();
         $sqlDelete = $this->db->prepare('DELETE FROM `goods-categories` WHERE goodId=' . $goodId);
         $sqlDelete->execute();
         $sqlDelete = $this->db->prepare('DELETE FROM `goods-effects` WHERE goodId=' . $goodId);
         $sqlDelete->execute();
         $sqlDelete = $this->db->prepare('DELETE FROM `goods-hairtypes` WHERE goodId=' . $goodId);
-        $sqlDelete->execute();
-        $sqlDelete = $this->db->prepare('DELETE FROM `goods-problems` WHERE goodId=' . $goodId);
         $sqlDelete->execute();
         $sqlDelete = $this->db->prepare('DELETE FROM `goods-skintypes` WHERE goodId=' . $goodId);
         $sqlDelete->execute();
@@ -588,6 +607,66 @@ Class Model {
         }
         $sqlSelect->closeCursor();
         return $catsArray;
+    }
+    
+    function getAllGoods() {
+        $sqlSelect = $this->db->prepare('SELECT id FROM goods');
+        try{
+            $sqlSelect->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when getting all goods');
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }   
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $good = $this->getGood($data['id']);
+            if (!$goods)
+                $goods = [$good];
+            else
+                array_push($goods, $good);
+        }
+        $sqlSelect->closeCursor();
+        return $goods;        
+    }
+    
+    function addGoodSize($goodId, $gsId, $size, $price, $code, $instock, $sale) {
+        if (!$code)
+            $code = null;
+        if ($gsId) {
+            $sqlQuery = $this->db->prepare('UPDATE `goods-sizes` SET goodId=:goodId, size=:size, code=:code, sale=:sale WHERE id='.$gsId);
+        } else {
+            $sqlQuery = $this->db->prepare('INSERT INTO `goods-sizes`(goodId, size, code, sale) VALUES(:goodId,:size,:code,:sale)');
+        }
+        $sqlQuery->bindParam(':goodId', $goodId);
+        $sqlQuery->bindParam(':size', $size);
+        $sqlQuery->bindParam(':code', $code);
+        $sqlQuery->bindParam(':sale', $sale);
+        try{
+            $sqlQuery->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when updating/inserting size ' . $size .' for good '.$goodId);
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        } 
+        if (!$gsId)
+            $gsId = $this->db->lastInsertId();
+        $sqlQuery->closeCursor();
+        $sqlSelect = $this->db->prepare('SELECT id FROM warehouse WHERE psId='.$gsId);
+        $sqlSelect->execute();
+        $warId = $sqlSelect->fetchColumn();
+        $sqlSelect->closeCursor();
+        if ($warId)
+            $sqlQuery2 = $this->db->prepare('UPDATE warehouse SET price=:price, instock=:instock WHERE psId=:gsId');
+        else 
+            $sqlQuery2 = $this->db->prepare('INSERT INTO warehouse(psId, price, instock) VALUES (:gsId, :price, :instock)');
+        $sqlQuery2->bindParam(':gsId', $gsId);
+        $sqlQuery2->bindParam(':price', $price);
+        $sqlQuery2->bindParam(':instock', $instock);
+        try{
+            $sqlQuery2->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when updating/inserting warehouse data for goodsize '.$gsId);
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        } 
+        $sqlQuery2->closeCursor();
     }
     
 }
