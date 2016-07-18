@@ -23,7 +23,7 @@ $good = $this->registry['good'];
                 </a>
             </div>
         </div>
-        <div class="simpleLens-thumbnails-container">
+        <!--div class="simpleLens-thumbnails-container">
             <a href="#" class="simpleLens-thumbnail-wrapper"
                data-lens-image="img/view-slider/large/polo-shirt-1.png"
                data-big-image="img/view-slider/medium/polo-shirt-1.png">
@@ -40,7 +40,7 @@ $good = $this->registry['good'];
                data-big-image="img/view-slider/medium/polo-shirt-4.png">
                 <img src="img/view-slider/thumbnail/polo-shirt-4.png">
             </a>
-        </div>
+        </div-->
       </div>
     </div>
   </div>

@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">    
     <title>Клевер экомаркет</title>
     
     <!-- Font awesome -->
@@ -124,12 +125,12 @@
               <!-- logo  -->
               <div class="aa-logo">
                 <!-- Text based logo -->
-                <a href="index.php">
+                <a href="/index.php">
                   <span class="fa fa-shopping-cart"></span>
                   <p><strong>Клевер</strong> <span>магазин натуральной косметики</span></p>
                 </a>
                 <!-- img based logo -->
-                <!-- <a href="index.html"><img src="img/logo.jpg" alt="logo img"></a> -->
+                <!-- a href="/index.php"><img src="images/design/logo.jpg" alt="Экомаркет Клевер"></a -->
               </div>
               <!-- / logo  -->
                <!-- cart box -->
@@ -142,7 +143,7 @@
                 <div class="aa-cartbox-summary">
                   <ul>
                     <li>
-                      <img class="aa-cartbox-img" src="" alt="Подарок">
+                        <img class="aa-cartbox-img" src="/images/goods/present.jpg" alt="Подарок">
                       <div class="aa-cartbox-info">
                         <h4>Подарок</h4>
                         <p>0&#8381;</p>
@@ -154,9 +155,9 @@
                         $total = $total + $basketItem->quantity * $basketItem->price;
                         ?>
                         <li>
-                          <a class="aa-cartbox-img" href="/product?id=<?php echo $basketItem->goodId ?>"><img src="good<?php echo $basketItem->goodId ?>" alt="<?php echo $basketItem->name ?>"></a>
+                          <a class="aa-cartbox-img" href="/showgood?id=<?php echo $basketItem->goodId ?>"><img src="/images/goods/good<?php echo $basketItem->goodId ?>-1.jpg" alt="<?php echo $basketItem->name ?>"></a>
                           <div class="aa-cartbox-info">
-                            <h4><?php echo $basketItem->name ?> <?php echo $basketItem->size ?>мл</h4>
+                            <h4><?php echo $basketItem->name ?> <?php echo $basketItem->size ?></h4>
                             <p><?php echo $basketItem->quantity ?> x <?php echo $basketItem->price ?>&#8381;</p>
                           </div>
                           <a class="aa-remove-product" href="#"><span class="fa fa-times"></span></a>
@@ -213,7 +214,7 @@
           <div class="navbar-collapse collapse">
             <!-- Left nav -->
             <ul class="nav navbar-nav">
-                <li><a href="/catalog">Каталог</a></li>
+                <li><a href="/">Каталог</a></li>
                 <li><a href="/catalog/firm">Бренды<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                       <?php foreach ($this->registry['firms'] as $key => $value) {

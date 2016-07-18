@@ -14,9 +14,9 @@
     
     //This is a temporary init for basket - SHOULD BE REMOVED
     $basketItem = new BasketItem();
-    $basketItem->goodId=13;
+    $basketItem->goodId=32;
     $basketItem->name="Мыло хозяйственное";
-    $basketItem->size=100;
+    $basketItem->size="100 гр.";
     $basketItem->price=50;
     $basketItem->quantity=2;
     $registry->set('basket', array($basketItem));

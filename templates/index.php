@@ -54,10 +54,16 @@ include 'header.php';
                                     ?>
                                         <li class="col-sm-3">
                                           <figure>
-                                            <a class="aa-product-img" data-toggle2="tooltip" data-placement="top" data-toggle="modal" data-target="#quick-view-modal" href="/showgood?id=<?php echo $good->id ?>"><img src="/images/goods/good<?php echo $good->id ?>-1.jpg" alt="<?php echo $good->name ?>"></a>
+                                            <a class="aa-product-img" data-toggle2="tooltip" data-placement="top" data-toggle="modal" data-target="#quick-view-modal" href="/showgood?id=<?php echo $good->id ?>"><img src="<?php
+                                            $file_name = 'images/goods/good' . $good->id . '-1.jpg';
+                                            if (!file_exists($file_name)) {
+                                                $file_name = 'images/goods/good0.png';
+                                            }    
+                                            echo '/'.$file_name;
+                                            ?>" alt="<?php echo $good->name ?>"></a>
                                             <a class="aa-add-card-btn" href="#"><span class="fa fa-shopping-cart"></span>В корзину</a>
                                             <figcaption>
-                                                <h4 class="aa-product-title"><a href="#" data-toggle2="tooltip" data-placement="top" data-toggle="modal" data-target="#quick-view-modal"><?php echo $good->name ?></a></h4>
+                                                <h4 class="aa-product-title"><a href="/showgood?id=<?php echo $good->id ?>" data-toggle2="tooltip" data-placement="top" data-toggle="modal" data-target="#quick-view-modal"><?php echo $good->name ?></a></h4>
                                                 <span class="aa-product-price"><?php echo $good->getPrice() ?>&#8381;</span>
                                                 <?php 
                                                 if ($good->sale > 0) {
