@@ -63,11 +63,11 @@ include 'header.php';
                                             <a class="aa-add-card-btn" href="#"><span class="fa fa-shopping-cart"></span>В корзину</a>
                                             <figcaption>
                                                 <h4 class="aa-product-title"><a href="/showgood?id=<?php echo $good->id ?>" data-toggle2="tooltip" data-placement="top" data-toggle="modal" data-target="#quick-view-modal"><?php echo $good->name ?></a></h4>
-                                                <span class="aa-product-price"><?php echo $good->getPrice() ?>&#8381;</span>
+                                                <span class="aa-product-price"><?php echo $good->getPrice() ?> руб.</span>
                                                 <?php 
                                                 if ($good->sale > 0) {
                                                 ?>
-                                                <span class="aa-product-price"><del><?php echo $good->getOldPrice() ?>&#8381;</del></span>
+                                                <span class="aa-product-price"><del><?php echo $good->getOldPrice() ?> руб.</del></span>
                                                 <?php    
                                                 }
                                                 ?>
@@ -83,7 +83,12 @@ include 'header.php';
                                           ?>
                                               <span class="aa-badge aa-sale">Скидка!</span> 
                                           <?php    
-                                          }        
+                                          }
+                                          if (!$good->isAvailable()) {
+                                          ?>
+                                              <span class="aa-badge aa-sold-out">Нет в наличии</span>
+                                          <?php    
+                                          }
                                           ?>        
                                         </li>
                                     <?php    

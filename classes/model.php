@@ -46,7 +46,7 @@ Class Model {
     
     function __construct($registry) {
         $this->registry = $registry;
-        $this->db = new PDO('mysql:host=localhost;dbname=clubclever;charset=utf8', 'root', 'root');
+        $this->db = new PDO('mysql:host=localhost;dbname=clubclever;charset=utf8', 'root', 'root', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     

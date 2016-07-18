@@ -47,14 +47,12 @@ include 'header.php';
                                 <div class="tab-pane fade <?php if ($i==1) echo 'in active' ?>" id="type<?php echo $typeId ?>">
                                     <ul class="aa-product-catg">
                                     <?php
-                                    $j = 0;
                                     foreach($this->registry['goods'] as $good) {
-                                        if (in_array($typeName, $good->types) and $j <8 ) {
-                                            $j++;
+                                        if (in_array($typeName, $good->types) ) {
                                     ?>
                                         <li class="col-sm-3">
                                           <figure>
-                                            <a class="aa-product-img" data-toggle2="tooltip" data-placement="top" data-toggle="modal" data-target="#quick-view-modal" href="/showgood?id=<?php echo $good->id ?>"><img src="<?php
+                                            <a class="aa-product-img" data-placement="top" data-toggle="modal" data-target="#quick-view-modal" href="/showgood?id=<?php echo $good->id ?>"><img src="<?php
                                             $file_name = 'images/goods/good' . $good->id . '-1.jpg';
                                             if (!file_exists($file_name)) {
                                                 $file_name = 'images/goods/good0.png';
@@ -64,11 +62,11 @@ include 'header.php';
                                             <a class="aa-add-card-btn" href="#"><span class="fa fa-shopping-cart"></span>В корзину</a>
                                             <figcaption>
                                                 <h4 class="aa-product-title"><a href="/showgood?id=<?php echo $good->id ?>" data-toggle2="tooltip" data-placement="top" data-toggle="modal" data-target="#quick-view-modal"><?php echo $good->name ?></a></h4>
-                                                <span class="aa-product-price"><?php echo $good->getPrice() ?>&#8381;</span>
+                                                <span class="aa-product-price"><?php echo $good->getPrice() ?> руб.</span>
                                                 <?php 
                                                 if ($good->sale > 0) {
                                                 ?>
-                                                <span class="aa-product-price"><del><?php echo $good->getOldPrice() ?>&#8381;</del></span>
+                                                <span class="aa-product-price"><del><?php echo $good->getOldPrice() ?> руб.</del></span>
                                                 <?php    
                                                 }
                                                 ?>
@@ -85,7 +83,12 @@ include 'header.php';
                                               <span class="aa-badge aa-sale">Скидка!</span> 
                                           <?php    
                                           }        
-                                          ?>        
+                                          if (!$good->isAvailable()) {
+                                          ?>
+                                              <span class="aa-badge aa-sold-out">Нет в наличии</span>
+                                          <?php    
+                                          }
+                                          ?> 
                                         </li>
                                     <?php    
                                         }
@@ -119,6 +122,7 @@ include 'header.php';
         </div>
     </div>
 </section>  
+  
 
 <?php
 include 'footer.php';

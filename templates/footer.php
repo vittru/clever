@@ -10,26 +10,24 @@
             <div class="row">
               <div class="col-md-3 col-sm-6">
                 <div class="aa-footer-widget">
-                  <h3>Main Menu</h3>
+                  <h3>Главное меню</h3>
                   <ul class="aa-footer-nav">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Our Services</a></li>
-                    <li><a href="#">Our Products</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="/">Каталог</a></li>
+                    <li><a href="/catalog/firms">Бренды</a></li>
+                    <li><a href="/actions">Акции</a></li>
+                    <li><a href="/additional">Прочее</a></li>
                   </ul>
                 </div>
               </div>
               <div class="col-md-3 col-sm-6">
                 <div class="aa-footer-widget">
                   <div class="aa-footer-widget">
-                    <h3>Knowledge Base</h3>
+                    <h3>Информация</h3>
                     <ul class="aa-footer-nav">
-                      <li><a href="#">Delivery</a></li>
-                      <li><a href="#">Returns</a></li>
-                      <li><a href="#">Services</a></li>
-                      <li><a href="#">Discount</a></li>
-                      <li><a href="#">Special Offer</a></li>
+                      <li><a href="/about">О нас</a></li>
+                      <li><a href="/delivery">Доставка</a></li>
+                      <li><a href="/payment">Оплата</a></li>
+                      <li><a href="/contacts">Контакты</a></li>
                     </ul>
                   </div>
                 </div>
@@ -37,13 +35,11 @@
               <div class="col-md-3 col-sm-6">
                 <div class="aa-footer-widget">
                   <div class="aa-footer-widget">
-                    <h3>Useful Links</h3>
+                    <h3>Ссылки</h3>
                     <ul class="aa-footer-nav">
-                      <li><a href="#">Site Map</a></li>
-                      <li><a href="#">Search</a></li>
-                      <li><a href="#">Advanced Search</a></li>
-                      <li><a href="#">Suppliers</a></li>
-                      <li><a href="#">FAQ</a></li>
+                      <li><a target="_blank" href="http://master-om.com/">Олеся Мустаева</a></li>
+                      <li><a target="_blank" href="https://www.biobeauty.ru/">БиоБьюти</a></li>
+                      <li><a target="_blank" href="http://www.mi-ko.org/">МиКо</a></li>
                     </ul>
                   </div>
                 </div>
@@ -51,17 +47,16 @@
               <div class="col-md-3 col-sm-6">
                 <div class="aa-footer-widget">
                   <div class="aa-footer-widget">
-                    <h3>Contact Us</h3>
+                    <h3>Наши контакты</h3>
                     <address>
-                      <p> 25 Astor Pl, NY 10003, USA</p>
-                      <p><span class="fa fa-phone"></span>+1 212-982-4589</p>
-                      <p><span class="fa fa-envelope"></span>dailyshop@gmail.com</p>
+                      <p> Самара, ул. Ново-Садовая, 271</p>
+                      <p><span class="fa fa-phone"></span>+7 927-658-27-15</p>
+                      <p><span class="fa fa-envelope"></span>clever@clubclever.ru</p>
                     </address>
                     <div class="aa-footer-social">
-                      <a href="#"><span class="fa fa-facebook"></span></a>
-                      <a href="#"><span class="fa fa-twitter"></span></a>
-                      <a href="#"><span class="fa fa-google-plus"></span></a>
-                      <a href="#"><span class="fa fa-youtube"></span></a>
+                      <a target="_blank" href="http://facebook.com"><span class="fa fa-facebook"></span></a>
+                      <a target="_blank" href="http://vk.com"><span class="fa fa-vk"></span></a>
+                      <a target="_blank" href="http://youtube.com"><span class="fa fa-youtube"></span></a>
                     </div>
                   </div>
                 </div>
@@ -128,6 +123,8 @@
   <script src="/js/jquery.validate.js"></script>
   <!-- auth-form js -->
   <script src="/js/auth-form.js"></script>
+  <!-- clubclever js -->
+  <script src="/js/clubclever.js"></script>
 
   </body>
 </html>

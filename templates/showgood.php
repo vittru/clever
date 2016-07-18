@@ -1,16 +1,14 @@
 <?php
-
 $good = $this->registry['good'];
 
 ?>
-<html>
-  <div class="modal-dialog">
-    <div class="modal-content">  
-        <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+<html>  
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3 class="modal-title"><?php echo $good->name ?></h3>
 
-        </div>  
-      <div class="modal-body">
+</div>  
+<div class="modal-body">
 <div class="row">
   <!-- Modal view slider -->
   <div class="col-md-6 col-sm-6 col-xs-12">                              
@@ -47,7 +45,7 @@ $good = $this->registry['good'];
   <!-- Modal view content -->
   <div class="col-md-6 col-sm-6 col-xs-12">
     <div class="aa-product-view-content">
-      <h3><?php echo $good->name ?></h3>
+
       <div class="aa-price-block">
         <span class="aa-product-view-price"><?php echo $good->getPrice() ?></span>
         <!--p class="aa-product-avilability">Avilability: <span>In stock</span></p-->
@@ -84,6 +82,4 @@ $good = $this->registry['good'];
 </div>
 
                         </div>                        
-                      </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
                   </html><!-- / quick view modal -->  

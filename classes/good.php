@@ -37,5 +37,13 @@ Class Good {
         return reset($this->sizes)->price;
     }
     
+    function isAvailable() {
+        $total = 0;
+        foreach ($this->sizes as $size) {
+            $total = $total + $size->instock;
+        }
+        return ($total > 0);
+    }
+    
 }
 

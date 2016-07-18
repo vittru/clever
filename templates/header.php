@@ -146,7 +146,7 @@
                         <img class="aa-cartbox-img" src="/images/goods/present.jpg" alt="Подарок">
                       <div class="aa-cartbox-info">
                         <h4>Подарок</h4>
-                        <p>0&#8381;</p>
+                        <!--p>0&#x20bd;</p-->
                       </div>
                     </li>
                     <?php
@@ -158,7 +158,7 @@
                           <a class="aa-cartbox-img" href="/showgood?id=<?php echo $basketItem->goodId ?>"><img src="/images/goods/good<?php echo $basketItem->goodId ?>-1.jpg" alt="<?php echo $basketItem->name ?>"></a>
                           <div class="aa-cartbox-info">
                             <h4><?php echo $basketItem->name ?> <?php echo $basketItem->size ?></h4>
-                            <p><?php echo $basketItem->quantity ?> x <?php echo $basketItem->price ?>&#8381;</p>
+                            <p><?php echo $basketItem->quantity ?> x <?php echo $basketItem->price ?> руб.</p>
                           </div>
                           <a class="aa-remove-product" href="#"><span class="fa fa-times"></span></a>
                         </li>
@@ -170,7 +170,7 @@
                         Всего покупок
                       </span>
                       <span class="aa-cartbox-total-price">
-                        <?php echo $total ?>&#8381;
+                        <?php echo $total ?> руб.
                       </span>
                     </li>
                   </ul>
