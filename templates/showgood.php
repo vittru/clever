@@ -1,5 +1,9 @@
 <?php
 $good = $this->registry['good'];
+$hasEffects = $good->hasEffects();
+$hasSkintypes = $good->hasSkintypes();
+$hasHairtypes = $good->hasHairtypes();
+$canBeBought = true;
 
 ?>
 <html>  
@@ -49,42 +53,52 @@ $good = $this->registry['good'];
       <div class="aa-price-block">
             <?php
             $i = 0;
-            foreach($good->sizes as $size) { 
-                $i++;
-            ?>
-                <div class="row">
-                    <div class="col-md-3 col-sm-3 col-xs-3">
-                        <?php echo $size->code; ?>
-                    </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2">
-                        <?php echo $size->size; ?>
-                    </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2">
-                        <?php echo $size->getPrice($good->sale); ?>
-                    </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2">
-                        <select class="form-control" id="sel<?php echo $i; ?>" <?php if (!$size->isAvailable()) echo 'disabled' ?>>
-                            <option>0</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3 col-sm-3 col-xs-3">
-                        <?php if ($size->isAvailable()) 
-                            echo 'В наличии';
-                            else
-                                echo 'Нет на складе'; ?>
-                    </div>
-                </div>    
-            <?php
+            if (sizeof($good->sizes) > 0) 
+                foreach($good->sizes as $size) { 
+                    $i++;
+                ?>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3 col-xs-3">
+                            <?php echo $size->code; ?>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-2">
+                            <?php echo $size->size; ?>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-2">
+                            <?php echo $size->getPrice($good->sale); ?>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-2">
+                            <select class="form-control quantity" id="sel<?php echo $i; ?>" <?php if (!$size->isAvailable()) echo 'disabled' ?> onchange="modifyBasket()">
+                                <option>0</option>
+                                <option <?php if (sizeof($good->sizes)==1 and $size->isAvailable()) echo 'selected' ?>>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3">
+                            <p class="aa-product-avilability">
+                            <?php if ($size->isAvailable()) 
+                                echo 'В наличии';
+                                else
+                                    echo 'Нет на складе'; ?>
+                            </p>    
+                        </div>
+                    </div>    
+                <?php
+                }
+            else {
+                $canBeBought = false;
+                ?>
+                <p>К сожалению данного товара нет в наличии</p>
+                <?php
             }
-            ?>
+                ?>
         <!--span class="aa-product-view-price"><?php //echo $good->getPrice() ?></span>
         <!--p class="aa-product-avilability">Avilability: <span>In stock</span></p-->
       </div>
+      <p>Производитель: <?php echo $this->registry['firms'][$good->firmId] ?></p>  
       <p><?php echo $good->shortdesc ?></p>
       <!--h4>Size</h4>
       <div class="aa-prod-view-size">
@@ -109,7 +123,7 @@ $good = $this->registry['good'];
         </p-->
       </div>
       <div class="aa-prod-view-bottom">
-        <a href="#" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>В корзину</a>
+        <a href="#" class="aa-add-to-cart-btn" <?php if (!$canBeBought) echo 'disabled' ?>><span class="fa fa-shopping-cart"></span>В корзину</a>
         <!--a href="#" class="aa-add-to-cart-btn">View Details</a-->
       </div>
     </div>
@@ -119,13 +133,13 @@ $good = $this->registry['good'];
             <li><a href="#madeOf" data-toggle="tab">Состав</a></li>
             <li><a href="#howTo" data-toggle="tab">Способ применения</a></li>
             <li><a href="#problems" data-toggle="tab">Проблемы</a></li>
-            <?php if ($good->hasEffects()) { ?>
+            <?php if ($hasEffects) { ?>
             <li><a href="#effects" data-toggle="tab">Эффекты</a></li>
             <?php }?>
-            <?php if ($good->hasSkintypes()) { ?>
+            <?php if ($hasSkintypes) { ?>
             <li><a href="#skintypes" data-toggle="tab">Типы кожи</a></li>
             <?php }?>
-            <?php if ($good->hasHairtypes()) { ?>
+            <?php if ($hasHairtypes) { ?>
             <li><a href="#hairtypes" data-toggle="tab">Типы волос</a></li>
             <?php }?>
         </ul>
@@ -142,19 +156,31 @@ $good = $this->registry['good'];
             <div class="tab-pane fade" id="problems">
                 <?php echo $good->problem; ?>
             </div>
-            <?php if ($good->hasEffects()) { ?>
+            <?php if ($hasEffects) { ?>
             <div class="tab-pane fade" id="effects">
-                <?php echo $good->description; ?>
+                <ul class="list-group">
+                <?php foreach($good->effs as $eff) { ?>
+                    <li class="list-group-item"><?php echo $this->registry['effects'][$eff] ?></li>
+                <?php } ?>
+                </ul>
             </div>
             <?php }?>
-            <?php if ($good->hasSkintypes()) { ?>
+            <?php if ($hasSkintypes) { ?>
             <div class="tab-pane fade" id="skintypes">
-                <?php echo $good->description; ?>
+                <ul class="list-group">
+                <?php foreach($good->skintypes as $st) { ?>
+                    <li class="list-group-item"><?php echo $this->registry['skintypes'][$st] ?></li>
+                <?php } ?>
+                </ul>
             </div>
             <?php }?>
-            <?php if ($good->hasHairtypes()) { ?>
+            <?php if ($hasHairtypes) { ?>
             <div class="tab-pane fade" id="hairtypes">
-                <?php echo $good->description; ?>
+                <ul class="list-group">
+                <?php foreach($good->hairtypes as $ht) { ?>
+                    <li class="list-group-item"><?php echo $this->registry['hairtypes'][$ht] ?></li>
+                <?php } ?>
+                </ul>
             </div>
             <?php }?>
         </div>    
@@ -162,4 +188,6 @@ $good = $this->registry['good'];
   </div>
 </div>
 
+<script src="/js/modalgood.js"></script>       
+    
 </html><!-- / quick view modal -->  

@@ -153,6 +153,13 @@ img {
   text-transform: uppercase;
   transition: all 0.5s ease 0s;
 }
+
+.aa-add-to-cart-btn[disabled] {
+    color: lightgray;
+    pointer-events: none !important;
+    cursor: default;
+}
+
 .aa-add-to-cart-btn span {
   margin-right: 5px;
 }

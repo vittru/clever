@@ -32,17 +32,21 @@ Class Good {
     }
     
     function getPrice() {
-        return reset($this->sizes)->price * (100-$this->sale)/100;
+        $price = reset($this->sizes)->price * (100-$this->sale)/100;
+        if ($price > 0)
+            return $price . " руб.";
+        else
+            return "";
     }
     
     function getOldPrice() {
-        return reset($this->sizes)->price;
+        return reset($this->sizes)->price . " руб.";
     }
     
     function isAvailable() {
         $total = 0;
         foreach ($this->sizes as $size) {
-            $total = $total + $size->instock;
+            $total = $total + $size->instock - $size->onhold;
         }
         return ($total > 0);
     }
@@ -57,7 +61,9 @@ Class Good {
         echo '" alt="';
         echo $this->name;
         echo'"></a>';
-        echo '<a class="aa-add-card-btn" href="#"><span class="fa fa-shopping-cart"></span>В корзину</a>';
+        if ($this->isAvailable()) {
+            echo '<a class="aa-add-card-btn" href="#"><span class="fa fa-shopping-cart"></span>В корзину</a>';
+        }
         echo '<figcaption>';
         echo '<h4 class="aa-product-title"><a href="/showgood?id=';
         echo $this->id;
@@ -66,11 +72,11 @@ Class Good {
         echo '</a></h4>';
         echo '<span class="aa-product-price">';
         echo $this->getPrice();
-        echo ' руб.</span>';
+        echo '</span>';
         if ($this->sale > 0) {
             echo '<span class="aa-product-price"><del>';
             echo $this->getOldPrice();
-            echo ' руб.</del></span>';
+            echo '</del></span>';
         }
         echo '</figcaption>';
         echo '</figure>';
@@ -103,11 +109,10 @@ Class Good {
     function hasSkintypes() {
         return sizeof($this->skintypes) > 0;
     }
-    
+
     function hasHairtypes() {
         return sizeof($this->hairtypes) > 0;
     }
-
     
 }
 
