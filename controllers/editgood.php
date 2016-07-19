@@ -16,11 +16,12 @@ Class Controller_Editgood Extends Controller_Base {
         $this->registry['logger']->lwrite($_POST['id']);
         $this->registry['logger']->lwrite($_POST['name']);
         $this->registry['logger']->lwrite($_POST['description']);
+        $this->registry['logger']->lwrite($_POST['shortdesc']);
         $this->registry['logger']->lwrite($_POST['madeOf']);
         $this->registry['logger']->lwrite($_POST['howTo']);
         $this->registry['logger']->lwrite($_POST['problem']);
         $this->registry['logger']->lwrite('**** END Saving product ****');
-        $goodId = $this->registry['model']->addGood($_POST['id'], $_POST['name'], $_POST['description'], $firmId, $_POST['sale'], $_POST['madeOf'], $_POST['howTo'], $_POST['problem']);
+        $goodId = $this->registry['model']->addGood($_POST['id'], $_POST['name'], $_POST['description'], $_POST['shortdesc'], $firmId, $_POST['sale'], $_POST['madeOf'], $_POST['howTo'], $_POST['problem']);
         $this->registry['model']->deleteGoodCat($goodId);
         foreach ($_POST as $name => $val) {
             if (strpos($name, 'mentype') !== false){

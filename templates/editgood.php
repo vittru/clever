@@ -15,6 +15,11 @@ if ($goodId) {
     </div>  
     
     <div class="form-group">
+      <label for="shortdesc">Краткое описание:</label>
+      <textarea class="form-control" rows="2" id="description" name="shortdesc"><?php if ($good) echo $good->shortdesc ?></textarea>
+    </div>
+
+    <div class="form-group">
       <label for="description">Описание:</label>
       <textarea class="form-control" rows="5" id="description" name="description"><?php if ($good) echo $good->description ?></textarea>
     </div>

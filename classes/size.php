@@ -18,4 +18,12 @@ class Size {
         $this->instock = $instock;
         $this->onhold = $onhold;
     }
+    
+    public function getPrice($sale) {
+        return ($this->price * (100-$sale)/100) . " руб.";
+    }
+    
+    public function isAvailable() {
+        return (($this->instock - $this->onhold) > 0);
+    }
 }

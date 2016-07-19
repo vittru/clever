@@ -52,3 +52,7 @@ else {
     $registry->set('userId', "");
 }
 
+$registry->set('dbname', 'clubclever');
+$registry->set('dbuser', 'root');
+$registry->set('dbpassword', 'root');
+

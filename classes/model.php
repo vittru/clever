@@ -35,8 +35,8 @@ Class Model {
     private $getNonClientNews = "select headr, time, text from news where forClients=0 order by time desc limit 10";
     private $addQuestion = "INSERT INTO questions(user, question, date) VALUES(:userId, :question, NOW())";
     private $selectCatalog = "SELECT id, name FROM ";
-    private $updateGood = "UPDATE goods SET name=:name, description=:description, firmId=:firmId, sale=:sale, howTo=:howTo, madeOf=:madeOf, problem=:problem WHERE id=:id";
-    private $addGood = "INSERT INTO goods (name, description, firmId, sale, howTo, madeOf, problem) VALUES (:name, :description, :firmId, :sale, :howTo, :madeOf, :problem)";
+    private $updateGood = "UPDATE goods SET name=:name, description=:description, shortdesc=:shortdesc, firmId=:firmId, sale=:sale, howTo=:howTo, madeOf=:madeOf, problem=:problem WHERE id=:id";
+    private $addGood = "INSERT INTO goods (name, description, shortdesc, firmId, sale, howTo, madeOf, problem) VALUES (:name, :description, :shortdesc, :firmId, :sale, :howTo, :madeOf, :problem)";
     private $linkGoodCat = "INSERT INTO `goods-categories` (goodId, categoryId) VALUES(:goodId, :catId)";
     private $linkGoodType = "INSERT INTO `goods-types` (goodId, typeId) VALUES(:goodId, :typeId)";
     private $linkGoodEff = "INSERT INTO `goods-effects` (goodId, effectId) VALUES(:goodId, :effId)";
@@ -46,7 +46,7 @@ Class Model {
     
     function __construct($registry) {
         $this->registry = $registry;
-        $this->db = new PDO('mysql:host=localhost;dbname=clubclever;charset=utf8', 'root', 'root', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+        $this->db = new PDO('mysql:host=localhost;dbname='.$this->registry['dbname'].';charset=utf8', $this->registry['dbuser'], $this->registry['dbpassword'], array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     
@@ -330,7 +330,7 @@ Class Model {
         return $catsArray;       
     }
     
-    function addGood($id, $name, $description, $firmId, $sale, $madeOf, $howTo, $problem) {
+    function addGood($id, $name, $description, $shortdesc, $firmId, $sale, $madeOf, $howTo, $problem) {
         if ($id) {
             $sqlInsert = $this->db->prepare($this->updateGood);
             $sqlInsert->bindParam(':id', $id);
@@ -339,6 +339,7 @@ Class Model {
         }
         $sqlInsert->bindParam(':name', $name);
         $sqlInsert->bindParam(':description', $description);
+        $sqlInsert->bindParam(':shortdesc', $shortdesc);
         $sqlInsert->bindParam(':firmId', $firmId);
         $sqlInsert->bindParam(':sale', $sale);
         $sqlInsert->bindParam(':howTo', $howTo);
@@ -433,7 +434,7 @@ Class Model {
             $this->registry['logger']->lwrite($e->getMessage()); 
         }
         $data = $sqlSelect->fetch();
-        $good=new Good($goodId, $data['name'], $data['description'], $data['howTo'], $data['madeOf'], $data['sale'], $data['firmId'], $data['problem']);
+        $good=new Good($goodId, $data['name'], $data['description'], $data['shortdesc'], $data['howTo'], $data['madeOf'], $data['sale'], $data['firmId'], $data['problem']);
         $good->cats = $this->getGoodCats($goodId);
         $good->effs = $this->getGoodEffs($goodId);
         $good->skintypes = $this->getGoodSTs($goodId);

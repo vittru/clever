@@ -640,3 +640,119 @@ CH2-O-CO-R’’’
 [18/Jul/2016:16:16:43] (index) Unable to set var `lastVisit`. Already set, and overwrite not allowed.
 [18/Jul/2016:16:17:16] (index) Unable to set var `lastVisit`. Already set, and overwrite not allowed.
 [18/Jul/2016:16:18:06] (index) Unable to set var `lastVisit`. Already set, and overwrite not allowed.
+[19/Jul/2016:07:06:48] (index) **** START Saving product ****
+[19/Jul/2016:07:06:48] (index) 32
+[19/Jul/2016:07:06:48] (index) Мыло хозяйственное
+[19/Jul/2016:07:06:48] (index) Сорт мыла с содержанием жирных кислот не более 72 % и большим количеством щелочей, около 0,15-0,20 %. Вследствие чего имеет очень высокий водородный показатель — pH 11-12. Обладает антибактериальными свойствами. В соответствии с ГОСТ 30266-95 хозяйственное мыло подразделяется на три категории в зависимости от содержания жирных кислот: I категория должна иметь не менее 70,5 % жирных кислот, II категория — 69,0 %, III — 64,0 % . Хозяйственное мыло получают охлаждением мыльного клея.
+[19/Jul/2016:07:06:48] (index) Состав:
+
+мыльная основа животного жира
+
+CH2-O-CO-R’
+
+I
+
+CH-O-CO-R’’
+
+I
+
+CH2-O-CO-R’’’
+
+ 
+
+натрий едкий гранулированный NaOH
+
+питьевая вода H2O
+[19/Jul/2016:07:06:48] (index) Мылить
+[19/Jul/2016:07:06:48] (index) Решает все проблемы
+[19/Jul/2016:07:06:48] (index) **** END Saving product ****
+[19/Jul/2016:07:07:53] (index) **** START Saving product ****
+[19/Jul/2016:07:07:53] (index) 32
+[19/Jul/2016:07:07:53] (index) Мыло хозяйственное
+[19/Jul/2016:07:07:53] (index) Сорт мыла с содержанием жирных кислот не более 72 % и большим количеством щелочей, около 0,15-0,20 %. Вследствие чего имеет очень высокий водородный показатель — pH 11-12. Обладает антибактериальными свойствами. В соответствии с ГОСТ 30266-95 хозяйственное мыло подразделяется на три категории в зависимости от содержания жирных кислот: I категория должна иметь не менее 70,5 % жирных кислот, II категория — 69,0 %, III — 64,0 % . Хозяйственное мыло получают охлаждением мыльного клея.
+[19/Jul/2016:07:07:53] (index) Состав:
+
+мыльная основа животного жира
+
+CH2-O-CO-R’
+
+I
+
+CH-O-CO-R’’
+
+I
+
+CH2-O-CO-R’’’
+
+ 
+
+натрий едкий гранулированный NaOH
+
+питьевая вода H2O
+[19/Jul/2016:07:07:53] (index) Мылить
+[19/Jul/2016:07:07:53] (index) Решает все проблемы
+[19/Jul/2016:07:07:53] (index) **** END Saving product ****
+[19/Jul/2016:07:32:09] (index) Unable to set var `lastVisit`. Already set, and overwrite not allowed.
+[19/Jul/2016:07:32:14] (index) Unable to set var `lastVisit`. Already set, and overwrite not allowed.
+[19/Jul/2016:07:36:53] (index) Unable to set var `lastVisit`. Already set, and overwrite not allowed.
+[19/Jul/2016:07:36:58] (index) Unable to set var `lastVisit`. Already set, and overwrite not allowed.
+[19/Jul/2016:07:37:27] (index) Error when getting a firm with id=/dfgdfgd
+[19/Jul/2016:07:37:27] (index) SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '/dfgdfgd' at line 1
+[19/Jul/2016:07:37:27] (index) Error when getting goods of firm with id=/dfgdfgd
+[19/Jul/2016:07:37:27] (index) SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '/dfgdfgd' at line 1
+[19/Jul/2016:07:37:27] (index) Error when getting categories of firm with id=/dfgdfgd
+[19/Jul/2016:07:37:27] (index) SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '/dfgdfgd' at line 1
+[19/Jul/2016:08:12:09] (index) **** START Saving product ****
+[19/Jul/2016:08:12:09] (index) 32
+[19/Jul/2016:08:12:09] (index) Мыло хозяйственное
+[19/Jul/2016:08:12:09] (index) Сорт мыла с содержанием жирных кислот не более 72 % и большим количеством щелочей, около 0,15-0,20 %. Вследствие чего имеет очень высокий водородный показатель — pH 11-12. Обладает антибактериальными свойствами. В соответствии с ГОСТ 30266-95 хозяйственное мыло подразделяется на три категории в зависимости от содержания жирных кислот: I категория должна иметь не менее 70,5 % жирных кислот, II категория — 69,0 %, III — 64,0 % . Хозяйственное мыло получают охлаждением мыльного клея.
+[19/Jul/2016:08:12:09] (index) Просто мыло для хозяйства
+[19/Jul/2016:08:12:09] (index) Состав:
+
+мыльная основа животного жира
+
+CH2-O-CO-R’
+
+I
+
+CH-O-CO-R’’
+
+I
+
+CH2-O-CO-R’’’
+
+ 
+
+натрий едкий гранулированный NaOH
+
+питьевая вода H2O
+[19/Jul/2016:08:12:09] (index) Мылить
+[19/Jul/2016:08:12:09] (index) Решает все проблемы
+[19/Jul/2016:08:12:09] (index) **** END Saving product ****
+[19/Jul/2016:08:12:38] (index) **** START Saving product ****
+[19/Jul/2016:08:12:38] (index) 32
+[19/Jul/2016:08:12:38] (index) Мыло хозяйственное
+[19/Jul/2016:08:12:38] (index) Сорт мыла с содержанием жирных кислот не более 72 % и большим количеством щелочей, около 0,15-0,20 %. Вследствие чего имеет очень высокий водородный показатель — pH 11-12. Обладает антибактериальными свойствами. В соответствии с ГОСТ 30266-95 хозяйственное мыло подразделяется на три категории в зависимости от содержания жирных кислот: I категория должна иметь не менее 70,5 % жирных кислот, II категория — 69,0 %, III — 64,0 % . Хозяйственное мыло получают охлаждением мыльного клея.
+[19/Jul/2016:08:12:38] (index) Просто мыло для хозяйства только немного коричневое
+[19/Jul/2016:08:12:38] (index) Состав:
+
+мыльная основа животного жира
+
+CH2-O-CO-R’
+
+I
+
+CH-O-CO-R’’
+
+I
+
+CH2-O-CO-R’’’
+
+ 
+
+натрий едкий гранулированный NaOH
+
+питьевая вода H2O
+[19/Jul/2016:08:12:38] (index) Мылить
+[19/Jul/2016:08:12:38] (index) Решает все проблемы
+[19/Jul/2016:08:12:38] (index) **** END Saving product ****

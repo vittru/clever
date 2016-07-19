@@ -11,13 +11,13 @@ $good = $this->registry['good'];
 <div class="modal-body">
 <div class="row">
   <!-- Modal view slider -->
-  <div class="col-md-6 col-sm-6 col-xs-12">                              
+  <div class="col-md-4 col-sm-4 col-xs-12">                              
     <div class="aa-product-view-slider">                                
       <div class="simpleLens-gallery-container" id="demo-1">
         <div class="simpleLens-container">
             <div class="simpleLens-big-image-container">
                 <a class="simpleLens-lens-image">
-                    <img src="/images/goods/good<?php echo $good->id ?>-1.jpg" class="simpleLens-big-image">
+                    <img src="<?php echo $good->getImage() ?>" class="simpleLens-big-image">
                 </a>
             </div>
         </div>
@@ -43,22 +43,57 @@ $good = $this->registry['good'];
     </div>
   </div>
   <!-- Modal view content -->
-  <div class="col-md-6 col-sm-6 col-xs-12">
+  <div class="col-md-8 col-sm-8 col-xs-12">
     <div class="aa-product-view-content">
 
       <div class="aa-price-block">
-        <span class="aa-product-view-price"><?php echo $good->getPrice() ?></span>
+            <?php
+            $i = 0;
+            foreach($good->sizes as $size) { 
+                $i++;
+            ?>
+                <div class="row">
+                    <div class="col-md-3 col-sm-3 col-xs-3">
+                        <?php echo $size->code; ?>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-2">
+                        <?php echo $size->size; ?>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-2">
+                        <?php echo $size->getPrice($good->sale); ?>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-2">
+                        <select class="form-control" id="sel<?php echo $i; ?>" <?php if (!$size->isAvailable()) echo 'disabled' ?>>
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-3">
+                        <?php if ($size->isAvailable()) 
+                            echo 'В наличии';
+                            else
+                                echo 'Нет на складе'; ?>
+                    </div>
+                </div>    
+            <?php
+            }
+            ?>
+        <!--span class="aa-product-view-price"><?php //echo $good->getPrice() ?></span>
         <!--p class="aa-product-avilability">Avilability: <span>In stock</span></p-->
       </div>
-      <p><?php echo $good->description ?></p>
-      <h4>Size</h4>
+      <p><?php echo $good->shortdesc ?></p>
+      <!--h4>Size</h4>
       <div class="aa-prod-view-size">
         <a href="#">S</a>
         <a href="#">M</a>
         <a href="#">L</a>
         <a href="#">XL</a>
-      </div>
-      <div class="aa-prod-quantity">
+      </div-->
+      <!--div class="aa-prod-quantity">
         <form action="">
           <select name="" id="">
             <option value="0" selected="1">1</option>
@@ -74,12 +109,57 @@ $good = $this->registry['good'];
         </p-->
       </div>
       <div class="aa-prod-view-bottom">
-        <a href="#" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
+        <a href="#" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>В корзину</a>
         <!--a href="#" class="aa-add-to-cart-btn">View Details</a-->
       </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#description" data-toggle="tab">Описание</a></li>
+            <li><a href="#madeOf" data-toggle="tab">Состав</a></li>
+            <li><a href="#howTo" data-toggle="tab">Способ применения</a></li>
+            <li><a href="#problems" data-toggle="tab">Проблемы</a></li>
+            <?php if ($good->hasEffects()) { ?>
+            <li><a href="#effects" data-toggle="tab">Эффекты</a></li>
+            <?php }?>
+            <?php if ($good->hasSkintypes()) { ?>
+            <li><a href="#skintypes" data-toggle="tab">Типы кожи</a></li>
+            <?php }?>
+            <?php if ($good->hasHairtypes()) { ?>
+            <li><a href="#hairtypes" data-toggle="tab">Типы волос</a></li>
+            <?php }?>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="description">
+                <?php echo $good->description; ?>
+            </div>
+            <div class="tab-pane fade" id="madeOf">
+                <?php echo $good->madeOf; ?>
+            </div>
+            <div class="tab-pane fade" id="howTo">
+                <?php echo $good->howTo; ?>
+            </div>
+            <div class="tab-pane fade" id="problems">
+                <?php echo $good->problem; ?>
+            </div>
+            <?php if ($good->hasEffects()) { ?>
+            <div class="tab-pane fade" id="effects">
+                <?php echo $good->description; ?>
+            </div>
+            <?php }?>
+            <?php if ($good->hasSkintypes()) { ?>
+            <div class="tab-pane fade" id="skintypes">
+                <?php echo $good->description; ?>
+            </div>
+            <?php }?>
+            <?php if ($good->hasHairtypes()) { ?>
+            <div class="tab-pane fade" id="hairtypes">
+                <?php echo $good->description; ?>
+            </div>
+            <?php }?>
+        </div>    
     </div>
   </div>
 </div>
 
-                        </div>                        
-                  </html><!-- / quick view modal -->  
+</html><!-- / quick view modal -->  
