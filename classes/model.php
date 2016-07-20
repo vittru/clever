@@ -489,7 +489,7 @@ Class Model {
         }
         $catsArray=array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $catsArray[$data['categoryId']]=$data['categoryId'];
+            array_push($catsArray, $data['categoryId']);
         }
         $sqlSelect->closeCursor();
         return $catsArray;
@@ -505,7 +505,7 @@ Class Model {
         }
         $catsArray=array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $catsArray[$data['effectId']]=$data['effectId'];
+            array_push($catsArray, $data['effectId']);
         }
         $sqlSelect->closeCursor();
         return $catsArray;
@@ -521,7 +521,7 @@ Class Model {
         }
         $catsArray=array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $catsArray[$data['skintypeId']]=$data['skintypeId'];
+            array_push($catsArray, $data['skintypeId']);
         }
         $sqlSelect->closeCursor();
         return $catsArray;
@@ -537,7 +537,7 @@ Class Model {
         }
         $catsArray=array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $catsArray[$data['hairtypeId']]=$data['hairtypeId'];
+            array_push($catsArray, $data['hairtypeId']);
         }
         $sqlSelect->closeCursor();
         return $catsArray;

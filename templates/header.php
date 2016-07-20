@@ -199,7 +199,7 @@
                                   <div class="row">
                                     <div class="form-group col-md-6">
                                         <label>Производитель:</label>
-                                        <select class="form-control" name="effect">
+                                        <select class="form-control" name="firm">
                                             <option value="0" selected></option>
                                             <?php
                                             foreach($this->registry['firms'] as $id=>$name) {
@@ -209,8 +209,8 @@
                                         </select>
                                       </div>
                                       <div class="form-group col-md-6">
-                                        <label for="skintype">Категория:</label>
-                                        <select class="form-control" name="skintype">
+                                        <label for="category">Категория:</label>
+                                        <select class="form-control" name="category">
                                             <option value="0" selected></option>
                                             <?php
                                             foreach($this->registry['categories'] as $id=>$name) {
@@ -222,7 +222,7 @@
                                   </div>    
                                   <div class="row">  
                                     <div class="form-group col-md-6">
-                                      <label>Проблема:</label>
+                                      <label for="problem">Проблема:</label>
                                       <select class="form-control" name="problem">
                                         <option value="0" selected></option>
                                         <?php
@@ -233,7 +233,7 @@
                                       </select>
                                     </div>
                                     <div class="form-group col-md-6"> 
-                                      <label>Эффект:</label>
+                                      <label for="effect">Эффект:</label>
                                       <select class="form-control" name="effect">
                                         <option value="0" selected></option>
                                         <?php
@@ -269,15 +269,15 @@
                                   </div>
                                   </div>    
                                   <div class="form-group">
-                                    <label for="contain">Описание:</label>
+                                    <label for="description">Описание:</label>
                                     <input class="form-control" type="text" name="description" />
                                   </div>
                                   <div class="form-group">
-                                    <label for="contain">Состав:</label>
+                                    <label for="description">Состав:</label>
                                     <input class="form-control" type="text" name="madeOf" />
                                   </div>
                                   <div class="form-group">
-                                    <label for="contain">Применение:</label>
+                                    <label for="description">Применение:</label>
                                     <input class="form-control" type="text" name="howTo" />
                                   </div>
                                   <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
