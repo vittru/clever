@@ -37,7 +37,7 @@
                   <div class="aa-footer-widget">
                     <h3>Ссылки</h3>
                     <ul class="aa-footer-nav">
-                      <li><a target="_blank" href="http://master-om.com/">Олеся Мустаева</a></li>
+                      <li><a target="_blank" href="http://master-om.com/">Мастерская Олеси Мустаевой</a></li>
                       <li><a target="_blank" href="https://www.biobeauty.ru/">БиоБьюти</a></li>
                       <li><a target="_blank" href="http://www.mi-ko.org/">МиКо</a></li>
                     </ul>

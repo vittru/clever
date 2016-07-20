@@ -2,12 +2,9 @@
 
 Class BasketItem {
     
-    public $goodid; 
-    public $name;
-    public $firmId;
-    public $price;
+    public $goodId; 
     public $quantity;
-    public $size;
+    public $sizeId;
    
     
 }

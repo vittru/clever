@@ -10,7 +10,7 @@ $canBeBought = true;
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h3 class="modal-title"><?php echo $good->name ?></h3>
-
+    <div hidden="" id="pId"><?php echo $good->id ?></div>
 </div>  
 <div class="modal-body">
 <div class="row">
@@ -52,10 +52,8 @@ $canBeBought = true;
 
       <div class="aa-price-block">
             <?php
-            $i = 0;
             if (sizeof($good->sizes) > 0) 
-                foreach($good->sizes as $size) { 
-                    $i++;
+                foreach($good->sizes as $sizeId=>$size) { 
                 ?>
                     <div class="row">
                         <div class="col-md-3 col-sm-3 col-xs-3">
@@ -65,10 +63,10 @@ $canBeBought = true;
                             <?php echo $size->size; ?>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-2">
-                            <?php echo $size->getPrice($good->sale); ?>
+                            <?php echo $size->getWebPrice($good->sale); ?>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-2">
-                            <select class="form-control quantity" id="sel<?php echo $i; ?>" <?php if (!$size->isAvailable()) echo 'disabled' ?> onchange="modifyBasket()">
+                            <select class="form-control quantity" id="sel<?php echo $sizeId; ?>" <?php if (!$size->isAvailable()) echo 'disabled' ?> onchange="modifyBasket()">
                                 <option>0</option>
                                 <option <?php if (sizeof($good->sizes)==1 and $size->isAvailable()) echo 'selected' ?>>1</option>
                                 <option>2</option>
@@ -123,7 +121,7 @@ $canBeBought = true;
         </p-->
       </div>
       <div class="aa-prod-view-bottom">
-        <a href="#" class="aa-add-to-cart-btn" <?php if (!$canBeBought) echo 'disabled' ?>><span class="fa fa-shopping-cart"></span>В корзину</a>
+        <a href="#" class="aa-add-to-cart-btn" data-dismiss="modal" <?php if (!$canBeBought) echo 'disabled' ?>><span class="fa fa-shopping-cart"></span>В корзину</a>
         <!--a href="#" class="aa-add-to-cart-btn">View Details</a-->
       </div>
     </div>
@@ -144,18 +142,10 @@ $canBeBought = true;
             <?php }?>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane fade in active" id="description">
-                <?php echo $good->description; ?>
-            </div>
-            <div class="tab-pane fade" id="madeOf">
-                <?php echo $good->madeOf; ?>
-            </div>
-            <div class="tab-pane fade" id="howTo">
-                <?php echo $good->howTo; ?>
-            </div>
-            <div class="tab-pane fade" id="problems">
-                <?php echo $good->problem; ?>
-            </div>
+            <div class="tab-pane fade in active aa-product-info-tab" id="description"><?php echo $good->getWebDescription(); ?></div>
+            <div class="tab-pane fade aa-product-info-tab" id="madeOf"><?php echo $good->getWebMadeOf(); ?></div>
+            <div class="tab-pane fade aa-product-info-tab" id="howTo"><?php echo $good->getWebHowTo(); ?></div>
+            <div class="tab-pane fade aa-product-info-tab" id="problems"><?php echo $good->problem; ?></div>
             <?php if ($hasEffects) { ?>
             <div class="tab-pane fade" id="effects">
                 <ul class="list-group">

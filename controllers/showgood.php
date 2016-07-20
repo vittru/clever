@@ -3,8 +3,8 @@
 Class Controller_Showgood Extends Controller_Base {
         
     function index() {
-        foreach($this->registry['goods'] as $good) {
-            if ($good->id == $_GET['id']) {
+        foreach($this->registry['goods'] as $id=>$good) {
+            if ($id == $_GET['id']) {
                 $this->registry->set('good', $good);
                 break;
             }    

@@ -47,7 +47,7 @@ include 'header.php';
                                 <div class="tab-pane fade <?php if ($i==1) echo 'in active' ?>" id="type<?php echo $typeId ?>">
                                     <ul class="aa-product-catg">
                                     <?php
-                                    foreach($this->registry['goods'] as $good) {
+                                    foreach($this->registry['goods'] as $id=>$good) {
                                         if (in_array($typeName, $good->types) ) {
                                             $good->showInCatalog();
                                         }

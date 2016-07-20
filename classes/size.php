@@ -20,7 +20,11 @@ class Size {
     }
     
     public function getPrice($sale) {
-        return ($this->price * (100-$sale)/100) . " руб.";
+        return ($this->price * (100-$sale)/100);
+    }
+    
+    public function getWebPrice($sale) {
+        return $this->getPrice($sale) . " руб.";
     }
     
     public function isAvailable() {

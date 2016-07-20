@@ -1144,7 +1144,7 @@ img {
   border-color: #3fc35f;
 }
 .aa-product-catg li figure .aa-product-img {
-  background-color: #f9f9fb;
+  /*background-color: #f9f9fb;*/
   display: block;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
@@ -1339,6 +1339,12 @@ img {
 }
 #quick-view-modal .modal-content .aa-product-view-content .aa-prod-view-bottom a:last-child {
   margin-left: 10px;
+}
+
+#quick-view-modal .modal-content .aa-product-info-tab {
+  text-align: justify;
+  white-space: pre-wrap;  
+  text-indent: 50px;
 }
 
 /*==================

@@ -434,7 +434,7 @@ Class Model {
             $this->registry['logger']->lwrite($e->getMessage()); 
         }
         $data = $sqlSelect->fetch();
-        $good=new Good($goodId, $data['name'], $data['description'], $data['shortdesc'], $data['howTo'], $data['madeOf'], $data['sale'], $data['firmId'], $data['problem']);
+        $good=new Good($goodId, trim($data['name']), trim($data['description']), trim($data['shortdesc']), trim($data['howTo']), trim($data['madeOf']), $data['sale'], $data['firmId'], trim($data['problem']));
         $good->cats = $this->getGoodCats($goodId);
         $good->effs = $this->getGoodEffs($goodId);
         $good->skintypes = $this->getGoodSTs($goodId);
@@ -470,12 +470,10 @@ Class Model {
             $this->registry['logger']->lwrite('Error when selecting product sizes');
             $this->registry['logger']->lwrite($e->getMessage()); 
         }
+        $sizes = array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $size = new Size($data['id'], $data['size'], $data['price'], $data['sale'], $data['code'], $data['instock'], $data['onhold']);
-            if (!$sizes) 
-                $sizes=[$size];
-            else
-                array_push($sizes, $size);
+            $sizes[$data['id']]=$size;
         }
         $sqlSelect->closeCursor();
         return $sizes;
@@ -618,12 +616,10 @@ Class Model {
             $this->registry['logger']->lwrite('Error when getting all goods');
             $this->registry['logger']->lwrite($e->getMessage()); 
         }   
+        $goods=array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $good = $this->getGood($data['id']);
-            if (!$goods)
-                $goods = [$good];
-            else
-                array_push($goods, $good);
+            $goods[$data['id']]=$good;
         }
         $sqlSelect->closeCursor();
         return $goods;        

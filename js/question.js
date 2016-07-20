@@ -5,7 +5,7 @@ $("#question-form").submit(function(e) {
         question = $("#question-text").val();
     $.ajax({
         type: "POST",
-        url: "question",
+        url: "/question",
         data: "userEmail=" + email + "&userName=" + name + "&question=" + question,
         dataType: "html",
         dataFilter: function(a) {

@@ -31,7 +31,7 @@ Class Good {
        $this->problem = $problem;
     }
     
-    function getPrice() {
+    function getWebPrice() {
         $price = reset($this->sizes)->price * (100-$this->sale)/100;
         if ($price > 0)
             return $price . " руб.";
@@ -39,7 +39,7 @@ Class Good {
             return "";
     }
     
-    function getOldPrice() {
+    function getWebOldPrice() {
         return reset($this->sizes)->price . " руб.";
     }
     
@@ -71,11 +71,11 @@ Class Good {
         echo $this->name;
         echo '</a></h4>';
         echo '<span class="aa-product-price">';
-        echo $this->getPrice();
+        echo $this->getWebPrice();
         echo '</span>';
         if ($this->sale > 0) {
             echo '<span class="aa-product-price"><del>';
-            echo $this->getOldPrice();
+            echo $this->getWebOldPrice();
             echo '</del></span>';
         }
         echo '</figcaption>';
@@ -112,6 +112,25 @@ Class Good {
 
     function hasHairtypes() {
         return sizeof($this->hairtypes) > 0;
+    }
+    
+    function getWebProperty($property) {
+        foreach (array("\r", "\n", "\r\n", "\n\r") as $token) {
+            $property = str_replace($token, "</div><div>",  $property);
+        }
+        return "<div>" . $property . "</div>";
+    }
+    
+    function getWebDescription() {
+        return $this->getWebProperty($this->description);
+    }
+    
+    function getWebHowTo() {
+        return $this->getWebProperty($this->howTo);
+    }
+    
+    function getWebMadeOf() {
+        return $this->getWebProperty($this->madeOf);
     }
     
 }

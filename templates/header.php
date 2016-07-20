@@ -7,6 +7,7 @@
     <meta name="robots" content="noindex">    
     <title>Клевер экомаркет</title>
     
+    <link rel="icon" href="/images/icon.png">
     <!-- Font awesome -->
     <link href="/css/font-awesome.css" rel="stylesheet">
     <!-- Bootstrap -->
@@ -152,13 +153,16 @@
                     <?php
                     $total = 0;
                     foreach ($this->registry['basket'] as $basketItem) {
-                        $total = $total + $basketItem->quantity * $basketItem->price;
+                        $good = $this->registry['goods'][$basketItem->goodId];
+                        $size = $good->sizes[$basketItem->sizeId];
+                        $price = $size->getPrice($good->sale);
+                        $total = $total + $basketItem->quantity * $price;
                         ?>
                         <li>
-                          <a class="aa-cartbox-img" href="/showgood?id=<?php echo $basketItem->goodId ?>"><img src="/images/goods/good<?php echo $basketItem->goodId ?>-1.jpg" alt="<?php echo $basketItem->name ?>"></a>
+                          <a class="aa-cartbox-img" href="/showgood?id=<?php echo $good->id ?>"><img src="<?php echo $good->getImage() ?>" alt="<?php echo $good->name ?>"></a>
                           <div class="aa-cartbox-info">
-                            <h4><?php echo $basketItem->name ?> <?php echo $basketItem->size ?></h4>
-                            <p><?php echo $basketItem->quantity ?> x <?php echo $basketItem->price ?> руб.</p>
+                            <h4><?php echo $good->name ?> <?php echo $size->size ?></h4>
+                            <p><?php echo $basketItem->quantity ?> x <?php echo $size->getWebPrice($good->sale) ?></p>
                           </div>
                           <a class="aa-remove-product" href="#"><span class="fa fa-times"></span></a>
                         </li>

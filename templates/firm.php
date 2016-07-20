@@ -11,8 +11,17 @@ include 'header.php';
         <div class="row">
             <div class="col-md-12">
                 <div class="aa-subscribe-area">
-                    <h3><?php echo $firm->name ?> </h3>
-                    <p><?php echo $firm->description ?></p>
+                    <h3><?php 
+                    if ($firm) 
+                        echo $firm->name; 
+                    else
+                        echo 'Наши бренды';
+                    ?></h3>
+                    <p><?php if ($firm)
+                        echo $firm->description;
+                    else 
+                        echo 'Мы торгуем только товарами проверенных годами фирм';
+                    ?></p>
                 </div>
             </div>
         </div>
@@ -26,7 +35,9 @@ include 'header.php';
                 <div class="row">
                     <div class="aa-product-area">
                         <div class="aa-product-inner">
-                        <!-- start product navigation -->
+                            <?php
+                            if ($firm) {
+                            ?>
                             <ul class="nav nav-tabs aa-products-tab">
                                 <?php 
                                 $i=1;
@@ -37,7 +48,6 @@ include 'header.php';
                                     $i++;
                                 }?>
                             </ul>
-                            <!-- Tab panes -->
                             <div class="tab-content">
                                 <?php 
                                 $i=0;
@@ -63,6 +73,26 @@ include 'header.php';
                             </div>  
                             <?php
                             include 'modalgood.php';
+                            } else {
+                            ?>
+                                <ul class="aa-product-catg">
+                                    <?php
+                                    foreach($this->registry['firms'] as $id=>$name) {
+                                    ?>    
+                                    <li>
+                                      <figure>
+                                        <a class="aa-product-img" href="/catalog/firm?id=<?php echo $id ?>"><img src="/images/firms/firm<?php echo $id ?>.jpg" alt="<?php echo $name ?>"></a>
+                                        <figcaption>
+                                            <h4 class="aa-product-title"><a href="/catalog/firm?id=<?php echo $id ?>"><?php echo $name ?></a></h4>
+                                        </figcaption>
+                                      </figure>                         
+                                    </li> 
+                                    <?php
+                                    }
+                                    ?>
+                                </ul>
+                            <?php
+                            }
                             ?>
                         </div>
                     </div>
