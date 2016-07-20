@@ -8,6 +8,9 @@
     <title>Клевер экомаркет</title>
     
     <link rel="icon" href="/images/icon.png">
+    
+    <link href="/css/search.css" rel="stylesheet">
+    
     <!-- Font awesome -->
     <link href="/css/font-awesome.css" rel="stylesheet">
     <!-- Bootstrap -->
@@ -71,12 +74,12 @@
                     </a>
                 </div>
                 <div class="aa-header-top-left">
-                    <a class="btn" href="/delivery" type="button" id="delivery">
+                    <a class="btn" href="/common/delivery" type="button" id="delivery">
                        Доставка
                     </a>
                 </div>
                 <div class="aa-header-top-left">
-                    <a class="btn" href="/payment" type="button" id="payment">
+                    <a class="btn" href="/common/payment" type="button" id="payment">
                        Оплата
                     </a>
                 </div>
@@ -185,12 +188,107 @@
               </div>
               <!-- / cart box -->
               <!-- search box -->
-              <div class="aa-search-box">
-                <form action="">
-                  <input type="text" name="" id="search" placeholder="Поиск по каталогу">
-                  <button type="submit"><span class="fa fa-search"></span></button>
-                </form>
-              </div>
+            <div class="input-group aa-search-box" id="adv-search">
+                <input type="text" class="form-control" placeholder="Поиск по каталогу" />
+                <div class="input-group-btn">
+                    <div class="btn-group" role="group">
+                        <div class="dropdown dropdown-lg">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                <form class="form-horizontal" role="form" action="/search">
+                                  <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>Производитель:</label>
+                                        <select class="form-control" name="effect">
+                                            <option value="0" selected></option>
+                                            <?php
+                                            foreach($this->registry['firms'] as $id=>$name) {
+                                                echo "<option value=".$id.">".$name."</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                      </div>
+                                      <div class="form-group col-md-6">
+                                        <label for="skintype">Категория:</label>
+                                        <select class="form-control" name="skintype">
+                                            <option value="0" selected></option>
+                                            <?php
+                                            foreach($this->registry['categories'] as $id=>$name) {
+                                                echo "<option value=".$id.">".$name."</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                      </div>
+                                  </div>    
+                                  <div class="row">  
+                                    <div class="form-group col-md-6">
+                                      <label>Проблема:</label>
+                                      <select class="form-control" name="problem">
+                                        <option value="0" selected></option>
+                                        <?php
+                                        foreach($this->registry['problems'] as $id=>$name) {
+                                            echo "<option value=".$id.">".$name."</option>";
+                                        }
+                                        ?>
+                                      </select>
+                                    </div>
+                                    <div class="form-group col-md-6"> 
+                                      <label>Эффект:</label>
+                                      <select class="form-control" name="effect">
+                                        <option value="0" selected></option>
+                                        <?php
+                                        foreach($this->registry['effects'] as $id=>$name) {
+                                            echo "<option value=".$id.">".$name."</option>";
+                                        }
+                                        ?>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="row">  
+                                  <div class="form-group col-md-6">
+                                    <label for="skintype">Тип кожи:</label>
+                                    <select class="form-control" name="skintype">
+                                        <option value="0" selected></option>
+                                        <?php
+                                        foreach($this->registry['skintypes'] as $id=>$name) {
+                                            echo "<option value=".$id.">".$name."</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                  </div>
+                                  <div class="form-group col-md-6">
+                                    <label for="hairtype">Тип волос:</label>
+                                    <select class="form-control" name="hairtype">
+                                        <option value="0" selected></option>
+                                        <?php
+                                        foreach($this->registry['hairtypes'] as $id=>$name) {
+                                            echo "<option value=".$id.">".$name."</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                  </div>
+                                  </div>    
+                                  <div class="form-group">
+                                    <label for="contain">Описание:</label>
+                                    <input class="form-control" type="text" name="description" />
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="contain">Состав:</label>
+                                    <input class="form-control" type="text" name="madeOf" />
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="contain">Применение:</label>
+                                    <input class="form-control" type="text" name="howTo" />
+                                  </div>
+                                  <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                </form>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </div>
+                </div>
+            </div>
+          </div>
               <!-- / search box -->             
             </div>
           </div>

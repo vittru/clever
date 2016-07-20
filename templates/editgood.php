@@ -3,7 +3,8 @@ include 'header.php';
 $goodId=$_GET['good'];
 if ($goodId) {
     $good = $this->registry['model']->getGood($goodId);
-}        
+} else 
+    $good=false;
 ?>
 
 

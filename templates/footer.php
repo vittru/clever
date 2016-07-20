@@ -25,8 +25,8 @@
                     <h3>Информация</h3>
                     <ul class="aa-footer-nav">
                       <li><a href="/about">О нас</a></li>
-                      <li><a href="/delivery">Доставка</a></li>
-                      <li><a href="/payment">Оплата</a></li>
+                      <li><a href="/common/delivery">Доставка</a></li>
+                      <li><a href="/common/payment">Оплата</a></li>
                       <li><a href="/contacts">Контакты</a></li>
                     </ul>
                   </div>

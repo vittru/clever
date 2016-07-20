@@ -3,10 +3,12 @@
 Class Controller_Editgood Extends Controller_Base {
         
     function index() {
+        $this->registry['model']->logVisit(1000);
         $this->registry['template']->show('editgood');
     }
     
     function save() {
+        $this->registry['model']->logVisit(1001);
         foreach ($_POST as $name => $val) {
             if ($name === 'brand'){
                 $firmId=substr($val, 4);
