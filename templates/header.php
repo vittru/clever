@@ -104,9 +104,9 @@
               <div class="aa-header-top-right">
                 <ul class="aa-head-top-nav-right">
                   <?php
-                  if ($this->registry['userName']) {
+                  if ($user->name) {
                   ?>
-                  <li><a href="/account">Добро пожаловать <?php echo $this->registry['userName']  ?>!</a></li>
+                  <li><a href="/account">Добро пожаловать <?php echo $user->name  ?>!</a></li>
                   <?php
                   } else {
                   ?>

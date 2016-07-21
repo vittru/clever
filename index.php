@@ -2,8 +2,8 @@
     include ('includes/startup.php');
     $model = new Model($registry);
     $registry->set('model', $model);
-    $registry->set('userId', $model->getUserId());
-    $registry->set('lastVisit', $model->getLastVisit());
+    $model->getUser();
+    $registry['user']->lastvisit = $model->getLastVisit();
     $registry->set('skintypes', $model->getCatalog('skintypes'));
     $registry->set('hairtypes', $model->getCatalog('hairtypes'));
     $registry->set('categories', $model->getCatalog('categories'));

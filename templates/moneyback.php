@@ -12,15 +12,15 @@ include 'header.php';
         <h4>Информация о заказе</h4>
         <div class="form-group">
             <label for="name">Ваше имя:</label>
-            <input type="text" class="form-control" id="name" name="name" value='<?php if ($userName) echo $userName ?>'>
+            <input type="text" class="form-control" id="name" name="name" value='<?php if ($user->name) echo $user->name ?>'>
         </div> 
         <div class="form-group">
             <label for="email">Ваш e-mail:</label>
-            <input type="text" class="form-control" id="email" name="email" value='<?php if ($userEmail) echo $userEmail ?>'>
+            <input type="text" class="form-control" id="email" name="email" value='<?php if ($user->email) echo $user->email ?>'>
         </div> 
         <div class="form-group">
             <label for="phone">Ваш телефон:</label>
-            <input type="text" class="form-control" id="phone" name="phone" value='<?php if ($userPhone) echo $userPhone ?>'>
+            <input type="text" class="form-control" id="phone" name="phone" value='<?php if ($user->phone) echo $user->phone ?>'>
         </div> 
         <div class="form-group">
             <label for="order">Номер заказа:</label>

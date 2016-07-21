@@ -7,7 +7,7 @@ Class Model {
     
     private $selectId = "SELECT id FROM users "
             . "WHERE ip=:ip AND useragent=:userAgent";
-    private $selectProfile = "SELECT p.name, p.email, p.client, p.password, p.spam "
+    private $selectProfile = "SELECT p.* "
             . "FROM profiles p, users u "
             . "WHERE u.id = :userId AND u.profile = p.id";
     private $addUser = "INSERT INTO users (ip, useragent)"
@@ -51,9 +51,10 @@ Class Model {
     }
     
     //Gets userId from DB or creates a new one if not exists
-    function getUserId() {
-        $userId = $this->registry['userId'];
-        //First of all we're trying to get User ID from DB
+    function getUser() {
+        $user = $this->registry['user'];
+        $userId = $user->id;
+        //If userId is not set we're trying to get User ID from DB by his ip and agent
         if (!$userId) {
             if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])){
                 $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
@@ -77,7 +78,7 @@ Class Model {
             $userId = $sqlSelect->fetchColumn();
             $sqlSelect->closeCursor();
         }
-        //If user doesn't exist we create it in Users table in DB
+        //If user doesn't exist in DB we create it in Users table
         if (!$userId) {
             $sqlInsert = $this->db->prepare($this->addUser);
             $sqlInsert->bindParam(':ip', $ip);
@@ -101,21 +102,24 @@ Class Model {
                 $this->registry['logger']->lwrite('Error when selecting user properties from DB');
                 $this->registry['logger']->lwrite($e->getMessage());
             }
-            $this->registry->set ('userName', $data['name']);
-            $this->registry->set ('userEmail', $data['email']);
-            $this->registry->set ('isClient', $data['client']);
-            $this->registry->set ('userPassword', $data['password']);
-            $this->registry->set ('isSpam', $data['spam']);
+            $user->name = $data['name'];
+            $user->email = $data['email'];
+            $user->client = $data['client'];
+            $user->password = $data['password'];
+            $user->spam = $data['spam'];
+            $user->phone = $data['phone'];
             $sqlSelect->closeCursor();
         }
-        setcookie('userId', $userId, 60*24*60*60+time());
-        return $userId;
+        $user->id = $userId;
+        $this->registry->remove('user');
+        $this->registry->set('user', $user);
+        setcookie('userId', $userId, 60*24*60*60+time(), "/");
     }
     
     //Gets user's last visit from DB
     function getLastVisit() {
         $sqlLastVisit = $this->db->prepare($this->lastVisit);
-        $sqlLastVisit->bindParam(':userId', $this->registry['userId']);
+        $sqlLastVisit->bindParam(':userId', $this->registry['user']->id);
         try {
             $sqlLastVisit->execute();
         } catch (PDOException $e) {
@@ -131,11 +135,8 @@ Class Model {
     function logVisit($pageId) {
         $time = date("Y-m-d H:i:s");
         $sqlLog = $this->db->prepare($this->addVisit);
-        $sqlLog->bindParam(':userId', $this->registry['userId']);
-        if (isset($pageId)){
-            $this->registry->set ('activePage', $pageId);
-        }
-        $sqlLog->bindParam(':pageId', $this->registry['activePage']);
+        $sqlLog->bindParam(':userId', $this->registry['user']->id);
+        $sqlLog->bindParam(':pageId', $pageId);
         $sqlLog->bindParam(':time', $time);        
         try{
             $sqlLog->execute();
@@ -149,7 +150,7 @@ Class Model {
     //Checks if profile exists for the user
     function checkProfile() {
         $sqlSelect = $this->db->prepare($this->profileExists);
-        $sqlSelect->bindParam(':userId', $this->registry['userId']);
+        $sqlSelect->bindParam(':userId', $this->registry['user']->id);
         try{
             $sqlSelect->execute();
         }catch(PDOException $e){
@@ -169,17 +170,17 @@ Class Model {
         //If profile doesn't exist then we create it and link to user
         if (!$this->checkProfile()) {
             $sqlCreate = $this->db->prepare($this->createProfile);
-            $sqlCreate->bindParam(':userName', $this->registry['userName']);
-            $sqlCreate->bindParam(':userEmail', $this->registry['userEmail']);
-            if (!$this->registry['isClient']){
-                $this->registry->set('isClient', 0);
+            $sqlCreate->bindParam(':userName', $this->registry['user']->name);
+            $sqlCreate->bindParam(':userEmail', $this->registry['user']->email);
+            if (!$this->registry['user']->client){
+                $this->registry['user']->client = 0;
             }
-            $sqlCreate->bindParam(':isClient', $this->registry['isClient'], PDO::PARAM_INT);
-            $sqlCreate->bindParam(':userPassword', $this->registry['userPassword']);
-            if (!$this->registry['isSpam']){
-                $this->registry->set('isSpam', 0);
+            $sqlCreate->bindParam(':isClient', $this->registry['user']->client, PDO::PARAM_INT);
+            $sqlCreate->bindParam(':userPassword', $this->registry['user']->password);
+            if (!$this->registry['user'].spam){
+                $this->registry['user']->spam = 0;
             }
-            $sqlCreate->bindParam(':spam', $this->registry['isSpam'], PDO::PARAM_INT);
+            $sqlCreate->bindParam(':spam', $this->registry['user']->spam, PDO::PARAM_INT);
             try {
                 $sqlCreate->execute();
             } catch (PDOException $e) {
@@ -189,7 +190,7 @@ Class Model {
             $profileId = $this->db->lastInsertId();
             $sqlCreate->closeCursor();
             $sqlLink = $this->db->prepare($this->linkProfile);
-            $sqlLink->bindParam(":userId", $this->registry['userId']);
+            $sqlLink->bindParam(":userId", $this->registry['user']->id);
             $sqlLink->bindParam(":profileId", $profileId);
             try {
                 $sqlLink->execute();
@@ -201,12 +202,12 @@ Class Model {
         //Otherwise we just update the profile    
         } else {    
             $sqlUpdate = $this->db->prepare($this->updateProfile);
-            $sqlUpdate->bindParam(':userName', $this->registry['userName']);
-            $sqlUpdate->bindParam(':userEmail', $this->registry['userEmail']);
-            $sqlUpdate->bindParam(':isClient', $this->registry['isClient'], PDO::PARAM_INT);
-            $sqlUpdate->bindParam(':userPassword', $this->registry['userPassword']);
-            $sqlUpdate->bindParam(':spam', $this->registry['isSpam'], PDO::PARAM_INT);
-            $sqlUpdate->bindParam(':userId', $this->registry['userId']);
+            $sqlUpdate->bindParam(':userName', $this->registry['user']->name);
+            $sqlUpdate->bindParam(':userEmail', $this->registry['user']->email);
+            $sqlUpdate->bindParam(':isClient', $this->registry['user']->client, PDO::PARAM_INT);
+            $sqlUpdate->bindParam(':userPassword', $this->registry['user']->password);
+            $sqlUpdate->bindParam(':spam', $this->registry['user']->spam, PDO::PARAM_INT);
+            $sqlUpdate->bindParam(':userId', $this->registry['user']->id);
             try {
                 $sqlUpdate->execute();
             } catch (PDOException $e) {
@@ -236,7 +237,7 @@ Class Model {
     
     function login() {
         $sqlSelect = $this->db->prepare($this->selectProfileEmail);
-        $sqlSelect->bindParam(":userEmail", $this->registry['userEmail']);
+        $sqlSelect->bindParam(":userEmail", $this->registry['user']->email);
         try{
             $sqlSelect->execute();
             $data = $sqlSelect->fetch();

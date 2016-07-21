@@ -27,13 +27,13 @@ include 'header.php';
                                             <div class="col-md-6">
                                                 <div class="form-group">                        
                                                     <input type="text" placeholder="Имя" class="form-control" id="question-name"
-                                                    value="<?php echo $this->registry['userName'];?>">
+                                                    value="<?php echo $user->name; ?>">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">                        
                                                     <input type="email" placeholder="Почта" class="form-control" id="question-email"
-                                                    value="<?php echo $this->registry['userEmail'];?>">
+                                                    value="<?php echo $user->email;?>">
                                                 </div>
                                             </div>
                                         </div>                                      
@@ -65,7 +65,7 @@ include 'header.php';
     </div>
 </section>
 
-<?php if (!$this->registry['isSpam']) {?>
+<?php if (!$user->spam) {?>
 <!-- Subscribe section -->
 <section id="aa-subscribe">
     <div class="container">
@@ -75,7 +75,7 @@ include 'header.php';
                     <h3>Подпишитесь на нашу рассылку </h3>
                     <p>Это позволит Вам первыми узнавать обо всех наших акциях и новинках!</p>
                     <form action="" class="aa-subscribe-form" id="subscribe-form" novalidate>
-                        <input type="email" name="" id="subscribe-email" placeholder="Ваша почта" value="<?php echo $this->registry['userEmail'];?>">
+                        <input type="email" name="" id="subscribe-email" placeholder="Ваша почта" value="<?php echo $user->email;?>">
                         <input type="submit" value="ОК">
                     </form>
                     <div id="subscribe-error" display="none"></div>

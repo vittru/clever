@@ -6,10 +6,10 @@ Class Controller_Register Extends Controller_Base {
         $this->registry['model']->logVisit(16);
         $error =  $this->isCorrect();
         if ($error == ""){
-            $this->registry->set('userName', htmlspecialchars(trim($_POST['userName'])));
-            $this->registry->set('userEmail', htmlspecialchars(trim($_POST['userEmail'])));
+            $this->registry['user']->name = htmlspecialchars(trim($_POST['userName']));
+            $this->registry['user']->email = htmlspecialchars(trim($_POST['userEmail']));
             if (isset($_POST['userPassword']) && $_POST['userPassword'] != "") {
-                $this->registry->set('userPassword', $_POST['userPassword']);
+                $this->registry['user']->password = $_POST['userPassword'];
             }
         /*    if ($_POST['isClient'] == "true"){
                 $this->registry->set('isClient', '1');
@@ -17,9 +17,9 @@ Class Controller_Register Extends Controller_Base {
                 $this->registry->set('isClient', '0');
             }*/
             if ($_POST['isSpam'] == "true"){
-                $this->registry->set('isSpam', '1');
+                $this->registry['user']->spam = 1;
             }else{
-                $this->registry->set('isSpam', '0');
+                $this->registry['user']->spam = 0;
             }
             if ($_POST['userAction'] != "login")
                 $this->registry['model']->updateUser();
@@ -41,7 +41,7 @@ Class Controller_Register Extends Controller_Base {
         } else {
             if (!preg_match('/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/is', trim($_POST['userEmail']))) $error = $error . "Ваша почта кажется нам подозрительной<br>";
             else
-                if ($action != 'login' && $this->registry['userEmail'] != $_POST['userEmail'] && $this->registry['model']->checkEmailExists($_POST['userEmail'])) $error = $error .  "К сожалению кто-то уже зарегистрировал эту почту у нас на сайте<br>";
+                if ($action != 'login' && $this->registry['user']->email != $_POST['userEmail'] && $this->registry['model']->checkEmailExists($_POST['userEmail'])) $error = $error .  "К сожалению кто-то уже зарегистрировал эту почту у нас на сайте<br>";
             }
 	if ($action != 'update' && $_POST['userPassword'] == "") $error = $error .  "Пустой пароль<br>";
         if ($action != 'login' && $_POST['userPassword'] != $_POST['userConfirm']) $error = $error .  "Ваши пароли не совпадают<br>"; 
