@@ -108,6 +108,34 @@ Class Good {
         return '/'.$file_name;
     }
     
+    function getSecondImage() {
+        $file_name = 'images/goods/good' . $this->id . '-2';
+        if (!file_exists($file_name . '.jpg')) {
+            if (!file_exists($file_name . '.png')) {
+                return '';
+            } else {
+                $file_name = $file_name . '.png';
+            }    
+        } else {
+            $file_name = $file_name . '.jpg';
+        }
+        return '/'.$file_name;        
+    }
+    
+    function getThirdImage() {
+        $file_name = 'images/goods/good' . $this->id . '-3';
+        if (!file_exists($file_name . '.jpg')) {
+            if (!file_exists($file_name . '.png')) {
+                return '';
+            } else {
+                $file_name = $file_name . '.png';
+            }    
+        } else {
+            $file_name = $file_name . '.jpg';
+        }
+        return '/'.$file_name;          
+    }
+    
     function hasEffects() {
         return sizeof($this->effs) > 0;
     }

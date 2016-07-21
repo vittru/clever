@@ -21,28 +21,36 @@ $canBeBought = true;
         <div class="simpleLens-container">
             <div class="simpleLens-big-image-container">
                 <a class="simpleLens-lens-image">
-                    <img src="<?php echo $good->getImage() ?>" class="simpleLens-big-image">
+                    <img src="<?php echo $good->getImage() ?>" class="simpleLens-big-image" data-big-image="<?php echo $good->getImage() ?>">
                 </a>
             </div>
         </div>
-        <!--div class="simpleLens-thumbnails-container">
-            <a href="#" class="simpleLens-thumbnail-wrapper"
-               data-lens-image="img/view-slider/large/polo-shirt-1.png"
-               data-big-image="img/view-slider/medium/polo-shirt-1.png">
-                <img src="img/view-slider/thumbnail/polo-shirt-1.png">
-            </a>                                    
-            <a href="#" class="simpleLens-thumbnail-wrapper"
-               data-lens-image="img/view-slider/large/polo-shirt-3.png"
-               data-big-image="img/view-slider/medium/polo-shirt-3.png">
-                <img src="img/view-slider/thumbnail/polo-shirt-3.png">
-            </a>
-
-            <a href="#" class="simpleLens-thumbnail-wrapper"
-               data-lens-image="img/view-slider/large/polo-shirt-4.png"
-               data-big-image="img/view-slider/medium/polo-shirt-4.png">
-                <img src="img/view-slider/thumbnail/polo-shirt-4.png">
-            </a>
-        </div-->
+        <?php 
+        $secondImage = $good->getSecondImage();
+        $thirdImage = $good->getThirdImage();
+        if ($secondImage or $thirdImage) {
+        ?>
+            <div class="simpleLens-thumbnails-container">
+                <?php
+                if ($secondImage) {
+                ?>
+                    <a href="#" class="simpleLens-thumbnail-wrapper" data-lens-image="<?php echo $secondImage; ?>" data-big-image="<?php echo $secondImage; ?>">
+                        <img src="<?php echo $secondImage; ?>">
+                    </a>               
+                <?php
+                }
+                if ($thirdImage) {
+                ?>
+                    <a href="#" class="simpleLens-thumbnail-wrapper" data-lens-image="<?php echo $thirdImage; ?>" data-big-image="<?php echo $thirdImage; ?>">
+                        <img src="<?php echo $thirdImage; ?>">
+                    </a>
+                <?php 
+                }
+                ?>
+            </div>
+        <?php  
+        }
+        ?>
       </div>
     </div>
   </div>
@@ -98,27 +106,6 @@ $canBeBought = true;
       </div>
       <p>Производитель: <?php echo $this->registry['firms'][$good->firmId] ?></p>  
       <p><?php echo $good->shortdesc ?></p>
-      <!--h4>Size</h4>
-      <div class="aa-prod-view-size">
-        <a href="#">S</a>
-        <a href="#">M</a>
-        <a href="#">L</a>
-        <a href="#">XL</a>
-      </div-->
-      <!--div class="aa-prod-quantity">
-        <form action="">
-          <select name="" id="">
-            <option value="0" selected="1">1</option>
-            <option value="1">2</option>
-            <option value="2">3</option>
-            <option value="3">4</option>
-            <option value="4">5</option>
-            <option value="5">6</option>
-          </select>
-        </form>
-        <!--p class="aa-prod-category">
-          Category: <a href="#">Polo T-Shirt</a>
-        </p-->
       </div>
       <div class="aa-prod-view-bottom">
         <a href="#" class="aa-add-to-cart-btn" data-dismiss="modal" <?php if (!$canBeBought) echo 'disabled' ?>><span class="fa fa-shopping-cart"></span>В корзину</a>
@@ -178,6 +165,6 @@ $canBeBought = true;
   </div>
 </div>
 
-<script src="/js/modalgood.js"></script>       
+<script src="/js/modalgood.js"></script>  
     
 </html><!-- / quick view modal -->  
