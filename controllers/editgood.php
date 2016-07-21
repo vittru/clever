@@ -56,26 +56,44 @@ Class Controller_Editgood Extends Controller_Base {
                 $this->registry['model']->addGoodSize($goodId, $_POST['sizeId3'], $val, $_POST['price3'], $_POST['code3'], $_POST['instock3'], $_POST['sale3']);
             }
         }
-    /*    if (getimagesize($_FILES["image1"]["tmp_name"])) {
-            $targetFile='/images/goods/good'.$goodId.'-1.jpg';
-            if ($_FILES["image1"]["size"] > 500000) {
-                echo "Очень большая картинка";
-            }
-            if(pathinfo(basename($_FILES["image1"]["name"]), PATHINFO_EXTENSION) != "jpg") {
-                echo "Мы поддерживаем только jpg";
-            }
-            if(file_exists($targetFile)) {
-                unlink($targetFile);
-                echo 'Удаляю файл';
-            }    
-            if(move_uploaded_file($_FILES["image1"]["tmp_name"], $targetFile)) {
-                echo "Картинка залита";
-            } else {
-                echo "Картинка не залита";
-            }
-        }*/
+        $this->loadImage($_FILES["image1"], 1, $goodId);
+        $this->loadImage($_FILES["image2"], 2, $goodId);
+        $this->loadImage($_FILES["image3"], 3, $goodId);
+        
+        
             
         echo "Товар сохранен под номером " . $goodId;
+    }
+    
+    function loadImage($image, $number, $goodId) {
+        if (getimagesize($image["tmp_name"])) {
+            $targetFileJpg = 'images/goods/good'.$goodId.'-'.$number.'.jpg';
+            $targetFilePng = 'images/goods/good'.$goodId.'-'.$number.'.png';
+            if ($image["size"] > 500000) {
+                echo "Очень большая картинка-".$number."<br>";
+            } else {
+                if(pathinfo(basename($image["name"]), PATHINFO_EXTENSION) == "jpg") {
+                    $targetFile = $targetFileJpg;
+                } else if ((pathinfo(basename($image["name"]), PATHINFO_EXTENSION) == "png")) {
+                    $targetFile=$targetFilePng;
+                } else {    
+                    echo "Мы поддерживаем только jpg и png. Поправьте картинку ".$number."<br>";
+                }    
+                if ($targetFile) {
+                    if(file_exists($targetFileJpg) or file_exists($targetFilePng)) {
+                        unlink($targetFileJpg);
+                        unlink($taregtFilePng);
+                        echo 'У товара уже была картинка '.$number.', заменяю<br>';
+                    }    
+                    if(move_uploaded_file($image["tmp_name"], $targetFile)) {
+                        echo "Картинка ".$number." залита<br>";
+                    } else {
+                        echo "Картинка ".$number." не залита<br>";
+                    }
+                }
+            }
+        }
+
     }
 }
 

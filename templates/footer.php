@@ -27,6 +27,7 @@
                       <li><a href="/about">О нас</a></li>
                       <li><a href="/common/delivery">Доставка</a></li>
                       <li><a href="/common/payment">Оплата</a></li>
+                      <li><a href="/common/moneyback">Возврат</a></li>
                       <li><a href="/contacts">Контакты</a></li>
                     </ul>
                   </div>

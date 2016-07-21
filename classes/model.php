@@ -326,8 +326,27 @@ Class Model {
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $catsArray[$data['id']]=$data['name'];
         }
-        $sqlSelect->closeCursor();    
-        return $catsArray;       
+        $sqlSelect->closeCursor(); 
+        return $this->prepareArray($catsArray);       
+    }
+    
+    function startsWith($haystack, $needle) {
+        $length = strlen($needle);
+        return (substr($haystack, 0, $length) === $needle);
+    }
+    
+    function prepareArray($array) {
+        $preparedArray = $array;
+        foreach($preparedArray as $key=>$value){
+            if ($this->startsWith($value, "Все") or $this->startsWith($value, "Прочее")) {
+                $keyAll = $key;
+                $valueAll = $value;
+                unset($preparedArray[$key]);
+            }    
+        }
+        asort($preparedArray);
+        if($keyAll) $preparedArray[$keyAll]=$valueAll;
+        return $preparedArray;
     }
     
     function addGood($id, $name, $description, $shortdesc, $firmId, $sale, $madeOf, $howTo, $problem) {

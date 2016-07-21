@@ -84,6 +84,11 @@
                     </a>
                 </div>
                 <div class="aa-header-top-left">
+                    <a class="btn" href="/common/moneyback" type="button" id="moneyback">
+                       Возврат
+                    </a>
+                </div>
+                <div class="aa-header-top-left">
                     <a class="btn" href="/contacts" type="button" id="contacts">
                        Контакты
                     </a>
@@ -141,7 +146,7 @@
               <div class="aa-cartbox">
                 <a class="aa-cart-link" href="/basket">
                   <span class="fa fa-shopping-basket"></span>
-                  <span class="aa-cart-title">Корзина</span>
+                  <span class="aa-cart-title">Корзина с подарком</span>
                   <span class="aa-cart-notify"><?php echo count($this->registry['basket'])+1; ?></span>
                 </a>
                 <div class="aa-cartbox-summary">
@@ -198,9 +203,8 @@
                                 <form class="form-horizontal" role="form" action="/search">
                                   <div class="row">
                                     <div class="form-group col-md-6">
-                                        <label>Производитель:</label>
                                         <select class="form-control" name="firm">
-                                            <option value="0" selected></option>
+                                            <option value="0" disabled selected>Производитель</option>
                                             <?php
                                             foreach($this->registry['firms'] as $id=>$name) {
                                                 echo "<option value=".$id.">".$name."</option>";
@@ -209,9 +213,8 @@
                                         </select>
                                       </div>
                                       <div class="form-group col-md-6">
-                                        <label for="category">Категория:</label>
                                         <select class="form-control" name="category">
-                                            <option value="0" selected></option>
+                                            <option value="0" selected disabled>Категория</option>
                                             <?php
                                             foreach($this->registry['categories'] as $id=>$name) {
                                                 echo "<option value=".$id.">".$name."</option>";
@@ -222,9 +225,8 @@
                                   </div>    
                                   <div class="row">  
                                     <div class="form-group col-md-6">
-                                      <label for="problem">Проблема:</label>
                                       <select class="form-control" name="problem">
-                                        <option value="0" selected></option>
+                                        <option value="0" selected disabled>Проблема</option>
                                         <?php
                                         foreach($this->registry['problems'] as $id=>$name) {
                                             echo "<option value=".$id.">".$name."</option>";
@@ -233,9 +235,8 @@
                                       </select>
                                     </div>
                                     <div class="form-group col-md-6"> 
-                                      <label for="effect">Эффект:</label>
                                       <select class="form-control" name="effect">
-                                        <option value="0" selected></option>
+                                        <option value="0" selected disabled>Эффект</option>
                                         <?php
                                         foreach($this->registry['effects'] as $id=>$name) {
                                             echo "<option value=".$id.">".$name."</option>";
@@ -246,9 +247,8 @@
                                   </div>
                                   <div class="row">  
                                   <div class="form-group col-md-6">
-                                    <label for="skintype">Тип кожи:</label>
                                     <select class="form-control" name="skintype">
-                                        <option value="0" selected></option>
+                                        <option value="0" selected disabled>Тип кожи</option>
                                         <?php
                                         foreach($this->registry['skintypes'] as $id=>$name) {
                                             echo "<option value=".$id.">".$name."</option>";
@@ -257,9 +257,8 @@
                                     </select>
                                   </div>
                                   <div class="form-group col-md-6">
-                                    <label for="hairtype">Тип волос:</label>
                                     <select class="form-control" name="hairtype">
-                                        <option value="0" selected></option>
+                                        <option value="0" selected disabled>Тип волос</option>
                                         <?php
                                         foreach($this->registry['hairtypes'] as $id=>$name) {
                                             echo "<option value=".$id.">".$name."</option>";
@@ -269,16 +268,13 @@
                                   </div>
                                   </div>    
                                   <div class="form-group">
-                                    <label for="description">Описание:</label>
-                                    <input class="form-control" type="text" name="description" />
+                                    <input class="form-control" type="text" name="description" placeholder="Описание" />
                                   </div>
                                   <div class="form-group">
-                                    <label for="description">Состав:</label>
-                                    <input class="form-control" type="text" name="madeOf" />
+                                    <input class="form-control" type="text" name="madeOf" placeholder="Состав"/>
                                   </div>
                                   <div class="form-group">
-                                    <label for="description">Применение:</label>
-                                    <input class="form-control" type="text" name="howTo" />
+                                    <input class="form-control" type="text" name="howTo" placeholder="Способ применения" />
                                   </div>
                                   <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                                 </form>

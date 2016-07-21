@@ -15,5 +15,13 @@ Class Controller_Common Extends Controller_Base {
     function payment() {
         $this->registry['model']->logVisit(13);
         $this->registry['template']->show('payment');
-    }}
+    }
+    
+    function moneyback() {
+        $this->registry['model']->logVisit(15);
+        $this->registry['template']->show('moneyback');
+    }
+
+    
+}
 

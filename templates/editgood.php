@@ -245,9 +245,27 @@ if ($goodId) {
         </td>
       </tr>
     </tbody>
-  </table>        
+  </table>
+  <?php
+  if ($good and (file_exists('images/goods/good'.$goodId.'-1.jpg') or file_exists('images/goods/good'.$goodId.'-1.png'))) {
+     echo "<label for='image1'>Товар уже имеет картинку-1. Она будет заменена</label>"; 
+  } else
+      echo "<label for='image1'>У товара еще нет картинки-1</label>"
+  ?>  
   <input class="form-control" type="file" name="image1" id="image1">          
+  <?php
+  if ($good and (file_exists('images/goods/good'.$goodId.'-2.jpg') or file_exists('images/goods/good'.$goodId.'-2.png'))) {
+     echo "<label for='image2'>Товар уже имеет картинку-2. Она будет заменена</label>"; 
+  } else
+      echo "<label for='image2'>У товара еще нет картинки-2</label>"
+  ?>  
   <input class="form-control" type="file" name="image2" id="image2">          
+  <?php
+  if ($good and (file_exists('images/goods/good'.$goodId.'-3.jpg') or file_exists('images/goods/good'.$goodId.'-3.png'))) {
+     echo "<label for='image3'>Товар уже имеет картинку-1. Она будет заменена</label>"; 
+  } else
+      echo "<label for='image3'>У товара еще нет картинки-3</label>"
+  ?>  
   <input class="form-control" type="file" name="image3" id="image3">          
             
     <button type="submit" class="btn btn-success">Сохранить</button>

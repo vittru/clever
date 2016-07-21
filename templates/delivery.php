@@ -169,7 +169,7 @@ include 'header.php';
 <p style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
 Возможна доставка в другие районы
 Самарской обасти и регионы РФ транспортными
-команиями по Вашему выбору. Условия
+компаниями по Вашему выбору. Условия
 доставки обсуждаются индивидуально.</p><p align="justify" style="text-indent: 0.5in; margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
 </section>
 
