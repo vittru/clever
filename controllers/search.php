@@ -14,7 +14,6 @@ Class Controller_Search Extends Controller_Base {
             $found = true;
             foreach($criteria as $key => $value){
                 if (!empty($value) and $key!="route") {
-                    $this->registry['logger']->lwrite($key."=".$value." works");
                     switch ($key) {
                         case "name":
                             if (mb_stripos($good->name, $value)===false)
@@ -57,7 +56,7 @@ Class Controller_Search Extends Controller_Base {
                                 $found = false;
                             break;
                     }
-                } else $this->registry['logger']->lwrite($key."=".$value." doesn't work");
+                }
                 if (!$found) {
                     break;
                 }    

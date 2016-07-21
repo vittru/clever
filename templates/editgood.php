@@ -134,35 +134,39 @@ if ($goodId) {
     <tbody>
       <tr>
         <td>
+            <?php 
+            if ($good)
+                $sizes = array_values($good->sizes);
+            ?>
             <input class="form-control" type="hidden" id="sizeId1" name="sizeId1" value="<?php 
             if ($good) {
-                echo $good->sizes[0]->id;
+                echo $sizes[0]->id;
             }?>">
             <input class="form-control" type="text" id="size1" name="size1" value='<?php 
             if ($good) {
-                echo $good->sizes[0]->size;
+                echo $sizes[0]->size;
             }?>'>
         </td>
         <td><input class="form-control" type="text" id="price1" name="price1" value='<?php 
             if ($good) {
-                echo $good->sizes[0]->price;
+                echo $sizes[0]->price;
             }?>'>
         </td>
         <td><input class="form-control" type="text" id="code1" name="code1" value='<?php 
             if ($good) {
-                echo $good->sizes[0]->code;
+                echo $sizes[0]->code;
             }?>'>
         </td>
         <td><input class="form-control" type="text" id="instock1" name="instock1" value='<?php 
-            if ($good and $good->sizes[0]) {
-                echo $good->sizes[0]->instock;
+            if ($good and $sizes[0]) {
+                echo $sizes[0]->instock;
             }else {
                 echo 0;
             } ?>'>
         </td>
         <td><input class="form-control" type="text" id="sale1" name="sale1" value='<?php 
-            if ($good and $good->sizes[0]) {
-                echo $good->sizes[0]->sale;
+            if ($good and $sizes[0]) {
+                echo $sizes[0]->sale;
             }else {
                 echo 0;
             } ?>'>
@@ -172,33 +176,33 @@ if ($goodId) {
         <td>
             <input class="form-control" type="hidden" id="sizeId2" name="sizeId2" value="<?php 
             if ($good) {
-                echo $good->sizes[1]->id;
+                echo $sizes[1]->id;
             }?>">
             <input class="form-control" type="text" id="size2" name="size2" value='<?php 
             if ($good) {
-                echo $good->sizes[1]->size;
+                echo $sizes[1]->size;
             }?>'>
         </td>
         <td><input class="form-control" type="text" id="price2" name="price2" value='<?php 
             if ($good) {
-                echo $good->sizes[1]->price;
+                echo $sizes[1]->price;
             }?>'>
         </td>
         <td><input class="form-control" type="text" id="code2" name="code2" value='<?php 
             if ($good) {
-                echo $good->sizes[1]->code;
+                echo $sizes[1]->code;
             }?>'>
         </td>
         <td><input class="form-control" type="text" id="instock2" name="instock2" value='<?php 
-            if ($good and $good->sizes[1]) {
-                echo $good->sizes[1]->instock;
+            if ($good and $sizes[1]) {
+                echo $sizes[1]->instock;
             }else {
                 echo 0;
             } ?>'>
         </td>
         <td><input class="form-control" type="text" id="sale2" name="sale2" value='<?php 
-            if ($good and $good->sizes[1]) {
-                echo $good->sizes[1]->sale;
+            if ($good and $sizes[1]) {
+                echo $sizes[1]->sale;
             }else {
                 echo 0;
             } ?>'>
@@ -208,11 +212,11 @@ if ($goodId) {
         <td>
             <input class="form-control" type="hidden" id="sizeId3" name="sizeId3" value="<?php 
             if ($good) {
-                echo $good->sizes[2]->id;
+                echo $sizes[2]->id;
             }?>">
             <input class="form-control" type="text" id="size3" name="size3" value='<?php 
             if ($good) {
-                echo $good->sizes[2]->size;
+                echo $sizes[2]->size;
             }?>'>
         </td>
         <td><input class="form-control" type="text" id="price3" name="price3" value='<?php 
@@ -222,19 +226,19 @@ if ($goodId) {
         </td>
         <td><input class="form-control" type="text" id="code3" name="code3" value='<?php 
             if ($good) {
-                echo $good->sizes[2]->code;
+                echo $sizes[2]->code;
             }?>'>
         </td>
         <td><input class="form-control" type="text" id="instock3" name="instock3" value='<?php 
-            if ($good and $good->sizes[2]) {
-                echo $good->sizes[2]->instock;
+            if ($good and $sizes[2]) {
+                echo $sizes[2]->instock;
             }else {
                 echo 0;
             } ?>'>
         </td>
         <td><input class="form-control" type="text" id="sale3" name="sale3" value='<?php 
-            if ($good and $good->sizes[2]) {
-                echo $good->sizes[2]->sale;
+            if ($good and $sizes[2]) {
+                echo $sizes[2]->sale;
             }else {
                 echo 0;
             } ?>'>
