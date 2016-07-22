@@ -2,20 +2,44 @@
 include 'header.php';
 ?>
 
-<!-- banner section -->
-<section id="aa-banner">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">        
-                <div class="row">
-                    <div class="aa-banner-area">
-                        <a href="#"><img src="/images/fashion-banner.jpg" alt="Наши акции"></a>
+<!-- Start slider -->
+  <section id="aa-slider">
+    <div class="aa-slider-area">
+      <div id="sequence" class="seq">
+        <div class="seq-screen">
+          <ul class="seq-canvas">
+            <?php
+            $bannersdir='images/banners';
+            $dir = new DirectoryIterator($bannersdir);
+            foreach ($dir as $fileinfo) {
+                if (!$fileinfo->isDot()) {
+                ?>  
+                <li>
+                    <div class="seq-model">
+                        <img data-seq src="<?php echo '/'.$bannersdir.'/'.$fileinfo->getFilename() ?>" alt="Men slide img" />
                     </div>
-                </div>
-            </div>
+                    <!--div class="seq-title">
+                    <span data-seq>Save Up to 75% Off</span>                
+                        <h2 data-seq>Men Collection</h2>                
+                        <p data-seq>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, illum.</p>
+                        <a data-seq href="#" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
+                    </div-->
+                </li>
+                <?php
+                }        
+            }
+            ?>
+          </ul>
         </div>
+        <!-- slider navigation btn -->
+        <fieldset class="seq-nav" aria-controls="sequence" aria-label="Slider buttons">
+          <a type="button" class="seq-prev" aria-label="Previous"><span class="fa fa-angle-left"></span></a>
+          <a type="button" class="seq-next" aria-label="Next"><span class="fa fa-angle-right"></span></a>
+        </fieldset>
+      </div>
     </div>
-</section>
+  </section>
+  
   
 
 <section id="aa-product">

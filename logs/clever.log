@@ -76,3 +76,19 @@ CH2-O-CO-R’’’
 [22/Jul/2016:12:01:08] (index) SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`visits`, CONSTRAINT `visits_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)
 [22/Jul/2016:13:51:35] (index) Error when logging a visit to DB
 [22/Jul/2016:13:51:35] (index) SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`visits`, CONSTRAINT `visits_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)
+[22/Jul/2016:14:07:52] (index) Error when logging a visit to DB
+[22/Jul/2016:14:07:52] (index) SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`visits`, CONSTRAINT `visits_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)
+[22/Jul/2016:14:07:53] (index) Error when logging a visit to DB
+[22/Jul/2016:14:07:53] (index) SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`visits`, CONSTRAINT `visits_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)
+[22/Jul/2016:14:07:53] (index) Error when logging a visit to DB
+[22/Jul/2016:14:07:53] (index) SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`visits`, CONSTRAINT `visits_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)
+[22/Jul/2016:14:08:14] (index) Error when logging a visit to DB
+[22/Jul/2016:14:08:14] (index) SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`visits`, CONSTRAINT `visits_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)
+[22/Jul/2016:14:08:15] (index) Error when logging a visit to DB
+[22/Jul/2016:14:08:15] (index) SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`visits`, CONSTRAINT `visits_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)
+[22/Jul/2016:14:08:15] (index) Error when logging a visit to DB
+[22/Jul/2016:14:08:15] (index) SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`visits`, CONSTRAINT `visits_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)
+[22/Jul/2016:14:09:33] (index) Error when logging a visit to DB
+[22/Jul/2016:14:09:33] (index) SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`visits`, CONSTRAINT `visits_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)
+[22/Jul/2016:14:10:25] (index) Error when logging a visit to DB
+[22/Jul/2016:14:10:25] (index) SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`visits`, CONSTRAINT `visits_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)
