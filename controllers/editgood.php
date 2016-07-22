@@ -38,6 +38,10 @@ Class Controller_Editgood Extends Controller_Base {
                 $effId=substr($name, 3);
                 $this->registry['model']->linkGoodEff($goodId, $effId);
             }
+            if (strpos($name, 'prolist') !== false){
+                $probId=substr($name, 7);
+                $this->registry['model']->linkGoodProblem($goodId, $probId);
+            }
             if (strpos($name, 'skintype') !== false){
                 $skintypeId=substr($name, 8);
                 $this->registry['model']->linkGoodST($goodId, $skintypeId);

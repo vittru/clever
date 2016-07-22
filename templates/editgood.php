@@ -105,8 +105,19 @@ if ($goodId) {
     </div>
 
     <div class="form-group">
-        <label for="problem">Проблема:</label>
+        <label for="problem">Проблема (текст):</label>
         <textarea class="form-control" rows="3" id="howTo" name="problem"><?php if ($good) echo $good->problem ?></textarea>
+    </div>
+    
+    <div class="form-group">
+        <label>Проблема (список):</label>    
+        <?php
+        foreach ($this->registry['problems'] as $key => $value) {
+            ?>
+            <label class="checkbox-inline"><input type="checkbox" value="" name="prolist<?php echo $key ?>" <?php if (in_array($key, $good->problems)) echo "checked" ?>><?php echo $value ?></label>
+            <?php
+        }
+        ?>
     </div>
     
     <div class="form-group">

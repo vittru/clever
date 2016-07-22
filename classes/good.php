@@ -18,7 +18,8 @@ Class Good {
     public $hairtypes;
     public $sizes;
     public $types;
-   
+    public $problems;
+    
     function __construct($id, $name, $description, $shortdesc, $howTo, $madeOf, $sale, $firmId, $problem) {
        $this->id = $id;
        $this->name = $name;

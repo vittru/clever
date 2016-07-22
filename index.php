@@ -11,6 +11,7 @@
     $registry->set('effects', $model->getCatalog('effects'));
     $registry->set('types', $model->getCatalog('types'));
     $registry->set('goods', $model->getAllGoods());
+    $registry->set('problems', $model->getCatalog('problems'));
     
     //This is a temporary init for basket - SHOULD BE REMOVED
     $basketItem = new BasketItem();

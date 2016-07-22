@@ -40,6 +40,7 @@ Class Model {
     private $linkGoodCat = "INSERT INTO `goods-categories` (goodId, categoryId) VALUES(:goodId, :catId)";
     private $linkGoodType = "INSERT INTO `goods-types` (goodId, typeId) VALUES(:goodId, :typeId)";
     private $linkGoodEff = "INSERT INTO `goods-effects` (goodId, effectId) VALUES(:goodId, :effId)";
+    private $linkGoodProblem = "INSERT INTO `goods-problems` (goodId, problemId) VALUES(:goodId, :probId)";
     private $linkGoodST = "INSERT INTO `goods-skintypes` (goodId, skintypeId) VALUES(:goodId, :skintypeId)";
     private $linkGoodHT = "INSERT INTO `goods-hairtypes` (goodId, hairtypeId) VALUES(:goodId, :hairtypeId)";
     
@@ -418,6 +419,19 @@ Class Model {
         }    
         $sqlInsert->closeCursor();
     }
+    
+    function linkGoodProblem($goodId, $probId) {
+        $sqlInsert = $this->db->prepare($this->linkGoodProblem);
+        $sqlInsert->bindParam(':goodId', $goodId);
+        $sqlInsert->bindParam(':probId', $probId);
+            try{
+            $sqlInsert->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when linking good and problem');
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }    
+        $sqlInsert->closeCursor();
+    }    
 
     function linkGoodST($goodId, $skintypeId) {
         $sqlInsert = $this->db->prepare($this->linkGoodST);
@@ -461,6 +475,7 @@ Class Model {
         $good->hairtypes = $this->getGoodHTs($goodId);
         $good->sizes = $this->getGoodSizes($goodId);
         $good->types = $this->getGoodTypes($goodId);
+        $good->problems = $this->getGoodProblems($goodId);
         
         $sqlSelect->closeCursor();    
         return $good;
@@ -531,6 +546,22 @@ Class Model {
         return $catsArray;
     }
 
+    function getGoodProblems($goodId) {
+        $sqlSelect = $this->db->prepare('SELECT problemId FROM `goods-problems` WHERE goodId=' . $goodId);
+        try{
+            $sqlSelect->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when selecting product problems');
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }
+        $catsArray=array();
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            array_push($catsArray, $data['problemId']);
+        }
+        $sqlSelect->closeCursor();
+        return $catsArray;
+    }
+    
     function getGoodSTs($goodId) {
         $sqlSelect = $this->db->prepare('SELECT skintypeId FROM `goods-skintypes` WHERE goodId=' . $goodId);
         try{
@@ -573,6 +604,8 @@ Class Model {
         $sqlDelete = $this->db->prepare('DELETE FROM `goods-hairtypes` WHERE goodId=' . $goodId);
         $sqlDelete->execute();
         $sqlDelete = $this->db->prepare('DELETE FROM `goods-skintypes` WHERE goodId=' . $goodId);
+        $sqlDelete->execute();
+        $sqlDelete = $this->db->prepare('DELETE FROM `goods-problems` WHERE goodId=' . $goodId);
         $sqlDelete->execute();
         $sqlDelete->closeCursor();
     }
