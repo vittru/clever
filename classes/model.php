@@ -35,8 +35,8 @@ Class Model {
     private $getNonClientNews = "select headr, time, text from news where forClients=0 order by time desc limit 10";
     private $addQuestion = "INSERT INTO questions(user, question, date) VALUES(:userId, :question, NOW())";
     private $selectCatalog = "SELECT id, name FROM ";
-    private $updateGood = "UPDATE goods SET name=:name, description=:description, shortdesc=:shortdesc, firmId=:firmId, sale=:sale, howTo=:howTo, madeOf=:madeOf, problem=:problem WHERE id=:id";
-    private $addGood = "INSERT INTO goods (name, description, shortdesc, firmId, sale, howTo, madeOf, problem) VALUES (:name, :description, :shortdesc, :firmId, :sale, :howTo, :madeOf, :problem)";
+    private $updateGood = "UPDATE goods SET name=:name, description=:description, shortdesc=:shortdesc, firmId=:firmId, sale=:sale, howTo=:howTo, madeOf=:madeOf, problem=:problem, bestbefore=:bestbefore, precaution=:precaution WHERE id=:id";
+    private $addGood = "INSERT INTO goods (name, description, shortdesc, firmId, sale, howTo, madeOf, problem, bestbefore, precaution) VALUES (:name, :description, :shortdesc, :firmId, :sale, :howTo, :madeOf, :problem, :bestbefore, :precaution)";
     private $linkGoodCat = "INSERT INTO `goods-categories` (goodId, categoryId) VALUES(:goodId, :catId)";
     private $linkGoodType = "INSERT INTO `goods-types` (goodId, typeId) VALUES(:goodId, :typeId)";
     private $linkGoodEff = "INSERT INTO `goods-effects` (goodId, effectId) VALUES(:goodId, :effId)";
@@ -351,7 +351,7 @@ Class Model {
         return $preparedArray;
     }
     
-    function addGood($id, $name, $description, $shortdesc, $firmId, $sale, $madeOf, $howTo, $problem) {
+    function addGood($id, $name, $description, $shortdesc, $firmId, $sale, $madeOf, $howTo, $problem, $bestbefore, $precaution) {
         if ($id) {
             $sqlInsert = $this->db->prepare($this->updateGood);
             $sqlInsert->bindParam(':id', $id);
@@ -366,6 +366,8 @@ Class Model {
         $sqlInsert->bindParam(':howTo', $howTo);
         $sqlInsert->bindParam(':madeOf', $madeOf);
         $sqlInsert->bindParam(':problem', $problem);
+        $sqlInsert->bindParam(':bestbefore', $bestbefore);
+        $sqlInsert->bindParam(':precaution', $precaution);
         try{
             $sqlInsert->execute();
         } catch (Exception $e) {
@@ -468,7 +470,7 @@ Class Model {
             $this->registry['logger']->lwrite($e->getMessage()); 
         }
         $data = $sqlSelect->fetch();
-        $good=new Good($goodId, trim($data['name']), trim($data['description']), trim($data['shortdesc']), trim($data['howTo']), trim($data['madeOf']), $data['sale'], $data['firmId'], trim($data['problem']));
+        $good=new Good($goodId, trim($data['name']), trim($data['description']), trim($data['shortdesc']), trim($data['howTo']), trim($data['madeOf']), $data['sale'], $data['firmId'], trim($data['problem']), trim($data['bestbefore']), trim($data['precaution']));
         $good->cats = $this->getGoodCats($goodId);
         $good->effs = $this->getGoodEffs($goodId);
         $good->skintypes = $this->getGoodSTs($goodId);

@@ -121,6 +121,16 @@ if ($goodId) {
     </div>
     
     <div class="form-group">
+        <label for="bestbefore">Срок хранения:</label>
+        <textarea class="form-control" rows="3" id="bestbefore" name="bestbefore"><?php if ($good) echo $good->bestbefore ?></textarea>
+    </div>
+    
+    <div class="form-group">
+        <label for="precaution">Противопоказания:</label>
+        <textarea class="form-control" rows="3" id="howTo" name="precaution"><?php if ($good) echo $good->precaution ?></textarea>
+    </div>
+    
+    <div class="form-group">
         <label for="sale">Скидка:</label>
         <input type="text" class="form-control" id="sale" name="sale" value='<?php 
             if ($good) {

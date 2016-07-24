@@ -117,6 +117,8 @@ $canBeBought = true;
             <li class="active"><a href="#description" data-toggle="tab">Описание</a></li>
             <li><a href="#madeOf" data-toggle="tab">Состав</a></li>
             <li><a href="#howTo" data-toggle="tab">Способ применения</a></li>
+            <!--li><a href="#bestbefore" data-toggle="tab">Срок хранения</a></li>
+            <li><a href="#precaution" data-toggle="tab">Противопоказания</a></li-->
             <li><a href="#problems" data-toggle="tab">Проблемы</a></li>
             <?php if ($hasEffects) { ?>
             <li><a href="#effects" data-toggle="tab">Эффекты</a></li>
@@ -129,10 +131,20 @@ $canBeBought = true;
             <?php }?>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane fade in active aa-product-info-tab" id="description"><?php echo $good->getWebDescription(); ?></div>
+            <div class="tab-pane fade in active aa-product-info-tab" id="description">
+                <?php echo $good->getWebDescription(); ?>
+                <?php echo $good->getWebBestbefore(); ?>
+                <?php echo $good->getWebPrecaution(); ?>
+            </div>
             <div class="tab-pane fade aa-product-info-tab" id="madeOf"><?php echo $good->getWebMadeOf(); ?></div>
             <div class="tab-pane fade aa-product-info-tab" id="howTo"><?php echo $good->getWebHowTo(); ?></div>
-            <div class="tab-pane fade aa-product-info-tab" id="problems"><?php echo $good->problem; ?></div>
+            <div class="tab-pane fade" id="problems">
+                <ul class="list-group">
+                <?php foreach($good->problems as $problem) { ?>
+                    <li class="list-group-item"><?php echo $this->registry['problems'][$problem] ?></li>
+                <?php } ?>
+                </ul>            
+            </div>
             <?php if ($hasEffects) { ?>
             <div class="tab-pane fade" id="effects">
                 <ul class="list-group">

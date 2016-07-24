@@ -19,8 +19,10 @@ Class Good {
     public $sizes;
     public $types;
     public $problems;
+    public $bestbefore;
+    public $precaution;
     
-    function __construct($id, $name, $description, $shortdesc, $howTo, $madeOf, $sale, $firmId, $problem) {
+    function __construct($id, $name, $description, $shortdesc, $howTo, $madeOf, $sale, $firmId, $problem, $bestbefore, $precaution) {
        $this->id = $id;
        $this->name = $name;
        $this->description = $description;
@@ -30,10 +32,16 @@ Class Good {
        $this->sale = $sale;
        $this->firmId = $firmId;
        $this->problem = $problem;
+       $this->bestbefore = $bestbefore;
+       $this->precaution = $precaution;
+    }
+    
+    function getPrice() {
+        return reset($this->sizes)->price * (100-$this->sale)/100;
     }
     
     function getWebPrice() {
-        $price = reset($this->sizes)->price * (100-$this->sale)/100;
+        $price = $this->getPrice();
         if ($price > 0)
             return $price . " руб.";
         else
@@ -53,7 +61,7 @@ Class Good {
     }
     
     function showInCatalog() {
-        echo '<li class="col-sm-3">';
+        echo '<li class="col-sm-3 good">';
         echo '<figure>';
         echo '<a class="aa-product-img" data-toggle2="tooltip" data-placement="top" data-toggle="modal" data-target="#quick-view-modal" href="/showgood?id=';
         echo $this->id;
@@ -71,7 +79,9 @@ Class Good {
         echo '" data-toggle2="tooltip" data-placement="top" data-toggle="modal" data-target="#quick-view-modal">';
         echo $this->name;
         echo '</a></h4>';
-        echo '<span class="aa-product-price">';
+        echo '<span class="aa-product-price" value=';
+        echo $this->getPrice();
+        echo '>';
         echo $this->getWebPrice();
         echo '</span>';
         if ($this->sale > 0) {
@@ -167,6 +177,14 @@ Class Good {
     function getWebMadeOf() {
         return $this->getWebProperty($this->madeOf);
     }
+    
+    function getWebBestBefore() {
+        return $this->getWebProperty('<b>Срок хранения: </b>'.$this->bestbefore);
+    }
+
+    function getWebPrecaution() {
+        return $this->getWebProperty('<b>Противопоказания: </b>'.$this->precaution);
+    }    
     
 }
 

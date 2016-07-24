@@ -69,6 +69,9 @@ include 'header.php';
                                 ?>
                                 <!-- Category -->
                                 <div class="tab-pane fade <?php if ($i==1) echo 'in active' ?>" id="type<?php echo $typeId ?>">
+                                    <?php
+                                    include 'sort.php';
+                                    ?>
                                     <ul class="aa-product-catg">
                                     <?php
                                     foreach($this->registry['goods'] as $id=>$good) {

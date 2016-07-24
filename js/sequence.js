@@ -83,7 +83,7 @@ function defineSequence(imagesLoaded, Hammer) {
       autoPlay: true,
 
       // How long to wait between each step before navigation occurs again
-      autoPlayInterval: 2000,
+      autoPlayInterval: 10000,
 
       // Amount of time to wait until autoPlay starts again after being stopped
       autoPlayDelay: null,
