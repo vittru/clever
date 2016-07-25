@@ -52,3 +52,34 @@ $(document).on("click", "#showSale", function() {
     };
     $("div.tab-pane.active #showAvailable").attr('checked',false);
 });
+
+$(document).on("click", ".aa-remove-product", function() {
+    var id = $(this).attr('id'),
+        sid = $(this).attr('value');
+
+    $.ajax({    
+        type: "GET",   
+        url: "/cart/remove",   
+        data: "id=" + id + "&sid=" + sid,
+        dataType: "html",
+        success: function (){
+            window.location.reload();
+        }
+    });
+});
+
+$(document).on("change", ".aa-cart-quantity", function() {
+    var tr = $(this).parent().parent();
+    var id = $(tr).find('.aa-remove-product').attr('id'),
+        sid = $(tr).find('.aa-remove-product').attr('value'),
+        count = $(this).val();
+    $.ajax({
+        type: "GET",
+        url: "/cart/update",
+        data: "id=" + id + "&sid=" + sid + "&c=" + count,
+        dataType: "html",
+        success: function(){
+            $(".cart-view-table").load(location.href + " .cart-view-table>*","");
+        }    
+    });    
+});       

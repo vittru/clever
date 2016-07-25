@@ -7,7 +7,7 @@ Abstract Class Controller_Base {
 
     function __construct($registry) {
         $this->registry = $registry;
-        $this->registry['template']->set('user', $this->registry['user'], true);
+        $this->registry['template']->set('user', $_SESSION['user']);
     }
 
     abstract function index();

@@ -6,8 +6,8 @@ Class Controller_Subscribe Extends Controller_Base {
         $this->registry['model']->logVisit(17);
         $error=$this->checkEmail($_POST['userEmail']);
         if ($error == "") {
-            $this->registry['user']->email = htmlspecialchars(trim($_POST['userEmail']));
-            $this->registry['user']->spam = 1;
+            $_SESSION['user']->email = htmlspecialchars(trim($_POST['userEmail']));
+            $_SESSION['user']->spam = 1;
             //$this->registry->set('isClient', '0');
             $this->registry['model']->updateUser();
         } else {

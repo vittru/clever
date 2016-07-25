@@ -454,7 +454,7 @@ img {
 #aa-header .aa-header-bottom .aa-cartbox .aa-cart-link {
   font-size: 22px;
   position: relative;
-  width: 120px;
+  width: 140px;
   height: auto;
   display: block;
 }
@@ -474,7 +474,7 @@ img {
   font-weight: bold;
   padding: 2px 9px;
   position: absolute;
-  right: 39%;
+  right: 40%;
   top: -15px;
   z-index: 10;
   -webkit-animation-name: cartbox-transition;
@@ -2339,7 +2339,7 @@ img {
   width: 100%;
 }
 #cart-view .cart-view-area .cart-view-table {
-  background-color: #F5F5F5;
+  /*background-color: #F5F5F5;*/
   display: inline;
   float: left;
   width: 100%;
@@ -2371,7 +2371,7 @@ img {
 }
 #cart-view .cart-view-area .cart-view-table .table tbody tr td img {
   width: 80px;
-  height: 100px;
+  height: 80px;
 }
 #cart-view .cart-view-area .cart-view-table .table tbody tr td .aa-cart-quantity {
   padding: 5px;

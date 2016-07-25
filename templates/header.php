@@ -143,39 +143,53 @@
               </div>
               <!-- / logo  -->
                <!-- cart box -->
-              <div class="aa-cartbox">
-                <a class="aa-cart-link" href="/basket">
+              <?php
+                if (!isset($_SESSION['cart']))
+                    $count = 0;
+                else        
+                  $count = count($_SESSION['cart']);
+              ?>
+              <div class="aa-cartbox" id="cartbox">
+                <a class="aa-cart-link" <?php if($count) echo 'href="/cart"'; ?>>
                   <span class="fa fa-shopping-basket"></span>
                   <span class="aa-cart-title">Корзина с подарком</span>
-                  <span class="aa-cart-notify"><?php echo count($this->registry['basket'])+1; ?></span>
+                  <?php
+                  if ($count) {
+                  ?>
+                    <span class="aa-cart-notify"><?php echo $count; ?></span>
+                  <?php 
+                  }
+                  ?>
                 </a>
                 <div class="aa-cartbox-summary">
                   <ul>
                     <li>
                         <img class="aa-cartbox-img" src="/images/goods/present.jpg" alt="Подарок">
                       <div class="aa-cartbox-info">
-                        <h4>Подарок</h4>
-                        <!--p>0&#x20bd;</p-->
+                        <h4>Оформите заказ и получите подарок!</h4>
+                        
                       </div>
                     </li>
                     <?php
                     $total = 0;
-                    foreach ($this->registry['basket'] as $basketItem) {
-                        $good = $this->registry['goods'][$basketItem->goodId];
-                        $size = $good->sizes[$basketItem->sizeId];
-                        $price = $size->getPrice($good->sale);
-                        $total = $total + $basketItem->quantity * $price;
+                    if ($count) {
+                        foreach ($_SESSION['cart'] as $cartItem) {
+                            $good = $this->registry['goods'][$cartItem->goodId];
+                            $size = $good->sizes[$cartItem->sizeId];
+                            $price = $size->getPrice($good->sale);
+                            $total = $total + $cartItem->quantity * $price;
                         ?>
                         <li>
-                          <a class="aa-cartbox-img" href="/showgood?id=<?php echo $good->id ?>"><img src="<?php echo $good->getImage() ?>" alt="<?php echo $good->name ?>"></a>
+                          <a class="aa-cartbox-img"><img src="<?php echo $good->getImage() ?>" alt="<?php echo $good->name ?>"></a>
                           <div class="aa-cartbox-info">
                             <h4><?php echo $good->name ?> <?php echo $size->size ?></h4>
-                            <p><?php echo $basketItem->quantity ?> x <?php echo $size->getWebPrice($good->sale) ?></p>
+                            <p><?php echo $cartItem->quantity ?> x <?php echo $size->getWebPrice($good->sale) ?></p>
                           </div>
-                          <a class="aa-remove-product" href="#"><span class="fa fa-times"></span></a>
+                          <a class="aa-remove-product" id="<?php echo $cartItem->goodId; ?>" value="<?php echo $cartItem->sizeId; ?>"><span class="fa fa-times"></span></a>
                         </li>
                         <?php
-                    }
+                        }
+                    }    
                     ?>
                     <li>
                       <span class="aa-cartbox-total-title">
@@ -186,7 +200,7 @@
                       </span>
                     </li>
                   </ul>
-                  <?php if (count($this->registry['basket']) > 0) { ?>  
+                  <?php if ($count) { ?>  
                   <a class="aa-cartbox-checkout aa-primary-btn" href="/buy">Купить</a>
                   <?php } ?>
                 </div>

@@ -44,15 +44,25 @@ $logger->lfile('logs/clever.log');
 
 $registry->set('logger', $logger);
 
-if (isset($_COOKIE['userId'])) {
-    $registry->set('user', new User($_COOKIE['userId']));
-}    
-else {
-    $registry['logger']->lwrite('Cookie is not set');
-    $registry->set('user', new User(""));
-}
 
 $registry->set('dbname', 'clubclever');
 $registry->set('dbuser', 'root');
 $registry->set('dbpassword', 'root');
+
+session_start();
+
+if (isset($_COOKIE['user'])) {
+    $userId=$_COOKIE['user'];
+}    
+else {
+    $userId="";
+    $registry['logger']->lwrite('Cookie is not set');
+};
+
+if (!isset($_SESSION['user'])) {
+    $_SESSION['user'] = new User($userId);
+} else {
+    $_SESSION['user']->id = $userId;
+}    
+
 

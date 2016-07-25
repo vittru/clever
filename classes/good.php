@@ -36,8 +36,16 @@ Class Good {
        $this->precaution = $precaution;
     }
     
-    function getPrice() {
-        return reset($this->sizes)->price * (100-$this->sale)/100;
+    function getMinSizePrice() {
+        foreach($this->sizes as $size) {
+            if ($size->isAvailable())
+                return $size->price;
+        }    
+        return 0;        
+    }    
+    
+    function getPrice() {  
+        return $this->getMinSizePrice() * (100-$this->sale)/100;
     }
     
     function getWebPrice() {
@@ -49,7 +57,7 @@ Class Good {
     }
     
     function getWebOldPrice() {
-        return reset($this->sizes)->price . " руб.";
+        return $this->getMinSizePrice() . " руб.";
     }
     
     function isAvailable() {

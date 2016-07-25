@@ -24,8 +24,11 @@ $('.aa-add-to-cart-btn').click(function e(){
     });
     $.ajax({
         type: "POST",
-        url: "/addtobasket",
-        data: {data : JSON.stringify(sizes)}
+        url: "/cart/add",
+        data: {data : JSON.stringify(sizes)},
+        success: function() {
+            $("#cartbox").load(location.href + " #cartbox>*","");
+        }    
     });
 });
 

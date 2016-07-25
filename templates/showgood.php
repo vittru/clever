@@ -108,7 +108,7 @@ $canBeBought = true;
       <p><?php echo $good->shortdesc ?></p>
       </div>
       <div class="aa-prod-view-bottom">
-        <a href="#" class="aa-add-to-cart-btn" data-dismiss="modal" <?php if (!$canBeBought) echo 'disabled' ?>><span class="fa fa-shopping-cart"></span>В корзину</a>
+        <a class="aa-add-to-cart-btn" data-dismiss="modal" <?php if (!$canBeBought) echo 'disabled' ?>><span class="fa fa-shopping-cart"></span>В корзину</a>
         <!--a href="#" class="aa-add-to-cart-btn">View Details</a-->
       </div>
     </div>

@@ -3,7 +3,7 @@
     $model = new Model($registry);
     $registry->set('model', $model);
     $model->getUser();
-    $registry['user']->lastvisit = $model->getLastVisit();
+    $_SESSION['user']->lastvisit = $model->getLastVisit();
     $registry->set('skintypes', $model->getCatalog('skintypes'));
     $registry->set('hairtypes', $model->getCatalog('hairtypes'));
     $registry->set('categories', $model->getCatalog('categories'));
@@ -12,13 +12,6 @@
     $registry->set('types', $model->getCatalog('types'));
     $registry->set('goods', $model->getAllGoods());
     $registry->set('problems', $model->getCatalog('problems'));
-    
-    //This is a temporary init for basket - SHOULD BE REMOVED
-    $basketItem = new BasketItem();
-    $basketItem->goodId=32;
-    $basketItem->sizeId=18;
-    $basketItem->quantity=2;
-    $registry->set('basket', array($basketItem));
     
 
     $template = new Template($registry);

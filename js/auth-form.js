@@ -81,7 +81,7 @@
  
         $.ajax({    // Делаем ajax запрос
             type: "POST",   
-            url: "register",   
+            url: "/register",   
             data: "userName=" + name + "&userEmail=" + email + "&userPassword=" + pass + "&userConfirm=" + confirm + "&isSpam=" + spam + "&userAction=" + action,   // формируем строку с переменными
             dataType: "html",   
             dataFilter: function(a) {   

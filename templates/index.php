@@ -1,5 +1,8 @@
 <?php
 include 'header.php';
+
+$bannersdir='images/banners';
+if ((new \FilesystemIterator($bannersdir))->valid()) {
 ?>
 
 <!-- Start slider -->
@@ -9,7 +12,6 @@ include 'header.php';
         <div class="seq-screen">
           <ul class="seq-canvas">
             <?php
-            $bannersdir='images/banners';
             $dir = new DirectoryIterator($bannersdir);
             foreach ($dir as $fileinfo) {
                 if (!$fileinfo->isDot()) {
@@ -39,7 +41,9 @@ include 'header.php';
       </div>
     </div>
   </section>
-  
+<?php
+}
+?>
   
 
 <section id="aa-product">
