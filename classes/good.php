@@ -36,6 +36,14 @@ Class Good {
        $this->precaution = $precaution;
     }
     
+    function getFirstAvailSize() {
+        foreach($this->sizes as $size) {
+            if ($size->isAvailable())
+                return $size->id;
+        }    
+        return 0;         
+    }    
+    
     function getMinSizePrice() {
         foreach($this->sizes as $size) {
             if ($size->isAvailable())
@@ -79,7 +87,11 @@ Class Good {
         echo $this->name;
         echo'"></a>';
         if ($this->isAvailable()) {
-            echo '<a class="aa-add-card-btn" href="#"><span class="fa fa-shopping-cart"></span>В корзину</a>';
+            echo '<a class="aa-add-card-btn" href="#" id="';
+            echo $this->id;
+            echo '" value="';
+            echo $this->getFirstAvailSize();
+            echo '"><span class="fa fa-shopping-cart"></span>В корзину</a>';
         }
         echo '<figcaption>';
         echo '<h4 class="aa-product-title"><a href="/showgood?id=';

@@ -63,7 +63,8 @@ $(document).on("click", ".aa-remove-product", function() {
         data: "id=" + id + "&sid=" + sid,
         dataType: "html",
         success: function (){
-            window.location.reload();
+            $(".cart-view-table").load(location.href + " .cart-view-table>*","");
+            $("#cartbox").load(location.href + " #cartbox>*","");
         }
     });
 });
@@ -80,6 +81,28 @@ $(document).on("change", ".aa-cart-quantity", function() {
         dataType: "html",
         success: function(){
             $(".cart-view-table").load(location.href + " .cart-view-table>*","");
+            $("#cartbox").load(location.href + " #cartbox>*","");
         }    
     });    
-});       
+});    
+
+$(document).on("click", ".aa-add-card-btn", function () {
+    var id = $(this).attr("id"),
+        sid = $(this).attr("value");
+        
+    var obj = {};
+    obj['goodId'] = id;
+    obj['sizeId'] = sid;
+    obj['count'] = 1;
+    var sizes=[obj];
+
+    $.ajax({
+        type: "POST",
+        url: "/cart/add",
+        data: {data : JSON.stringify(sizes)},
+        success: function() {
+            $("#cartbox").load(location.href + " #cartbox>*","");
+        }    
+    });
+        
+});    
