@@ -1166,6 +1166,7 @@ img {
   padding: 12px 10px;
   position: absolute;
   right: 0;
+  cursor: pointer;
   text-transform: uppercase;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;

@@ -733,10 +733,10 @@ Class Model {
         $catsArray=array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $branch = New Branch($data['id'], $data['address'], $data['open'], $data['card']);
-            array_push($catsArray, $branch);
+            $catsArray[$data['id']] = $branch;
         }
         $sqlSelect->closeCursor(); 
-        return $this->prepareArray($catsArray);       
+        return $catsArray;       
     }
     
     function saveOrder($userId, $name, $email, $phone) {

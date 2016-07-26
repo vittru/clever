@@ -87,7 +87,7 @@ Class Good {
         echo $this->name;
         echo'"></a>';
         if ($this->isAvailable()) {
-            echo '<a class="aa-add-card-btn" href="#" id="';
+            echo '<a class="aa-add-card-btn" id="';
             echo $this->id;
             echo '" value="';
             echo $this->getFirstAvailSize();

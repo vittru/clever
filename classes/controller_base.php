@@ -21,6 +21,14 @@ Abstract Class Controller_Base {
         }
         return $error;
     }
+    
+    function sendMail($to, $subject, $message) {
+        $headers = 'From: clubclever63@gmail.com' . "\r\n" .
+            'Reply-To: clubclever63@gmail.com' . "\r\n" .
+            'X-Mailer: PHP/' . phpversion();
+
+        mail($to, $subject, $message, $headers);
+    }    
 }
 
 

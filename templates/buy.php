@@ -64,9 +64,9 @@ include 'header.php';
                                 <select name="branch">
                                   <option value="0" disabled selected>Выберите точку</option>
                                   <?php
-                                  foreach ($this->registry['branches'] as $branch) {
+                                  foreach ($this->registry['branches'] as $id=>$branch) {
                                   ?>
-                                    <option value="<?php echo $branch->id ?>"><?php echo $branch->address ?></option>
+                                    <option value="<?php echo $id ?>"><?php echo $branch->address ?></option>
                                   <?php
                                   }
                                   ?>

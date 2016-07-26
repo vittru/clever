@@ -87,6 +87,8 @@ $(document).on("change", ".aa-cart-quantity", function() {
 });    
 
 $(document).on("click", ".aa-add-card-btn", function () {
+    $(this).text('ДОБАВЛЕНО');
+    $(this).css("background-color","#1DA93C");
     var id = $(this).attr("id"),
         sid = $(this).attr("value");
         
@@ -105,6 +107,11 @@ $(document).on("click", ".aa-add-card-btn", function () {
         }    
     });
 });
+
+$(document).on("mouseleave", ".aa-product-img", function() {
+    $(this).parent().find(".aa-add-card-btn").html('<span class="fa fa-shopping-cart"></span>В корзину');
+    $(this).parent().find(".aa-add-card-btn").css("background-color","#E46713")
+})
 
 $('.panel-heading a').on('click',function(e){
     if($(this).parents('.panel').children('.panel-collapse').hasClass('in')){
