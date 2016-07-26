@@ -739,12 +739,16 @@ Class Model {
         return $catsArray;       
     }
     
-    function saveOrder($userId, $name, $email, $phone) {
-        $sqlInsert = $this->db->prepare('INSERT INTO orders(userId, name, email, phone, date) VALUES(:userId, :name, :email, :phone, :date)');
+    function saveOrder($userId, $name, $email, $phone, $branch, $takeDate, $takeTime, $address) {
+        $sqlInsert = $this->db->prepare('INSERT INTO orders(userId, name, email, phone, date, branchId, day, time, address) VALUES(:userId, :name, :email, :phone, :date, :branch, :takeDate, :takeTime, :address)');
         $sqlInsert->bindParam(':userId', $userId);
         $sqlInsert->bindParam(':name', $name);
         $sqlInsert->bindParam(':email', $email);
         $sqlInsert->bindParam(':phone', $phone);
+        $sqlInsert->bindParam(':branch', $branch);
+        $sqlInsert->bindParam(':takeDate', $takeDate);
+        $sqlInsert->bindParam(':takeTime', $takeTime);
+        $sqlInsert->bindParam(':address', $address);
         $this->registry['logger']->lwrite(date('Y-m-d', time()));
         $sqlInsert->bindParam(':date',  date('Y-m-d', time()));
         try{

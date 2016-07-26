@@ -242,3 +242,13 @@
 [26/Jul/2016:12:39:15] (index) updating quantity
 [26/Jul/2016:12:45:15] (index) Unable to set var `user`. Already set, and overwrite not allowed.
 [26/Jul/2016:12:45:15] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[26/Jul/2016:15:13:40] (index) initializing cart
+[26/Jul/2016:15:13:40] (index) cart initialized
+[26/Jul/2016:15:13:40] (index) adding items
+[26/Jul/2016:15:13:40] (index) creating an item
+[26/Jul/2016:15:13:40] (index) adding item 24
+[26/Jul/2016:15:13:40] (index) pushing to cart array
+[26/Jul/2016:15:13:40] (index) item pushed
+[26/Jul/2016:15:13:49] (index) 2016-07-26
+[26/Jul/2016:15:13:49] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[26/Jul/2016:15:13:49] (index) Unable to set var `user`. Already set, and overwrite not allowed.
