@@ -59,7 +59,7 @@ include 'header.php';
                           <?php
                           if ($total) {
                           ?>
-                            <input class="aa-cart-view-btn" type="submit" value="Заказать">
+                            <a href="/buy"><input class="aa-cart-view-btn" type="submit" value="Оформить заказ"></a>
                           <?php
                           }
                           ?>

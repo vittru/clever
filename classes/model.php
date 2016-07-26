@@ -722,5 +722,63 @@ Class Model {
         $sqlQuery2->closeCursor();
     }
     
+    function getBranches() {
+        $sqlSelect = $this->db->prepare('SELECT * FROM branches');
+        try{
+            $sqlSelect->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when getting branches');
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }
+        $catsArray=array();
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $branch = New Branch($data['id'], $data['address'], $data['open'], $data['card']);
+            array_push($catsArray, $branch);
+        }
+        $sqlSelect->closeCursor(); 
+        return $this->prepareArray($catsArray);       
+    }
+    
+    function saveOrder($userId, $name, $email, $phone) {
+        $sqlInsert = $this->db->prepare('INSERT INTO orders(userId, name, email, phone, date) VALUES(:userId, :name, :email, :phone, :date)');
+        $sqlInsert->bindParam(':userId', $userId);
+        $sqlInsert->bindParam(':name', $name);
+        $sqlInsert->bindParam(':email', $email);
+        $sqlInsert->bindParam(':phone', $phone);
+        $this->registry['logger']->lwrite(date('Y-m-d', time()));
+        $sqlInsert->bindParam(':date',  date('Y-m-d', time()));
+        try{
+            $sqlInsert->execute();
+            $orderId = $this->db->lastInsertId();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when saving order');
+            $this->registry['logger']->lwrite($e->getMessage()); 
+            $orderId=0;
+        }  
+        $sqlInsert->closeCursor();
+        if ($orderId)
+            $this->saveOrderedGoods($orderId);
+        return $orderId;
+    }    
+    
+    function saveOrderedGoods($orderId) {
+        $sqlInsert = $this->db->prepare('INSERT INTO `orders-goods`(sizeId, quantity, price, orderId) VALUES(:sizeId, :quantity, :price, :orderId)');
+        $sqlInsert->bindParam(':orderId', $orderId);
+        foreach ($_SESSION['cart'] as $cartItem) {
+            $good = $this->registry['goods'][$cartItem->goodId];
+            $size = $good->sizes[$cartItem->sizeId];
+            $price = $size->getPrice($good->sale) * $cartItem->quantity;
+            $sqlInsert->bindParam(':sizeId', $cartItem->sizeId);
+            $sqlInsert->bindParam(':quantity', $cartItem->quantity);
+            $sqlInsert->bindParam(':price', $price);
+            try{
+                $sqlInsert->execute();
+            } catch (Exception $e) {
+                $this->registry['logger']->lwrite('Error when saving ordered goods');
+                $this->registry['logger']->lwrite($e->getMessage()); 
+            }
+            $sqlInsert->closeCursor();
+        }    
+    }    
 }
 

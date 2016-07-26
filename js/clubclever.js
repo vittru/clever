@@ -104,5 +104,24 @@ $(document).on("click", ".aa-add-card-btn", function () {
             $("#cartbox").load(location.href + " #cartbox>*","");
         }    
     });
-        
-});    
+});
+
+$('.panel-heading a').on('click',function(e){
+    if($(this).parents('.panel').children('.panel-collapse').hasClass('in')){
+        e.stopPropagation();
+    }
+     e.preventDefault();
+});
+
+$('#order-form').submit(function() {
+     $('input').each(function(){
+        if($(this).is(":hidden")){
+           $(this).remove();
+        }
+     });
+    $('textarea').each(function(){
+        if($(this).is(":hidden")){
+           $(this).remove();
+        }
+     });
+});

@@ -12,6 +12,7 @@
     $registry->set('types', $model->getCatalog('types'));
     $registry->set('goods', $model->getAllGoods());
     $registry->set('problems', $model->getCatalog('problems'));
+    $registry->set('branches', $model->getBranches());
     
 
     $template = new Template($registry);
