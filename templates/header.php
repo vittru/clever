@@ -207,7 +207,7 @@
               <!-- / cart box -->
               <!-- search box -->
             <div class="input-group aa-search-box" id="adv-search">
-                <input type="text" class="form-control" placeholder="Поиск по каталогу" />
+                <input type="text" class="form-control" placeholder="Поиск по каталогу (Пока работает только расширенный)" />
                 <div class="input-group-btn">
                     <div class="btn-group" role="group">
                         <div class="dropdown dropdown-lg">
