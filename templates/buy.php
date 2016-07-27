@@ -26,19 +26,19 @@ include 'header.php';
                           <div class="row">
                             <div class="col-md-12">
                               <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="Ваше имя" name="name" value="<?php if ($_SESSION['user']->name) echo $_SESSION['user']->name; ?>">
+                                <input class="order-form" type="text" placeholder="Ваше имя*" name="name" value="<?php if ($_SESSION['user']->name) echo $_SESSION['user']->name; ?>">
                               </div>                             
                             </div>                            
                           </div>  
                           <div class="row">
                             <div class="col-md-6">
                               <div class="aa-checkout-single-bill">
-                                <input type="email" placeholder="Email*" name="email" value="<?php if ($_SESSION['user']->email) echo $_SESSION['user']->email; ?>">
+                                <input class="order-form" type="email" placeholder="Email*" name="email" value="<?php if ($_SESSION['user']->email) echo $_SESSION['user']->email; ?>">
                               </div>                             
                             </div>
                             <div class="col-md-6">
                               <div class="aa-checkout-single-bill">
-                                <input type="tel" placeholder="Телефон*" name="phone" value="<?php if ($_SESSION['user']->phone) echo $_SESSION['user']->phone; ?>">
+                                <input class="order-form" type="tel" placeholder="Телефон*" name="phone" value="<?php if ($_SESSION['user']->phone) echo $_SESSION['user']->phone; ?>">
                               </div>
                             </div>
                           </div> 
@@ -61,8 +61,8 @@ include 'header.php';
                           <div class="row">
                             <div class="col-md-12">
                               <div class="aa-checkout-single-bill">
-                                <select name="branch">
-                                  <option value="0" disabled selected>Выберите точку</option>
+                                <select name="branch" id="branch">
+                                  <option value="0" disabled selected>Выберите точку*</option>
                                   <?php
                                   foreach ($this->registry['branches'] as $id=>$branch) {
                                   ?>
@@ -77,12 +77,12 @@ include 'header.php';
                           <div class="row">
                             <div class="col-md-6">
                               <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="Желаемая дата" name="takeDate">
+                                <input class="order-form" type="text" placeholder="Желаемая дата*" name="takeDate">
                               </div>                             
                             </div>
                             <div class="col-md-6">
                               <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="Желаемое время" name="takeTime">
+                                <input class="order-form" type="text" placeholder="Желаемое время*" name="takeTime">
                               </div>
                             </div>
                           </div>   
@@ -103,14 +103,14 @@ include 'header.php';
                           <div class="row">
                             <div class="col-md-12">
                               <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="Населенный пункт*" name="city">
+                                <input class="order-form" type="text" placeholder="Населенный пункт*" name="city">
                               </div>                             
                             </div>                            
                           </div>  
                           <div class="row">
                             <div class="col-md-12">
                               <div class="aa-checkout-single-bill">
-                                <textarea cols="8" rows="2" name="address" placeholder="Адрес*"></textarea>
+                                <textarea class="order-form" cols="8" rows="2" name="address" placeholder="Адрес*"></textarea>
                               </div>                             
                             </div>                            
                           </div>   
@@ -176,6 +176,7 @@ include 'header.php';
                         </div>
                       </div>
                   </div>  
+                    <div id="order-error" hidden>Не все обязательные поля заполнены</div>
                     <input type="submit" value="Заказать" class="aa-browse-btn">                
                 </div>
               </div>

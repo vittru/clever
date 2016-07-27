@@ -120,15 +120,27 @@ $('.panel-heading a').on('click',function(e){
      e.preventDefault();
 });
 
-$('#order-form').submit(function() {
-     $('input').each(function(){
+$('#order-form').submit(function(e) {
+    var submit = true;
+     $('input.order-form').each(function(){
         if($(this).is(":hidden")){
            $(this).remove();
-        }
+        } else if (!$(this).val().trim()){
+                submit = false;
+        }    
      });
-    $('textarea').each(function(){
+    $('textarea.order-form').each(function(){
         if($(this).is(":hidden")){
            $(this).remove();
-        }
+        } else if (!$(this).val().trim()){
+            submit = false;
+        }    
      });
+     if (!$('#branch').is(':hidden') && !$('#branch').val())
+         submit = false;
+     if (!submit) {
+         e.preventDefault();
+         $('#order-error').show();
+     }    
 });
+

@@ -18,12 +18,12 @@ Class Model {
             . "WHERE userid=:userId";
     private $profileExists = "SELECT count(p.id) FROM profiles p, users u "
             . "WHERE p.id = u.profile AND u.id = :userId";
-    private $createProfile = "INSERT INTO profiles(name, email, client, password, spam) "
-            . "VALUES(:userName, :userEmail, :isClient, :userPassword, :spam)";
+    private $createProfile = "INSERT INTO profiles(name, email, client, password, spam, phone) "
+            . "VALUES(:userName, :userEmail, :isClient, :userPassword, :spam, :phone)";
     private $linkProfile = "UPDATE users SET profile = :profileId "
             . "WHERE id = :userId";
     private $updateProfile = "UPDATE profiles "
-            . "SET name = :userName, email = :userEmail, client = :isClient, password=:userPassword, spam=:spam "
+            . "SET name = :userName, email = :userEmail, client = :isClient, password=:userPassword, spam=:spam, phone=:phone "
             . "WHERE id = (SELECT profile FROM users WHERE id = :userId)"; 
     private $emailExists = "SELECT count(*) FROM profiles "
             . "WHERE email = :userEmail";
@@ -178,6 +178,7 @@ Class Model {
             }
             $sqlCreate->bindParam(':isClient', $_SESSION['user']->client, PDO::PARAM_INT);
             $sqlCreate->bindParam(':userPassword', $_SESSION['user']->password);
+            $sqlCreate->bindParam(':phone', $_SESSION['user']->phone);
             if (!$_SESSION['user'].spam){
                 $_SESSION['user']->spam = 0;
             }
@@ -208,6 +209,7 @@ Class Model {
             $sqlUpdate->bindParam(':isClient', $_SESSION['user']->client, PDO::PARAM_INT);
             $sqlUpdate->bindParam(':userPassword', $_SESSION['user']->password);
             $sqlUpdate->bindParam(':spam', $_SESSION['user']->spam, PDO::PARAM_INT);
+            $sqlUpdate->bindParam(':phone', $_SESSION['user']->phone);
             $sqlUpdate->bindParam(':userId', $_SESSION['user']->id);
             try {
                 $sqlUpdate->execute();

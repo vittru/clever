@@ -23,8 +23,8 @@ Abstract Class Controller_Base {
     }
     
     function sendMail($to, $subject, $message) {
-        $headers = 'From: clubclever63@gmail.com' . "\r\n" .
-            'Reply-To: clubclever63@gmail.com' . "\r\n" .
+        $headers = 'From: clever@clubclever.ru' . "\r\n" .
+            'Reply-To: clever@clubclever.ru' . "\r\n" .
             'X-Mailer: PHP/' . phpversion();
 
         mail($to, $subject, $message, $headers);

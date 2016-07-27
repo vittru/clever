@@ -4,7 +4,10 @@ Class Controller_Editgood Extends Controller_Base {
         
     function index() {
         $this->registry['model']->logVisit(1000);
-        $this->registry['template']->show('editgood');
+        if ($_SESSION['user']->email == 'Nataliya.zhirnova@gmail.com' or $_SESSION['user']->email == 'Tev0205@gmail.com')
+            $this->registry['template']->show('editgood');
+        else 
+            $this->registry['template']->show('404');
     }
     
     function save() {

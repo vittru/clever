@@ -19,7 +19,14 @@ Class Controller_Buy Extends Controller_Base {
         $this->informClient($orderId, $_POST);
         
         //Update warehouse
+        //@TODO
         
+        //Update user info
+        if (!$_SESSION['user']->email) 
+            $_SESSION['user']->email = $_POST['email'];
+        if (!$_SESSION['user']->phone)
+            $_SESSION['user']->phone = $_POST['phone'];
+        $this->registry['model']->updateUser();
         
         //Clear the cart box
         unset($_SESSION['cart']);
@@ -30,7 +37,7 @@ Class Controller_Buy Extends Controller_Base {
     }
     
     private function informManager($orderId, $parameters) {
-        $to      = 'vitaly.trusov@gmail.com';
+        $to      = 'clubclever63@gmail.com';
         $subject = 'Новый заказ №'.$orderId;
         $message = 'На сайте новый заказ' . "\r\n" .
                 "Заказ №" . $orderId . "\r\n" .
@@ -66,7 +73,7 @@ Class Controller_Buy Extends Controller_Base {
                 "Заказ №" . $orderId . "\r\n" .
                 "Покупатель: " . $parameters['name'] . "\r\n" . 
                 "Email: " . $parameters['email'] . "\r\n" . 
-                "Телефон: " . $parameters['phone'] . "\r\n" ;
+                "Телефон: " . $parameters['phone'] . "\r\n";
         $this->sendMail($to, $subject, $message);
         
     }    
