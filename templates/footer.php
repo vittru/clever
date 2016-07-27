@@ -50,9 +50,9 @@
                   <div class="aa-footer-widget">
                     <h3>Наши контакты</h3>
                     <address>
-                      <p> Самара, ул. Ново-Садовая, 271</p>
-                      <p><span class="fa fa-phone"></span>+7 927-658-27-15</p>
-                      <p><span class="fa fa-envelope"></span>clever@clubclever.ru</p>
+                      <p><span class="fa fa-phone"></span>+7-996-725-00-62</p>
+                      <p><span class="fa fa-phone"></span>+7-996-730-46-22</p>
+                      <p><span class="fa fa-envelope"></span>clubclever63@gmail.com</p>
                     </address>
                     <div class="aa-footer-social">
                       <a target="_blank" href="http://facebook.com"><span class="fa fa-facebook"></span></a>

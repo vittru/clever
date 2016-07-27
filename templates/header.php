@@ -67,11 +67,11 @@
             <div class="aa-header-top-area">
               <!-- start header top left -->
               <div class="aa-header-top-left">
-                <div class="aa-header-top-left">
+                <!--div class="aa-header-top-left">
                     <a class="btn" href="/about" type="button" id="about">
                       О нас
                     </a>
-                </div>
+                </div-->
                 <div class="aa-header-top-left">
                     <a class="btn" href="/common/delivery" type="button" id="delivery">
                        Доставка
@@ -95,7 +95,7 @@
 
                 <!-- start cellphone -->
                 <div class="cellphone hidden-xs">
-                  <p><span class="fa fa-phone"></span>+7 (927) 658-27-15</p>
+                  <p><span class="fa fa-phone"></span>+7 (996) 725-00-62</p>
                 </div>
                 <!-- / cellphone -->
               </div>
@@ -114,7 +114,7 @@
                   }
                   ?>
                   <!--li class="hidden-xs"><a href="cart.html">Корзина</a></li-->
-                  <li class="hidden-xs"><a href="/orders">Отследить заказ</a></li>
+                  <!--li class="hidden-xs"><a href="/orders">Отследить заказ</a></li-->
                 </ul>
               </div>
             </div>

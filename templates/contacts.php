@@ -13,9 +13,9 @@ include 'header.php';
                         <p>Найти нас очень просто</p>
                     </div>
                     <!-- contact map -->
-                    <div class="aa-contact-map">
+                    <!--div class="aa-contact-map">
                         <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=3Z04yabmOvp2FZ3pW8QyO_fTbB6Y_MFy&width=100%&height=450&lang=ru_RU&sourceType=constructor&scroll=true"></script>
-                    </div>
+                    </div-->
                     <!-- Contact address -->
                     <div class="aa-contact-address">
                         <div class="row">
@@ -50,10 +50,11 @@ include 'header.php';
                                     <address>
                                         <h4>Клевер</h4>
                                         <h5>МАГАЗИН НАТУРАЛЬНОЙ КОСМЕТИКИ</h5>
-                                        <p><span class="fa fa-home"></span>443011, Самара</p>
-                                        <p><span class="fa fa-home"></span>ул. Ново-Садовая, 271</p>
-                                        <p><span class="fa fa-phone"></span>+7-927-658-27-15</p>
-                                        <p><span class="fa fa-envelope"></span>Email: clever@clubclever.ru</p>
+                                        <!--p><span class="fa fa-home"></span>443011, Самара</p>
+                                        <p><span class="fa fa-home"></span>ул. Ново-Садовая, 271</p-->
+                                        <p><span class="fa fa-phone"></span>+7-996-725-00-62</p>
+                                        <p><span class="fa fa-phone"></span>+7-996-730-46-22</p>
+                                        <p><span class="fa fa-envelope"></span>Email: clubclever63@gmail.com</p>
                                     </address>
                                 </div>
                             </div>
