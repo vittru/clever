@@ -199,7 +199,7 @@ Class Good {
     }
     
     function getWebBestBefore() {
-        return $this->getWebProperty('<b>Срок хранения: </b>'.$this->bestbefore);
+        return $this->getWebProperty('<b>Срок и условия хранения: </b>'.$this->bestbefore);
     }
 
     function getWebPrecaution() {

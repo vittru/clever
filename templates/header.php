@@ -166,7 +166,6 @@
                         <img class="aa-cartbox-img" src="/images/goods/present.jpg" alt="Подарок">
                       <div class="aa-cartbox-info">
                         <h4>Оформите заказ и получите подарок!</h4>
-                        
                       </div>
                     </li>
                     <?php
@@ -207,7 +206,7 @@
               <!-- / cart box -->
               <!-- search box -->
             <div class="input-group aa-search-box" id="adv-search">
-                <input type="text" class="form-control" placeholder="Поиск по каталогу (Пока работает только расширенный)" />
+                <input id="search-text" type="text" class="form-control" placeholder="Поиск по каталогу" />
                 <div class="input-group-btn">
                     <div class="btn-group" role="group">
                         <div class="dropdown dropdown-lg">
