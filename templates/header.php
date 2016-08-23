@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Клевер экомаркет</title>
     
-    <link rel="icon" href="/images/icon.png">
+    <link rel="icon" href="/images/icon_old.png">
     
     <link href="/css/search.css" rel="stylesheet">
     

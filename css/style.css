@@ -1348,11 +1348,12 @@ img {
   margin-left: 10px;
 }
 
+/*
 #quick-view-modal .modal-content .aa-product-info-tab {
   text-align: justify;
   white-space: pre-wrap;  
   text-indent: 50px;
-}
+}*/
 
 /*==================
   BANNER SECTION
@@ -2231,10 +2232,15 @@ img {
   background-color: transparent;
   border: none;
 }
-#aa-product-details .aa-product-details-area .aa-product-details-bottom #description {
+
+#quick-view-modal .modal-content .aa-product-info-tab {
+  text-align: justify;
+  /*white-space: pre-wrap;  */
+  text-indent: 50px;  
   padding: 20px 10px;
 }
-#aa-product-details .aa-product-details-area .aa-product-details-bottom #description ul {
+
+.aa-product-info-tab #description ul {
   margin-bottom: 10px;
   padding-left: 25px;
 }

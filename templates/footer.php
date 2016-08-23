@@ -52,7 +52,7 @@
                     <address>
                       <p><span class="fa fa-phone"></span>+7-996-725-00-62</p>
                       <p><span class="fa fa-phone"></span>+7-996-730-46-22</p>
-                      <p><span class="fa fa-envelope"></span>clubclever63@gmail.com</p>
+                      <p><span class="fa fa-envelope"></span>clever@clubclever.ru</p>
                     </address>
                     <div class="aa-footer-social">
                       <a target="_blank" href="http://facebook.com"><span class="fa fa-facebook"></span></a>

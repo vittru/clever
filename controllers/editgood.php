@@ -91,7 +91,7 @@ Class Controller_Editgood Extends Controller_Base {
                 if ($targetFile) {
                     if(file_exists($targetFileJpg) or file_exists($targetFilePng)) {
                         unlink($targetFileJpg);
-                        unlink($taregtFilePng);
+                        unlink($targetFilePng);
                         echo 'У товара уже была картинка '.$number.', заменяю<br>';
                     }    
                     if(move_uploaded_file($image["tmp_name"], $targetFile)) {

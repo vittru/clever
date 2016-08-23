@@ -82,7 +82,7 @@ include 'header.php';
                                     <?php
                                     foreach($this->registry['firms'] as $id=>$name) {
                                     ?>    
-                                    <li>
+                                    <li class="col-sm-3 good">
                                       <figure>
                                         <a class="aa-product-img" href="/catalog/firm?id=<?php echo $id ?>"><img src="/images/firms/firm<?php echo $id ?>.jpg" alt="<?php echo $name ?>"></a>
                                         <figcaption>

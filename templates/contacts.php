@@ -54,7 +54,7 @@ include 'header.php';
                                         <p><span class="fa fa-home"></span>ул. Ново-Садовая, 271</p-->
                                         <p><span class="fa fa-phone"></span>+7-996-725-00-62</p>
                                         <p><span class="fa fa-phone"></span>+7-996-730-46-22</p>
-                                        <p><span class="fa fa-envelope"></span>Email: clubclever63@gmail.com</p>
+                                        <p><span class="fa fa-envelope"></span>Email: clever@clubclever.ru</p>
                                     </address>
                                 </div>
                             </div>

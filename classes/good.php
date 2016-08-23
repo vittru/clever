@@ -181,9 +181,9 @@ Class Good {
     
     function getWebProperty($property) {
         foreach (array("\r", "\n", "\r\n", "\n\r") as $token) {
-            $property = str_replace($token, "</div><div>",  $property);
+            $property = str_replace($token, "</p><p>",  $property);
         }
-        return "<div>" . $property . "</div>";
+        return "<p>" . $property . "</p>";
     }
     
     function getWebDescription() {
@@ -199,12 +199,29 @@ Class Good {
     }
     
     function getWebBestBefore() {
-        return $this->getWebProperty('<b>Срок и условия хранения: </b>'.$this->bestbefore);
+        if ($this->bestbefore) {
+            return $this->getWebProperty('<b>Срок и условия хранения: </b>'.$this->bestbefore);
+        }else
+            return '';
     }
 
     function getWebPrecaution() {
-        return $this->getWebProperty('<b>Противопоказания: </b>'.$this->precaution);
+        if ($this->precaution) 
+            return $this->getWebProperty('<b>Противопоказания: </b>'.$this->precaution);
+        else
+            return '';
     }    
     
+    function getWebSkinTypes() {
+        if ($this->hasSkintypes()){
+            return '<p><b>Типы кожи: </b>';
+        } else return '';    
+    }
+
+    function getWebHairTypes() {
+        if ($this->hasHairtypes()){
+            return '<p><b>Типы волос: </b></p>';
+        } else return '';    
+    }    
 }
 

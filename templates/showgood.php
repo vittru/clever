@@ -123,15 +123,27 @@ $canBeBought = true;
             <?php if ($hasEffects) { ?>
             <li><a href="#effects" data-toggle="tab">Эффекты</a></li>
             <?php }?>
-            <?php if ($hasSkintypes) { ?>
-            <li><a href="#skintypes" data-toggle="tab">Типы кожи</a></li>
-            <?php }?>
-            <?php if ($hasHairtypes) { ?>
-            <li><a href="#hairtypes" data-toggle="tab">Типы волос</a></li>
-            <?php }?>
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade in active aa-product-info-tab" id="description">
+                <?php if ($hasSkintypes) {
+                    echo '<p><b>Типы кожи: </b>'; 
+                    $toEnd = count($good->skintypes);
+                    foreach($good->skintypes as $st) { 
+                        echo $this->registry['skintypes'][$st];
+                        if (0 !== --$toEnd) echo ", ";
+                    } 
+                    echo '</p>';
+                }?>
+                <?php if ($hasHairtypes) {
+                    echo '<p><b>Типы волос: </b>'; 
+                    $toEnd = count($good->hairtypes);
+                    foreach($good->hairtypes as $ht) { 
+                        echo $this->registry['hairtypes'][$ht]; 
+                        if (0 !== --$toEnd) echo ", ";
+                    } 
+                    echo '</p>';
+                }?>
                 <?php echo $good->getWebDescription(); ?>
                 <?php echo $good->getWebBestbefore(); ?>
                 <?php echo $good->getWebPrecaution(); ?>
@@ -150,24 +162,6 @@ $canBeBought = true;
                 <ul class="list-group">
                 <?php foreach($good->effs as $eff) { ?>
                     <li class="list-group-item"><?php echo $this->registry['effects'][$eff] ?></li>
-                <?php } ?>
-                </ul>
-            </div>
-            <?php }?>
-            <?php if ($hasSkintypes) { ?>
-            <div class="tab-pane fade" id="skintypes">
-                <ul class="list-group">
-                <?php foreach($good->skintypes as $st) { ?>
-                    <li class="list-group-item"><?php echo $this->registry['skintypes'][$st] ?></li>
-                <?php } ?>
-                </ul>
-            </div>
-            <?php }?>
-            <?php if ($hasHairtypes) { ?>
-            <div class="tab-pane fade" id="hairtypes">
-                <ul class="list-group">
-                <?php foreach($good->hairtypes as $ht) { ?>
-                    <li class="list-group-item"><?php echo $this->registry['hairtypes'][$ht] ?></li>
                 <?php } ?>
                 </ul>
             </div>
