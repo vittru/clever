@@ -84,7 +84,7 @@ include 'header.php';
                                     ?>    
                                     <li class="col-sm-3 good">
                                       <figure>
-                                        <a class="aa-product-img" href="/catalog/firm?id=<?php echo $id ?>"><img src="/images/firms/firm<?php echo $id ?>.jpg" alt="<?php echo $name ?>"></a>
+                                        <a class="aa-product-img" href="/catalog/firm?id=<?php echo $id ?>"><img src="/images/firms/firm<?php echo $id ?>.png" alt="<?php echo $name ?>"></a>
                                         <figcaption>
                                             <h4 class="aa-product-title"><a href="/catalog/firm?id=<?php echo $id ?>"><?php echo $name ?></a></h4>
                                         </figcaption>
