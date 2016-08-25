@@ -653,6 +653,32 @@ img {
     text-decoration: underline;
 }
 
+#aa-text .worktime:before {
+    content: url('/images/design/worktime.png');
+}
+
+#aa-text .cash {
+    background-image: url('/images/design/cash.png');
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    margin-right: 10px;
+    
+}
+
+#aa-text .card {
+    background-image: url('/images/design/card.png');
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+#aa-text .map {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
 /*==================
  NAVBAR SECTION
 ====================*/
