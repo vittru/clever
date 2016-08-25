@@ -133,9 +133,10 @@
               <!-- logo  -->
               <div class="aa-logo">
                 <!-- Text based logo -->
-                <a href="/index.php">
-                  <span class="fa fa-shopping-cart"></span>
-                  <p><strong>Клевер</strong> <span>магазин натуральной косметики</span></p>
+                <a href="/">
+                  <img src="/images/header.png" height='80px' alt="Экомаркет Клевер">  
+                  <!--span class="fa fa-shopping-cart"></span>
+                  <p><strong>Клевер</strong> <span>магазин натуральной косметики</span></p-->
                 </a>
                 <!-- img based logo -->
                 <!-- a href="/index.php"><img src="images/design/logo.jpg" alt="Экомаркет Клевер"></a -->

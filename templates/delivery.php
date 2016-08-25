@@ -1,11 +1,12 @@
 <?php
 include 'header.php';
 ?>
-<section>
-    <h2>Варианты доставки</h2>
-    <p align="justify" style="text-indent: 0.5in; margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-    <h3>Доставка курьером</h3></p>
-<p align="justify" style="text-indent: 0.5in; margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<section id="aa-text">
+    <div class="container">
+        <div class="row">
+    <h1>Варианты доставки</h1>
+    <h2>Доставка курьером</h2>
+<p>
 Доставка по Самаре и Самарской области
 осуществляется в течение 1-3 дней с
 момента подтверждения полной комплектации
@@ -16,40 +17,34 @@ include 'header.php';
 менеджер по телефону, указанному при
 оформлении заказа, и уточнит удобное
 для Вас время доставки.</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-<br>
-</p>
-<p align="justify" style="text-indent: 0.5in; margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-Доставка в Железнодорожный, Ленинский,
-Октябрьский, Промышленный, Советский,
-Самарский районы –&nbsp;300 руб.</p>
-<p align="justify" style="text-indent: 0.5in; margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-Доставка в Кировский и Куйбышевский,
-Красноглинский районы –&nbsp;450 руб.</p>
-<p align="justify" style="text-indent: 0.5in; margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-Доставка в п. Алексеевка - 600 руб.</p>
-<p align="justify" style="text-indent: 0.5in; margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-Доставка в г. Кинель - 800 руб.</p>
-<p align="justify" style="text-indent: 0.5in; margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-Доставка в г. Новокуйбышевск - 650 руб.</p>
-<p align="justify" style="text-indent: 0.5in; margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-Доставка в г. Тольятти - 1700 руб. 
-</p>
-<p align="justify" style="text-indent: 0.5in; margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-<br>
-</p>
-<p align="justify" style="text-indent: 0.5in; margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-Ожидание курьером 50 руб. за каждые 20
-полных минут.<br>	</p>
-<p align="justify" style="text-indent: 0.5in; margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<h3>Стоимость доставки</h3>
+<p>
 При заказе на сумму от 2500 руб. доставка
-по г. Самара осуществляется&nbsp;бесплатно.</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-<br>
-</p>
-<p align="justify" style="text-indent: 0.5in; margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-Примечание по доставке:</p>
-<p align="justify" style="text-indent: 0.5in; margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+по г. Самара осуществляется бесплатно.</p>
+<table class="table">
+    <th colspan="2">
+    Доставка по Самаре и области
+    </th>    
+    <tr>
+        <td>Самарский, Ленинский, Октябрьский, Железнодорожный, Советский и
+Промышленный районы</td><td>300 руб.</td></tr><tr>
+<td>
+Кировский, Красноглинский и Куйбышевский районы</td><td>450 руб.</td></tr><tr>
+<td>
+    Алексеевка</td><td>600 руб.</td></tr><tr>
+<td>
+    Кинель</td><td>800 руб.</td></tr><tr>
+<td>
+    Новокуйбышевск</td><td>650 руб.</td></tr><tr>
+<td>
+    Тольятти</td><td>1700 руб.</td> 
+</tr></table>
+<p>
+Ожидание курьером 50 руб. за каждые 20
+полных минут.</p>
+<h3>
+Примечание по доставке</h3>
+<p>
 Осуществление доставки - отдельная
 услуга, не являющаяся неотъемлемой
 частью приобретаемого Покупателем
@@ -64,23 +59,19 @@ include 'header.php';
 В случае отказа Покупателем от
 доставленного заказа, Покупатель должен
 оплатить стоимость услуг службы доставки.</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-<br>
-</p>
-<p align="justify" style="text-indent: 0.5in; margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-<h3>Бесплатный самовывоз</h3></p>
-<p align="justify" style="text-indent: 0.5in; margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<h2>Бесплатный самовывоз</h2>
+<p>
 Оформляйте заказ и просто приезжайте
 за ним в любое удобное место! Только
 сначала обязательно дождитесь звонка,
 чтобы уточнить детали.</p>
-<p align="justify" style="text-indent: 0.5in; margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<p>
 Срок доставки в пункт самовывоза 1-7 дня
 (с момента отправки заказа) в зависимости
 от удаленности. Вам придет смс-уведомление
 на указанный мобильный телефон о том,
 что заказ можно забрать.</p>
-<p align="justify" style="text-indent: 0.5in; margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<p>
 Заказ следует забрать в течение 3-х дней
 после получения смс уведомления о
 поступлении заказа. Если Вы не успеваете
@@ -89,88 +80,56 @@ include 'header.php';
 электронной почте, иначе заказ будет
 расформирован по истечении указанного
 времени.</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-<br>
-</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-<br>
-</p>
-<p align="justify" style="text-indent: 0.5in; margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-<b>Пункты самовывоза</b></p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<p>Пункты самовывоза</p>
+<p>
 г. Самара</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-<br>
-</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<p>
 ул.Л.Шмидта, д. 24</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<p>
 Время работы: ежедневно с 10.00 до 22.00</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<p>
 Способ оплаты: наличные, картой</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-<br>
-</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<p>
 ул.Н. Панова, д. 50 
 </p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<p>
 Время работы: ежедневно с 10.00 до 21.00</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<p>
 Способ оплаты: наличные</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-<br>
-</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<p>
 ул. Ново-Садовая, 271</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<p>
 Время работы: ежедневно с 10.00 до 21.00</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<p>
 Способ оплаты: наличные, картой</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-<br>
-</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-<br>
-</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<p>
 ул.Антонова-Овсеенко, д.83 
 </p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<p>
 Время работы: ежедневно с 18.00 до 20.00</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<p>
 Способ оплаты: наличные</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-<br>
-</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<p>
 ул. Димитрова 112</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<p>
 Время работы: ежедневно с 10.00 до 21.00</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<p>
 Способ оплаты: наличные</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-<br>
-</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<p>
 Новосемейкино</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-<br>
-</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<p>
 Ул. Губернаторская, д.1</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<p>
 Время работы: ежедневно с 10.00 до 19.00</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<p>
 Способ оплаты: наличные</p>
-<p align="justify" style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
-<br>
-</p>
-<p style="margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<p>
 Возможна доставка в другие районы
 Самарской обасти и регионы РФ транспортными
 компаниями по Вашему выбору. Условия
-доставки обсуждаются индивидуально.</p><p align="justify" style="text-indent: 0.5in; margin-bottom: 0in; line-height: 100%; page-break-before: auto; page-break-after: auto">
+доставки обсуждаются индивидуально.</p>
+        </div>
+    </div>
 </section>
 
 <?php
