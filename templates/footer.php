@@ -113,8 +113,8 @@
   <script src="js/sequence.js"></script>
   <script src="js/sequence-theme.modern-slide-in.js"></script>  
   <!-- Product view slider -->
-  <script type="text/javascript" src="/js/jquery.simpleGallery.js"></script>
-  <script type="text/javascript" src="/js/jquery.simpleLens.js"></script>
+  <!--script type="text/javascript" src="/js/jquery.simpleGallery.js"></script>
+  <script type="text/javascript" src="/js/jquery.simpleLens.js"></script-->
   <!-- slick slider -->
   <script type="text/javascript" src="/js/slick.js"></script>
   <!-- Price picker slider -->
@@ -126,7 +126,10 @@
   <script src="/js/auth-form.js"></script>
   <!-- clubclever js -->
   <script src="/js/clubclever.js"></script>
+  <script src="/js/lightbox.js"></script> 
 
+  
+  
   </body>
 </html>
 

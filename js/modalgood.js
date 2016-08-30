@@ -30,16 +30,4 @@ $('.aa-add-to-cart-btn').click(function e(){
             $("#cartbox").load(location.href + " #cartbox>*","");
         }    
     });
-});
-
-
-$(document).ready(function () {
-    $('.simpleLens-thumbnail-wrapper img').mouseenter(function () {
-        $('.simpleLens-big-image').attr('src' ,this.src);
-    });
-
-    $('.simpleLens-thumbnail-wrapper img').mouseout(function () {
-        $('.simpleLens-big-image').attr('src' ,$('.simpleLens-big-image').attr('data-big-image'));
-    });
-
-});
+});		

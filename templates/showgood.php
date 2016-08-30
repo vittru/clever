@@ -6,54 +6,46 @@ $hasHairtypes = $good->hasHairtypes();
 $canBeBought = true;
 
 ?>
-<html>  
+<html>
+    <link href="/css/lightbox.css" rel="stylesheet">
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h3 class="modal-title"><?php echo $good->name ?></h3>
     <div hidden="" id="pId"><?php echo $good->id ?></div>
 </div>  
 <div class="modal-body">
-<div class="row">
-  <!-- Modal view slider -->
-  <div class="col-md-4 col-sm-4 col-xs-12">                              
-    <div class="aa-product-view-slider">                                
-      <div class="simpleLens-gallery-container" id="demo-1">
-        <div class="simpleLens-container">
-            <div class="simpleLens-big-image-container">
-                <a class="simpleLens-lens-image">
-                    <img src="<?php echo $good->getImage() ?>" class="simpleLens-big-image" data-big-image="<?php echo $good->getImage() ?>">
-                </a>
-            </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-4 col-xs-12">  
+            <?php
+            $firstImage = $good->getImage();
+            $secondImage = $good->getSecondImage();
+            $thirdImage = $good->getThirdImage();
+            $colsm = 12;
+            if ($thirdImage)
+                $colsm = 4;
+            else if ($secondImage)
+                $colsm = 6;
+            ?>
+            <a href="<?php echo $firstImage; ?>" data-lightbox="lightbox" data-title='<?php echo $good->name ?>' class="col-sm-<?php echo $colsm ?>">
+                <img src="<?php echo $firstImage; ?>" class="img-responsive">
+            </a>    
+            <?php 
+            if ($secondImage) {
+            ?>
+            <a href="<?php echo $secondImage ?>" data-lightbox="lightbox" data-title='<?php echo $good->name ?>'  class="col-sm-<?php echo $colsm ?>">
+                <img src="<?php echo $secondImage ?>" class="img-responsive">
+            </a>    
+            <?php
+            }
+            if ($thirdImage) {
+            ?>
+            <a href="<?php echo $thirdImage ?>" data-lightbox="lightbox" data-title='<?php echo $good->name ?>' class="col-sm-<?php echo $colsm ?>">
+                <img src="<?php echo $thirdImage ?>" class="img-responsive">
+            </a>    
+            <?php 
+            }
+            ?>
         </div>
-        <?php 
-        $secondImage = $good->getSecondImage();
-        $thirdImage = $good->getThirdImage();
-        if ($secondImage or $thirdImage) {
-        ?>
-            <div class="simpleLens-thumbnails-container">
-                <?php
-                if ($secondImage) {
-                ?>
-                    <a href="#" class="simpleLens-thumbnail-wrapper" data-lens-image="<?php echo $secondImage; ?>" data-big-image="<?php echo $secondImage; ?>">
-                        <img src="<?php echo $secondImage; ?>">
-                    </a>               
-                <?php
-                }
-                if ($thirdImage) {
-                ?>
-                    <a href="#" class="simpleLens-thumbnail-wrapper" data-lens-image="<?php echo $thirdImage; ?>" data-big-image="<?php echo $thirdImage; ?>">
-                        <img src="<?php echo $thirdImage; ?>">
-                    </a>
-                <?php 
-                }
-                ?>
-            </div>
-        <?php  
-        }
-        ?>
-      </div>
-    </div>
-  </div>
   <!-- Modal view content -->
   <div class="col-md-8 col-sm-8 col-xs-12">
     <div class="aa-product-view-content">
@@ -171,6 +163,6 @@ $canBeBought = true;
   </div>
 </div>
 
-<script src="/js/modalgood.js"></script>  
+<script src="/js/modalgood.js"></script> 
     
 </html><!-- / quick view modal -->  

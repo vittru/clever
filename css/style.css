@@ -1329,6 +1329,13 @@ img {
 #quick-view-modal .modal-content button.close:hover {
   opacity: 1;
 }
+
+#quick-view-modal .modal-content img {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #3fc35f;
+}
+
 #quick-view-modal .modal-content .aa-product-view-slider .simpleLens-container {
   width: 100%;
 }
