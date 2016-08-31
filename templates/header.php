@@ -215,7 +215,7 @@
                             <div class="dropdown-menu dropdown-menu-right" role="menu">
                                 <form class="form-horizontal" role="form" action="/search">
                                   <div class="row">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-sm-6">
                                         <select class="form-control" name="firm">
                                             <option value="0" disabled selected>Производитель</option>
                                             <?php
@@ -225,7 +225,7 @@
                                             ?>
                                         </select>
                                       </div>
-                                      <div class="form-group col-md-6">
+                                      <div class="form-group col-sm-6">
                                         <select class="form-control" name="category">
                                             <option value="0" selected disabled>Категория</option>
                                             <?php
@@ -237,7 +237,7 @@
                                       </div>
                                   </div>    
                                   <div class="row">  
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-sm-6">
                                       <select class="form-control" name="problem">
                                         <option value="0" selected disabled>Проблема</option>
                                         <?php
@@ -247,7 +247,7 @@
                                         ?>
                                       </select>
                                     </div>
-                                    <div class="form-group col-md-6"> 
+                                    <div class="form-group col-sm-6"> 
                                       <select class="form-control" name="effect">
                                         <option value="0" selected disabled>Эффект</option>
                                         <?php
@@ -259,7 +259,7 @@
                                     </div>
                                   </div>
                                   <div class="row">  
-                                  <div class="form-group col-md-6">
+                                  <div class="form-group col-sm-6">
                                     <select class="form-control" name="skintype">
                                         <option value="0" selected disabled>Тип кожи</option>
                                         <?php
@@ -269,7 +269,7 @@
                                         ?>
                                     </select>
                                   </div>
-                                  <div class="form-group col-md-6">
+                                  <div class="form-group col-sm-6">
                                     <select class="form-control" name="hairtype">
                                         <option value="0" selected disabled>Тип волос</option>
                                         <?php
