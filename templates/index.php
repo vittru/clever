@@ -74,17 +74,21 @@ if ((new \FilesystemIterator($bannersdir))->valid()) {
                                 <!-- Category -->
                                 <div class="tab-pane fade <?php if ($i==1) echo 'in active' ?>" id="type<?php echo $typeId ?>">
                                     <?php
-                                    include 'sort.php';
+                                    //include 'sort.php';
                                     ?>
                                     <ul class="aa-product-catg">
                                     <?php
+                                    $count = 0;
                                     foreach($this->registry['goods'] as $id=>$good) {
-                                        if (in_array($typeName, $good->types) ) {
+                                        if ($count < 8 and in_array($typeName, $good->types) and $good->isAvailable()) {
+                                            $count++;
                                             $good->showInCatalog();
                                         }
                                     }
                                     ?>
                                     </ul>
+                                    <a class="aa-browse-btn" href="/catalog/type?id=<?php echo $typeId ?>">Больше товаров <?php echo mb_strtolower($typeName) ?><span class="fa fa-long-arrow-right"></span></a>
+                                        
                                 </div>
                                 <!-- /Category -->
                                 <?php

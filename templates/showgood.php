@@ -122,7 +122,7 @@ $canBeBought = true;
                     echo '<p><b>Типы кожи: </b>'; 
                     $toEnd = count($good->skintypes);
                     foreach($good->skintypes as $st) { 
-                        echo $this->registry['skintypes'][$st];
+                        echo mb_strtolower($this->registry['skintypes'][$st]);
                         if (0 !== --$toEnd) echo ", ";
                     } 
                     echo '</p>';
@@ -131,7 +131,7 @@ $canBeBought = true;
                     echo '<p><b>Типы волос: </b>'; 
                     $toEnd = count($good->hairtypes);
                     foreach($good->hairtypes as $ht) { 
-                        echo $this->registry['hairtypes'][$ht]; 
+                        echo mb_strtolower($this->registry['hairtypes'][$ht]); 
                         if (0 !== --$toEnd) echo ", ";
                     } 
                     echo '</p>';

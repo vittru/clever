@@ -325,7 +325,20 @@
           <div class="navbar-collapse collapse">
             <!-- Left nav -->
             <ul class="nav navbar-nav">
-                <li><a href="/">Каталог</a></li>
+                <li><a href="/catalog/type">Каталог<span class="caret"></a>
+                    <ul class="dropdown-menu">
+                      <?php foreach ($this->registry['types'] as $key => $value) {
+                          ?>
+                          <li><a href="/catalog/type?id=<?php echo $key; ?>">
+                          <?php
+                          echo $value;
+                          ?>
+                              </a>
+                          </li>        
+                          <?php        
+                      } ?>  
+                    </ul>
+                </li>
                 <li><a href="/catalog/firm">Бренды<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                       <?php foreach ($this->registry['firms'] as $key => $value) {

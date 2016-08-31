@@ -11,6 +11,11 @@ Class Controller_Catalog Extends Controller_Base {
         $this->registry['model']->logVisit(3);
         $this->registry['template']->show('firm');
     }
+    
+    function type() {
+        $this->registry['model']->logVisit(4);
+        $this->registry['template']->show('type');
+    }    
 }
 
 
