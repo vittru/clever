@@ -12,7 +12,7 @@
                 <div class="aa-footer-widget">
                   <h3>Главное меню</h3>
                   <ul class="aa-footer-nav">
-                    <li><a href="/">Каталог</a></li>
+                    <li><a href="/catalog">Каталог</a></li>
                     <li><a href="/catalog/firms">Бренды</a></li>
                     <li><a href="/actions">Акции</a></li>
                     <li><a href="/additional">Прочее</a></li>
@@ -38,8 +38,8 @@
                   <div class="aa-footer-widget">
                     <h3>Ссылки</h3>
                     <ul class="aa-footer-nav">
-                      <li><a target="_blank" href="http://master-om.com/">Мастерская Олеси Мустаевой</a></li>
                       <li><a target="_blank" href="https://www.biobeauty.ru/">БиоБьюти</a></li>
+                      <li><a target="_blank" href="http://master-om.com/">Мастерская Олеси Мустаевой</a></li>
                       <li><a target="_blank" href="http://www.mi-ko.org/">МиКо</a></li>
                     </ul>
                   </div>

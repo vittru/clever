@@ -52,20 +52,28 @@ $canBeBought = true;
 
       <div class="aa-price-block">
             <?php
-            if (sizeof($good->sizes) > 0) 
+            if (sizeof($good->sizes) > 0) { 
+                ?>
+                <table class="table">
+                    <th>Артикул</th>
+                    <th>Объем</th>
+                    <th>Цена</th>
+                    <th>Количество</th>
+                    <th>Наличие</th>
+                <?php
                 foreach($good->sizes as $sizeId=>$size) { 
                 ?>
-                    <div class="row">
-                        <div class="col-md-3 col-sm-3 col-xs-3">
+                    <tr>
+                        <td>
                             <?php echo $size->code; ?>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-2">
+                        </td>
+                        <td>
                             <?php echo $size->size; ?>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-2">
+                        </td>
+                        <td>
                             <?php echo $size->getWebPrice($good->sale); ?>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-2">
+                        </td>
+                        <td>
                             <select class="form-control quantity" id="sel<?php echo $sizeId; ?>" <?php if (!$size->isAvailable()) echo 'disabled' ?> onchange="modifyBasket()">
                                 <option>0</option>
                                 <option <?php if (sizeof($good->sizes)==1 and $size->isAvailable()) echo 'selected' ?>>1</option>
@@ -74,18 +82,22 @@ $canBeBought = true;
                                 <option>4</option>
                                 <option>5</option>
                             </select>
-                        </div>
-                        <div class="col-md-3 col-sm-3 col-xs-3">
-                            <p class="aa-product-avilability">
+                        </td>
+                        <td>
+                            <!--p class="aa-product-avilability"-->
                             <?php if ($size->isAvailable()) 
-                                echo 'В наличии';
+                                echo '<span class="available">В наличии</span>';
                                 else
-                                    echo 'Нет на складе'; ?>
-                            </p>    
-                        </div>
-                    </div>    
+                                    echo '<span class="unavailable">Нет на складе</span>'; ?>
+                            <!--/p-->    
+                        </td>
+                    </tr> 
                 <?php
                 }
+            ?>
+                </table>
+            <?php
+            }    
             else {
                 $canBeBought = false;
                 ?>
@@ -93,8 +105,6 @@ $canBeBought = true;
                 <?php
             }
                 ?>
-        <!--span class="aa-product-view-price"><?php //echo $good->getPrice() ?></span>
-        <!--p class="aa-product-avilability">Avilability: <span>In stock</span></p-->
       </div>
       <p>Производитель: <?php echo $this->registry['firms'][$good->firmId] ?></p>  
       <p><?php echo $good->shortdesc ?></p>
