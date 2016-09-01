@@ -1334,6 +1334,7 @@ img {
     border-style: solid;
     border-width: 1px;
     border-color: #3fc35f;
+    max-width: 200px;
 }
 
 #quick-view-modal .modal-content .aa-product-view-slider .simpleLens-container {

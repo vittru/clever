@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Клевер экомаркет</title>
     
-    <link rel="icon" href="/images/icon_old.png">
+    <link rel="icon" href="/images/icon.png">
     
     <link href="/css/search.css" rel="stylesheet">
     
@@ -206,14 +206,15 @@
               </div>
               <!-- / cart box -->
               <!-- search box -->
+                <form class="form-horizontal" role="form" action="/search">
             <div class="input-group aa-search-box" id="adv-search">
-                <input id="search-text" type="text" class="form-control" placeholder="Поиск по каталогу" />
+                <input id="search-text" type="text" class="form-control" name="name" placeholder="Поиск по каталогу" />
                 <div class="input-group-btn">
                     <div class="btn-group" role="group">
                         <div class="dropdown dropdown-lg">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
                             <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                <form class="form-horizontal" role="form" action="/search">
+                                <!--form class="form-horizontal" role="form" action="/search"-->
                                   <div class="row">
                                     <div class="form-group col-sm-6">
                                         <select class="form-control" name="firm">
@@ -290,13 +291,14 @@
                                     <input class="form-control" type="text" name="howTo" placeholder="Способ применения" />
                                   </div>
                                   <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                </form>
+                                <!--/form-->
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                     </div>
                 </div>
             </div>
+                </form>
           </div>
               <!-- / search box -->             
             </div>

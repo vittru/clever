@@ -144,3 +144,10 @@ $('#order-form').submit(function(e) {
      }    
 });
 
+$(document).on('click', '.aa-search-box .dropdown-lg', function (e) {
+  e.stopPropagation();
+});
+
+$(document).on('click', '.aa-search-box #search-text', function (e) {
+  e.stopPropagation();
+});
