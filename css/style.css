@@ -50,11 +50,11 @@ body {
 }
 
 /* MODULES - Individual site components */
-/*ul {
+ul {
   padding: 0;
   margin: 0;
   list-style: none;
-}*/
+}
 
 a {
   text-decoration: none;
@@ -2326,8 +2326,9 @@ img {
 }
 
 .aa-product-info-tab ul {
-  margin-left: 60px;
+  margin-left: 100px;
   text-indent: 0;
+  list-style: square;
 }
 #aa-product-details .aa-product-details-area .aa-product-details-bottom #description ul li {
   color: #555;

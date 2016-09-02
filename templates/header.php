@@ -95,6 +95,9 @@
 
                 <!-- start cellphone -->
                 <div class="cellphone hidden-xs">
+                  <p><span class="fa fa-phone"></span>+7 (996) 725-00-61</p>
+                </div>
+                <div class="cellphone hidden-xs">
                   <p><span class="fa fa-phone"></span>+7 (996) 725-00-62</p>
                 </div>
                 <!-- / cellphone -->

@@ -50,6 +50,7 @@
                   <div class="aa-footer-widget">
                     <h3>Наши контакты</h3>
                     <address>
+                      <p><span class="fa fa-phone"></span>+7-996-725-00-61</p>
                       <p><span class="fa fa-phone"></span>+7-996-725-00-62</p>
                       <p><span class="fa fa-phone"></span>+7-996-730-46-22</p>
                       <p><span class="fa fa-envelope"></span>clever@clubclever.ru</p>
