@@ -50,11 +50,11 @@ body {
 }
 
 /* MODULES - Individual site components */
-ul {
+/*ul {
   padding: 0;
   margin: 0;
   list-style: none;
-}
+}*/
 
 a {
   text-decoration: none;
@@ -1334,7 +1334,7 @@ img {
     border-style: solid;
     border-width: 1px;
     border-color: #3fc35f;
-    max-width: 200px;
+    width: 100%;
 }
 
 #quick-view-modal .modal-content .aa-product-view-slider .simpleLens-container {
@@ -2325,9 +2325,9 @@ img {
   padding: 20px 10px;
 }
 
-.aa-product-info-tab #description ul {
-  margin-bottom: 10px;
-  padding-left: 25px;
+.aa-product-info-tab ul {
+  margin-left: 60px;
+  text-indent: 0;
 }
 #aa-product-details .aa-product-details-area .aa-product-details-bottom #description ul li {
   color: #555;

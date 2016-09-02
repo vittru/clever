@@ -171,6 +171,10 @@ Class Good {
         return sizeof($this->effs) > 0;
     }
 
+    function hasProblems() {
+        return sizeof($this->problems) > 0;
+    }
+    
     function hasSkintypes() {
         return sizeof($this->skintypes) > 0;
     }
