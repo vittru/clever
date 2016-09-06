@@ -1,11 +1,5 @@
 <?php
-$good = $this->registry['good'];
-$hasProblems = $good->hasProblems();
-$hasEffects = $good->hasEffects();
-$hasSkintypes = $good->hasSkintypes();
-$hasHairtypes = $good->hasHairtypes();
-$canBeBought = true;
-
+    $canBeBought = true;
 ?>
 <html>
     <link href="/css/lightbox.css" rel="stylesheet">
@@ -165,7 +159,7 @@ $canBeBought = true;
                 ?>
                 <div class="tab-pane fade aa-product-info-tab" id="effect">
                     <?php if ($hasProblems) { ?>
-                        <p><b>Эффективен при:</b></p>
+                        <p><b>Эффективен при следующих проблемах:</b></p>
                         <ul>
                         <?php foreach($good->problems as $problem) { ?>
                             <li><?php echo $this->registry['problems'][$problem] ?></li>

@@ -47,7 +47,7 @@ include 'header.php';
                     }
                     ?></p>
                     <h4><?php 
-                    if (count($this->registry['foundgoods']))
+                    if (count($foundgoods))
                         echo "Мы нашли";
                     else
                         echo "К сожалению таких товаров нет"
@@ -68,11 +68,11 @@ include 'header.php';
                             <div class="tab-content">
                                 <div class="tab-pane fade in active">
                             <?php
-                            if (count($this->registry['foundgoods']))include 'sort.php';
+                            if (count($foundgoods))include 'sort.php';
                             ?>                                
                                     <ul class="aa-product-catg">
                             <?php
-                                foreach($this->registry['foundgoods'] as $goodid=>$good) {
+                                foreach($foundgoods as $goodid=>$good) {
                                     $good->showInCatalog();
                                 }
                             ?>

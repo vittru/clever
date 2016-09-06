@@ -7,140 +7,197 @@ if ($goodId) {
     $good=false;
 ?>
 
-
+<section id="editgood">
 <form method="post" action="/editgood/save" enctype="multipart/form-data" id="editgood">
-    <input hidden name='id' value='<?php echo $goodId ?>'>
-    <div class="form-group">
-        <label for="name">Имя:</label>
-        <input type="text" class="form-control" id="name" name="name" value='<?php if ($good) echo $good->name ?>'>
-    </div>  
-    
-    <div class="form-group">
-      <label for="shortdesc">Краткое описание:</label>
-      <textarea class="form-control" rows="2" id="description" name="shortdesc"><?php if ($good) echo $good->shortdesc ?></textarea>
-    </div>
-
-    <div class="form-group">
-      <label for="description">Описание:</label>
-      <textarea class="form-control" rows="5" id="description" name="description"><?php if ($good) echo $good->description ?></textarea>
-    </div>
-    
-    <div class="form-group">
-        <label for="brand">Производитель:</label>
-        <select class="form-control" id="brand" name="brand">
-            <?php
-            foreach ($this->registry['firms'] as $key => $value) {
-                ?>
-                <option value="firm<?php echo $key ?>" <?php if ($good && $good->firmId == $key) echo "selected" ?>><?php echo $value ?></option>
+    <table class="table">
+        <tr>
+          <td>  
+            <input hidden name='id' value='<?php echo $goodId ?>'>
+            <div class="form-group">
+                <label class="col-md-2" for="name">Имя:</label>
+                <input type="text" class="form-control text col-md-10" id="name" name="name" value='<?php if ($good) echo $good->name ?>' maxlength="60">
+            </div>  
+          </td>
+        </tr>
+        <tr>
+          <td>  
+            <div class="form-group">
+              <label class="col-md-2" for="shortdesc">Краткое описание:</label>
+              <textarea class="form-control col-md-10 text" rows="2" id="description" name="shortdesc" maxlength="300"><?php if ($good) echo $good->shortdesc ?></textarea>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>  
+            <div class="form-group">
+              <label class="col-md-2" for="description">Описание:</label>
+              <textarea class="form-control col-md-10 text" rows="5" id="description" name="description"><?php if ($good) echo $good->description ?></textarea>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>  
+            <div class="form-group">
+                <label for="brand" class="col-md-2">Производитель:</label>
+                <select class="form-control inline col-md-10" id="brand" name="brand">
+                    <?php
+                    foreach ($this->registry['firms'] as $key => $value) {
+                        ?>
+                        <option value="firm<?php echo $key ?>" <?php if ($good && $good->firmId == $key) echo "selected" ?>><?php echo $value ?></option>
+                        <?php
+                    }
+                    ?>
+                </select>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>  
+            <div class="form-group">
+                <label class="col-md-2">Для кого:</label>
+                 <div class="col-md-10">
                 <?php
-            }
-            ?>
-        </select>
-    </div>
-
-    <div class="form-group">
-        <label>Для кого:</label>
-        <?php
-        foreach ($this->registry['types'] as $key => $value) {
-            ?>
-            <label class="checkbox-inline"><input type="checkbox" value="" name="mentype<?php echo $key ?>" <?php if (in_array($value, $good->types)) echo "checked" ?>><?php echo $value ?></label>
-            <?php
-        }
-        ?>
-    </div>
-    
-    
-    <div class="form-group">
-        <label>Категория:</label>
-        <?php
-        foreach ($this->registry['categories'] as $key => $value) {
-            ?>
-            <label class="checkbox-inline"><input type="checkbox" value="" name="cat<?php echo $key ?>" <?php if (in_array($key, $good->cats)) echo "checked" ?>><?php echo $value ?></label>
-            <?php
-        }
-        ?>
-    </div>
-        
-    <div class="form-group">
-        <label>Эффект:</label>    
-        <?php
-        foreach ($this->registry['effects'] as $key => $value) {
-            ?>
-            <label class="checkbox-inline"><input type="checkbox" value="" name="eff<?php echo $key ?>" <?php if (in_array($key, $good->effs)) echo "checked" ?>><?php echo $value ?></label>
-            <?php
-        }
-        ?>
-    </div>
-
-    <div class="form-group">
-        <label>Тип кожи:</label>    
-        <?php
-        foreach ($this->registry['skintypes'] as $key => $value) {
-            ?>
-            <label class="checkbox-inline"><input type="checkbox" value="" name="skintype<?php echo $key ?>" <?php if (in_array($key, $good->skintypes)) echo "checked" ?>><?php echo $value ?></label>
-            <?php
-        }
-        ?>
-    </div>
-
-    <div class="form-group">
-        <label>Тип волос:</label>    
-        <?php
-        foreach ($this->registry['hairtypes'] as $key => $value) {
-            ?>
-            <label class="checkbox-inline"><input type="checkbox" value="" name="hairtype<?php echo $key ?>" <?php if (in_array($key, $good->hairtypes)) echo "checked" ?>><?php echo $value ?></label>
-            <?php
-        }
-        ?>
-    </div>
-    
-    <div class="form-group">
-        <label for="madeOf">Состав:</label>
-        <textarea class="form-control" rows="3" id="madeOf" name="madeOf"><?php if ($good) echo $good->madeOf ?></textarea>
-    </div>
-    
-    <div class="form-group">
-        <label for="howTo">Способ применения:</label>
-        <textarea class="form-control" rows="3" id="howTo" name="howTo"><?php if ($good) echo $good->howTo ?></textarea>
-    </div>
-
-    <div class="form-group">
-        <label for="problem">Проблема (текст):</label>
-        <textarea class="form-control" rows="3" id="howTo" name="problem"><?php if ($good) echo $good->problem ?></textarea>
-    </div>
-    
-    <div class="form-group">
-        <label>Проблема (список):</label>    
-        <?php
-        foreach ($this->registry['problems'] as $key => $value) {
-            ?>
-            <label class="checkbox-inline"><input type="checkbox" value="" name="prolist<?php echo $key ?>" <?php if (in_array($key, $good->problems)) echo "checked" ?>><?php echo $value ?></label>
-            <?php
-        }
-        ?>
-    </div>
-    
-    <div class="form-group">
-        <label for="bestbefore">Срок хранения:</label>
-        <textarea class="form-control" rows="3" id="bestbefore" name="bestbefore"><?php if ($good) echo $good->bestbefore ?></textarea>
-    </div>
-    
-    <div class="form-group">
-        <label for="precaution">Противопоказания:</label>
-        <textarea class="form-control" rows="3" id="howTo" name="precaution"><?php if ($good) echo $good->precaution ?></textarea>
-    </div>
-    
-    <div class="form-group">
-        <label for="sale">Скидка:</label>
-        <input type="text" class="form-control" id="sale" name="sale" value='<?php 
-            if ($good) {
-                echo $good->sale;
-            } else {
-                echo 0;
-            }  ?>'>
-        <label>%</label>
-    </div>
-      
+                foreach ($this->registry['types'] as $key => $value) {
+                    ?>
+                    <label class="checkbox-inline"><input type="checkbox" value="" name="mentype<?php echo $key ?>" <?php if (in_array($value, $good->types)) echo "checked" ?>><?php echo $value ?></label>
+                    <?php
+                }
+                ?>
+                 </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>  
+            <div class="form-group">
+                <label class="col-md-2">Категория:</label>
+                <div class="col-md-10 columns">
+                <?php
+                foreach ($this->registry['categories'] as $key => $value) {
+                    ?>
+                    <label class="checkbox-inline"><input type="checkbox" value="" name="cat<?php echo $key ?>" <?php if (in_array($key, $good->cats)) echo "checked" ?>><?php echo $value ?></label>
+                    <?php
+                }
+                ?>
+                </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>  
+            <div class="form-group">
+                <label class="col-md-2">Эффект:</label>    
+                <div class="col-md-10 columns">
+                <?php
+                foreach ($this->registry['effects'] as $key => $value) {
+                    ?>
+                    <label class="checkbox-inline"><input type="checkbox" value="" name="eff<?php echo $key ?>" <?php if (in_array($key, $good->effs)) echo "checked" ?>><?php echo $value ?></label>
+                    <?php
+                }
+                ?>
+                </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>  
+            <div class="form-group">
+                <label class="col-md-2">Тип кожи:</label>  
+                <div class="col-md-10 columns">
+                <?php
+                foreach ($this->registry['skintypes'] as $key => $value) {
+                    ?>
+                    <label class="checkbox-inline"><input type="checkbox" value="" name="skintype<?php echo $key ?>" <?php if (in_array($key, $good->skintypes)) echo "checked" ?>><?php echo $value ?></label>
+                    <?php
+                }
+                ?>
+                </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>  
+            <div class="form-group">
+                <label class="col-md-2">Тип волос:</label> 
+                <div class="col-md-10 columns">
+                <?php
+                foreach ($this->registry['hairtypes'] as $key => $value) {
+                    ?>
+                    <label class="checkbox-inline"><input type="checkbox" value="" name="hairtype<?php echo $key ?>" <?php if (in_array($key, $good->hairtypes)) echo "checked" ?>><?php echo $value ?></label>
+                    <?php
+                }
+                ?>
+                </div>    
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>  
+            <div class="form-group">
+                <label class="col-md-2" for="madeOf">Состав:</label>
+                <textarea class="form-control col-md-10 text" rows="3" id="madeOf" name="madeOf"><?php if ($good) echo $good->madeOf ?></textarea>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>  
+            <div class="form-group">
+                <label class="col-md-2" for="howTo">Способ применения:</label>
+                <textarea class="form-control col-md-10 text" rows="3" id="howTo" name="howTo"><?php if ($good) echo $good->howTo ?></textarea>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>  
+            <div class="form-group">
+                <label class="col-md-2">Проблема:</label>    
+                <div class="col-md-10 columns">
+                <?php
+                foreach ($this->registry['problems'] as $key => $value) {
+                    ?>
+                    <label class="checkbox-inline"><input type="checkbox" value="" name="prolist<?php echo $key ?>" <?php if (in_array($key, $good->problems)) echo "checked" ?>><?php echo $value ?></label>
+                    <?php
+                }
+                ?>
+                </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>  
+            <div class="form-group">
+                <label class="col-md-2" for="bestbefore">Срок хранения:</label>
+                <textarea class="form-control col-md-10 text" rows="3" id="bestbefore" name="bestbefore" maxlength="200"><?php if ($good) echo $good->bestbefore ?></textarea>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>  
+            <div class="form-group">
+                <label class="col-md-2" for="precaution">Противопоказания:</label>
+                <textarea class="form-control col-md-10 text" rows="3" id="howTo" name="precaution" maxlength="200"><?php if ($good) echo $good->precaution ?></textarea>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>  
+            <div class="form-group">
+                <label class="col-md-2" for="sale">Скидка:</label>
+                <input type="number" class="form-control col-md-9 inline" id="sale" name="sale" value='<?php 
+                    if ($good) {
+                        echo $good->sale;
+                    } else {
+                        echo 0;
+                    }  ?>'>
+                <label class="col-md-1">%</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td> 
+          </td>
+        </tr>
+    </table>
     
     <table class="table">
     <thead>
@@ -168,7 +225,7 @@ if ($goodId) {
                 echo $sizes[0]->size;
             }?>'>
         </td>
-        <td><input class="form-control" type="text" id="price1" name="price1" value='<?php 
+        <td><input class="form-control" type="number" id="price1" name="price1" value='<?php 
             if ($good) {
                 echo $sizes[0]->price;
             }?>'>
@@ -178,14 +235,14 @@ if ($goodId) {
                 echo $sizes[0]->code;
             }?>'>
         </td>
-        <td><input class="form-control" type="text" id="instock1" name="instock1" value='<?php 
+        <td><input class="form-control" type="number" id="instock1" name="instock1" value='<?php 
             if ($good and $sizes[0]) {
                 echo $sizes[0]->instock;
             }else {
                 echo 0;
             } ?>'>
         </td>
-        <td><input class="form-control" type="text" id="sale1" name="sale1" value='<?php 
+        <td><input class="form-control" type="number" id="sale1" name="sale1" value='<?php 
             if ($good and $sizes[0]) {
                 echo $sizes[0]->sale;
             }else {
@@ -204,7 +261,7 @@ if ($goodId) {
                 echo $sizes[1]->size;
             }?>'>
         </td>
-        <td><input class="form-control" type="text" id="price2" name="price2" value='<?php 
+        <td><input class="form-control" type="number" id="price2" name="price2" value='<?php 
             if ($good) {
                 echo $sizes[1]->price;
             }?>'>
@@ -214,14 +271,14 @@ if ($goodId) {
                 echo $sizes[1]->code;
             }?>'>
         </td>
-        <td><input class="form-control" type="text" id="instock2" name="instock2" value='<?php 
+        <td><input class="form-control" type="number" id="instock2" name="instock2" value='<?php 
             if ($good and $sizes[1]) {
                 echo $sizes[1]->instock;
             }else {
                 echo 0;
             } ?>'>
         </td>
-        <td><input class="form-control" type="text" id="sale2" name="sale2" value='<?php 
+        <td><input class="form-control" type="number" id="sale2" name="sale2" value='<?php 
             if ($good and $sizes[1]) {
                 echo $sizes[1]->sale;
             }else {
@@ -240,7 +297,7 @@ if ($goodId) {
                 echo $sizes[2]->size;
             }?>'>
         </td>
-        <td><input class="form-control" type="text" id="price3" name="price3" value='<?php 
+        <td><input class="form-control" type="number" id="price3" name="price3" value='<?php 
             if ($good) {
                 echo $good->sizes[2]->price;
             }?>'>
@@ -250,14 +307,14 @@ if ($goodId) {
                 echo $sizes[2]->code;
             }?>'>
         </td>
-        <td><input class="form-control" type="text" id="instock3" name="instock3" value='<?php 
+        <td><input class="form-control" type="number" id="instock3" name="instock3" value='<?php 
             if ($good and $sizes[2]) {
                 echo $sizes[2]->instock;
             }else {
                 echo 0;
             } ?>'>
         </td>
-        <td><input class="form-control" type="text" id="sale3" name="sale3" value='<?php 
+        <td><input class="form-control" type="number" id="sale3" name="sale3" value='<?php 
             if ($good and $sizes[2]) {
                 echo $sizes[2]->sale;
             }else {
@@ -265,34 +322,82 @@ if ($goodId) {
             } ?>'>
         </td>
       </tr>
+      <tr>
+          <td colspan="5">
+          </td>
+      </tr>    
     </tbody>
   </table>
+    
+  <table class="table">
+      <tr>
+          <td>
   <?php
-  if ($good and (file_exists('images/goods/good'.$goodId.'-1.jpg') or file_exists('images/goods/good'.$goodId.'-1.png'))) {
-     echo "<label for='image1'>Товар уже имеет картинку-1. Она будет заменена</label>"; 
-  } else
-      echo "<label for='image1'>У товара еще нет картинки-1</label>"
+  if ($good and $good->getImage()) {
+    ?>
+    <a href="<?php echo $good->getImage(); ?>" data-lightbox="lightbox" data-title='<?php echo $good->name ?>' class="col-md-2">
+        <img width="100px" src="<?php echo $good->getImage(); ?>" class="img-responsive">
+    </a> 
+    <?php
+    //echo "<label for='image1'>Товар уже имеет картинку-1. Она будет заменена</label>"; 
+  } else {
+      ?>
+              <div class="col-md-2">
+        <img width="100px" src="/images/goods/good0.png" class="img-responsive">
+              </div>
+    <?php
+  }
   ?>  
-  <input class="form-control" type="file" name="image1" id="image1">          
+            <input class="form-control col-md-10 text" type="file" name="image1" id="image1"> 
+          </td>
+      </tr>
+      <tr>
+          <td>
   <?php
-  if ($good and (file_exists('images/goods/good'.$goodId.'-2.jpg') or file_exists('images/goods/good'.$goodId.'-2.png'))) {
-     echo "<label for='image2'>Товар уже имеет картинку-2. Она будет заменена</label>"; 
-  } else
-      echo "<label for='image2'>У товара еще нет картинки-2</label>"
-  ?>  
-  <input class="form-control" type="file" name="image2" id="image2">          
+  if ($good and $good->getSecondImage()) {
+      ?>
+    <a href="<?php echo $good->getSecondImage(); ?>" data-lightbox="lightbox" data-title='<?php echo $good->name ?>' class="col-md-2">
+        <img width="100px" src="<?php echo $good->getSecondImage(); ?>" class="img-responsive">
+    </a>
+    <?php
+    } else {
+        ?>
+              <div class="col-md-2">
+        <img width="100px" src="/images/goods/good0.png" class="img-responsive">
+              </div>
+       <?php
+    }       ?>
+  <input class="form-control col-md-10 text" type="file" name="image2" id="image2"> 
+          </td>
+      </tr>
+      <tr>
+          <td>
   <?php
-  if ($good and (file_exists('images/goods/good'.$goodId.'-3.jpg') or file_exists('images/goods/good'.$goodId.'-3.png'))) {
-     echo "<label for='image3'>Товар уже имеет картинку-1. Она будет заменена</label>"; 
-  } else
-      echo "<label for='image3'>У товара еще нет картинки-3</label>"
-  ?>  
-  <input class="form-control" type="file" name="image3" id="image3">          
-            
-    <button type="submit" class="btn btn-success">Сохранить</button>
+  if ($good and $good->getThirdImage()) {
+      ?>
+    <a href="<?php echo $good->getThirdImage(); ?>" data-lightbox="lightbox" data-title='<?php echo $good->name ?>' class="col-md-2">
+        <img width="100px" src="<?php echo $good->getThirdImage(); ?>" class="img-responsive">
+    </a>
+    <?php
+    } else {
+        ?>
+              <div class="col-md-2">
+        <img width="100px" src="/images/goods/good0.png" class="img-responsive">
+              </div>
+       <?php
+    }       ?>
+  <input class="form-control col-md-10 text" type="file" name="image3" id="image3">          
+          </td>
+      </tr>
+      <tr>
+          <td>
+          </td>
+      </tr>
+  </table>
+    <button type="submit" style="margin-bottom: 40px;" class="btn btn-success">Сохранить</button>
     
 </form>
-
+</section>
 
 <?php
 include 'footer.php';

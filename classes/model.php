@@ -626,7 +626,7 @@ Class Model {
         $data = $sqlSelect->fetch();
         $firm = new Firm($firmId, $data['name'], $data['description']);
         $firm->goods = $this->getGoodsByFirm($firmId);
-        $firm->categories = $this->getFirmCats($firmId);
+        $firm->categories = $this->prepareArray($this->getFirmCats($firmId));
         $sqlSelect->closeCursor();
         return $firm;
     }

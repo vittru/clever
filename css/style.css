@@ -196,6 +196,27 @@ img {
   color: #fff;
 }
 
+#editgood .inline {
+    width: auto;
+    display: inline;
+}
+
+#editgood .name {
+    width: 700px;
+    display: inline;
+}
+
+#editgood .text {
+    width: 80%;
+    display: inline;
+}
+
+#editgood .columns label.checkbox-inline {
+  min-width: 190px;
+  vertical-align: top;
+  width: 30%;
+}
+
 /* LAYOUTS - Page layout styles */
 /*==================
  HEADER SECTION
