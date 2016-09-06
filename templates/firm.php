@@ -1,8 +1,4 @@
 <?php
-$firmId=$_GET['id'];
-if ($firmId) {
-    $firm = $this->registry['model']->getFirm($firmId);
-} 
 include 'header.php';
 ?>
 
@@ -80,7 +76,7 @@ include 'header.php';
                             ?>
                                 <ul class="aa-product-catg">
                                     <?php
-                                    foreach($this->registry['firms'] as $id=>$name) {
+                                    foreach($firms as $id=>$name) {
                                     ?>    
                                     <li class="col-sm-3 good">
                                       <figure>

@@ -1,9 +1,4 @@
 <?php
-$typeId=$_GET['id'];
-if ($typeId) {
-    $type = $this->registry['types'][$typeId];
-} 
-$firms = $this->registry['firms'];
 include 'header.php';
 ?>
 
@@ -60,7 +55,7 @@ include 'header.php';
                                     ?>
                                     <ul class="aa-product-catg">
                                     <?php
-                                    foreach($this->registry['goods'] as $good) {
+                                    foreach($goods as $good) {
                                         //echo $firmId . " " . $good->firmId."; ";
                                     
                                         if (in_array($type, $good->types) and $good->firmId == $firmId) {
@@ -80,7 +75,7 @@ include 'header.php';
                             ?>
                                 <ul class="aa-product-catg">
                                     <?php
-                                    foreach($this->registry['types'] as $id=>$name) {
+                                    foreach($types as $id=>$name) {
                                     ?>    
                                     <li class="col-sm-3 good">
                                       <figure>

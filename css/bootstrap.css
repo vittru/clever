@@ -4023,6 +4023,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-tabs {
   border-bottom: 1px solid #ddd;
 }
+
+.modal-body .nav-tabs {
+    padding-top: 20px;
+}
+
 .nav-tabs > li {
   float: left;
   margin-bottom: -1px;
@@ -5909,7 +5914,7 @@ button.close {
 }
 .modal-content {
   position: relative;
-  background-color: #fff;
+  background-image: url('../images/design/background.jpg');
   -webkit-background-clip: padding-box;
           background-clip: padding-box;
   border: 1px solid #999;

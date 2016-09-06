@@ -49,8 +49,8 @@ $canBeBought = true;
         </div>
         <div class="col-md-8 col-sm-8 col-xs-12">
             <div class="aa-product-view-content">
-                <p><?php echo $good->shortdesc ?></p>
-                <p><b>Производитель:</b> <?php echo $this->registry['firms'][$good->firmId] ?></p>  
+                <div class="short-desc"><?php echo $good->shortdesc ?></div>
+                <div class="firm"><b>Производитель:</b> <?php echo $this->registry['firms'][$good->firmId] ?></div>  
 
                 <div class="aa-price-block">
                     <?php
@@ -91,6 +91,7 @@ $canBeBought = true;
                         <?php
                         }
                         ?>
+                        <tr><td colspan="5"></td></tr>
                     </table>
                     <?php
                     }    
@@ -110,9 +111,20 @@ $canBeBought = true;
         <div class="col-md-12 col-sm-12 col-xs-12">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#description" data-toggle="tab">Описание</a></li>
+                <?php
+                if ($good->madeOf) {
+                ?>
                 <li><a href="#madeOf" data-toggle="tab">Состав</a></li>
+                <?php }
+                if ($good->howTo) {
+                ?>
                 <li><a href="#howTo" data-toggle="tab">Способ применения</a></li>
-                <li><a href="#effect" data-toggle="tab">Эффект</a></li>
+                <?php
+                }
+                if ($hasProblems or $hasEffects) {
+                ?>
+                    <li><a href="#effect" data-toggle="tab">Эффект</a></li>
+                <?php } ?>    
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade in active aa-product-info-tab" id="description">
@@ -138,8 +150,19 @@ $canBeBought = true;
                     <?php echo $good->getWebBestbefore(); ?>
                     <?php echo $good->getWebPrecaution(); ?>
                 </div>
+                <?php
+                if ($good->madeOf) {
+                ?>
                 <div class="tab-pane fade aa-product-info-tab" id="madeOf"><?php echo $good->getWebMadeOf(); ?></div>
+                <?php 
+                } 
+                if ($good->howTo) {
+                ?>
                 <div class="tab-pane fade aa-product-info-tab" id="howTo"><?php echo $good->getWebHowTo(); ?></div>
+                <?php
+                }
+                if ($hasProblems or $hasEffects) {
+                ?>
                 <div class="tab-pane fade aa-product-info-tab" id="effect">
                     <?php if ($hasProblems) { ?>
                         <p><b>Эффективен при:</b></p>
@@ -158,6 +181,7 @@ $canBeBought = true;
                         </ul>
                     <?php }?>
                 </div>
+                <?php } ?>
             </div>    
         </div>
     </div>

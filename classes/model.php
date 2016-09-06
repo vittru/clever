@@ -785,6 +785,25 @@ Class Model {
             }
             $sqlInsert->closeCursor();
         }    
+    }  
+    
+    function getTypeFirms($typeId) {
+        $sqlSelect = $this->db->prepare('SELECT distinct g.firmId FROM  goods g, `goods-types` gt WHERE g.id = gt.goodId AND gt.typeId=:typeId');
+        $sqlSelect->bindParam(':typeId', $typeId);
+        try{
+            $sqlSelect->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when getting firms of type');
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }    
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            if (!$firms)
+                $firms = [$data['firmId']];
+            else
+                array_push($firms, $data['firmId']);
+        }        
+        $sqlSelect->closeCursor();
+        return $firms;
     }    
 }
 
