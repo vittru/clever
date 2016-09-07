@@ -31,8 +31,8 @@ Class Model {
             . "WHERE email = :userEmail AND password = :userPassword";
     private $selectProfileEmail = "SELECT * FROM profiles "
             . "WHERE email = :userEmail";
-    private $getAllNews = "select header, time, text from news order by time desc limit 10";
-    private $getNonClientNews = "select headr, time, text from news where forClients=0 order by time desc limit 10";
+    private $getAllNews = "SELECT * FROM news ORDER BY time DESC";
+    private $getNonClientNews = "SELECT * FROM news WHERE forClients=0 ORDER BY time DESC";
     private $addQuestion = "INSERT INTO questions(user, question, date) VALUES(:userId, :question, NOW())";
     private $selectCatalog = "SELECT id, name FROM ";
     private $updateGood = "UPDATE goods SET name=:name, description=:description, shortdesc=:shortdesc, firmId=:firmId, sale=:sale, howTo=:howTo, madeOf=:madeOf, problem=:problem, bestbefore=:bestbefore, precaution=:precaution WHERE id=:id";
@@ -296,14 +296,14 @@ Class Model {
             $this->registry['logger']->lwrite($e->getMessage()); 
         }
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $news = new News($data['header'], $data['time'], $data['text']);
+            $news = new News($data['id'], $data['header'], $data['time'], $data['text']);
             if (!$newsArray)
                 $newsArray = [$news];
             else
                 array_push($newsArray, $news);
         }
-        $this->registry['news']= $newsArray;
         $sqlSelect->closeCursor();
+        return $newsArray;
     }
     
     function addQuestion($userId, $question) {

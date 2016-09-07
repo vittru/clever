@@ -360,7 +360,7 @@
                 </li>
                 <li><a href="/actions">Акции</a>
                 </li>
-                <li><a href="/additional">Прочее</a>
+                <li><a href="/news">Новости</a>
                 </li>
             </ul>
           </div><!--/.nav-collapse -->

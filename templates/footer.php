@@ -15,7 +15,7 @@
                     <li><a href="/catalog">Каталог</a></li>
                     <li><a href="/catalog/firms">Бренды</a></li>
                     <li><a href="/actions">Акции</a></li>
-                    <li><a href="/additional">Прочее</a></li>
+                    <li><a href="/news">Новости</a></li>
                   </ul>
                 </div>
               </div>

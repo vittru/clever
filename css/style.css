@@ -676,6 +676,10 @@ img {
     text-decoration: underline;
 }
 
+#aa-text img {
+    width: 70%;
+}
+
 #aa-text .worktime:before {
     content: url('/images/design/worktime.png');
 }
@@ -700,6 +704,18 @@ img {
 #aa-text .map {
     margin-bottom: 10px;
     margin-top: 10px;
+}
+
+#aa-text .newstime {
+    font-size: 13px;
+    color: #E46713;
+}
+
+#aa-text .news {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #3fc35f;
+    padding-bottom: 10px;
 }
 
 /*==================
