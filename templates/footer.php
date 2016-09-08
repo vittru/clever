@@ -12,7 +12,7 @@
                 <div class="aa-footer-widget">
                   <h3>Главное меню</h3>
                   <ul class="aa-footer-nav">
-                    <li><a href="/catalog">Каталог</a></li>
+                    <li><a href="/catalog/type">Каталог</a></li>
                     <li><a href="/catalog/firms">Бренды</a></li>
                     <li><a href="/actions">Акции</a></li>
                     <li><a href="/news">Новости</a></li>
@@ -24,7 +24,7 @@
                   <div class="aa-footer-widget">
                     <h3>Информация</h3>
                     <ul class="aa-footer-nav">
-                      <li><a href="/about">О нас</a></li>
+                      <!--li><a href="/about">О нас</a></li-->
                       <li><a href="/common/delivery">Доставка</a></li>
                       <li><a href="/common/payment">Оплата</a></li>
                       <li><a href="/common/moneyback">Возврат</a></li>
@@ -56,9 +56,9 @@
                       <p><span class="fa fa-envelope"></span>clever@clubclever.ru</p>
                     </address>
                     <div class="aa-footer-social">
-                      <a target="_blank" href="http://facebook.com"><span class="fa fa-facebook"></span></a>
-                      <a target="_blank" href="http://vk.com"><span class="fa fa-vk"></span></a>
-                      <a target="_blank" href="http://youtube.com"><span class="fa fa-youtube"></span></a>
+                      <!--a target="_blank" href="http://facebook.com"><span class="fa fa-facebook"></span></a-->
+                      <a target="_blank" href="https://vk.com/clubcleverru"><span class="fa fa-vk"></span></a>
+                      <!--a target="_blank" href="http://youtube.com"><span class="fa fa-youtube"></span></a-->
                     </div>
                   </div>
                 </div>
