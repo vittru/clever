@@ -11,7 +11,7 @@ class Size {
     
     public function __construct($id, $size, $price, $sale, $code, $instock, $onhold) {
         $this->id = $id;
-        $this->size = $size;
+        $this->size = str_replace(" ", "&nbsp;", $size);
         $this->price = $price;
         $this->sale = $sale;
         $this->code = $code;

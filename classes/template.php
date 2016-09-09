@@ -12,7 +12,7 @@ Class Template {
         
     function set($varname, $value, $overwrite=false) {
         if (isset($this->vars[$varname]) == true AND $overwrite == false) {
-            $this->registry['logger']->lwrite('Unable to set var `' . $varname . '`. Already set, and overwrite not allowed.');
+            //$this->registry['logger']->lwrite('Unable to set var `' . $varname . '`. Already set, and overwrite not allowed.');
             return false;
         }
         $this->vars[$varname] = $value;

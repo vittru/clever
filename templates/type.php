@@ -9,7 +9,7 @@ include 'header.php';
                 <div class="aa-subscribe-area">
                     <h3><?php 
                     if ($type) 
-                        echo 'Товары для ' . $type; 
+                        echo 'Товары ' . $type; 
                     else
                         echo 'Категории товаров';
                     ?></h3>
