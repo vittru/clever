@@ -51,14 +51,14 @@ include 'header.php';
             <table class="table">
                 <tr>
                     <td>
-                        <b>ул. Лейтенанта Шмидта, д. 24</b>
+                        <b>ул. Лейтенанта Шмидта, д.24</b>
                         <div class="map"><script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=2ARpWSbe1UzFUu93JteFOJqr_tLnHwLG&amp;width=320&amp;height=240&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script></div>
                         <p class="worktime">ежедневно с 10.00 до 22.00</p>
                         <div class="cash" data-toggle="tooltip" title="Оплата наличными"></div>
                         <div class="card" data-toggle="tooltip" title="Оплата банковской картой"></div>
                     </td>
                     <td>
-                        <b>ул.Н. Панова, д. 50 </b>
+                        <b>ул.Н. Панова, д.50 </b>
                         <div class="map"><script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=GYDbNlYjLzmFVBKiPFuSfy0FCfraBnZu&amp;width=320&amp;height=240&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script></div>
                         <p class="worktime">ежедневно с 10.00 до 21.00</p>
                         <div class="cash" data-toggle="tooltip" title="Оплата наличными"></div>
@@ -66,7 +66,7 @@ include 'header.php';
                 </tr>
                 <tr>
                     <td>
-                        <b>ул. Ново-Садовая, 271</b>
+                        <b>ул. Ново-Садовая, д.271</b>
                         <div class="map"><script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=3Z04yabmOvp2FZ3pW8QyO_fTbB6Y_MFy&amp;width=320&amp;height=240&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script></div>
                         <p class="worktime">ежедневно с 10.00 до 21.00</p>
                         <div class="cash" data-toggle="tooltip" title="Оплата наличными"></div>
@@ -80,14 +80,20 @@ include 'header.php';
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2">
+                    <td>
                         <b>ул. Георгия Димитрова, д.112</b>
                         <div class="map"><script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=GrArh56-A8ES1kTZdADZ7tgWcLvkOgSq&amp;width=320&amp;height=240&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script></div>
                         <p  class="worktime">ежедневно с 10.00 до 21.00</p>
                         <div class="cash" data-toggle="tooltip" title="Оплата наличными"></div>
                     </td>
+                    <td>
+                        <b>ул. Стара-Загора, д.168</b>
+                        <div class="map"><script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=X_vOb2NXN7WVSnIiUtq5RbhTy3EdzSa4&amp;width=320&amp;height=240&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script></div>
+                        <p  class="worktime">ежедневно с 10.00 до 20.00</p>
+                        <div class="cash" data-toggle="tooltip" title="Оплата наличными"></div>
+                    </td>
                 </tr>
-                <tr><td clospan="2"></td></tr>
+                <tr><td colspan="2"></td></tr>
             </table>
             <h4>Новосемейкино</h4>
             <table class="table">

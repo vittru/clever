@@ -684,6 +684,10 @@ img {
     content: url('/images/design/worktime.png');
 }
 
+#aa-text .phone:before {
+    content: url('/images/design/phone.png');
+}
+
 #aa-text .cash {
     background-image: url('/images/design/cash.png');
     height: 30px;
@@ -3375,7 +3379,7 @@ img {
 #aa-contact .aa-contact-area {
   display: inline;
   float: left;
-  padding: 50px 0;
+  /*padding: 50px 0;*/
   width: 100%;
 }
 #aa-contact .aa-contact-area .aa-contact-top {
@@ -3431,7 +3435,7 @@ img {
   font-size: 16px;
   height: 200px;
   padding: 10px;
-  width: 70%;
+  width: 100%;
 }
 #aa-contact .aa-contact-area .aa-contact-address .aa-contact-address-left .comments-form .form-control:focus {
   box-shadow: none;
