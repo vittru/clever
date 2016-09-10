@@ -3409,7 +3409,7 @@ img {
 /*  background-color: #FFF; */
   display: inline;
   float: left;
-  padding: 50px;
+ /* padding: 50px;*/
   width: 100%;
 }
 #aa-contact .aa-contact-area .aa-contact-address .aa-contact-address-left {

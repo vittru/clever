@@ -17,11 +17,11 @@
         <!-- SmartMenus jQuery Bootstrap Addon CSS -->
         <link href="/css/jquery.smartmenus.bootstrap.css" rel="stylesheet">
         <!-- Product view slider -->
-        <link rel="stylesheet" type="text/css" href="/css/jquery.simpleLens.css">    
+        <!--link rel="stylesheet" type="text/css" href="/css/jquery.simpleLens.css"-->    
         <!-- slick slider -->
-        <link rel="stylesheet" type="text/css" href="/css/slick.css">
+        <!--link rel="stylesheet" type="text/css" href="/css/slick.css"-->
         <!-- price picker slider -->
-        <link rel="stylesheet" type="text/css" href="/css/nouislider.css">
+        <!--link rel="stylesheet" type="text/css" href="/css/nouislider.css"-->
         <!-- Theme color -->
         <link id="switcher" href="/css/theme-color/green-theme.css" rel="stylesheet">
         <!-- <link id="switcher" href="css/theme-color/bridge-theme.css" rel="stylesheet"> -->

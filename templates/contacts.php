@@ -5,7 +5,7 @@ include 'header.php';
 <!-- start contact section -->
 <section id="aa-contact">
     <div class="container">
-        <div class="row">
+        <div class="row" id="aa-text">
             <div class="col-md-12">
                 <div class="aa-contact-area">
                     <!--div class="aa-contact-top">
@@ -19,11 +19,9 @@ include 'header.php';
                     <!-- Contact address -->
                     <div class="aa-contact-address">
                         <div class="row">
-                            <div class="col-md-12" id="aa-text">
-                                <h3 style="
-    font-size: 24px;
-    padding-left: 20px;
-">Посмотреть и приобрести наши товары можно по следующим адресам в Самаре</h3>
+                            <div class="col-md-12">
+                                <h1>Наши контакты</h1>
+                                <h2>Посмотреть и приобрести наши товары можно по следующим адресам в Самаре</h3>
                                 <table class="table">
                                     <tr>
                                         <td>
@@ -48,7 +46,7 @@ include 'header.php';
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="aa-contact-address-left">
-                                    <h3>Задайте нам вопрос</h3>
+                                    <h2>Задайте нам вопрос</h2>
                                     <form class="comments-form contact-form" action="" id="question-form" novalidate>
                                         <div class="row">
                                             <div class="col-md-5">
@@ -79,7 +77,7 @@ include 'header.php';
                             <div class="col-md-4">
                                 <div class="aa-contact-address-right">
                                     <address>
-                                        <h3>Клевер</h3>
+                                        <h2>Клевер</h2>
                                         <h5>МАГАЗИН НАТУРАЛЬНОЙ КОСМЕТИКИ</h5>
                                         <!--p><span class="fa fa-home"></span>443011, Самара</p>
                                         <p><span class="fa fa-home"></span>ул. Ново-Садовая, 271</p-->
