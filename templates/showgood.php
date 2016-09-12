@@ -44,7 +44,7 @@
             <div class="col-md-8 col-sm-8 col-xs-12">
                 <div class="aa-product-view-content">
                     <div class="short-desc"><?php echo $good->shortdesc ?></div>
-                    <div class="firm"><b>Производитель:</b> <?php echo $this->registry['firms'][$good->firmId] ?></div>  
+                    <div class="firm"><b>Бренд:</b> <?php echo $this->registry['firms'][$good->firmId] ?></div>  
 
                     <div class="aa-price-block">
                         <?php

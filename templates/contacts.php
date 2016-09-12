@@ -8,15 +8,6 @@ include 'header.php';
         <div class="row" id="aa-text">
             <div class="col-md-12">
                 <div class="aa-contact-area">
-                    <!--div class="aa-contact-top">
-                        <h2>Мы всегда рады помочь Вам.</h2>
-                        <p>Задайте вопрос, напишите или позвоните нам.</p>
-                    </div-->
-                    <!-- contact map -->
-                    <!--div class="aa-contact-map">
-                        <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=3Z04yabmOvp2FZ3pW8QyO_fTbB6Y_MFy&width=100%&height=450&lang=ru_RU&sourceType=constructor&scroll=true"></script>
-                    </div-->
-                    <!-- Contact address -->
                     <div class="aa-contact-address">
                         <div class="row">
                             <div class="col-md-12">
