@@ -1027,7 +1027,7 @@ img {
   height: 400px;
 }
 #aa-promo .aa-promo-area .aa-promo-right .aa-single-promo-right {
-  width: 50%;
+  width: 25%;
   height: 50%;
   float: left;
 }
@@ -1822,7 +1822,7 @@ img {
 ====================*/
 
 #aa-client-brand {
-  background-color: #333;
+  /*background-color: #333;*/
   display: inline;
   float: left;
   padding: 40px 0;
@@ -1837,7 +1837,7 @@ img {
   margin-left: -35px;
 }
 #aa-client-brand .aa-client-brand-area .aa-client-brand-slider li {
-  background: #fff none repeat scroll 0 0;
+  /*background: #fff none repeat scroll 0 0;*/
   float: left;
   margin-left: 35px;
   text-align: center;
@@ -1845,7 +1845,7 @@ img {
 }
 #aa-client-brand .aa-client-brand-area .aa-client-brand-slider li a {
   display: block;
-  padding: 20px 0;
+  /*padding: 20px 0;*/
 }
 #aa-client-brand .aa-client-brand-area .aa-client-brand-slider li a img {
   display: inline-block;

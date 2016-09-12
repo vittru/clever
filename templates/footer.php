@@ -108,7 +108,7 @@
 <!--script type="text/javascript" src="/js/jquery.simpleGallery.js"></script>
 <script type="text/javascript" src="/js/jquery.simpleLens.js"></script-->
 <!-- slick slider -->
-<!--script type="text/javascript" src="/js/slick.js"></script-->
+<script type="text/javascript" src="/js/slick.js"></script>
 <!-- Price picker slider -->
 <!--script type="text/javascript" src="/js/nouislider.js"></script-->
 <!-- Custom js -->

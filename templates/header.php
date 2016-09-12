@@ -19,7 +19,7 @@
         <!-- Product view slider -->
         <!--link rel="stylesheet" type="text/css" href="/css/jquery.simpleLens.css"-->    
         <!-- slick slider -->
-        <!--link rel="stylesheet" type="text/css" href="/css/slick.css"-->
+        <link rel="stylesheet" type="text/css" href="/css/slick.css">
         <!-- price picker slider -->
         <!--link rel="stylesheet" type="text/css" href="/css/nouislider.css"-->
         <!-- Theme color -->

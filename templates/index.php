@@ -108,7 +108,82 @@ if ((new \FilesystemIterator($bannersdir))->valid()) {
         </div>
     </div>
 </section>  
+
+  <!-- Client Brand -->
+<section id="aa-client-brand">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="aa-client-brand-area">
+                    <ul class="aa-client-brand-slider">
+                        <?php 
+                        foreach ($firms as $id=>$name) {
+                        ?>
+                            <li><a href="/catalog/firm?id=<?php echo $id; ?>"><img src="/images/firms/firm<?php echo $id; ?>.png" alt="<?php echo $name; ?>"></a></li>
+                        <?php
+                        }
+                        ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<?php if (!$user->spam) {?>
+<!-- Subscribe section -->
+<section id="aa-subscribe">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="aa-subscribe-area">
+                    <h3>Подпишитесь на нашу рассылку </h3>
+                    <p>Это позволит Вам первыми узнавать обо всех наших акциях и новинках!</p>
+                    <form action="" class="aa-subscribe-form" id="subscribe-form" novalidate>
+                        <input type="email" name="" id="subscribe-email" placeholder="Ваша почта" value="<?php echo $user->email;?>">
+                        <input type="submit" value="ОК">
+                    </form>
+                    <div id="subscribe-error" display="none"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- / Subscribe section -->
+<?php } ?>
   
+<section id="aa-support">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="aa-support-area">
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="aa-support-single">
+                            <span class="fa fa-truck"></span>
+                            <h4>Качество</h4>
+                            <P>Все товары отгружаются нам напрямую со склада производителя.</P>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="aa-support-single">
+                            <span class="fa fa-car"></span>
+                            <h4>Доставка</h4>
+                            <P>Где бы вы ни были в Самарской области, мы сможем доставить вам наш товар.</P>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="aa-support-single">
+                            <span class="fa fa-rub"></span>
+                            <h4>Возврат</h4>
+                            <P>Если что-то пошло не так, мы готовы обменять товар обратно на деньги</P>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 <?php
 include 'footer.php';
