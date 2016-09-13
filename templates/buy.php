@@ -125,7 +125,7 @@ include 'header.php';
                                                 </a>
                                             </h4>
                                         </div>  
-                                        <div class="panel-collapse collapse in">
+                                        <div class="panel-collapse collapse in checkout-goods">
                                             <div class="panel-body">
                                                 <?php
                                                 if (isset($_SESSION['cart'])){

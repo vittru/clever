@@ -175,7 +175,7 @@ if ((new \FilesystemIterator($bannersdir))->valid()) {
                         <div class="aa-support-single">
                             <span class="fa fa-rub"></span>
                             <h4>Возврат</h4>
-                            <P>Если что-то пошло не так, мы готовы обменять товар обратно на деньги</P>
+                            <P>Если что-то пошло не так, мы готовы обменять товар обратно на деньги.</P>
                         </div>
                     </div>
                 </div>

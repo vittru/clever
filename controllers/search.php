@@ -16,7 +16,7 @@ Class Controller_Search Extends Controller_Base {
                 if (!empty($value) and $key!="route") {
                     switch ($key) {
                         case "name":
-                            if (mb_stripos($good->name, $value)===false)
+                            if (mb_stripos(str_replace('&nbsp;', ' ', $good->name), $value)===false)
                                 $found = false;
                             break;
                         case "effect":
@@ -40,15 +40,15 @@ Class Controller_Search Extends Controller_Base {
                                 $found = false;
                             break;
                         case "description":
-                            if (mb_stripos($good->description, $value)===false and mb_stripos($good->shortdesc, $value)===false)
+                            if (mb_stripos(str_replace('&nbsp;', ' ', $good->description), $value)===false and mb_stripos($good->shortdesc, $value)===false)
                                 $found = false;
                             break;                        
                         case "howTo":
-                            if (mb_stripos($good->howTo, $value)===false)
+                            if (mb_stripos(str_replace('&nbsp;', ' ', $good->howTo), $value)===false)
                                 $found = false;
                             break;
                         case "madeOf":
-                            if (mb_stripos($good->madeOf, $value)===false)
+                            if (mb_stripos(str_replace('&nbsp;', ' ', $good->madeOf), $value)===false)
                                 $found = false;
                             break;
                         case "category":

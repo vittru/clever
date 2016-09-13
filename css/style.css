@@ -2691,6 +2691,11 @@ img {
   padding: 10px;
   width: 100%;
 }
+
+#checkout .checkout-goods .aa-checkout-single-bill {
+    padding-bottom: 10px;
+}
+
 #checkout .checkout-area .checkout-right {
   display: inline;
   float: left;
