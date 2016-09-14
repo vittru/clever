@@ -3470,6 +3470,10 @@ img {
   margin-right: 10px;
 }
 
+#showWord {
+    width: 120px;
+}
+
 /*==================
  ERROR  PAGE
 ====================*/

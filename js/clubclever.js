@@ -1,9 +1,28 @@
+jQuery.expr[':'].icontains = function(a, i, m) {
+  return jQuery(a).text().toUpperCase()
+      .indexOf(m[3].toUpperCase()) >= 0;
+};
+
 $(document.body).on('hidden.bs.modal', function () {
     $('#quick-view-modal').removeData('bs.modal');
 });
 
 var nameAsc = true;
 var priceAsc = true;
+
+function filter() {
+    $("div.tab-pane.active li.good").show();
+    if ($("div.tab-pane.active #showAvailable").is(":checked")) {
+        $("div.tab-pane.active li.good").has('.aa-sold-out').hide();
+    };
+    if ($("div.tab-pane.active #showSale").is(":checked")) {
+        $("div.tab-pane.active li.good").not(":has('.aa-sale')").hide();
+    };
+    var word = $("div.tab-pane.active #showWord").val().trim();
+    if (word) {
+        $("div.tab-pane.active li.good").not(":icontains('" + word + "')").hide();
+    };     
+}    
 
 $(document).on("click","#nameSortButton", function () {
     var alphabeticallyOrderedDivs = $("div.tab-pane.active li.good").sort(function (a, b) {
@@ -37,21 +56,11 @@ $(document).on("click",'#priceSortButton', function () {
     $("div.tab-pane.active ul.aa-product-catg").html(numericallyOrderedDivs);
 });
 
-$(document).on("click", "#showAvailable", function() {
-    $("div.tab-pane.active li.good").show();
-    if ($(this).is(":checked")) {
-        $("div.tab-pane.active li.good").has('.aa-sold-out').hide();
-    };
-    $("div.tab-pane.active #showSale").attr('checked',false);
-});
+$(document).on("click", "#showAvailable", filter);
 
-$(document).on("click", "#showSale", function() {
-    $("div.tab-pane.active li.good").show();
-    if ($(this).is(":checked")) {
-        $("div.tab-pane.active li.good").not(":has('.aa-sale')").hide();
-    };
-    $("div.tab-pane.active #showAvailable").attr('checked',false);
-});
+$(document).on("click", "#showSale", filter);
+
+$(document).on("change keyup paste input", "#showWord", filter);
 
 $(document).on("click", ".aa-remove-product", function() {
     var id = $(this).attr('id'),
