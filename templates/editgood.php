@@ -223,7 +223,7 @@ if ($goodId) {
                         <input class="form-control" type="text" id="size1" name="size1" value='<?php 
                         if ($good) {
                             echo $sizes[0]->size;
-                        }?>'>
+                        }?>' maxlength="10">
                     </td>
                     <td>
                         <input class="form-control" type="number" id="price1" name="price1" value='<?php 
@@ -235,7 +235,7 @@ if ($goodId) {
                         <input class="form-control" type="text" id="code1" name="code1" value='<?php 
                         if ($good) {
                             echo $sizes[0]->code;
-                        }?>'>
+                        }?>' maxlength="10">
                     </td>
                     <td>
                         <input class="form-control" type="number" id="instock1" name="instock1" value='<?php 
@@ -263,7 +263,7 @@ if ($goodId) {
                         <input class="form-control" type="text" id="size2" name="size2" value='<?php 
                         if ($good) {
                             echo $sizes[1]->size;
-                        }?>'>
+                        }?>' maxlength="10">
                     </td>
                     <td>
                         <input class="form-control" type="number" id="price2" name="price2" value='<?php 
@@ -275,7 +275,7 @@ if ($goodId) {
                         <input class="form-control" type="text" id="code2" name="code2" value='<?php 
                         if ($good) {
                             echo $sizes[1]->code;
-                        }?>'>
+                        }?>' maxlength="10">
                     </td>
                     <td>
                         <input class="form-control" type="number" id="instock2" name="instock2" value='<?php 
@@ -303,7 +303,7 @@ if ($goodId) {
                         <input class="form-control" type="text" id="size3" name="size3" value='<?php 
                         if ($good) {
                             echo $sizes[2]->size;
-                        }?>'>
+                        }?>' maxlength="10">
                     </td>
                     <td>
                         <input class="form-control" type="number" id="price3" name="price3" value='<?php 
@@ -315,7 +315,7 @@ if ($goodId) {
                         <input class="form-control" type="text" id="code3" name="code3" value='<?php 
                         if ($good) {
                             echo $sizes[2]->code;
-                        }?>'>
+                        }?>' maxlength="10">
                     </td>
                     <td>
                         <input class="form-control" type="number" id="instock3" name="instock3" value='<?php 

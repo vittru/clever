@@ -43,6 +43,8 @@ Class Model {
     private $linkGoodProblem = "INSERT INTO `goods-problems` (goodId, problemId) VALUES(:goodId, :probId)";
     private $linkGoodST = "INSERT INTO `goods-skintypes` (goodId, skintypeId) VALUES(:goodId, :skintypeId)";
     private $linkGoodHT = "INSERT INTO `goods-hairtypes` (goodId, hairtypeId) VALUES(:goodId, :hairtypeId)";
+    private $updateNews = "UPDATE news SET header=:header, text=:text, time=:time, forClients=:forClients WHERE id=:id";
+    private $addNews = "INSERT INTO news (header, text, time, forClients) VALUES (:header, :text, :time, :forClients)";
     
     
     function __construct($registry) {
@@ -296,7 +298,7 @@ Class Model {
             $this->registry['logger']->lwrite($e->getMessage()); 
         }
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $news = new News($data['id'], $data['header'], $data['time'], $data['text']);
+            $news = new News($data['id'], $data['header'], $data['time'], $data['text'], $data['forClients']);
             if (!$newsArray)
                 $newsArray = [$news];
             else
@@ -305,6 +307,20 @@ Class Model {
         $sqlSelect->closeCursor();
         return $newsArray;
     }
+    
+    function getNewsItem($newsId) {
+        $sqlSelect = $this->db->prepare('SELECT * FROM news WHERE id=:newsId');
+        $sqlSelect->bindParam(':newsId', $newsId);
+        try{
+            $sqlSelect->execute();
+            $data = $sqlSelect->fetch();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when getting news with id=' . $newsId);
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }
+        $sqlSelect->closeCursor();
+        return new News($data['id'], $data['header'], $data['time'], $data['text'], $data['forClients']);
+    }    
     
     function addQuestion($userId, $question) {
         $sqlSelect = $this->db->prepare($this->addQuestion);
@@ -804,6 +820,32 @@ Class Model {
         }        
         $sqlSelect->closeCursor();
         return $firms;
-    }    
+    }   
+       
+    function addNews($id, $header, $text, $time, $forClients) {
+        if ($id) {
+            $sqlInsert = $this->db->prepare($this->updateNews);
+            $sqlInsert->bindParam(':id', $id);
+        } else {
+            $sqlInsert = $this->db->prepare($this->addNews);
+        }
+        $sqlInsert->bindParam(':header', $header);
+        $sqlInsert->bindParam(':text', $text);
+        $sqlInsert->bindParam(':time', $time);
+        $sqlInsert->bindParam(':forClients', $forClients);
+        try{
+            $sqlInsert->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when adding/updating a news record');
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }
+        if ($id) {
+            $newsId=$id;
+        } else {
+            $newsId = $this->db->lastInsertId();
+        }
+        $sqlInsert->closeCursor();
+        return $newsId;
+    }
 }
 

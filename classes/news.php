@@ -7,13 +7,15 @@ Class News {
     public $time;
     public $text; 
     private $id;
+    public $forClients;
    
-    function __construct($id, $header, $time, $text) {
+    function __construct($id, $header, $time, $text, $forClients) {
         $this->id = $id;
         $this->header = $header;
         setlocale(LC_TIME, "ru_RU.UTF-8");
         $this->time = strftime('%e/%m/%G', strtotime($time));
         $this->text = $text;
+        $this->forClients = $forClients;
     }
     
     function getWebText() {
@@ -22,7 +24,7 @@ Class News {
             $property = str_replace($token, "</p><p>",  $property);
         }
         return "<div>" . $property . "</div>";    
-    }  
+    }    
     
     function getImage() {
         $file_name = 'images/news/news' . $this->id;
@@ -36,7 +38,7 @@ Class News {
             $file_name = $file_name . '.jpg';
         }
         return '/'.$file_name;
-    }    
+    }
 
 }
 

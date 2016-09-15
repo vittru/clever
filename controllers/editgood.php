@@ -71,7 +71,10 @@ Class Controller_Editgood Extends Controller_Base {
         
         
             
-        echo "Товар сохранен под номером " . $goodId;
+        echo "<p>Товар сохранен под номером " . $goodId . "</p>";
+        echo "<p><a href='/editgood?good=".$goodId ."'>Отредактировать товар</a></p>";
+        echo "<p><a href='/editgood'>Создать новый</a></p>";
+        echo "<p><a href='/'>На главную</a></p>";
     }
     
     function loadImage($image, $number, $goodId) {
