@@ -159,14 +159,14 @@ if ((new \FilesystemIterator($bannersdir))->valid()) {
                 <div class="aa-support-area">
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <div class="aa-support-single">
-                            <span class="fa fa-truck"></span>
+                            <span class="fa fa-leaf"></span>
                             <h4>Качество</h4>
-                            <P>Все товары отгружаются нам напрямую со склада производителя.</P>
+                            <P>Всегда свежая косметика от производителя.</P>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <div class="aa-support-single">
-                            <span class="fa fa-car"></span>
+                            <span class="fa fa-truck"></span>
                             <h4>Доставка</h4>
                             <P>Где бы вы ни были в Самарской области, мы сможем доставить вам наш товар.</P>
                         </div>
