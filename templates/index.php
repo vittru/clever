@@ -184,6 +184,8 @@ if ((new \FilesystemIterator($bannersdir))->valid()) {
     </div>
 </section>
 
+<script src="js/sequence.js"></script>
+<script src="js/sequence-theme.modern-slide-in.js"></script>  
 
 <?php
 include 'footer.php';

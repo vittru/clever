@@ -239,3 +239,4 @@
 [14/Sep/2016:16:14:47] (index) SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'forClients' cannot be null
 [14/Sep/2016:16:16:06] (index) Error when adding/updating a news record
 [14/Sep/2016:16:16:06] (index) SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'forClients' cannot be null
+[15/Sep/2016:10:25:55] (index) Cookie is not set

@@ -540,6 +540,7 @@ img {
   top: 100%;
   width: 300px;
   z-index: 9999;
+  overflow: auto;
 }
 #aa-header .aa-header-bottom .aa-cartbox .aa-cartbox-summary:after, #aa-header .aa-header-bottom .aa-cartbox .aa-cartbox-summary:before {
   bottom: 100%;
