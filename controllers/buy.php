@@ -43,15 +43,9 @@ Class Controller_Buy Extends Controller_Base {
                 "Заказ №" . $orderId . "\r\n" .
                 "Покупатель: " . $parameters['name'] . "\r\n" . 
                 "Email: " . $parameters['email'] . "\r\n" . 
-                "Телефон: " . $parameters['phone'] . "\r\n";
-        $message = $message . $this->getGoodsForLetter($parameters['promo']);
-        if ($parameters['branch']) {
-            $message = $message . "Самовывоз из " . $this->registry['branсhes'][$parameters['branch']]->address . "\r\n";
-            if ($parameters['takeDate'])
-                $message = $message . "Клиент готов приехать: " . $parameters['takeDate'] . " " . $parameters['takeTime'];
-        } else {
-            $message = $message . "Доставка курьером по адресу: " . $parameters['city'] . ", " . $parameters['address'];
-        }
+                "Телефон: " . $parameters['phone'] . "\r\n" . 
+                $this->getGoodsForLetter($parameters['promo']) .
+                $this->getDeliveryForLetter($parameters);
         $this->sendMail($to, $subject, $message);
     }   
     
@@ -62,17 +56,30 @@ Class Controller_Buy Extends Controller_Base {
             $good = $this->registry['goods'][$cartItem->goodId];
             $size = $good->sizes[$cartItem->sizeId];
             $price = $size->getPrice($good->sale) * $cartItem->quantity;
-            $message = $message . "| " . $size->code . " | " . $good->name . " " 
-                    . $size->size . " | ".$cartItem->quantity . " | " . $price . "руб. | \r\n";
+            $message = $message . "| " . $size->code . " | " . str_replace('&nbsp;', ' ' , $good->name) . " " 
+                    . str_replace('&nbsp;', ' ' , $size->size) . " | ".$cartItem->quantity . " | " . $price . " руб. | \r\n";
         }    
         $promoAmount = 0;
         if ($promo){
-            $message = $message . "Промо-код: " . $promo . '\r\n';
+            $message = $message . "Промо-код: " . $promo . "\r\n";
             $promoId = $this->registry['model']->getPromoId(trim($promo));
             $promoAmount = $this->registry['model']->getPromoAmount($promoId);
         }   
         $total = $this->getCartTotal() - $promoAmount;
         $message = $message . "Сумма заказа: " . $total . " руб. \r\n";
+        return $message;
+    }
+    
+    private function getDeliveryForLetter($parameters) {
+        $message = '';
+        if ($parameters['branch']) {
+            $branch = $this->registry['branches'][$parameters['branch']];
+            $message = "Самовывоз из " . $branch->address . "\r\n";
+            if ($parameters['takeDate'])
+                $message = $message . "Желаемое время самовывоза: " . $parameters['takeDate'] . " в " . $parameters['takeTime'];
+        } else {
+            $message = $message . "Доставка курьером по адресу: " . $parameters['city'] . ", " . $parameters['address'];
+        }
         return $message;
     }
     
@@ -84,8 +91,10 @@ Class Controller_Buy Extends Controller_Base {
                 "Покупатель: " . $parameters['name'] . "\r\n" . 
                 "Email: " . $parameters['email'] . "\r\n" . 
                 "Телефон: " . $parameters['phone'] . "\r\n" .
-                $this->getGoodsForLetter($parameters['promo']);
-        
+                $this->getGoodsForLetter($parameters['promo']) . 
+                $this->getDeliveryForLetter($parameters);
+
+        $this->registry['logger']->lwrite($message);
         $this->sendMail($to, $subject, $message);
     }
 
