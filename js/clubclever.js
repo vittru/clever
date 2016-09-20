@@ -1,6 +1,5 @@
 jQuery.expr[':'].icontains = function(a, i, m) {
-  return jQuery(a).text().toUpperCase()
-      .indexOf(m[3].toUpperCase()) >= 0;
+    return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
 };
 
 $(document.body).on('hidden.bs.modal', function () {
@@ -120,43 +119,106 @@ $(document).on("click", ".aa-add-card-btn", function () {
 $(document).on("mouseleave", ".aa-product-img", function() {
     $(this).parent().find(".aa-add-card-btn").html('<span class="fa fa-shopping-cart"></span>В корзину');
     $(this).parent().find(".aa-add-card-btn").css("background-color","#E46713")
-})
+});
 
 $('.panel-heading a').on('click',function(e){
     if($(this).parents('.panel').children('.panel-collapse').hasClass('in')){
         e.stopPropagation();
     }
-     e.preventDefault();
+    e.preventDefault();
 });
 
 $('#order-form').submit(function(e) {
     var submit = true;
-     $('input.order-form').each(function(){
-        if($(this).is(":hidden")){
-           $(this).remove();
-        } else if (!$(this).val().trim()){
-                submit = false;
-        }    
+    if (!$("#promo-error").is(":hidden")){
+        $("#promo").val('');
+    }
+    $('input.order-form').each(function(){
+        if(!$(this).is(":hidden") && !$(this).val().trim())
+            submit = false;
      });
     $('textarea.order-form').each(function(){
-        if($(this).is(":hidden")){
-           $(this).remove();
-        } else if (!$(this).val().trim()){
+        if(!$(this).is(":hidden") && !$(this).val().trim())
             submit = false;
-        }    
      });
      if (!$('#branch').is(':hidden') && !$('#branch').val())
          submit = false;
      if (!submit) {
          e.preventDefault();
          $('#order-error').show();
-     }    
+     } else {
+        //We're disabling all hidden fields to avoid sending them to backend
+        $('input.order-form:hidden').attr("disabled", true);
+        $('textarea.order-form:hidden').attr("disabled", true);
+        $('#branch:hidden').attr("disabled", true);
+     };    
 });
 
 $(document).on('click', '.aa-search-box .dropdown-lg', function (e) {
-  e.stopPropagation();
+    e.stopPropagation();
 });
 
 $(document).on('click', '.aa-search-box #search-text', function (e) {
-  e.stopPropagation();
+    e.stopPropagation();
+});
+
+function checkPromo(promo) {
+    if (promo) {
+        $.ajax({    
+            type: "GET",   
+            url: "/buy/checkpromo",   
+            data: "promo=" + promo,
+            dataType: "html",
+            success: function (a){
+                var code = true;
+                JSON.parse(a, function(k, v) {
+                    if (k === 'error') {
+                        if (v) {
+                            $("#promo-error").text(v);
+                            $("#promo-error").show();
+                            code = false;
+                        } else {
+                            $('#promo-error').hide();
+                        }    
+                    }
+                    if (!code) {
+                        $('#discount').hide();
+                    } else {
+                        if (k === 'discount') {
+                            $('#discount').find('#sum').text(v + ' руб.');    
+                            $('#discount').show();
+                        }
+                        if (k === 'total') {
+                            $('#total').text(v + ' руб.');
+                        }
+                    }
+                });
+            }
+        });
+    } else {
+        $('#discount').hide();
+        $('#promo-error').hide();
+    }   
+}
+
+$(document).on('change', '#promo', function() {
+    var promo = $(this).val().trim();
+    checkPromo(promo);
+});
+
+$('#promo').on('keyup', function(e) {
+  var keyCode = e.keyCode || e.which;
+  if (keyCode === 13) { 
+    e.preventDefault();
+    checkPromo($(this).val().trim());
+    return false;
+  }
+});
+
+$('#order-form').on('keyup keypress', function(e) {
+  var keyCode = e.keyCode || e.which;
+  if (keyCode === 13) { 
+    e.preventDefault();
+    return false;
+  }
 });

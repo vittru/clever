@@ -168,7 +168,7 @@ if ((new \FilesystemIterator($bannersdir))->valid()) {
                         <div class="aa-support-single">
                             <span class="fa fa-truck"></span>
                             <h4>Доставка</h4>
-                            <P>Где бы вы ни были в Самарской области, мы сможем доставить вам наш товар.</P>
+                            <P>Где бы вы ни были в Самарской области, мы сможем доставить товар.</P>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-12">

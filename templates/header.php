@@ -152,13 +152,10 @@
                                             </div>
                                         </li>
                                         <?php
-                                        $total = 0;
                                         if ($count) {
                                             foreach ($_SESSION['cart'] as $cartItem) {
                                                 $good = $this->registry['goods'][$cartItem->goodId];
                                                 $size = $good->sizes[$cartItem->sizeId];
-                                                $price = $size->getPrice($good->sale);
-                                                $total = $total + $cartItem->quantity * $price;
                                             ?>
                                                 <li>
                                                     <a class="aa-cartbox-img"><img src="<?php echo $good->getImage() ?>" alt="<?php echo $good->name ?>"></a>

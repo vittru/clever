@@ -31,12 +31,10 @@ include 'header.php';
                                     </tr>
                                     <?php
                                     if (isset($_SESSION['cart'])){
-                                        $total = 0;
                                         foreach ($_SESSION['cart'] as $cartItem) {
                                           $good = $this->registry['goods'][$cartItem->goodId];
                                           $size = $good->sizes[$cartItem->sizeId];
                                           $price = $size->getPrice($good->sale);
-                                          $total = $total + $cartItem->quantity * $price;                              
                                     ?>
                                     <tr>
                                         <td><a class="aa-remove-product" id="<?php echo $cartItem->goodId; ?>" value="<?php echo $cartItem->sizeId; ?>"><fa class="fa fa-close"></fa></a></td>

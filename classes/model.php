@@ -16,7 +16,7 @@ Class Model {
             . "VALUES(:userId, :pageId, :time)";
     private $lastVisit = "SELECT MAX(time) FROM visits "
             . "WHERE userid=:userId";
-    private $profileExists = "SELECT count(p.id) FROM profiles p, users u "
+    private $profileExists = "SELECT p.id FROM profiles p, users u "
             . "WHERE p.id = u.profile AND u.id = :userId";
     private $createProfile = "INSERT INTO profiles(name, email, client, password, spam, phone) "
             . "VALUES(:userName, :userEmail, :isClient, :userPassword, :spam, :phone)";
@@ -160,12 +160,12 @@ Class Model {
             $this->registry['logger']->lwrite('Error when checking profile existence');
             $this->registry['logger']->lwrite($e->getMessage());
         }
-        $count = $sqlSelect->fetchColumn();
+        $id = $sqlSelect->fetchColumn();
         $sqlSelect->closeCursor();        
-        if ($count > 0) {
-            return true;
+        if ($id) {
+            return $id;
         }
-        return false;
+        return 0;
     }
     
     //Updates user profile
@@ -750,15 +750,15 @@ Class Model {
         }
         $catsArray=array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $branch = New Branch($data['id'], $data['address'], $data['open'], $data['card']);
+            $branch = New Branch($data['id'], $data['address'], $data['open'], $data['card'], $data['map']);
             $catsArray[$data['id']] = $branch;
         }
         $sqlSelect->closeCursor(); 
         return $catsArray;       
     }
     
-    function saveOrder($userId, $name, $email, $phone, $branch, $takeDate, $takeTime, $address) {
-        $sqlInsert = $this->db->prepare('INSERT INTO orders(userId, name, email, phone, date, branchId, day, time, address) VALUES(:userId, :name, :email, :phone, :date, :branch, :takeDate, :takeTime, :address)');
+    function saveOrder($userId, $name, $email, $phone, $branch, $takeDate, $takeTime, $address, $promo) {
+        $sqlInsert = $this->db->prepare('INSERT INTO orders(userId, name, email, phone, date, branchId, day, time, address, promoid) VALUES(:userId, :name, :email, :phone, :date, :branch, :takeDate, :takeTime, :address, :promo)');
         $sqlInsert->bindParam(':userId', $userId);
         $sqlInsert->bindParam(':name', $name);
         $sqlInsert->bindParam(':email', $email);
@@ -767,7 +767,12 @@ Class Model {
         $sqlInsert->bindParam(':takeDate', $takeDate);
         $sqlInsert->bindParam(':takeTime', $takeTime);
         $sqlInsert->bindParam(':address', $address);
-        $this->registry['logger']->lwrite(date('Y-m-d', time()));
+        $promoId = $this->getPromoId(trim($promo));
+        if ($promoId) {
+            $sqlInsert->bindParam(':promo', $promoId);
+        } else {
+            $sqlInsert->bindValue(':promo', null, PDO::PARAM_INT);
+        }
         $sqlInsert->bindParam(':date',  date('Y-m-d', time()));
         try{
             $sqlInsert->execute();
@@ -847,5 +852,106 @@ Class Model {
         $sqlInsert->closeCursor();
         return $newsId;
     }
+    
+    function getPromoId($promo) {
+        if ($promo) {
+            $sqlSelect = $this->db->prepare('SELECT id FROM promos WHERE name=:name');
+            $sqlSelect->bindParam(':name', strtolower($promo));
+            try{
+                $sqlSelect->execute();
+                $promoId = $sqlSelect->fetchColumn();
+            } catch (Exception $e) {
+                $this->registry['logger']->lwrite('Error when getting promo id');
+                $this->registry['logger']->lwrite($e->getMessage()); 
+            }
+            $sqlSelect->closeCursor();
+            return $promoId;
+        } else {
+            return 0;
+        }    
+    }    
+    
+    private function getUserPromos($promoId, $userId) {
+        $sqlSelect = $this->db->prepare('SELECT count(*) FROM orders WHERE userId=:userId AND promoId=:promoId');
+        $sqlSelect->bindParam(':userId', $userId);
+        $sqlSelect->bindParam(':promoId', $promoId);
+        try{
+            $sqlSelect->execute();
+            $userPromoOrders = $sqlSelect->fetchColumn();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when getting orders for user '. $userId . ' with promo ' . $promoId);
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        } 
+        $sqlSelect->closeCursor();
+        return $userPromoOrders;
+    }    
+    
+    private function getPromoCount($promoId) {
+        $sqlSelect = $this->db->prepare('SELECT count FROM promos WHERE id=:promoId');
+        $sqlSelect->bindParam(':promoId', $promoId);
+        try{
+            $sqlSelect->execute();
+            $promoCount = $sqlSelect->fetchColumn();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when getting count for promo ' . $promoId);
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        } 
+        $sqlSelect->closeCursor(); 
+        return $promoCount;
+    }
+    
+    public function getPromoAmount($promoId) {
+        $sqlSelect = $this->db->prepare('SELECT amount FROM promos WHERE id=:promoId');
+        try{
+            $sqlSelect->bindParam(':promoId', $promoId);
+            $sqlSelect->execute();
+            $promoAmount = $sqlSelect->fetchColumn();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when getting amount for promo ' . $promoId);
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        } 
+        $sqlSelect->closeCursor(); 
+        return $promoAmount;
+    }    
+    
+    private function getProfileUsers($profile) {
+        $sqlSelect = $this->db->prepare('SELECT id FROM users WHERE profile=:profile');
+        $sqlSelect->bindParam(':profile', $profile);
+        try {
+            $sqlSelect->execute();
+        } catch (Exception $ex) {
+            $this->registry['logger']->lwrite('Error when getting users for profile ' . $profile);
+            $this->registry['logger']->lwrite($e->getMessage()); 
+        }
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            if (!$users)
+                $users = [$data['id']];
+            else
+                array_push($users, $data['id']); 
+        }
+        $sqlSelect->closeCursor();
+        return $users;
+    }
+    
+    function checkPromo($promo) {
+        $promoId = $this->getPromoId($promo);
+        if ($promoId) {
+            $userId = $_SESSION['user']->id;
+            $promoCount = $this->getPromoCount($promoId);
+            $promoCount -= $this->getUserPromos($promoId, $userId);
+            $profile = $this->checkProfile();
+            if ($profile) {
+                $users = $this->getProfileUsers($profile);
+                foreach($users as $user) {
+                    if ($user <> $userId)
+                        $promoCount -= $this->getUserPromos($promoId, $user);
+                }
+            }
+            if ($promoCount > 0) 
+                return $this->getPromoAmount($promoId);
+            else 
+                return -1;
+        }    
+        return 0;
+    }    
 }
-

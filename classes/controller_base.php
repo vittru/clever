@@ -8,6 +8,7 @@ Abstract Class Controller_Base {
     function __construct($registry) {
         $this->registry = $registry;
         $this->registry['template']->set('user', $_SESSION['user']);
+        $this->registry['template']->set('total', $this->getCartTotal());
     }
 
     abstract function index();
@@ -28,7 +29,20 @@ Abstract Class Controller_Base {
             'X-Mailer: PHP/' . phpversion();
 
         mail($to, $subject, $message, $headers);
-    }    
+    }  
+    
+    function getCartTotal() {
+        $total = 0;
+        if (isset($_SESSION['cart'])) {
+            foreach ($_SESSION['cart'] as $cartItem) {
+                $good = $this->registry['goods'][$cartItem->goodId];
+                $size = $good->sizes[$cartItem->sizeId];
+                $price = $size->getPrice($good->sale);
+                $total = $total + $cartItem->quantity * $price; 
+            }         
+        }
+        return $total;
+    }
 }
 
 

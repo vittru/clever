@@ -1,5 +1,4 @@
 <?php
-
 include 'header.php';
 ?>
 
@@ -62,7 +61,7 @@ include 'header.php';
                                                                     <?php
                                                                     foreach ($this->registry['branches'] as $id=>$branch) {
                                                                     ?>
-                                                                      <option value="<?php echo $id ?>"><?php echo $branch->address ?></option>
+                                                                        <option value="<?php echo $id ?>"><?php echo $branch->address ?></option>
                                                                     <?php
                                                                     }
                                                                     ?>
@@ -129,12 +128,10 @@ include 'header.php';
                                             <div class="panel-body">
                                                 <?php
                                                 if (isset($_SESSION['cart'])){
-                                                  $total = 0;
                                                   foreach ($_SESSION['cart'] as $cartItem) {
                                                     $good = $this->registry['goods'][$cartItem->goodId];
                                                     $size = $good->sizes[$cartItem->sizeId];
                                                     $price = $size->getPrice($good->sale);
-                                                    $total = $total + $cartItem->quantity * $price;  
                                                 ?>  
                         
                                                 <div class="row">
@@ -155,6 +152,17 @@ include 'header.php';
                                                 <div class="row">
                                                     <div class="col-md-12">-------------</div>
                                                 </div>  
+                                                <div class="row" hidden id="discount">
+                                                    <div class="col-md-8">
+                                                        <div class="aa-checkout-single-bill">
+                                                            <strong>Скидка</strong>
+                                                        </div>                             
+                                                    </div>                            
+                                                    <div class="col-md-4">
+                                                        <div class="aa-checkout-single-bill" id="sum">
+                                                        </div>                             
+                                                    </div>
+                                                </div>                            
                                                 <div class="row">
                                                     <div class="col-md-8">
                                                         <div class="aa-checkout-single-bill">
@@ -162,8 +170,8 @@ include 'header.php';
                                                         </div>                             
                                                     </div>                            
                                                     <div class="col-md-4">
-                                                        <div class="aa-checkout-single-bill">
-                                                            <?php echo $total." руб." ?>
+                                                        <div class="aa-checkout-single-bill" id="total">
+                                                            <?php echo $total . " руб." ?>
                                                         </div>                             
                                                     </div>
                                                 </div>                            
@@ -173,7 +181,9 @@ include 'header.php';
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="order-error" hidden>Не все обязательные поля заполнены</div>
+                                    <div id="promo-error" class="error" hidden>Не все обязательные поля заполнены</div>
+                                    <input type="text" placeholder="Промо-код" id="promo" name="promo">
+                                    <div id="order-error" class="error" hidden>Не все обязательные поля заполнены</div>
                                     <input type="submit" value="Заказать" class="aa-browse-btn">                
                                 </div>
                             </div>
@@ -184,8 +194,6 @@ include 'header.php';
         </div>
     </div>
 </section>
- <!-- / Cart view section -->
-
 
 <?php
 include 'footer.php';
