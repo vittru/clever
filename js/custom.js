@@ -92,9 +92,6 @@ jQuery(function($){
             slidesToScroll: 1
           }
         }
-        // You can unslick at a given breakpoint now by adding:
-        // settings: "unslick"
-        // instead of a settings object
       ]
     }); 
 
@@ -172,9 +169,6 @@ jQuery(function($){
               slidesToScroll: 1
             }
           }
-          // You can unslick at a given breakpoint now by adding:
-          // settings: "unslick"
-          // instead of a settings object
         ]
     });
 
@@ -227,9 +221,6 @@ jQuery(function($){
               slidesToScroll: 1
             }
           }
-          // You can unslick at a given breakpoint now by adding:
-          // settings: "unslick"
-          // instead of a settings object
         ]
     });
 
@@ -297,9 +288,9 @@ jQuery(function($){
   /*  11. PRELOADER
   /* ----------------------------------------------------------- */
 
-    jQuery(window).load(function() { // makes sure the whole site is loaded      
+   /* jQuery(window).load(function() { // makes sure the whole site is loaded      
       jQuery('#wpf-loader-two').delay(200).fadeOut('slow'); // will fade out      
-    })
+    })*/
 
   /* ----------------------------------------------------------- */
   /*  12. GRID AND LIST LAYOUT CHANGER 
@@ -349,11 +340,6 @@ jQuery(function($){
             slidesToScroll: 1
           }
         }
-        // You can unslick at a given breakpoint now by adding:
-        // settings: "unslick"
-        // instead of a settings object
       ]
     }); 
-    
 });
-
