@@ -37,7 +37,7 @@
 
 /* BASE - Base tyles, Variables, Mixins, etc. */
 body {
-  background-image: url('../images/design/background.jpg');
+  background-image: url('../images/design/background.png');
 /*  background-color: #ffffff;*/
   font-family: "Lato", sans-serif;
   color: #333333;

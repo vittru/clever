@@ -5914,7 +5914,7 @@ button.close {
 }
 .modal-content {
   position: relative;
-  background-image: url('../images/design/background.jpg');
+  background-image: url('../images/design/background.png');
   -webkit-background-clip: padding-box;
           background-clip: padding-box;
   border: 1px solid #999;
