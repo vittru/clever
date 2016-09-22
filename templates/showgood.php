@@ -1,14 +1,38 @@
 <?php
     $canBeBought = true;
+
+    if ($fs) {
+        include 'header.php';
+    } else {
 ?>
 <html>
+<?php
+    }
+?>
     <link href="/css/lightbox.css" rel="stylesheet">
+    <?php
+    if (!$fs) {
+    ?>
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <?php
+    } else {
+    ?>  
+        <section id="single-product">
+        <div class="container">
+    <?php    
+    }
+    ?>
         <h3 class="modal-title"><?php echo $good->name ?></h3>
         <div hidden="" id="pId"><?php echo $good->id ?></div>
+    <?php
+    if (!$fs) {
+    ?>    
     </div>  
     <div class="modal-body">
+    <?php
+    } 
+    ?>
         <div class="row">
             <div class="col-md-4 col-sm-4 col-xs-12">  
                 <?php
@@ -180,7 +204,22 @@
             </div>
         </div>
     </div>
-
-    <script src="/js/modalgood.js"></script> 
+    <?php
+    if (fs) {
+    ?>
+        </section>
+    <?php
+    }
+    ?>
     
-</html><!-- / quick view modal -->  
+<?php
+if ($fs) {
+    include 'footer.php';
+} else {
+?>
+</html>
+<?php
+}
+?>
+<script src="/js/modalgood.js"></script> 
+

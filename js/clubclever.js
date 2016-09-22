@@ -3,7 +3,7 @@ jQuery.expr[':'].icontains = function(a, i, m) {
 };
 
 $(document.body).on('hidden.bs.modal', function () {
-    $('#quick-view-modal').removeData('bs.modal');
+    $('#single-product').removeData('bs.modal');
 });
 
 var nameAsc = true;

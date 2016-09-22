@@ -79,7 +79,7 @@ Class Good {
     function showInCatalog() {
         echo '<li class="col-sm-3 good">';
         echo '<figure>';
-        echo '<a class="aa-product-img" data-toggle2="tooltip" data-placement="top" data-toggle="modal" data-target="#quick-view-modal" href="/showgood?id=';
+        echo '<a class="aa-product-img" data-toggle2="tooltip" data-placement="top" data-toggle="modal" data-target="#single-product" href="/showgood?id=';
         echo $this->id;
         echo '"><img src="';
         echo $this->getImage();
@@ -96,7 +96,7 @@ Class Good {
         echo '<figcaption>';
         echo '<h4 class="aa-product-title"><a href="/showgood?id=';
         echo $this->id;
-        echo '" data-toggle2="tooltip" data-placement="top" data-toggle="modal" data-target="#quick-view-modal">';
+        echo '" data-toggle2="tooltip" data-placement="top" data-toggle="modal" data-target="#single-product">';
         echo $this->name;
         echo '</a></h4>';
         echo '<span class="aa-product-price" value=';
@@ -114,7 +114,7 @@ Class Good {
         //<!-- div class="aa-product-hvr-content">
         //    <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
         //    <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>
-        //    <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
+        //    <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#single-product"><span class="fa fa-search"></span></a>                          
         //</div -->
         if ($this->sale > 0) {
             echo '<span class="aa-badge aa-sale">Скидка!</span> ';
