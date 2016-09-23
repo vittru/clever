@@ -27,7 +27,7 @@ include 'header.php';
                                             <p><b>ул. Георгия Димитрова, д.112</b></p>
                                             <div class="map"><script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=GrArh56-A8ES1kTZdADZ7tgWcLvkOgSq&amp;width=320&amp;height=240&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script></div>
                                             <p  class="worktime">ежедневно с 10.00 до 21.00</p>
-                                            <p class="phone">8-987-914-30-77</p>
+                                            <p class="phone">+7-987-914-30-77</p>
                                         </td>
                                     </tr>
                                     <tr><td colspan="2"></td></tr>

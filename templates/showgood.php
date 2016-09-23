@@ -1,7 +1,7 @@
 <?php
     $canBeBought = true;
 
-    if ($fs) {
+    if (!$pm) {
         include 'header.php';
     } else {
 ?>
@@ -11,7 +11,7 @@
 ?>
     <link href="/css/lightbox.css" rel="stylesheet">
     <?php
-    if (!$fs) {
+    if ($pm) {
     ?>
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -26,7 +26,7 @@
         <h3 class="modal-title"><?php echo $good->name ?></h3>
         <div hidden="" id="pId"><?php echo $good->id ?></div>
     <?php
-    if (!$fs) {
+    if ($pm) {
     ?>    
     </div>  
     <div class="modal-body">
@@ -205,7 +205,7 @@
         </div>
     </div>
     <?php
-    if (fs) {
+    if (!$pm) {
     ?>
         </section>
     <?php
@@ -213,7 +213,7 @@
     ?>
     
 <?php
-if ($fs) {
+if (!$pm) {
     include 'footer.php';
 } else {
 ?>

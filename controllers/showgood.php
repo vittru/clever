@@ -7,11 +7,11 @@ Class Controller_Showgood Extends Controller_Base {
             $this->registry['template']->show('404');
         } else {
             $good = $this->registry['goods'][$_GET['id']];
-            if (isset($_GET['fs']))
-                $fs = true;
+            if (isset($_GET['pm']))
+                $pm = true;
             else 
-                $fs = false;
-            $this->registry['template']->set('fs', $fs);
+                $pm = false;
+            $this->registry['template']->set('pm', $pm);
             $this->registry['template']->set('good', $good);
             $this->registry['template']->set('hasProblems', $good->hasProblems());
             $this->registry['template']->set('hasEffects', $good->hasEffects());

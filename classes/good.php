@@ -79,7 +79,7 @@ Class Good {
     function showInCatalog() {
         echo '<li class="col-sm-3 good">';
         echo '<figure>';
-        echo '<a class="aa-product-img" data-toggle2="tooltip" data-placement="top" data-toggle="modal" data-target="#single-product" href="/showgood?id=';
+        echo '<a class="aa-product-img" data-toggle2="tooltip" data-placement="top" data-toggle="modal" data-target="#single-product" href="/showgood?pm&id=';
         echo $this->id;
         echo '"><img src="';
         echo $this->getImage();
@@ -94,7 +94,7 @@ Class Good {
             echo '"><span class="fa fa-shopping-cart"></span>В корзину</a>';
         }
         echo '<figcaption>';
-        echo '<h4 class="aa-product-title"><a href="/showgood?id=';
+        echo '<h4 class="aa-product-title"><a href="/showgood?pm&id=';
         echo $this->id;
         echo '" data-toggle2="tooltip" data-placement="top" data-toggle="modal" data-target="#single-product">';
         echo $this->name;
