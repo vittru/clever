@@ -21,8 +21,9 @@ Class Good {
     public $problems;
     public $bestbefore;
     public $precaution;
+    public $url;
     
-    function __construct($id, $name, $description, $shortdesc, $howTo, $madeOf, $sale, $firmId, $problem, $bestbefore, $precaution) {
+    function __construct($id, $name, $description, $shortdesc, $howTo, $madeOf, $sale, $firmId, $problem, $bestbefore, $precaution, $url) {
        $this->id = $id;
        $this->name = $name;
        $this->description = $description;
@@ -34,6 +35,7 @@ Class Good {
        $this->problem = $problem;
        $this->bestbefore = $bestbefore;
        $this->precaution = $precaution;
+       $this->url = $url;
     }
     
     function getFirstAvailSize() {

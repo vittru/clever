@@ -22,10 +22,6 @@ Class Router {
 
     function delegate() {
         $this->getController($file, $controller, $action, $args);
-//        if (is_readable($file) == false) {
-//            $file = $this->path . '404.php';
-//            $controller = '404';
-//        }
         include ($file);
         $class = 'Controller_' . $controller;
         $controller = new $class($this->registry);

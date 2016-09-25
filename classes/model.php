@@ -366,7 +366,7 @@ Class Model {
             }    
         }
         asort($preparedArray);
-        if($keyAll) $preparedArray[$keyAll]=$valueAll;
+        if(isset($keyAll)) $preparedArray[$keyAll]=$valueAll;
         return $preparedArray;
     }
     
@@ -481,7 +481,8 @@ Class Model {
     }
     
     function getGood($goodId) {
-        $sqlSelect = $this->db->prepare("SELECT * FROM goods WHERE id=" . $goodId);
+        $sqlSelect = $this->db->prepare("SELECT * FROM goods WHERE id=:goodId");
+        $sqlSelect->bindParam(':goodId', $goodId);
         try{
             $sqlSelect->execute();
         } catch (Exception $e) {
@@ -489,7 +490,7 @@ Class Model {
             $this->registry['logger']->lwrite($e->getMessage()); 
         }
         $data = $sqlSelect->fetch();
-        $good=new Good($goodId, trim($data['name']), trim($data['description']), trim($data['shortdesc']), trim($data['howTo']), trim($data['madeOf']), $data['sale'], $data['firmId'], trim($data['problem']), trim($data['bestbefore']), trim($data['precaution']));
+        $good=new Good($data['id'], trim($data['name']), trim($data['description']), trim($data['shortdesc']), trim($data['howTo']), trim($data['madeOf']), $data['sale'], $data['firmId'], trim($data['problem']), trim($data['bestbefore']), trim($data['precaution']), trim($data['url']));
         $good->cats = $this->getGoodCats($goodId);
         $good->effs = $this->getGoodEffs($goodId);
         $good->skintypes = $this->getGoodSTs($goodId);
@@ -822,7 +823,7 @@ Class Model {
             $this->registry['logger']->lwrite($e->getMessage()); 
         }    
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            if (!$firms)
+            if (!isset($firms))
                 $firms = [$data['firmId']];
             else
                 array_push($firms, $data['firmId']);
@@ -988,5 +989,19 @@ Class Model {
         $firmId = $sqlSelect->fetchColumn();
         $sqlSelect->closeCursor();
         return $firmId;
+    }
+    
+    function getGoodIdByUrl($url) {
+        $sqlSelect = $this->db->prepare('SELECT id FROM goods WHERE url=:url');
+        $sqlSelect->bindParam(':url', $url);
+        try {
+            $sqlSelect->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when getting good with url='.$url);
+            $this->registry['logger']->lwrite($e->getMessage());
+        }
+        $goodId = $sqlSelect->fetchColumn();
+        $sqlSelect->closeCursor();
+        return $goodId;
     }
 }
