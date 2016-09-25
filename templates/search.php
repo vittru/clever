@@ -25,7 +25,7 @@ include 'header.php';
                                     echo "Тип кожи: ".$this->registry['skintypes'][$value]."<br>";
                                     break;
                                 case "firm":    
-                                    echo "Производитель: ".$this->registry['firms'][$value]."<br>";
+                                    echo "Бренд: ".$this->registry['firms'][$value]->name."<br>";
                                     break;
                                 case "problem":    
                                     echo "Проблема: ".$this->registry['problems'][$value]."<br>";
@@ -48,7 +48,7 @@ include 'header.php';
                     ?></p>
                     <h4><?php 
                     if (count($foundgoods))
-                        echo "Мы нашли";
+                        echo "Мы нашли товаров: " . count($foundgoods);
                     else
                         echo "К сожалению таких товаров нет"
                     ?></h4>

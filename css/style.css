@@ -483,7 +483,9 @@ img {
 }
 #aa-text a {
     color: #E46713;
-    text-decoration: underline;
+}
+#aa-text a:hover {
+    text-decoration: underline;   
 }
 #aa-text img {
     width: 70%;
@@ -1056,17 +1058,11 @@ img {
     border-color: #3fc35f;
     width: 100%;
 }
-#single-product .aa-product-view-slider .simpleLens-container {
-    width: 100%;
+#single-product .firm a {
+    color: #3fc35f;
 }
-#single-product .aa-product-view-slider .simpleLens-container .simpleLens-big-image-container {
-    width: 100%;
-}
-#single-product .aa-product-view-slider .simpleLens-container .simpleLens-big-image-container .simpleLens-lens-image {
-    width: 100%;
-}
-#single-product .aa-product-view-slider .simpleLens-thumbnails-container {
-  text-align: center;
+#single-product .firm a:hover {
+    text-decoration: underline;   
 }
 #single-product .aa-product-view-content {
   padding-right: 10px;

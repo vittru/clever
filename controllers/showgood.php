@@ -12,7 +12,7 @@ Class Controller_Showgood Extends Controller_Base {
             else 
                 $pm = false;
             $this->registry['template']->set('pm', $pm);
-            $this->registry['template']->set('good', $good);
+            $this->registry['template']->set('showGood', $good);
             $this->registry['template']->set('hasProblems', $good->hasProblems());
             $this->registry['template']->set('hasEffects', $good->hasEffects());
             $this->registry['template']->set('hasSkintypes', $good->hasSkintypes());

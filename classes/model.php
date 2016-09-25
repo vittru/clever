@@ -632,7 +632,8 @@ Class Model {
     }
     
     function getFirm($firmId) {
-        $sqlSelect = $this->db->prepare('SELECT name, description FROM firms WHERE id=' . $firmId);
+        $sqlSelect = $this->db->prepare('SELECT name, description, url FROM firms WHERE id=:firmId');
+        $sqlSelect->bindParam(':firmId', $firmId);
         try{
             $sqlSelect->execute();
         } catch (Exception $e) {
@@ -640,15 +641,18 @@ Class Model {
             $this->registry['logger']->lwrite($e->getMessage()); 
         }
         $data = $sqlSelect->fetch();
-        $firm = new Firm($firmId, $data['name'], $data['description']);
-        $firm->goods = $this->getGoodsByFirm($firmId);
-        $firm->categories = $this->prepareArray($this->getFirmCats($firmId));
+        if ($data) {
+            $firm = new Firm($firmId, $data['name'], $data['description'], data['url']);
+            $firm->goods = $this->getGoodsByFirm($firmId);
+            $firm->categories = $this->prepareArray($this->getFirmCats($firmId));
+        }    
         $sqlSelect->closeCursor();
         return $firm;
     }
     
     function getGoodsByFirm($firmId) {
-        $sqlSelect = $this->db->prepare('SELECT id FROM goods WHERE firmId=' . $firmId);
+        $sqlSelect = $this->db->prepare('SELECT id FROM goods WHERE firmId=:firmId');
+        $sqlSelect->bindParam(':firmId', $firmId);
         try{
             $sqlSelect->execute();
         } catch (Exception $e) {
@@ -657,7 +661,7 @@ Class Model {
         }   
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $good = $this->getGood($data['id']);
-            if (!$goods)
+            if (!isset($goods))
                 $goods = [$good];
             else
                 array_push($goods, $good);
@@ -953,5 +957,36 @@ Class Model {
                 return -1;
         }    
         return 0;
-    }    
+    } 
+    
+    function getFirms() {
+        $sqlSelect = $this->db->prepare('SELECT * FROM firms ORDER BY name');
+        try {
+            $sqlSelect->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when getting firms');
+            $this->registry['logger']->lwrite($e->getMessage());
+        }
+        $firms = array();
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $firm = New Firm($data['id'], $data['name'], $data['description'], $data['url']);
+            $firms[$data['id']] = $firm;
+        }
+        $sqlSelect->closeCursor();
+        return $firms;
+    }
+    
+    function getFirmIdByUrl($url) {
+        $sqlSelect = $this->db->prepare('SELECT id FROM firms WHERE url=:url');
+        $sqlSelect->bindParam(':url', $url);
+        try {
+            $sqlSelect->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when getting firm with url='.$url);
+            $this->registry['logger']->lwrite($e->getMessage());
+        }
+        $firmId = $sqlSelect->fetchColumn();
+        $sqlSelect->closeCursor();
+        return $firmId;
+    }
 }

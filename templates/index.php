@@ -117,9 +117,9 @@ if ((new \FilesystemIterator($bannersdir))->valid()) {
                 <div class="aa-client-brand-area">
                     <ul class="aa-client-brand-slider">
                         <?php 
-                        foreach ($firms as $id=>$name) {
+                        foreach ($firms as $id=>$firm) {
                         ?>
-                            <li><a href="/catalog/firm?id=<?php echo $id; ?>"><img src="/images/firms/firm<?php echo $id; ?>.png" alt="<?php echo $name; ?>"></a></li>
+                            <li><a href="/catalog/firm/<?php echo $firm->url; ?>"><img src="/images/firms/firm<?php echo $id; ?>.png" alt="<?php echo $firm->name; ?>"></a></li>
                         <?php
                         }
                         ?>

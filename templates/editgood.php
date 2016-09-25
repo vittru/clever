@@ -38,12 +38,12 @@ if ($goodId) {
             <tr>
                 <td>  
                     <div class="form-group">
-                        <label for="brand" class="col-md-2">Производитель:</label>
+                        <label for="brand" class="col-md-2">Бренд:</label>
                         <select class="form-control inline col-md-10" id="brand" name="brand">
                         <?php
-                        foreach ($this->registry['firms'] as $key => $value) {
+                        foreach ($this->registry['firms'] as $key => $firm) {
                         ?>
-                            <option value="firm<?php echo $key ?>" <?php if ($good && $good->firmId == $key) echo "selected" ?>><?php echo $value ?></option>
+                            <option value="firm<?php echo $key ?>" <?php if ($good && $good->firmId == $key) echo "selected" ?>><?php echo $firm->name ?></option>
                         <?php
                         }
                         ?>

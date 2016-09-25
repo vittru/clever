@@ -23,8 +23,8 @@
     <?php    
     }
     ?>
-        <h3 class="modal-title"><?php echo $good->name ?></h3>
-        <div hidden="" id="pId"><?php echo $good->id ?></div>
+        <h3 class="modal-title"><?php echo $showGood->name ?></h3>
+        <div hidden="" id="pId"><?php echo $showGood->id ?></div>
     <?php
     if ($pm) {
     ?>    
@@ -36,29 +36,29 @@
         <div class="row">
             <div class="col-md-4 col-sm-4 col-xs-12">  
                 <?php
-                $firstImage = $good->getImage();
-                $secondImage = $good->getSecondImage();
-                $thirdImage = $good->getThirdImage();
+                $firstImage = $showGood->getImage();
+                $secondImage = $showGood->getSecondImage();
+                $thirdImage = $showGood->getThirdImage();
                 $colsm = 12;
                 if ($thirdImage)
                     $colsm = 4;
                 else if ($secondImage)
                     $colsm = 6;
                 ?>
-                <a href="<?php echo $firstImage; ?>" data-lightbox="lightbox" data-title='<?php echo $good->name ?>' class="col-sm-<?php echo $colsm ?>">
+                <a href="<?php echo $firstImage; ?>" data-lightbox="lightbox" data-title='<?php echo $showGood->name ?>' class="col-sm-<?php echo $colsm ?>">
                     <img src="<?php echo $firstImage; ?>" class="img-responsive">
                 </a>    
                 <?php 
                 if ($secondImage) {
                 ?>
-                <a href="<?php echo $secondImage ?>" data-lightbox="lightbox" data-title='<?php echo $good->name ?>'  class="col-sm-<?php echo $colsm ?>">
+                <a href="<?php echo $secondImage ?>" data-lightbox="lightbox" data-title='<?php echo $showGood->name ?>'  class="col-sm-<?php echo $colsm ?>">
                     <img src="<?php echo $secondImage ?>" class="img-responsive">
                 </a>    
                 <?php
                 }
                 if ($thirdImage) {
                 ?>
-                <a href="<?php echo $thirdImage ?>" data-lightbox="lightbox" data-title='<?php echo $good->name ?>' class="col-sm-<?php echo $colsm ?>">
+                <a href="<?php echo $thirdImage ?>" data-lightbox="lightbox" data-title='<?php echo $showGood->name ?>' class="col-sm-<?php echo $colsm ?>">
                     <img src="<?php echo $thirdImage ?>" class="img-responsive">
                 </a>    
                 <?php 
@@ -67,12 +67,15 @@
             </div>
             <div class="col-md-8 col-sm-8 col-xs-12">
                 <div class="aa-product-view-content">
-                    <div class="short-desc"><?php echo $good->shortdesc ?></div>
-                    <div class="firm"><b>Бренд:</b> <?php echo $this->registry['firms'][$good->firmId] ?></div>  
+                    <div class="short-desc"><?php echo $showGood->shortdesc ?></div>
+                    <?php
+                    $firm = $this->registry['firms'][$showGood->firmId];
+                    ?>
+                    <div class="firm"><b>Бренд:</b> <a href="/catalog/firm/<?php echo $firm->url; ?>"><?php echo $firm->name ?></a></div>  
 
                     <div class="aa-price-block">
                         <?php
-                        if (sizeof($good->sizes) > 0) { 
+                        if (sizeof($showGood->sizes) > 0) { 
                         ?>
                         <table class="table">
                             <th>Артикул</th>
@@ -81,16 +84,16 @@
                             <th>Количество</th>
                             <th>Наличие</th>
                             <?php
-                            foreach($good->sizes as $sizeId=>$size) { 
+                            foreach($showGood->sizes as $sizeId=>$size) { 
                             ?>
                             <tr>
                                 <td><?php echo $size->code; ?></td>
                                 <td><?php echo $size->size; ?></td>
-                                <td><?php echo $size->getWebPrice($good->sale); ?></td>
+                                <td><?php echo $size->getWebPrice($showGood->sale); ?></td>
                                 <td>
                                     <select class="form-control quantity" id="sel<?php echo $sizeId; ?>" <?php if (!$size->isAvailable()) echo 'disabled' ?> onchange="modifyBasket()">
                                         <option>0</option>
-                                        <option <?php if (sizeof($good->sizes)==1 and $size->isAvailable()) echo 'selected' ?>>1</option>
+                                        <option <?php if (sizeof($showGood->sizes)==1 and $size->isAvailable()) echo 'selected' ?>>1</option>
                                         <option>2</option>
                                         <option>3</option>
                                         <option>4</option>
@@ -130,11 +133,11 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#description" data-toggle="tab">Описание</a></li>
                     <?php
-                    if ($good->madeOf) {
+                    if ($showGood->madeOf) {
                     ?>
                     <li><a href="#madeOf" data-toggle="tab">Состав</a></li>
                     <?php }
-                    if ($good->howTo) {
+                    if ($showGood->howTo) {
                     ?>
                     <li><a href="#howTo" data-toggle="tab">Способ применения</a></li>
                     <?php
@@ -148,8 +151,8 @@
                     <div class="tab-pane fade in active aa-product-info-tab" id="description">
                         <?php if ($hasSkintypes) {
                             echo '<p><b>Типы кожи: </b>'; 
-                            $toEnd = count($good->skintypes);
-                            foreach($good->skintypes as $st) { 
+                            $toEnd = count($showGood->skintypes);
+                            foreach($showGood->skintypes as $st) { 
                                 echo mb_strtolower($this->registry['skintypes'][$st]);
                                 if (0 !== --$toEnd) echo ", ";
                             } 
@@ -157,26 +160,26 @@
                         }?>
                         <?php if ($hasHairtypes) {
                             echo '<p><b>Типы волос: </b>'; 
-                            $toEnd = count($good->hairtypes);
-                            foreach($good->hairtypes as $ht) { 
+                            $toEnd = count($showGood->hairtypes);
+                            foreach($showGood->hairtypes as $ht) { 
                                 echo mb_strtolower($this->registry['hairtypes'][$ht]); 
                                 if (0 !== --$toEnd) echo ", ";
                             } 
                             echo '</p>';
                         }?>
-                        <?php echo $good->getWebDescription(); ?>
-                        <?php echo $good->getWebBestbefore(); ?>
-                        <?php echo $good->getWebPrecaution(); ?>
+                        <?php echo $showGood->getWebDescription(); ?>
+                        <?php echo $showGood->getWebBestbefore(); ?>
+                        <?php echo $showGood->getWebPrecaution(); ?>
                     </div>
                     <?php
-                    if ($good->madeOf) {
+                    if ($showGood->madeOf) {
                     ?>
-                    <div class="tab-pane fade aa-product-info-tab" id="madeOf"><?php echo $good->getWebMadeOf(); ?></div>
+                    <div class="tab-pane fade aa-product-info-tab" id="madeOf"><?php echo $showGood->getWebMadeOf(); ?></div>
                     <?php 
                     } 
-                    if ($good->howTo) {
+                    if ($showGood->howTo) {
                     ?>
-                    <div class="tab-pane fade aa-product-info-tab" id="howTo"><?php echo $good->getWebHowTo(); ?></div>
+                    <div class="tab-pane fade aa-product-info-tab" id="howTo"><?php echo $showGood->getWebHowTo(); ?></div>
                     <?php
                     }
                     if ($hasProblems or $hasEffects) {
@@ -185,7 +188,7 @@
                         <?php if ($hasProblems) { ?>
                             <p><b>Эффективен при следующих проблемах:</b></p>
                             <ul>
-                            <?php foreach($good->problems as $problem) { ?>
+                            <?php foreach($showGood->problems as $problem) { ?>
                                 <li><?php echo $this->registry['problems'][$problem] ?></li>
                             <?php } ?>
                             </ul>            
@@ -193,7 +196,7 @@
                         <?php if ($hasEffects) { ?>
                             <p><b>Эффект:</b></p>
                             <ul>
-                            <?php foreach($good->effs as $eff) { ?>
+                            <?php foreach($showGood->effs as $eff) { ?>
                                 <li><?php echo $this->registry['effects'][$eff] ?></li>
                             <?php } ?>
                             </ul>

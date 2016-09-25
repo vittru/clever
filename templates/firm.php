@@ -8,13 +8,13 @@ include 'header.php';
             <div class="col-md-12">
                 <div class="aa-subscribe-area">
                     <h3><?php 
-                    if ($firm) 
-                        echo $firm->name; 
+                    if ($showFirm) 
+                        echo $showFirm->name; 
                     else
                         echo 'Наши бренды';
                     ?></h3>
-                    <p><?php if ($firm)
-                        echo $firm->description;
+                    <p><?php if ($showFirm)
+                        echo $showFirm->description;
                     else 
                         echo 'Мы торгуем только товарами проверенных годами фирм';
                     ?></p>
@@ -32,12 +32,12 @@ include 'header.php';
                     <div class="aa-product-area">
                         <div class="aa-product-inner">
                             <?php
-                            if ($firm) {
+                            if ($showFirm) {
                             ?>
                             <ul class="nav nav-tabs aa-products-tab">
                                 <?php 
                                 $i=1;
-                                foreach($firm->categories as $catId=>$catName) {
+                                foreach($showFirm->categories as $catId=>$catName) {
                                     ?>
                                 <li <?php if ($i==1) echo 'class="active"' ?>><a href="#cat<?php echo $catId ?>" data-toggle="tab"><?php echo $catName ?></a></li>
                                     <?php
@@ -47,7 +47,7 @@ include 'header.php';
                             <div class="tab-content">
                                 <?php 
                                 $i=0;
-                                foreach($firm->categories as $catId=>$catName) {
+                                foreach($showFirm->categories as $catId=>$catName) {
                                     $i++
                                 ?>
                                 <!-- Category -->
@@ -57,7 +57,7 @@ include 'header.php';
                                     ?>
                                     <ul class="aa-product-catg">
                                     <?php
-                                    foreach($firm->goods as $good) {
+                                    foreach($showFirm->goods as $good) {
                                         if (in_array($catId, $good->cats)) {
                                             $good->showInCatalog();
                                         }
@@ -76,13 +76,13 @@ include 'header.php';
                             ?>
                                 <ul class="aa-product-catg">
                                     <?php
-                                    foreach($firms as $id=>$name) {
+                                    foreach($firms as $id=>$firm) {
                                     ?>    
                                     <li class="col-sm-3 good">
                                       <figure>
-                                        <a class="aa-product-img" href="/catalog/firm?id=<?php echo $id ?>"><img src="/images/firms/firm<?php echo $id ?>.png" alt="<?php echo $name ?>"></a>
+                                        <a class="aa-product-img" href="/catalog/firm/<?php echo $firm->url ?>"><img src="/images/firms/firm<?php echo $id ?>.png" alt="<?php echo $firm->name ?>"></a>
                                         <figcaption>
-                                            <h4 class="aa-product-title"><a href="/catalog/firm?id=<?php echo $id ?>"><?php echo $name ?></a></h4>
+                                            <h4 class="aa-product-title"><a href="/catalog/firm/<?php echo $firm->url ?>"><?php echo $firm->name ?></a></h4>
                                         </figcaption>
                                       </figure>                         
                                     </li> 

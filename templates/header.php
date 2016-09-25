@@ -198,10 +198,10 @@
                                                     <div class="row">
                                                         <div class="form-group col-sm-6">
                                                             <select class="form-control" name="firm">
-                                                                <option value="0" disabled selected>Производитель</option>
+                                                                <option value="0" disabled selected>Бренд</option>
                                                                 <?php
-                                                                foreach($this->registry['firms'] as $id=>$name) {
-                                                                    echo "<option value=".$id.">".$name."</option>";
+                                                                foreach($this->registry['firms'] as $id=>$firm) {
+                                                                    echo "<option value=".$id.">".$firm->name."</option>";
                                                                 }
                                                                 ?>
                                                             </select>
@@ -323,11 +323,11 @@
                             <li><a href="/catalog/firm">Бренды<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <?php 
-                                    foreach ($this->registry['firms'] as $key => $value) {
+                                    foreach ($this->registry['firms'] as $id => $firm) {
                                     ?>
                                         <li>
-                                            <a href="/catalog/firm?id=<?php echo $key; ?>">
-                                                <?php echo $value; ?>
+                                            <a href="/catalog/firm/<?php echo $firm->url; ?>">
+                                                <?php echo $firm->name; ?>
                                             </a>
                                         </li>        
                                     <?php        
