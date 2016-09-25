@@ -39,7 +39,7 @@
     </div--> 
     <!-- / wpf loader Two -->       
     <!-- SCROLL TOP BUTTON -->
-    <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
+    <a class="scrollToTop green-button" href="#"><i class="fa fa-chevron-up"></i></a>
     <!-- END SCROLL TOP BUTTON -->
 
     <!-- Start header section -->
@@ -179,7 +179,7 @@
                                     <?php 
                                     if ($count) { 
                                         ?>  
-                                        <a class="aa-cartbox-checkout aa-primary-btn" href="/buy">Купить</a>
+                                        <a class="aa-cartbox-checkout green-button" href="/buy">Купить</a>
                                     <?php 
                                     } 
                                     ?>

@@ -184,7 +184,7 @@ include 'header.php';
                                     <div id="promo-error" class="error" hidden>Не все обязательные поля заполнены</div>
                                     <input type="text" placeholder="Промо-код" id="promo" name="promo">
                                     <div id="order-error" class="error" hidden>Не все обязательные поля заполнены</div>
-                                    <input type="submit" value="Заказать" class="aa-browse-btn">                
+                                    <input type="submit" value="Заказать" class="green-button">                
                                 </div>
                             </div>
                         </div>

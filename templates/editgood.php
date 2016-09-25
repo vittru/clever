@@ -407,7 +407,7 @@ if ($goodId) {
                 </td>
             </tr>
         </table>
-        <button type="submit" style="margin-bottom: 40px;" class="btn btn-success">Сохранить</button>
+        <button type="submit" style="margin-bottom: 40px;" class="btn green-button">Сохранить</button>
     
     </form>
 </section>

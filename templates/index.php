@@ -91,7 +91,7 @@ if ((new \FilesystemIterator($bannersdir))->valid()) {
                                         }
                                         ?>
                                         </ul>
-                                        <a class="aa-browse-btn" href="/catalog/type?id=<?php echo $typeId ?>">Больше товаров <?php echo mb_strtolower($typeName) ?><span class="fa fa-long-arrow-right"></span></a>
+                                        <a class="aa-browse-btn green-button" href="/catalog/type?id=<?php echo $typeId ?>">Больше товаров <?php echo mb_strtolower($typeName) ?><span class="fa fa-long-arrow-right"></span></a>
 
                                     </div>
                                 <?php
@@ -141,7 +141,7 @@ if ((new \FilesystemIterator($bannersdir))->valid()) {
                     <p>Это позволит Вам первыми узнавать обо всех наших акциях и новинках!</p>
                     <form action="" class="aa-subscribe-form" id="subscribe-form" novalidate>
                         <input type="email" name="" id="subscribe-email" placeholder="Ваша почта" value="<?php echo $user->email;?>">
-                        <input type="submit" value="ОК">
+                        <input type="submit" class="green-button" value="ОК">
                     </form>
                     <div id="subscribe-error" display="none"></div>
                 </div>

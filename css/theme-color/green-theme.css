@@ -41,9 +41,6 @@ h3 {
   background-color: #3fc35f;
   border: 1px solid #3fc35f;  
 }
-.aa-cart-view-btn {
-  background-color: #3fc35f;  
-}
 #aa-header .aa-header-bottom .aa-header-bottom-area .aa-logo a > span {
   color: #3fc35f;  
 }
@@ -78,23 +75,6 @@ h3 {
 }
 #menu .menu-area .navbar-default .navbar-nav .dropdown-menu li a:hover, #menu .menu-area .navbar-default .navbar-nav .dropdown-menu li a:focus { 
   background-color: #3fc35f;
-}
-.scrollToTop {
-  background-color: #3fc35f;
-  border: 1px solid #3fc35f;  
-}
-.scrollToTop:hover,
-.scrollToTop:focus { 
-  color: #3fc35f; 
-}
-#wpf-loader-two .wpf-loader-two-inner:before {
-  background: #3fc35f;  
-}
-#wpf-loader-two .wpf-loader-two-inner:after {
-  background: #3fc35f;  
-}
-#wpf-loader-two {
-  background-color: #3fc35f;  
 }
 #aa-slider .aa-slider-area .seq-title span {
   color: #3fc35f;  
@@ -166,10 +146,6 @@ h3 {
 }
 .aa-latest-blog-single .aa-blog-info .aa-read-mor-btn:hover span, .aa-latest-blog-single .aa-blog-info .aa-read-mor-btn:focus span {  
   color: #3fc35f;
-}
-#aa-subscribe .aa-subscribe-area .aa-subscribe-form input[type="submit"] {
-  background: #3fc35f none repeat scroll 0 0;
-  border: 1px solid #3fc35f;  
 }
 #aa-footer .aa-footer-bottom .aa-footer-bottom-area > p a:hover, #aa-footer .aa-footer-bottom .aa-footer-bottom-area > p a:focus {
   color: #3fc35f;
@@ -300,9 +276,6 @@ h3 {
 #aa-contact .aa-contact-area .aa-contact-address .aa-contact-address-left .comments-form .form-control:focus {
   border-color: #3fc35f;
 }
-#aa-contact .aa-contact-area .aa-contact-address .aa-contact-address-left .comments-form button {
-  border: 1px solid #3fc35f;  
-}
 #aa-error .aa-error-area {
   border: 5px solid #3fc35f;  
 }
@@ -321,9 +294,31 @@ h3 {
   background-color: #3fc35f;
 }
 
-
-
-/*=======================================
-Template Design By MarkUps.
-Author URI : http://www.markups.io/
-========================================*/
+.green-button {
+    background-color: #3fc35f;
+    border: none;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    /*letter-spacing: 2px;*/
+    text-decoration: none;
+    /*text-transform: uppercase;*/
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+.green-button:hover,
+.green-button:focus {
+    background-color: #E46713;
+    color: #fff;
+    border: none;
+}
+.green-button[disabled] {
+    background-color: lightgray;
+    pointer-events: none !important;
+    cursor: default;
+}

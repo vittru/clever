@@ -83,7 +83,7 @@
                     <label for="auth-spam" class="nologin"><input type="checkbox" id="auth-spam" name="isSpam"> Подписаться на рассылку? </label>
                     <div id="auth-error"></div>
                     <input type="hidden" id="auth-action" name="userAction"></input>
-                    <button class="aa-browse-btn" type="submit" id="auth-submit">ОК</button>
+                    <button class="aa-login-btn green-button" type="submit" id="auth-submit">ОК</button>
                     <div class="modal-footer">
                         <div class="aa-register-now"></div>
                     </div>

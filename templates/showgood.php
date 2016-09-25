@@ -126,7 +126,7 @@
                     </div>
                 </div>
                 <div class="aa-prod-view-bottom">
-                    <a class="aa-add-to-cart-btn" data-dismiss="modal" <?php if (!$canBeBought) echo 'disabled' ?>><span class="fa fa-shopping-cart"></span>В корзину</a>
+                    <a class="aa-add-to-cart-btn green-button" data-dismiss="modal" <?php if (!$canBeBought) echo 'disabled' ?>><span class="fa fa-shopping-cart"></span>В корзину</a>
                 </div>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">

@@ -58,7 +58,7 @@ include 'header.php';
                                                 <div class="form-group">
                                                     <textarea class="form-control" rows="3" placeholder="Вопрос" id="question-text"></textarea>
                                                 </div>
-                                                <button class="aa-secondary-btn">Задать</button>
+                                                <button class="green-button">Задать</button>
                                                 <div id="question-error" display="none"></div>
                                             </div>
                                         </div>
@@ -98,7 +98,7 @@ include 'header.php';
                     <p>Это позволит Вам первыми узнавать обо всех наших акциях и новинках!</p>
                     <form action="" class="aa-subscribe-form" id="subscribe-form" novalidate>
                         <input type="email" name="" id="subscribe-email" placeholder="Ваша почта" value="<?php echo $user->email;?>">
-                        <input type="submit" value="ОК">
+                        <input type="submit" class="green-button" value="ОК">
                     </form>
                     <div id="subscribe-error" display="none"></div>
                 </div>
