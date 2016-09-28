@@ -24,7 +24,7 @@ include 'header.php';
                                     <tr>
                                         <td></td>
                                         <td><img src="/images/goods/present.jpg" alt="img"></td>
-                                        <td><a class="aa-cart-title">Ваш личный подарок от Экомаркет "Клевер"</a></td>
+                                        <td><div class="aa-cart-title">Ваш личный подарок от Экомаркет "Клевер"</div></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -37,11 +37,11 @@ include 'header.php';
                                           $price = $size->getPrice($good->sale);
                                     ?>
                                     <tr>
-                                        <td><a class="aa-remove-product" id="<?php echo $cartItem->goodId; ?>" value="<?php echo $cartItem->sizeId; ?>"><fa class="fa fa-close"></fa></a></td>
-                                        <td><img src="<?php echo $good->getImage() ?>" alt="img"></td>
-                                        <td><a class="aa-cart-title"><?php echo $good->name ?> <?php echo $size->size ?></a></td>
+                                        <td><a class="aa-remove-product" id="<?php echo $cartItem->goodId; ?>" value="<?php echo $cartItem->sizeId; ?>"><fa class="fa fa-times"></fa></a></td>
+                                        <td><a href="/showgood?id=<?php echo $good->id ?>"><img src="<?php echo $good->getImage() ?>" alt="<?php echo $good->name ?>"></a></td>
+                                        <td><a class="aa-cart-title" href="/showgood?id=<?php echo $good->id ?>"><?php echo $good->name ?> <?php echo $size->size ?></a></td>
                                         <td><?php echo $size->getWebPrice($good->sale) ?></td>
-                                        <td><input class="aa-cart-quantity" type="number" value="<?php echo $cartItem->quantity ?>"></td>
+                                        <td><input class="aa-cart-quantity form-control" type="number" value="<?php echo $cartItem->quantity ?>"></td>
                                         <td><?php echo $cartItem->quantity * $price.' руб.' ?></td>
                                     </tr>
                                     <?php

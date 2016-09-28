@@ -76,10 +76,10 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 id="auth-header">Войти</h4>
                 <form class="aa-login-form" action="" id="auth-form">
-                    <input type="text" placeholder="Имя" id="auth-name" class="nologin" name="userName">   
-                    <input type="text" placeholder="Почта" id="auth-email" name="userEmail">
-                    <input type="password" placeholder="Пароль" id="auth-password" name="userPassword">
-                    <input type="password" placeholder="Повторите пароль" id="auth-confirm" class="nologin" name="userConfirm">
+                    <input type="text" placeholder="Имя" id="auth-name" class="nologin form-control" name="userName">   
+                    <input type="text" placeholder="Почта" id="auth-email" name="userEmail" class="form-control">
+                    <input type="password" placeholder="Пароль" id="auth-password" name="userPassword" class="form-control">
+                    <input type="password" placeholder="Повторите пароль" id="auth-confirm" class="nologin form-control" name="userConfirm">
                     <label for="auth-spam" class="nologin"><input type="checkbox" id="auth-spam" name="isSpam"> Подписаться на рассылку? </label>
                     <div id="auth-error"></div>
                     <input type="hidden" id="auth-action" name="userAction"></input>

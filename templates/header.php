@@ -93,11 +93,11 @@
                                     <?php
                                     if ($user->name) {
                                     ?>
-                                        <li><a href="/account">Добро пожаловать <?php echo $user->name  ?>!</a></li>
+                                        <li>Добро пожаловать<a href="/account"><?php echo $user->name; ?></a></li>
                                     <?php
                                     } else {
                                     ?>
-                                        <li><a href="" data-toggle="modal" data-target="#login-modal">Войти/Зарегистрироваться</a></li>
+                                        <li><a href="" data-toggle="modal" data-target="#login-modal" class="btn">Войти/Зарегистрироваться</a></li>
                                     <?php
                                     }
                                     ?>
@@ -158,9 +158,9 @@
                                                 $size = $good->sizes[$cartItem->sizeId];
                                             ?>
                                                 <li>
-                                                    <a class="aa-cartbox-img"><img src="<?php echo $good->getImage() ?>" alt="<?php echo $good->name ?>"></a>
+                                                    <a class="aa-cartbox-img" href="/showgood?id=<?php echo $good->id ?>"><img src="<?php echo $good->getImage() ?>" alt="<?php echo $good->name ?>"></a>
                                                     <div class="aa-cartbox-info">
-                                                        <h4><?php echo $good->name ?> <?php echo $size->size ?></h4>
+                                                        <a href="/showgood?id=<?php echo $good->id; ?>"><h4><?php echo $good->name ?> <?php echo $size->size ?></h4></a>
                                                         <p><?php echo $cartItem->quantity ?> x <?php echo $size->getWebPrice($good->sale) ?></p>
                                                     </div>
                                                     <a class="aa-remove-product" id="<?php echo $cartItem->goodId; ?>" value="<?php echo $cartItem->sizeId; ?>"><span class="fa fa-times"></span></a>
@@ -270,10 +270,10 @@
                                                     <div class="form-group">
                                                         <input class="form-control" type="text" name="howTo" placeholder="Способ применения" />
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                                    <button type="submit" class="btn orange-button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                            <button type="submit" class="btn orange-button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                                         </div>
                                     </div>
                                 </div>
