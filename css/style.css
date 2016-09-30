@@ -1205,13 +1205,16 @@ img {
   display: inline-block;  
   float: left;
 }
-.aa-product-catg-head-left .aa-show-form {
+.aa-product-catg-head .aa-show-form {
     display: inline-block;
-  float: left;
-  margin-left: 25px;
+    float: right;
+    margin-right: 25px;
 }
 .aa-product-catg-head .aa-show-form #showWord {
     width: 120px;
+    display: inline-block;
+    padding: 0;
+    height: 27px;
 }
 
 #single-product .aa-product-info-tab {
@@ -1496,11 +1499,11 @@ img {
   display: inline;
   float: left;
   width: 100%;
+  padding-bottom: 30px;
 }
 #aa-myaccount .aa-myaccount-area {
   display: inline;
   float: left;
-  padding: 100px 0;
   width: 100%;
 }
 #aa-myaccount .aa-myaccount-area h4 {
@@ -1510,15 +1513,35 @@ img {
   margin-bottom: 20px;
   padding-bottom: 15px;
 }
-#aa-myaccount .aa-myaccount-area .aa-myaccount-login {
-  display: inline;
-  float: left;
-  width: 100%;
+#aa-myaccount .aa-myaccount-area .row {
+    border-bottom: 1px solid #ccc;
 }
-#aa-myaccount .aa-myaccount-area .aa-myaccount-register {
-  display: inline;
-  float: left;
-  width: 100%;
+#aa-myaccount .aa-myaccount-area .aa-myaccount-details {
+    display: inline;
+    float: left;
+    width: 100%;
+    padding-bottom: 10px;
+}
+#aa-myaccount .aa-myaccount-area .aa-myaccount-orders {
+    display: inline;
+    float: left;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 10px;
+}
+#aa-myaccount .aa-myaccount-area .aa-myaccount-orders table {
+    margin-top: 40px;
+}
+#aa-myaccount .aa-myaccount-area .aa-myaccount-orders .order-details {
+    width: 100%;
+    height: 30px;
+}
+#aa-myaccount #logout {
+    display: block;
+    margin-top: 30px;
+    padding: 8px 20px;
+    width: 192px;
+    margin-bottom: 30px;
 }
 
 .aa-login-form input[type="text"],
@@ -1529,33 +1552,21 @@ img {
   width: 100%;
 }
 .aa-login-form label {
-  font-weight: normal;
+  /*font-weight: normal;*/
   margin-top: 8px;
+  width: 100%;
 }
 .aa-login-form label span {
   color: red;
-}
-.aa-login-form .rememberme {
-  cursor: pointer;
-  margin-top: 18px;
 }
 .aa-login-form input[type="checkbox"] {
   margin-top: 5px;
 }
 .aa-login-form button {
-  font-size: 14px;
-  padding: 8px 20px;
-  margin-right: 5px;
-  margin-top: 10px;
-  float: left;
-}
-.aa-login-form .aa-lost-password {
-  color: #555;
-  margin-top: 10px;
-  width: 100%;
-}
-.aa-login-form .aa-lost-password a {
-  color: #555;
+    padding: 8px 20px;
+    margin-right: 5px;
+    margin-top: 10px;
+    float: left;
 }
 
 #login-modal .modal-content {

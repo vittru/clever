@@ -8,32 +8,36 @@ Class Controller_Buy Extends Controller_Base {
     }
     
     function complete() {
-        $this->registry['model']->logVisit(26);
-        //Save the order in DB
-        $orderId = $this->registry['model']->saveOrder($_SESSION['user']->id, htmlspecialchars($_POST['name']), htmlspecialchars($_POST['email']), htmlspecialchars($_POST['phone']), htmlspecialchars($_POST['branch']), htmlspecialchars($_POST['takeDate']), htmlspecialchars($_POST['takeTime']), htmlspecialchars($_POST['city']." ".$_POST['address']), htmlspecialchars(trim($_POST['promo'])));
-        
-        //Inform manager by email
-        $this->informManager($orderId, $_POST);
+        if (isset($_SESSION['cart'])) {
+            $this->registry['model']->logVisit(26);
+            //Save the order in DB
+            $orderId = $this->registry['model']->saveOrder($_SESSION['user']->id, htmlspecialchars($_POST['name']), htmlspecialchars($_POST['email']), htmlspecialchars($_POST['phone']), htmlspecialchars($_POST['branch']), htmlspecialchars($_POST['takeDate']), htmlspecialchars($_POST['takeTime']), htmlspecialchars($_POST['city']." ".$_POST['address']), htmlspecialchars(trim($_POST['promo'])));
 
-        //Send email to client
-        $this->informClient($orderId, $_POST);
-        
-        //Update warehouse
-        //@TODO
-        
-        //Update user info
-        if (!$_SESSION['user']->email) 
-            $_SESSION['user']->email = $_POST['email'];
-        if (!$_SESSION['user']->phone)
-            $_SESSION['user']->phone = $_POST['phone'];
-        $this->registry['model']->updateUser();
-        
-        //Clear the cart box
-        unset($_SESSION['cart']);
-        
-        //Show the results
-        $this->registry['template']->set('orderId', $orderId);
-        $this->registry['template']->show('complete');
+            //Inform manager by email
+            $this->informManager($orderId, $_POST);
+
+            //Send email to client
+            $this->informClient($orderId, $_POST);
+
+            //Update warehouse
+            //@TODO
+
+            //Update user info
+            if (!$_SESSION['user']->email) 
+                $_SESSION['user']->email = $_POST['email'];
+            if (!$_SESSION['user']->phone)
+                $_SESSION['user']->phone = $_POST['phone'];
+            $this->registry['model']->updateUser();
+
+            //Clear the cart box
+            unset($_SESSION['cart']);
+
+            //Show the results
+            $this->registry['template']->set('orderId', $orderId);
+            $this->registry['template']->show('complete');
+        } else {
+            $this->registry['template']->show('404');
+        }    
     }
     
     private function informManager($orderId, $parameters) {

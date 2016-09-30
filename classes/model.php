@@ -213,6 +213,7 @@ Class Model {
             $sqlUpdate->bindParam(':spam', $_SESSION['user']->spam, PDO::PARAM_INT);
             $sqlUpdate->bindParam(':phone', $_SESSION['user']->phone);
             $sqlUpdate->bindParam(':userId', $_SESSION['user']->id);
+            $this->registry['logger']->lwrite($_SESSION['user']->phone);
             try {
                 $sqlUpdate->execute();
             } catch (PDOException $e) {
@@ -763,7 +764,7 @@ Class Model {
     }
     
     function saveOrder($userId, $name, $email, $phone, $branch, $takeDate, $takeTime, $address, $promo) {
-        $sqlInsert = $this->db->prepare('INSERT INTO orders(userId, name, email, phone, date, branchId, day, time, address, promoid) VALUES(:userId, :name, :email, :phone, :date, :branch, :takeDate, :takeTime, :address, :promo)');
+        $sqlInsert = $this->db->prepare('INSERT INTO orders(userId, name, email, phone, date, branchId, day, time, address, promoid, profileId) VALUES(:userId, :name, :email, :phone, :date, :branch, :takeDate, :takeTime, :address, :promo, :profileId)');
         $sqlInsert->bindParam(':userId', $userId);
         $sqlInsert->bindParam(':name', $name);
         $sqlInsert->bindParam(':email', $email);
@@ -778,6 +779,11 @@ Class Model {
         } else {
             $sqlInsert->bindValue(':promo', null, PDO::PARAM_INT);
         }
+        $profile = $this->checkProfile();
+        if ($profile == 0)
+            $sqlInsert->bindValue (':profileId', null, PDO::PARAM_INT);
+        else
+            $sqlInsert->bindParam (':profileId', $profile);
         $sqlInsert->bindParam(':date',  date('Y-m-d', time()));
         try{
             $sqlInsert->execute();
@@ -1003,5 +1009,47 @@ Class Model {
         $goodId = $sqlSelect->fetchColumn();
         $sqlSelect->closeCursor();
         return $goodId;
+    }
+    
+    function logout($userId) {
+        $sqlUpdate = $this->db->prepare('UPDATE users SET profile=NULL WHERE id=:userId');
+        $sqlUpdate->bindParam(':userId', $userId);
+        try {
+            $sqlUpdate->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite('Error when logging out user '.$userId);
+            $this->registry['logger']->lwrite($e->getMessage());
+        }
+        $sqlUpdate->closeCursor();
+        $_SESSION['user']->name = '';
+    }
+    
+    function getUserOrders($userId) {
+        $sqlSelect = $this->db->prepare('SELECT o.id, o.date, s.name status, p.name promo, IF (o.branchId=0, "Доставка", "Самовывоз") type FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id WHERE o.userId=:userId');
+        $sqlSelect->bindParam(':userId', $userId);
+        try {
+            $sqlSelect->execute();
+        } catch (Exception $ex) {
+            $this->registry['logger']->lwrite('Error when getting orders for user '.$userId);
+            $this->registry['logger']->lwrite($ex->getMessage());
+        }
+        $orders = array();
+        try {
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $order = New Order($data['id'], $data['date'], $data['status'], $data['type'], $data['promo']);
+            array_push($orders, $order);
+        }    
+        } catch (Exception $ex) {
+            $this->registry['logger']->lwrite($ex->getMessage());
+        }
+        $this->registry['logger']->lwrite(sizeof($orders));
+
+        $sqlSelect->closeCursor();
+        function cmp($a, $b) {
+                return $b->id > $a->id;
+        }
+        usort($orders, "cmp");
+        
+        return $orders;
     }
 }

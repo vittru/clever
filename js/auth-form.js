@@ -12,25 +12,30 @@ function submitForm(){
         email = $("#auth-email").val(),
         pass = $("#auth-password").val(),
         confirm = $("#auth-confirm").val(),
+        phone = $("#auth-phone").val(),
         //client = $("#auth-client").prop('checked'),
         spam = $("#auth-spam").prop('checked'),
         action = $("#auth-action").val();
 
     $.ajax({ 
         type: "POST",   
-        url: "/register",   
-        data: "userName=" + name + "&userEmail=" + email + "&userPassword=" + pass + "&userConfirm=" + confirm + "&isSpam=" + spam + "&userAction=" + action,   // формируем строку с переменными
+        url: "/account/register",   
+        data: "userName=" + name + "&userEmail=" + email + "&userPassword=" + pass + "&userConfirm=" + confirm + "&isSpam=" + spam + "&userAction=" + action + "&userPhone=" + phone,   // формируем строку с переменными
         dataType: "html",   
         dataFilter: function(a) {   
             return $(a).filter("#error").html(); 
         },   
         success: function(a) {  
-            if(a === null) {   
-                window.location.reload();    
+            if(a == null) {  
+                if (window.location.pathname.includes('logout')) 
+                    window.location.assign('/');
+                else    
+                    window.location.reload();    
             }
             else {  
-                $("#auth-error").css("display", "inline-block");
-                $("#auth-error").html(a);   
+                $("#auth-error").css("display", "block");
+                $("#auth-error").html(a);  
+                $("#auth-email").focus();
             }
         }
     });

@@ -2,64 +2,71 @@
 include 'header.php';
 ?>
  
-  <!-- catg header banner section -->
-  <section id="aa-catg-head-banner">
-    <img src="" alt="fashion img">
-    <div class="aa-catg-head-banner-area">
-     <div class="container">
-      <div class="aa-catg-head-banner-content">
-        <h2>Account Page</h2>
-        <ol class="breadcrumb">
-          <li><a href="/">Home</a></li>                   
-          <li class="active">Account</li>
-        </ol>
-      </div>
-     </div>
-   </div>
-  </section>
-  <!-- / catg header banner section -->
-
- <!-- Cart view section -->
- <section id="aa-myaccount">
-   <div class="container">
-     <div class="row">
-       <div class="col-md-12">
-        <div class="aa-myaccount-area">         
-            <div class="row">
-              <div class="col-md-6">
-                <div class="aa-myaccount-login">
-                <h4>Login</h4>
-                 <form action="" class="aa-login-form">
-                  <label for="">Username or Email address<span>*</span></label>
-                   <input type="text" placeholder="Username or email">
-                   <label for="">Password<span>*</span></label>
-                    <input type="password" placeholder="Password">
-                    <button type="submit" class="aa-browse-btn">Login</button>
-                    <label class="rememberme" for="rememberme"><input type="checkbox" id="rememberme"> Remember me </label>
-                    <p class="aa-lost-password"><a href="#">Lost your password?</a></p>
-                  </form>
+<section id="aa-myaccount">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="aa-myaccount-area">  
+                    <div class="row">
+                        <h1>Аккаунт</h1>
+                        <div class="col-md-6">
+                            <div class="aa-myaccount-details">
+                                <h2>Мои данные</h2>
+                                <form action="" class="aa-login-form" id="auth-form">
+                                    <label for="">Имя<span>*</span></label>
+                                    <input type="text" placeholder="Имя" id="auth-name" class="form-control" name="userName" value="<?php echo $user->name ?>" maxlength="30">
+                                    <label for="">Почта<span>*</span></label>
+                                    <input type="text" placeholder="Почта" id="auth-email" name="userEmail" class="form-control" value="<?php echo $user->email ?>" maxlength="40">
+                                    <label for="">Телефон</label>
+                                    <input type="text" placeholder="Телефон" id="auth-phone" name="userPhone" class="form-control" value="<?php echo $user->phone ?>" maxlength="20">
+                                    <label for="">Пароль<span>*</span></label>
+                                    <input type="password" placeholder="Пароль" id="auth-password" name="userPassword" class="form-control" value="<?php echo $user->password ?>" maxlength="30">
+                                    <label for="">Подтверждение пароля<span>*</span></label>
+                                    <input type="password" placeholder="Подтверждение пароля" id="auth-confirm" class="nologin form-control" name="userConfirm" value="<?php echo $user->password ?>" maxlength="30">
+                                    <label for="auth-spam"><input type="checkbox" id="auth-spam" name="isSpam" <?php if ($user->spam) echo "checked" ?>> Подписаться на рассылку? </label>
+                                    <input type="hidden" id="auth-action" name="userAction" value="update">
+                                    <div hidden id="auth-error"></div>
+                                    <button type="submit" class="green-button">Изменить профиль</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="aa-myaccount-orders">                 
+                                <h2>Мои заказы</h2>
+                                <table class="table">
+                                    <tr>
+                                        <th>Номер</th>
+                                        <th>Дата</th>
+                                        <th>Статус</th>
+                                        <th></th>
+                                    </tr>
+                                    <?php
+                                    foreach ($orders as $order) {
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $order->id?></td>
+                                        <td><?php echo $order->date?></td>
+                                        <td><?php echo $order->status?></td>
+                                        <td><!--button class="green-button order-details">Детали</button--></td>
+                                    </tr>
+                                    <?php
+                                    }
+                                    ?>
+                                    <tr><td colspan="4"></td></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <a href="/account/logout" id="logout" class="orange-button">Выйти</a>
+                        </div>
+                    </div>    
                 </div>
-              </div>
-              <div class="col-md-6">
-                <div class="aa-myaccount-register">                 
-                 <h4>Register</h4>
-                 <form action="" class="aa-login-form">
-                    <label for="">Username or Email address<span>*</span></label>
-                    <input type="text" placeholder="Username or email">
-                    <label for="">Password<span>*</span></label>
-                    <input type="password" placeholder="Password">
-                    <button type="submit" class="aa-browse-btn">Register</button>                    
-                  </form>
-                </div>
-              </div>
-            </div>          
-         </div>
-       </div>
-     </div>
-   </div>
- </section>
- <!-- / Cart view section -->
+            </div>
+        </div>
+    </div>
+</section>
 
- <?php
- include 'footer.php';
- ?>
+<?php
+include 'footer.php';

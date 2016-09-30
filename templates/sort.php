@@ -8,7 +8,7 @@
         <label>Показывать: </label>
         <label class="checkbox-inline filter"><input type="checkbox" id="showAvailable" />в наличии</labeL>
         <label class="checkbox-inline filter"><input type="checkbox" id="showSale" />со скидкой</labeL>
-        <label class="checkbox-inline filter">со словами <input id="showWord" /></label>
+        <label class="checkbox-inline filter">со словами <input id="showWord" class="form-control" /></label>
     </div>
 </div>
 

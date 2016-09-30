@@ -278,6 +278,7 @@ a.btn:hover {
     background-color: #E46713;
     color: #fff;
     border: none;
+    outline: none;
 }
 .green-button[disabled] {
     background-color: lightgray;
@@ -307,6 +308,7 @@ a.btn:hover {
     background-color: #3fc35f;
     color: #fff;
     border: none;
+    outline: none;
 }
 .orange-button[disabled] {
     background-color: lightgray;
