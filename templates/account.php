@@ -25,7 +25,7 @@ include 'header.php';
                                     <input type="password" placeholder="Подтверждение пароля" id="auth-confirm" class="nologin form-control" name="userConfirm" value="<?php echo $user->password ?>" maxlength="30">
                                     <label for="auth-spam"><input type="checkbox" id="auth-spam" name="isSpam" <?php if ($user->spam) echo "checked" ?>> Подписаться на рассылку? </label>
                                     <input type="hidden" id="auth-action" name="userAction" value="update">
-                                    <div hidden id="auth-error"></div>
+                                    <div hidden id="auth-error" class="error"></div>
                                     <button type="submit" class="green-button">Изменить профиль</button>
                                 </form>
                             </div>

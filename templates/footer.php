@@ -82,7 +82,7 @@
                     <input type="password" placeholder="Пароль*" id="auth-password" name="userPassword" class="form-control" maxlength="30">
                     <input type="password" placeholder="Повторите пароль*" id="auth-confirm" class="nologin form-control" name="userConfirm" maxlength="30">
                     <label for="auth-spam" class="nologin"><input type="checkbox" id="auth-spam" name="isSpam"> Подписаться на рассылку? </label>
-                    <div id="auth-error"></div>
+                    <div id="auth-error" class="error"></div>
                     <input type="hidden" id="auth-action" name="userAction">
                     <button class="aa-login-btn green-button" type="submit" id="auth-submit">ОК</button>
                     <div class="modal-footer">

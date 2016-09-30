@@ -28,6 +28,9 @@ a.btn {
 a.btn:hover {
     color: #3fc35f;
 }
+a.btn:focus {
+    outline: none;
+}
 
 #aa-header .aa-header-bottom .aa-header-bottom-area .aa-logo a > span {
   color: #E46713;  
@@ -356,4 +359,8 @@ textarea.form-control {
 }
 .form-control:hover {
     border-color:#3fc35f;
+}
+
+.error {
+    color: #E46713;
 }

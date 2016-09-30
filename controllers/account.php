@@ -70,7 +70,7 @@ Class Controller_Account Extends Controller_Base {
             $error = $error .  "Пустой пароль<br>";
         //For update and register the password should be equal with confirmation
         if ($action != 'login' && $_POST['userPassword'] != $_POST['userConfirm']) 
-            $error = $error .  "Ваши пароли не совпадают<br>"; 
+            $error = $error .  "Пароли не совпадают<br>"; 
         //For login we also check that such user exists in DB
 	if ($action == 'login' && $error == '' && !$this->registry['model']->checkUser($_POST['userEmail'], $_POST['userPassword'])) 
                 $error = $error . "Неправильная почта или пароль<br>";

@@ -33,7 +33,7 @@ function submitForm(){
                     window.location.reload();    
             }
             else {  
-                $("#auth-error").css("display", "block");
+                $("#auth-error").show();
                 $("#auth-error").html(a);  
                 $("#auth-email").focus();
             }
@@ -44,10 +44,10 @@ function submitForm(){
 
 function showRegForm() {
     $('#auth-header').text('Зарегистрироваться');
-    $('#auth-error').css('display','none');
+    $('#auth-error').hide();
     $('#auth-action').val("register");
     $(".nologin").each(function() {
-        $(this).css('display','inline-block');
+        $(this).show();
     });
     $('#auth-name').focus();
     $('.aa-register-now').text('Уже зарегистрированы?');
@@ -56,10 +56,10 @@ function showRegForm() {
 
 function showLoginForm() {
     $('#auth-header').text('Войти');
-    $('#auth-error').css('display','none');
+    $('#auth-error').hide();
     $('#auth-action').val("login");
     $(".nologin").each(function() {
-        $(this).css('display','none');
+        $(this).hide();
     });
     $('#auth-email').focus();
     $('.aa-register-now').text('У вас еще нет пароля?');

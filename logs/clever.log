@@ -34,3 +34,18 @@
 [30/Sep/2016:14:05:50] (index) 5
 [30/Sep/2016:14:07:03] (index) 5
 [30/Sep/2016:14:08:10] (index) 5
+[30/Sep/2016:14:29:01] (index) 5
+[30/Sep/2016:14:29:07] (index) action: update user: Vit
+[30/Sep/2016:14:29:07] (index) <div id='error'>Пустой пароль<br>Пароли не совпадают<br></div>
+[30/Sep/2016:14:29:23] (index) action: update user: Vit
+[30/Sep/2016:14:29:23] (index) 89171444004
+[30/Sep/2016:14:29:23] (index) 
+[30/Sep/2016:14:29:23] (index) 5
+[30/Sep/2016:14:29:32] (index) action: update user: Vit
+[30/Sep/2016:14:29:32] (index) <div id='error'>Пустая почта<br></div>
+[30/Sep/2016:14:34:00] (index) action: login user: 
+[30/Sep/2016:14:34:00] (index) <div id='error'>Пустая почта<br>Пустой пароль<br></div>
+[30/Sep/2016:14:34:05] (index) action: login user: 
+[30/Sep/2016:14:34:05] (index) <div id='error'>Подозрительная почта<br>Пустой пароль<br></div>
+[30/Sep/2016:14:34:08] (index) action: register user: 
+[30/Sep/2016:14:34:08] (index) <div id='error'>Пустое имя пользователя<br>Подозрительная почта<br>Пустой пароль<br></div>
