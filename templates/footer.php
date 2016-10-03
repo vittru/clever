@@ -7,7 +7,7 @@
                         <div class="row">
                             <div class="col-md-3 col-sm-6">
                                 <div class="aa-footer-widget">
-                                    <h3>Главное меню</h3>
+                                    <h2>Главное меню</h2>
                                     <ul class="aa-footer-nav">
                                         <li><a href="/catalog/type">Каталог</a></li>
                                         <li><a href="/catalog/firms">Бренды</a></li>
@@ -19,7 +19,7 @@
                             <div class="col-md-3 col-sm-6">
                                 <div class="aa-footer-widget">
                                     <div class="aa-footer-widget">
-                                        <h3>Информация</h3>
+                                        <h2>Информация</h2>
                                         <ul class="aa-footer-nav">
                                             <!--li><a href="/about">О нас</a></li-->
                                             <li><a href="/common/delivery">Доставка</a></li>
@@ -33,7 +33,7 @@
                             <div class="col-md-3 col-sm-6">
                                 <div class="aa-footer-widget">
                                     <div class="aa-footer-widget">
-                                        <h3>Ссылки</h3>
+                                        <h2>Ссылки</h2>
                                         <ul class="aa-footer-nav">
                                             <li><a target="_blank" href="https://www.biobeauty.ru/">БиоБьюти</a></li>
                                             <li><a target="_blank" href="http://master-om.com/">Мастерская Олеси Мустаевой</a></li>
@@ -45,7 +45,7 @@
                             <div class="col-md-3 col-sm-6">
                                 <div class="aa-footer-widget">
                                     <div class="aa-footer-widget">
-                                        <h3>Наши контакты</h3>
+                                        <h2>Наши контакты</h2>
                                         <address>
                                             <p><span class="fa fa-phone"></span>+7-996-725-00-61</p>
                                             <p><span class="fa fa-phone"></span>+7-996-725-00-62</p>

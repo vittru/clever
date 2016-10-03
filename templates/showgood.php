@@ -23,7 +23,7 @@
     <?php    
     }
     ?>
-        <h3 class="modal-title"><?php echo $showGood->name ?></h3>
+        <h2 class="modal-title"><?php echo $showGood->name ?></h2>
         <div hidden="" id="pId"><?php echo $showGood->id ?></div>
     <?php
     if ($pm) {

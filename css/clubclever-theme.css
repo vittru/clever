@@ -21,6 +21,7 @@ a:hover {
 a:focus {
     color: #3fc35f;
     text-decoration: none;
+    outline: none;
 }
 a.btn {
     color: black;
@@ -264,7 +265,7 @@ a.btn:focus {
     border: none;
     color: #fff;
     text-align: center;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
     /*letter-spacing: 2px;*/
     text-decoration: none;
@@ -294,7 +295,7 @@ a.btn:focus {
     border: none;
     color: #fff;
     text-align: center;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
     /*letter-spacing: 2px;*/
     text-decoration: none;
@@ -341,7 +342,7 @@ a.btn:focus {
 }
 
 input.form-control {
-  font-size: 16px;
+  font-size: 14px;
   border-radius: 0;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
@@ -351,7 +352,7 @@ input.form-control {
 }
 textarea.form-control {
     border-radius: 0;
-    font-size: 16px;
+    font-size: 14px;
 }
 .form-control:focus {
     box-shadow: none;

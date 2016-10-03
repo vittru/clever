@@ -14,9 +14,9 @@
         <link href="/css/bootstrap.css" rel="stylesheet">   
         <link href="/css/jquery.smartmenus.bootstrap.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/css/slick.css">
-        <link id="switcher" href="/css/theme-color/green-theme.css" rel="stylesheet">
+        <link id="switcher" href="/css/clubclever-theme.css" rel="stylesheet">
         <link href="/css/sequence-theme.modern-slide-in.css" rel="stylesheet" media="all">
-        <link href="/css/style.css" rel="stylesheet">    
+        <link href="/css/clubclever.css" rel="stylesheet">    
 
         <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>

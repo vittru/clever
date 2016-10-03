@@ -2,7 +2,7 @@ body {
   background-image: url('../images/design/background.png');
   font-family: "Lato", sans-serif;
   color: #333333;
-  font-size: 16px;
+  font-size: 14px;
   overflow-x: hidden;
 }
 
@@ -333,14 +333,14 @@ img {
 #aa-header .aa-header-bottom .aa-cartbox .aa-cartbox-summary ul li .aa-cartbox-total-title {
   float: left;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 14px;
   font-family: "Lato", sans-serif;
   letter-spacing: 0.5px;
 }
 #aa-header .aa-header-bottom .aa-cartbox .aa-cartbox-summary ul li .aa-cartbox-total-price {
   float: right;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 14px;
   font-family: "Lato", sans-serif;
   letter-spacing: 0.5px;
 }
@@ -349,7 +349,16 @@ img {
     margin-top: 10px;
     display: inline-block;
 }
-  
+
+h1 {
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 40px;
+}
+h2 {
+    font-size: 20px;  
+}
+
 #aa-text {
     display: inline;
     float: left;
@@ -357,18 +366,18 @@ img {
     padding: 0 0 30px 0;
 }
 #aa-text h1 {
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 700;
     line-height: 40px;
 }
 #aa-text h2 {
-    font-size: 25px;  
+    font-size: 20px;  
 }
 #aa-text h2:before {
     content: url('/images/logo-small.png');
 }
 #aa-text h3 {
-    font-size: 20px;  
+    font-size: 18px;  
 }
 #aa-text table {
     margin: 20px;
@@ -465,7 +474,7 @@ img {
 #menu .menu-area .navbar-default .navbar-nav .dropdown-menu .dropdown-header {
   color: #555;
   display: block;
-  font-size: 16px;
+  font-size: 14px;
   padding: 3px 20px;
   text-transform: uppercase;
 }
@@ -747,7 +756,7 @@ img {
 .aa-products-tab li a {
   color: black;  
   border: none;
-  font-size: 16px;
+  font-size: 14px;
   text-transform: uppercase;
   border-radius: 0;
   border-bottom: 1px solid #fff;
@@ -766,7 +775,7 @@ img {
 .aa-products-tab li.active a {
   border: none;
   background-color: inherit;
-  font-size: 16px;
+  font-size: 14px;
 }
 .aa-products-tab li.active a:hover, .aa-products-tab li.active a:focus {
   border: none;
@@ -840,6 +849,7 @@ img {
 .aa-product-catg li .aa-product-title {
   color: #333;
   margin-bottom: 5px;
+  font-size: 16px;
 }
 .aa-product-catg li .aa-product-title a {
   color: #333;
@@ -852,7 +862,7 @@ img {
 .aa-product-catg li .aa-product-price {
   font-weight: bold;
   letter-spacing: 0.5px;
-  font-size: 16px;
+  font-size: 14px;
 }
 .aa-product-catg li .aa-product-price del {
   margin-left: 5px;
@@ -943,13 +953,14 @@ img {
 #single-product .container .modal-title {
     padding-top: 200px;
     padding-bottom: 20px;
+    font-size: 22px;
 }
 #single-product .aa-product-view-content h4 {
   font-weight: bold;
   letter-spacing: 1px;
 }
 #single-product .aa-product-view-content > p {
-  font-size: 15px;
+  font-size: 14px;
   letter-spacing: 0.5px;
   margin-bottom: 14px;
 }
@@ -1120,7 +1131,7 @@ img {
 }
 #aa-subscribe .aa-subscribe-area h3 {
   color: #222;
-  font-size: 26px;
+  font-size: 22px;
   font-weight: bold;
   margin-bottom: 5px;
   margin-top: 0;
@@ -1128,7 +1139,7 @@ img {
 }
 #aa-subscribe .aa-subscribe-area p {
   color: #333;
-  font-size: 15px;
+  font-size: 14px;
   letter-spacing: 0.5px;
 }
 #aa-subscribe .aa-subscribe-area .aa-subscribe-form {
@@ -1254,7 +1265,7 @@ img {
   border-bottom: 1px solid #ddd;
   border-right: 1px solid #ddd;
   color: #555;
-  font-size: 18px;
+  font-size: 16px;
   padding: 20px 0;
   text-align: center;
 }
@@ -1285,7 +1296,7 @@ img {
 #cart-view .cart-view-area .cart-view-table .table tbody tr .aa-cart-view-bottom .aa-cart-coupon .aa-coupon-code {
   border: 1px solid #e5e5e5;
   color: #505050;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 2px;
   line-height: 25px;
@@ -1354,7 +1365,7 @@ img {
   padding: 0;
 }
 #checkout .checkout-area .panel-default .panel-heading .panel-title {
-  font-size: 18px;
+  font-size: 16px;
   padding: 20px 15px;
 }
 #checkout .checkout-area .panel-default .panel-heading .panel-title a {
@@ -1430,7 +1441,7 @@ img {
   height: 40px;
   padding: 10px;
   width: 100%;
-  font-size: 16px;
+  font-size: 14px;
 }
 #checkout .checkout-goods .aa-checkout-single-bill {
     padding-bottom: 10px;
@@ -1540,7 +1551,7 @@ img {
     display: block;
     margin-top: 30px;
     padding: 8px 20px;
-    width: 192px;
+    width: 173px;
     margin-bottom: 30px;
 }
 
@@ -1697,7 +1708,7 @@ img {
   text-shadow: 1px 1px 3px #ddd;
 }
 #aa-error .aa-error-area p {
-  font-size: 18px;
+  font-size: 16px;
 }
 #aa-error .aa-error-area a {
   display: inline-block;
@@ -1862,7 +1873,7 @@ img {
   }
 
   #menu .menu-area .navbar-default .navbar-nav li a {
-    font-size: 15px;
+    font-size: 14px;
     padding: 8px;
   }
 
@@ -1915,7 +1926,7 @@ img {
 
   #aa-product-category .aa-product-catg-content .aa-product-catg-body .list li figure .aa-product-descrip {
     padding-right: 25px;
-    font-size: 15px;
+    font-size: 14px;
   }
 
   #aa-product-category .aa-product-catg-content .aa-product-catg-body .list li figure .aa-add-card-btn {
@@ -2023,7 +2034,7 @@ img {
   }
 
   #cart-view .cart-view-area .cart-view-table .aa-cart-view-btn {
-    font-size: 15px;
+    font-size: 14px;
     padding: 12px;
   }
 
@@ -2032,7 +2043,7 @@ img {
   }
 
   #cart-view .cart-view-area .cart-view-table .table tbody tr .aa-cart-view-bottom .aa-cart-coupon .aa-coupon-code {
-    font-size: 15px;
+    font-size: 14px;
     margin-right: 15px;
     min-width: 100px;
     padding: 12px;
@@ -2086,7 +2097,7 @@ img {
   }
 
   #cart-view .cart-view-area .cart-view-table .table thead tr th {
-    font-size: 16px;
+    font-size: 14px;
     padding: 10px 0;
   }
 
