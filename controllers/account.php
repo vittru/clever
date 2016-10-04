@@ -73,8 +73,17 @@ Class Controller_Account Extends Controller_Base {
             $error = $error .  "Пароли не совпадают<br>"; 
         //For login we also check that such user exists in DB
 	if ($action == 'login' && $error == '' && !$this->registry['model']->checkUser($_POST['userEmail'], $_POST['userPassword'])) 
-                $error = $error . "Неправильная почта или пароль<br>";
+            $error = $error . "Неправильная почта или пароль<br>";
         return $error; 
+    }
+    
+    function orders() {
+        $this->registry['model']->logVisit(29);
+        if (isset($_GET['id'])) {
+            $order = $this->registry['model']->getOrder($_GET['id']);
+            $this->registry['template']->set('order', $order);
+        }
+        $this->registry['template']->show('orders');
     }
 }
 

@@ -7,6 +7,8 @@ Class Order {
     public $status;
     public $type;
     public $promo;
+    public $total;
+    public $goods;
    
     function __construct($id, $date, $status, $type, $promo) {
         $this->id = $id;

@@ -33,27 +33,37 @@ include 'header.php';
                         <div class="col-md-6">
                             <div class="aa-myaccount-orders">                 
                                 <h2>Мои заказы</h2>
-                                <table class="table">
-                                    <tr>
-                                        <th>Номер</th>
-                                        <th>Дата</th>
-                                        <th>Статус</th>
-                                        <th></th>
-                                    </tr>
-                                    <?php
-                                    foreach ($orders as $order) {
-                                    ?>
-                                    <tr>
-                                        <td><?php echo $order->id?></td>
-                                        <td><?php echo $order->date?></td>
-                                        <td><?php echo $order->status?></td>
-                                        <td><!--button class="green-button order-details">Детали</button--></td>
-                                    </tr>
-                                    <?php
-                                    }
-                                    ?>
-                                    <tr><td colspan="4"></td></tr>
-                                </table>
+                                <?php
+                                if (sizeof($orders) > 0) {
+                                ?>
+                                    <table class="table">
+                                        <tr>
+                                            <th>Номер</th>
+                                            <th>Дата</th>
+                                            <th>Статус</th>
+                                            <th></th>
+                                        </tr>
+                                        <?php
+                                        foreach ($orders as $order) {
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $order->id?></td>
+                                            <td><?php echo $order->date?></td>
+                                            <td><?php echo $order->status?></td>
+                                            <td><a class="green-button order-details" href="/account/orders?id=<?php echo $order->id ?>">Детали</a></td>
+                                        </tr>
+                                        <?php
+                                        }
+                                        ?>
+                                        <tr><td colspan="4"></td></tr>
+                                    </table>
+                                <?php
+                                } else {
+                                ?>
+                                    <h4>У вас еще нет заказов на нашем сайте</h4>
+                                <?php
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>

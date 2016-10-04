@@ -140,8 +140,6 @@ img {
 }
 #aa-header .aa-header-top .aa-header-top-right .aa-head-top-nav-right li a {
   display: inline-block;
-  border-right: 1px solid #ddd;
-  font-size: 14px;
   padding: 5px 8px;
 }
 #aa-header .aa-header-bottom {
@@ -1022,7 +1020,10 @@ h2 {
   padding-top: 10px;
 }
 #single-product .aa-product-view-content .aa-prod-view-bottom a:last-child {
-  margin-left: 10px;
+    margin-left: 10px;
+}
+#single-product .nav-tabs {
+    margin-top: 20px;
 }
 
 #aa-banner {
@@ -1518,11 +1519,8 @@ h2 {
   width: 100%;
 }
 #aa-myaccount .aa-myaccount-area h4 {
-  border-bottom: 1px solid #ccc;
-  font-size: 25px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  padding-bottom: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
 }
 #aa-myaccount .aa-myaccount-area .row {
     border-bottom: 1px solid #ccc;
@@ -1544,8 +1542,7 @@ h2 {
     margin-top: 40px;
 }
 #aa-myaccount .aa-myaccount-area .aa-myaccount-orders .order-details {
-    width: 100%;
-    height: 30px;
+    padding: 5px 20px;
 }
 #aa-myaccount #logout {
     display: block;
@@ -1677,6 +1674,26 @@ h2 {
 }
 #aa-contact .aa-contact-area .aa-contact-address .aa-contact-address-right address span {
   margin-right: 10px;
+}
+
+#aa-orders .order-parameters-header {
+    font-weight: bold;
+    width: 150px;
+    display: inline-block;
+}
+#aa-orders .order-parameters-value {
+    width: 120px;
+    display: inline-block;
+    padding: 5px 4px;
+}
+#aa-orders .form-control {
+    display: inline-block;
+    width: 100px;
+    margin-right: 20px;
+}
+#aa-orders .show-details {
+    height: 34px;
+    padding: 5px 10px;
 }
 
 #aa-error {

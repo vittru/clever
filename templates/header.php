@@ -31,13 +31,6 @@
 
     </head>
     <body> 
-    <!-- wpf loader Two -->
-    <!--div id="wpf-loader-two">          
-        <div class="wpf-loader-two-inner">
-            <span>Загрузка</span>
-        </div>
-    </div--> 
-    <!-- / wpf loader Two -->       
     <!-- SCROLL TOP BUTTON -->
     <a class="scrollToTop green-button" href="#"><i class="fa fa-chevron-up"></i></a>
     <!-- END SCROLL TOP BUTTON -->
@@ -98,10 +91,10 @@
                                     } else {
                                     ?>
                                         <li><a href="" data-toggle="modal" data-target="#login-modal" class="btn">Войти/Зарегистрироваться</a></li>
+                                        <li><a class="btn" href="/account/orders">Отследить заказ</a></li>
                                     <?php
                                     }
                                     ?>
-                                    <!--li class="hidden-xs"><a href="/orders">Отследить заказ</a></li-->
                                 </ul>
                             </div>
                         </div>

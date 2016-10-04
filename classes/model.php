@@ -1034,22 +1034,73 @@ Class Model {
             $this->registry['logger']->lwrite($ex->getMessage());
         }
         $orders = array();
-        try {
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $order = New Order($data['id'], $data['date'], $data['status'], $data['type'], $data['promo']);
             array_push($orders, $order);
         }    
-        } catch (Exception $ex) {
-            $this->registry['logger']->lwrite($ex->getMessage());
-        }
-        $this->registry['logger']->lwrite(sizeof($orders));
-
         $sqlSelect->closeCursor();
+        
+        //If a user has profile then we get all orders for it
+        $profile = $this->checkProfile();
+        if ($profile) {
+            $sqlSelect = $this->db->prepare('SELECT o.id, o.date, s.name status, p.name promo, IF (o.branchId=0, "Доставка", "Самовывоз") type FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id WHERE o.profileId=:profileId AND o.userId <> :userId');
+            $sqlSelect->bindParam(':userId', $userId);
+            $sqlSelect->bindParam(':profileId', $profile);
+            try {
+                $sqlSelect->execute();
+            } catch (Exception $ex) {
+                $this->registry['logger']->lwrite('Error when getting orders for user '.$userId);
+                $this->registry['logger']->lwrite($ex->getMessage());
+            }
+            while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+                $order = New Order($data['id'], $data['date'], $data['status'], $data['type'], $data['promo']);
+                array_push($orders, $order);
+            }    
+            $sqlSelect->closeCursor();
+        }
+        
         function cmp($a, $b) {
                 return $b->id > $a->id;
         }
+        //Orders should be sorted by id descendingly
         usort($orders, "cmp");
         
         return $orders;
     }
+    
+    function getOrder($orderId) {
+        $sqlSelect = $this->db->prepare('SELECT o.id, o.date, s.name status, p.amount promo, IF (o.branchId=0, "Доставка", "Самовывоз") type, SUM(og.price * og.quantity) total FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id LEFT JOIN `orders-goods` og ON o.id=og.orderid WHERE o.id=:orderId');
+        $sqlSelect->bindParam(':orderId', $orderId);
+        try {
+            $sqlSelect->execute();
+        } catch (Exception $ex) {
+            $this->registry['logger']->lwrite('Error when getting details for order '.$orderId);
+            $this->registry['logger']->lwrite($ex->getMessage());
+        }  
+        $data = $sqlSelect->fetch();
+        $order = new Order($data['id'], $data['date'], $data['status'], $data['type'], $data['promo']);
+        $order->total = $data['total'];
+        $sqlSelect->closeCursor();
+        $order->goods = $this->getOrderGoods($orderId);
+        return $order;
+    }
+    
+    function getOrderGoods($orderId) {
+        $sqlSelect = $this->db->prepare('SELECT og.quantity, og.price, s.size, g.`name`, g.id FROM `orders-goods` og LEFT JOIN `goods-sizes` s ON og.sizeid=s.id LEFT JOIN goods g ON s.goodId=g.id WHERE og.orderId=:orderId');
+        $sqlSelect->bindParam(':orderId', $orderId);
+        try {
+            $sqlSelect->execute();
+        } catch (Exception $ex) {
+            $this->registry['logger']->lwrite('Error when getting goods for order '.$orderId);
+            $this->registry['logger']->lwrite($ex->getMessage());
+        }
+        $goods = array();
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $good = New Orderedgood($data['id'], $data['name'], $data['size'], $data['price'], $data['quantity']);
+            $this->registry['logger']->lwrite('creating orderedgood');
+            array_push($goods, $good);
+        }    
+        $sqlSelect->closeCursor();
+        return $goods;
+    }   
 }
