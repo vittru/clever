@@ -3,9 +3,13 @@
 Class Controller_Account Extends Controller_Base {
 
     function index() {
-        $this->registry['model']->logVisit(27);
-        $this->registry['template']->set('orders', $this->registry['model']->getUserOrders($_SESSION['user']->id));
-        $this->registry['template']->show('account');
+        if ($_SESSION['user']->name) {
+            $this->registry['model']->logVisit(27);
+            $this->registry['template']->set('orders', $this->registry['model']->getUserOrders($_SESSION['user']->id));
+            $this->registry['template']->show('account');
+        } else {
+            $this->registry['template']->show('404');
+        }    
     }
     
     function logout() {
