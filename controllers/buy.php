@@ -27,7 +27,7 @@ Class Controller_Buy Extends Controller_Base {
                 $_SESSION['user']->email = $_POST['email'];
             if (!$_SESSION['user']->phone)
                 $_SESSION['user']->phone = $_POST['phone'];
-            $this->registry['model']->updateUser();
+            $_SESSION['user'] = $this->registry['model']->updateUser($_SESSION['user']);
 
             //Clear the cart box
             unset($_SESSION['cart']);

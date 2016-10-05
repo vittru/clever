@@ -308,7 +308,7 @@ if ($goodId) {
                     <td>
                         <input class="form-control" type="number" id="price3" name="price3" value='<?php 
                         if ($good) {
-                            echo $good->sizes[2]->price;
+                            echo $sizes[2]->price;
                         }?>'>
                     </td>
                     <td>
@@ -414,4 +414,3 @@ if ($goodId) {
 
 <?php
 include 'footer.php';
-?>

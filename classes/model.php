@@ -53,6 +53,15 @@ Class Model {
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     
+    private function executeQuery($query, $error) {
+        try {
+            $query->execute();
+        } catch (Exception $e) {
+            $this->registry['logger']->lwrite($error);
+            $this->registry['logger']->lwrite($e.getMessage);
+        }
+    }
+    
     //Gets userId from DB or creates a new one if not exists
     function getUser() {
         $user = $_SESSION['user'];
@@ -72,12 +81,7 @@ Class Model {
             $sqlSelect->bindParam(':ip', $ip);
             $sqlSelect->bindParam(':userAgent', $agent);
 
-            try {
-                $sqlSelect->execute();
-            } catch (PDOException $e) {
-                $this->registry['logger']->lwrite('Error when getting userId from DB');
-                $this->registry['logger']->lwrite($e.getMessage);
-            }
+            $this->executeQuery($sqlSelect, 'Error when getting userId from DB');
             $userId = $sqlSelect->fetchColumn();
             $sqlSelect->closeCursor();
         }
@@ -86,25 +90,15 @@ Class Model {
             $sqlInsert = $this->db->prepare($this->addUser);
             $sqlInsert->bindParam(':ip', $ip);
             $sqlInsert->bindParam(':userAgent', $agent);
-            try {            
-                $sqlInsert->execute();
-            } catch (PDOException $e){
-                $this->registry['logger']->lwrite('Error when inserting new user to DB');
-                $this->registry['logger']->lwrite($e->getMessage());
-            }
+            $this->executeQuery($sqlInsert, 'Error when inserting new user to DB');
             $userId = $this->db->lastInsertId();
             $sqlInsert->closeCursor();
         //If user exists we're getting his info from Profiles table    
         }else{
             $sqlSelect = $this->db->prepare($this->selectProfile);
             $sqlSelect->bindParam(':userId', $userId);
-            try {
-                $sqlSelect->execute();
-                $data = $sqlSelect->fetch();
-            } catch(PDOException $e) {
-                $this->registry['logger']->lwrite('Error when selecting user properties from DB');
-                $this->registry['logger']->lwrite($e->getMessage());
-            }
+            $this->executeQuery($sqlSelect, 'Error when selecting user properties from DB');
+            $data = $sqlSelect->fetch();
             $user->name = $data['name'];
             $user->email = $data['email'];
             $user->client = $data['client'];
@@ -123,12 +117,7 @@ Class Model {
     function getLastVisit() {
         $sqlLastVisit = $this->db->prepare($this->lastVisit);
         $sqlLastVisit->bindParam(':userId', $_SESSION['user']->id);
-        try {
-            $sqlLastVisit->execute();
-        } catch (PDOException $e) {
-            $this->registry['logger']->lwrite('Error when getting last visit from DB');
-            $this->registry['logger']->lwrite($e->getMessage());
-    }
+        $this->executeQuery($sqlLastVisit, 'Error when getting last visit from DB');
         $visit = $sqlLastVisit->fetchColumn();
         $sqlLastVisit->closeCursor();
         return $visit;
@@ -140,13 +129,8 @@ Class Model {
         $sqlLog = $this->db->prepare($this->addVisit);
         $sqlLog->bindParam(':userId', $_SESSION['user']->id);
         $sqlLog->bindParam(':pageId', $pageId);
-        $sqlLog->bindParam(':time', $time);        
-        try{
-            $sqlLog->execute();
-        }catch(PDOException $e){
-            $this->registry['logger']->lwrite('Error when logging a visit to DB');
-            $this->registry['logger']->lwrite($e->getMessage());
-        }
+        $sqlLog->bindParam(':time', $time); 
+        $this->executeQuery($sqlLog, 'Error when logging a visit to DB');
         $sqlLog->closeCursor();
     }
     
@@ -154,12 +138,7 @@ Class Model {
     function checkProfile() {
         $sqlSelect = $this->db->prepare($this->profileExists);
         $sqlSelect->bindParam(':userId', $_SESSION['user']->id);
-        try{
-            $sqlSelect->execute();
-        }catch(PDOException $e){
-            $this->registry['logger']->lwrite('Error when checking profile existence');
-            $this->registry['logger']->lwrite($e->getMessage());
-        }
+        $this->executeQuery($sqlSelect, 'Error when checking profile existence');
         $id = $sqlSelect->fetchColumn();
         $sqlSelect->closeCursor();        
         if ($id) {
@@ -169,70 +148,56 @@ Class Model {
     }
     
     //Updates user profile
-    function updateUser() {
+    function updateUser($user) {
         //If profile doesn't exist then we create it and link to user
         if (!$this->checkProfile()) {
             $sqlCreate = $this->db->prepare($this->createProfile);
-            $sqlCreate->bindParam(':userName', $_SESSION['user']->name);
-            $sqlCreate->bindParam(':userEmail', $_SESSION['user']->email);
-            if (!$_SESSION['user']->client){
-                $_SESSION['user']->client = 0;
+            $sqlCreate->bindParam(':userName', $user->name);
+            $sqlCreate->bindParam(':userEmail', $user->email);
+            if (!$user->client){
+                $user->client = 0;
             }
-            $sqlCreate->bindParam(':isClient', $_SESSION['user']->client, PDO::PARAM_INT);
-            $sqlCreate->bindParam(':userPassword', $_SESSION['user']->password);
-            $sqlCreate->bindParam(':phone', $_SESSION['user']->phone);
-            if (!$_SESSION['user'].spam){
-                $_SESSION['user']->spam = 0;
+            $sqlCreate->bindParam(':isClient', $user->client, PDO::PARAM_INT);
+            $options = [
+                'cost' => 11,
+                'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
+            ];
+            $password = $user->password;//password_hash($user->password, PASSWORD_BCRYPT, $options)."\n";
+            $sqlCreate->bindParam(':userPassword', $password);
+            $sqlCreate->bindParam(':phone', $user->phone);
+            if (!$user.spam){
+                $user->spam = 0;
             }
-            $sqlCreate->bindParam(':spam', $_SESSION['user']->spam, PDO::PARAM_INT);
-            try {
-                $sqlCreate->execute();
-            } catch (PDOException $e) {
-                $this->registry['logger']->lwrite('Error when creating profile in DB');
-                $this->registry['logger']->lwrite($e->getMessage());            
-            }
+            $sqlCreate->bindParam(':spam', $user->spam, PDO::PARAM_INT);
+            $this->executeQuery($sqlCreate, 'Error when creating profile in DB');
             $profileId = $this->db->lastInsertId();
             $sqlCreate->closeCursor();
             $sqlLink = $this->db->prepare($this->linkProfile);
-            $sqlLink->bindParam(":userId", $_SESSION['user']->id);
+            $sqlLink->bindParam(":userId", $user->id);
             $sqlLink->bindParam(":profileId", $profileId);
-            try {
-                $sqlLink->execute();
-            } catch (PDOException $e) {
-                $this->registry['logger']->lwrite('Error when linking user to profile in DB');
-                $this->registry['logger']->lwrite($e->getMessage());            
-            }
+            $this->executeQuery($sqlLink, 'Error when linking user to profile in DB');
             $sqlLink->closeCursor();   
         //Otherwise we just update the profile    
         } else {    
             $sqlUpdate = $this->db->prepare($this->updateProfile);
-            $sqlUpdate->bindParam(':userName', $_SESSION['user']->name);
-            $sqlUpdate->bindParam(':userEmail', $_SESSION['user']->email);
-            $sqlUpdate->bindParam(':isClient', $_SESSION['user']->client, PDO::PARAM_INT);
-            $sqlUpdate->bindParam(':userPassword', $_SESSION['user']->password);
-            $sqlUpdate->bindParam(':spam', $_SESSION['user']->spam, PDO::PARAM_INT);
-            $sqlUpdate->bindParam(':phone', $_SESSION['user']->phone);
-            $sqlUpdate->bindParam(':userId', $_SESSION['user']->id);
-            $this->registry['logger']->lwrite($_SESSION['user']->phone);
-            try {
-                $sqlUpdate->execute();
-            } catch (PDOException $e) {
-                $this->registry['logger']->lwrite('Error when updating user in DB');
-                $this->registry['logger']->lwrite($e->getMessage());            
-            }
+            $sqlUpdate->bindParam(':userName', $user->name);
+            $sqlUpdate->bindParam(':userEmail', $user->email);
+            $sqlUpdate->bindParam(':isClient', $user->client, PDO::PARAM_INT);
+            $sqlUpdate->bindParam(':userPassword', $user->password);
+            $sqlUpdate->bindParam(':spam', $user->spam, PDO::PARAM_INT);
+            $sqlUpdate->bindParam(':phone', $user->phone);
+            $sqlUpdate->bindParam(':userId', $user->id);
+            $this->registry['logger']->lwrite($user->phone);
+            $this->executeQuery($sqlUpdate, 'Error when updating user in DB');
             $sqlUpdate->closeCursor();
-        }    
+        }
+        return $user;
     }
     
     function checkEmailExists($userEmail) {
         $sqlSelect = $this->db->prepare($this->emailExists);
         $sqlSelect->bindParam(':userEmail', $userEmail);
-        try{
-            $sqlSelect->execute();
-        } catch (Exception $ex) {
-            $this->registry['logger']->lwrite('Error when checking email existence');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }
+        $this->executeQuery($sqlSelect, 'Error when checking email existence');
         $count = $sqlSelect->fetchColumn();
         $sqlSelect->closeCursor();
         if ($count > 0) {
@@ -241,43 +206,29 @@ Class Model {
         return false;
     }
     
-    function login() {
+    function login($user) {
         $sqlSelect = $this->db->prepare($this->selectProfileEmail);
-        $sqlSelect->bindParam(":userEmail", $_SESSION['user']->email);
-        try{
-            $sqlSelect->execute();
-            $data = $sqlSelect->fetch();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when selecting profile by email');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }
+        $sqlSelect->bindParam(":userEmail", $user->email);
+        $this->executeQuery($sqlSelect, 'Error when selecting profile by email: ' . $user->email);
+        $data = $sqlSelect->fetch();
         $sqlSelect->closeCursor();
-        $_SESSION['user']->name = $data['name'];
-        $_SESSION['user']->client = $data['client'];
-        $_SESSION['user']->spam = $data['spam'];
-        $_SESSION['user']->phone = $data['phone'];
+        $user->name = $data['name'];
+        $user->client = $data['client'];
+        $user->spam = $data['spam'];
+        $user->phone = $data['phone'];
         $sqlLink = $this->db->prepare($this->linkProfile);
-        $sqlLink->bindParam(":userId", $_SESSION['user']->id);
+        $sqlLink->bindParam(":userId", $user->id);
         $sqlLink->bindParam(":profileId", $data['id']);
-        try {
-            $sqlLink->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when linking user to profile');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }
+        $this->executeQuery($sqlLink, 'Error when linking user to profile');
         $sqlLink->closeCursor();
+        return $user;
     }
     
     function checkUser($userEmail, $userPassword) {
         $sqlSelect = $this->db->prepare($this->checkUser);
         $sqlSelect->bindParam(':userEmail', $userEmail);
-        $sqlSelect->bindParam(':userPassword', $userPassword);        
-        try{
-            $sqlSelect->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when checking user existance');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }
+        $sqlSelect->bindParam(':userPassword', $userPassword); 
+        $this->executeQuery($sqlSelect, 'Error when checking user existance');
         $count = $sqlSelect->fetchColumn();
         $sqlSelect->closeCursor();
         if ($count == 0) {
@@ -292,12 +243,7 @@ Class Model {
             $sqlSelect = $this->db->prepare($this->getAllNews);
         else 
             $sqlSelect = $this->db->prepare($this->getNonClientNews);
-        try{
-            $sqlSelect->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when getting news from DB');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }
+        $this->executeQuery($sqlSelect, 'Error when getting news from DB');
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $news = new News($data['id'], $data['header'], $data['time'], $data['text'], $data['forClients']);
             if (!$newsArray)
@@ -312,13 +258,8 @@ Class Model {
     function getNewsItem($newsId) {
         $sqlSelect = $this->db->prepare('SELECT * FROM news WHERE id=:newsId');
         $sqlSelect->bindParam(':newsId', $newsId);
-        try{
-            $sqlSelect->execute();
-            $data = $sqlSelect->fetch();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when getting news with id=' . $newsId);
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }
+        $this->executeQuery($sqlSelect, 'Error when getting news with id=' . $newsId);
+        $data = $sqlSelect->fetch();
         $sqlSelect->closeCursor();
         return new News($data['id'], $data['header'], $data['time'], $data['text'], $data['forClients']);
     }    
@@ -327,23 +268,13 @@ Class Model {
         $sqlSelect = $this->db->prepare($this->addQuestion);
         $sqlSelect->bindParam(':userId', $userId);
         $sqlSelect->bindParam(':question', $question); 
-        try{
-            $sqlSelect->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when adding a question');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }
+        $this->executeQuery($sqlSelect, 'Error when adding a question');
         $sqlSelect->closeCursor();
     }
     
     function getCatalog($catName) {
         $sqlSelect = $this->db->prepare($this->selectCatalog . $catName);
-        try{
-            $sqlSelect->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when getting ' . $catName);
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }
+        $this->executeQuery($sqlSelect, 'Error when getting ' . $catName);
         $catsArray=array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $catsArray[$data['id']]=$data['name'];
@@ -352,12 +283,12 @@ Class Model {
         return $this->prepareArray($catsArray);       
     }
     
-    function startsWith($haystack, $needle) {
+    private function startsWith($haystack, $needle) {
         $length = strlen($needle);
         return (substr($haystack, 0, $length) === $needle);
     }
     
-    function prepareArray($array) {
+    private function prepareArray($array) {
         $preparedArray = $array;
         foreach($preparedArray as $key=>$value){
             if ($this->startsWith($value, "Все") or $this->startsWith($value, "Прочее")) {
@@ -388,12 +319,7 @@ Class Model {
         $sqlInsert->bindParam(':problem', $problem);
         $sqlInsert->bindParam(':bestbefore', $bestbefore);
         $sqlInsert->bindParam(':precaution', $precaution);
-        try{
-            $sqlInsert->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when adding/updating a good');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }
+        $this->executeQuery($sqlInsert, 'Error when adding/updating a good');
         if ($id) {
             $goodId=$id;
         } else {
@@ -407,12 +333,7 @@ Class Model {
         $sqlInsert = $this->db->prepare($this->linkGoodType);
         $sqlInsert->bindParam(':goodId', $goodId);
         $sqlInsert->bindParam(':typeId', $typeId);
-        try{
-            $sqlInsert->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when linking good '.$goodId.' and type '.$typeId);
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }    
+        $this->executeQuery($sqlInsert, 'Error when linking good '.$goodId.' and type '.$typeId);
         $sqlInsert->closeCursor();
     }    
     
@@ -420,12 +341,7 @@ Class Model {
         $sqlInsert = $this->db->prepare($this->linkGoodCat);
         $sqlInsert->bindParam(':goodId', $goodId);
         $sqlInsert->bindParam(':catId', $catId);
-        try{
-            $sqlInsert->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when linking good and category');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }    
+        $this->executeQuery($sqlInsert, 'Error when linking good ' . $goodId . ' and category ' . $catId);
         $sqlInsert->closeCursor();
     }
         
@@ -433,12 +349,7 @@ Class Model {
         $sqlInsert = $this->db->prepare($this->linkGoodEff);
         $sqlInsert->bindParam(':goodId', $goodId);
         $sqlInsert->bindParam(':effId', $effId);
-            try{
-            $sqlInsert->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when linking good and effect');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }    
+        $this->executeQuery($sqlInsert, 'Error when linking good ' . $goodId . ' and effect ' . $effId);
         $sqlInsert->closeCursor();
     }
     
@@ -446,12 +357,7 @@ Class Model {
         $sqlInsert = $this->db->prepare($this->linkGoodProblem);
         $sqlInsert->bindParam(':goodId', $goodId);
         $sqlInsert->bindParam(':probId', $probId);
-            try{
-            $sqlInsert->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when linking good and problem');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }    
+        $this->executeQuery($sqlInsert, 'Error when linking good ' . $goodId . ' and problem ' . $probId);
         $sqlInsert->closeCursor();
     }    
 
@@ -459,12 +365,7 @@ Class Model {
         $sqlInsert = $this->db->prepare($this->linkGoodST);
         $sqlInsert->bindParam(':goodId', $goodId);
         $sqlInsert->bindParam(':skintypeId', $skintypeId);
-            try{
-            $sqlInsert->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when linking good and skintype');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }    
+        $this->executeQuery($sqlInsert, 'Error when linking good ' . $goodId . ' and skintype ' . $skintypeId);
         $sqlInsert->closeCursor();
     }
 
@@ -472,25 +373,16 @@ Class Model {
         $sqlInsert = $this->db->prepare($this->linkGoodHT);
         $sqlInsert->bindParam(':goodId', $goodId);
         $sqlInsert->bindParam(':hairtypeId', $hairtypeId);
-            try{
-            $sqlInsert->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when linking good and hairtype');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }    
+        $this->executeQuery($sqlInsert, 'Error when linking good ' . $goodId . ' and hairtype ' . $hairtypeId);
         $sqlInsert->closeCursor();
     }
     
     function getGood($goodId) {
         $sqlSelect = $this->db->prepare("SELECT * FROM goods WHERE id=:goodId");
         $sqlSelect->bindParam(':goodId', $goodId);
-        try{
-            $sqlSelect->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when selecting a product');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }
+        $this->executeQuery($sqlSelect, 'Error when getting a product: ' . $goodId);
         $data = $sqlSelect->fetch();
+        $sqlSelect->closeCursor();    
         $good=new Good($data['id'], trim($data['name']), trim($data['description']), trim($data['shortdesc']), trim($data['howTo']), trim($data['madeOf']), $data['sale'], $data['firmId'], trim($data['problem']), trim($data['bestbefore']), trim($data['precaution']), trim($data['url']));
         $good->cats = $this->getGoodCats($goodId);
         $good->effs = $this->getGoodEffs($goodId);
@@ -499,19 +391,13 @@ Class Model {
         $good->sizes = $this->getGoodSizes($goodId);
         $good->types = $this->getGoodTypes($goodId);
         $good->problems = $this->getGoodProblems($goodId);
-        
-        $sqlSelect->closeCursor();    
         return $good;
     }
     
     function getGoodTypes($goodId) {
-        $sqlSelect = $this->db->prepare('SELECT t.id, t.name FROM types t, `goods-types` gt WHERE t.id=gt.typeId AND gt.goodId='.$goodId);
-        try{
-            $sqlSelect->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when selecting product types');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }
+        $sqlSelect = $this->db->prepare('SELECT t.id, t.name FROM types t, `goods-types` gt WHERE t.id=gt.typeId AND gt.goodId=:goodId');
+        $sqlSelect->bindParam(':goodId', $goodId);
+        $this->executeQuery($sqlSelect, 'Error when selecting types for product ' . $goodId);
         $types = array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $types[$data['id']]=$data['name'];
@@ -521,13 +407,9 @@ Class Model {
     }
     
     function getGoodSizes($goodId) {
-        $sqlSelect = $this->db->prepare('SELECT gs.id, gs.size, w.price, w.instock, w.onhold, gs.code, gs.sale FROM `goods-sizes` gs LEFT JOIN warehouse w ON gs.Id=w.psId WHERE gs.goodId='.$goodId.' ORDER BY w.price');
-        try{
-            $sqlSelect->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when selecting product sizes');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }
+        $sqlSelect = $this->db->prepare('SELECT gs.id, gs.size, w.price, w.instock, w.onhold, gs.code, gs.sale FROM `goods-sizes` gs LEFT JOIN warehouse w ON gs.Id=w.psId WHERE gs.goodId=:goodId ORDER BY w.price');
+        $sqlSelect->bindParam(':goodId', $goodId);
+        $this->executeQuery($sqlSelect, 'Error when selecting sizes for product ' . $goodId);
         $sizes = array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $size = new Size($data['id'], $data['size'], $data['price'], $data['sale'], $data['code'], $data['instock'], $data['onhold']);
@@ -538,13 +420,9 @@ Class Model {
     }
     
     function getGoodCats($goodId) {
-        $sqlSelect = $this->db->prepare('SELECT categoryId FROM `goods-categories` WHERE goodId=' . $goodId);
-        try{
-            $sqlSelect->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when selecting product categories');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }
+        $sqlSelect = $this->db->prepare('SELECT categoryId FROM `goods-categories` WHERE goodId=:goodId');
+        $sqlSelect->bindParam(':goodId', $goodId);
+        $this->executeQuery($sqlSelect, 'Error when selecting categories for product ' . $goodId);
         $catsArray=array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             array_push($catsArray, $data['categoryId']);
@@ -554,13 +432,9 @@ Class Model {
     }
     
     function getGoodEffs($goodId) {
-        $sqlSelect = $this->db->prepare('SELECT effectId FROM `goods-effects` WHERE goodId=' . $goodId);
-        try{
-            $sqlSelect->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when selecting product effects');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }
+        $sqlSelect = $this->db->prepare('SELECT effectId FROM `goods-effects` WHERE goodId=:goodId');
+        $sqlSelect->bindParam(':goodId', $goodId);
+        $this->executeQuery($sqlSelect, 'Error when selecting effects for product ' . $goodId);
         $catsArray=array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             array_push($catsArray, $data['effectId']);
@@ -570,13 +444,9 @@ Class Model {
     }
 
     function getGoodProblems($goodId) {
-        $sqlSelect = $this->db->prepare('SELECT problemId FROM `goods-problems` WHERE goodId=' . $goodId);
-        try{
-            $sqlSelect->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when selecting product problems');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }
+        $sqlSelect = $this->db->prepare('SELECT problemId FROM `goods-problems` WHERE goodId=:goodId');
+        $sqlSelect->bindParam(':goodId', $goodId);
+        $this->executeQuery($sqlSelect, 'Error when selecting problems for product ' . $goodId);
         $catsArray=array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             array_push($catsArray, $data['problemId']);
@@ -586,13 +456,9 @@ Class Model {
     }
     
     function getGoodSTs($goodId) {
-        $sqlSelect = $this->db->prepare('SELECT skintypeId FROM `goods-skintypes` WHERE goodId=' . $goodId);
-        try{
-            $sqlSelect->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when selecting product skintypes');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }
+        $sqlSelect = $this->db->prepare('SELECT skintypeId FROM `goods-skintypes` WHERE goodId=:goodId');
+        $sqlSelect->bindParam(':goodId', $goodId);
+        $this->executeQuery($sqlSelect, 'Error when selecting skintypes for product ' . $goodId);
         $catsArray=array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             array_push($catsArray, $data['skintypeId']);
@@ -602,13 +468,9 @@ Class Model {
     }
 
     function getGoodHTs($goodId) {
-        $sqlSelect = $this->db->prepare('SELECT hairtypeId FROM `goods-hairtypes` WHERE goodId=' . $goodId);
-        try{
-            $sqlSelect->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when selecting product hairtypes');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }
+        $sqlSelect = $this->db->prepare('SELECT hairtypeId FROM `goods-hairtypes` WHERE goodId=:goodId');
+        $sqlSelect->bindParam(':goodId', $goodId);
+        $this->executeQuery($sqlSelect, 'Error when selecting hairtypes for product ' . $goodId);
         $catsArray=array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             array_push($catsArray, $data['hairtypeId']);
@@ -618,30 +480,25 @@ Class Model {
     }
     
     function deleteGoodCat($goodId) {
-        $sqlDelete = $this->db->prepare('DELETE FROM `goods-types` WHERE goodId=' . $goodId);
-        $sqlDelete->execute();
-        $sqlDelete = $this->db->prepare('DELETE FROM `goods-categories` WHERE goodId=' . $goodId);
-        $sqlDelete->execute();
-        $sqlDelete = $this->db->prepare('DELETE FROM `goods-effects` WHERE goodId=' . $goodId);
-        $sqlDelete->execute();
-        $sqlDelete = $this->db->prepare('DELETE FROM `goods-hairtypes` WHERE goodId=' . $goodId);
-        $sqlDelete->execute();
-        $sqlDelete = $this->db->prepare('DELETE FROM `goods-skintypes` WHERE goodId=' . $goodId);
-        $sqlDelete->execute();
-        $sqlDelete = $this->db->prepare('DELETE FROM `goods-problems` WHERE goodId=' . $goodId);
-        $sqlDelete->execute();
+        $sqlDelete = $this->db->prepare('DELETE FROM `goods-types` WHERE goodId=:goodId');
+        $sqlDelete->execute($goodId);
+        $sqlDelete = $this->db->prepare('DELETE FROM `goods-categories` WHERE goodId=:goodId');
+        $sqlDelete->execute($goodId);
+        $sqlDelete = $this->db->prepare('DELETE FROM `goods-effects` WHERE goodId=:goodId');
+        $sqlDelete->execute($goodId);
+        $sqlDelete = $this->db->prepare('DELETE FROM `goods-hairtypes` WHERE goodId=:goodId');
+        $sqlDelete->execute($goodId);
+        $sqlDelete = $this->db->prepare('DELETE FROM `goods-skintypes` WHERE goodId=:goodId');
+        $sqlDelete->execute($goodId);
+        $sqlDelete = $this->db->prepare('DELETE FROM `goods-problems` WHERE goodId=:goodId');
+        $sqlDelete->execute($goodId);
         $sqlDelete->closeCursor();
     }
     
     function getFirm($firmId) {
         $sqlSelect = $this->db->prepare('SELECT name, description, url FROM firms WHERE id=:firmId');
         $sqlSelect->bindParam(':firmId', $firmId);
-        try{
-            $sqlSelect->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when getting a firm with id=' . $firmId);
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }
+        $this->executeQuery($sqlSelect, 'Error when getting a firm with id=' . $firmId);
         $data = $sqlSelect->fetch();
         if ($data) {
             $firm = new Firm($firmId, $data['name'], $data['description'], data['url']);
@@ -655,12 +512,7 @@ Class Model {
     function getGoodsByFirm($firmId) {
         $sqlSelect = $this->db->prepare('SELECT id FROM goods WHERE firmId=:firmId');
         $sqlSelect->bindParam(':firmId', $firmId);
-        try{
-            $sqlSelect->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when getting goods of firm with id=' . $firmId);
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }   
+        $this->executeQuery($sqlSelect, 'Error when getting goods of firm with id=' . $firmId);
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $good = $this->getGood($data['id']);
             if (!isset($goods))
@@ -673,13 +525,9 @@ Class Model {
     }
     
     function getFirmCats($firmId) {
-        $sqlSelect = $this->db->prepare('SELECT DISTINCT cat.id, cat.name FROM categories cat, `goods-categories` gc, goods g WHERE cat.id=gc.categoryid AND gc.goodId=g.id and g.firmId=' . $firmId);
-        try{
-            $sqlSelect->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when getting categories of firm with id=' . $firmId);
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }
+        $sqlSelect = $this->db->prepare('SELECT DISTINCT cat.id, cat.name FROM categories cat, `goods-categories` gc, goods g WHERE cat.id=gc.categoryid AND gc.goodId=g.id and g.firmId=:firmId');
+        $sqlSelect->bindParam(':firmId', $firmId);
+        $this->executeQuery($sqlSelect, 'Error when getting categories of firm with id=' . $firmId);
         $catsArray=array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $catsArray[$data['id']]=$data['name'];
@@ -690,12 +538,7 @@ Class Model {
     
     function getAllGoods() {
         $sqlSelect = $this->db->prepare('SELECT id FROM goods');
-        try{
-            $sqlSelect->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when getting all goods');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }   
+        $this->executeQuery($sqlSelect, 'Error when getting all goods');
         $goods=array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $good = $this->getGood($data['id']);
@@ -709,7 +552,8 @@ Class Model {
         if (!$code)
             $code = null;
         if ($gsId) {
-            $sqlQuery = $this->db->prepare('UPDATE `goods-sizes` SET goodId=:goodId, size=:size, code=:code, sale=:sale WHERE id='.$gsId);
+            $sqlQuery = $this->db->prepare('UPDATE `goods-sizes` SET goodId=:goodId, size=:size, code=:code, sale=:sale WHERE id=:gsId');
+            $sqlQuery->bindParam(':gsId', $gsId);
         } else {
             $sqlQuery = $this->db->prepare('INSERT INTO `goods-sizes`(goodId, size, code, sale) VALUES(:goodId,:size,:code,:sale)');
         }
@@ -717,16 +561,12 @@ Class Model {
         $sqlQuery->bindParam(':size', $size);
         $sqlQuery->bindParam(':code', $code);
         $sqlQuery->bindParam(':sale', $sale);
-        try{
-            $sqlQuery->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when updating/inserting size ' . $size .' for good '.$goodId);
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        } 
+        $this->executeQuery($sqlQuery, 'Error when updating/inserting size ' . $size .' for good '.$goodId);
         if (!$gsId)
             $gsId = $this->db->lastInsertId();
         $sqlQuery->closeCursor();
-        $sqlSelect = $this->db->prepare('SELECT id FROM warehouse WHERE psId='.$gsId);
+        $sqlSelect = $this->db->prepare('SELECT id FROM warehouse WHERE psId=:gsId');
+        $sqlSelect->bindParam(':gsId', $gsId);
         $sqlSelect->execute();
         $warId = $sqlSelect->fetchColumn();
         $sqlSelect->closeCursor();
@@ -737,23 +577,13 @@ Class Model {
         $sqlQuery2->bindParam(':gsId', $gsId);
         $sqlQuery2->bindParam(':price', $price);
         $sqlQuery2->bindParam(':instock', $instock);
-        try{
-            $sqlQuery2->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when updating/inserting warehouse data for goodsize '.$gsId);
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        } 
+        $this->executeQuery($sqlQuery2, 'Error when updating/inserting warehouse data for goodsize '.$gsId);
         $sqlQuery2->closeCursor();
     }
     
     function getBranches() {
         $sqlSelect = $this->db->prepare('SELECT * FROM branches');
-        try{
-            $sqlSelect->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when getting branches');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }
+        $this->executeQuery($sqlSelect, 'Error when getting branches');
         $catsArray=array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $branch = New Branch($data['id'], $data['address'], $data['open'], $data['card'], $data['map']);
@@ -785,12 +615,11 @@ Class Model {
         else
             $sqlInsert->bindParam (':profileId', $profile);
         $sqlInsert->bindParam(':date',  date('Y-m-d', time()));
+        $this->executeQuery($sqlInsert, 'Error when saving order');
         try{
-            $sqlInsert->execute();
             $orderId = $this->db->lastInsertId();
         } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when saving order');
-            $this->registry['logger']->lwrite($e->getMessage()); 
+            $this->registry['logger']->lwrite('Error when getting new order ID');
             $orderId=0;
         }  
         $sqlInsert->closeCursor();
@@ -809,12 +638,7 @@ Class Model {
             $sqlInsert->bindParam(':sizeId', $cartItem->sizeId);
             $sqlInsert->bindParam(':quantity', $cartItem->quantity);
             $sqlInsert->bindParam(':price', $price);
-            try{
-                $sqlInsert->execute();
-            } catch (Exception $e) {
-                $this->registry['logger']->lwrite('Error when saving ordered goods');
-                $this->registry['logger']->lwrite($e->getMessage()); 
-            }
+            $this->executeQuery($sqlInsert, 'Error when saving ordered goods');
             $sqlInsert->closeCursor();
         }    
     }  
@@ -822,12 +646,7 @@ Class Model {
     function getTypeFirms($typeId) {
         $sqlSelect = $this->db->prepare('SELECT distinct g.firmId FROM  goods g, `goods-types` gt WHERE g.id = gt.goodId AND gt.typeId=:typeId');
         $sqlSelect->bindParam(':typeId', $typeId);
-        try{
-            $sqlSelect->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when getting firms of type');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }    
+        $this->executeQuery($sqlSelect, 'Error when getting firms of type ' . $typeId);
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             if (!isset($firms))
                 $firms = [$data['firmId']];
@@ -849,12 +668,7 @@ Class Model {
         $sqlInsert->bindParam(':text', $text);
         $sqlInsert->bindParam(':time', $time);
         $sqlInsert->bindParam(':forClients', $forClients);
-        try{
-            $sqlInsert->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when adding/updating a news record');
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }
+        $this->executeQuery($sqlInsert, 'Error when adding/updating a news record');
         if ($id) {
             $newsId=$id;
         } else {
@@ -868,13 +682,8 @@ Class Model {
         if ($promo) {
             $sqlSelect = $this->db->prepare('SELECT id FROM promos WHERE name=:name');
             $sqlSelect->bindParam(':name', strtolower($promo));
-            try{
-                $sqlSelect->execute();
-                $promoId = $sqlSelect->fetchColumn();
-            } catch (Exception $e) {
-                $this->registry['logger']->lwrite('Error when getting promo id');
-                $this->registry['logger']->lwrite($e->getMessage()); 
-            }
+            $this->executeQuery($sqlSelect, 'Error when getting promo id');
+            $promoId = $sqlSelect->fetchColumn();
             $sqlSelect->closeCursor();
             return $promoId;
         } else {
@@ -886,13 +695,8 @@ Class Model {
         $sqlSelect = $this->db->prepare('SELECT count(*) FROM orders WHERE userId=:userId AND promoId=:promoId');
         $sqlSelect->bindParam(':userId', $userId);
         $sqlSelect->bindParam(':promoId', $promoId);
-        try{
-            $sqlSelect->execute();
-            $userPromoOrders = $sqlSelect->fetchColumn();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when getting orders for user '. $userId . ' with promo ' . $promoId);
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        } 
+        $this->executeQuery($sqlSelect, 'Error when getting orders for user '. $userId . ' with promo ' . $promoId);
+        $userPromoOrders = $sqlSelect->fetchColumn();
         $sqlSelect->closeCursor();
         return $userPromoOrders;
     }    
@@ -900,27 +704,17 @@ Class Model {
     private function getPromoCount($promoId) {
         $sqlSelect = $this->db->prepare('SELECT count FROM promos WHERE id=:promoId');
         $sqlSelect->bindParam(':promoId', $promoId);
-        try{
-            $sqlSelect->execute();
-            $promoCount = $sqlSelect->fetchColumn();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when getting count for promo ' . $promoId);
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        } 
+        $this->executeQuery($sqlSelect, 'Error when getting count for promo ' . $promoId);
+        $promoCount = $sqlSelect->fetchColumn();
         $sqlSelect->closeCursor(); 
         return $promoCount;
     }
     
     public function getPromoAmount($promoId) {
         $sqlSelect = $this->db->prepare('SELECT amount FROM promos WHERE id=:promoId');
-        try{
-            $sqlSelect->bindParam(':promoId', $promoId);
-            $sqlSelect->execute();
-            $promoAmount = $sqlSelect->fetchColumn();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when getting amount for promo ' . $promoId);
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        } 
+        $sqlSelect->bindParam(':promoId', $promoId);
+        $this->executeQuery($sqlSelect, 'Error when getting amount for promo ' . $promoId);
+        $promoAmount = $sqlSelect->fetchColumn();
         $sqlSelect->closeCursor(); 
         return $promoAmount;
     }    
@@ -928,12 +722,7 @@ Class Model {
     private function getProfileUsers($profile) {
         $sqlSelect = $this->db->prepare('SELECT id FROM users WHERE profile=:profile');
         $sqlSelect->bindParam(':profile', $profile);
-        try {
-            $sqlSelect->execute();
-        } catch (Exception $ex) {
-            $this->registry['logger']->lwrite('Error when getting users for profile ' . $profile);
-            $this->registry['logger']->lwrite($e->getMessage()); 
-        }
+        $this->executeQuery($sqlSelect, 'Error when getting users for profile ' . $profile);
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             if (!$users)
                 $users = [$data['id']];
@@ -968,12 +757,7 @@ Class Model {
     
     function getFirms() {
         $sqlSelect = $this->db->prepare('SELECT * FROM firms ORDER BY name');
-        try {
-            $sqlSelect->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when getting firms');
-            $this->registry['logger']->lwrite($e->getMessage());
-        }
+        $this->executeQuery($sqlSelect, 'Error when getting firms');
         $firms = array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $firm = New Firm($data['id'], $data['name'], $data['description'], $data['url']);
@@ -986,12 +770,7 @@ Class Model {
     function getFirmIdByUrl($url) {
         $sqlSelect = $this->db->prepare('SELECT id FROM firms WHERE url=:url');
         $sqlSelect->bindParam(':url', $url);
-        try {
-            $sqlSelect->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when getting firm with url='.$url);
-            $this->registry['logger']->lwrite($e->getMessage());
-        }
+        $this->executeQuery($sqlSelect, 'Error when getting firm with url='.$url);
         $firmId = $sqlSelect->fetchColumn();
         $sqlSelect->closeCursor();
         return $firmId;
@@ -1000,12 +779,7 @@ Class Model {
     function getGoodIdByUrl($url) {
         $sqlSelect = $this->db->prepare('SELECT id FROM goods WHERE url=:url');
         $sqlSelect->bindParam(':url', $url);
-        try {
-            $sqlSelect->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when getting good with url='.$url);
-            $this->registry['logger']->lwrite($e->getMessage());
-        }
+        $this->executeQuery($sqlSelect, 'Error when getting good with url='.$url);
         $goodId = $sqlSelect->fetchColumn();
         $sqlSelect->closeCursor();
         return $goodId;
@@ -1014,25 +788,14 @@ Class Model {
     function logout($userId) {
         $sqlUpdate = $this->db->prepare('UPDATE users SET profile=NULL WHERE id=:userId');
         $sqlUpdate->bindParam(':userId', $userId);
-        try {
-            $sqlUpdate->execute();
-        } catch (Exception $e) {
-            $this->registry['logger']->lwrite('Error when logging out user '.$userId);
-            $this->registry['logger']->lwrite($e->getMessage());
-        }
+        $this->executeQuery($sqlUpdate, 'Error when logging out user '.$userId);
         $sqlUpdate->closeCursor();
-        $_SESSION['user']->name = '';
     }
     
     function getUserOrders($userId) {
         $sqlSelect = $this->db->prepare('SELECT o.id, o.date, s.name status, p.name promo, IF (o.branchId=0, "Доставка", "Самовывоз") type FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id WHERE o.userId=:userId');
         $sqlSelect->bindParam(':userId', $userId);
-        try {
-            $sqlSelect->execute();
-        } catch (Exception $ex) {
-            $this->registry['logger']->lwrite('Error when getting orders for user '.$userId);
-            $this->registry['logger']->lwrite($ex->getMessage());
-        }
+        $this->executeQuery($sqlSelect, 'Error when getting orders for user '.$userId);
         $orders = array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $order = New Order($data['id'], $data['date'], $data['status'], $data['type'], $data['promo']);
@@ -1046,12 +809,7 @@ Class Model {
             $sqlSelect = $this->db->prepare('SELECT o.id, o.date, s.name status, p.name promo, IF (o.branchId=0, "Доставка", "Самовывоз") type FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id WHERE o.profileId=:profileId AND o.userId <> :userId');
             $sqlSelect->bindParam(':userId', $userId);
             $sqlSelect->bindParam(':profileId', $profile);
-            try {
-                $sqlSelect->execute();
-            } catch (Exception $ex) {
-                $this->registry['logger']->lwrite('Error when getting orders for user '.$userId);
-                $this->registry['logger']->lwrite($ex->getMessage());
-            }
+            $this->executeQuery($sqlSelect, 'Error when getting orders for user '.$userId);
             while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
                 $order = New Order($data['id'], $data['date'], $data['status'], $data['type'], $data['promo']);
                 array_push($orders, $order);
@@ -1071,12 +829,7 @@ Class Model {
     function getOrder($orderId) {
         $sqlSelect = $this->db->prepare('SELECT o.id, o.date, s.name status, p.amount promo, IF (o.branchId=0, "Доставка", "Самовывоз") type, SUM(og.price * og.quantity) total FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id LEFT JOIN `orders-goods` og ON o.id=og.orderid WHERE o.id=:orderId');
         $sqlSelect->bindParam(':orderId', $orderId);
-        try {
-            $sqlSelect->execute();
-        } catch (Exception $ex) {
-            $this->registry['logger']->lwrite('Error when getting details for order '.$orderId);
-            $this->registry['logger']->lwrite($ex->getMessage());
-        }  
+        $this->executeQuery($sqlSelect, 'Error when getting details for order '.$orderId);
         $data = $sqlSelect->fetch();
         $order = new Order($data['id'], $data['date'], $data['status'], $data['type'], $data['promo']);
         $order->total = $data['total'];
@@ -1088,12 +841,7 @@ Class Model {
     function getOrderGoods($orderId) {
         $sqlSelect = $this->db->prepare('SELECT og.quantity, og.price, s.size, g.`name`, g.id FROM `orders-goods` og LEFT JOIN `goods-sizes` s ON og.sizeid=s.id LEFT JOIN goods g ON s.goodId=g.id WHERE og.orderId=:orderId');
         $sqlSelect->bindParam(':orderId', $orderId);
-        try {
-            $sqlSelect->execute();
-        } catch (Exception $ex) {
-            $this->registry['logger']->lwrite('Error when getting goods for order '.$orderId);
-            $this->registry['logger']->lwrite($ex->getMessage());
-        }
+        $this->executeQuery($sqlSelect, 'Error when getting goods for order '.$orderId);
         $goods = array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $good = New Orderedgood($data['id'], $data['name'], $data['size'], $data['price'], $data['quantity']);

@@ -4,9 +4,9 @@ Class Controller_Editgood Extends Controller_Base {
         
     function index() {
         $this->registry['model']->logVisit(1000);
-        if ($_SESSION['user']->email == 'Nataliya.zhirnova@gmail.com' or $_SESSION['user']->email == 'Tev0205@gmail.com')
+        if ($_SESSION['user']->email == 'Nataliya.zhirnova@gmail.com' or $_SESSION['user']->email == 'Tev0205@gmail.com') {
             $this->registry['template']->show('editgood');
-        else 
+        } else 
             $this->registry['template']->show('404');
     }
     
@@ -70,11 +70,8 @@ Class Controller_Editgood Extends Controller_Base {
         $this->loadImage($_FILES["image3"], 3, $goodId);
         
         
-            
-        echo "<p>Товар сохранен под номером " . $goodId . "</p>";
-        echo "<p><a href='/editgood?good=".$goodId ."'>Отредактировать товар</a></p>";
-        echo "<p><a href='/editgood'>Создать новый</a></p>";
-        echo "<p><a href='/'>На главную</a></p>";
+        $this->registry['template']->set('savedGood', $goodId);  
+        $this->registry['template']->show('savedgood');
     }
     
     function loadImage($image, $number, $goodId) {

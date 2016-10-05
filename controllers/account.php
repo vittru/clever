@@ -15,6 +15,7 @@ Class Controller_Account Extends Controller_Base {
     function logout() {
         $this->registry['model']->logVisit(28);
         $this->registry['model']->logout($_SESSION['user']->id);
+        $_SESSION['user']->name = '';
         $this->registry['template']->show('logout');
     }
     
@@ -41,9 +42,9 @@ Class Controller_Account Extends Controller_Base {
                 $_SESSION['user']->spam = 0;
             }
             if ($_POST['userAction'] != "login")
-                $this->registry['model']->updateUser();
+                $_SESSION['user'] = $this->registry['model']->updateUser($_SESSION['user']);
             else 
-                $this->registry['model']->login();
+                $_SESSION['user'] = $this->registry['model']->login($_SESSION['user']);
         } else {
             $error = "<div id='error'>" . $error . "</div>";
         }

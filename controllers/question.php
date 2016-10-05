@@ -13,7 +13,7 @@ Class Controller_Question Extends Controller_Base {
             if (trim($_POST['userName']) != '') {
                 $_SESSION['user']->name = htmlspecialchars(trim($_POST['userName']));
             }
-            $this->registry['model']->updateUser();
+            $_SESSION['user'] = $this->registry['model']->updateUser($_SESSION['user']);
             $this->registry['model']->addQuestion($_SESSION['user']->id, $_POST['question']);
         } else {
             $error = "<div id='error'>" . $error . "</div>";
