@@ -7,8 +7,8 @@ include 'header.php';
         <div class="row">
             <div class="col-md-12">
                 <div class="aa-orders-area">  
+                    <h1>Детали заказа</h1>
                     <div class="row">
-                        <h1>Детали заказа</h1>
                         <div class="col-md-12">
                             <form method="GET" action="/account/orders">
                                 <label class="order-parameters-header">Номер заказа:</label>
@@ -36,7 +36,7 @@ include 'header.php';
                             ?>
                         </div>
                         <?php
-                        if ($order->id and $user->name) {
+                        if ($order->id and $user->name and $order->profile == $user->name) {
                         ?>
                         <div class="col-md-12">
                             <h2>Товары</h2>

@@ -7,8 +7,8 @@ include 'header.php';
         <div class="row">
             <div class="col-md-12">
                 <div class="aa-myaccount-area">  
+                    <h1>Аккаунт</h1>
                     <div class="row">
-                        <h1>Аккаунт</h1>
                         <div class="col-md-6">
                             <div class="aa-myaccount-details">
                                 <h2>Мои данные</h2>
