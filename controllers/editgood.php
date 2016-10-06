@@ -70,8 +70,16 @@ Class Controller_Editgood Extends Controller_Base {
         $this->loadImage($_FILES["image3"], 3, $goodId);
         
         
-        $this->registry['template']->set('savedGood', $goodId);  
-        $this->registry['template']->show('savedgood');
+        $good = $this->registry['model']->getGood($goodId);
+        $this->registry['template']->set('pm', false);
+        $this->registry['template']->set('showGood', $good);
+        $this->registry['template']->set('hasProblems', $good->hasProblems());
+        $this->registry['template']->set('hasEffects', $good->hasEffects());
+        $this->registry['template']->set('hasSkintypes', $good->hasSkintypes());
+        $this->registry['template']->set('hasHairtypes', $good->hasHairtypes());
+        $this->registry['template']->show('showgood'); 
+        //$this->registry['template']->set('savedGood', $goodId);  
+        //$this->registry['template']->show('savedgood');
     }
     
     function loadImage($image, $number, $goodId) {

@@ -36,7 +36,7 @@ include 'header.php';
                         </div>    
                         <div class="row">
                             <div class="col-md-8">
-                                <div class="aa-contact-address-left">
+                                <div class="aa-question">
                                     <h2>Задайте нам вопрос</h2>
                                     <form class="comments-form contact-form" action="" id="question-form" novalidate>
                                         <div class="row">
@@ -48,7 +48,7 @@ include 'header.php';
                                             </div>
                                             <div class="col-md-5">
                                                 <div class="form-group">                        
-                                                    <input type="email" placeholder="Почта" class="form-control" id="question-email"
+                                                    <input type="email" placeholder="Почта*" class="form-control" id="question-email"
                                                     value="<?php echo $user->email;?>">
                                                 </div>
                                             </div>
@@ -56,11 +56,15 @@ include 'header.php';
                                         <div class="row">
                                             <div class="col-md-10">  
                                                 <div class="form-group">
-                                                    <textarea class="form-control" rows="3" placeholder="Вопрос" id="question-text"></textarea>
+                                                    <textarea class="form-control" rows="3" placeholder="Вопрос*" id="question-text"></textarea>
                                                 </div>
-                                                <button class="green-button">Задать</button>
-                                                <div id="question-error" display="none"></div>
                                             </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <button class="green-button">Задать</button>
+                                            </div>    
+                                            <div id="question-error" class="col-md-8 error" hidden></div>
                                         </div>
                                     </form>
                                 </div>
@@ -87,32 +91,12 @@ include 'header.php';
     </div>
 </section>
 
-<?php if (!$user->spam) {?>
-<!-- Subscribe section -->
-<section id="aa-subscribe">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="aa-subscribe-area">
-                    <h3>Подпишитесь на нашу рассылку </h3>
-                    <p>Это позволит Вам первыми узнавать обо всех наших акциях и новинках!</p>
-                    <form action="" class="aa-subscribe-form" id="subscribe-form" novalidate>
-                        <input type="email" name="" id="subscribe-email" placeholder="Ваша почта" value="<?php echo $user->email;?>">
-                        <input type="submit" class="green-button" value="ОК">
-                    </form>
-                    <div id="subscribe-error" display="none"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- / Subscribe section -->
-<?php } ?>
-  
-<?php
+<?php if (!$user->spam) {
+    include 'subscribe.php';
+}
+
 include 'footer.php';
 ?>
 
-<!-- subscribe js -->
 <script src="/js/subscribe.js"></script>
 <script src="/js/question.js"></script>

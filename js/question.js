@@ -13,9 +13,9 @@ $("#question-form").submit(function(e) {
         },
         success: function(a) {
             if (a == null) {
-                window.location.reload();
+                $(".aa-question").html("<h2>Спасибо за ваш вопрос, мы ответим Вам на указанную почту</h2>");
             }else {
-                $("#question-error").css("display", "inline-block");
+                $("#question-error").show();
                 $("#question-error").html(a);
             }
         }
@@ -23,14 +23,14 @@ $("#question-form").submit(function(e) {
 });
 
 $("#question-email").focus(function(){
-    $('#question-error').css("display", "none");
+    $('#question-error').hide();
 });
 
 $("#question-name").focus(function(){
-    $('#question-error').css("display", "none");
+    $('#question-error').hide();
 });
 
 $("#question-text").focus(function(){
-    $('#question-error').css("display", "none");
+    $('#question-error').hide();
 });
 

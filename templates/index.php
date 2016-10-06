@@ -130,27 +130,9 @@ if ((new \FilesystemIterator($bannersdir))->valid()) {
     </div>
 </section>
 
-<?php if (!$user->spam) {?>
-<!-- Subscribe section -->
-<section id="aa-subscribe">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="aa-subscribe-area">
-                    <h3>Подпишитесь на нашу рассылку </h3>
-                    <p>Это позволит Вам первыми узнавать обо всех наших акциях и новинках!</p>
-                    <form action="" class="aa-subscribe-form" id="subscribe-form" novalidate>
-                        <input type="email" name="" id="subscribe-email" placeholder="Ваша почта" value="<?php echo $user->email;?>">
-                        <input type="submit" class="green-button" value="ОК">
-                    </form>
-                    <div id="subscribe-error" display="none"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- / Subscribe section -->
-<?php } ?>
+<?php if (!$user->spam) {
+    include 'subscribe.php';
+} ?>
   
 <section id="aa-support">
     <div class="container">
@@ -189,4 +171,5 @@ if ((new \FilesystemIterator($bannersdir))->valid()) {
 
 <?php
 include 'footer.php';
-  
+?>
+<script src="/js/subscribe.js"></script>

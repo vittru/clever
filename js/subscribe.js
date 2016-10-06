@@ -13,7 +13,7 @@ $("#subscribe-form").submit(function(e) {
             if (a == null) {
                 window.location.reload();
             }else {
-                $("#subscribe-error").css("display", "inline-block");
+                $("#subscribe-error").show();
                 $("#subscribe-error").html(a);
             }
         }
@@ -21,5 +21,5 @@ $("#subscribe-form").submit(function(e) {
 });
 
 $("#subscribe-email").focus(function(){
-    $('#subscribe-error').css("display", "none");
+    $('#subscribe-error').hide();
 });

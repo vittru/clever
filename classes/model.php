@@ -165,7 +165,7 @@ Class Model {
             $password = $user->password;//password_hash($user->password, PASSWORD_BCRYPT, $options)."\n";
             $sqlCreate->bindParam(':userPassword', $password);
             $sqlCreate->bindParam(':phone', $user->phone);
-            if (!$user.spam){
+            if (!$user->spam){
                 $user->spam = 0;
             }
             $sqlCreate->bindParam(':spam', $user->spam, PDO::PARAM_INT);
