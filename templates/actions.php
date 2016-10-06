@@ -5,10 +5,17 @@ include 'header.php';
 <section id="aa-text">
     <div class="container">
         <div class="row">
-            <h1>Наши акции</h1>
-            <p>Совсем скоро здесь будет исчерпывающая информация о наших и партнерских акциях.</p>   
-            <p>А пока можете посмотреть на котиков.</p>  
-            <img src="/images/cats.gif">
+            <div class="col-md-12">
+                <h1>Наши акции</h1>
+                <h2>Бесплатная доставка по Самаре заказов от 500 рублей</h2>
+                <div class="newstime">6/10/2016 - 1/11/2016</div>
+                <img src="/images/actions/action1.jpg">
+                <h2>Акции от компании МиКо</h2>
+                <div class="newstime">1/10/2016 - 1/11/2016</div>
+                <img src="/images/banners/Мед и малина_октябрь.jpg">
+                <p></p>
+                <img src="/images/banners/Роза_октябрь.jpg">
+            </div>
         </div>
     </div>
 </section>    

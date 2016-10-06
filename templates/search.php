@@ -2,11 +2,12 @@
 include 'header.php';
 ?>
 
-<section id="aa-subscribe">
+<section id="aa-product">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="aa-subscribe-area">
+                <div class="row">
+                    <div class="aa-product-header">
                     <h3>Вы искали</h3>
                     <p><?php
                     foreach($_GET as $key => $value){
@@ -52,16 +53,8 @@ include 'header.php';
                     else
                         echo "К сожалению таких товаров нет"
                     ?></h4>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="aa-product">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
                 <div class="row">
                     <div class="aa-product-area">
                         <div class="aa-product-inner">

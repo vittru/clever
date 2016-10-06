@@ -424,6 +424,8 @@ h2 {
     border-bottom-width: 1px;
     border-bottom-color: #3fc35f;
     padding-bottom: 10px;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 #menu {
@@ -498,6 +500,7 @@ h2 {
   display: inline;
   float: left;
   width: 100%;
+  margin-bottom: 20px;
 }
 #aa-slider .aa-slider-area .seq-title {
   left: 19%;
@@ -685,6 +688,23 @@ h2 {
   display: inline;
   float: left;
   width: 100%;
+}
+#aa-product .aa-product-header {
+    float: left;
+    padding: 40px 0 10px 0;
+    width: 100%;
+    text-align: center;
+}
+#aa-product .aa-product-header h3 {
+    color: #222;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 0;
+    text-transform: uppercase;
+}
+#aa-product .aa-product-header p {
+    letter-spacing: 0.5px;
 }
 #aa-product .aa-product-area {
   display: inline;

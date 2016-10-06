@@ -4,11 +4,14 @@ Class Controller_Buy Extends Controller_Base {
     
     function index() {
         $this->registry['model']->logVisit(25);
-        $this->registry['template']->show('buy');
+        if (isset($_SESSION['cart']) and sizeof($_SESSION['cart']) > 0)
+            $this->registry['template']->show('buy');
+        else 
+            $this->registry['template']->show('404');
     }
     
     function complete() {
-        if (isset($_SESSION['cart'])) {
+        if (isset($_SESSION['cart']) and sizeof($_SESSION['cart']) > 0 and $_SERVER['REQUEST_METHOD'] == 'POST') {
             $this->registry['model']->logVisit(26);
             //Save the order in DB
             $orderId = $this->registry['model']->saveOrder($_SESSION['user']->id, htmlspecialchars($_POST['name']), htmlspecialchars($_POST['email']), htmlspecialchars($_POST['phone']), htmlspecialchars($_POST['branch']), htmlspecialchars($_POST['takeDate']), htmlspecialchars($_POST['takeTime']), htmlspecialchars($_POST['city']." ".$_POST['address']), htmlspecialchars(trim($_POST['promo'])));

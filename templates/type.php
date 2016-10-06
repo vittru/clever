@@ -2,11 +2,12 @@
 include 'header.php';
 ?>
 
-<section id="aa-subscribe">
+<section id="aa-product">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="aa-subscribe-area">
+                <div class="row">
+                    <div class="aa-product-header">
                     <h3><?php 
                     if ($type) 
                         echo 'Товары ' . $type; 
@@ -16,16 +17,8 @@ include 'header.php';
                     <p><?php if (!$type)
                         echo 'Мы постарались разбить весь наш ассортимент по категориям для удобства поиска';
                     ?></p>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="aa-product">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
                 <div class="row">
                     <div class="aa-product-area">
                         <div class="aa-product-inner">

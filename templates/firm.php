@@ -2,11 +2,12 @@
 include 'header.php';
 ?>
 
-<section id="aa-subscribe">
+<section id="aa-product">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="aa-subscribe-area">
+                <div class="row">
+                    <div class="aa-product-header">
                     <h3><?php 
                     if ($showFirm) 
                         echo $showFirm->name; 
@@ -16,18 +17,10 @@ include 'header.php';
                     <p><?php if ($showFirm)
                         echo $showFirm->description;
                     else 
-                        echo 'Мы торгуем только товарами проверенных годами фирм';
+                        echo 'Мы торгуем только товарами проверенных годами брендов';
                     ?></p>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="aa-product">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
                 <div class="row">
                     <div class="aa-product-area">
                         <div class="aa-product-inner">

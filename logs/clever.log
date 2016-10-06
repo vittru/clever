@@ -272,3 +272,31 @@ Email: vitaly.trusov@gmail.com
 test test2
 test test 3
 
+[06/Oct/2016:11:10:21] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:11:10:22] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:11:10:23] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:11:10:24] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:11:11:36] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:11:11:36] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:11:11:37] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:11:11:38] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:11:12:18] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:11:12:18] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:11:12:19] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:11:12:20] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:11:16:16] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:11:16:16] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:11:16:17] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:11:16:18] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:11:46:14] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:11:46:14] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:11:46:15] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:11:46:16] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:12:04:53] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:12:04:54] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:12:04:54] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:12:04:55] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:12:45:15] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:12:45:16] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:12:45:16] (index) Unable to set var `user`. Already set, and overwrite not allowed.
+[06/Oct/2016:12:45:17] (index) Unable to set var `user`. Already set, and overwrite not allowed.
