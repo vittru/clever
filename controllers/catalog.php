@@ -8,6 +8,7 @@ Class Controller_Catalog Extends Controller_Base {
     }
 
     private function showFirm($firmId) {
+        $this->registry['model']->logVisit(3, $firmId);
         $firm = $this->registry['model']->getFirm($firmId);
         if ($firm)
             $this->registry['template']->set('showFirm', $firm);        
@@ -16,7 +17,6 @@ Class Controller_Catalog Extends Controller_Base {
     }
     
     function firm() {
-        $this->registry['model']->logVisit(3);
         if (isset($_GET['id'])) {
             $this->showFirm($_GET['id']);
         } else {          
@@ -25,8 +25,10 @@ Class Controller_Catalog Extends Controller_Base {
             $firmId = $this->registry['model']->getFirmIdByUrl($route);
             if ($firmId)
                 $this->showFirm($firmId);
-            else 
+            else {
+                $this->registry['model']->logVisit(3);
                 $this->registry['template']->set('firms', $this->registry['firms']);
+            }    
         }    
         $this->registry['template']->show('firm');
     }

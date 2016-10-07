@@ -21,13 +21,17 @@ include 'header.php';
                                 <div><div class="order-parameters-header">Дата заказа:</div><div class="order-parameters-value"><?php echo $order->date; ?></div> </div>
                                 <div><div class="order-parameters-header">Способ доставки:</div><div class="order-parameters-value"><?php echo $order->type; ?></div> </div>
                                 <div><div class="order-parameters-header">Статус:</div><div class="order-parameters-value"><?php echo $order->status; ?></div></div>
-                                <div><div class="order-parameters-header">Сумма:</div><div class="order-parameters-value"><?php echo ($order->total-$order->promo) . " руб."; ?></div> </div>
                                 <?php
-                                if ($order->promo) {
+                                if ($order->id and $user->name and $order->profile == $user->name) {
                                 ?>
-                                    <div><div class="order-parameters-header">Промо-скидка:</div><div class="order-parameters-value"><?php echo $order->promo . " руб."; ?></div> </div>
-                                <?php
-                                }
+                                    <div><div class="order-parameters-header">Сумма:</div><div class="order-parameters-value"><?php echo ($order->total-$order->promo) . " руб."; ?></div> </div>
+                                    <?php
+                                    if ($order->promo) {
+                                    ?>
+                                        <div><div class="order-parameters-header">Промо-скидка:</div><div class="order-parameters-value"><?php echo $order->promo . " руб."; ?></div> </div>
+                                    <?php
+                                    }
+                                }    
                             } else {
                             ?>
                                 <h4>Введите номер вашего заказа</h4>    

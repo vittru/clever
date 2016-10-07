@@ -3,15 +3,14 @@
 Class Controller_Editgood Extends Controller_Base {
         
     function index() {
-        $this->registry['model']->logVisit(1000);
         if ($_SESSION['user']->email == 'Nataliya.zhirnova@gmail.com' or $_SESSION['user']->email == 'Tev0205@gmail.com') {
+            $this->registry['model']->logVisit(1000);
             $this->registry['template']->show('editgood');
         } else 
             $this->registry['template']->show('404');
     }
     
     function save() {
-        $this->registry['model']->logVisit(1001);
         foreach ($_POST as $name => $val) {
             if ($name === 'brand'){
                 $firmId=substr($val, 4);
@@ -77,6 +76,7 @@ Class Controller_Editgood Extends Controller_Base {
         $this->registry['template']->set('hasEffects', $good->hasEffects());
         $this->registry['template']->set('hasSkintypes', $good->hasSkintypes());
         $this->registry['template']->set('hasHairtypes', $good->hasHairtypes());
+        $this->registry['model']->logVisit(1001, $goodId);
         $this->registry['template']->show('showgood'); 
         //$this->registry['template']->set('savedGood', $goodId);  
         //$this->registry['template']->show('savedgood');

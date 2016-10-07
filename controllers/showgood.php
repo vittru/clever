@@ -19,12 +19,14 @@ Class Controller_Showgood Extends Controller_Base {
             $this->registry['logger']->lwrite($goodId);
             if (!$goodId)
                 $this->registry['template']->show('404');
-            else
+            else {
                 $this->showGood ($this->registry['goods'][$goodId]);
+            }    
         }
     }
     
     private function showGood($good) {
+        $this->registry['model']->logVisit(30, $good->id);
         if (isset($_GET['pm']))
             $pm = true;
         else 
