@@ -18,12 +18,12 @@ Class Model {
             . "WHERE userid=:userId";
     private $profileExists = "SELECT p.id FROM profiles p, users u "
             . "WHERE p.id = u.profile AND u.id = :userId";
-    private $createProfile = "INSERT INTO profiles(name, email, client, password, spam, phone) "
-            . "VALUES(:userName, :userEmail, :isClient, :userPassword, :spam, :phone)";
+    private $createProfile = "INSERT INTO profiles(name, email, client, password, spam, phone, salt) "
+            . "VALUES(:userName, :userEmail, :isClient, :userPassword, :spam, :phone, :salt)";
     private $linkProfile = "UPDATE users SET profile = :profileId "
             . "WHERE id = :userId";
     private $updateProfile = "UPDATE profiles "
-            . "SET name = :userName, email = :userEmail, client = :isClient, password=:userPassword, spam=:spam, phone=:phone "
+            . "SET name = :userName, email = :userEmail, client = :isClient, spam=:spam, phone=:phone "
             . "WHERE id = (SELECT profile FROM users WHERE id = :userId)"; 
     private $emailExists = "SELECT count(*) FROM profiles "
             . "WHERE email = :userEmail";
@@ -45,12 +45,28 @@ Class Model {
     private $linkGoodHT = "INSERT INTO `goods-hairtypes` (goodId, hairtypeId) VALUES(:goodId, :hairtypeId)";
     private $updateNews = "UPDATE news SET header=:header, text=:text, time=:time, forClients=:forClients WHERE id=:id";
     private $addNews = "INSERT INTO news (header, text, time, forClients) VALUES (:header, :text, :time, :forClients)";
-    
+    public $default = "cccccccccc";
     
     function __construct($registry) {
         $this->registry = $registry;
         $this->db = new PDO('mysql:host=localhost;dbname='.$this->registry['dbname'].';charset=utf8', $this->registry['dbuser'], $this->registry['dbpassword'], array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+    
+    private function confirmPassword($hash, $salt, $password)
+    {
+        $this->registry['logger']->lwrite('Password: ' . $password . ' Hash: ' . $this->hashPassword($salt, $password));
+        return $this->hashPassword($salt, $password) == $hash;
+    }
+ 
+    private function hashPassword($salt, $password)
+    {
+        return md5($salt . $password);
+    }
+
+    private function generateSalt()
+    {
+        return substr(md5(uniqid('some_prefix', true)), 1, 10);
     }
     
     private function executeQuery($query, $error) {
@@ -102,7 +118,7 @@ Class Model {
             $user->name = $data['name'];
             $user->email = $data['email'];
             $user->client = $data['client'];
-            $user->password = $data['password'];
+            $user->password = $this->default;
             $user->spam = $data['spam'];
             $user->phone = $data['phone'];
             $sqlSelect->closeCursor();
@@ -166,13 +182,12 @@ Class Model {
                 $user->client = 0;
             }
             $sqlCreate->bindParam(':isClient', $user->client, PDO::PARAM_INT);
-            $options = [
-                'cost' => 11,
-                'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
-            ];
-            $password = $user->password;//password_hash($user->password, PASSWORD_BCRYPT, $options)."\n";
+            $salt = $this->generateSalt();
+            $password = $this->hashPassword($salt, $user->password);
             $sqlCreate->bindParam(':userPassword', $password);
+            $user->password = $this->default;
             $sqlCreate->bindParam(':phone', $user->phone);
+            $sqlCreate->bindParam(':salt', $salt);
             if (!$user->spam){
                 $user->spam = 0;
             }
@@ -191,13 +206,23 @@ Class Model {
             $sqlUpdate->bindParam(':userName', $user->name);
             $sqlUpdate->bindParam(':userEmail', $user->email);
             $sqlUpdate->bindParam(':isClient', $user->client, PDO::PARAM_INT);
-            $sqlUpdate->bindParam(':userPassword', $user->password);
             $sqlUpdate->bindParam(':spam', $user->spam, PDO::PARAM_INT);
             $sqlUpdate->bindParam(':phone', $user->phone);
             $sqlUpdate->bindParam(':userId', $user->id);
             $this->registry['logger']->lwrite($user->phone);
             $this->executeQuery($sqlUpdate, 'Error when updating user in DB');
             $sqlUpdate->closeCursor();
+            //If user has changed his password
+            if ($user->password != $this->default) {
+                $sqlUpdate = $this->db->prepare('UPDATE profiles SET password=:password, salt=:salt WHERE id = (SELECT profile FROM users WHERE id = :userId)');
+                $sqlUpdate->bindParam(':userId', $user->id);
+                $salt = $this->generateSalt();
+                $sqlUpdate->bindParam(':salt', $salt);
+                $sqlUpdate->bindParam(':password', $this->hashPassword($salt, $user->password));
+                $this->executeQuery($sqlUpdate, 'Error when updating password for user ' . $user->id);
+                $sqlUpdate->closeCursor();
+                $user->password = $this->default;
+            }
         }
         return $user;
     }
@@ -224,6 +249,7 @@ Class Model {
         $user->client = $data['client'];
         $user->spam = $data['spam'];
         $user->phone = $data['phone'];
+        $user->password = $this->default;
         $sqlLink = $this->db->prepare($this->linkProfile);
         $sqlLink->bindParam(":userId", $user->id);
         $sqlLink->bindParam(":profileId", $data['id']);
@@ -233,17 +259,17 @@ Class Model {
     }
     
     function checkUser($userEmail, $userPassword) {
-        $sqlSelect = $this->db->prepare($this->checkUser);
+        $sqlSelect = $this->db->prepare('SELECT password, salt FROM profiles WHERE email=:userEmail');
         $sqlSelect->bindParam(':userEmail', $userEmail);
-        $sqlSelect->bindParam(':userPassword', $userPassword); 
         $this->executeQuery($sqlSelect, 'Error when checking user existance');
-        $count = $sqlSelect->fetchColumn();
+        $data = $sqlSelect->fetch();
         $sqlSelect->closeCursor();
-        if ($count == 0) {
-            return false;
-        } else {
-            return true;
+        if ($data) {
+            if($this->confirmPassword($data['password'], $data['salt'], $userPassword)){
+                return true;
+            }
         }
+        return false;
     }
     
     function getNews() {

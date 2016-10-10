@@ -377,3 +377,97 @@ test test 3
 [07/Oct/2016:10:15:38] (index) Unable to set var `user`. Already set, and overwrite not allowed.
 [07/Oct/2016:10:15:38] (index) 404: Trying to access route=fgdfgd
 [10/Oct/2016:08:14:43] (index) 404: Trying to access route=sdfgdfg
+[10/Oct/2016:14:07:48] (index) action: register user: vvv
+[10/Oct/2016:14:07:49] (index) 
+[10/Oct/2016:15:03:57] (index) action: register user: qqq
+[10/Oct/2016:15:06:14] (index) action: register user: qqq
+[10/Oct/2016:15:06:15] (index) 
+[10/Oct/2016:15:21:13] (index) authentication failed
+[10/Oct/2016:15:21:13] (index) action: login user: 
+[10/Oct/2016:15:21:13] (index) <div id='error'>Неправильная почта или пароль<br></div>
+[10/Oct/2016:15:23:41] (index) authentication succeded
+[10/Oct/2016:15:23:41] (index) action: login user: 
+[10/Oct/2016:15:23:41] (index) 
+[10/Oct/2016:15:47:52] (index) action: update user: qqq
+[10/Oct/2016:15:47:52] (index) 
+[10/Oct/2016:15:47:52] (index) 
+[10/Oct/2016:15:48:27] (index) action: login user: 
+[10/Oct/2016:15:48:27] (index) <div id='error'>Неправильная почта или пароль<br></div>
+[10/Oct/2016:15:48:30] (index) action: login user: 
+[10/Oct/2016:15:48:30] (index) 
+[10/Oct/2016:15:49:19] (index) action: login user: 
+[10/Oct/2016:15:49:19] (index) <div id='error'>Неправильная почта или пароль<br></div>
+[10/Oct/2016:15:49:27] (index) action: login user: 
+[10/Oct/2016:15:49:27] (index) <div id='error'>Неправильная почта или пароль<br></div>
+[10/Oct/2016:15:52:14] (index) Password: Samara Hash: 9dc59b7bbc9586a3296282498da09ca9
+[10/Oct/2016:15:52:14] (index) action: login user: 
+[10/Oct/2016:15:52:14] (index) <div id='error'>Неправильная почта или пароль<br></div>
+[10/Oct/2016:15:52:49] (index) Password: Samara Hash: 9dc59b7bbc9586a3296282498da09ca9
+[10/Oct/2016:15:52:49] (index) action: login user: 
+[10/Oct/2016:15:52:49] (index) 
+[10/Oct/2016:15:53:25] (index) Password: samara Hash: 3eb4b10b5f512417b22d3a66e776a44b
+[10/Oct/2016:15:53:25] (index) action: login user: 
+[10/Oct/2016:15:53:25] (index) <div id='error'>Неправильная почта или пароль<br></div>
+[10/Oct/2016:15:53:30] (index) Password: SAMARA Hash: b2e263043bc55a48b9b7390b02f661a6
+[10/Oct/2016:15:53:30] (index) action: login user: 
+[10/Oct/2016:15:53:30] (index) <div id='error'>Неправильная почта или пароль<br></div>
+[10/Oct/2016:15:53:35] (index) Password: Samara Hash: 9dc59b7bbc9586a3296282498da09ca9
+[10/Oct/2016:15:53:35] (index) action: login user: 
+[10/Oct/2016:15:53:35] (index) 
+[10/Oct/2016:15:54:02] (index) Password: clever Hash: 644982fcb2c3f002b5ee5183b2c63a3d
+[10/Oct/2016:15:54:02] (index) action: login user: 
+[10/Oct/2016:15:54:02] (index) <div id='error'>Неправильная почта или пароль<br></div>
+[10/Oct/2016:15:54:40] (index) Password: clever Hash: 644982fcb2c3f002b5ee5183b2c63a3d
+[10/Oct/2016:15:54:40] (index) action: login user: 
+[10/Oct/2016:15:54:40] (index) 
+[10/Oct/2016:15:55:23] (index) Password: nordnomo Hash: 3ae0e3877dedeb9e68d6b2142732b289
+[10/Oct/2016:15:55:23] (index) action: login user: 
+[10/Oct/2016:15:55:23] (index) <div id='error'>Неправильная почта или пароль<br></div>
+[10/Oct/2016:15:55:55] (index) Password: nordnomo Hash: 3ae0e3877dedeb9e68d6b2142732b289
+[10/Oct/2016:15:55:55] (index) action: login user: 
+[10/Oct/2016:15:55:55] (index) 
+[10/Oct/2016:15:56:16] (index) action: update user: ЕвгенияТ
+[10/Oct/2016:15:56:16] (index) dfsdfsf
+[10/Oct/2016:15:56:16] (index) 
+[10/Oct/2016:15:57:02] (index) Password: clever Hash: 644982fcb2c3f002b5ee5183b2c63a3d
+[10/Oct/2016:15:57:02] (index) action: login user: 
+[10/Oct/2016:15:57:02] (index) 
+[10/Oct/2016:15:57:27] (index) action: update user: Наталия
+[10/Oct/2016:15:57:27] (index) 
+[10/Oct/2016:15:57:27] (index) 
+[10/Oct/2016:15:57:56] (index) Password: Samara Hash: 9dc59b7bbc9586a3296282498da09ca9
+[10/Oct/2016:15:57:56] (index) action: login user: 
+[10/Oct/2016:15:57:56] (index) 
+[10/Oct/2016:15:58:10] (index) action: update user: Vit
+[10/Oct/2016:15:58:10] (index) 89171444004
+[10/Oct/2016:15:58:10] (index) 
+[10/Oct/2016:15:58:31] (index) Password: nordnomo Hash: 38ba54e405eb34a59b2cac5f2bd74f44
+[10/Oct/2016:15:58:31] (index) action: login user: 
+[10/Oct/2016:15:58:31] (index) 
+[10/Oct/2016:15:58:43] (index) Password: clever Hash: a189b7ed281a4dcd3bb0ec541de35c5f
+[10/Oct/2016:15:58:43] (index) action: login user: 
+[10/Oct/2016:15:58:43] (index) 
+[10/Oct/2016:15:59:15] (index) Password: K9o11a29v8v19 Hash: 0d34ca2d65cd704351cb327b9cf09de6
+[10/Oct/2016:15:59:15] (index) action: login user: 
+[10/Oct/2016:15:59:15] (index) <div id='error'>Неправильная почта или пароль<br></div>
+[10/Oct/2016:15:59:45] (index) Password: K9o11a29v8v19 Hash: 0d34ca2d65cd704351cb327b9cf09de6
+[10/Oct/2016:15:59:45] (index) action: login user: 
+[10/Oct/2016:15:59:45] (index) 
+[10/Oct/2016:16:00:43] (index) action: update user: Екатерина Пешкова
+[10/Oct/2016:16:00:43] (index) 
+[10/Oct/2016:16:00:43] (index) 
+[10/Oct/2016:16:00:55] (index) Password: K9o11a29v8v19 Hash: 52caf4046d56dd489e928716a72e8f36
+[10/Oct/2016:16:00:55] (index) action: login user: 
+[10/Oct/2016:16:00:55] (index) 
+[10/Oct/2016:16:01:42] (index) Password: Benjamin2016 Hash: 62ee00d4b1d58d8b81394cd526b23664
+[10/Oct/2016:16:01:42] (index) action: login user: 
+[10/Oct/2016:16:01:42] (index) <div id='error'>Неправильная почта или пароль<br></div>
+[10/Oct/2016:16:02:04] (index) Password: Benjamin2016 Hash: 62ee00d4b1d58d8b81394cd526b23664
+[10/Oct/2016:16:02:04] (index) action: login user: 
+[10/Oct/2016:16:02:04] (index) <div id='error'>Неправильная почта или пароль<br></div>
+[10/Oct/2016:16:02:22] (index) Password: Benjamin2016 Hash: 62ee00d4b1d58d8b81394cd526b23664
+[10/Oct/2016:16:02:22] (index) action: login user: 
+[10/Oct/2016:16:02:22] (index) 
+[10/Oct/2016:16:02:40] (index) action: update user: Tatyana
+[10/Oct/2016:16:02:40] (index)  79608120801
+[10/Oct/2016:16:02:40] (index) 
