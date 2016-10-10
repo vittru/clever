@@ -3,7 +3,7 @@
 Class Controller_Search Extends Controller_Base {
 
     function index() {
-        $this->registry['model']->logVisit(10);
+        $this->registry['model']->logVisit(10, false , $_SERVER['QUERY_STRING']);
         $this->registry['template']->set('foundgoods', $this->performSearch($_GET));
         $this->registry['template']->show('search');
     }

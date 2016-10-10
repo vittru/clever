@@ -12,8 +12,8 @@ Class Model {
             . "WHERE u.id = :userId AND u.profile = p.id";
     private $addUser = "INSERT INTO users (ip, useragent)"
             . "VALUES(:ip, :userAgent)";
-    private $addVisit = "INSERT INTO visits (userid, pageid, time, good)"
-            . "VALUES(:userId, :pageId, :time, :goodId)";
+    private $addVisit = "INSERT INTO visits (userid, pageid, time, good, url)"
+            . "VALUES(:userId, :pageId, :time, :goodId, :url)";
     private $lastVisit = "SELECT MAX(time) FROM visits "
             . "WHERE userid=:userId";
     private $profileExists = "SELECT p.id FROM profiles p, users u "
@@ -124,7 +124,7 @@ Class Model {
     }
     
     //Adds a record about visit
-    function logVisit($pageId, $goodId=false) {
+    function logVisit($pageId, $goodId=false, $url=false) {
         $time = date("Y-m-d H:i:s");
         $sqlLog = $this->db->prepare($this->addVisit);
         $sqlLog->bindParam(':userId', $_SESSION['user']->id);
@@ -134,6 +134,10 @@ Class Model {
             $sqlLog->bindParam (':goodId', $goodId);
         else
             $sqlLog->bindValue (':goodId', null, PDO::PARAM_INT);
+        if ($url)
+            $sqlLog->bindParam (':url', urldecode ($url));
+        else
+            $sqlLog->bindValue (':url', null, PDO::PARAM_INT);
         $this->executeQuery($sqlLog, 'Error when logging a visit to DB');
         $sqlLog->closeCursor();
     }

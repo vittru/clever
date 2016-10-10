@@ -376,3 +376,4 @@ test test 3
 [07/Oct/2016:08:11:04] (index) Unable to set var `user`. Already set, and overwrite not allowed.
 [07/Oct/2016:10:15:38] (index) Unable to set var `user`. Already set, and overwrite not allowed.
 [07/Oct/2016:10:15:38] (index) 404: Trying to access route=fgdfgd
+[10/Oct/2016:08:14:43] (index) 404: Trying to access route=sdfgdfg
