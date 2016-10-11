@@ -194,6 +194,12 @@ function checkPromo(promo) {
                 }
                 if (k === 'total') {
                     $('#total').text(v + ' руб.');
+                    if (v < 500) {
+                        $('#amount-left').text(500-v);
+                        $('#delivery-info').show();
+                    } else {
+                        $('#delivery-info').hide()
+                    }
                 }
             });
         }

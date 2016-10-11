@@ -178,6 +178,9 @@ a.btn:focus {
 #checkout .checkout-area .checkout-right h4 { 
   color: #3fc35f;
 }
+#checkout .checkout-area #delivery-info {
+    color: #E46713;
+}
 #aa-blog-archive .aa-blog-archive-area .aa-blog-content .aa-blog-content-single h4 a:hover, #aa-blog-archive .aa-blog-archive-area .aa-blog-content .aa-blog-content-single h4 a:focus {
   color: #3fc35f;
 }
