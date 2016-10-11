@@ -55,7 +55,6 @@ Class Model {
     
     private function confirmPassword($hash, $salt, $password)
     {
-        $this->registry['logger']->lwrite('Password: ' . $password . ' Hash: ' . $this->hashPassword($salt, $password));
         return $this->hashPassword($salt, $password) == $hash;
     }
  
@@ -745,11 +744,17 @@ Class Model {
     }
     
     public function getPromoAmount($promoId) {
-        $sqlSelect = $this->db->prepare('SELECT amount FROM promos WHERE id=:promoId');
+        $sqlSelect = $this->db->prepare('SELECT amount, percent FROM promos WHERE id=:promoId');
         $sqlSelect->bindParam(':promoId', $promoId);
         $this->executeQuery($sqlSelect, 'Error when getting amount for promo ' . $promoId);
-        $promoAmount = $sqlSelect->fetchColumn();
+        $promoAmount = [
+            'amount' => 0,
+            'percent' => 0
+        ];
+        $data = $sqlSelect->fetch();
         $sqlSelect->closeCursor(); 
+        $promoAmount['amount'] = $data['amount'];
+        $promoAmount['percent'] = $data['percent'];
         return $promoAmount;
     }    
     

@@ -163,39 +163,42 @@ $(document).on('click', '.aa-search-box #search-text', function (e) {
 });
 
 function checkPromo(promo) {
-    if (promo) {
-        $.ajax({    
-            type: "GET",   
-            url: "/buy/checkpromo",   
-            data: "promo=" + promo,
-            dataType: "html",
-            success: function (a){
-                var code = true;
-                JSON.parse(a, function(k, v) {
-                    if (k === 'error') {
-                        if (v) {
-                            $("#promo-error").text(v);
-                            $("#promo-error").show();
-                            code = false;
-                        } else {
-                            $('#promo-error').hide();
-                        }    
-                    }
-                    if (!code) {
-                        $('#discount').hide();
+    $.ajax({    
+        type: "GET",   
+        url: "/buy/checkpromo",   
+        data: "promo=" + promo,
+        dataType: "html",
+        success: function (a){
+            var code = true;
+            JSON.parse(a, function(k, v) {
+                if (k === 'error') {
+                    if (v) {
+                        $("#promo-error").text(v);
+                        $("#promo-error").show();
+                        code = false;
                     } else {
-                        if (k === 'discount') {
-                            $('#discount').find('#sum').text(v + ' руб.');    
-                            $('#discount').show();
-                        }
-                        if (k === 'total') {
-                            $('#total').text(v + ' руб.');
-                        }
+                        $('#promo-error').hide();
+                    }    
+                }
+                if (!code) {
+                    $('#discount').hide();
+                } else {
+                    if (k === 'discount' && v) {
+                        $('#discount').find('#sum').text(v + ' руб.');    
+                        $('#discount').show();
                     }
-                });
-            }
-        });
-    } else {
+                    if (k === 'percent' && v) {
+                        $('#discount').find('#sum').text(v + ' %');    
+                        $('#discount').show();                            
+                    }
+                }
+                if (k === 'total') {
+                    $('#total').text(v + ' руб.');
+                }
+            });
+        }
+    });
+    if (!promo) {
         $('#discount').hide();
         $('#promo-error').hide();
     }   

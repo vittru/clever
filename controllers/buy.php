@@ -72,7 +72,9 @@ Class Controller_Buy Extends Controller_Base {
             $promoId = $this->registry['model']->getPromoId(trim($promo));
             $promoAmount = $this->registry['model']->getPromoAmount($promoId);
         }   
-        $total = $this->getCartTotal() - $promoAmount;
+        $total = $this->getCartTotal() - $promoAmount['amount'] - ($this->getCartTotal() * $promoAmount['percent'] / 100);
+        if ($total < 0)
+            $total = 0;
         $message = $message . "Сумма заказа: " . $total . " руб. \r\n";
         return $message;
     }
@@ -120,7 +122,10 @@ Class Controller_Buy Extends Controller_Base {
             $error = 'Вы уже использовали этот промокод';
             $discount = 0;
         };
-        $arr = array('error' => $error, 'discount' => $discount, 'total' => $this->getCartTotal() - $discount);
+        $total = $this->getCartTotal() - $discount['amount'] - $this->getCartTotal() * $discount['percent'] / 100;
+        if ($total < 0)
+            $total = 0;
+        $arr = array('error' => $error, 'discount' => $discount['amount'], 'percent' => $discount['percent'], 'total' => $total);
         echo json_encode($arr);
     }    
 }    
