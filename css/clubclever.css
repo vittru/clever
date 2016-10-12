@@ -1226,14 +1226,13 @@ h2 {
 #cart-view .cart-view-area {
   display: inline;
   float: left;
-  padding-top: 50px;
   width: 100%;
 }
 #cart-view .cart-view-area .cart-view-table {
   display: inline;
   float: left;
   width: 100%;
-  padding: 30px;
+  padding: 10px 0;
   min-height: 350px;
 }
 #cart-view .cart-view-area .cart-view-table .table {
@@ -1327,7 +1326,7 @@ h2 {
 #checkout .checkout-area {
   display: inline;
   float: left;
-  padding: 50px 0;
+  padding: 10px 0;
   width: 100%;
 }
 #checkout .checkout-area .checkout-left {

@@ -6,6 +6,7 @@ include 'header.php';
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                <h1>Корзина</h1>
                 <div class="cart-view-area">
                     <div class="cart-view-table">
                         <div class="table-responsive">
