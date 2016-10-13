@@ -492,3 +492,78 @@ Email: vitaly.trusov@gmail.com
 [12/Oct/2016:11:44:50] (index) creating orderedgood
 [12/Oct/2016:11:44:50] (index) creating orderedgood
 [12/Oct/2016:11:44:50] (index) creating orderedgood
+[13/Oct/2016:09:37:48] (index) Ваш заказ добавлен на сайт. Менеджер свяжется с вами в ближайшее время.
+Заказ №28
+Покупатель: ЕвгенияТ
+Email: Tev0205@gmail.com
+Телефон: xfsdf
+Товары: 
+| ОМ044 | Бальзам для губ "Заботливый с Облепихой" 5 г | 1 | 160 руб. | 
+| МК141 | Хозяйственное мыло Pure Water с эфирными маслами 175 г | 3 | 360 руб. | 
+Сумма заказа: 520 руб. 
+Самовывоз из Самара, ул. Ново-Садовая, 271
+Желаемое время самовывоза: sadasd в asdasd
+[13/Oct/2016:09:37:48] (index) xfsdf
+[13/Oct/2016:09:38:35] (index) Error when saving order
+[13/Oct/2016:09:38:35] (index) exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`orders`, CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`branchId`) REFERENCES `branches` (`id`) ON DELETE SET NULL ON UPDATE CASCADE)' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(651): Model->executeQuery(Object(PDOStatement), 'Error when savi...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/buy.php(17): Model->saveOrder('51', '\xD0\x95\xD0\xB2\xD0\xB3\xD0\xB5\xD0\xBD\xD0\xB8\xD1\x8F\xD0...', 'Tev0205@gmail.c...', 'xfsdf', '', '', '', 'dfdsf dsfsdfsd', '')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Buy->complete()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(25): Router->delegate()
+#5 {main}getMessage
+[13/Oct/2016:09:38:35] (index) Ваш заказ добавлен на сайт. Менеджер свяжется с вами в ближайшее время.
+Заказ №0
+Покупатель: ЕвгенияТ
+Email: Tev0205@gmail.com
+Телефон: xfsdf
+Товары: 
+| ББ020 | Скраб "Fresh faсe" для сухой кожи 3 г | 1 | 115 руб. | 
+| ББ017 | Скраб "Fresh face" для нормальной и жирной кожи 3 г | 1 | 115 руб. | 
+Сумма заказа: 230 руб. 
+Доставка курьером по адресу: dfdsf, dsfsdfsd
+[13/Oct/2016:09:38:35] (index) xfsdf
+[13/Oct/2016:09:43:03] (index) Branch is 
+[13/Oct/2016:09:43:04] (index) Error when saving order
+[13/Oct/2016:09:43:04] (index) exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`orders`, CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`branchId`) REFERENCES `branches` (`id`) ON DELETE SET NULL ON UPDATE CASCADE)' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(652): Model->executeQuery(Object(PDOStatement), 'Error when savi...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/buy.php(17): Model->saveOrder('51', '\xD0\x95\xD0\xB2\xD0\xB3\xD0\xB5\xD0\xBD\xD0\xB8\xD1\x8F\xD0...', 'Tev0205@gmail.c...', 'xfsdf', '', '', '', 'vcvcxv dsfsdfsd', '')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Buy->complete()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(25): Router->delegate()
+#5 {main}getMessage
+[13/Oct/2016:09:43:04] (index) Ваш заказ добавлен на сайт. Менеджер свяжется с вами в ближайшее время.
+Заказ №0
+Покупатель: ЕвгенияТ
+Email: Tev0205@gmail.com
+Телефон: xfsdf
+Товары: 
+| ББ004 | Биочистка  "Нежная" 10 г | 1 | 75 руб. | 
+| ББ040 | Биочистка серебряная для жирной и нормальной кожи 70 г | 1 | 860 руб. | 
+Сумма заказа: 935 руб. 
+Доставка курьером по адресу: vcvcxv, dsfsdfsd
+[13/Oct/2016:09:43:04] (index) xfsdf
+[13/Oct/2016:09:44:40] (index) Branch is 
+[13/Oct/2016:09:44:40] (index) Ваш заказ добавлен на сайт. Менеджер свяжется с вами в ближайшее время.
+Заказ №32
+Покупатель: ЕвгенияТ
+Email: Tev0205@gmail.com
+Телефон: xfsdf
+Товары: 
+| МК143 | Стиральный порошок Pure Water 300 г | 1 | 160 руб. | 
+Сумма заказа: 160 руб. 
+Доставка курьером по адресу: cvsdfs, sdfsdf
+[13/Oct/2016:09:44:40] (index) xfsdf
+[13/Oct/2016:09:47:57] (index) Ваш заказ добавлен на сайт. Менеджер свяжется с вами в ближайшее время.
+Заказ №33
+Покупатель: ЕвгенияТ
+Email: Tev0205@gmail.com
+Телефон: xfsdf
+Товары: 
+| МК141 | Хозяйственное мыло Pure Water с эфирными маслами 175 г | 1 | 120 руб. | 
+Сумма заказа: 120 руб. 
+Самовывоз из Самара, ул. Ново-Садовая, 271
+Желаемое время самовывоза: dsfds в dsfsdfsd
+[13/Oct/2016:09:47:57] (index) xfsdf

@@ -8,7 +8,7 @@ include 'header.php';
             <div class="col-md-12">
                 <div class="row">
                     <div class="aa-product-header">
-                    <h3>Вы искали</h3>
+                    <h1>Вы искали</h1>
                     <p><?php
                     foreach($_GET as $key => $value){
                         if (!empty($value) and $key!="route") {

@@ -52,6 +52,7 @@ if ((new \FilesystemIterator($bannersdir))->valid()) {
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                <h1 class="center">Популярные товары</h1>
                 <div class="row">
                     <div class="aa-product-area">
                         <div class="aa-product-inner">
@@ -114,6 +115,7 @@ if ((new \FilesystemIterator($bannersdir))->valid()) {
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                <h1 class="center">Наши бренды</h1>
                 <div class="aa-client-brand-area">
                     <ul class="aa-client-brand-slider">
                         <?php 

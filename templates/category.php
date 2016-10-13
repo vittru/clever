@@ -9,15 +9,15 @@ include 'header.php';
                 <div class="row">
                     <div class="aa-product-header">
                     <h1><?php 
-                    if ($showFirm) 
-                        echo $showFirm->name; 
+                    if ($showCategory) 
+                        echo $showCategory->name; 
                     else
-                        echo 'Наши бренды';
+                        echo 'Категории товаров';
                     ?></h1>
-                    <p><?php if ($showFirm)
-                        echo $showFirm->description;
+                    <p><?php if ($showCategory)
+                        echo $showCategory->description;
                     else 
-                        echo 'Мы торгуем только товарами проверенных годами брендов';
+                        echo 'Мы постоянно стараемся расширить наш ассортимент';
                     ?></p>
                     </div>
                 </div>
@@ -25,43 +25,23 @@ include 'header.php';
                     <div class="aa-product-area">
                         <div class="aa-product-inner">
                             <?php
-                            if ($showFirm) {
+                            if ($showCategory) {
                             ?>
-                            <ul class="nav nav-tabs aa-products-tab">
-                                <?php 
-                                $i=1;
-                                foreach($showFirm->categories as $catId=>$catName) {
-                                    ?>
-                                <li <?php if ($i==1) echo 'class="active"' ?>><a href="#cat<?php echo $catId ?>" data-toggle="tab"><?php echo $catName ?></a></li>
-                                    <?php
-                                    $i++;
-                                }?>
-                            </ul>
                             <div class="tab-content">
-                                <?php 
-                                $i=0;
-                                foreach($showFirm->categories as $catId=>$catName) {
-                                    $i++
-                                ?>
                                 <!-- Category -->
-                                <div class="tab-pane fade <?php if ($i==1) echo 'in active' ?>" id="cat<?php echo $catId ?>">
+                                <div class="tab-pane fade in active" id="<?php echo $showCategory->id ?>">
                                     <?php
                                     include 'sort.php';
                                     ?>
                                     <ul class="aa-product-catg">
                                     <?php
-                                    foreach($showFirm->goods as $good) {
-                                        if (in_array($catId, $good->cats)) {
-                                            $good->showInCatalog();
-                                        }
+                                    foreach($showCategory->goods as $good) {
+                                        $good->showInCatalog();
                                     }
                                     ?>
                                     </ul>
                                 </div>
                                 <!-- /Category -->
-                                <?php
-                                }
-                                ?>
                             </div>  
                             <?php
                             include 'modalgood.php';
@@ -69,13 +49,13 @@ include 'header.php';
                             ?>
                                 <ul class="aa-product-catg">
                                     <?php
-                                    foreach($firms as $id=>$firm) {
+                                    foreach($categories as $category) {
                                     ?>    
                                     <li class="col-sm-3 good">
                                       <figure>
-                                        <a class="aa-product-img" href="/catalog/firm/<?php echo $firm->url ?>"><img src="/images/firms/firm<?php echo $id ?>.png" alt="<?php echo $firm->name ?>"></a>
+                                        <a class="aa-product-img" href="/catalog/category/<?php echo $category->url ?>"><img src="/images/category/category<?php echo $category->id ?>.png" alt="<?php echo $category->name ?>"></a>
                                         <figcaption>
-                                            <h4 class="aa-product-title"><a href="/catalog/firm/<?php echo $firm->url ?>"><?php echo $firm->name ?></a></h4>
+                                            <h4 class="aa-product-title"><a href="/catalog/category/<?php echo $category->url ?>"><?php echo $category->name ?></a></h4>
                                         </figcaption>
                                       </figure>                         
                                     </li> 

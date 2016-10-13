@@ -8,14 +8,14 @@ include 'header.php';
             <div class="col-md-12">
                 <div class="row">
                     <div class="aa-product-header">
-                    <h3><?php 
+                    <h1><?php 
                     if ($type) 
-                        echo 'Товары ' . $type; 
+                        echo 'Косметика ' . mb_strtolower ($type); 
                     else
-                        echo 'Категории товаров';
-                    ?></h3>
+                        echo 'Натуральная косметика';
+                    ?></h1>
                     <p><?php if (!$type)
-                        echo 'Мы постарались разбить весь наш ассортимент по категориям для удобства поиска';
+                        echo 'Мы постарались разбить весь наш ассортимент косметики по категориям для удобства поиска';
                     ?></p>
                     </div>
                 </div>

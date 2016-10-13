@@ -632,7 +632,10 @@ Class Model {
         $sqlInsert->bindParam(':name', $name);
         $sqlInsert->bindParam(':email', $email);
         $sqlInsert->bindParam(':phone', $phone);
-        $sqlInsert->bindParam(':branch', $branch);
+        if ($branch)
+            $sqlInsert->bindParam(':branch', $branch);
+        else
+            $sqlInsert->bindValue (':branch', null, PDO::PARAM_INT);
         $sqlInsert->bindParam(':takeDate', $takeDate);
         $sqlInsert->bindParam(':takeTime', $takeTime);
         $sqlInsert->bindParam(':address', $address);
@@ -889,5 +892,46 @@ Class Model {
         }    
         $sqlSelect->closeCursor();
         return $goods;
-    }   
+    } 
+    
+    function getCategoryByUrl($url) {
+        $sqlSelect = $this->db->prepare('SELECT * FROM categories WHERE url=:url');
+        $sqlSelect->bindParam(':url', $url);
+        $this->executeQuery($sqlSelect, 'Error when getting category with url='.$url);
+        $data = $sqlSelect->fetch();
+        $sqlSelect->closeCursor();
+        if ($data) {
+            $category = new Category($data['id'], $data['name'], $data['description'], $data['url']);
+        }
+        return $category;
+    }
+    
+    function getCategoryGoods($categoryId) {
+        $sqlSelect = $this->db->prepare('SELECT goodid FROM `goods-categories` WHERE categoryId=:categoryId');
+        $sqlSelect->bindParam(':categoryId', $categoryId);
+        $this->executeQuery($sqlSelect, 'Error when getting goods of category with id=' . $ategoryId);
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $good = $this->getGood($data['goodid']);
+            if (!isset($goods))
+                $goods = [$good];
+            else
+                array_push($goods, $good);
+        }
+        $sqlSelect->closeCursor();
+        return $goods;
+    }
+    
+    function getCategories() {
+        $sqlSelect = $this->db->prepare('SELECT * FROM categories ORDER BY name');
+        $this->executeQuery($sqlSelect, 'Error when getting categories');
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $category = New Category($data['id'], $data['name'], $data['description'], $data['url']);
+            if (!isset($categories))
+                $categories = [$category];
+            else
+                array_push($categories, $category);
+        }   
+        $sqlSelect->closeCursor();
+        return $categories;
+    }
 }

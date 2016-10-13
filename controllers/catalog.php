@@ -34,7 +34,6 @@ Class Controller_Catalog Extends Controller_Base {
     }
     
     function type() {
-        $this->registry['model']->logVisit(4);
         $typeId=$_GET['id'];
         if ($typeId) {
             $firms = $this->registry['model']->getTypeFirms($typeId);
@@ -46,10 +45,29 @@ Class Controller_Catalog Extends Controller_Base {
             $this->registry['template']->set('firms', $selectedFirms);
             $this->registry['template']->set('type', $this->registry['types'][$typeId]);
             $this->registry['template']->set('goods', $this->registry['goods']);
-        } else
+            $this->registry['model']->logVisit(4, $typeId);
+
+        } else {
             $this->registry['template']->set('types', $this->registry['types']);
+            $this->registry['model']->logVisit(4);
+        }    
         $this->registry['template']->show('type');
-    }    
+    }
+
+    function category() {
+        $rt=explode('/', $_GET['route']);
+        $route=$rt[(count($rt)-1)];
+        $category = $this->registry['model']->getCategoryByUrl($route);
+        if ($category) {
+            $this->registry['model']->logVisit(5, $category->id);
+            $category->goods = $this->registry['model']->getCategoryGoods($category->id);
+            $this->registry['template']->set('showCategory', $category);
+        } else {
+            $this->registry['model']->logVisit(5);
+            $this->registry['template']->set('categories', $this->registry['model']->getCategories());
+        }
+        $this->registry['template']->show('category');
+    }
 }
 
 
