@@ -869,7 +869,7 @@ Class Model {
     }
     
     function getOrder($orderId) {
-        $sqlSelect = $this->db->prepare('SELECT o.id, o.date, s.name status, p.amount promo, IF (o.branchId=0, "Доставка", "Самовывоз") type, SUM(og.price * og.quantity) total, o.userId, pr.name profileId FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id LEFT JOIN `orders-goods` og ON o.id=og.orderid LEFT JOIN profiles pr ON o.profileId=pr.id WHERE o.id=:orderId');
+        $sqlSelect = $this->db->prepare('SELECT o.id, o.date, s.name status, p.amount promo, IF (o.branchId is null, "Доставка", "Самовывоз") type, SUM(og.price * og.quantity) total, o.userId, pr.name profileId FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id LEFT JOIN `orders-goods` og ON o.id=og.orderid LEFT JOIN profiles pr ON o.profileId=pr.id WHERE o.id=:orderId');
         $sqlSelect->bindParam(':orderId', $orderId);
         $this->executeQuery($sqlSelect, 'Error when getting details for order '.$orderId);
         $data = $sqlSelect->fetch();
