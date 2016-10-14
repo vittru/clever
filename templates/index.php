@@ -8,7 +8,7 @@ if ((new \FilesystemIterator($bannersdir))->valid()) {
 ?>
 
 <!-- Start slider -->
-<section id="aa-slider">
+<section id="aa-slider" class="hidden-xs hidden-sm">
     <div class="aa-slider-area">
         <div id="sequence" class="seq">
             <div class="seq-screen">

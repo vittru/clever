@@ -119,6 +119,9 @@ img {
 #aa-header .aa-header-top .aa-header-top-left .cellphone {
   float: left;
 }
+#aa-header .aa-header-top .aa-header-top-left a.btn {
+  float: left;
+}
 #aa-header .aa-header-top .aa-header-top-left .cellphone p {
   font-size: 14px;
   margin-bottom: 0;
@@ -2490,10 +2493,6 @@ h2 {
   #aa-header .aa-header-top .aa-header-top-left .aa-language .btn {
     padding: 6px 1px;
     font-size: 10px;
-  }
-
-  #aa-header .aa-header-top .aa-header-top-left .aa-language {
-    padding-top: 3px;
   }
 
   #aa-product-category .aa-product-catg-content .aa-product-catg-head .aa-product-catg-head-left .aa-show-form {

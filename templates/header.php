@@ -50,26 +50,18 @@
                                         О нас
                                     </a>
                                 </div-->
-                                <div class="aa-header-top-left">
                                     <a class="btn" href="/common/delivery" type="button" id="delivery">
                                         Доставка
                                     </a>
-                                </div>
-                                <div class="aa-header-top-left">
                                     <a class="btn" href="/common/payment" type="button" id="payment">
                                         Оплата
                                     </a>
-                                </div>
-                                <div class="aa-header-top-left">
                                     <a class="btn" href="/common/moneyback" type="button" id="moneyback">
                                         Возврат
                                     </a>
-                                </div>
-                                <div class="aa-header-top-left">
                                     <a class="btn" href="/contacts" type="button" id="contacts">
                                         Контакты
                                     </a>
-                                </div>
 
                                 <!-- start cellphone -->
                                 <div class="cellphone hidden-xs">
