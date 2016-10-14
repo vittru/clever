@@ -70,16 +70,19 @@
                     <div class="short-desc"><?php echo $showGood->shortdesc ?></div>
                     <?php
                     $firm = $this->registry['firms'][$showGood->firmId];
+                    if ($firm) {
                     ?>
-                    <div class="firm"><b>Бренд:</b> <a href="/catalog/firm/<?php echo $firm->url; ?>"><?php echo $firm->name ?></a></div>  
-
+                        <div class="firm"><b>Бренд:</b> <a href="/catalog/firm/<?php echo $firm->url; ?>"><?php echo $firm->name ?></a></div>  
+                    <?php
+                    }
+                    ?>
                     <div class="aa-price-block">
                         <?php
                         if (sizeof($showGood->sizes) > 0) { 
                         ?>
                         <table class="table">
                             <th>Артикул</th>
-                            <th>Объем</th>
+                            <th>Размер</th>
                             <th>Цена</th>
                             <th>Количество</th>
                             <th>Наличие</th>

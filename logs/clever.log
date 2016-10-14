@@ -576,3 +576,209 @@ Email: Tev0205@gmail.com
 [13/Oct/2016:15:30:33] (index) creating orderedgood
 [13/Oct/2016:15:31:13] (index) creating orderedgood
 [13/Oct/2016:15:31:27] (index) creating orderedgood
+[14/Oct/2016:06:52:42] (index) **** START Saving product ****
+[14/Oct/2016:06:52:42] (index) 385
+[14/Oct/2016:06:52:42] (index) Котик
+[14/Oct/2016:06:52:42] (index) Весёлая мурлыкающая компания мечтает, чтобы Вы пригласили их в гости. Обещают с собой принести много улыбок и хорошего настроения. 
+Котик станет прекрасным украшением любого интерьера.
+[14/Oct/2016:06:52:42] (index) Подарит массу положительных эмоций Вам и Вашим детям!
+[14/Oct/2016:06:52:42] (index) велсофт или 100% хлопок, синтепух.
+[14/Oct/2016:06:52:42] (index) Цвет и материал игрушки может отличаться от представленного на фото. Уточняйте, пожалуйста, при заказе.
+[14/Oct/2016:06:52:42] (index) 
+[14/Oct/2016:06:52:42] (index) Не ограничен.
+[14/Oct/2016:06:52:42] (index) Индивидуальная непереносимость.
+[14/Oct/2016:06:52:42] (index) **** END Saving product ****
+[14/Oct/2016:06:52:43] (index) Error when adding/updating a good
+[14/Oct/2016:06:52:43] (index) exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`goods`, CONSTRAINT `goods_ibfk_1` FOREIGN KEY (`firmId`) REFERENCES `firms` (`id`) ON DELETE SET NULL ON UPDATE CASCADE)' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(355): Model->executeQuery(Object(PDOStatement), 'Error when addi...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/editgood.php(30): Model->addGood('385', '\xD0\x9A\xD0\xBE\xD1\x82\xD0\xB8\xD0\xBA', '\xD0\x92\xD0\xB5\xD1\x81\xD1\x91\xD0\xBB\xD0\xB0\xD1\x8F ...', '\xD0\x9F\xD0\xBE\xD0\xB4\xD0\xB0\xD1\x80\xD0\xB8\xD1\x82 ...', false, '0', '\xD0\xB2\xD0\xB5\xD0\xBB\xD1\x81\xD0\xBE\xD1\x84\xD1\x82 ...', '\xD0\xA6\xD0\xB2\xD0\xB5\xD1\x82 \xD0\xB8 \xD0\xBC\xD0...', NULL, '\xD0\x9D\xD0\xB5 \xD0\xBE\xD0\xB3\xD1\x80\xD0\xB0\xD0\xBD...', '\xD0\x98\xD0\xBD\xD0\xB4\xD0\xB8\xD0\xB2\xD0\xB8\xD0\xB4\xD1...')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Editgood->save()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(25): Router->delegate()
+#5 {main}getMessage
+[14/Oct/2016:06:53:12] (index) **** START Saving product ****
+[14/Oct/2016:06:53:12] (index) 385
+[14/Oct/2016:06:53:12] (index) Котик
+[14/Oct/2016:06:53:12] (index) Весёлая мурлыкающая компания мечтает, чтобы Вы пригласили их в гости. Обещают с собой принести много улыбок и хорошего настроения. 
+Котик станет прекрасным украшением любого интерьера.
+[14/Oct/2016:06:53:12] (index) Подарит массу положительных эмоций Вам и Вашим детям!
+[14/Oct/2016:06:53:12] (index) велсофт или 100% хлопок, синтепух.
+[14/Oct/2016:06:53:12] (index) Цвет и материал игрушки может отличаться от представленного на фото. Уточняйте, пожалуйста, при заказе.
+[14/Oct/2016:06:53:12] (index) 
+[14/Oct/2016:06:53:12] (index) Не ограничен.
+[14/Oct/2016:06:53:12] (index) Индивидуальная непереносимость.
+[14/Oct/2016:06:53:12] (index) **** END Saving product ****
+[14/Oct/2016:06:53:12] (index) Error when adding/updating a good
+[14/Oct/2016:06:53:12] (index) exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`goods`, CONSTRAINT `goods_ibfk_1` FOREIGN KEY (`firmId`) REFERENCES `firms` (`id`) ON DELETE SET NULL ON UPDATE CASCADE)' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(355): Model->executeQuery(Object(PDOStatement), 'Error when addi...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/editgood.php(30): Model->addGood('385', '\xD0\x9A\xD0\xBE\xD1\x82\xD0\xB8\xD0\xBA', '\xD0\x92\xD0\xB5\xD1\x81\xD1\x91\xD0\xBB\xD0\xB0\xD1\x8F ...', '\xD0\x9F\xD0\xBE\xD0\xB4\xD0\xB0\xD1\x80\xD0\xB8\xD1\x82 ...', false, '0', '\xD0\xB2\xD0\xB5\xD0\xBB\xD1\x81\xD0\xBE\xD1\x84\xD1\x82 ...', '\xD0\xA6\xD0\xB2\xD0\xB5\xD1\x82 \xD0\xB8 \xD0\xBC\xD0...', NULL, '\xD0\x9D\xD0\xB5 \xD0\xBE\xD0\xB3\xD1\x80\xD0\xB0\xD0\xBD...', '\xD0\x98\xD0\xBD\xD0\xB4\xD0\xB8\xD0\xB2\xD0\xB8\xD0\xB4\xD1...')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Editgood->save()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(25): Router->delegate()
+#5 {main}getMessage
+[14/Oct/2016:06:55:14] (index) **** START Saving product ****
+[14/Oct/2016:06:55:14] (index) 14
+[14/Oct/2016:06:55:14] (index) Биочистка  классическая
+[14/Oct/2016:06:55:14] (index) Биочистка - уникальное средство для умывания и очищения, действующие как губка для сбора всех вредных отложений и нормализующее ионный обмен.
+Биочистка предназначена для комплексного ежедневного ухода за кожей лица и тела, а также для восстановления повреждённых волос.
+100 % натуральный сухой минерально-солевой скраб для лица  выравнивает поверхность кожи, кожа становится упругой, эластичной, обретает здоровый и свежий вид. У жирной кожи снимается раздражение, исчезает жирный блеск, предотвращается появление угрей и юношеской угревой сыпи. Ускоряется заживление травм и гематом. Повышается способность кожи защищать от воздействия окружающей среды, патогенных микроорганизмов и вирусов. Биочистка идеально подготавливает кожу и усиливает действие питательных масок, кремов, гелей, мазей.
+Помимо косметического эффекта биочистка оказывает общеукрепляющее действие на соединительную ткань благодаря стимуляции обновления коллагена.
+[14/Oct/2016:06:55:14] (index) Комплекс для умывания, эффективное очищение кожи, восстановление упругости, нормализации жирной кожи.
+[14/Oct/2016:06:55:14] (index) - <b>природный цеолит</b>, обогащенный ионами меди и серебра, минерал вулканического происхождения (добывается в Читинской области) - удаляет из кожи вредные вещества и помещает в нее полезные;
+- <b>каолиновые глины</b> - идеальны для жирной и проблемной кожи лица, эффективно борются с микроорганизмами и токсинами в коже;
+- <b>природный диосмектит</b> - лекарственный сорбент, борется с вирусами, бактериями и их токсинами; 
+- <b>тальк</b> - насыщает кожу и волосы магнием, необходимым для увлажнениия и сохранения упругости;
+- <b>каменная соль, морская соль,  соль Мертвого моря, рапа (озерная соль)</b> - насыщает микроэлементами, способствует увлажнению кожи
+- <b>бикарбонат натрия </b> - растворяет жир.
+[14/Oct/2016:06:55:14] (index) Смешайте в ладони до состояния мокрого песочка кофейную ложку биочистки и 5-6 капель воды комфортной температуры. Полученную смесь нанесите на очищенное влажное лицо и шею не втирая (в местах, где есть черные точки или угревая сыпь можно слегка похлопать по коже подушечками пальцев). Через 0,5 - 1 минуту тщательно смойте препарат водой. 
+После регулярного использования рекомендуется снизить время выдержки биочистки на лице до 20-30 секунд.
+Для усиления регенерирующего действия биочистки, рекомендуется 2-3 раза в неделю после процедуры очистки наносить биомаску «БиоБьюти».
+[14/Oct/2016:06:55:14] (index) 
+[14/Oct/2016:06:55:14] (index) хранить в закрытой банке. Не допускать попадения влаги внутрь.
+[14/Oct/2016:06:55:14] (index) индивидуальная непереносимость компонентов.
+[14/Oct/2016:06:55:14] (index) **** END Saving product ****
+[14/Oct/2016:06:56:23] (index) **** START Saving product ****
+[14/Oct/2016:06:56:23] (index) 
+[14/Oct/2016:06:56:23] (index) test
+[14/Oct/2016:06:56:23] (index) dfdfgdfgdf
+[14/Oct/2016:06:56:23] (index) rted
+[14/Oct/2016:06:56:23] (index) 
+[14/Oct/2016:06:56:23] (index) 
+[14/Oct/2016:06:56:23] (index) 
+[14/Oct/2016:06:56:23] (index) 
+[14/Oct/2016:06:56:23] (index) dvdfv
+[14/Oct/2016:06:56:23] (index) **** END Saving product ****
+[14/Oct/2016:06:56:23] (index) Error when adding/updating a good
+[14/Oct/2016:06:56:23] (index) exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`goods`, CONSTRAINT `goods_ibfk_1` FOREIGN KEY (`firmId`) REFERENCES `firms` (`id`) ON DELETE SET NULL ON UPDATE CASCADE)' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(355): Model->executeQuery(Object(PDOStatement), 'Error when addi...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/editgood.php(30): Model->addGood('', 'test', 'dfdfgdfgdf', 'rted', false, '0', '', '', NULL, '', 'dvdfv')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Editgood->save()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(25): Router->delegate()
+#5 {main}getMessage
+[14/Oct/2016:06:56:23] (index) Error when linking good 0 and type 2
+[14/Oct/2016:06:56:23] (index) exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`goods-types`, CONSTRAINT `goods-types_ibfk_1` FOREIGN KEY (`goodId`) REFERENCES `goods` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(369): Model->executeQuery(Object(PDOStatement), 'Error when link...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/editgood.php(35): Model->linkGoodType('0', '2')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Editgood->save()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(25): Router->delegate()
+#5 {main}getMessage
+[14/Oct/2016:06:56:23] (index) Error when linking good 0 and category 8
+[14/Oct/2016:06:56:23] (index) exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`goods-categories`, CONSTRAINT `goods-categories_ibfk_1` FOREIGN KEY (`goodId`) REFERENCES `goods` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(377): Model->executeQuery(Object(PDOStatement), 'Error when link...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/editgood.php(39): Model->linkGoodCat('0', '8')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Editgood->save()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(25): Router->delegate()
+#5 {main}getMessage
+[14/Oct/2016:06:56:23] (index) Error when linking good 0 and category 23
+[14/Oct/2016:06:56:23] (index) exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`goods-categories`, CONSTRAINT `goods-categories_ibfk_1` FOREIGN KEY (`goodId`) REFERENCES `goods` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(377): Model->executeQuery(Object(PDOStatement), 'Error when link...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/editgood.php(39): Model->linkGoodCat('0', '23')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Editgood->save()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(25): Router->delegate()
+#5 {main}getMessage
+[14/Oct/2016:06:56:23] (index) Error when linking good 0 and effect 8
+[14/Oct/2016:06:56:23] (index) exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`goods-effects`, CONSTRAINT `goods-effects_ibfk_1` FOREIGN KEY (`goodId`) REFERENCES `goods` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(385): Model->executeQuery(Object(PDOStatement), 'Error when link...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/editgood.php(43): Model->linkGoodEff('0', '8')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Editgood->save()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(25): Router->delegate()
+#5 {main}getMessage
+[14/Oct/2016:06:56:23] (index) Error when linking good 0 and effect 32
+[14/Oct/2016:06:56:23] (index) exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`goods-effects`, CONSTRAINT `goods-effects_ibfk_1` FOREIGN KEY (`goodId`) REFERENCES `goods` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(385): Model->executeQuery(Object(PDOStatement), 'Error when link...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/editgood.php(43): Model->linkGoodEff('0', '32')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Editgood->save()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(25): Router->delegate()
+#5 {main}getMessage
+[14/Oct/2016:06:56:23] (index) Error when linking good 0 and skintype 2
+[14/Oct/2016:06:56:23] (index) exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`goods-skintypes`, CONSTRAINT `goods-skintypes_ibfk_1` FOREIGN KEY (`goodId`) REFERENCES `goods` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(401): Model->executeQuery(Object(PDOStatement), 'Error when link...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/editgood.php(51): Model->linkGoodST('0', '2')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Editgood->save()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(25): Router->delegate()
+#5 {main}getMessage
+[14/Oct/2016:06:56:23] (index) Error when linking good 0 and skintype 1
+[14/Oct/2016:06:56:23] (index) exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`goods-skintypes`, CONSTRAINT `goods-skintypes_ibfk_1` FOREIGN KEY (`goodId`) REFERENCES `goods` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(401): Model->executeQuery(Object(PDOStatement), 'Error when link...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/editgood.php(51): Model->linkGoodST('0', '1')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Editgood->save()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(25): Router->delegate()
+#5 {main}getMessage
+[14/Oct/2016:06:56:23] (index) Error when linking good 0 and hairtype 6
+[14/Oct/2016:06:56:23] (index) exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`goods-hairtypes`, CONSTRAINT `goods-hairtypes_ibfk_1` FOREIGN KEY (`goodId`) REFERENCES `goods` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(409): Model->executeQuery(Object(PDOStatement), 'Error when link...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/editgood.php(55): Model->linkGoodHT('0', '6')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Editgood->save()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(25): Router->delegate()
+#5 {main}getMessage
+[14/Oct/2016:06:56:23] (index) Error when linking good 0 and hairtype 1
+[14/Oct/2016:06:56:23] (index) exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`goods-hairtypes`, CONSTRAINT `goods-hairtypes_ibfk_1` FOREIGN KEY (`goodId`) REFERENCES `goods` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(409): Model->executeQuery(Object(PDOStatement), 'Error when link...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/editgood.php(55): Model->linkGoodHT('0', '1')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Editgood->save()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(25): Router->delegate()
+#5 {main}getMessage
+[14/Oct/2016:07:04:16] (index) **** START Saving product ****
+[14/Oct/2016:07:04:16] (index) 
+[14/Oct/2016:07:04:16] (index) 
+[14/Oct/2016:07:04:16] (index) 
+[14/Oct/2016:07:04:16] (index) 
+[14/Oct/2016:07:04:16] (index) 
+[14/Oct/2016:07:04:16] (index) 
+[14/Oct/2016:07:04:16] (index) 
+[14/Oct/2016:07:04:16] (index) 
+[14/Oct/2016:07:04:16] (index) 
+[14/Oct/2016:07:04:16] (index) **** END Saving product ****
+[14/Oct/2016:07:04:16] (index) Error when adding/updating a good
+[14/Oct/2016:07:04:16] (index) exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'name' cannot be null' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(358): Model->executeQuery(Object(PDOStatement), 'Error when addi...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/editgood.php(30): Model->addGood(NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Editgood->save()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(25): Router->delegate()
+#5 {main}getMessage
+[14/Oct/2016:07:07:15] (index) **** START Saving product ****
+[14/Oct/2016:07:07:15] (index) 
+[14/Oct/2016:07:07:15] (index) test
+[14/Oct/2016:07:07:15] (index) test
+[14/Oct/2016:07:07:15] (index) test
+[14/Oct/2016:07:07:15] (index) 
+[14/Oct/2016:07:07:15] (index) 
+[14/Oct/2016:07:07:15] (index) 
+[14/Oct/2016:07:07:15] (index) 
+[14/Oct/2016:07:07:15] (index) 
+[14/Oct/2016:07:07:15] (index) **** END Saving product ****
+[14/Oct/2016:07:07:39] (index) **** START Saving product ****
+[14/Oct/2016:07:07:39] (index) 389
+[14/Oct/2016:07:07:39] (index) test
+[14/Oct/2016:07:07:39] (index) test
+[14/Oct/2016:07:07:39] (index) test
+[14/Oct/2016:07:07:39] (index) 
+[14/Oct/2016:07:07:39] (index) 
+[14/Oct/2016:07:07:39] (index) 
+[14/Oct/2016:07:07:39] (index) 
+[14/Oct/2016:07:07:39] (index) 
+[14/Oct/2016:07:07:39] (index) **** END Saving product ****

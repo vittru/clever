@@ -10,9 +10,9 @@ include 'header.php';
                     <div class="aa-product-header">
                     <h1><?php 
                     if ($type) 
-                        echo 'Косметика ' . mb_strtolower ($type); 
+                        echo 'Товары ' . mb_strtolower ($type); 
                     else
-                        echo 'Натуральная косметика';
+                        echo 'Экологические товары';
                     ?></h1>
                     <p><?php if (!$type)
                         echo 'Мы постарались разбить весь наш ассортимент косметики по категориям для удобства поиска';

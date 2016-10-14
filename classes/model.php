@@ -345,7 +345,10 @@ Class Model {
         $sqlInsert->bindParam(':name', $name);
         $sqlInsert->bindParam(':description', $description);
         $sqlInsert->bindParam(':shortdesc', $shortdesc);
-        $sqlInsert->bindParam(':firmId', $firmId);
+        if ($firmId == 0)
+            $sqlInsert->bindValue (':firmId', null, PDO::PARAM_INT);
+        else     
+            $sqlInsert->bindParam(':firmId', $firmId);
         $sqlInsert->bindParam(':sale', $sale);
         $sqlInsert->bindParam(':howTo', $howTo);
         $sqlInsert->bindParam(':madeOf', $madeOf);
@@ -514,17 +517,17 @@ Class Model {
     
     function deleteGoodCat($goodId) {
         $sqlDelete = $this->db->prepare('DELETE FROM `goods-types` WHERE goodId=:goodId');
-        $sqlDelete->execute($goodId);
+        $sqlDelete->execute(array(':goodId' => $goodId));
         $sqlDelete = $this->db->prepare('DELETE FROM `goods-categories` WHERE goodId=:goodId');
-        $sqlDelete->execute($goodId);
+        $sqlDelete->execute(array(':goodId' => $goodId));
         $sqlDelete = $this->db->prepare('DELETE FROM `goods-effects` WHERE goodId=:goodId');
-        $sqlDelete->execute($goodId);
+        $sqlDelete->execute(array(':goodId' => $goodId));
         $sqlDelete = $this->db->prepare('DELETE FROM `goods-hairtypes` WHERE goodId=:goodId');
-        $sqlDelete->execute($goodId);
+        $sqlDelete->execute(array(':goodId' => $goodId));
         $sqlDelete = $this->db->prepare('DELETE FROM `goods-skintypes` WHERE goodId=:goodId');
-        $sqlDelete->execute($goodId);
+        $sqlDelete->execute(array(':goodId' => $goodId));
         $sqlDelete = $this->db->prepare('DELETE FROM `goods-problems` WHERE goodId=:goodId');
-        $sqlDelete->execute($goodId);
+        $sqlDelete->execute(array(':goodId' => $goodId));
         $sqlDelete->closeCursor();
     }
     
@@ -907,7 +910,7 @@ Class Model {
     }
     
     function getCategoryGoods($categoryId) {
-        $sqlSelect = $this->db->prepare('SELECT goodid FROM `goods-categories` WHERE categoryId=:categoryId');
+        $sqlSelect = $this->db->prepare('SELECT DISTINCT goodid FROM `goods-categories` WHERE categoryId=:categoryId');
         $sqlSelect->bindParam(':categoryId', $categoryId);
         $this->executeQuery($sqlSelect, 'Error when getting goods of category with id=' . $ategoryId);
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
