@@ -433,6 +433,11 @@ h2 {
     margin-left: 0;
     margin-right: 0;
 }
+#aa-text ul {
+  margin-left: 70px;
+  text-indent: 0;
+  list-style: square;
+}
 
 #menu {
   display: inline;
@@ -1762,7 +1767,7 @@ h2 {
   transition: all 0.5s;
 }
 #aa-footer .aa-footer-top .aa-footer-top-area .aa-footer-widget .aa-footer-nav li a:hover, #aa-footer .aa-footer-top .aa-footer-top-area .aa-footer-widget .aa-footer-nav li a:focus {
-  color: #51A512;
+    color: #51A512;
 }
 #aa-footer .aa-footer-top .aa-footer-top-area .aa-footer-widget address p {
   margin-bottom: 5px;

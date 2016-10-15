@@ -22,6 +22,10 @@ Class Controller_Common Extends Controller_Base {
         $this->registry['template']->show('moneyback');
     }
 
+    function offer() {
+        $this->registry['model']->logVisit(8);
+        $this->registry['template']->show('offer');
+    }
     
 }
 
