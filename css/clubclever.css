@@ -394,7 +394,7 @@ h2 {
     padding: 20px 30px;
     border-bottom-style: solid;
     border-bottom-width: 1px;
-    border-bottom-color: #3fc35f;
+    border-bottom-color: #51A512;
 }
 #aa-text .worktime:before {
     content: url('/images/design/worktime.png');
@@ -423,12 +423,12 @@ h2 {
 }
 #aa-text .newstime {
     font-size: 13px;
-    color: #E46713;
+    color: #DF5600;
 }
 #aa-text .news {
     border-bottom-style: solid;
     border-bottom-width: 1px;
-    border-bottom-color: #3fc35f;
+    border-bottom-color: #51A512;
     padding-bottom: 10px;
     margin-left: 0;
     margin-right: 0;
@@ -840,10 +840,10 @@ h2 {
   height: 202px;
   border-style: solid;
   border-width: 1px;
-  border-color: #3fc35f;
+  border-color: #51A512;
 }
 .aa-product-catg li figure:hover {
-    border-color: #E46713;
+    border-color: #DF5600;
 }    
 .aa-product-catg li figure .aa-product-img {
   display: block;
@@ -958,11 +958,11 @@ h2 {
 #single-product img {
     border-style: solid;
     border-width: 1px;
-    border-color: #3fc35f;
+    border-color: #51A512;
     width: 100%;
 }
 #single-product img:hover {
-    border-color: #E46713;
+    border-color: #DF5600;
 }
 #single-product .aa-product-view-content {
   padding-right: 10px;
@@ -1008,10 +1008,10 @@ h2 {
   top: 0;
 }
 #single-product .aa-product-view-content .aa-price-block .available {
-  color: #3fc35f;
+  color: #51A512;
 }
 #single-product .aa-product-view-content .aa-price-block .unavailable {
-  color: #E46713;
+  color: #DF5600;
 }
 #single-product .aa-product-view-content .aa-price-block select {
   width: 60%;
@@ -1224,6 +1224,12 @@ h2 {
     text-align: justify;
     text-indent: 50px;  
     padding: 20px 10px;
+}
+#single-product .aa-product-info-tab p {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 #single-product .aa-product-info-tab ul {
   margin-left: 100px;
@@ -1485,7 +1491,7 @@ h2 {
   width: 80%;
 }
 #checkout .checkout-area .checkout-right #discount{
-    color: #E46713;
+    color: #DF5600;
 }
 #checkout .checkout-area .checkout-right #promo{
     height: 40px;
@@ -1727,7 +1733,7 @@ h2 {
   display: inline;
   float: left;
   width: 100%;
-  border-top: #3fc35f;
+  border-top: #51A512;
   border-top-style: solid;
   border-top-width: 10px;
 }
@@ -1756,7 +1762,7 @@ h2 {
   transition: all 0.5s;
 }
 #aa-footer .aa-footer-top .aa-footer-top-area .aa-footer-widget .aa-footer-nav li a:hover, #aa-footer .aa-footer-top .aa-footer-top-area .aa-footer-widget .aa-footer-nav li a:focus {
-  color: #1FAC3B;
+  color: #51A512;
 }
 #aa-footer .aa-footer-top .aa-footer-top-area .aa-footer-widget address p {
   margin-bottom: 5px;
@@ -1781,8 +1787,8 @@ h2 {
   transition: all 0.5s;
 }
 #aa-footer .aa-footer-top .aa-footer-top-area .aa-footer-widget .aa-footer-social a:hover {
-  color: #1FAC3B;
-  border-color: #1FAC3B;
+  color: #51A512;
+  border-color: #51A512;
 }
 #aa-footer .aa-footer-bottom {
   border-top: 1px solid #333;

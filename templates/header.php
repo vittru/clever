@@ -105,7 +105,7 @@
                             <!-- logo  -->
                             <div class="aa-logo">
                                 <a href="/">
-                                    <img src="/images/header.png" height='80px' alt="Экомаркет Клевер">  
+                                    <img src="/images/logo.png" height='80px' alt="Экомаркет Клевер">  
                                 </a>
                             </div>
                             <!-- / logo  -->
