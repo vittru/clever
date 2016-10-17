@@ -425,7 +425,7 @@ Class Model {
         $good->skintypes = $this->getGoodSTs($goodId);
         $good->hairtypes = $this->getGoodHTs($goodId);
         $good->sizes = $this->getGoodSizes($goodId);
-        $good->types = $this->getGoodTypes($goodId);
+       // $good->types = $this->getGoodTypes($goodId);
         $good->problems = $this->getGoodProblems($goodId);
         return $good;
     }
@@ -671,7 +671,7 @@ Class Model {
         $sqlInsert = $this->db->prepare('INSERT INTO `orders-goods`(sizeId, quantity, price, orderId) VALUES(:sizeId, :quantity, :price, :orderId)');
         $sqlInsert->bindParam(':orderId', $orderId);
         foreach ($_SESSION['cart'] as $cartItem) {
-            $good = $this->registry['goods'][$cartItem->goodId];
+            $good = $this->registry['model']->getGood($cartItem->goodId);
             $size = $good->sizes[$cartItem->sizeId];
             $price = $size->getPrice($good->sale) * $cartItem->quantity;
             $sqlInsert->bindParam(':sizeId', $cartItem->sizeId);
@@ -951,6 +951,21 @@ Class Model {
         $this->executeQuery($sqlSelect, 'Error when getting popular goods of type '.$typeId);
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $good = $this->getGood($data['good']);
+            if (!isset($goods))
+                $goods = [$good];
+            else
+                array_push($goods, $good);
+        }   
+        $sqlSelect->closeCursor();
+        return $goods;
+    }
+    
+    function getGoodsByType($typeId) {
+        $sqlSelect = $this->db->prepare('SELECT g.id FROM goods g JOIN `goods-types` gt ON g.id=gt.goodid WHERE gt.typeid=:typeId');
+        $sqlSelect->bindParam('typeId', $typeId);
+        $this->executeQuery($sqlSelect, 'Error when getting goods for type ' . $typeId);
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $good = $this->getGood($data['id']);
             if (!isset($goods))
                 $goods = [$good];
             else

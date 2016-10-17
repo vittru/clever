@@ -10,7 +10,7 @@ Class Controller_Search Extends Controller_Base {
     
     function performSearch($criteria) {
         $foundgoods=array();
-        foreach ($this->registry['goods'] as $goodId=>$good) {
+        foreach ($this->registry['model']->getAllGoods() as $goodId=>$good) {
             $found = true;
             foreach($criteria as $key => $value){
                 if (!empty($value) and $key!="route") {

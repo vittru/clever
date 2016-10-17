@@ -1,36 +1,14 @@
-[16/Oct/2016:12:22:38] (index) Error when getting popular goods of type 1
-[16/Oct/2016:12:22:38] (index) exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`goods-sizes` gs ON v.good=gs.goodidJOIN warehouse w ON w.psid = gs.idWHERE v.pa' at line 1' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
-Stack trace:
-#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
-#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(951): Model->executeQuery(Object(PDOStatement), 'Error when gett...')
-#2 /Applications/MAMP/htdocs/ClubClever/controllers/index.php(10): Model->getPopularGoods(1)
-#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Index->index()
-#4 /Applications/MAMP/htdocs/ClubClever/index.php(25): Router->delegate()
-#5 {main}getMessage
-[16/Oct/2016:12:22:38] (index) Error when getting popular goods of type 2
-[16/Oct/2016:12:22:38] (index) exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`goods-sizes` gs ON v.good=gs.goodidJOIN warehouse w ON w.psid = gs.idWHERE v.pa' at line 1' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
-Stack trace:
-#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
-#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(951): Model->executeQuery(Object(PDOStatement), 'Error when gett...')
-#2 /Applications/MAMP/htdocs/ClubClever/controllers/index.php(10): Model->getPopularGoods(2)
-#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Index->index()
-#4 /Applications/MAMP/htdocs/ClubClever/index.php(25): Router->delegate()
-#5 {main}getMessage
-[16/Oct/2016:12:22:38] (index) Error when getting popular goods of type 3
-[16/Oct/2016:12:22:38] (index) exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`goods-sizes` gs ON v.good=gs.goodidJOIN warehouse w ON w.psid = gs.idWHERE v.pa' at line 1' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
-Stack trace:
-#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
-#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(951): Model->executeQuery(Object(PDOStatement), 'Error when gett...')
-#2 /Applications/MAMP/htdocs/ClubClever/controllers/index.php(10): Model->getPopularGoods(3)
-#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Index->index()
-#4 /Applications/MAMP/htdocs/ClubClever/index.php(25): Router->delegate()
-#5 {main}getMessage
-[16/Oct/2016:12:22:38] (index) Error when getting popular goods of type 4
-[16/Oct/2016:12:22:38] (index) exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`goods-sizes` gs ON v.good=gs.goodidJOIN warehouse w ON w.psid = gs.idWHERE v.pa' at line 1' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
-Stack trace:
-#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
-#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(951): Model->executeQuery(Object(PDOStatement), 'Error when gett...')
-#2 /Applications/MAMP/htdocs/ClubClever/controllers/index.php(10): Model->getPopularGoods(4)
-#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Index->index()
-#4 /Applications/MAMP/htdocs/ClubClever/index.php(25): Router->delegate()
-#5 {main}getMessage
+[16/Oct/2016:12:58:14] (index) Ваш заказ добавлен на сайт. Менеджер свяжется с вами в ближайшее время.
+Заказ №28
+Покупатель: ЕвгенияТ
+Email: Tev0205@gmail.com
+Телефон: fsdfsdf
+Товары: 
+| ББ093 | Основа (тональная пудра) "Нежная ваниль"  10 г | 1 | 1030 руб. | 
+Сумма заказа: 1030 руб. 
+Самовывоз из Самара, ул. Ново-Садовая, 271
+Желаемое время самовывоза: sdfsdf в dsfsdf
+[16/Oct/2016:12:58:14] (index) fsdfsdf
+[16/Oct/2016:13:02:15] (index) creating orderedgood
+[16/Oct/2016:13:02:23] (index) creating orderedgood
+[16/Oct/2016:13:02:23] (index) creating orderedgood

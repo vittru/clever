@@ -35,7 +35,7 @@ Abstract Class Controller_Base {
         $total = 0;
         if (isset($_SESSION['cart'])) {
             foreach ($_SESSION['cart'] as $cartItem) {
-                $good = $this->registry['goods'][$cartItem->goodId];
+                $good = $this->registry['model']->getGood($cartItem->goodId);
                 $size = $good->sizes[$cartItem->sizeId];
                 $price = $size->getPrice($good->sale);
                 $total = $total + $cartItem->quantity * $price; 

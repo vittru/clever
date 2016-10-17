@@ -44,7 +44,7 @@ Class Controller_Catalog Extends Controller_Base {
             } 
             $this->registry['template']->set('firms', $selectedFirms);
             $this->registry['template']->set('type', $this->registry['types'][$typeId]);
-            $this->registry['template']->set('goods', $this->registry['goods']);
+            $this->registry['template']->set('goods', $this->registry['model']->getGoodsByType($typeId));
             $this->registry['model']->logVisit(4, $typeId);
 
         } else {

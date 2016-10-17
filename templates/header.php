@@ -139,7 +139,7 @@
                                         <?php
                                         if ($count) {
                                             foreach ($_SESSION['cart'] as $cartItem) {
-                                                $good = $this->registry['goods'][$cartItem->goodId];
+                                                $good = $this->registry['model']->getGood($cartItem->goodId);
                                                 $size = $good->sizes[$cartItem->sizeId];
                                             ?>
                                                 <li>

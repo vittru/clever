@@ -4,7 +4,7 @@ Class Controller_Showgood Extends Controller_Base {
         
     function index() {
         if (isset($_GET['id'])) {
-            $good = $this->registry['goods'][$_GET['id']];
+            $good = $this->registry['model']->getGood($_GET['id']);
             if (!$good) {
                 $this->registry['template']->show('404');
             } else {   
@@ -20,7 +20,7 @@ Class Controller_Showgood Extends Controller_Base {
             if (!$goodId)
                 $this->registry['template']->show('404');
             else {
-                $this->showGood ($this->registry['goods'][$goodId]);
+                $this->showGood($this->registry['model']->getGood($goodId));
             }    
         }
     }

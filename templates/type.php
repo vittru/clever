@@ -49,9 +49,7 @@ include 'header.php';
                                     <ul class="aa-product-catg">
                                     <?php
                                     foreach($goods as $good) {
-                                        //echo $firmId . " " . $good->firmId."; ";
-                                    
-                                        if (in_array($type, $good->types) and $good->firmId == $firmId) {
+                                        if ($good->firmId == $firmId) {
                                             $good->showInCatalog();
                                         }
                                     }
