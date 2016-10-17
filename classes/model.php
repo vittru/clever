@@ -974,4 +974,12 @@ Class Model {
         $sqlSelect->closeCursor();
         return $goods;
     }
+    
+    function removeNews($newsId) {
+        $this->registry['logger']->lwrite($newsId);
+        $sqlDelete = $this->db->prepare('DELETE FROM news WHERE id=:newsId');
+        $sqlDelete->bindParam(':newsId', $newsId);
+        $this->executeQuery($sqlDelete, 'Error when deleting news with id='.$newsId);
+        $sqlDelete->closeCursor();
+    }
 }

@@ -9,6 +9,7 @@ Abstract Class Controller_Base {
         $this->registry = $registry;
         $this->registry['template']->set('user', $_SESSION['user'], true);
         $this->registry['template']->set('total', $this->getCartTotal(), true);
+        $this->registry['template']->set('isadmin', $this->registry['isadmin'], true);
     }
 
     abstract function index();

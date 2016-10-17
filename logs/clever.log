@@ -1,14 +1,15 @@
-[16/Oct/2016:12:58:14] (index) Ваш заказ добавлен на сайт. Менеджер свяжется с вами в ближайшее время.
-Заказ №28
-Покупатель: ЕвгенияТ
-Email: Tev0205@gmail.com
-Телефон: fsdfsdf
-Товары: 
-| ББ093 | Основа (тональная пудра) "Нежная ваниль"  10 г | 1 | 1030 руб. | 
-Сумма заказа: 1030 руб. 
-Самовывоз из Самара, ул. Ново-Садовая, 271
-Желаемое время самовывоза: sdfsdf в dsfsdf
-[16/Oct/2016:12:58:14] (index) fsdfsdf
-[16/Oct/2016:13:02:15] (index) creating orderedgood
-[16/Oct/2016:13:02:23] (index) creating orderedgood
-[16/Oct/2016:13:02:23] (index) creating orderedgood
+[17/Oct/2016:16:05:21] (index) 
+[17/Oct/2016:16:05:26] (index) 
+[17/Oct/2016:16:06:17] (index) 7
+[17/Oct/2016:16:08:11] (index) 8
+[17/Oct/2016:16:11:41] (index) action: login user: 
+[17/Oct/2016:16:11:41] (index) 
+[17/Oct/2016:16:11:41] (index) Error when adding/updating a news record
+[17/Oct/2016:16:11:41] (index) exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'header' cannot be null' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(710): Model->executeQuery(Object(PDOStatement), 'Error when addi...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/editnews.php(29): Model->addNews(NULL, NULL, NULL, NULL, 0)
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Editnews->save()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(26): Router->delegate()
+#5 {main}getMessage

@@ -6,7 +6,7 @@ Class News {
     public $header;
     public $time;
     public $text; 
-    private $id;
+    public $id;
     public $forClients;
    
     function __construct($id, $header, $time, $text, $forClients) {

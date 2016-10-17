@@ -131,9 +131,9 @@
                 <div class="aa-prod-view-bottom">
                     <a class="aa-add-to-cart-btn green-button" data-dismiss="modal" <?php if (!$canBeBought) echo 'disabled' ?>><span class="fa fa-shopping-cart"></span>В корзину</a>
                     <?php
-                    if ($_SESSION['user']->email == 'Nataliya.zhirnova@gmail.com' or $_SESSION['user']->email == 'Tev0205@gmail.com') {
+                    if ($isadmin) {
                     ?>
-                    <a class="green-button" style="padding: 12px 15px;" href="/editgood?good=<?php echo $showGood->id ?>">Редактировать</a>
+                        <a class="green-button" style="padding: 12px 15px;" href="/editgood?good=<?php echo $showGood->id ?>">Редактировать</a>
                     <?php
                     }    
                     ?>
