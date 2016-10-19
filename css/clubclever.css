@@ -849,7 +849,10 @@ h2 {
 }
 .aa-product-catg li figure:hover {
     border-color: #DF5600;
-}    
+}
+.aa-product-catg li figure.noborder {
+    border-style: none;
+}
 .aa-product-catg li figure .aa-product-img {
   display: block;
   -webkit-transition: all 0.5s;

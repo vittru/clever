@@ -35,11 +35,12 @@
                             <div class="col-md-3 col-sm-6">
                                 <div class="aa-footer-widget">
                                     <div class="aa-footer-widget">
-                                        <h2>Ссылки</h2>
+                                        <h2>Материалы</h2>
                                         <ul class="aa-footer-nav">
                                             <li><a target="_blank" href="https://www.biobeauty.ru/">БиоБьюти</a></li>
                                             <li><a target="_blank" href="http://master-om.com/">Мастерская Олеси Мустаевой</a></li>
                                             <li><a target="_blank" href="http://www.mi-ko.org/">МиКо</a></li>
+                                            <li><a href="/common/certs">Сертификаты</a></li>
                                         </ul>
                                     </div>
                                 </div>

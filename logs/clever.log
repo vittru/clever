@@ -1,17 +1,16 @@
-[17/Oct/2016:16:05:21] (index) 
-[17/Oct/2016:16:05:26] (index) 
-[17/Oct/2016:16:06:17] (index) 7
-[17/Oct/2016:16:08:11] (index) 8
-[17/Oct/2016:16:11:41] (index) action: login user: 
-[17/Oct/2016:16:11:41] (index) 
-[17/Oct/2016:16:11:41] (index) Error when adding/updating a news record
-[17/Oct/2016:16:11:41] (index) exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'header' cannot be null' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
-Stack trace:
-#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
-#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(710): Model->executeQuery(Object(PDOStatement), 'Error when addi...')
-#2 /Applications/MAMP/htdocs/ClubClever/controllers/editnews.php(29): Model->addNews(NULL, NULL, NULL, NULL, 0)
-#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Editnews->save()
-#4 /Applications/MAMP/htdocs/ClubClever/index.php(26): Router->delegate()
-#5 {main}getMessage
-[19/Oct/2016:08:20:30] (index) creating orderedgood
-[19/Oct/2016:08:20:30] (index) creating orderedgood
+[19/Oct/2016:12:25:16] (index) ../images/certs/firm5
+[19/Oct/2016:12:25:16] (index) ../images/certs/firm4
+[19/Oct/2016:12:25:16] (index) ../images/certs/firm2
+[19/Oct/2016:12:25:16] (index) ../images/certs/firm8
+[19/Oct/2016:12:25:16] (index) ../images/certs/firm1
+[19/Oct/2016:12:25:16] (index) ../images/certs/firm3
+[19/Oct/2016:12:25:16] (index) ../images/certs/firm7
+[19/Oct/2016:12:25:16] (index) ../images/certs/firm6
+[19/Oct/2016:12:26:12] (index) images/certs/firm5
+[19/Oct/2016:12:26:12] (index) images/certs/firm4
+[19/Oct/2016:12:26:12] (index) images/certs/firm2
+[19/Oct/2016:12:26:12] (index) images/certs/firm8
+[19/Oct/2016:12:26:12] (index) images/certs/firm1
+[19/Oct/2016:12:26:12] (index) images/certs/firm3
+[19/Oct/2016:12:26:12] (index) images/certs/firm7
+[19/Oct/2016:12:26:12] (index) images/certs/firm6

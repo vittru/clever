@@ -27,5 +27,17 @@ Class Controller_Common Extends Controller_Base {
         $this->registry['template']->show('offer');
     }
     
+    function certs() {
+        if (isset($_GET['firm'])) {
+            $firmId = $_GET['firm'];
+            $this->registry['model']->logVisit(31, $firmId);
+            $this->registry['template']->set('showFirm', $this->registry['firms'][$firmId]);
+        } else {
+            $this->registry['model']->logVisit(31);
+            $this->registry['template']->set('firms', $this->registry['firms']);
+        }    
+        $this->registry['template']->show('certs');
+    }
+    
 }
 
