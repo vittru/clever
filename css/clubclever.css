@@ -1534,6 +1534,12 @@ h2 {
     width: 100%;
     padding-bottom: 10px;
 }
+#aa-myaccount .aa-myaccount-bonus {
+    margin-bottom: 20px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #ccc;
+}    
 #aa-myaccount .aa-myaccount-area .aa-myaccount-orders {
     display: inline;
     float: left;
@@ -1542,7 +1548,7 @@ h2 {
     padding-bottom: 10px;
 }
 #aa-myaccount .aa-myaccount-area .aa-myaccount-orders table {
-    margin-top: 40px;
+    margin-top: 10px;
 }
 #aa-myaccount .aa-myaccount-area .aa-myaccount-orders .order-details {
     padding: 5px 20px;
@@ -1558,7 +1564,6 @@ h2 {
 .aa-login-form input[type="text"],
 .aa-login-form input[type="password"] {
   height: 40px;
-  margin-bottom: 15px;
   padding: 10px;
   width: 100%;
 }

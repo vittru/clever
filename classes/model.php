@@ -120,6 +120,7 @@ Class Model {
             $user->password = $this->default;
             $user->spam = $data['spam'];
             $user->phone = $data['phone'];
+            $user->bonus = $data['bonus'];
             $sqlSelect->closeCursor();
         }
         $user->id = $userId;

@@ -31,7 +31,21 @@ include 'header.php';
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="aa-myaccount-orders">                 
+                            <div class="aa-myaccount-bonus">
+                                <h2>Мои бонусы</h2>
+                                <?php 
+                                if ($user->bonus) {
+                                ?>
+                                    <p>Начислено бонусов: <?php echo $user->bonus; ?></p>
+                                <?php 
+                                } else {
+                                ?>
+                                    <p>У Вас пока нет бонусов. Оформите заказы, чтобы получить их.
+                                <?php    
+                                }
+                                ?>
+                            </div>
+                            <div class="aa-myaccount-orders">
                                 <h2>Мои заказы</h2>
                                 <?php
                                 if (sizeof($orders) > 0) {

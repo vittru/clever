@@ -9,6 +9,7 @@ class User {
     public $client;
     public $spam;
     public $password;
+    public $bonus;
     public $orders;
 
     public function __construct($userId) {

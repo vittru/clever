@@ -13,3 +13,5 @@ Stack trace:
 #3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Editnews->save()
 #4 /Applications/MAMP/htdocs/ClubClever/index.php(26): Router->delegate()
 #5 {main}getMessage
+[19/Oct/2016:08:20:30] (index) creating orderedgood
+[19/Oct/2016:08:20:30] (index) creating orderedgood
