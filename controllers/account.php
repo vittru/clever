@@ -90,5 +90,23 @@ Class Controller_Account Extends Controller_Base {
         }
         $this->registry['template']->show('orders');
     }
+    
+    function updateorder() {
+        if ($this->registry['isadmin']) {
+            $status = $_GET['status'];
+            $orderid = $_GET['order'];
+            $this->registry['model']->updateOrder($orderid, $status);
+            $order = $this->registry['model']->getOrder($orderid);
+            $to      = $order->email;
+            $subject = 'Clever. Статус заказа №'.$orderid.' изменен';
+            $message = 'Статус вашего заказа изменен.' . "\r\n" .
+                "Заказ №" . $orderid . "\r\n" .
+                "Статус: " . $order->status . "\r\n" . 
+                $order->statusdesc . "\r\n";
+            $this->registry['logger']->lwrite($message);
+            $this->sendMail($to, $subject, $message);
+        } else
+            $this->registry['template']->show('404');
+    }
 }
 

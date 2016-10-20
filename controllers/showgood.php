@@ -11,12 +11,9 @@ Class Controller_Showgood Extends Controller_Base {
                 $this->showGood($good);
             }               
         } else {    
-            $this->registry['logger']->lwrite($_GET['route']);
             $rt=explode('/', $_GET['route']);
             $route=$rt[(count($rt)-1)];
-            $this->registry['logger']->lwrite($route);
             $goodId = $this->registry['model']->getGoodIdByUrl($route);
-            $this->registry['logger']->lwrite($goodId);
             if (!$goodId)
                 $this->registry['template']->show('404');
             else {

@@ -231,3 +231,15 @@ $('#order-form').on('keyup keypress', function(e) {
     return false;
   }
 });
+
+$('#change-order-status').on('click', function() {
+    var orderId = $("[name='id']").val();
+    var statusId = $('#status').val();
+    $.ajax({    
+        type: "GET",   
+        url: "/account/updateorder",   
+        data: "order=" + orderId + "&status="+statusId,
+        dataType: "html"
+    }); 
+    location.reload();
+});

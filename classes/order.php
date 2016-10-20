@@ -9,11 +9,12 @@ Class Order {
     public $type;
     public $promo;
     public $user;
+    public $email;
     public $profile;
     public $total;
     public $goods;
    
-    function __construct($id, $date, $status, $type, $promo, $user, $profile, $statusdesc) {
+    function __construct($id, $date, $status, $type, $promo, $user, $profile, $statusdesc, $email) {
         $this->id = $id;
         $this->status = $status;
         setlocale(LC_TIME, "ru_RU.UTF-8");
@@ -23,5 +24,6 @@ Class Order {
         $this->user = $user;
         $this->profile = $profile;
         $this->statusdesc = $statusdesc;
+        $this->email = $email;
     }
 }

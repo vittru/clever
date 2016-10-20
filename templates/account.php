@@ -59,7 +59,6 @@ include 'header.php';
                                         </tr>
                                         <?php
                                         foreach ($orders as $order) {
-                                            $this->registry['logger']->lwrite($order->status." ".$order->statusdesc);
                                         ?>
                                         <tr>
                                             <td><?php echo $order->id?></td>

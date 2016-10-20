@@ -17,16 +17,32 @@ include 'header.php';
                             </form>
                             <?php
                             if ($order->id) {
-                            ?>    
+                            ?>
                                 <div><div class="order-parameters-header">Дата заказа:</div><div class="order-parameters-value"><?php echo $order->date; ?></div> </div>
                                 <div><div class="order-parameters-header">Способ доставки:</div><div class="order-parameters-value"><?php echo $order->type; ?></div> </div>
-                                <div style="display:inline-block"><div class="order-parameters-header">Статус:</div><div class="order-parameters-value"><span class="dotted" data-toggle="tooltip" title="<?php echo $order->statusdesc; ?>"><?php echo $order->status; ?></span></div></div>
                                 <?php
                                 if ($isadmin) {
-                                ?>    
-                                    <button class="green-button show-details">Изменить</button>
+                                ?>
+                                    <div>
+                                        <div class="order-parameters-header">Статус:</div>
+                                        <select class="order-parameters-value form-control" id="status">
+                                            <option value="1" <?php if ($order->status == "Принят") echo "selected"; ?>>Принят</option>
+                                            <option value="2" <?php if ($order->status == "Исполняется") echo "selected"; ?>>Исполняется</option>
+                                            <option value="3" <?php if ($order->status == "Подтвержден") echo "selected"; ?>>Потдвержден</option>
+                                            <option value="4" <?php if ($order->status == "Не подтвержден") echo "selected"; ?>>Не подтвержден</option>
+                                            <option value="5" <?php if ($order->status == "Выдан") echo "selected"; ?>>Выдан</option>
+                                            <option value="6" <?php if ($order->status == "Изменение") echo "selected"; ?>>Изменение</option>
+                                            <option value="7" <?php if ($order->status == "Не выдан") echo "selected"; ?>>Не выдан</option>
+                                            <option value="8" <?php if ($order->status == "Отменен") echo "selected"; ?>>Отменен</option>
+                                        </select>
+                                    <button class="green-button show-details" id="change-order-status">Изменить</button>
+                                    </div>
                                 <?php
-                                }            
+                                } else {
+                                ?>
+                                    <div><div class="order-parameters-header">Статус:</div><div class="order-parameters-value"><span class="dotted" data-toggle="tooltip" title="<?php echo $order->statusdesc; ?>"><?php echo $order->status; ?></span></div></div>
+                                <?php    
+                                }
                                 if ($order->id and $user->name and $order->profile == $user->name) {
                                 ?>
                                     <div><div class="order-parameters-header">Сумма:</div><div class="order-parameters-value"><?php echo ($order->total-$order->promo) . " руб."; ?></div> </div>
