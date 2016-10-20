@@ -99,9 +99,9 @@ Class Controller_Account Extends Controller_Base {
             $order = $this->registry['model']->getOrder($orderid);
             $to      = $order->email;
             $subject = 'Clever. Статус заказа №'.$orderid.' изменен';
-            $message = 'Статус вашего заказа изменен.' . "\r\n" .
+            $message = 'Статус вашего заказа изменен.' . "\r\n" . "\r\n" .
                 "Заказ №" . $orderid . "\r\n" .
-                "Статус: " . $order->status . "\r\n" . 
+                "Статус: " . $order->status . "\r\n" . "\r\n" . 
                 $order->statusdesc . "\r\n";
             $this->registry['logger']->lwrite($message);
             $this->sendMail($to, $subject, $message);

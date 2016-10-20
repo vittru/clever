@@ -95,12 +95,12 @@ Class Controller_Buy Extends Controller_Base {
     private function informClient($orderId, $parameters) {
         $to      = $parameters['email'];
         $subject = 'Clever. Заказ №'.$orderId;
-        $message = 'Ваш заказ добавлен на сайт. Менеджер свяжется с вами в ближайшее время.' . "\r\n" .
+        $message = 'Ваш заказ добавлен на сайт. Менеджер свяжется с вами в ближайшее время.' . "\r\n" . "\r\n" .
                 "Заказ №" . $orderId . "\r\n" .
                 "Покупатель: " . $parameters['name'] . "\r\n" . 
                 "Email: " . $parameters['email'] . "\r\n" . 
-                "Телефон: " . $parameters['phone'] . "\r\n" .
-                $this->getGoodsForLetter($parameters['promo']) . 
+                "Телефон: " . $parameters['phone'] . "\r\n" . "\r\n" .
+                $this->getGoodsForLetter($parameters['promo']) . "\r\n" .
                 $this->getDeliveryForLetter($parameters);
 
         $this->registry['logger']->lwrite($message);

@@ -25,7 +25,7 @@ Abstract Class Controller_Base {
     }
     
     function sendMail($to, $subject, $message) {
-        $headers = 'From: clever@clubclever.ru' . "\r\n" .
+        $headers = 'From: Экомаркет Клевер clever@clubclever.ru' . "\r\n" .
             'Reply-To: clever@clubclever.ru' . "\r\n" .
             'X-Mailer: PHP/' . phpversion();
 
