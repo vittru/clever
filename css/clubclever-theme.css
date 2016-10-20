@@ -10,6 +10,17 @@ h3 {
     color: #51A512;  
 }
 
+.tooltip-inner {
+    white-space:pre-wrap;
+    background-color: #DF5600;
+}
+.tooltip.top > .tooltip-arrow {
+    border-top-color: #DF5600;
+}
+.tooltip.bottom > .tooltip-arrow {
+    border-bottom-color: #DF5600;
+}
+
 a {
     color: #51A512;
     cursor: pointer;

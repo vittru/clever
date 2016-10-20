@@ -839,12 +839,12 @@ Class Model {
     }
     
     function getUserOrders($userId) {
-        $sqlSelect = $this->db->prepare('SELECT o.id, o.date, s.name status, p.name promo, IF (o.branchId=0, "Доставка", "Самовывоз") type FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id WHERE o.userId=:userId');
+        $sqlSelect = $this->db->prepare('SELECT o.id, o.date, s.name status, s.description statusdesc, p.name promo, IF (o.branchId=0, "Доставка", "Самовывоз") type FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id WHERE o.userId=:userId');
         $sqlSelect->bindParam(':userId', $userId);
         $this->executeQuery($sqlSelect, 'Error when getting orders for user '.$userId);
         $orders = array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $order = New Order($data['id'], $data['date'], $data['status'], $data['type'], $data['promo']);
+            $order = New Order($data['id'], $data['date'], $data['status'], $data['type'], $data['promo'], $userId, 0, $data['statusdesc']);
             array_push($orders, $order);
         }    
         $sqlSelect->closeCursor();
@@ -852,12 +852,13 @@ Class Model {
         //If a user has profile then we get all orders for it
         $profile = $this->checkProfile();
         if ($profile) {
-            $sqlSelect = $this->db->prepare('SELECT o.id, o.date, s.name status, p.name promo, IF (o.branchId=0, "Доставка", "Самовывоз") type FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id WHERE o.profileId=:profileId AND o.userId <> :userId');
+            $sqlSelect = $this->db->prepare('SELECT o.id, o.date, s.name status, s.description statusdesc, p.name promo, IF (o.branchId=0, "Доставка", "Самовывоз") type FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id WHERE o.profileId=:profileId AND o.userId <> :userId');
             $sqlSelect->bindParam(':userId', $userId);
             $sqlSelect->bindParam(':profileId', $profile);
             $this->executeQuery($sqlSelect, 'Error when getting orders for user '.$userId);
             while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-                $order = New Order($data['id'], $data['date'], $data['status'], $data['type'], $data['promo']);
+                $order = New Order($data['id'], $data['date'], $data['status'], $data['type'], $data['promo'], $userId, $profile, $data['statusdesc']);
+                $this->registry['logger']->lwrite($order->statusdesc);
                 array_push($orders, $order);
             }    
             $sqlSelect->closeCursor();
@@ -873,11 +874,11 @@ Class Model {
     }
     
     function getOrder($orderId) {
-        $sqlSelect = $this->db->prepare('SELECT o.id, o.date, s.name status, p.amount promo, IF (o.branchId is null, "Доставка", "Самовывоз") type, SUM(og.price * og.quantity) total, o.userId, pr.name profileId FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id LEFT JOIN `orders-goods` og ON o.id=og.orderid LEFT JOIN profiles pr ON o.profileId=pr.id WHERE o.id=:orderId');
+        $sqlSelect = $this->db->prepare('SELECT o.id, o.date, s.name status, s.description statusdesc, p.amount promo, IF (o.branchId is null, "Доставка", "Самовывоз") type, SUM(og.price * og.quantity) total, o.userId, pr.name profileId FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id LEFT JOIN `orders-goods` og ON o.id=og.orderid LEFT JOIN profiles pr ON o.profileId=pr.id WHERE o.id=:orderId');
         $sqlSelect->bindParam(':orderId', $orderId);
         $this->executeQuery($sqlSelect, 'Error when getting details for order '.$orderId);
         $data = $sqlSelect->fetch();
-        $order = new Order($data['id'], $data['date'], $data['status'], $data['type'], $data['promo'], $data['userId'], $data['profileId']);
+        $order = new Order($data['id'], $data['date'], $data['status'], $data['type'], $data['promo'], $data['userId'], $data['profileId'], $data['statusdesc']);
         $order->total = $data['total'];
         $sqlSelect->closeCursor();
         $order->goods = $this->getOrderGoods($orderId);

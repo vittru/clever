@@ -10,6 +10,12 @@ body {
   padding: 0;
 }
 
+.dotted {
+    border-bottom: 1px dashed #999;
+    text-decoration: none;
+}
+
+
 ul {
   padding: 0;
   margin: 0;
@@ -1567,6 +1573,7 @@ h2 {
 .aa-login-form input[type="text"],
 .aa-login-form input[type="password"] {
   height: 40px;
+  margin-bottom: 15px;
   padding: 10px;
   width: 100%;
 }
