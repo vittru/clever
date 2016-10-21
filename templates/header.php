@@ -306,6 +306,7 @@
                                 </ul>
                             </li>
                             <li><a href="/catalog/category/toys">Игрушки</a></li>
+                            <li><a href="/catalog/category/presents">Подарки</a></li>
                             <li><a href="/catalog/firm">Бренды<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <?php 
