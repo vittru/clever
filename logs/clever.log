@@ -1,41 +1,33 @@
-[20/Oct/2016:13:54:14] (index) Мы не смогли по какой-то причине связаться с Вами для получения подтверждения заказа. Чаще всего такое бывает, когда указаны неправильные контактные данные в заказе, или Вы не смогли ответить на звонки консультанта. Позвоните, пожалуйста, нам по телефону +7-996-725-00-61 или отправьте сообщение clever@clubclever.ru.
-[20/Oct/2016:13:54:14] (index) Не подтвержден Мы не смогли по какой-то причине связаться с Вами для получения подтверждения заказа. Чаще всего такое бывает, когда указаны неправильные контактные данные в заказе, или Вы не смогли ответить на звонки консультанта. Позвоните, пожалуйста, нам по телефону +7-996-725-00-61 или отправьте сообщение clever@clubclever.ru.
-[20/Oct/2016:13:54:17] (index) creating orderedgood
-[20/Oct/2016:13:54:17] (index) creating orderedgood
-[20/Oct/2016:13:54:22] (index) creating orderedgood
-[20/Oct/2016:13:54:22] (index) creating orderedgood
-[20/Oct/2016:13:54:22] (index) Статус вашего заказа изменен.
-Заказ №27
-Статус: Принят
-Описание: Мы получили Ваш заказ и начали работу над ним.
-Вы получили sms/e-mail с описанием заказа.
-
-[20/Oct/2016:13:54:22] (index) creating orderedgood
-[20/Oct/2016:13:54:22] (index) creating orderedgood
-[20/Oct/2016:13:55:31] (index) creating orderedgood
-[20/Oct/2016:13:55:31] (index) creating orderedgood
-[20/Oct/2016:13:55:31] (index) creating orderedgood
-[20/Oct/2016:13:55:31] (index) creating orderedgood
-[20/Oct/2016:13:55:31] (index) Статус вашего заказа изменен.
-Заказ №27
-Статус: Подтвержден
-Описание: Вы подтвердили все данные о заказе и времени доставки или выдачи.
-
-[20/Oct/2016:13:56:33] (index) creating orderedgood
-[20/Oct/2016:13:56:33] (index) creating orderedgood
-[20/Oct/2016:13:56:38] (index) creating orderedgood
-[20/Oct/2016:13:56:38] (index) creating orderedgood
-[20/Oct/2016:13:56:38] (index) Статус вашего заказа изменен.
-Заказ №27
-Статус: Не выдан
-В день доставки товар не был передан Вам и вернулся на склад, ожидайте звонка нашего оператора.
-Этот статус применим только для заказов с доставкой. Заказ может быть не выдан по ряду причин, например, не застали Вас дома и не смогли с Вами связаться. В таких случаях мы обязательно позвоним Вам для согласования нового времени доставки или изменения заказа.
-
-[20/Oct/2016:13:56:38] (index) creating orderedgood
-[20/Oct/2016:13:56:38] (index) creating orderedgood
-[20/Oct/2016:13:58:55] (index) Статус вашего заказа изменен.
-Заказ №27
-Статус: Отменен
-Мы получили запрос от Вас и отменили заказ,  заказ хранился в магазине до указанной даты и его никто не забрал.
-Вы получите sms/email с уведомлением об отмене заказа. Если Вы не отменяли заказ, свяжитесь с нами. Обычно мы храним заказ до 5 дней со дня уведомления о готовности к выдаче, после чего заказ отменяется. Вы получаете sms/e-mail об истечении срока хранения и отмене заказа.
-
+[22/Oct/2016:12:55:47] (index) Total: Array
+[22/Oct/2016:12:58:27] (index) Total: 450
+[22/Oct/2016:12:58:27] (index) New bonus: 45
+[22/Oct/2016:13:00:17] (index) Total: 450
+[22/Oct/2016:13:00:17] (index) New bonus: 45
+[22/Oct/2016:13:00:17] (index) 45
+[22/Oct/2016:13:01:38] (index) Total: 450
+[22/Oct/2016:13:01:38] (index) New bonus: 45
+[22/Oct/2016:13:01:38] (index) New total bonus: 45
+[22/Oct/2016:13:01:38] (index) Error when updating bonuses for order 34
+[22/Oct/2016:13:01:38] (index) exception 'PDOException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'clubclever.profile' doesn't exist' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(1006): Model->executeQuery(Object(PDOStatement), 'Error when upda...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/buy.php(27): Model->updateBonus('34', '0')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Buy->complete()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(26): Router->delegate()
+#5 {main}getMessage
+[22/Oct/2016:13:03:14] (index) Total: 495
+[22/Oct/2016:13:03:14] (index) New bonus: 49
+[22/Oct/2016:13:03:14] (index) New total bonus: 49
+[22/Oct/2016:13:03:50] (index) Total: 970
+[22/Oct/2016:13:03:50] (index) New bonus: 97
+[22/Oct/2016:13:03:50] (index) New total bonus: 146
+[22/Oct/2016:13:07:26] (index) Total: 400
+[22/Oct/2016:13:07:26] (index) New bonus: 40
+[22/Oct/2016:13:07:26] (index) New total bonus: 186
+[22/Oct/2016:14:03:42] (index) Total: 230
+[22/Oct/2016:14:03:42] (index) New bonus: 23
+[22/Oct/2016:14:03:42] (index) New total bonus: 209
+[22/Oct/2016:14:14:21] (index) Total: 185
+[22/Oct/2016:14:14:21] (index) New bonus: 16
+[22/Oct/2016:14:14:21] (index) New total bonus: 225

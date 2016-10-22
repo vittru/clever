@@ -3,25 +3,33 @@
 Class Controller_Buy Extends Controller_Base {
     
     function index() {
-        $this->registry['model']->logVisit(25);
-        if (isset($_SESSION['cart']) and sizeof($_SESSION['cart']) > 0)
+        if (isset($_SESSION['cart']) and sizeof($_SESSION['cart']) > 0) {
+            $this->registry['model']->logVisit(25);
             $this->registry['template']->show('buy');
-        else 
+        } else {
+            $this->registry['model']->logVisit(404, false, $_SERVER['QUERY_STRING']);
             $this->registry['template']->show('404');
+        }    
     }
     
     function complete() {
         if (isset($_SESSION['cart']) and sizeof($_SESSION['cart']) > 0 and $_SERVER['REQUEST_METHOD'] == 'POST') {
-            $this->registry['model']->logVisit(26);
             //Save the order in DB
             $orderId = $this->registry['model']->saveOrder($_SESSION['user']->id, htmlspecialchars($_POST['name']), htmlspecialchars($_POST['email']), htmlspecialchars($_POST['phone']), htmlspecialchars($_POST['branch']), htmlspecialchars($_POST['takeDate']), htmlspecialchars($_POST['takeTime']), htmlspecialchars($_POST['city']." ".$_POST['address']), htmlspecialchars(trim($_POST['promo'])));
+            $this->registry['model']->logVisit(26, $orderId);
 
             //Inform manager by email
             $this->informManager($orderId, $_POST);
 
             //Send email to client
             $this->informClient($orderId, $_POST);
-
+            
+            //Update bonuses
+            if ($_SESSION['user']->name) {
+                $bonus = $this->registry['model']->updateBonus($orderId, $_SESSION['user']->bonus);
+                $_SESSION['user']->bonus += $bonus;
+            }
+            
             //Update warehouse
             //@TODO
 
@@ -37,6 +45,7 @@ Class Controller_Buy Extends Controller_Base {
 
             //Show the results
             $this->registry['template']->set('orderId', $orderId);
+            $this->registry['template']->set('bonus', $bonus);
             $this->registry['template']->show('complete');
         } else {
             $this->registry['template']->show('404');
@@ -72,7 +81,7 @@ Class Controller_Buy Extends Controller_Base {
             $promoId = $this->registry['model']->getPromoId(trim($promo));
             $promoAmount = $this->registry['model']->getPromoAmount($promoId);
         }   
-        $total = $this->getCartTotal() - $promoAmount['amount'] - ($this->getCartTotal() * $promoAmount['percent'] / 100);
+        $total = $this->getCartTotal() - $promoAmount['amount'] - floor(($this->getCartTotal() * $promoAmount['percent'] / 100));
         if ($total < 0)
             $total = 0;
         $message = $message . "Сумма заказа: " . $total . " руб. \r\n";
@@ -122,7 +131,7 @@ Class Controller_Buy Extends Controller_Base {
             $error = 'Вы уже использовали этот промокод';
             $discount = 0;
         };
-        $total = $this->getCartTotal() - $discount['amount'] - $this->getCartTotal() * $discount['percent'] / 100;
+        $total = $this->getCartTotal() - $discount['amount'] - floor($this->getCartTotal() * $discount['percent'] / 100);
         if ($total < 0)
             $total = 0;
         $arr = array('error' => $error, 'discount' => $discount['amount'], 'percent' => $discount['percent'], 'total' => $total);

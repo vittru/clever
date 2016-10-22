@@ -872,12 +872,18 @@ Class Model {
     }
     
     function getOrder($orderId) {
-        $sqlSelect = $this->db->prepare('SELECT o.id, o.date, o.email, s.name status, s.description statusdesc, p.amount promo, IF (o.branchId is null, "Доставка", "Самовывоз") type, SUM(og.price * og.quantity) total, o.userId, pr.name profileId FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id LEFT JOIN `orders-goods` og ON o.id=og.orderid LEFT JOIN profiles pr ON o.profileId=pr.id WHERE o.id=:orderId');
+        $sqlSelect = $this->db->prepare('SELECT o.id, o.date, o.email, s.name status, s.description statusdesc, p.amount promoAmount, p.percent promoPercent, IF (o.branchId is null, "Доставка", "Самовывоз") type, SUM(og.price * og.quantity) total, o.userId, pr.name profileId FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id LEFT JOIN `orders-goods` og ON o.id=og.orderid LEFT JOIN profiles pr ON o.profileId=pr.id WHERE o.id=:orderId');
         $sqlSelect->bindParam(':orderId', $orderId);
         $this->executeQuery($sqlSelect, 'Error when getting details for order '.$orderId);
         $data = $sqlSelect->fetch();
-        $order = new Order($data['id'], $data['date'], $data['status'], $data['type'], $data['promo'], $data['userId'], $data['profileId'], $data['statusdesc'], $data['email']);
-        $order->total = $data['total'];
+        if ($data['promoAmount'])
+            $promo = $data['promoAmount'];
+        else if ($data['promoPercent'])
+            $promo = floor($data['total'] * $data['promoPercent']/100);
+        else
+            $promo=0;
+        $order = new Order($data['id'], $data['date'], $data['status'], $data['type'], $promo, $data['userId'], $data['profileId'], $data['statusdesc'], $data['email']);
+        $order->total = $data['total'] - $promo;
         $sqlSelect->closeCursor();
         $order->goods = $this->getOrderGoods($orderId);
         return $order;
@@ -987,5 +993,30 @@ Class Model {
         $sqlDelete->bindParam(':newsId', $newsId);
         $this->executeQuery($sqlDelete, 'Error when deleting news with id='.$newsId);
         $sqlDelete->closeCursor();
+    }
+    
+    function updateBonus($orderId, $bonus) {
+        $sqlSelect = $this->db->prepare('SELECT SUM(price*quantity) FROM `orders-goods` WHERE orderId=:orderId');
+        $sqlSelect->bindParam(':orderId', $orderId);
+        $this->executeQuery($sqlSelect, 'Error when getting total for order '.$orderId);
+        $total = $sqlSelect->fetchColumn();
+        $this->registry['logger']->lwrite('Total: '.$total);
+        $sqlSelect->closeCursor();
+        $sqlSelect = $this->db->prepare('SELECT p.amount, p.percent FROM promos p, orders o WHERE p.id=o.promoid AND o.id=:orderId');
+        $sqlSelect->bindParam(':orderId', $orderId);
+        $this->executeQuery($sqlSelect, 'Error when getting promo for order '.$orderId);
+        $data = $sqlSelect->fetch();
+        $sqlSelect->closeCursor();
+        $total = $total - $data['amount'] - floor($total * $data['percent']/100);
+        $newBonus = floor($total / 10);
+        $this->registry['logger']->lwrite('New bonus: '.$newBonus);
+        $sqlUpdate = $this->db->prepare('UPDATE profiles SET bonus=:bonus WHERE id in (SELECT profileId FROM orders WHERE id=:orderId)');
+        $bonus += $newBonus;
+        $this->registry['logger']->lwrite('New total bonus: '. $bonus);
+        $sqlUpdate->bindParam(':bonus', $bonus);
+        $sqlUpdate->bindParam(':orderId', $orderId);
+        $this->executeQuery($sqlUpdate, 'Error when updating bonuses for order '.$orderId);
+        $sqlUpdate->closeCursor();
+        return $newBonus;
     }
 }

@@ -36,7 +36,7 @@ include 'header.php';
                                 <?php 
                                 if ($user->bonus) {
                                 ?>
-                                    <p>Начислено бонусов: <?php echo $user->bonus; ?></p>
+                                    <p>На вашем счету сейчас бонусов: <?php echo $user->bonus; ?></p>
                                 <?php 
                                 } else {
                                 ?>
