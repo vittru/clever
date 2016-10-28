@@ -26,7 +26,7 @@ Class Model {
             . "SET name = :userName, email = :userEmail, client = :isClient, spam=:spam, phone=:phone "
             . "WHERE id = (SELECT profile FROM users WHERE id = :userId)"; 
     private $emailExists = "SELECT count(*) FROM profiles "
-            . "WHERE email = :userEmail";
+            . "WHERE email = :userEmail AND name IS NOT NULL";
     private $checkUser = "SELECT count(*) FROM profiles "
             . "WHERE email = :userEmail AND password = :userPassword";
     private $selectProfileEmail = "SELECT * FROM profiles "

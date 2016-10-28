@@ -31,3 +31,21 @@ Stack trace:
 [22/Oct/2016:14:14:21] (index) Total: 185
 [22/Oct/2016:14:14:21] (index) New bonus: 16
 [22/Oct/2016:14:14:21] (index) New total bonus: 225
+[28/Oct/2016:07:55:30] (index) action: register user: iii
+[28/Oct/2016:07:55:30] (index) <div id='error'>Эта почта уже зарегистрирована<br></div>
+[28/Oct/2016:08:00:04] (index) action: register user: iii
+[28/Oct/2016:08:00:04] (index) 
+[28/Oct/2016:08:00:55] (index) action: login user: 
+[28/Oct/2016:08:00:55] (index) <div id='error'>Неправильная почта или пароль<br></div>
+[28/Oct/2016:08:28:43] (index) action: login user: 
+[28/Oct/2016:08:28:43] (index) <div id='error'>Неправильная почта или пароль<br></div>
+[28/Oct/2016:08:28:50] (index) action: login user: 
+[28/Oct/2016:08:28:50] (index) 
+[28/Oct/2016:08:36:55] (index) action: login user: 
+[28/Oct/2016:08:36:55] (index) <div id='error'>Пустой пароль<br></div>
+[28/Oct/2016:08:43:35] (index) action: register user: iii
+[28/Oct/2016:08:43:35] (index) 
+[28/Oct/2016:08:44:24] (index) action: login user: 
+[28/Oct/2016:08:44:24] (index) 
+[28/Oct/2016:08:47:13] (index) action: register user: iii
+[28/Oct/2016:08:47:13] (index) 
