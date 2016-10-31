@@ -36,14 +36,17 @@ Class Controller_Account Extends Controller_Base {
             }else{
                 $this->registry->set('isClient', '0');
             }*/
-            if ($_POST['isSpam'] == "true"){
+            if ($_POST['isSpam'] == "true") {
                 $_SESSION['user']->spam = 1;
-            }else{
+            } else {
                 $_SESSION['user']->spam = 0;
             }
-            if ($_POST['userAction'] != "login")
+            if ($_POST['userAction'] != "login") {
                 $_SESSION['user'] = $this->registry['model']->updateUser($_SESSION['user']);
-            else 
+                if (isset($_POST['userFlyer']) && $_POST['userAction'] == 'register') {
+                    $this->registry['model']->applyFlyer($_SESSION['user']->id, $_POST['userFlyer']);
+                }    
+            } else 
                 $_SESSION['user'] = $this->registry['model']->login($_SESSION['user']);
         } else {
             $error = "<div id='error'>" . $error . "</div>";
@@ -79,6 +82,8 @@ Class Controller_Account Extends Controller_Base {
         //For login we also check that such user exists in DB
 	if ($action == 'login' && $error == '' && !$this->registry['model']->checkUser($_POST['userEmail'], $_POST['userPassword'])) 
             $error = $error . "Неправильная почта или пароль<br>";
+        if (isset($_POST['userFlyer']) && $action == 'register' && $this->registry['model']->flyerUsed($_POST['userFlyer']))
+            $error = $error . "Этот сертификат уже использован<br>";
         return $error; 
     }
     

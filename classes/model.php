@@ -1019,4 +1019,38 @@ Class Model {
         $sqlUpdate->closeCursor();
         return $newBonus;
     }
+    
+    function flyerUsed($flyerId) {
+        $sqlSelect = $this->db->prepare('SELECT IFNULL(profile, 0) FROM flyers WHERE id=:flyerId');
+        $sqlSelect->bindParam(':flyerId', $flyerId);
+        $this->executeQuery($sqlSelect, 'Error when checking flyer ' . $flyerId);
+        $data = $sqlSelect->fetchColumn();
+        //$this->registry['logger']->lwrite($data);
+        $sqlSelect->closeCursor();
+        return $data;
+    }
+    
+    function applyFlyer($userId, $flyerId) {
+        $sqlSelect = $this->db->prepare('SELECT bonus FROM flyers WHERE id =:flyerId');
+        $sqlSelect->bindParam(':flyerId', $flyerId);
+        $this->executeQuery($sqlSelect, 'Error when getting bonus for flyer ' . $flyerId);
+        $data = $sqlSelect->fetchColumn();
+        $bonus = $data;
+        $sqlSelect->closeCursor();
+        $sqlSelect = $this->db->prepare('SELECT p.id FROM profiles p, users u WHERE p.id=u.profile AND u.id=:userId');
+        $sqlSelect->bindParam(':userId', $userId);
+        $this->executeQuery($sqlSelect, 'Error when getting profile for user ' . $userId);
+        $profile = $sqlSelect->fetchColumn();
+        $sqlSelect->closeCursor();
+        $sqlUpdate = $this->db->prepare('UPDATE profiles SET bonus=:bonus WHERE id=:profileId');
+        $sqlUpdate->bindParam(':bonus', $bonus);
+        $sqlUpdate->bindParam(':profileId', $profile);
+        $this->executeQuery($sqlUpdate, 'Error when applying flyer ' . $flyerId . ' for profile ' . $profile);
+        $sqlUpdate->closeCursor();
+        $sqlUpdate = $this->db->prepare('UPDATE flyers SET profile=:profileId WHERE id=:flyerId');
+        $sqlUpdate->bindValue(':profileId', $profile);
+        $sqlUpdate->bindParam(':flyerId', $flyerId);
+        $this->executeQuery($sqlUpdate, 'Error when linking flyer ' . $flyerId . ' with profile ' . $profile);
+        $sqlUpdate->closeCursor();
+    }
 }

@@ -1,51 +1,35 @@
-[22/Oct/2016:12:55:47] (index) Total: Array
-[22/Oct/2016:12:58:27] (index) Total: 450
-[22/Oct/2016:12:58:27] (index) New bonus: 45
-[22/Oct/2016:13:00:17] (index) Total: 450
-[22/Oct/2016:13:00:17] (index) New bonus: 45
-[22/Oct/2016:13:00:17] (index) 45
-[22/Oct/2016:13:01:38] (index) Total: 450
-[22/Oct/2016:13:01:38] (index) New bonus: 45
-[22/Oct/2016:13:01:38] (index) New total bonus: 45
-[22/Oct/2016:13:01:38] (index) Error when updating bonuses for order 34
-[22/Oct/2016:13:01:38] (index) exception 'PDOException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'clubclever.profile' doesn't exist' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
+[30/Oct/2016:19:51:26] (index) action: register user: qqq
+[30/Oct/2016:19:51:26] (index) Registered user: 51
+[30/Oct/2016:19:51:26] (index) 
+[30/Oct/2016:19:52:29] (index) action: register user: qqq
+[30/Oct/2016:19:52:29] (index) 
+[30/Oct/2016:19:53:45] (index) action: register user: qqq
+[30/Oct/2016:19:53:45] (index) 
+[30/Oct/2016:19:54:56] (index) action: register user: qqq
+[30/Oct/2016:19:54:56] (index) 
+[30/Oct/2016:19:57:37] (index) action: register user: qqq
+[30/Oct/2016:19:57:37] (index) <div id='error'>Этот сертификат уже использован<br></div>
+[30/Oct/2016:20:00:48] (index) action: register user: qqq
+[30/Oct/2016:20:00:48] (index) <div id='error'>Этот сертификат уже использован<br></div>
+[30/Oct/2016:20:01:20] (index) action: register user: qqq
+[30/Oct/2016:20:01:20] (index) <div id='error'>Этот сертификат уже использован<br></div>
+[30/Oct/2016:20:02:21] (index) 0
+[30/Oct/2016:20:02:21] (index) action: register user: qqq
+[30/Oct/2016:20:02:21] (index) <div id='error'>Этот сертификат уже использован<br></div>
+[30/Oct/2016:20:03:53] (index) action: register user: qqq
+[30/Oct/2016:20:03:53] (index) Error when linking flyer 2 with profile 25
+[30/Oct/2016:20:03:53] (index) exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHEN id='2'' at line 1' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
 Stack trace:
 #0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
-#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(1006): Model->executeQuery(Object(PDOStatement), 'Error when upda...')
-#2 /Applications/MAMP/htdocs/ClubClever/controllers/buy.php(27): Model->updateBonus('34', '0')
-#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Buy->complete()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(1053): Model->executeQuery(Object(PDOStatement), 'Error when link...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/account.php(47): Model->applyFlyer('51', '2')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Account->register()
 #4 /Applications/MAMP/htdocs/ClubClever/index.php(26): Router->delegate()
 #5 {main}getMessage
-[22/Oct/2016:13:03:14] (index) Total: 495
-[22/Oct/2016:13:03:14] (index) New bonus: 49
-[22/Oct/2016:13:03:14] (index) New total bonus: 49
-[22/Oct/2016:13:03:50] (index) Total: 970
-[22/Oct/2016:13:03:50] (index) New bonus: 97
-[22/Oct/2016:13:03:50] (index) New total bonus: 146
-[22/Oct/2016:13:07:26] (index) Total: 400
-[22/Oct/2016:13:07:26] (index) New bonus: 40
-[22/Oct/2016:13:07:26] (index) New total bonus: 186
-[22/Oct/2016:14:03:42] (index) Total: 230
-[22/Oct/2016:14:03:42] (index) New bonus: 23
-[22/Oct/2016:14:03:42] (index) New total bonus: 209
-[22/Oct/2016:14:14:21] (index) Total: 185
-[22/Oct/2016:14:14:21] (index) New bonus: 16
-[22/Oct/2016:14:14:21] (index) New total bonus: 225
-[28/Oct/2016:07:55:30] (index) action: register user: iii
-[28/Oct/2016:07:55:30] (index) <div id='error'>Эта почта уже зарегистрирована<br></div>
-[28/Oct/2016:08:00:04] (index) action: register user: iii
-[28/Oct/2016:08:00:04] (index) 
-[28/Oct/2016:08:00:55] (index) action: login user: 
-[28/Oct/2016:08:00:55] (index) <div id='error'>Неправильная почта или пароль<br></div>
-[28/Oct/2016:08:28:43] (index) action: login user: 
-[28/Oct/2016:08:28:43] (index) <div id='error'>Неправильная почта или пароль<br></div>
-[28/Oct/2016:08:28:50] (index) action: login user: 
-[28/Oct/2016:08:28:50] (index) 
-[28/Oct/2016:08:36:55] (index) action: login user: 
-[28/Oct/2016:08:36:55] (index) <div id='error'>Пустой пароль<br></div>
-[28/Oct/2016:08:43:35] (index) action: register user: iii
-[28/Oct/2016:08:43:35] (index) 
-[28/Oct/2016:08:44:24] (index) action: login user: 
-[28/Oct/2016:08:44:24] (index) 
-[28/Oct/2016:08:47:13] (index) action: register user: iii
-[28/Oct/2016:08:47:13] (index) 
+[30/Oct/2016:20:03:53] (index) 
+[30/Oct/2016:20:07:04] (index) action: register user: qqq
+[30/Oct/2016:20:07:04] (index) 
+[30/Oct/2016:20:07:39] (index) action: register user: www
+[30/Oct/2016:20:07:39] (index) <div id='error'>Этот сертификат уже использован<br></div>
+[30/Oct/2016:20:07:43] (index) action: register user: www
+[30/Oct/2016:20:07:43] (index) 

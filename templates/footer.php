@@ -84,6 +84,7 @@
                     <input type="text" placeholder="Телефон" id="auth-phone" name="userPhone" class="nologin form-control" maxlength="20" value="<?php echo $user->phone ?>">
                     <input type="password" placeholder="Пароль*" id="auth-password" name="userPassword" class="form-control" maxlength="30">
                     <input type="password" placeholder="Повторите пароль*" id="auth-confirm" class="nologin form-control" name="userConfirm" maxlength="30">
+                    <input type="number" placeholder="Номер сертификата" id="auth-flyer" class="nologin form-control" name="userFlyer" maxlength="6">   
                     <label for="auth-spam" class="nologin"><input type="checkbox" id="auth-spam" name="isSpam"> Подписаться на рассылку? </label>
                     <div id="auth-error" class="error"></div>
                     <input type="hidden" id="auth-action" name="userAction">

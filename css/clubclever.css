@@ -1571,7 +1571,8 @@ h2 {
 }
 
 .aa-login-form input[type="text"],
-.aa-login-form input[type="password"] {
+.aa-login-form input[type="password"],
+.aa-login-form input[type="number"]{
   height: 40px;
   margin-bottom: 15px;
   padding: 10px;
