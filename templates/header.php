@@ -177,8 +177,8 @@
                                     <input id="search-text" type="text" class="form-control" name="name" placeholder="Поиск по каталогу" />
                                     <div class="input-group-btn">
                                         <div class="btn-group" role="group">
-                                            <div class="dropdown dropdown-lg">
-                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                                            <div id="search-dropdown" class="dropdown dropdown-lg">
+                                                <!--button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button-->
                                                 <div class="dropdown-menu dropdown-menu-right" role="menu">
                                                     <div class="row">
                                                         <div class="form-group col-sm-6">

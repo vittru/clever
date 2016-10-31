@@ -11,6 +11,8 @@
 .btn-group .btn {
     border-radius: 0;
     margin-left: -1px;
+    padding-bottom: 7px;
+    padding-top: 7px;
 }
 
 .btn-group .form-horizontal .btn[type="submit"] {

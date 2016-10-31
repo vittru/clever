@@ -243,3 +243,13 @@ $('#change-order-status').on('click', function() {
     }); 
     location.reload();
 });
+
+$('#search-text').on('focus', function() {
+    $('#search-dropdown').addClass('open'); 
+});
+
+$(document).on('click', function(e) {
+    if (!$(e.target).closest('#search-dropdown').length) {
+        $('#search-dropdown').removeClass('open'); 
+    }    
+});
