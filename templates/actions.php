@@ -7,6 +7,10 @@ include 'header.php';
         <div class="row">
             <div class="col-md-12">
                 <h1>Наши акции</h1>
+                <h2>С днем рождения салона красоты "Каролина"</h2>
+                <div class="newstime">1/11/2016 - 14/11/2016</div>
+                <img src="/images/banners/Karolina.jpg">
+                <div>Полные условия акции читайте <a href="/actions/karolina2016">здесь</a></div>
                 <h2>Бесплатная доставка по Самаре заказов от 500 рублей</h2>
                 <div class="newstime">6/10/2016 - 1/11/2016</div>
                 <img src="/images/actions/action1.jpg">
