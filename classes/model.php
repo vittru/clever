@@ -629,8 +629,8 @@ Class Model {
         return $catsArray;       
     }
     
-    function saveOrder($userId, $name, $email, $phone, $branch, $takeDate, $takeTime, $address, $promo) {
-        $sqlInsert = $this->db->prepare('INSERT INTO orders(userId, name, email, phone, date, branchId, day, time, address, promoid, profileId) VALUES(:userId, :name, :email, :phone, :date, :branch, :takeDate, :takeTime, :address, :promo, :profileId)');
+    function saveOrder($userId, $name, $email, $phone, $branch, $takeDate, $takeTime, $address, $promo, $bonus) {
+        $sqlInsert = $this->db->prepare('INSERT INTO orders(userId, name, email, phone, date, branchId, day, time, address, promoid, profileId, bonus) VALUES(:userId, :name, :email, :phone, :date, :branch, :takeDate, :takeTime, :address, :promo, :profileId, :bonus)');
         $sqlInsert->bindParam(':userId', $userId);
         $sqlInsert->bindParam(':name', $name);
         $sqlInsert->bindParam(':email', $email);
@@ -654,6 +654,9 @@ Class Model {
         else
             $sqlInsert->bindParam (':profileId', $profile);
         $sqlInsert->bindParam(':date',  date('Y-m-d', time()));
+        if (!$bonus)
+            $bonus=0;
+        $sqlInsert->bindParam(':bonus', $bonus);
         $this->executeQuery($sqlInsert, 'Error when saving order');
         try{
             $orderId = $this->db->lastInsertId();
@@ -783,13 +786,13 @@ Class Model {
         if ($promoId) {
             $userId = $_SESSION['user']->id;
             $promoCount = $this->getPromoCount($promoId);
-            $promoCount -= $this->getUserPromos($promoId, $userId);
+            $promoCount = $promoCount - $this->getUserPromos($promoId, $userId);
             $profile = $this->checkProfile();
             if ($profile) {
                 $users = $this->getProfileUsers($profile);
                 foreach($users as $user) {
                     if ($user <> $userId)
-                        $promoCount -= $this->getUserPromos($promoId, $user);
+                        $promoCount = $promoCount - $this->getUserPromos($promoId, $user);
                 }
             }
             if ($promoCount > 0) 
@@ -872,7 +875,7 @@ Class Model {
     }
     
     function getOrder($orderId) {
-        $sqlSelect = $this->db->prepare('SELECT o.id, o.date, o.email, s.name status, s.description statusdesc, p.amount promoAmount, p.percent promoPercent, IF (o.branchId is null, "Доставка", "Самовывоз") type, SUM(og.price * og.quantity) total, o.userId, pr.name profileId FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id LEFT JOIN `orders-goods` og ON o.id=og.orderid LEFT JOIN profiles pr ON o.profileId=pr.id WHERE o.id=:orderId');
+        $sqlSelect = $this->db->prepare('SELECT o.id, o.date, o.email, s.name status, s.description statusdesc, p.amount promoAmount, p.percent promoPercent, IF (o.branchId is null, "Доставка", "Самовывоз") type, SUM(og.price * og.quantity) total, o.userId, pr.name profileId, o.bonus FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id LEFT JOIN `orders-goods` og ON o.id=og.orderid LEFT JOIN profiles pr ON o.profileId=pr.id WHERE o.id=:orderId');
         $sqlSelect->bindParam(':orderId', $orderId);
         $this->executeQuery($sqlSelect, 'Error when getting details for order '.$orderId);
         $data = $sqlSelect->fetch();
@@ -882,8 +885,8 @@ Class Model {
             $promo = floor($data['total'] * $data['promoPercent']/100);
         else
             $promo=0;
-        $order = new Order($data['id'], $data['date'], $data['status'], $data['type'], $promo, $data['userId'], $data['profileId'], $data['statusdesc'], $data['email']);
-        $order->total = $data['total'] - $promo;
+        $order = new Order($data['id'], $data['date'], $data['status'], $data['type'], $promo, $data['userId'], $data['profileId'], $data['statusdesc'], $data['email'], $data['bonus']);
+        $order->total = $data['total'] - $promo - $data['bonus'];
         $sqlSelect->closeCursor();
         $order->goods = $this->getOrderGoods($orderId);
         return $order;
@@ -1051,6 +1054,14 @@ Class Model {
         $sqlUpdate->bindValue(':profileId', $profile);
         $sqlUpdate->bindParam(':flyerId', $flyerId);
         $this->executeQuery($sqlUpdate, 'Error when linking flyer ' . $flyerId . ' with profile ' . $profile);
+        $sqlUpdate->closeCursor();
+    }
+    
+    function decreaseBonus($userId, $bonus) {
+        $sqlUpdate = $this->db->prepare('UPDATE profiles SET bonus=:bonus WHERE id IN (SELECT profile FROM users WHERE id=:userId)');
+        $sqlUpdate->bindParam(':bonus', $bonus);
+        $sqlUpdate->bindParam(':userId', $userId);
+        $this->executeQuery($sqlUpdate, 'Error when decreasing bonus for user ' . $userId);
         $sqlUpdate->closeCursor();
     }
 }

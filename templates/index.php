@@ -20,14 +20,8 @@ if ((new \FilesystemIterator($bannersdir))->valid()) {
                         ?>  
                             <li>
                                 <div class="seq-model">
-                                    <img data-seq src="<?php echo '/'.$bannersdir.'/'.$fileinfo->getFilename() ?>" alt="Men slide img" />
+                                    <img data-seq src="<?php echo '/'.$bannersdir.'/'.$fileinfo->getFilename() ?>" alt="<?php $fileinfo->getFilename() ?>" />
                                 </div>
-                                <!--div class="seq-title">
-                                <span data-seq>Save Up to 75% Off</span>                
-                                    <h2 data-seq>Men Collection</h2>                
-                                    <p data-seq>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, illum.</p>
-                                    <a data-seq href="#" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
-                                </div-->
                             </li>
                         <?php
                         }        

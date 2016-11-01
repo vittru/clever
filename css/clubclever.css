@@ -1456,7 +1456,7 @@ h2 {
   width: 100%;
   font-size: 14px;
 }
-#checkout .checkout-goods .aa-checkout-single-bill {
+#checkout .aa-checkout-single-bill {
     padding-bottom: 10px;
 }
 #checkout .checkout-area .checkout-right {
@@ -1515,8 +1515,17 @@ h2 {
 #checkout .checkout-area .checkout-right input[type="submit"] {
   display: block;
   margin-top: 15px;
-  padding: 8px 12px;
+  padding: 7px 12px;
   width: 100%;
+}
+#checkout #bonus {
+    width: 50%;
+    display: inline-block;
+}
+#checkout #use-bonus {
+    display: inline-block;
+    padding: 8px 12px;
+    width: 48%;
 }
 
 #aa-myaccount {

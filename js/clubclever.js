@@ -118,7 +118,6 @@ $(document).on("click", ".aa-add-card-btn", function () {
 
 $(document).on("mouseleave", ".aa-product-img", function() {
     $(this).parent().find(".aa-add-card-btn").html('<span class="fa fa-shopping-cart"></span>В корзину');
-    //$(this).parent().find(".aa-add-card-btn").css("background-color","#E46713")
 });
 
 $('.panel-heading a').on('click',function(e){
@@ -130,8 +129,11 @@ $('.panel-heading a').on('click',function(e){
 
 $('#order-form').submit(function(e) {
     var submit = true;
-    if (!$("#promo-error").is(":hidden")){
+    if (!$("#promo-error").is(":hidden") || $("#promo").is(":hidden")){
         $("#promo").val('');
+    }
+    if (!$("#bonus-error").is(":hidden") || $("#bonus").is(":hidden")){
+        $("#bonus").val('');
     }
     $('input.order-form').each(function(){
         if(!$(this).is(":hidden") && !$(this).val().trim())
@@ -162,6 +164,47 @@ $(document).on('click', '.aa-search-box #search-text', function (e) {
     e.stopPropagation();
 });
 
+function applyDiscount(a, error) {
+    JSON.parse(a, function(k, v) {
+        var code = true;
+        if (k === 'error') {
+            if (v) {
+                error.text(v);
+                error.show();
+                code = false;
+            } else {
+                error.hide();
+            }    
+        }
+        if (!code) {
+            $('#discount').hide();
+        } else {
+            if (k === 'discount') {
+                if (v) {
+                    $('#discount').find('#sum').text(v + ' руб.');    
+                    $('#discount').show();
+                } else {
+                    $('#discount').hide();
+                }
+            }    
+            if (k === 'percent' && v) {
+                $('#discount').find('#sum').text(v + ' %');    
+                $('#discount').show();                            
+            }
+        }
+        if (k === 'total') {
+            $('#total').text(v + ' руб.');
+            if (v < 1500) {
+                $('#amount-left').text(1500-v);
+                $('#delivery-info').show();
+            } else {
+                $('#delivery-info').hide();
+            }
+        }
+    });
+
+};
+
 function checkPromo(promo) {
     $.ajax({    
         type: "GET",   
@@ -169,50 +212,17 @@ function checkPromo(promo) {
         data: "promo=" + promo,
         dataType: "html",
         success: function (a){
-            var code = true;
-            JSON.parse(a, function(k, v) {
-                if (k === 'error') {
-                    if (v) {
-                        $("#promo-error").text(v);
-                        $("#promo-error").show();
-                        code = false;
-                    } else {
-                        $('#promo-error').hide();
-                    }    
-                }
-                if (!code) {
-                    $('#discount').hide();
-                } else {
-                    if (k === 'discount' && v) {
-                        $('#discount').find('#sum').text(v + ' руб.');    
-                        $('#discount').show();
-                    }
-                    if (k === 'percent' && v) {
-                        $('#discount').find('#sum').text(v + ' %');    
-                        $('#discount').show();                            
-                    }
-                }
-                if (k === 'total') {
-                    $('#total').text(v + ' руб.');
-                    if (v < 500) {
-                        $('#amount-left').text(500-v);
-                        $('#delivery-info').show();
-                    } else {
-                        $('#delivery-info').hide()
-                    }
-                }
-            });
+            applyDiscount(a, $('#promo-error'));
         }
     });
     if (!promo) {
         $('#discount').hide();
         $('#promo-error').hide();
-    }   
+    }    
 }
 
 $(document).on('change', '#promo', function() {
-    var promo = $(this).val().trim();
-    checkPromo(promo);
+    checkPromo($(this).val().trim());
 });
 
 $('#promo').on('keyup', function(e) {
@@ -252,4 +262,24 @@ $(document).on('click', function(e) {
     if (!$(e.target).closest('#search-dropdown').length) {
         $('#search-dropdown').removeClass('open'); 
     }    
+});
+
+$('#panel-bonus').on('click',function(){
+    if(!$(this).parents('.panel').children('.panel-collapse').hasClass('in')){
+        $('#promo').val('');
+        checkPromo($('#promo').val().trim());
+    }
+});
+
+$('#use-bonus').on('click', function() {
+    $.ajax({
+        type: "GET",   
+        url: "/buy/checkbonus",   
+        data: "bonus=" + $('#bonus').val(),
+        dataType: "html",
+        success: function (a){
+            applyDiscount(a, $('#bonus-error'));
+        }
+    });
+    $(this).blur();
 });

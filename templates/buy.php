@@ -95,12 +95,12 @@ include 'header.php';
                                             </div>
                                             <div id="collapseThree" class="panel-collapse collapse">
                                                 <div class="panel-body">
-                                                    <div class="row" id="delivery-info" <?php if ($total > 500) echo "hidden" ?>>
+                                                    <div class="row" id="delivery-info" <?php if ($total > 1500) echo "hidden" ?>>
                                                         <div class="col-md-12">
                                                             Стоимость доставки по Самаре - 300 руб. 
                                                         </div>
                                                         <div class="col-md-12">
-                                                            Добавьте в заказ товаров на <span id="amount-left"><?php echo 500-$total ?></span> руб., и доставка будет бесплатной.
+                                                            Добавьте в заказ товаров на <span id="amount-left"><?php echo 1500-$total ?></span> руб., и доставка будет бесплатной.
                                                         </div>    
                                                     </div>    
                                                     <div class="row">
@@ -181,15 +181,72 @@ include 'header.php';
                                                             <?php echo $total . " руб." ?>
                                                         </div>                             
                                                     </div>
-                                                </div>                            
+                                                </div> 
                                                 <?php    
                                                 }
                                                 ?>                            
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="promo-error" class="error" hidden>Не все обязательные поля заполнены</div>
-                                    <input type="text" placeholder="Промо-код" id="promo" name="promo" class="form-control">
+                                    <div class="panel-group" id="accordionRight">
+                                        <div class="panel panel-default aa-checkout-billaddress">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <?php
+                                                    if ($user->name and $user->bonus) {
+                                                    ?>    
+                                                    <a data-toggle="collapse" data-parent="#accordionRight" href="#collapsePromo">
+                                                    <?php 
+                                                    }
+                                                    ?>    
+                                                        Промо-код
+                                                    <?php
+                                                    if ($user->name and $user->bonus) {
+                                                    ?>    
+                                                    </a>
+                                                    <?php 
+                                                    }
+                                                    ?>    
+                                                </h4>
+                                            </div>
+                                            <div id="collapsePromo" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div id="promo-error" class="error" hidden></div>
+                                                            <input type="text" placeholder="Промо-код" id="promo" name="promo" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php
+                                        if ($user->name and $user->bonus) {
+                                        ?>
+                                        <div class="panel panel-default aa-checkout-billaddress">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" data-parent="#accordionRight" href="#collapseBonus" id="panel-bonus">Бонусы</a>
+                                                </h4>
+                                            </div>  
+                                            <div id="collapseBonus" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    <div class="row">                                                                                            
+                                                        <div class="col-md-12">
+                                                            <div class="aa-checkout-single-bill">Всего бонусов: <?php echo $user->bonus ?></div>
+                                                            <div class="aa-checkout-single-bill">Можно использовать: <?php echo min(floor($total * 0.3), $user->bonus)?></div>
+                                                            <div id="bonus-error" class="error" hidden></div>
+                                                            <input class="form-control" id="bonus" name="bonus" type="number" value="<?php echo min(floor($total * 0.3), $user->bonus)?>">
+                                                            <button id="use-bonus" class="orange-button" type="button">Использовать</button>
+                                                        </div>
+                                                    </div>
+                                                </div>    
+                                            </div>
+                                        </div>    
+                                        <?php
+                                        }
+                                        ?>
+                                    </div>
                                     <div id="order-error" class="error" hidden>Не все обязательные поля заполнены</div>
                                     <input type="submit" value="Заказать" class="green-button">                
                                 </div>

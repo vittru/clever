@@ -45,11 +45,16 @@ include 'header.php';
                                 }
                                 if ($order->id and $user->name and $order->profile == $user->name) {
                                 ?>
-                                    <div><div class="order-parameters-header">Сумма:</div><div class="order-parameters-value"><?php echo ($order->total) . " руб."; ?></div> </div>
+                                    <div><div class="order-parameters-header">Сумма:</div><div class="order-parameters-value"><?php echo $order->total . " руб."; ?></div> </div>
                                     <?php
                                     if ($order->promo) {
                                     ?>
-                                        <div><div class="order-parameters-header">Промо-скидка:</div><div class="order-parameters-value"><?php echo $order->promo . " руб."; ?></div> </div>
+                                        <div><div class="order-parameters-header">Скидка:</div><div class="order-parameters-value"><?php echo $order->promo . " руб."; ?></div> </div>
+                                    <?php
+                                    }
+                                    if ($order->bonus) {
+                                    ?>
+                                        <div><div class="order-parameters-header">Скидка:</div><div class="order-parameters-value"><?php echo $order->bonus . " руб."; ?></div> </div>
                                     <?php
                                     }
                                 }    

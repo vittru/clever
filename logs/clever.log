@@ -1,35 +1,39 @@
-[30/Oct/2016:19:51:26] (index) action: register user: qqq
-[30/Oct/2016:19:51:26] (index) Registered user: 51
-[30/Oct/2016:19:51:26] (index) 
-[30/Oct/2016:19:52:29] (index) action: register user: qqq
-[30/Oct/2016:19:52:29] (index) 
-[30/Oct/2016:19:53:45] (index) action: register user: qqq
-[30/Oct/2016:19:53:45] (index) 
-[30/Oct/2016:19:54:56] (index) action: register user: qqq
-[30/Oct/2016:19:54:56] (index) 
-[30/Oct/2016:19:57:37] (index) action: register user: qqq
-[30/Oct/2016:19:57:37] (index) <div id='error'>Этот сертификат уже использован<br></div>
-[30/Oct/2016:20:00:48] (index) action: register user: qqq
-[30/Oct/2016:20:00:48] (index) <div id='error'>Этот сертификат уже использован<br></div>
-[30/Oct/2016:20:01:20] (index) action: register user: qqq
-[30/Oct/2016:20:01:20] (index) <div id='error'>Этот сертификат уже использован<br></div>
-[30/Oct/2016:20:02:21] (index) 0
-[30/Oct/2016:20:02:21] (index) action: register user: qqq
-[30/Oct/2016:20:02:21] (index) <div id='error'>Этот сертификат уже использован<br></div>
-[30/Oct/2016:20:03:53] (index) action: register user: qqq
-[30/Oct/2016:20:03:53] (index) Error when linking flyer 2 with profile 25
-[30/Oct/2016:20:03:53] (index) exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHEN id='2'' at line 1' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
+[31/Oct/2016:20:42:14] (index) 
+[31/Oct/2016:20:42:14] (index) Error when saving order
+[31/Oct/2016:20:42:14] (index) exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'bonus' cannot be null' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
 Stack trace:
 #0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
-#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(1053): Model->executeQuery(Object(PDOStatement), 'Error when link...')
-#2 /Applications/MAMP/htdocs/ClubClever/controllers/account.php(47): Model->applyFlyer('51', '2')
-#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Account->register()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(661): Model->executeQuery(Object(PDOStatement), 'Error when savi...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/buy.php(18): Model->saveOrder('51', 'Vit', 'vitaly.trusov@g...', '89171444004', '3', '33', '444', ' ', '')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Buy->complete()
 #4 /Applications/MAMP/htdocs/ClubClever/index.php(26): Router->delegate()
 #5 {main}getMessage
-[30/Oct/2016:20:03:53] (index) 
-[30/Oct/2016:20:07:04] (index) action: register user: qqq
-[30/Oct/2016:20:07:04] (index) 
-[30/Oct/2016:20:07:39] (index) action: register user: www
-[30/Oct/2016:20:07:39] (index) <div id='error'>Этот сертификат уже использован<br></div>
-[30/Oct/2016:20:07:43] (index) action: register user: www
-[30/Oct/2016:20:07:43] (index) 
+[31/Oct/2016:20:47:10] (index) 700
+[31/Oct/2016:20:47:10] (index) 
+[31/Oct/2016:20:47:10] (index) Error when saving order
+[31/Oct/2016:20:47:10] (index) exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'bonus' cannot be null' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(661): Model->executeQuery(Object(PDOStatement), 'Error when savi...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/buy.php(19): Model->saveOrder('51', 'Vit', 'vitaly.trusov@g...', '89171444004', '4', '4353', '43534', ' ', '')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Buy->complete()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(26): Router->delegate()
+#5 {main}getMessage
+[01/Nov/2016:06:08:03] (index) 255
+[01/Nov/2016:06:08:03] (index) 
+[01/Nov/2016:06:08:03] (index) Error when saving order
+[01/Nov/2016:06:08:03] (index) exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'bonus' cannot be null' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(661): Model->executeQuery(Object(PDOStatement), 'Error when savi...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/buy.php(19): Model->saveOrder('51', 'Vit', 'vitaly.trusov@g...', '89171444004', '1', 'sdfsf', 'sdfsdfsd', ' ', '')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Buy->complete()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(26): Router->delegate()
+#5 {main}getMessage
+[01/Nov/2016:06:41:00] (index) Total: 900
+[01/Nov/2016:06:41:00] (index) New bonus: 90
+[01/Nov/2016:06:41:00] (index) New total bonus: 790
+[01/Nov/2016:06:58:48] (index) action: login user: 
+[01/Nov/2016:06:58:48] (index) <div id='error'>Неправильная почта или пароль<br></div>
+[01/Nov/2016:06:58:52] (index) action: login user: 
+[01/Nov/2016:06:58:52] (index) 

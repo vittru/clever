@@ -15,7 +15,7 @@ Class Controller_Buy Extends Controller_Base {
     function complete() {
         if (isset($_SESSION['cart']) and sizeof($_SESSION['cart']) > 0 and $_SERVER['REQUEST_METHOD'] == 'POST') {
             //Save the order in DB
-            $orderId = $this->registry['model']->saveOrder($_SESSION['user']->id, htmlspecialchars($_POST['name']), htmlspecialchars($_POST['email']), htmlspecialchars($_POST['phone']), htmlspecialchars($_POST['branch']), htmlspecialchars($_POST['takeDate']), htmlspecialchars($_POST['takeTime']), htmlspecialchars($_POST['city']." ".$_POST['address']), htmlspecialchars(trim($_POST['promo'])));
+            $orderId = $this->registry['model']->saveOrder($_SESSION['user']->id, htmlspecialchars($_POST['name']), htmlspecialchars($_POST['email']), htmlspecialchars($_POST['phone']), htmlspecialchars($_POST['branch']), htmlspecialchars($_POST['takeDate']), htmlspecialchars($_POST['takeTime']), htmlspecialchars($_POST['city']." ".$_POST['address']), htmlspecialchars(trim($_POST['promo'])), $_POST['bonus']);
             $this->registry['model']->logVisit(26, $orderId);
 
             //Inform manager by email
@@ -25,9 +25,14 @@ Class Controller_Buy Extends Controller_Base {
             $this->informClient($orderId, $_POST);
             
             //Update bonuses
-            if ($_SESSION['user']->name) {
+            if ($_SESSION['user']->name and !$_POST['bonus'] and !$_POST['promo']) {
                 $bonus = $this->registry['model']->updateBonus($orderId, $_SESSION['user']->bonus);
                 $_SESSION['user']->bonus += $bonus;
+            }
+            
+            if ($_SESSION['user']->name and $_POST['bonus']) {
+                $_SESSION['user']->bonus -= $_POST['bonus'];
+                $this->registry['model']->decreaseBonus($_SESSION['user']->id, $_SESSION['user']->bonus);
             }
             
             //Update warehouse
@@ -135,6 +140,28 @@ Class Controller_Buy Extends Controller_Base {
         if ($total < 0)
             $total = 0;
         $arr = array('error' => $error, 'discount' => $discount['amount'], 'percent' => $discount['percent'], 'total' => $total);
+        echo json_encode($arr);
+    }    
+
+    function checkbonus() {
+        $error = '';
+        $discount = 0;
+        $bonus = $_GET['bonus'];
+        if ($bonus) {
+            if ($bonus > $_SESSION['user']->bonus)
+                $error = 'У вас нет столько бонусов';
+            else if ($bonus > floor($this->getCartTotal() * 0.3))
+                $error = 'Бонусами можно оплатить только 30% покупки';
+            if (!$error) {
+                $discount = $bonus;
+            }
+        } else {
+            $discount = 0;
+        }    
+        $total = $this->getCartTotal() - $discount;
+        if ($total < 0)
+            $total = 0;
+        $arr = array('error' => $error, 'discount' => $discount, 'percent' => 0, 'total' => $total);
         echo json_encode($arr);
     }    
 }    
