@@ -129,6 +129,10 @@ $('.panel-heading a').on('click',function(e){
 
 $('#order-form').submit(function(e) {
     var submit = true;
+    if ($("#discount").is(":hidden")) {
+        $("#promo").val('');
+        $("#bonus").val('');
+    }
     if (!$("#promo-error").is(":hidden") || $("#promo").is(":hidden")){
         $("#promo").val('');
     }

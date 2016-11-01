@@ -37,3 +37,6 @@ Stack trace:
 [01/Nov/2016:06:58:48] (index) <div id='error'>Неправильная почта или пароль<br></div>
 [01/Nov/2016:06:58:52] (index) action: login user: 
 [01/Nov/2016:06:58:52] (index) 
+[01/Nov/2016:10:20:59] (index) Total: 1300
+[01/Nov/2016:10:20:59] (index) New bonus: 130
+[01/Nov/2016:10:20:59] (index) New total bonus: 280
