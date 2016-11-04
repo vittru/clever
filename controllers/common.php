@@ -39,5 +39,10 @@ Class Controller_Common Extends Controller_Base {
         $this->registry['template']->show('certs');
     }
     
+    function bonus() {
+        $this->registry['model']->logvisit(32);
+        $this->registry['template']->show('bonus');
+    }
+    
 }
 

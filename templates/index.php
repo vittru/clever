@@ -3,8 +3,8 @@ include 'header.php';
 
 $bannersdir='images/banners';
 
-
-if ((new \FilesystemIterator($bannersdir))->valid()) {
+$banners = new FilesystemIterator($bannersdir);
+if ($banners->valid()) {
 ?>
 
 <!-- Start slider -->
@@ -12,18 +12,20 @@ if ((new \FilesystemIterator($bannersdir))->valid()) {
     <div class="aa-slider-area">
         <div id="sequence" class="seq">
             <div class="seq-screen">
-                <ul class="seq-canvas">
+                <ul <?php if (iterator_count($banners) >1) echo 'class="seq-canvas"' ?>>
                     <?php
                     $dir = new DirectoryIterator($bannersdir);
+                    $ind = 1;
                     foreach ($dir as $fileinfo) {
                         if (!$fileinfo->isDot()) {
                         ?>  
-                            <li>
+                            <li <?php if ($ind == 1) echo 'class="seq-in"' ?>>
                                 <div class="seq-model">
                                     <img data-seq src="<?php echo '/'.$bannersdir.'/'.$fileinfo->getFilename() ?>" alt="<?php $fileinfo->getFilename() ?>" />
                                 </div>
                             </li>
                         <?php
+                        $ind++;
                         }        
                     }
                     ?>

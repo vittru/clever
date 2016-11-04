@@ -56,6 +56,9 @@
                                     <a class="btn" href="/common/payment" type="button" id="payment">
                                         Оплата
                                     </a>
+                                    <a class="btn" href="/common/bonus" type="button" id="bonus">
+                                        Бонусы
+                                    </a>
                                     <a class="btn" href="/common/moneyback" type="button" id="moneyback">
                                         Возврат
                                     </a>

@@ -40,3 +40,21 @@ Stack trace:
 [01/Nov/2016:10:20:59] (index) Total: 1300
 [01/Nov/2016:10:20:59] (index) New bonus: 130
 [01/Nov/2016:10:20:59] (index) New total bonus: 280
+[04/Nov/2016:10:30:55] (index) Error when getting details for order 27
+[04/Nov/2016:10:30:55] (index) exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'o.bonus' in 'field list'' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(880): Model->executeQuery(Object(PDOStatement), 'Error when gett...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/account.php(93): Model->getOrder('27')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Account->orders()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(26): Router->delegate()
+#5 {main}getMessage
+[04/Nov/2016:10:30:59] (index) Error when getting details for order 27
+[04/Nov/2016:10:30:59] (index) exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'o.bonus' in 'field list'' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:73
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(73): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(880): Model->executeQuery(Object(PDOStatement), 'Error when gett...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/account.php(93): Model->getOrder('27')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Account->orders()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(26): Router->delegate()
+#5 {main}getMessage
