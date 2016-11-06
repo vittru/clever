@@ -62,9 +62,9 @@ Class Controller_Buy Extends Controller_Base {
         $subject = 'Новый заказ №'.$orderId;
         $message = '<html><body><h2>На сайте новый заказ</h2>' .
                 "<h3>Заказ №" . $orderId . "</h3>" .
-                "<p><b>Покупатель:</b> " . $parameters['name'] . "</p>" . 
-                "<p><b>Email:</b> " . $parameters['email'] . "</p>" . 
-                "<p><b>Телефон:</b> " . $parameters['phone'] . "</p>" . 
+                "<p><b>Покупатель:</b> " . htmlspecialchars($parameters['name']) . "</p>" . 
+                "<p><b>Email:</b> " . htmlspecialchars($parameters['email']) . "</p>" . 
+                "<p><b>Телефон:</b> " . htmlspecialchars($parameters['phone']) . "</p>" . 
                 $this->getGoodsForLetter($parameters['promo'], $parameters['bonus']) .
                 $this->getDeliveryForLetter($parameters) . '</body></html>';
         $this->sendMail($to, $subject, $message);
@@ -73,7 +73,7 @@ Class Controller_Buy Extends Controller_Base {
     private function getGoodsForLetter($promo, $bonus) {
         $message = "<h3>Товары</h3>";
         
-        $message .= "<table><tr><th>Артикул</th><th>Имя</th><th>Количество</th><th>Цена</th></tr>";
+        $message .= "<table width=100% border=1><tr><th>Артикул</th><th>Имя</th><th>Количество</th><th>Цена</th></tr>";
         foreach($_SESSION['cart'] as $cartItem) {
             $good = $this->registry['model']->getGood($cartItem->goodId);
             $size = $good->sizes[$cartItem->sizeId];
@@ -84,7 +84,7 @@ Class Controller_Buy Extends Controller_Base {
         $message .= "</table>";
         $promoAmount = 0;
         if ($promo){
-            $message .= "<p><b>Промо-код:</b> " . $promo . "</p>";
+            $message .= "<p><b>Промо-код:</b> " . htmlspecialchars($promo) . "</p>";
             $promoId = $this->registry['model']->getPromoId(trim($promo));
             $promoAmount = $this->registry['model']->getPromoAmount($promoId);
         }
@@ -103,11 +103,11 @@ Class Controller_Buy Extends Controller_Base {
         $message = '<h3>Доставка</h3>';
         if ($parameters['branch']) {
             $branch = $this->registry['branches'][$parameters['branch']];
-            $message .= "<p><b>Самовывоз из:<b> " . $branch->address . "</p>";
+            $message .= "<p><b>Самовывоз из:</b> " . $branch->address . "</p>";
             if ($parameters['takeDate'])
-                $message .= "<p><b>Желаемое время самовывоза:</b> " . $parameters['takeDate'] . " в " . $parameters['takeTime'] . '</p>';
+                $message .= "<p><b>Желаемое время самовывоза:</b> " . htmlspecialchars ($parameters['takeDate']) . " " . htmlspecialchars ($parameters['takeTime']) . '</p>';
         } else {
-            $message = $message . "<p><b>Доставка курьером по адресу:</b> " . $parameters['city'] . ", " . $parameters['address'] . '</p>';
+            $message = $message . "<p><b>Доставка курьером по адресу:</b> " . htmlspecialchars($parameters['city']) . ", " . htmlspecialchars($parameters['address']) . '</p>';
         }
         return $message;
     }
@@ -115,14 +115,20 @@ Class Controller_Buy Extends Controller_Base {
     private function informClient($orderId, $parameters) {
         $to      = $parameters['email'];
         $subject = 'Clever. Заказ №'.$orderId;
-        $message = '<html><body><h2>Информация о вашем заказе</h2>' .
-                '<p>Ваш заказ добавлен на сайт. Менеджер свяжется с вами в ближайшее время.</p><p></p>' .
-                "<h3>Заказ №" . $orderId . "</h3>" .
+        $message = '<html><body><h2>Заказ №' . $orderId . '</h2>' .
+                '<p>Ваш заказ добавлен на сайт <a href="www.clubclever.ru">www.clubclever.ru</a>. Менеджер свяжется с вами в ближайшее время.</p><p></p>' .
+                '<p>Мы будем информировать Вас о статусе заказа по email.</p>' .
+                '<p>Отследить заказ Вы также можете на <a href="www.clubclever.ru/account/orders?id='. $orderId . '">нашем сайте</a></p>' .
+                "<h3>Информация о заказе</h3>" .
                 "<p><b>Покупатель:</b> " . $parameters['name'] . "</p>" . 
                 "<p><b>Email:</b> " . $parameters['email'] . "</p>" . 
                 "<p><b>Телефон:</b> " . $parameters['phone'] . "</p>" .
                 $this->getGoodsForLetter($parameters['promo'], $parameters['bonus']) .
-                $this->getDeliveryForLetter($parameters) . '</body></html>';
+                $this->getDeliveryForLetter($parameters) . 
+                '<p>Больше информации о наших акциях и товарах:</p>'.
+                '<ul><li><a href="www.clubclever.ru">www.cluclever.ru</a></li>' .
+                '<li><a href="https://vk.com/clubcleverru">http://vk.com/clubcleverru</a></li>' . 
+                '<li><a href="http://www.instagram.com/clubclever.ru/">http://www.instagram.com/clubclever.ru</a></li>' . '</body></html>';
 
         $this->registry['logger']->lwrite($message);
         $this->sendMail($to, $subject, $message);
