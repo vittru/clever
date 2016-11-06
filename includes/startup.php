@@ -48,6 +48,7 @@ $registry->set('logger', $logger);
 $registry->set('dbname', 'clubclever');
 $registry->set('dbuser', 'root');
 $registry->set('dbpassword', 'root');
+$registry->set('mainemail', 'vitaly.trusov@gmail.com');
 
 session_start();
 

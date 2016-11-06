@@ -1090,6 +1090,25 @@ h2 {
   max-width: 100%;
 }
 
+.bonus-item {
+    border-color: #51A512;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    margin: 0 15px 20px 15px;
+    padding: 0 20px 5px 20px;
+    text-align: justify;
+}
+.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+.remark {
+    font-size: 11px;
+}
+
 #aa-support {
   background-color: #333;
   display: inline;

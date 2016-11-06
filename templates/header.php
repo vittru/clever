@@ -50,19 +50,19 @@
                                         О нас
                                     </a>
                                 </div-->
-                                    <a class="btn" href="/common/delivery" type="button" id="delivery">
+                                    <a class="btn" href="/common/delivery" type="button">
                                         Доставка
                                     </a>
-                                    <a class="btn" href="/common/payment" type="button" id="payment">
+                                    <a class="btn" href="/common/payment" type="button">
                                         Оплата
                                     </a>
-                                    <a class="btn" href="/common/bonus" type="button" id="bonus">
+                                    <a class="btn" href="/common/bonus" type="button">
                                         Бонусы
                                     </a>
-                                    <a class="btn" href="/common/moneyback" type="button" id="moneyback">
+                                    <a class="btn" href="/common/moneyback" type="button">
                                         Возврат
                                     </a>
-                                    <a class="btn" href="/contacts" type="button" id="contacts">
+                                    <a class="btn" href="/contacts" type="button">
                                         Контакты
                                     </a>
 

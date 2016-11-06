@@ -25,9 +25,11 @@ Abstract Class Controller_Base {
     }
     
     function sendMail($to, $subject, $message) {
-        $headers = 'From: Экомаркет Клевер clever@clubclever.ru' . "\r\n" .
-            'Reply-To: clever@clubclever.ru' . "\r\n" .
+        $headers = "From: 'Экомаркет Клевер' " . $this->registry['mainemail'] . "\r\n" .
+            'Reply-To: ' . $this->registry['mainemail'] . "\r\n" .
             'X-Mailer: PHP/' . phpversion();
+        $headers .= 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
         mail($to, $subject, $message, $headers);
     }  
@@ -45,5 +47,3 @@ Abstract Class Controller_Base {
         return $total;
     }
 }
-
-

@@ -58,3 +58,39 @@ Stack trace:
 #3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Account->orders()
 #4 /Applications/MAMP/htdocs/ClubClever/index.php(26): Router->delegate()
 #5 {main}getMessage
+[05/Nov/2016:11:19:07] (index) <html><body><h1>На сайте задан новый вопрос</h1><h3>Пользователь: ЕвгенияТ</h3><h3>Email: Tev0205@gmail.com</h3><p><b>Вопрос:</b> line 1
+line 2</p></body></html>
+[05/Nov/2016:11:32:28] (index) <html><body><h1>На сайте задан новый вопрос</h1><p><b>Пользователь:</b> ЕвгенияТ</p><p><b>Email:</b> Tev0205@gmail.com</p><p><b>Вопрос:</b> dssfsdf</p></body></html>
+[05/Nov/2016:12:29:08] (index) <html><body><h1>На сайте задан новый вопрос</h1><p><b>Пользователь:</b> ЕвгенияТ</p><p><b>Email:</b> Tev0205@gmail.com</p><p><b>Вопрос:</b> line 1
+line 2
+line 3</p></body></html>
+[05/Nov/2016:12:30:15] (index) <html><body><h2>На сайте задан новый вопрос</h2><p><b>Пользователь:</b> ЕвгенияТ</p><p><b>Email:</b> Tev0205@gmail.com</p><p><b>Вопрос:</b> line
+sec
+third</p></body></html>
+[05/Nov/2016:12:31:18] (index) <html><body><h2>На сайте задан новый вопрос</h2><p><b>Пользователь:</b> ЕвгенияТ</p><p><b>Email:</b> Tev0205@gmail.com</p><p><b>Вопрос:</b> fdsfsd
+dsfsdf
+dsfsdf
+dsfsdf
+dsfsdfsd</p></body></html>
+[05/Nov/2016:12:38:37] (index) <html><body><h2>На сайте задан новый вопрос</h2><p><b>Пользователь:</b> ЕвгенияТ</p><p><b>Email:</b> Tev0205@gmail.com</p><p><b>Вопрос:</b> dfsdfsdfs</p></body></html>
+[05/Nov/2016:12:40:26] (index) <html><body><h2>На сайте задан новый вопрос</h2><p><b>Пользователь:</b> ЕвгенияТ</p><p><b>Email:</b> Tev0205@gmail.com</p><p><b>Вопрос:</b> dfgdfg
+dfgdfg
+fdgdfg</p></body></html>
+[05/Nov/2016:12:43:38] (index) <html><body><h2>На сайте задан новый вопрос</h2><p><b>Пользователь:</b> ЕвгенияТ</p><p><b>Email:</b> Tev0205@gmail.com</p><p><b>Вопрос:</b> dwfdsfdsf
+dfsdf
+dsfsdf</p></body></html>
+[05/Nov/2016:13:02:33] (index) <html><body><h2>На сайте задан новый вопрос</h2><p><b>Пользователь:</b> ЕвгенияТ</p><p><b>Email:</b> Tev0205@gmail.com</p><p><b>Вопрос:</b> dssdgdgd</p></body></html>
+[06/Nov/2016:11:16:58] (index) action: login user: 
+[06/Nov/2016:11:16:58] (index) 
+[06/Nov/2016:11:17:15] (index) <html><body><h2>На сайте задан новый вопрос</h2><p><b>Пользователь:</b> Vit</p><p><b>Email:</b> vitaly.trusov@gmail.com</p><p><b>Вопрос:</b> sdfsdf
+sdfsdf
+fsdfs</p></body></html>
+[06/Nov/2016:11:19:03] (index) <html><body><h2>На сайте задан новый вопрос</h2><p><b>Пользователь:</b> Vit</p><p><b>Email:</b> vitaly.trusov@gmail.com</p><p><b>Вопрос:</b> sdfsdf
+dsfsdf
+dsfsdf
+dsf
+dsf
+sdf
+sdf
+</p></body></html>
+[06/Nov/2016:11:27:10] (index) <html><body><h2>Информация о вашем заказе</h2><p>Ваш заказ добавлен на сайт. Менеджер свяжется с вами в ближайшее время.</p><p></p><h3>Заказ №31</h3><p><b>Покупатель:</b> Vit</p><p><b>Email:</b> vitaly.trusov@gmail.com</p><p><b>Телефон:</b> 89171444004</p><h3>Товары</h3><table><tr><th>Артикул</th><th>Имя</th><th>Количество</th><th>Цена</th></tr><tr><td>МК166</td><td>Аромат прованса. Лаванда 2 3 средства</td><td>1</td><td>850 руб. </td></tr></table><p><b>Использованные бонусы:</b> 44</p><p><b>Сумма заказа:</b> 806 руб. </p><h3>Доставка</h3><p><b>Самовывоз из:<b> Самара, ул. Ново-Садовая, 271</p><p><b>Желаемое время самовывоза:</b> завтра в вечером</p></body></html>

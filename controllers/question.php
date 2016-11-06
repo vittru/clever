@@ -23,12 +23,12 @@ Class Controller_Question Extends Controller_Base {
     }
     
     private function sendQuestion($email, $name, $question) {
-        $to      = "clubclever63@gmail.com";
+        $to      = $this->registry['mainemail'];
         $subject = "Новый вопрос на сайте";
-        $message = "На сайте задан новый вопрос" . "\r\n" .
-                "Пользователь: " . $name . "\r\n" . 
-                "Email: " . $email . "\r\n" . 
-                "Вопрос: " . $question . "\r\n";
+        $message = "<html><body><h2>На сайте задан новый вопрос</h2>" .
+                "<p><b>Пользователь:</b> " . $name . "</p>" . 
+                "<p><b>Email:</b> " . $email . "</p>" . 
+                "<p><b>Вопрос:</b> " . $question . "</p></body></html>";
         $this->registry['logger']->lwrite($message);
         $this->sendMail($to, $subject, $message);        
     }
