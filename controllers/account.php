@@ -103,11 +103,16 @@ Class Controller_Account Extends Controller_Base {
             $this->registry['model']->updateOrder($orderid, $status);
             $order = $this->registry['model']->getOrder($orderid);
             $to      = $order->email;
-            $subject = 'Clever. Статус заказа №'.$orderid.' изменен';
-            $message = 'Статус вашего заказа изменен.' . "\r\n" . "\r\n" .
-                "Заказ №" . $orderid . "\r\n" .
-                "Статус: " . $order->status . "\r\n" . "\r\n" . 
-                $order->statusdesc . "\r\n";
+            $subject = 'Clever. Статус заказа №' . $orderid . ' изменен';
+            $message = '<html><body><h2>Заказ №' . $orderid . '</h2>'
+                    . '<p>Статус вашего заказа изменен.</p>' .
+                    '<p><b>Статус:</b> ' . $order->status . '</p>' . 
+                    '<p>' . $order->statusdesc . '</p>' . 
+                    '<p>Отследить заказ Вы также можете на <a href="www.clubclever.ru/account/orders?id='. $orderid . '">нашем сайте</a></p>' .
+                    '<p>Больше информации о наших акциях и товарах:</p>'.
+                    '<ul><li><a href="www.clubclever.ru">www.cluclever.ru</a></li>' .
+                    '<li><a href="https://vk.com/clubcleverru">http://vk.com/clubcleverru</a></li>' . 
+                    '<li><a href="http://www.instagram.com/clubclever.ru/">http://www.instagram.com/clubclever.ru</a></li></body></html>';;
             $this->registry['logger']->lwrite($message);
             $this->sendMail($to, $subject, $message);
         } else
