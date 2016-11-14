@@ -1028,7 +1028,6 @@ Class Model {
         $sqlSelect->bindParam(':flyerId', $flyerId);
         $this->executeQuery($sqlSelect, 'Error when checking flyer ' . $flyerId);
         $data = $sqlSelect->fetchColumn();
-        //$this->registry['logger']->lwrite($data);
         $sqlSelect->closeCursor();
         return $data;
     }
@@ -1063,5 +1062,32 @@ Class Model {
         $sqlUpdate->bindParam(':userId', $userId);
         $this->executeQuery($sqlUpdate, 'Error when decreasing bonus for user ' . $userId);
         $sqlUpdate->closeCursor();
+    }
+    
+    function getBlogEntries() {
+        $sqlSelect = $this->db->prepare("SELECT id, name, date, CONCAT(LEFT(text, 97), '...') as text, author, url FROM blogentries ORDER BY date DESC LIMIT 10");
+        $this->executeQuery($sqlSelect, 'Error when getting blog entries');
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $entry = $data;
+            setlocale(LC_TIME, "ru_RU.UTF-8");
+            $entry['date'] = strftime('%e/%m/%G', strtotime($entry['date']));
+            if (!isset($entries))
+                $entries = [$entry];
+            else
+                array_push($entries, $entry);
+        }   
+        $sqlSelect->closeCursor();
+        return $entries;
+    }
+    
+    function getBlogEntry($entryId) {
+        $sqlSelect = $this->db->prepare('SELECT * FROM blogentries WHERE id=:entryId');
+        $sqlSelect->bindParam(':entryId', $entryId);
+        $this->executeQuery($sqlSelect, 'Error when getting blog entry with id=' . $entryId);
+        $entry = $sqlSelect->fetch();
+        $sqlSelect->closeCursor();
+        setlocale(LC_TIME, "ru_RU.UTF-8");
+        $entry['date'] = strftime('%e/%m/%G', strtotime($entry['date']));
+        return $entry;
     }
 }

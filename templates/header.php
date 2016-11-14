@@ -62,6 +62,9 @@
                                     <a class="btn" href="/common/moneyback" type="button">
                                         Возврат
                                     </a>
+                                    <a class="btn" href="/common/blog" type="button">
+                                        Блог
+                                    </a>
                                     <a class="btn" href="/contacts" type="button">
                                         Контакты
                                     </a>

@@ -40,8 +40,20 @@ Class Controller_Common Extends Controller_Base {
     }
     
     function bonus() {
-        $this->registry['model']->logvisit(32);
+        $this->registry['model']->logVisit(32);
         $this->registry['template']->show('bonus');
+    }
+    
+    function blog() {
+        if (isset($_GET['entry'])) {
+            $entryId = $_GET['entry'];
+            $this->registry['model']->logVisit(33, $entryId);
+            $this->registry['template']->set('entry', $this->registry['model']->getBlogEntry($entryId));
+        } else { 
+            $this->registry['model']->logVisit(33);
+            $this->registry['template']->set('entries', $this->registry['model']->getBlogEntries());
+        }    
+        $this->registry['template']->show('blog');
     }
     
 }
