@@ -12,7 +12,7 @@ include 'header.php';
                 <img src="/images/banners/banner-purewater.jpg">
                 <h2>С днем рождения салона красоты "Каролина"</h2>
                 <div class="newstime">1/11/2016 - 14/11/2016</div>
-                <img src="/images/banners/Karolina.jpg">
+                <img src="/images/actions/Karolina.jpg">
                 <p></p>
                 <img src="images/actions/bonus.jpg">
                 <div>Полные условия акции читайте <a href="/actions/karolina2016">здесь</a></div>
