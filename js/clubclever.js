@@ -198,8 +198,8 @@ function applyDiscount(a, error) {
         }
         if (k === 'total') {
             $('#total').text(v + ' руб.');
-            if (v < 1500) {
-                $('#amount-left').text(1500-v);
+            if (v < 700) {
+                $('#amount-left').text(700-v);
                 $('#delivery-info').show();
             } else {
                 $('#delivery-info').hide();
