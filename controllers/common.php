@@ -47,13 +47,20 @@ Class Controller_Common Extends Controller_Base {
     function blog() {
         if (isset($_GET['entry'])) {
             $entryId = $_GET['entry'];
-            $this->registry['model']->logVisit(33, $entryId);
-            $this->registry['template']->set('entry', $this->registry['model']->getBlogEntry($entryId));
+            $entry = $this->registry['model']->getBlogEntry($entryId);
+            if ($entry['name']) {
+                $this->registry['model']->logVisit(33, $entryId);
+                $this->registry['template']->set('entry', $entry);
+                $this->registry['template']->show('blog');
+            } else {
+                $this->registry['model']->logVisit(404, false, $_SERVER['QUERY_STRING']);
+                $this->registry['template']->show('404');
+            }    
         } else { 
             $this->registry['model']->logVisit(33);
             $this->registry['template']->set('entries', $this->registry['model']->getBlogEntries());
+            $this->registry['template']->show('blog');
         }    
-        $this->registry['template']->show('blog');
     }
     
 }

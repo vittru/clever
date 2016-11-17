@@ -95,13 +95,14 @@ include 'header.php';
                                             </div>
                                             <div id="collapseThree" class="panel-collapse collapse">
                                                 <div class="panel-body">
-                                                    <div class="row" id="delivery-info" <?php if ($total > 700) echo "hidden" ?>>
+                                                    <div class="row" id="delivery-info" <?php if ($total > $this->registry['freeDelivery']) echo "hidden" ?>>
                                                         <div class="col-md-12">
                                                             Стоимость доставки по Самаре - 300 руб. 
                                                         </div>
                                                         <div class="col-md-12">
-                                                            Добавьте в заказ товаров на <span id="amount-left"><?php echo 700-$total ?></span> руб., и доставка будет бесплатной.
-                                                        </div>    
+                                                            Добавьте в заказ товаров на <span id="amount-left"><?php echo $this->registry['freeDelivery']-$total ?></span> руб., и доставка будет бесплатной.
+                                                        </div>  
+                                                        <div id='freeDelivery' hidden><?php echo $this->registry['freeDelivery'] ?></div>
                                                     </div>    
                                                     <div class="row">
                                                         <div class="col-md-12">

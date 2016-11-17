@@ -2,6 +2,7 @@
     include ('includes/startup.php');
     $model = new Model($registry);
     $registry->set('model', $model);
+    $registry->set('freeDelivery', 700);
     $model->getUser();
     //$_SESSION['user']->lastvisit = $model->getLastVisit();
     $registry->set('skintypes', $model->getCatalog('skintypes'));
