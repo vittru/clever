@@ -20,14 +20,12 @@ include 'header.php';
                                             <p><b>ул. Стара-Загора, 168</b></p>
                                             <div class="map"><script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=X_vOb2NXN7WVSnIiUtq5RbhTy3EdzSa4&amp;width=320&amp;height=240&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script></div>
                                             <p class="worktime">ежедневно с 10.00 до 20.00</p>
-                                            <p class="phone">331-14-36, 331-14-37</p>
                                         </td>
                                         <td>
-                                            <p><b>Салон красоты</b></p>
+                                            <p><b>Гостиница "Мой город"</b></p>
                                             <p><b>ул. Георгия Димитрова, 112</b></p>
                                             <div class="map"><script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=GrArh56-A8ES1kTZdADZ7tgWcLvkOgSq&amp;width=320&amp;height=240&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script></div>
                                             <p  class="worktime">ежедневно с 10.00 до 21.00</p>
-                                            <p class="phone">+7-987-914-30-77</p>
                                         </td>
                                     </tr>
                                     <tr><td colspan="2"></td></tr>
