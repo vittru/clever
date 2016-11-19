@@ -125,7 +125,7 @@
                             <div class="aa-cartbox" id="cartbox">
                                 <a class="aa-cart-link" <?php if($count) echo 'href="/cart"'; ?>>
                                     <span class="fa fa-shopping-basket"></span>
-                                    <span class="aa-cart-title">Корзина с подарком</span>
+                                    <span class="aa-cart-title">Корзина<?php if ($total >= $this->registry['presentSum']) echo ' с подарком' ?></span>
                                     <?php
                                     if ($count) {
                                     ?>
@@ -139,7 +139,14 @@
                                         <li>
                                             <img class="aa-cartbox-img" src="/images/goods/present.jpg" alt="Подарок">
                                             <div class="aa-cartbox-info">
-                                                <h4>Оформите заказ и получите подарок!</h4>
+                                                <h4>
+                                                <?php
+                                                if ($total >= $this->registry['presentSum'])
+                                                    echo 'Ваш личный подарок от Экомаркет "Клевер"';
+                                                else
+                                                    echo 'Оформите заказ на&nbsp;' . $this->registry['presentSum'] . ' рублей и&nbsp;получите подарок!';
+                                                ?>
+                                                </h4>
                                             </div>
                                         </li>
                                         <?php

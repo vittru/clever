@@ -25,7 +25,13 @@ include 'header.php';
                                     <tr>
                                         <td></td>
                                         <td><img src="/images/goods/present.jpg" alt="img"></td>
-                                        <td><div class="aa-cart-title">Ваш личный подарок от Экомаркет "Клевер"</div></td>
+                                        <td><div class="aa-cart-title"><?php
+                                            if ($total >= $this->registry['presentSum'])
+                                                echo 'Ваш личный подарок от Экомаркет "Клевер"';
+                                            else
+                                                echo 'Оформите заказ на ' . $this->registry['presentSum'] . ' рублей и получите подарок';
+                                            ?>
+                                            </div></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
