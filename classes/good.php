@@ -55,7 +55,7 @@ Class Good {
     }    
     
     function getPrice() {  
-        return $this->getMinSizePrice() * (100-$this->sale)/100;
+        return ceil($this->getMinSizePrice() * (100-$this->sale)/100);
     }
     
     function getWebPrice() {
