@@ -425,7 +425,7 @@ Class Model {
         $good->skintypes = $this->getGoodSTs($goodId);
         $good->hairtypes = $this->getGoodHTs($goodId);
         $good->sizes = $this->getGoodSizes($goodId);
-       // $good->types = $this->getGoodTypes($goodId);
+        $good->types = $this->getGoodTypes($goodId);
         $good->problems = $this->getGoodProblems($goodId);
         return $good;
     }
