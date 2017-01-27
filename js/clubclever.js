@@ -287,3 +287,41 @@ $('#use-bonus').on('click', function() {
     });
     $(this).blur();
 });
+
+$("input[name=payment]").on('change', function () {
+    if (this.value == 'card') {
+        $('#make_order').val('Заказать и оплатить');
+    } else {
+        $('#make_order').val('Заказать');
+    }    
+});
+
+$(".SlectBox").on("change", filter_goods);
+
+function filter_goods() {
+    $("ul.aa-product-catg li.good").show();
+    $(".SlectBox").each(function() {
+        var criteria = new Array();
+        $(this).find("option:selected").each(function() {
+            criteria.push($(this)[0].id);
+        });
+        if (criteria.length > 0) {
+            $("ul.aa-product-catg li.good").each(function() {
+                var shown = false;
+                var i = 0;
+                while (!shown && i < criteria.length) {
+                    if ($(this).has('div.' + criteria[i]).length)
+                        shown = true;
+                    else
+                        i++;
+                };
+                if (!shown)
+                    $(this).hide();
+            });
+        };    
+    });
+};
+
+$(document).ready(function () {
+    $('.SlectBox').SumoSelect({captionFormat: '{0} выбрано', captionFormatAllSelected:'Все {0} выбраны'});
+});

@@ -103,6 +103,11 @@ img {
   }
 }
 
+#aa-payment .text {
+    width: 30%;
+    display: inline;
+}
+
 #aa-header {
   display: inline;
   float: left;
@@ -702,10 +707,18 @@ h2 {
 }
 
 #aa-product {
-  display: inline;
-  float: left;
-  width: 100%;
+    display: inline;
+    float: left;
+    width: 100%;
 }
+#aa-product .aa-sidebar .aa-sidebar-widget .aa-catg-nav li {
+    font-size: 16px;
+}
+#aa-product .aa-sidebar .aa-sidebar-widget .aa-catg-nav li label {
+    font-size: 14px;
+    font-weight: normal;
+}
+
 #aa-product .aa-product-header {
     float: left;
     /*padding: 40px 0 10px 0;*/
@@ -825,8 +838,8 @@ h2 {
   float: left;
   height: 300px;
   text-align: center;
-  margin: 0 0 20px 55px;
-  width: 230px;
+  margin: 0 27px 20px 27px;
+  width: 220px;
   position: relative;
   overflow: hidden;
 }
@@ -852,6 +865,7 @@ h2 {
   border-style: solid;
   border-width: 1px;
   border-color: #51A512;
+  width: 200px;
 }
 .aa-product-catg li figure:hover {
     border-color: #DF5600;
@@ -1464,6 +1478,14 @@ h2 {
   padding: 10px;
   width: 100%;
 }
+#checkout .checkout-area .checkout-left .aa-checkout-billaddress .aa-checkout-single-bill .radio-inline {
+    padding-right: 30px;
+}
+#checkout .checkout-area .checkout-left .aa-checkout-billaddress .aa-checkout-single-bill .radio-inline input {
+    height: 13px;
+    padding: 10px;
+    width: 100%;
+}
 #checkout .checkout-area .checkout-left .aa-checkout-billaddress .aa-checkout-single-bill textarea {
   height: 150px;
   padding: 10px;
@@ -2068,10 +2090,10 @@ h2 {
     width: 100%;
   }
 
-  #aa-product-category .aa-sidebar .aa-sidebar-widget h3 {
+  #aa-product .aa-sidebar .aa-sidebar-widget h3 {
     font-size: 22px;
   }
-
+  
   #aa-catg-head-banner img {
     width: 100%;
   }

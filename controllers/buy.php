@@ -47,10 +47,15 @@ Class Controller_Buy Extends Controller_Base {
 
             //Clear the cart box
             unset($_SESSION['cart']);
-
+            
             //Show the results
             $this->registry['template']->set('orderId', $orderId);
             $this->registry['template']->set('bonus', $bonus);
+
+            if ($_POST['payment'] == 'card') {
+                $this->registry['template']->set('payment', true);
+                $this->registry['template']->set('sum', $this->registry['model']->getOrder($orderId)->total);
+            } 
             $this->registry['template']->show('complete');
         } else {
             $this->registry['template']->show('404');
@@ -58,6 +63,10 @@ Class Controller_Buy Extends Controller_Base {
     }
     
     private function informManager($orderId, $parameters) {
+        if ($parameters['payment'] == 'cash')
+            $payment = 'наличными при получении';
+        else 
+            $payment = 'картой онлайн';
         $to      = $this->registry['mainemail'];
         $subject = 'Новый заказ №'.$orderId;
         $message = '<html><body><h2>На сайте новый заказ</h2>' .
@@ -66,7 +75,8 @@ Class Controller_Buy Extends Controller_Base {
                 "<p><b>Email:</b> " . htmlspecialchars($parameters['email']) . "</p>" . 
                 "<p><b>Телефон:</b> " . htmlspecialchars($parameters['phone']) . "</p>" . 
                 $this->getGoodsForLetter($parameters['promo'], $parameters['bonus']) .
-                $this->getDeliveryForLetter($parameters) . '</body></html>';
+                $this->getDeliveryForLetter($parameters) . 
+                '<p><b>Оплата:</b> ' . $payment . '</p></body></html>';
         $this->sendMail($to, $subject, $message);
     }   
     
@@ -128,7 +138,7 @@ Class Controller_Buy Extends Controller_Base {
                 '<p>Больше информации о наших акциях и товарах:</p>'.
                 '<ul><li><a href="www.clubclever.ru">www.cluclever.ru</a></li>' .
                 '<li><a href="https://vk.com/clubcleverru">http://vk.com/clubcleverru</a></li>' . 
-                '<li><a href="http://www.instagram.com/clubclever.ru/">http://www.instagram.com/clubclever.ru</a></li>' . '</body></html>';
+                '<li><a href="http://www.instagram.com/clubclever.ru/">http://www.instagram.com/clubclever.ru</a></li></ul></body></html>';
 
         $this->registry['logger']->lwrite($message);
         $this->sendMail($to, $subject, $message);

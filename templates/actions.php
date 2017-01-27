@@ -7,12 +7,18 @@ include 'header.php';
         <div class="row">
             <div class="col-md-12">
                 <h1>Наши акции</h1>
+                <h2>Новогодние подарки для всех</h2>
+                <div class="newstime">20/12/2016</div>
+                <img src="/images/actions/newyear2017.png">
+                <h2>Мы на ярмарке в ТЦ Амбар</h2>
+                <div class="newstime">11/12/2016</div>
+                <img src="/images/actions/ambar.jpg">
                 <h2>Подарки к дню матери</h2>
                 <div class="newstime">22/11/2016 - 26/11/2016</div>
                 <img src="/images/actions/motherday.jpg">
                 <h2>Знакомьтесь с Pure Water!</h2>
                 <div class="newstime">1/11/2016 - 30/11/2016</div>
-                <img src="/images/banners/banner-purewater.jpg">
+                <img src="/images/actions/banner-purewater.jpg">
                 <h2>С днем рождения салона красоты "Каролина"</h2>
                 <div class="newstime">1/11/2016 - 14/11/2016</div>
                 <img src="/images/actions/Karolina.jpg">

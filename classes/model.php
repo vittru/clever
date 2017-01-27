@@ -421,6 +421,7 @@ Class Model {
         $sqlSelect->closeCursor();    
         $good=new Good($data['id'], trim($data['name']), trim($data['description']), trim($data['shortdesc']), trim($data['howTo']), trim($data['madeOf']), $data['sale'], $data['firmId'], trim($data['problem']), trim($data['bestbefore']), trim($data['precaution']), trim($data['url']));
         $good->cats = $this->getGoodCats($goodId);
+        $good->supercats = $this->getGoodSuperCats($good);
         $good->effs = $this->getGoodEffs($goodId);
         $good->skintypes = $this->getGoodSTs($goodId);
         $good->hairtypes = $this->getGoodHTs($goodId);
@@ -428,6 +429,26 @@ Class Model {
         $good->types = $this->getGoodTypes($goodId);
         $good->problems = $this->getGoodProblems($goodId);
         return $good;
+    }
+    
+    function getGoodSuperCats($good) {
+        $supercats = array();
+        foreach ($good->cats as $cat) {
+            $this->registry['logger']->lwrite($cat);
+            $supercat = $this->getSuperCatByCat($cat);
+            $supercats[$supercat['id']] = $supercat['name'];
+        }
+        return $supercats;
+    }
+    
+    function getSuperCatByCat($catId) {
+        $sqlSelect = $this->db->prepare('SELECT sc.* FROM supercats sc, categories c WHERE c.supercatid=sc.id and c.id=:catId');
+        $sqlSelect->bindParam(':catId', $catId);
+        $this->executeQuery($sqlSelect, 'Error when getting supercat for cat id=' . $catId);
+        $data = $sqlSelect->fetch(PDO::FETCH_ASSOC);
+        $this->registry['logger']->lwrite($data['id']);
+        $sqlSelect->closeCursor();
+        return $data;
     }
     
     function getGoodTypes($goodId) {
