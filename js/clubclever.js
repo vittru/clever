@@ -10,56 +10,56 @@ var nameAsc = true;
 var priceAsc = true;
 
 function filter() {
-    $("div.tab-pane.active li.good").show();
+    $("ul.aa-product-catg li.good").show();
     if ($("div.tab-pane.active #showAvailable").is(":checked")) {
         $("div.tab-pane.active li.good").has('.aa-sold-out').hide();
     };
     if ($("div.tab-pane.active #showSale").is(":checked")) {
         $("div.tab-pane.active li.good").not(":has('.aa-sale')").hide();
     };
-    var word = $("div.tab-pane.active #showWord").val().trim();
+    var word = $("#showWord").val().trim();
     if (word) {
         $("div.tab-pane.active li.good").not(":icontains('" + word + "')").hide();
     };     
 }    
 
-$(document).on("click","#nameSortButton", function () {
-    var alphabeticallyOrderedDivs = $("div.tab-pane.active li.good").sort(function (a, b) {
+$("#nameSortButton").on("click", function () {
+    var alphabeticallyOrderedDivs = $("ul.aa-product-catg li.good").sort(function (a, b) {
         return (nameAsc == ($(a).find(".aa-product-title").text() > $(b).find(".aa-product-title").text())) ? 1 : -1;
     });
     nameAsc = nameAsc ? false : true;
-    $("div.tab-pane.active").find(".sortAsc").hide();
-    $("div.tab-pane.active").find(".sortDesc").hide();
+    $("div.aa-sort-form").find(".sortAsc").hide();
+    $("div.aa-sort-form").find(".sortDesc").hide();
     
     if (nameAsc) {
         $(this).find(".sortAsc").show();
     } else {
         $(this).find(".sortDesc").show();
     }    
-    $("div.tab-pane.active ul.aa-product-catg").html(alphabeticallyOrderedDivs);
+    $("ul.aa-product-catg").html(alphabeticallyOrderedDivs);
 });
 
-$(document).on("click",'#priceSortButton', function () {
-    var numericallyOrderedDivs = $("div.tab-pane.active li.good").sort(function (a, b) {
+$("#priceSortButton").on("click", function () {
+    var numericallyOrderedDivs = $("ul.aa-product-catg li.good").sort(function (a, b) {
         return (priceAsc == (parseInt($(a).find(".aa-product-price").attr('value')) > parseInt($(b).find(".aa-product-price").attr('value')))) ? 1 : -1;
     });
     priceAsc = priceAsc ? false : true;
-    $("div.tab-pane.active").find(".sortAsc").hide();
-    $("div.tab-pane.active").find(".sortDesc").hide();
+    $("div.aa-sort-form").find(".sortAsc").hide();
+    $("div.aa-sort-form").find(".sortDesc").hide();
     
     if (priceAsc) {
         $(this).find(".sortAsc").show();
     } else {
         $(this).find(".sortDesc").show();
     }    
-    $("div.tab-pane.active ul.aa-product-catg").html(numericallyOrderedDivs);
+    $("ul.aa-product-catg").html(numericallyOrderedDivs);
 });
 
-$(document).on("click", "#showAvailable", filter);
+//$(document).on("click", "#showAvailable", filter);
 
-$(document).on("click", "#showSale", filter);
+//$(document).on("click", "#showSale", filter);
 
-$(document).on("change keyup paste input", "#showWord", filter);
+$("#showWord").on("change keyup paste input", filter_goods);
 
 $(document).on("click", ".aa-remove-product", function() {
     var id = $(this).attr('id'),
@@ -286,4 +286,42 @@ $('#use-bonus').on('click', function() {
         }
     });
     $(this).blur();
+});
+
+$(".SlectBox").on("change", filter_goods);
+
+function filter_goods() {
+    $("#empty-catg").hide();
+    $("ul.aa-product-catg li.good").show();
+    $(".SlectBox").each(function() {
+        var criteria = new Array();
+        $(this).find("option:selected").each(function() {
+            criteria.push($(this)[0].id);
+        });
+        if (criteria.length > 0) {
+            $("ul.aa-product-catg li.good").each(function() {
+                var shown = false;
+                var i = 0;
+                while (!shown && i < criteria.length) {
+                    if ($(this).has('div.' + criteria[i]).length)
+                        shown = true;
+                    else
+                        i++;
+                };
+                if (!shown)
+                    $(this).hide();
+            });
+        };
+    });
+    var word = $("#showWord").val().trim();
+    if (word) {
+        $("ul.aa-product-catg li.good").not(":icontains('" + word + "')").hide();
+    };
+    if($("ul.aa-product-catg").children(':visible').length == 0) {
+        $("#empty-catg").show();
+    }
+};
+
+$(document).ready(function () {
+    $('.SlectBox').SumoSelect({captionFormat: '{0} выбрано', captionFormatAllSelected:'Все {0} выбраны'});
 });

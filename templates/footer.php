@@ -103,14 +103,13 @@
 <script type="text/javascript" src="/js/jquery.smartmenus.js"></script>
 <script type="text/javascript" src="/js/jquery.smartmenus.bootstrap.js"></script>  
 <script type="text/javascript" src="/js/slick.js"></script>
+<script src="/js/jquery.sumoselect.js"></script>
 <script src="/js/custom.js"></script> 
 <script src="/js/jquery.validate.js"></script>
 <script src="/js/auth-form.js"></script>
 <script src="/js/clubclever.js"></script>
 <script src="/js/lightbox.js"></script> 
 
-  
-  
 </body>
 </html>
 

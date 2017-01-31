@@ -22,6 +22,7 @@ Class Good {
     public $bestbefore;
     public $precaution;
     public $url;
+    public $supercats;
     
     function __construct($id, $name, $description, $shortdesc, $howTo, $madeOf, $sale, $firmId, $problem, $bestbefore, $precaution, $url) {
        $this->id = $id;
@@ -80,6 +81,28 @@ Class Good {
     
     function showInCatalog() {
         echo '<li class="col-sm-3 good">';
+        foreach ($this->types as $id=>$type) {
+            echo '<div hidden class="type_'. $id . '"></div>';
+        };
+        foreach ($this->problems as $problem) {
+            echo '<div hidden class="problem_' . $problem . '"></div>';
+        };
+        foreach ($this->effs as $effect) {
+            echo '<div hidden class="effect_' . $effect . '"></div>';
+        };
+        foreach ($this->supercats as $id => $supercat) {
+            if ($id)
+                echo '<div hidden class="supercat_' . $id . '"></div>';
+        };
+        foreach ($this->skintypes as $skintype) {
+            if ($id)
+                echo '<div hidden class="skintype_' . $skintype . '"></div>';
+        };
+        foreach ($this->hairtypes as $hairtype) {
+            if ($id)
+                echo '<div hidden class="hairtype_' . $hairtype . '"></div>';
+        };
+        echo '<div hidden class="firm_' . $this->firmId . '"></div>';
         echo '<figure>';
         echo '<a class="aa-product-img" data-toggle2="tooltip" data-placement="top" data-toggle="modal" data-target="#single-product" href="/showgood?pm&id=';
         echo $this->id;

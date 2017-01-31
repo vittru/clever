@@ -5,91 +5,78 @@ include 'header.php';
 <section id="aa-product">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="aa-product-header">
-                    <h1><?php 
-                    if ($showFirm) 
-                        echo $showFirm->name; 
-                    else
-                        echo 'Наши бренды';
-                    ?></h1>
-                    <p><?php if ($showFirm)
-                        echo $showFirm->description;
-                    else 
-                        echo 'Мы торгуем только товарами проверенных годами брендов';
-                    ?></p>
-                    </div>
+            <div class="aa-product-header">
+                <h1><?php 
+                if ($showFirm)
+                    echo $showFirm->name; 
+                else 
+                    echo 'Наши бренды';
+                ?></h1>
+                <p><?php
+                if ($showFirm)
+                    echo $showFirm->description;
+                else
+                    echo 'Мы торгуем только товарами проверенных годами брендов';
+                ?></p>
+            </div>
+
+            <?php 
+            if ($showFirm) {
+            ?>
+            <div class="col-lg-9 col-md-9 col-sm-8 col-md-push-3">
+                <div class="aa-product-catg-content">
+                    <div class="aa-product-area">
+                        <?php
+                        include 'sort.php';
+                        ?>
+                        <div class="aa-product-catg-body">
+                            <ul class="aa-product-catg">
+                                <?php
+                                foreach($showFirm->goods as $good) {
+                                    $good->showInCatalog();
+                                }
+                                ?>
+                            </ul>
+                            <div id="empty-catg" class="aa-empty-catg" hidden>Мы не нашли товаров, удовлетворяющих вашему запросу</div>
+                        </div>
+                    </div>  
+                    <?php
+                    include 'modalgood.php';
+                    ?>
                 </div>
+            </div>
+            <?php
+                $hideFilterFirm = true;
+                include 'filter.php';
+            } else {
+            ?>
+            <div class="col-md-12">
                 <div class="row">
                     <div class="aa-product-area">
                         <div class="aa-product-inner">
-                            <?php
-                            if ($showFirm) {
-                            ?>
-                            <ul class="nav nav-tabs aa-products-tab">
-                                <?php 
-                                $i=1;
-                                foreach($showFirm->categories as $catId=>$catName) {
-                                    ?>
-                                <li <?php if ($i==1) echo 'class="active"' ?>><a href="#cat<?php echo $catId ?>" data-toggle="tab"><?php echo $catName ?></a></li>
-                                    <?php
-                                    $i++;
-                                }?>
-                            </ul>
-                            <div class="tab-content">
-                                <?php 
-                                $i=0;
-                                foreach($showFirm->categories as $catId=>$catName) {
-                                    $i++
-                                ?>
-                                <!-- Category -->
-                                <div class="tab-pane fade <?php if ($i==1) echo 'in active' ?>" id="cat<?php echo $catId ?>">
-                                    <?php
-                                    include 'sort.php';
-                                    ?>
-                                    <ul class="aa-product-catg">
-                                    <?php
-                                    foreach($showFirm->goods as $good) {
-                                        if (in_array($catId, $good->cats)) {
-                                            $good->showInCatalog();
-                                        }
-                                    }
-                                    ?>
-                                    </ul>
-                                </div>
-                                <!-- /Category -->
+                            <ul class="aa-product-catg">
                                 <?php
-                                }
-                                ?>
-                            </div>  
-                            <?php
-                            include 'modalgood.php';
-                            } else {
-                            ?>
-                                <ul class="aa-product-catg">
-                                    <?php
-                                    foreach($firms as $id=>$firm) {
-                                    ?>    
-                                    <li class="col-sm-3 good">
-                                      <figure>
+                                foreach($firms as $id=>$firm) {
+                                ?>    
+                                <li class="col-sm-3 good">
+                                    <figure>
                                         <a class="aa-product-img" href="/catalog/firm/<?php echo $firm->url ?>"><img src="/images/firms/firm<?php echo $id ?>.png" alt="<?php echo $firm->name ?>"></a>
                                         <figcaption>
                                             <h4 class="aa-product-title"><a href="/catalog/firm/<?php echo $firm->url ?>"><?php echo $firm->name ?></a></h4>
                                         </figcaption>
-                                      </figure>                         
-                                    </li> 
-                                    <?php
-                                    }
-                                    ?>
-                                </ul>
-                            <?php
-                            }
-                            ?>
+                                    </figure>                         
+                                </li> 
+                                <?php
+                                }
+                                ?>
+                            </ul>
                         </div>
                     </div>
                 </div>
-            </div>    
+            </div>
+            <?php    
+            }
+            ?>
         </div>
     </div>
 </section>

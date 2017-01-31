@@ -22,52 +22,59 @@ include 'header.php';
                     </div>
                 </div>
                 <div class="row">
-                    <div class="aa-product-area">
-                        <div class="aa-product-inner">
-                            <?php
-                            if ($showCategory) {
-                            ?>
-                            <div class="tab-content">
-                                <!-- Category -->
-                                <div class="tab-pane fade in active" id="<?php echo $showCategory->id ?>">
-                                    <?php
-                                    include 'sort.php';
-                                    ?>
+                    <?php
+                    if ($showCategory) {
+                    ?>
+                    <div class="col-lg-9 col-md-9 col-sm-8 col-md-push-3">
+                        <div class="aa-product-catg-content">
+                            <div class="aa-product-area">
+                                <?php
+                                include 'sort.php';
+                                ?>                                
+                                <div class="aa-product-catg-body">
                                     <ul class="aa-product-catg">
-                                    <?php
-                                    foreach($showCategory->goods as $good) {
-                                        $good->showInCatalog();
-                                    }
-                                    ?>
+                                        <?php
+                                        foreach($showCategory->goods as $good) {
+                                            $good->showInCatalog();
+                                        }
+                                        ?>
                                     </ul>
+                                    <div id="empty-catg" class="aa-empty-catg" hidden>Мы не нашли товаров, удовлетворяющих вашему запросу</div>
                                 </div>
-                                <!-- /Category -->
                             </div>  
                             <?php
                             include 'modalgood.php';
-                            } else {
-                            ?>
-                                <ul class="aa-product-catg">
-                                    <?php
-                                    foreach($categories as $category) {
-                                    ?>    
-                                    <li class="col-sm-3 good">
-                                      <figure>
-                                        <a class="aa-product-img" href="/catalog/category/<?php echo $category->url ?>"><img src="/images/category/category<?php echo $category->id ?>.png" alt="<?php echo $category->name ?>"></a>
-                                        <figcaption>
-                                            <h4 class="aa-product-title"><a href="/catalog/category/<?php echo $category->url ?>"><?php echo $category->name ?></a></h4>
-                                        </figcaption>
-                                      </figure>                         
-                                    </li> 
-                                    <?php
-                                    }
-                                    ?>
-                                </ul>
-                            <?php
-                            }
                             ?>
                         </div>
                     </div>
+                <?php
+                    $hideFilterCat = true;
+                    include 'filter.php';
+                } else {
+                ?>
+                    <div class="aa-product-area">
+                        <div class="aa-product-inner">
+                            <ul class="aa-product-catg">
+                                <?php
+                                foreach($categories as $category) {
+                                ?>    
+                                <li class="col-sm-3 good">
+                                  <figure>
+                                    <a class="aa-product-img" href="/catalog/category/<?php echo $category->url ?>"><img src="/images/category/category<?php echo $category->id ?>.png" alt="<?php echo $category->name ?>"></a>
+                                    <figcaption>
+                                        <h4 class="aa-product-title"><a href="/catalog/category/<?php echo $category->url ?>"><?php echo $category->name ?></a></h4>
+                                    </figcaption>
+                                  </figure>                         
+                                </li> 
+                                <?php
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                    </div>
+                <?php
+                }
+                ?>
                 </div>
             </div>    
         </div>

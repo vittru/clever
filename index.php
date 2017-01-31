@@ -14,6 +14,7 @@
     $registry->set('types', $model->getCatalog('types'));
     $registry->set('problems', $model->getCatalog('problems'));
     $registry->set('branches', $model->getBranches());
+    $registry->set('supercats', $model->getCatalog('supercats'));
 
     $isAdmin = ($_SESSION['user']->email == 'Nataliya.zhirnova@gmail.com' or $_SESSION['user']->email == 'Tev0205@gmail.com');
     $registry->set('isadmin', $isAdmin);

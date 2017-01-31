@@ -47,7 +47,7 @@ Class Controller_Buy Extends Controller_Base {
 
             //Clear the cart box
             unset($_SESSION['cart']);
-
+            
             //Show the results
             $this->registry['template']->set('orderId', $orderId);
             $this->registry['template']->set('bonus', $bonus);

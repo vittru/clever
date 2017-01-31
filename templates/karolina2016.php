@@ -172,6 +172,7 @@ include 'header.php';
                 <p>13.1. Правила рекламной акции подлежат опубликованию  до начала ее проведения на сайтах организаторов <a href="/">www.clubclever.ru</a> и <a href="www.karolina63.ru" target="blank">www.karolina63.ru</a>.</p>
                 <p>13.2.Информация о проведении рекламной акции размещается в салоне красоты «Каролина», на сайтах <a href="/">www.clubclever.ru</a> и <a href="www.karolina63.ru" target="blank">www.karolina63.ru</a>, в социальных группах <a href="https://vk.com/clubcleverru" target="blank">https://vk.com/clubcleverru</a>,  <a href="https://vk.com/sk.karolina" target="blank">https://vk.com/sk.karolina</a>, <a href="https://www.instagram.com/clubclever.ru/" target="blank">https://www.instagram.com/clubclever.ru/</a>, <a href="https://www.instagram.com/karolina_s04/" target="blank">https://www.instagram.com/karolina_s04/</a>.</p>
                 <p>13.3. Участники рекламной акции могут уточнить информацию об участии и проведении рекламной акции по телефону Организатора +7 996 725 00 61 (62).</p>    
+            </div>
         </div>
     </div>
 </section>
