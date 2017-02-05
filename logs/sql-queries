@@ -1,0 +1,45 @@
+select DATE(v.time) 'Дата', p.pagename 'Страница', count(v.id) 'Посещения'
+from visits v, pages p
+where v.pageid=p.id and v.userid in (select id from users
+where useragent not like '%bot%' and useragent not like '%Megaindex%' and useragent not like '%Yahoo%' and useragent not like '%spider%'  and useragent not like '%Crawler%' and useragent not like '%validator%')
+and v.userid not in (select id from users where profile in (12, 13, 14))
+and pagename <> '404'
+group by 1,2
+order by 1 desc, 3 desc
+
+
+select DATE(v.time) day, count(distinct v.userId), count(v.id)
+from visits v, pages p
+where v.pageid=p.id and v.userid in (select id from users
+where useragent not like '%bot%' and useragent not like '%Megaindex%' and useragent not like '%Yahoo%' and useragent not like '%spider%' and useragent not like '%Crawler%' and useragent not like '%validator%')
+and v.userid not in (select id from users where profile in (12, 13, 14))
+group by 1
+order by 1 desc
+
+select v.time 'Время', 
+	p.pagename 'Страница', 
+	CASE v.pageid 
+		WHEN 30 THEN g.name
+		WHEN 4 THEN t.name
+		WHEN 3 THEN f.name
+		WHEN 5 THEN c.name
+		ELSE ''
+	END 'Сущность'
+from visits v left outer join pages p on v.pageid=p.id
+left outer join goods g on v.good=g.id
+left outer join types t on v.good=t.id
+left outer join firms f on v.good=f.id
+left outer join categories c on v.good=c.id
+where v.userid=2180
+order by 1 
+
+select WEEK(v.time) 'Неделя', 
+		 g.name 'Товар', 
+		 count(v.id) 'Просмотры'
+from visits v left outer join pages p on v.pageid=p.id
+left outer join goods g on v.good=g.id
+where v.pageid=30 and v.userid in (select id from users
+where useragent not like '%bot%' and useragent not like '%Megaindex%' and useragent not like '%Yahoo%' and useragent not like '%spider%' and useragent not like '%vkShare%'  and useragent not like '%Crawler%' and useragent not like '%validator%')
+and v.userid not in (select id from users where profile in (12, 13, 14))
+group by 1,2
+order by 1 desc, 3 desc 
