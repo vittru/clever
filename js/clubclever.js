@@ -320,7 +320,16 @@ function filter_goods() {
     if($("ul.aa-product-catg").children(':visible').length == 0) {
         $("#empty-catg").show();
     }
-};
+};    
+
+$("input[name=payment]").on('change', function () {
+    if (this.value == 'card') {
+        $('#make_order').val('Заказать и оплатить');
+    } else {
+        $('#make_order').val('Заказать');
+    }    
+});
+
 
 $(document).ready(function () {
     $('.SlectBox').SumoSelect({captionFormat: '{0} выбрано', captionFormatAllSelected:'Все {0} выбраны'});

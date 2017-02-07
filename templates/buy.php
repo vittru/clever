@@ -122,14 +122,34 @@ include 'header.php';
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="panel panel-default aa-checkout-billaddress">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                Способ оплаты
+                                            </h4>
                                         </div>
+                                        <div class="panel-collapse collapse in">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="aa-checkout-single-bill">
+                                                            <label class="radio-inline"><input type="radio" name="payment" value='card' id='payment_card' checked>Картой онлайн</label>
+                                                            <label class="radio-inline"><input type="radio" name="payment" value='cash' id='payment_cash'>Наличными при получении</label>
                                                         </div>                             
+                                                    </div>                            
+                                                </div>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
                             <div class="col-md-4">
                                 <div class="checkout-right">
                                     <div class="panel panel-default aa-checkout-billaddress">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
-                                                    Ваши товары 
+                                                Ваши товары 
                                             </h4>
                                         </div>  
                                         <div class="panel-collapse collapse in checkout-goods">
@@ -249,7 +269,7 @@ include 'header.php';
                                         ?>
                                     </div>
                                     <div id="order-error" class="error" hidden>Не все обязательные поля заполнены</div>
-                                    <input type="submit" value="Заказать" class="green-button">                
+                                    <input type="submit" value="Заказать и оплатить" class="green-button" id='make_order'>                
                                 </div>
                             </div>
                         </div>

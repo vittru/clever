@@ -650,8 +650,8 @@ Class Model {
         return $catsArray;       
     }
     
-    function saveOrder($userId, $name, $email, $phone, $branch, $takeDate, $takeTime, $address, $promo, $bonus) {
-        $sqlInsert = $this->db->prepare('INSERT INTO orders(userId, name, email, phone, date, branchId, day, time, address, promoid, profileId, bonus) VALUES(:userId, :name, :email, :phone, :date, :branch, :takeDate, :takeTime, :address, :promo, :profileId, :bonus)');
+    function saveOrder($userId, $name, $email, $phone, $branch, $takeDate, $takeTime, $address, $promo, $bonus, $paymentCard) {
+        $sqlInsert = $this->db->prepare('INSERT INTO orders(userId, name, email, phone, date, branchId, day, time, address, promoid, profileId, bonus, card) VALUES(:userId, :name, :email, :phone, :date, :branch, :takeDate, :takeTime, :address, :promo, :profileId, :bonus, :card)');
         $sqlInsert->bindParam(':userId', $userId);
         $sqlInsert->bindParam(':name', $name);
         $sqlInsert->bindParam(':email', $email);
@@ -678,6 +678,8 @@ Class Model {
         if (!$bonus)
             $bonus=0;
         $sqlInsert->bindParam(':bonus', $bonus);
+        $sqlInsert->bindParam(':card', $paymentCard);
+        $this->registry['logger']->lwrite('order is ready to save');
         $this->executeQuery($sqlInsert, 'Error when saving order');
         try{
             $orderId = $this->db->lastInsertId();
