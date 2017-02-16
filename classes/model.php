@@ -863,6 +863,18 @@ Class Model {
         $sqlUpdate->closeCursor();
     }
     
+    function getAllOrders() {
+        $sqlSelect = $this->db->prepare('SELECT o.id, o.date, o.email, s.name status, s.description statusdesc, p.name promo, IF (o.branchId=0, "Доставка", "Самовывоз") type FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id');
+        $this->executeQuery($sqlSelect, 'Error when getting all orders');
+        $orders = array();
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $order = New Order($data['id'], $data['date'], $data['status'], $data['type'], $data['promo'], $userId, 0, $data['statusdesc'], $data['email']);
+            array_push($orders, $order);
+        }    
+        $sqlSelect->closeCursor();
+        return $orders;
+    }
+    
     function getUserOrders($userId) {
         $sqlSelect = $this->db->prepare('SELECT o.id, o.date, o.email, s.name status, s.description statusdesc, p.name promo, IF (o.branchId=0, "Доставка", "Самовывоз") type FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id WHERE o.userId=:userId');
         $sqlSelect->bindParam(':userId', $userId);

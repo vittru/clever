@@ -130,7 +130,7 @@ Class Controller_Buy Extends Controller_Base {
         $to      = $parameters['email'];
         $subject = 'Clever. Заказ №'.$orderId;
         $message = '<html><body><h2>Заказ №' . $orderId . '</h2>' .
-                '<p>Ваш заказ добавлен на сайт <a href="www.clubclever.ru">www.clubclever.ru</a>. Менеджер свяжется с вами в ближайшее время.</p><p></p>' .
+                '<p>Ваш заказ добавлен на сайт www.clubclever.ru. Менеджер свяжется с вами в ближайшее время.</p><p></p>' .
                 '<p>Мы будем информировать Вас о статусе заказа по email.</p>' .
                 '<p>Отследить заказ Вы также можете на <a href="www.clubclever.ru/account/orders?id='. $orderId . '">нашем сайте</a></p>' .
                 "<h3>Информация о заказе</h3>" .

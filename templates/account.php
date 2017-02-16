@@ -46,7 +46,9 @@ include 'header.php';
                                 ?>
                             </div>
                             <div class="aa-myaccount-orders">
-                                <h2>Мои заказы</h2>
+                                <h2><?php 
+                                if ($this->registry['isadmin']) echo 'Заказы';
+                                else echo 'Мои заказы' ?></h2>
                                 <?php
                                 if (sizeof($orders) > 0) {
                                 ?>
