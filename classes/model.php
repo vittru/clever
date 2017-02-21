@@ -994,7 +994,7 @@ Class Model {
                 . 'FROM visits v JOIN `goods-types` gt ON v.good=gt.goodId '
                 . 'JOIN `goods-sizes` gs ON v.good=gs.goodid '
                 . 'JOIN warehouse w ON w.psid = gs.id '
-                . 'WHERE v.pageid=30 AND v.good IS NOT NULL AND gt.typeId=:typeId AND w.instock > w.onhold '
+                . 'WHERE v.pageid=30 AND v.good IS NOT NULL AND gt.typeId=:typeId AND w.instock > w.onhold AND v.time >=DATE_SUB(curdate(), INTERVAL 1 MONTH) '
                 . 'GROUP BY 1 '
                 . 'ORDER BY 2 DESC '
                 . 'LIMIT 8');
