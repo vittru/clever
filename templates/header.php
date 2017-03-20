@@ -19,8 +19,8 @@
         <link href="/css/clubclever.css" rel="stylesheet">    
         <link href="/css/sumoselect.css" rel="stylesheet">    
         
-        <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+        <!--link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'-->
+        <!--link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'-->
        
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -46,40 +46,32 @@
                         <div class="aa-header-top-area">
                             <!-- start header top left -->
                             <div class="aa-header-top-left">
-                                <!--div class="aa-header-top-left">
-                                    <a class="btn" href="/about" type="button" id="about">
-                                        О нас
-                                    </a>
-                                </div-->
-                                    <a class="btn" href="/common/delivery" type="button">
-                                        Доставка
-                                    </a>
-                                    <a class="btn" href="/common/payment" type="button">
-                                        Оплата
-                                    </a>
-                                    <a class="btn" href="/common/bonus" type="button">
-                                        Бонусы
-                                    </a>
-                                    <a class="btn" href="/common/moneyback" type="button">
-                                        Возврат
-                                    </a>
-                                    <a class="btn" href="/common/blog" type="button">
-                                        Блог
-                                    </a>
-                                    <a class="btn" href="/contacts" type="button">
-                                        Контакты
-                                    </a>
+                                <a class="btn" href="/common/delivery" type="button">
+                                            Доставка
+                                </a>
+                                <a class="btn" href="/common/payment" type="button">
+                                            Оплата
+                                </a>
+                                <a class="btn hidden-xs hidden-sm" href="/common/bonus" type="button">
+                                            Бонусы
+                                </a>
+                                <a class="btn hidden-xs" href="/common/moneyback" type="button">
+                                            Возврат
+                                </a>
+                                <a class="btn hidden-xs hidden-sm hidden-md" href="/common/blog" type="button">
+                                            Блог
+                                </a>
+                                <a class="btn" href="/contacts" type="button">
+                                            Контакты
+                                </a>
 
-                                <!-- start cellphone -->
                                 <div class="cellphone hidden-xs">
                                     <p><span class="fa fa-phone"></span>+7-996-725-00-61</p>
                                 </div>
-                                <div class="cellphone hidden-xs">
+                                <div class="cellphone hidden-xs hidden-sm hidden-md">
                                     <p><span class="fa fa-phone"></span>+7-996-725-00-62</p>
                                 </div>
-                                <!-- / cellphone -->
-                            </div>
-                            <!-- / header top left -->
+                            </div>    
                             <div class="aa-header-top-right">
                                 <ul class="aa-head-top-nav-right">
                                     <?php

@@ -7,6 +7,15 @@ include 'header.php';
         <div class="row">
             <div class="col-md-12">
                 <h1>Наши акции</h1>
+                <h2>Товары недели со скидкой</h2>
+                <div class="newstime">13/03/2017</div>
+                <img src="/images/actions/week_13_03.jpg">
+                <h2>Товары недели со скидкой</h2>
+                <div class="newstime">13/02/2017</div>
+                <img src="/images/actions/good-of-week-13-02.jpg">
+                <h2>Подарки для настоящих мужчин</h2>
+                <div class="newstime">23/01/2017</div>
+                <img src="/images/actions/Miko_TM_Dub-moh.jpg">
                 <h2>Новогодние подарки для всех</h2>
                 <div class="newstime">20/12/2016</div>
                 <img src="/images/actions/newyear2017.png">
