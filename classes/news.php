@@ -8,14 +8,21 @@ Class News {
     public $text; 
     public $id;
     public $forClients;
+    public $banner;
+    public $end;
    
-    function __construct($id, $header, $time, $text, $forClients) {
+    function __construct($id, $header, $time, $text, $forClients, $banner, $end) {
         $this->id = $id;
         $this->header = $header;
         setlocale(LC_TIME, "ru_RU.UTF-8");
-        $this->time = strftime('%e/%m/%G', strtotime($time));
+        $this->time = strftime('%e.%m.%G', strtotime($time));
         $this->text = $text;
         $this->forClients = $forClients;
+        $this->banner = $banner;
+        if ($end)
+            $this->end = strftime('%e.%m.%G', strtotime($end));
+        else 
+            $this->end = $end;
     }
     
     function getWebText() {
@@ -39,6 +46,4 @@ Class News {
         }
         return '/'.$file_name;
     }
-
 }
-

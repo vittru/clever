@@ -44,9 +44,9 @@ include 'header.php';
                 <img src="/images/actions/Роза_октябрь.jpg">
                 <h2>Акции от компании МиКо в сентябре</h2>
                 <div class="newstime">1/09/2016 - 1/10/2016</div>
-                <img src="/images/actions/Miko_action_bdg_medimalina.jpg">
+                <img src="/images/actions/news15.jpg">
                 <p></p>
-                <img src="/images/actions/Miko_action_lavanda-andiroba.jpg">
+                <img src="/images/actions/news16.jpg">
                 
             </div>
         </div>

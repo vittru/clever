@@ -3,18 +3,21 @@
 Class Controller_Editnews Extends Controller_Base {
         
     function index() {
-        $this->registry['model']->logVisit(1002);
-        if ($this->registry['isadmin'])
+        if ($this->registry['isadmin']) {
+            $this->registry['model']->logVisit(1002);
             $this->registry['template']->show('editnews');
-        else 
+        } else 
             $this->registry['template']->show('404');
     }
     
     function remove() {
         if ($this->registry['isadmin']) {
+            unlink('images/news/news'.$_GET['news'].'.png');
+            unlink('images/news/news'.$_GET['news'].'.jpg');
+            unlink('images/banners/news'.$_GET['news'].'.png');
+            unlink('images/banners/news'.$_GET['news'].'.jpg');
             $this->registry['model']->removeNews($_GET['news']);
-            $this->registry['template']->set('news', $this->registry['model']->getNews());
-            $this->registry['template']->show('news');
+            header("LOCATION: ../news");
         } else 
             $this->registry['template']->show('404');            
     }
@@ -25,37 +28,51 @@ Class Controller_Editnews Extends Controller_Base {
             if (isset($_POST['forClients']))
                 $forClients=1;
             else $forClients=0;        
+            
+            if (isset($_POST['banner']))
+                $banner = 1;
+            else
+                $banner = 0;
 
-            $newsId = $this->registry['model']->addNews($_POST['id'], $_POST['header'], $_POST['text'], $_POST['time'], $forClients);
+            $newsId = $this->registry['model']->addNews($_POST['id'], $_POST['header'], $_POST['text'], $_POST['time'], $forClients, $banner, $_POST['end']);
             $this->registry['model']->logVisit(1003, $newsId);
 
-            $this->loadNewsImage($_FILES["image"], $newsId);
+            $this->loadNewsImage($_FILES["image"], $newsId, $banner);
     
-            $this->registry['template']->set('news', $this->registry['model']->getNews());
-            $this->registry['template']->show('news');
+            header("LOCATION: ../news");
         } else 
             $this->registry['template']->show('404');            
     }
     
-    private function loadNewsImage($image, $newsId) {
+    private function loadNewsImage($image, $newsId, $banner) {
+        $targetFileJpg = 'images/news/news'.$newsId.'.jpg';
+        $targetFilePng = 'images/news/news'.$newsId.'.png';
+        $bannerFileJpg = 'images/banners/news'.$newsId.'.jpg';
+        $bannerFilePng = 'images/banners/news'.$newsId.'.png';
+        if (!$banner) {
+            unlink($bannerFileJpg);
+            unlink($bannerFilePng);
+        }
         if (getimagesize($image["tmp_name"])) {
-            $targetFileJpg = 'images/news/news'.$newsId.'.jpg';
-            $targetFilePng = 'images/news/news'.$newsId.'.png';
             if ($image["size"] > 500000) {
                 echo "Очень большая картинка<br>";
             } else {
                 if(pathinfo(basename($image["name"]), PATHINFO_EXTENSION) == "jpg") {
                     $targetFile = $targetFileJpg;
+                    $bannerFile = $bannerFileJpg;
                 } else if ((pathinfo(basename($image["name"]), PATHINFO_EXTENSION) == "png")) {
-                    $targetFile=$targetFilePng;
+                    $targetFile = $targetFilePng;
+                    $bannerFile = $bannerFilePng;
                 } else {    
                     echo "Мы поддерживаем только jpg и png. Поправьте картинку<br>";
                 }    
                 if ($targetFile) {
-                    if(file_exists($targetFileJpg) or file_exists($targetFilePng)) {
+//                    if(file_exists($targetFileJpg) or file_exists($targetFilePng)) {
                         unlink($targetFileJpg);
                         unlink($targetFilePng);
-                    }    
+                        unlink($bannerFileJpg);
+                        unlink($bannerFilePng);
+//                    }    
                     if(move_uploaded_file($image["tmp_name"], $targetFile)) {
                         echo "Картинка залита<br>";
                     } else {
@@ -64,10 +81,9 @@ Class Controller_Editnews Extends Controller_Base {
                 }
             }
         }
-
+        if ($banner) {
+            copy($targetFileJpg, $bannerFileJpg);
+            copy($targetFilePng, $bannerFilePng);
+        }
     }
-    
-    
 }
-
-

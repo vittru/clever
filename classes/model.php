@@ -43,8 +43,8 @@ Class Model {
     private $linkGoodProblem = "INSERT INTO `goods-problems` (goodId, problemId) VALUES(:goodId, :probId)";
     private $linkGoodST = "INSERT INTO `goods-skintypes` (goodId, skintypeId) VALUES(:goodId, :skintypeId)";
     private $linkGoodHT = "INSERT INTO `goods-hairtypes` (goodId, hairtypeId) VALUES(:goodId, :hairtypeId)";
-    private $updateNews = "UPDATE news SET header=:header, text=:text, time=:time, forClients=:forClients WHERE id=:id";
-    private $addNews = "INSERT INTO news (header, text, time, forClients) VALUES (:header, :text, :time, :forClients)";
+    private $updateNews = "UPDATE news SET header=:header, text=:text, time=:time, forClients=:forClients, banner=:banner, end=:end WHERE id=:id";
+    private $addNews = "INSERT INTO news (header, text, time, forClients, banner, end) VALUES (:header, :text, :time, :forClients, :banner, :end)";
     public $default = "cccccccccc";
     
     function __construct($registry) {
@@ -278,7 +278,7 @@ Class Model {
             $sqlSelect = $this->db->prepare($this->getNonClientNews);
         $this->executeQuery($sqlSelect, 'Error when getting news from DB');
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $news = new News($data['id'], $data['header'], $data['time'], $data['text'], $data['forClients']);
+            $news = new News($data['id'], $data['header'], $data['time'], $data['text'], $data['forClients'], $data['banner'], $data['end']);
             if (!$newsArray)
                 $newsArray = [$news];
             else
@@ -294,7 +294,7 @@ Class Model {
         $this->executeQuery($sqlSelect, 'Error when getting news with id=' . $newsId);
         $data = $sqlSelect->fetch();
         $sqlSelect->closeCursor();
-        return new News($data['id'], $data['header'], $data['time'], $data['text'], $data['forClients']);
+        return new News($data['id'], $data['header'], $data['time'], $data['text'], $data['forClients'], $data['banner'], $data['end']);
     }    
     
     function addQuestion($userId, $question) {
@@ -722,7 +722,7 @@ Class Model {
         return $firms;
     }   
        
-    function addNews($id, $header, $text, $time, $forClients) {
+    function addNews($id, $header, $text, $time, $forClients, $banner, $end) {
         if ($id) {
             $sqlInsert = $this->db->prepare($this->updateNews);
             $sqlInsert->bindParam(':id', $id);
@@ -733,6 +733,11 @@ Class Model {
         $sqlInsert->bindParam(':text', $text);
         $sqlInsert->bindParam(':time', $time);
         $sqlInsert->bindParam(':forClients', $forClients);
+        $sqlInsert->bindParam(':banner', $banner);
+        if ($end)
+            $sqlInsert->bindParam(':end', $end);
+        else
+            $sqlInsert->bindValue (':end', null, PDO::PARAM_INT);
         $this->executeQuery($sqlInsert, 'Error when adding/updating a news record');
         if ($id) {
             $newsId=$id;

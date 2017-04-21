@@ -545,6 +545,12 @@ h2 {
     margin-left: 0;
     margin-right: 0;
 }
+#aa-text .news-image {
+    width:auto;
+    height:auto;
+    max-height:292px;
+    max-width:800px;
+}
 #aa-text ul {
   margin-left: 70px;
   text-indent: 0;
