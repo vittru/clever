@@ -1127,7 +1127,7 @@ Class Model {
         $entry = $sqlSelect->fetch();
         $sqlSelect->closeCursor();
         setlocale(LC_TIME, "ru_RU.UTF-8");
-        $entry['date'] = strftime('%e/%m/%G', strtotime($entry['date']));
+        $entry['date'] = strftime('%e.%m.%G', strtotime($entry['date']));
         return $entry;
     }
 }
