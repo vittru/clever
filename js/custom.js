@@ -33,12 +33,18 @@ jQuery(function($){
   /* ----------------------------------------------------------- */
     
      jQuery(".aa-cartbox").hover(function(){
-      jQuery(this).find(".aa-cartbox-summary").fadeIn(500);
+        /*We do not expand the cart in cart and buy pages*/
+        if (window.location.pathname !== "/cart" && window.location.pathname !== "/buy") {
+            jQuery(this).find(".aa-cartbox-summary").fadeIn(500);
+        }    
     }
-      ,function(){
-          jQuery(this).find(".aa-cartbox-summary").fadeOut(500);
-      }
-     );   
+    ,function(){
+        jQuery(this).find(".aa-cartbox-summary").fadeOut(500);
+    });
+     
+    jQuery(".aa-cartbox").click(function() {
+        jQuery(this).find(".aa-cartbox-summary").fadeOut(500);
+    });
   
   /* ----------------------------------------------------------- */
   /*  2. TOOLTIP
