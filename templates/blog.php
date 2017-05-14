@@ -10,8 +10,23 @@ include 'header.php';
                 if ($entries)
                     echo 'Блог';
                 else 
-                    echo $entry['name'];
+                    echo $entry->name;
                 ?></h1>
+                <?php
+                if ($isadmin) {
+                    if ($entries) {
+                ?>
+                        <a class="green-button" style="padding: 12px 15px;" href="/editblog">Добавить запись</a>
+                <?php
+                    } else {
+                ?>
+                        <a class="orange-button" style="padding: 12px 15px;margin:5px;float:right" href="/editblog/remove?blog=<?php echo $entry->id ?>">Удалить</a>
+                        <a class="green-button" style="padding: 12px 15px;margin:5px;float:right" href="/editblog?blog=<?php echo $entry->id ?>">Редактировать</a>
+
+                <?php
+                    }
+                }    
+                ?>
                 <div class="aa-blog-archive-area">
                     <div class="row">
                         <div class="col-md-9">
@@ -22,16 +37,16 @@ include 'header.php';
                                     <article class="aa-blog-details">                        
                                         <div class="aa-article-bottom">
                                             <div class="aa-post-date">
-                                                <?php echo $entry['date'] ?>
+                                                <?php echo $entry->date ?>
                                             </div>
                                             <div class="aa-post-author">
-                                                Автор: <?php if ($entry['url']) echo '<a target="blank" href="' . $entry['url'] . '">' . $entry['author'] . '</a>'; else echo $entry['author'] ?>
+                                                Автор: <?php if ($entry->url) echo '<a target="blank" href="' . $entry->url . '">' . $entry->author . '</a>'; else echo $entry->author ?>
                                             </div>
                                         </div>
                                         <figure class="aa-blog-img">
-                                            <img src="/images/blogs/blog<?php echo $entry['id'] ?>.png" alt="<?php echo $entry['name'] ?>">
+                                            <img src="<?php echo $entry->getImage() ?>" alt="<?php echo $entry->name ?>">
                                         </figure>
-                                        <p><?php echo $entry['text'] ?></p>
+                                        <p><?php echo $entry->text ?></p>
                                     </article>    
                                 <?php
                                 } else {
@@ -43,19 +58,22 @@ include 'header.php';
                                     ?>
                                     <div class="col-md-4 col-sm-4">
                                         <article class="aa-blog-content-single">                        
-                                            <h2><a href="/common/blog?entry=<?php echo $singleentry['id'] ?>"><?php echo $singleentry['name'] ?></a></h2>
+                                            <h2><a href="/common/blog?entry=<?php echo $singleentry->id ?>"><?php echo $singleentry->name ?></a></h2>
                                             <div class="aa-article-bottom">
                                                 <div class="aa-post-author">
-                                                    Автор: <?php echo $singleentry['author'] ?>
+                                                    Автор: <?php echo $singleentry->author ?>
                                                 </div>
                                                 <div class="aa-post-date">
-                                                    <?php echo $singleentry['date'] ?>
+                                                    <?php echo $singleentry->date ?>
                                                 </div>
                                             </div>
                                             <figure class="aa-blog-img">
-                                                <a href="/common/blog?entry=<?php echo $singleentry['id'] ?>"><img src="/images/blogs/blog<?php echo $singleentry['id'] ?>.png" alt="<?php echo $singleentry['name'] ?>"></a>
+                                                <a href="/common/blog?entry=<?php echo $singleentry->id ?>"><img src="<?php echo $singleentry->getImage() ?>" alt="<?php echo $singleentry->name ?>"></a>
                                             </figure>
-                                            <?php echo $singleentry['text'] ?>
+                                            <div style="height: 25px; width: 100%; text-overflow: ellipsis; white-space: nowrap;
+                                                overflow: hidden;"><?php echo $singleentry->text ?></div>
+
+                                            
                                         </article>
                                     </div>
                                     <?php

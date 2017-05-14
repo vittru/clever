@@ -48,7 +48,7 @@ Class Controller_Common Extends Controller_Base {
         if (isset($_GET['entry'])) {
             $entryId = $_GET['entry'];
             $entry = $this->registry['model']->getBlogEntry($entryId);
-            if ($entry['name']) {
+            if ($entry->name) {
                 $this->registry['model']->logVisit(33, $entryId);
                 $this->registry['template']->set('entry', $entry);
                 $this->registry['template']->show('blog');
@@ -62,6 +62,4 @@ Class Controller_Common Extends Controller_Base {
             $this->registry['template']->show('blog');
         }    
     }
-    
 }
-

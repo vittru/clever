@@ -43,3 +43,25 @@ where useragent not like '%bot%' and useragent not like '%Megaindex%' and userag
 and v.userid not in (select id from users where profile in (12, 13, 14))
 group by 1,2
 order by 1 desc, 3 desc 
+
+select v.time 'Время', 
+	p.pagename 'Страница', 
+	CASE v.pageid 
+		WHEN 30 THEN g.name
+		WHEN 4 THEN t.name
+		WHEN 3 THEN f.name
+		WHEN 5 THEN c.name
+		ELSE ''
+	END 'Сущность',
+	v.`userid` 'Пользователь',
+	u.profile 'Зарегистрирован',
+	u.useragent 'Агент'
+from visits v left outer join pages p on v.pageid=p.id
+left outer join goods g on v.good=g.id
+left outer join types t on v.good=t.id
+left outer join firms f on v.good=f.id
+left outer join categories c on v.good=c.id
+left outer join users u on v.userid = u.id
+where u.useragent not like '%bot%' and u.useragent not like '%Megaindex%' and u.useragent not like '%Yahoo%' and u.useragent not like '%spider%' and u.useragent not like '%Crawler%' and u.useragent not like '%validator%' and u.useragent not like '%vkShare%' and u.useragent not like '%DataMiner%' and u.useragent not like '%Daum%' and u.useragent not like '%Dataprovider.com%' and u.useragent not like '%Stratagems Kumo%' and u.useragent not like '%Go-http-client/1.1%'
+and  (u.profile not in (12, 13, 14) or u.profile is null) and v.pageid<>404
+order by 1 desc

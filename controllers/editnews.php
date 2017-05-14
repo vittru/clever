@@ -67,14 +67,11 @@ Class Controller_Editnews Extends Controller_Base {
                     echo "Мы поддерживаем только jpg и png. Поправьте картинку<br>";
                 }    
                 if ($targetFile) {
-//                    if(file_exists($targetFileJpg) or file_exists($targetFilePng)) {
-                        unlink($targetFileJpg);
-                        unlink($targetFilePng);
-                        unlink($bannerFileJpg);
-                        unlink($bannerFilePng);
-//                    }    
+                    unlink($targetFileJpg);
+                    unlink($targetFilePng);
+                    unlink($bannerFileJpg);
+                    unlink($bannerFilePng);
                     if(move_uploaded_file($image["tmp_name"], $targetFile)) {
-                        echo "Картинка залита<br>";
                     } else {
                         echo "Картинка не залита<br>";
                     }

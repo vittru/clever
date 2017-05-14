@@ -45,6 +45,8 @@ Class Model {
     private $linkGoodHT = "INSERT INTO `goods-hairtypes` (goodId, hairtypeId) VALUES(:goodId, :hairtypeId)";
     private $updateNews = "UPDATE news SET header=:header, text=:text, time=:time, forClients=:forClients, banner=:banner, end=:end WHERE id=:id";
     private $addNews = "INSERT INTO news (header, text, time, forClients, banner, end) VALUES (:header, :text, :time, :forClients, :banner, :end)";
+    private $updateBlog = "UPDATE blogentries SET name=:name, text=:text, date=:date, author=:author, url=:url WHERE id=:id";
+    private $addBlog = "INSERT INTO blogentries (name, text, date, author, url) VALUES (:name, :text, :date, :author, :url)";
     public $default = "cccccccccc";
     
     function __construct($registry) {
@@ -1105,12 +1107,10 @@ Class Model {
     }
     
     function getBlogEntries() {
-        $sqlSelect = $this->db->prepare("SELECT id, name, date, CONCAT(LEFT(text, 97), '...') as text, author, url FROM blogentries ORDER BY date DESC LIMIT 10");
+        $sqlSelect = $this->db->prepare("SELECT id, name, date, text, author, url FROM blogentries ORDER BY date DESC LIMIT 10");
         $this->executeQuery($sqlSelect, 'Error when getting blog entries');
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $entry = $data;
-            setlocale(LC_TIME, "ru_RU.UTF-8");
-            $entry['date'] = strftime('%e/%m/%G', strtotime($entry['date']));
+            $entry = new Blog($data['id'], $data['name'], $data['author'], $data['url'], $data['text'], $data['date']);
             if (!isset($entries))
                 $entries = [$entry];
             else
@@ -1126,8 +1126,37 @@ Class Model {
         $this->executeQuery($sqlSelect, 'Error when getting blog entry with id=' . $entryId);
         $entry = $sqlSelect->fetch();
         $sqlSelect->closeCursor();
-        setlocale(LC_TIME, "ru_RU.UTF-8");
-        $entry['date'] = strftime('%e.%m.%G', strtotime($entry['date']));
-        return $entry;
+        $blog = new Blog($entry['id'], $entry['name'], $entry['author'], $entry['url'], $entry['text'], $entry['date']);
+        return $blog;
     }
+
+    function addBlogEntry($id, $name, $author, $url, $text, $date) {
+        if ($id) {
+            $sqlInsert = $this->db->prepare($this->updateBlog);
+            $sqlInsert->bindParam(':id', $id);
+        } else {
+            $sqlInsert = $this->db->prepare($this->addBlog);
+        }
+        $sqlInsert->bindParam(':name', $name);
+        $sqlInsert->bindParam(':author', $author);
+        $sqlInsert->bindParam(':url', $url);
+        $sqlInsert->bindParam(':text', $text);
+        $sqlInsert->bindParam(':date', $date);
+        $this->executeQuery($sqlInsert, 'Error when adding/updating a blog entry');
+        if ($id) {
+            $blogId=$id;
+        } else {
+            $blogId = $this->db->lastInsertId();
+        }
+        $sqlInsert->closeCursor();
+        return $blogId;
+    }
+    
+    function removeBlog($blogId) {
+        $sqlDelete = $this->db->prepare('DELETE FROM blogentries WHERE id=:blogId');
+        $sqlDelete->bindParam(':blogId', $blogId);
+        $this->executeQuery($sqlDelete, 'Error when deleting blog with id='.$blogId);
+        $sqlDelete->closeCursor();
+    }
+    
 }
