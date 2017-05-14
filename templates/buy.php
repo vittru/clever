@@ -133,8 +133,8 @@ include 'header.php';
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="aa-checkout-single-bill">
-                                                            <label class="radio-inline"><input type="radio" name="payment" value='card' id='payment_card' checked>Картой онлайн</label>
-                                                            <label class="radio-inline"><input type="radio" name="payment" value='cash' id='payment_cash'>Наличными при получении</label>
+                                                            <label class="radio-inline"><input type="radio" name="payment" value="card" id="payment_card" checked style="width: auto;">Картой онлайн</label>
+                                                            <label class="radio-inline"><input type="radio" name="payment" value="cash" id="payment_cash" style="width: auto;">Наличными при получении</label>
                                                         </div>                             
                                                     </div>                            
                                                 </div>  
