@@ -94,19 +94,7 @@
                                 <td><?php echo $size->size; ?></td>
                                 <td><?php echo $size->getWebPrice($showGood->sale); ?></td>
                                 <td>
-                                    <select class="form-control quantity" id="sel<?php echo $sizeId; ?>" <?php if (!$size->isAvailable()) echo 'disabled' ?> onchange="modifyBasket()">
-                                        <option>0</option>
-                                        <option <?php if (sizeof($showGood->sizes)==1 and $size->isAvailable()) echo 'selected' ?>>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                        <option>6</option>
-                                        <option>7</option>
-                                        <option>8</option>
-                                        <option>9</option>
-                                        <option>10</option>
-                                    </select>
+                                    <input class="quantity form-control" type="number" id="sel<?php echo $sizeId; ?>" value="<?php if (sizeof($showGood->sizes)==1 and $size->isAvailable()) echo '1'; else echo '0';  ?>" <?php if (!$size->isAvailable()) echo 'disabled' ?> onchange="modifyBasket()">
                                 </td>
                                 <td>
                                     <?php 

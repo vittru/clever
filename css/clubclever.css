@@ -1064,6 +1064,9 @@ h2 {
 #single-product .aa-product-view-content .aa-price-block select {
   width: 60%;
 }
+#single-product .aa-product-view-content .aa-price-block .quantity {
+  max-width: 90px;
+}
 #single-product .aa-product-view-content .aa-prod-view-size a {
   border: 1px solid #ddd;
   display: inline-block;
