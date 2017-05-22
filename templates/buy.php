@@ -97,7 +97,7 @@ include 'header.php';
                                                 <div class="panel-body">
                                                     <div class="row" id="delivery-info" <?php if ($total > $this->registry['freeDelivery']) echo "hidden" ?>>
                                                         <div class="col-md-12">
-                                                            Стоимость доставки по Самаре - 300 руб. 
+                                                            Стоимость доставки по Самаре - 350 руб. 
                                                         </div>
                                                         <div class="col-md-12">
                                                             Добавьте в заказ товаров на <span id="amount-left"><?php echo $this->registry['freeDelivery']-$total ?></span> руб., и доставка будет бесплатной.
@@ -107,7 +107,22 @@ include 'header.php';
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="aa-checkout-single-bill">
-                                                                <input class="order-form form-control" type="text" placeholder="Населенный пункт*" name="city">
+                                                                <!--input class="order-form form-control" type="text" placeholder="Населенный пункт*"-->
+                                                                <!--select class="order-form form-control" name="city">
+                                                                    <option selected>Самара</option>
+                                                                    <option>Алексеевка</option>
+                                                                    <option>Кинель</option>
+                                                                    <option>Новокуйбышевск</option>
+                                                                    <option>Тольятти</option>
+                                                                </select-->
+                                                                <input class="order-form form-control" type="text" list="cities" name="city"/>
+                                                                <datalist id="cities">
+                                                                  <option>Самара</option>
+                                                                  <option>Алексеевка</option>
+                                                                  <option>Кинель</option>
+                                                                  <option>Новокуйбышевск</option>
+                                                                  <option>Тольятти</option>
+                                                                </datalist>
                                                             </div>                             
                                                         </div>                            
                                                     </div>  

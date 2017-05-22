@@ -9,49 +9,53 @@ include 'header.php';
                 <div class="row">
                     <div class="aa-product-header">
                     <h1>Вы искали</h1>
-                    <p><?php
+                    <p><table class="table search-table"><?php
                     foreach($_GET as $key => $value){
                         if (!empty($value) and $key!="route") {
                             switch ($key) {
+                                case "type":
+                                    echo "<tr><td></td><td class=\"bold\">Товары ".mb_strtolower($this->registry['types'][$value])."</td></tr>";
+                                    break;
                                 case "name":
-                                    echo "Tекст: ".$value."<br>";
+                                    echo "<tr><td>Название:</td><td class=\"bold\">".$value."</td></tr>";
+                                    break;
+                                case "supercat":
+                                    echo "<tr><td>Тип:</td><td class=\"bold\">".$this->registry['supercats'][$value]."</td></tr>";
                                     break;
                                 case "effect":
-                                    echo "Эффект: ".$this->registry['effects'][$value]."<br>";
+                                    echo "<tr><td>Эффект:</td><td class=\"bold\">".$this->registry['effects'][$value]."</td></tr>";
                                     break;
                                 case "hairtype":
-                                    echo "Тип волос: ".$this->registry['hairtypes'][$value]."<br>";
+                                    echo "<tr><td>Тип волос:</td><td class=\"bold\">".$this->registry['hairtypes'][$value]."</td></tr>";
                                     break;
                                 case "skintype":
-                                    echo "Тип кожи: ".$this->registry['skintypes'][$value]."<br>";
+                                    echo "<tr><td>Тип кожи:</td><td class=\"bold\">".$this->registry['skintypes'][$value]."</td></tr>";
                                     break;
                                 case "firm":    
-                                    echo "Бренд: ".$this->registry['firms'][$value]->name."<br>";
+                                    echo "<tr><td>Бренд:</td><td class=\"bold\">".$this->registry['firms'][$value]->name."</td></tr>";
                                     break;
                                 case "problem":    
-                                    echo "Проблема: ".$this->registry['problems'][$value]."<br>";
+                                    echo "<tr><td>Проблема:</td><td class=\"bold\">".$this->registry['problems'][$value]."</td></tr>";
                                     break;
                                 case "description":
-                                    echo "Описание: ".$value."<br>";
+                                    echo "<tr><td>Описание:</td><td class=\"bold\">".$value."</td></tr>";
                                     break;                        
                                 case "howTo":
-                                    echo "Способ применения: ".$value."<br>";
+                                    echo "<tr><td>Способ применения:</td><td class=\"bold\">".$value."</td></tr>";
                                     break;
                                 case "madeOf":
-                                    echo "Состав: ".$value."<br>";
+                                    echo "<tr><td>Состав:</td><td class=\"bold\">".$value."</td></tr>";
                                     break;
                                 case "category":
-                                    echo "Категория: ".$this->registry['categories'][$value]."<br>";
+                                    echo "<tr><td>Категория:</td><td class=\"bold\">".$this->registry['categories'][$value]."</td></tr>";
                                     break;
                             }
                         }
                     }
-                    ?></p>
+                    ?><tr><td colspan="2"></td></tr></table></p>
                     <h4><?php 
                     if (count($foundgoods))
                         echo "Мы нашли товаров: " . count($foundgoods);
-                    else
-                        echo "К сожалению таких товаров нет"
                     ?></h4>
                     </div>
                 </div>
@@ -64,12 +68,13 @@ include 'header.php';
                             if (count($foundgoods))include 'sort.php';
                             ?>                                
                                     <ul class="aa-product-catg">
-                            <?php
-                                foreach($foundgoods as $goodid=>$good) {
-                                    $good->showInCatalog();
-                                }
-                            ?>
+                                    <?php
+                                        foreach($foundgoods as $goodid=>$good) {
+                                            $good->showInCatalog();
+                                        }
+                                    ?>
                                     </ul>
+                                    <div id="empty-catg" class="aa-empty-catg" <?php if (count($foundgoods)) echo "hidden"?>>Мы не нашли товаров, удовлетворяющих вашему запросу</div>
                                 </div>
                             </div>    
                         </div>

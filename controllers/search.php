@@ -19,9 +19,23 @@ Class Controller_Search Extends Controller_Base {
                             if (mb_stripos(str_replace('&nbsp;', ' ', $good->name), $value)===false)
                                 $found = false;
                             break;
+                        case "type":
+                            $found = false;
+                            foreach($good->types as $id=>$type) {
+                                if ($id == $value)
+                                    $found = true;
+                            }
+                            break;
                         case "effect":
                             if (!in_array($value, $good->effs))
                                 $found = false;
+                            break;
+                        case "supercat":
+                            $found = false;
+                            foreach($good->supercats as $id=>$type) {
+                                if ($id == $value)
+                                    $found = true;
+                            }
                             break;
                         case "hairtype":
                             if (!in_array($value, $good->hairtypes))

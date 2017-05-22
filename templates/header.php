@@ -216,11 +216,33 @@
                                                 <div class="dropdown-menu dropdown-menu-right" role="menu">
                                                     <div class="row">
                                                         <div class="form-group col-sm-6">
+                                                            <select class="form-control" name="type">
+                                                                <option value="0" disabled selected>Для кого</option>
+                                                                <?php
+                                                                foreach($this->registry['types'] as $key=>$value) {
+                                                                    echo "<option value=".$key.">".$value."</option>";
+                                                                }
+                                                                ?>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
                                                             <select class="form-control" name="firm">
                                                                 <option value="0" disabled selected>Бренд</option>
                                                                 <?php
                                                                 foreach($this->registry['firms'] as $id=>$firm) {
                                                                     echo "<option value=".$id.">".$firm->name."</option>";
+                                                                }
+                                                                ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>    
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-6">
+                                                            <select class="form-control" name="supercat">
+                                                                <option value="0" disabled selected>Тип</option>
+                                                                <?php
+                                                                foreach($this->registry['supercats'] as $id=>$name) {
+                                                                    echo "<option value=".$id.">".$name."</option>";
                                                                 }
                                                                 ?>
                                                             </select>

@@ -726,6 +726,18 @@ h2 {
     font-weight: normal;
 }
 
+.search-table {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 400px;
+}
+.search-table .centered {
+    text-align: center;
+}
+.search-table .bold {
+    font-weight: bold;
+}
+
 #aa-product .aa-product-header {
     float: left;
     /*padding: 40px 0 10px 0;*/
