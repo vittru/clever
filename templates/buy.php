@@ -224,7 +224,7 @@ include 'header.php';
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="panel-group" id="accordionRight">
+                                    <div class="panel-group" id="accordionRight" <?php if ($this->registry['globalsale']) echo "hidden" ?>>
                                         <div class="panel panel-default aa-checkout-billaddress">
                                             <div class="panel-heading">
                                                 <h4 class="panel-title">
