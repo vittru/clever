@@ -70,9 +70,8 @@ include 'header.php';
                                             <figure class="aa-blog-img">
                                                 <a href="/common/blog?entry=<?php echo $singleentry->id ?>"><img src="<?php echo $singleentry->getImage() ?>" alt="<?php echo $singleentry->name ?>"></a>
                                             </figure>
-                                            <div style="height: 25px; width: 100%; text-overflow: ellipsis; white-space: nowrap;
+                                            <div style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; height: 48px; width: 100%; text-overflow: ellipsis; white-space: normal;
                                                 overflow: hidden;"><?php echo $singleentry->text ?></div>
-
                                             
                                         </article>
                                     </div>
