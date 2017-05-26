@@ -1849,6 +1849,9 @@ h2 {
   -o-transition: all 0.5s;
   transition: all 0.5s;
 }
+#aa-blog-archive .aa-blog-archive-area .aa-blog-content .aa-blog-details .aa-blog-img img {
+  max-width: 300px;
+}
 #aa-blog-archive .aa-blog-archive-area .aa-blog-content .aa-blog-content-single .aa-article-bottom {
   display: inline;
   float: left;
