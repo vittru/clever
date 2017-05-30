@@ -1,11 +1,16 @@
 <?php
 include 'header.php';
-
+?>
+<?php
 if ($payment) {
 ?>
     <script src="https://securepay.tinkoff.ru/html/payForm/js/tinkoff.js" defer></script>
     <script src="/js/payment.js" defer></script>
 <?php
+} else {
+?>
+    <script src="/js/pause.js"></script>
+<?php    
 }
 ?>
 
@@ -15,7 +20,7 @@ if ($payment) {
         <div class="row">
             <div class="col-md-12">
                 <div class="aa-product-header">
-                    <div id="order-confirm">
+                    <div id="order-confirm" hidden>
                         <div hidden id="pay_order"><?php echo $orderId; ?></div>
                         <div hidden id="pay_sum"><?php echo $sum * 100; ?></div>
                         <div hidden id="pay_name"><?php echo $user->name; ?></div>
@@ -36,9 +41,17 @@ if ($payment) {
                         <p>Спасибо за шоппинг с нами.</p>
                         <h4>Ваш Клевер!</h4>
                     </div>  
-                    <div id="payment-redirect" hidden>
-                        <h1>Перенаправляем Вас на сайт оплаты</h1>
-                        <progress max="100"></progress>
+                    <div id="payment-redirect">
+                        <?php if ($payment) { ?>
+                            <h2>Перенаправляем Вас на сайт Тинькофф Банк для оплаты заказа</h2>
+                        <?php } else { ?>
+                            <h2>Мы обрабатываем ваш заказ</h2>
+                        <?php } ?>    
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                            <span>Пожалуйста, подождите немного</span>
+                          </div>
+                        </div>
                     </div>
                 </div>
             </div>

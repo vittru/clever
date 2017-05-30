@@ -12,24 +12,32 @@ include 'header.php';
                         <div class="row">
                             <div class="col-md-12">
                                 <h1>Наши контакты</h1>
-                                <h2>Посмотреть и приобрести наши товары можно по следующим адресам в Самаре</h3>
-                                <table class="table">
-                                    <tr>
-                                        <td>
-                                            <p><b>Салон красоты "Каролина"</b></p>
-                                            <p><b>ул. Стара-Загора, 168</b></p>
-                                            <div class="map"><script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=X_vOb2NXN7WVSnIiUtq5RbhTy3EdzSa4&amp;width=320&amp;height=240&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script></div>
-                                            <p class="worktime">ежедневно с 10.00 до 20.00</p>
-                                        </td>
-                                        <td>
-                                            <p><b>Гостиница "Мой город"</b></p>
-                                            <p><b>ул. Георгия Димитрова, 112</b></p>
-                                            <div class="map"><script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=GrArh56-A8ES1kTZdADZ7tgWcLvkOgSq&amp;width=320&amp;height=240&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script></div>
-                                            <p  class="worktime">ежедневно с 10.00 до 21.00</p>
-                                        </td>
-                                    </tr>
-                                    <tr><td colspan="2"></td></tr>
-                                </table>
+                                <h2>Посмотреть и приобрести наши товары можно по следующим адресам в Самаре</h2>
+                                <div class="row" style="display: flex">
+                                    <div class="col-md-6 branch">
+                                        <p><b>Студия красоты Аллы Пелевиной</b></p>
+                                        <p><b>ул. Ново-Садовая, 271</b></p>
+                                        <div class="map"><script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=3Z04yabmOvp2FZ3pW8QyO_fTbB6Y_MFy&amp;width=320&amp;height=240&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script></div>
+                                        <p class="worktime">в будни с 10.00 до 20.00</p>
+                                        <p class="worktime">по выходным с 10.00 до 18.00</p>
+                                    </div>    
+                                    <div class="col-md-6 branch">
+                                        <p><b>Салон красоты "Каролина"</b></p>
+                                        <p><b>ул. Стара-Загора, 168</b></p>
+                                        <div class="map"><script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=X_vOb2NXN7WVSnIiUtq5RbhTy3EdzSa4&amp;width=320&amp;height=240&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script></div>
+                                        <p class="worktime">ежедневно с 10.00 до 20.00</p>
+                                        <p></p>
+                                    </div>  
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 branch">
+                                        <p><b>Салон красоты</b></p>
+                                        <p><b>ул. Георгия Димитрова, 112</b></p>
+                                        <div class="map"><script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=GrArh56-A8ES1kTZdADZ7tgWcLvkOgSq&amp;width=320&amp;height=240&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script></div>
+                                        <p class="worktime">ежедневно с 10.00 до 21.00</p>
+                                        <p></p>
+                                    </div>    
+                                </div>
                             </div>
                         </div>    
                         <div class="row">

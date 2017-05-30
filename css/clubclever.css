@@ -725,6 +725,16 @@ h2 {
     font-size: 14px;
     font-weight: normal;
 }
+#aa-product .progress {
+    width: 100%;
+}
+#aa-product .progress .progress-bar {
+    width: 100%;
+    animation: progress-bar-stripes .5s linear infinite;
+    height: 60px;
+    font-size: 16px;
+    background-color: #DF5600;
+}
 
 .search-table {
     margin-left: auto;
@@ -2457,7 +2467,7 @@ h2 {
   #aa-product .aa-product-area {
     margin-top: 20px;
   }
-
+  
   .aa-products-tab li a {
     margin: 0 4px;
     padding: 6px;
