@@ -39,9 +39,15 @@ include 'header.php';
                                             <div class="aa-post-date">
                                                 <?php echo $entry->date ?>
                                             </div>
+                                            <?php
+                                            if ($entry->author) {
+                                            ?>
                                             <div class="aa-post-author">
                                                 Автор: <?php if ($entry->url) echo '<a target="blank" href="' . $entry->url . '">' . $entry->author . '</a>'; else echo $entry->author ?>
                                             </div>
+                                            <?php
+                                            }
+                                            ?>
                                         </div>
                                         <figure class="aa-blog-img">
                                             <img src="<?php echo $entry->getImage() ?>" alt="<?php echo $entry->name ?>">
@@ -60,9 +66,15 @@ include 'header.php';
                                         <article class="aa-blog-content-single">                        
                                             <h2><a href="/common/blog?entry=<?php echo $singleentry->id ?>"><?php echo $singleentry->name ?></a></h2>
                                             <div class="aa-article-bottom">
+                                                <?php
+                                                if ($singleentry->author) {
+                                                ?>
                                                 <div class="aa-post-author">
                                                     Автор: <?php echo $singleentry->author ?>
                                                 </div>
+                                                <?php
+                                                }
+                                                ?>
                                                 <div class="aa-post-date">
                                                     <?php echo $singleentry->date ?>
                                                 </div>

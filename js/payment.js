@@ -1,6 +1,6 @@
 setTimeout(function () {
     var params = {
-        TerminalKey: "1479903966423DEMO",
+        TerminalKey: "1479903966423",
         Amount: $('#pay_sum').text(),
         OrderId: $('#pay_order').text(),
         DATA: "Email=" + $('#pay_email').text() + "|Phone=" + $('#pay_phone').text() + "|Name=" + $('#pay_name').text(),
