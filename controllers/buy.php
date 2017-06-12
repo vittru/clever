@@ -163,7 +163,12 @@ Class Controller_Buy Extends Controller_Base {
             $error = 'Вы уже использовали этот промокод';
             $discount = 0;
         };
-        $total = $this->getCartTotal() - $discount['amount'] - floor($this->getCartTotal() * $discount['percent'] / 100);
+        $total = $this->getCartTotal();
+        if ($discount['amount'] > $total * 0.3) {
+            $discount['percent'] = 30;
+            $discount['amount'] = 0;
+        }
+        $total = $total - $discount['amount'] - floor($total * $discount['percent'] / 100);
         if ($total < 0)
             $total = 0;
         $arr = array('error' => $error, 'discount' => $discount['amount'], 'percent' => $discount['percent'], 'total' => $total);

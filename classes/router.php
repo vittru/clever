@@ -48,8 +48,8 @@ Class Router {
                 array_shift($parts);
                 continue;
             }
-            if (is_file($fullpath . '.php')) {
-                $controller = $part;
+            if (is_file($fullpath . '.php') || is_file($fullpath)) {
+                $controller = pathinfo($part, PATHINFO_FILENAME);
                 array_shift($parts);
                 break;
             }

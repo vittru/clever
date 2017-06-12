@@ -18,7 +18,7 @@ include 'header.php';
                             <?php
                             if ($order->id) {
                             ?>
-                                <div><div class="order-parameters-header">Дата заказа:</div><div class="order-parameters-value"><?php echo $order->date; ?></div> </div>
+                                <div><div class="order-parameters-header">Дата заказа:</div><div class="order-parameters-value"><?php echo strftime('%e/%m/%G', strtotime($order->date)); ?></div> </div>
                                 <div><div class="order-parameters-header">Способ доставки:</div><div class="order-parameters-value"><?php echo $order->type; ?></div> </div>
                                 <?php
                                 if ($isadmin) {

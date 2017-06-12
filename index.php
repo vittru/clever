@@ -4,7 +4,7 @@
     $registry->set('model', $model);
     $registry->set('freeDelivery', 700);
     $registry->set('presentSum', 0);
-    $registry->set('globalsale', true);
+    $registry->set('globalsale', false);
     $model->getUser();
     //$_SESSION['user']->lastvisit = $model->getLastVisit();
     $registry->set('skintypes', $model->getCatalog('skintypes'));

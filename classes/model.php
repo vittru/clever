@@ -436,7 +436,6 @@ Class Model {
     function getGoodSuperCats($good) {
         $supercats = array();
         foreach ($good->cats as $cat) {
-            $this->registry['logger']->lwrite($cat);
             $supercat = $this->getSuperCatByCat($cat);
             $supercats[$supercat['id']] = $supercat['name'];
         }
@@ -448,7 +447,6 @@ Class Model {
         $sqlSelect->bindParam(':catId', $catId);
         $this->executeQuery($sqlSelect, 'Error when getting supercat for cat id=' . $catId);
         $data = $sqlSelect->fetch(PDO::FETCH_ASSOC);
-        $this->registry['logger']->lwrite($data['id']);
         $sqlSelect->closeCursor();
         return $data;
     }
@@ -676,7 +674,7 @@ Class Model {
             $sqlInsert->bindValue (':profileId', null, PDO::PARAM_INT);
         else
             $sqlInsert->bindParam (':profileId', $profile);
-        $sqlInsert->bindParam(':date',  date('Y-m-d', time()));
+        $sqlInsert->bindParam(':date',  date('Y-m-d H:i:s', time()));
         if (!$bonus)
             $bonus=0;
         $sqlInsert->bindParam(':bonus', $bonus);
@@ -871,24 +869,30 @@ Class Model {
     }
     
     function getAllOrders() {
-        $sqlSelect = $this->db->prepare('SELECT o.id, o.date, o.email, s.name status, s.description statusdesc, p.name promo, IF (o.branchId=0, "Доставка", "Самовывоз") type FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id');
+        $sqlSelect = $this->db->prepare('SELECT o.id FROM orders o');
         $this->executeQuery($sqlSelect, 'Error when getting all orders');
         $orders = array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $order = New Order($data['id'], $data['date'], $data['status'], $data['type'], $data['promo'], $userId, 0, $data['statusdesc'], $data['email']);
+            $order = $this->getOrder($data['id']);
             array_push($orders, $order);
         }    
         $sqlSelect->closeCursor();
+        
+        function cmp($a, $b) {
+            return $b->id > $a->id;
+        }
+        //Orders should be sorted by id descendingly
+        usort($orders, "cmp");
         return $orders;
     }
     
     function getUserOrders($userId) {
-        $sqlSelect = $this->db->prepare('SELECT o.id, o.date, o.email, s.name status, s.description statusdesc, p.name promo, IF (o.branchId=0, "Доставка", "Самовывоз") type FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id WHERE o.userId=:userId');
+        $sqlSelect = $this->db->prepare('SELECT o.id, o.name, o.date, o.email, o.phone, s.name status, s.description statusdesc, p.name promo, IF (o.branchId=0, "Доставка", "Самовывоз") type FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id WHERE o.userId=:userId');
         $sqlSelect->bindParam(':userId', $userId);
         $this->executeQuery($sqlSelect, 'Error when getting orders for user '.$userId);
         $orders = array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $order = New Order($data['id'], $data['date'], $data['status'], $data['type'], $data['promo'], $userId, 0, $data['statusdesc'], $data['email']);
+            $order = New Order($data['id'], $data['date'], $data['status'], $data['type'], $data['promo'], $userId, 0, $data['statusdesc'], $data['email'],0, $data['name'], $data['phone']);
             array_push($orders, $order);
         }    
         $sqlSelect->closeCursor();
@@ -896,20 +900,17 @@ Class Model {
         //If a user has profile then we get all orders for it
         $profile = $this->checkProfile();
         if ($profile) {
-            $sqlSelect = $this->db->prepare('SELECT o.id, o.date, o.email, s.name status, s.description statusdesc, p.name promo, IF (o.branchId=0, "Доставка", "Самовывоз") type FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id WHERE o.profileId=:profileId AND o.userId <> :userId');
+            $sqlSelect = $this->db->prepare('SELECT o.id, o.name, o.date, o.email, o.phone, s.name status, s.description statusdesc, p.name promo, IF (o.branchId=0, "Доставка", "Самовывоз") type FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id WHERE o.profileId=:profileId AND o.userId <> :userId');
             $sqlSelect->bindParam(':userId', $userId);
             $sqlSelect->bindParam(':profileId', $profile);
             $this->executeQuery($sqlSelect, 'Error when getting orders for user '.$userId);
             while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-                $order = New Order($data['id'], $data['date'], $data['status'], $data['type'], $data['promo'], $userId, $profile, $data['statusdesc'], $data['email']);
+                $order = New Order($data['id'], $data['date'], $data['status'], $data['type'], $data['promo'], $userId, $profile, $data['statusdesc'], $data['email'], 0, $data['name'], data['phone']);
                 array_push($orders, $order);
             }    
             $sqlSelect->closeCursor();
         }
         
-        function cmp($a, $b) {
-                return $b->id > $a->id;
-        }
         //Orders should be sorted by id descendingly
         usort($orders, "cmp");
         
@@ -917,17 +918,21 @@ Class Model {
     }
     
     function getOrder($orderId) {
-        $sqlSelect = $this->db->prepare('SELECT o.id, o.date, o.email, s.name status, s.description statusdesc, p.amount promoAmount, p.percent promoPercent, IF (o.branchId is null, "Доставка", "Самовывоз") type, SUM(og.price * og.quantity) total, o.userId, pr.name profileId, o.bonus FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id LEFT JOIN `orders-goods` og ON o.id=og.orderid LEFT JOIN profiles pr ON o.profileId=pr.id WHERE o.id=:orderId');
+        $sqlSelect = $this->db->prepare('SELECT o.id, o.name, o.date, o.email, o.phone, s.name status, s.description statusdesc, p.amount promoAmount, p.percent promoPercent, IF (o.branchId is null, "Доставка", "Самовывоз") type, SUM(og.price * og.quantity) total, o.userId, pr.name profileId, o.bonus FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id LEFT JOIN `orders-goods` og ON o.id=og.orderid LEFT JOIN profiles pr ON o.profileId=pr.id WHERE o.id=:orderId');
         $sqlSelect->bindParam(':orderId', $orderId);
         $this->executeQuery($sqlSelect, 'Error when getting details for order '.$orderId);
         $data = $sqlSelect->fetch();
         if ($data['promoAmount'])
-            $promo = $data['promoAmount'];
+            //If promo amount is more than 30% than it's 30%
+            if ($data['promoAmount'] > $data['total'] * 0.3)
+                $promo = floor($data['total'] * 0.3);
+            else 
+                $promo = $data['promoAmount'];
         else if ($data['promoPercent'])
             $promo = floor($data['total'] * $data['promoPercent']/100);
         else
             $promo=0;
-        $order = new Order($data['id'], $data['date'], $data['status'], $data['type'], $promo, $data['userId'], $data['profileId'], $data['statusdesc'], $data['email'], $data['bonus']);
+        $order = new Order($data['id'], $data['date'], $data['status'], $data['type'], $promo, $data['userId'], $data['profileId'], $data['statusdesc'], $data['email'], $data['bonus'], $data['name'], $data['phone']);
         $order->total = $data['total'] - $promo - $data['bonus'];
         $sqlSelect->closeCursor();
         $order->goods = $this->getOrderGoods($orderId);
@@ -935,12 +940,12 @@ Class Model {
     }
     
     function getOrderGoods($orderId) {
-        $sqlSelect = $this->db->prepare('SELECT og.quantity, og.price, s.size, g.`name`, g.id FROM `orders-goods` og LEFT JOIN `goods-sizes` s ON og.sizeid=s.id LEFT JOIN goods g ON s.goodId=g.id WHERE og.orderId=:orderId');
+        $sqlSelect = $this->db->prepare('SELECT og.quantity, og.price, s.size, s.code, g.`name`, g.id FROM `orders-goods` og LEFT JOIN `goods-sizes` s ON og.sizeid=s.id LEFT JOIN goods g ON s.goodId=g.id WHERE og.orderId=:orderId');
         $sqlSelect->bindParam(':orderId', $orderId);
         $this->executeQuery($sqlSelect, 'Error when getting goods for order '.$orderId);
         $goods = array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $good = New Orderedgood($data['id'], $data['name'], $data['size'], $data['price'], $data['quantity']);
+            $good = New Orderedgood($data['id'], $data['name'], $data['size'], $data['price'], $data['quantity'], $data['code']);
             array_push($goods, $good);
         }    
         $sqlSelect->closeCursor();
@@ -1159,4 +1164,38 @@ Class Model {
         $sqlDelete->closeCursor();
     }
     
+    function getLastExportDate() {
+        $sqlSelect = $this->db->prepare('SELECT 1c_last_date FROM common');
+        $this->executeQuery($sqlSelect, 'Error when selecting last export date');
+        $date = $sqlSelect->fetch();
+        $sqlSelect->closeCursor();
+        if (!$date['1c_last_date']) {
+            $returnDate = new DateTime('2000-01-01');
+        } else
+            $returnDate = new DateTime($date['1c_last_date']);
+        return $returnDate->format('Y-m-d H:i:s');
+    }
+    
+    function setLastExportDate($date) {
+        $sqlUpdate = $this->db->prepare('UPDATE common SET 1c_last_date = :lastDate');
+        $sqlUpdate->bindParam(':lastDate', $date);
+        $this->executeQuery($sqlUpdate, 'Error when setting last export date to ' . $date);
+        $sqlUpdate->closeCursor();
+    }
+
+    function getExportSession() {
+        $sqlSelect = $this->db->prepare('SELECT 1c_session FROM common');
+        $this->executeQuery($sqlSelect, 'Error when selecting export session');
+        $date = $sqlSelect->fetch();
+        $sqlSelect->closeCursor();
+        return $date['1c_session'];
+    }
+    
+    function setExportSession($session) {
+        $sqlUpdate = $this->db->prepare('UPDATE common SET 1c_session = :session');
+        $sqlUpdate->bindParam(':session', $session);
+        $this->executeQuery($sqlUpdate, 'Error when setting export session to ' . $session);
+        $sqlUpdate->closeCursor();
+    }
+
 }
