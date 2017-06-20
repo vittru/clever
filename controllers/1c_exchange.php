@@ -17,6 +17,7 @@ Class Controller_1c_exchange Extends Controller_Base {
 
 
         if($_GET['type'] == 'sale' && $_GET['mode'] == 'checkauth') {
+            $this->registry['model']->logVisit(2000);
             print "success\n";
             print session_name()."\n";
             print session_id();
@@ -25,10 +26,13 @@ Class Controller_1c_exchange Extends Controller_Base {
 
         if($_GET['type'] == 'sale' && $_GET['mode'] == 'init') {
             if ($_COOKIE['PHPSESSID'] == $this->registry['model']->getExportSession()) {
+                $this->registry['model']->logVisit(2001);
                 print "zip=no\n";
                 print "file_limit=1000000\n";
-            } else 
-                print "error";
+            } else {
+                $this->registry['model']->logVisit(404, false, $_SERVER['QUERY_STRING']);
+                $this->registry['template']->show('404');
+            }    
         }
 
         if($_GET['type'] == 'sale' && $_GET['mode'] == 'file') {
@@ -127,6 +131,7 @@ Class Controller_1c_exchange Extends Controller_Base {
 
         if($_GET['type'] == 'sale' && $_GET['mode'] == 'query') {
             if ($_COOKIE['PHPSESSID'] == $this->registry['model']->getExportSession()) {
+                $this->registry['model']->logVisit(2002);
                 $no_spaces = '<?xml version="1.0" encoding="utf-8"?>
                             <КоммерческаяИнформация ВерсияСхемы="2.04" ДатаФормирования="' . date ( 'Y-m-d' )  . '"></КоммерческаяИнформация>';
                 $xml = new SimpleXMLElement ( $no_spaces );
@@ -270,8 +275,10 @@ Class Controller_1c_exchange Extends Controller_Base {
                 print "\xEF\xBB\xBF";
                 print $xml->asXML ();
                 $this->registry['model']->setLastExportDate(date("Y-m-d H:i:s"));
-            } else 
-                print "error";    
+            } else {
+                $this->registry['model']->logVisit(404, false, $_SERVER['QUERY_STRING']);
+                $this->registry['template']->show('404');
+            }    
         }
 
         if($_GET['type'] == 'sale' && $_GET['mode'] == 'success') {
