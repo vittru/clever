@@ -34,7 +34,7 @@ Class Controller_Editnews Extends Controller_Base {
             else
                 $banner = 0;
 
-            $newsId = $this->registry['model']->addNews($_POST['id'], $_POST['header'], $_POST['text'], $_POST['time'], $forClients, $banner, $_POST['end']);
+            $newsId = $this->registry['model']->addNews($_POST['id'], $_POST['header'], $_POST['text'], $_POST['time'], $forClients, $banner, $_POST['end'], $_POST['bannerlink']);
             $this->registry['model']->logVisit(1003, $newsId);
 
             $this->loadNewsImage($_FILES["image"], $newsId, $banner);

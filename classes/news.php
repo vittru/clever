@@ -10,8 +10,9 @@ Class News {
     public $forClients;
     public $banner;
     public $end;
+    public $bannerlink;
    
-    function __construct($id, $header, $time, $text, $forClients, $banner, $end) {
+    function __construct($id, $header, $time, $text, $forClients, $banner, $end, $bannerlink) {
         $this->id = $id;
         $this->header = $header;
         setlocale(LC_TIME, "ru_RU.UTF-8");
@@ -23,6 +24,7 @@ Class News {
             $this->end = strftime('%e.%m.%G', strtotime($end));
         else 
             $this->end = $end;
+        $this->bannerlink = $bannerlink;
     }
     
     function getWebText() {

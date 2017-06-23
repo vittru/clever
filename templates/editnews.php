@@ -51,6 +51,14 @@ if ($newsId) {
             <tr>
                 <td>  
                     <div class="form-group">
+                        <label class="col-md-2">Ссылка для баннера:</label> 
+                        <input type="text" class="form-control col-md-10 text" maxlength="100" value="<?php if ($news) echo $news->bannerlink ?>" name="bannerlink"/>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>  
+                    <div class="form-group">
                         <label class="col-md-2" for="time">Дата публикации:</label>
                         <input type="date" name="time" id="time" class="form-control col-md-3 inline" value="<?php if ($news) echo date('Y-m-d',strtotime(str_replace('/', '-', trim($news->time)))) ?>">
                         <?php

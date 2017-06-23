@@ -18,10 +18,20 @@ if ($banners->valid()) {
                     $ind = 1;
                     foreach ($dir as $fileinfo) {
                         if (!$fileinfo->isDot()) {
+                            $newsId = filter_var($fileinfo->getFilename(), FILTER_SANITIZE_NUMBER_INT); 
+                            $newsItem = $this->registry['model']->getNewsItem($newsId);
                         ?>  
                             <li <?php if ($ind == 1) echo 'class="seq-in"' ?>>
                                 <div class="seq-model">
+                                    <?php
+                                    if ($newsItem->bannerlink)
+                                        echo '<a href="' . $newsItem->bannerlink . '">';
+                                    ?>
                                     <img data-seq src="<?php echo '/'.$bannersdir.'/'.$fileinfo->getFilename() ?>" alt="<?php $fileinfo->getFilename() ?>" />
+                                    <?php
+                                    if ($newsItem->bannerlink)
+                                        echo "</a>";    
+                                    ?>
                                 </div>
                             </li>
                         <?php
