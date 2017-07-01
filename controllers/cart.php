@@ -18,9 +18,10 @@ Class Controller_Cart Extends Controller_Base {
             $cartItem->goodId = $d['goodId'];
             $cartItem->quantity = $d['count'];
             $cartItem->sizeId = $d['sizeId'];
+            $cartItem->price = $d['price'];
             $index = -1;
             foreach ($_SESSION['cart'] as $cI) {
-                if ($cI->goodId == $cartItem->goodId and $cI->sizeId == $cartItem->sizeId) {
+                if ($cI->goodId == $cartItem->goodId and $cI->sizeId == $cartItem->sizeId and $cI->price == $cartItem->price) {
                     $index = array_search($cI, $_SESSION['cart']);
                     $_SESSION['cart'][$index]->quantity += $cartItem->quantity;
                     break;
@@ -62,5 +63,4 @@ Class Controller_Cart Extends Controller_Base {
             }    
         }    
     }    
-}    
-
+}

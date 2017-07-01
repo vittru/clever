@@ -56,13 +56,13 @@ Class Controller_Editgood Extends Controller_Base {
                     $this->registry['model']->linkGoodHT($goodId, $hairtypeId);
                 }
                 if ($name=='size1' and $val!=""){
-                    $this->registry['model']->addGoodSize($goodId, $_POST['sizeId1'], $val, $_POST['price1'], $_POST['code1'], $_POST['instock1'], $_POST['sale1']);
+                    $this->registry['model']->addGoodSize($goodId, $_POST['sizeId1'], $val, $_POST['price1'], $_POST['code1'], $_POST['instock1'], $_POST['sale1'], $_POST['bbsize1'], $_POST['bbprice1']);
                 }
                 if ($name=='size2' and $val!=""){
-                    $this->registry['model']->addGoodSize($goodId, $_POST['sizeId2'], $val, $_POST['price2'], $_POST['code2'], $_POST['instock2'], $_POST['sale2']);
+                    $this->registry['model']->addGoodSize($goodId, $_POST['sizeId2'], $val, $_POST['price2'], $_POST['code2'], $_POST['instock2'], $_POST['sale2'], $_POST['bbsize2'], $_POST['bbprice2']);
                 }
                 if ($name=='size3' and $val!=""){
-                    $this->registry['model']->addGoodSize($goodId, $_POST['sizeId3'], $val, $_POST['price3'], $_POST['code3'], $_POST['instock3'], $_POST['sale3']);
+                    $this->registry['model']->addGoodSize($goodId, $_POST['sizeId3'], $val, $_POST['price3'], $_POST['code3'], $_POST['instock3'], $_POST['sale3'], $_POST['bbsize3'], $_POST['bbprice3']);
                 }
             }
             $this->loadImage($_FILES["image1"], 1, $goodId);

@@ -25,7 +25,6 @@ Class Controller_Account Extends Controller_Base {
     function register() {
         $this->registry['model']->logVisit(16);
         $error =  $this->isCorrect();
-        $this->registry['logger']->lwrite("action: ".$_POST['userAction']." user: ".$_POST['userName']);
         if ($error == ""){
             $_SESSION['user']->name = htmlspecialchars(trim($_POST['userName']));
             $_SESSION['user']->email = htmlspecialchars(trim($_POST['userEmail']));

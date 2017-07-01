@@ -91,7 +91,7 @@ Class Controller_Buy Extends Controller_Base {
         foreach($_SESSION['cart'] as $cartItem) {
             $good = $this->registry['model']->getGood($cartItem->goodId);
             $size = $good->sizes[$cartItem->sizeId];
-            $price = $size->getPrice($good->sale) * $cartItem->quantity;
+            $price = $cartItem->price * $cartItem->quantity;
             $message .= "<tr><td>" . $size->code . "</td><td>" . str_replace('&nbsp;', ' ' , $good->name) . " " 
                     . str_replace('&nbsp;', ' ' , $size->size) . "</td><td>".$cartItem->quantity . "</td><td>" . $price . " руб. </td></tr>";
         }    

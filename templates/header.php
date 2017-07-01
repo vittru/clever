@@ -74,24 +74,12 @@
                         <div class="aa-header-top-area">
                             <!-- start header top left -->
                             <div class="aa-header-top-left">
-                                <a class="btn" href="/common/delivery" type="button">
-                                            Доставка
-                                </a>
-                                <a class="btn" href="/common/payment" type="button">
-                                            Оплата
-                                </a>
-                                <a class="btn hidden-xs hidden-sm" href="/common/bonus" type="button">
-                                            Бонусы
-                                </a>
-                                <a class="btn hidden-xs" href="/common/moneyback" type="button">
-                                            Возврат
-                                </a>
-                                <a class="btn hidden-xs hidden-sm hidden-md" href="/common/blog" type="button">
-                                            Блог
-                                </a>
-                                <a class="btn" href="/contacts" type="button">
-                                            Контакты
-                                </a>
+                                <a class="btn" href="/common/delivery" type="button">Доставка</a>
+                                <a class="btn" href="/common/payment" type="button">Оплата</a>
+                                <a class="btn hidden-xs hidden-sm" href="/common/bonus" type="button">Бонусы</a>
+                                <a class="btn hidden-xs" href="/common/moneyback" type="button">Возврат</a>
+                                <a class="btn hidden-xs hidden-sm hidden-md" href="/common/blog" type="button">Блог</a>
+                                <a class="btn" href="/contacts" type="button">Контакты</a>
 
                                 <div class="cellphone hidden-xs">
                                     <p><span class="fa fa-phone"></span>+7-996-725-00-61</p>
@@ -180,7 +168,7 @@
                                                     <a class="aa-cartbox-img" href="/showgood?id=<?php echo $good->id ?>"><img src="<?php echo $good->getImage() ?>" alt="<?php echo $good->name ?>"></a>
                                                     <div class="aa-cartbox-info">
                                                         <a href="/showgood?id=<?php echo $good->id; ?>"><h4><?php echo $good->name ?> <?php echo $size->size ?></h4></a>
-                                                        <p><?php echo $cartItem->quantity ?> x <?php echo $size->getWebPrice($good->sale) ?></p>
+                                                        <p><?php echo $cartItem->quantity ?> x <?php echo $cartItem->price . ' руб.' ?></p>
                                                     </div>
                                                     <a class="aa-remove-product" id="<?php echo $cartItem->goodId; ?>" value="<?php echo $cartItem->sizeId; ?>"><span class="fa fa-times"></span></a>
                                                 </li>
@@ -377,6 +365,20 @@
                                     <?php        
                                     } 
                                     ?>  
+                                </ul>
+                            </li>
+                            <li><a href="/actions">Акции<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="/actions/bestbefore">
+                                            Истекающие сроки
+                                        </a>
+                                    </li>        
+                                    <li>
+                                        <a href="/actions/discounts">
+                                            Скидки
+                                        </a>
+                                    </li>        
                                 </ul>
                             </li>
                             <li><a href="/news">Новости</a></li>

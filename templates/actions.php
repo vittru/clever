@@ -1,4 +1,5 @@
 <?php
+
 include 'header.php';
 ?>
 
@@ -8,28 +9,30 @@ include 'header.php';
             <div class="col-md-12">
                 <div class="row">
                     <div class="aa-product-header">
-                        <h1>Экологические товары</h1>
-                        <p>Мы постарались разбить весь наш ассортимент косметики по категориям для удобства поиска</p>
+                        <h1>Наши акции</h1>
+                        <p></p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="aa-product-area">
                         <div class="aa-product-inner">
                             <ul class="aa-product-catg">
-                                <?php
-                                foreach($types as $id=>$name) {
-                                ?>    
                                 <li class="col-sm-3 good">
                                   <figure>
-                                    <a class="aa-product-img" href="/catalog/type?id=<?php echo $id ?>"><img src="/images/types/type<?php echo $id ?>.png" alt="<?php echo $name ?>"></a>
+                                    <a class="aa-product-img" href="/actions/bestbefore"><img src="/images/news/news0.png" alt="Истекающие сроки"></a>
                                     <figcaption>
-                                        <h4 class="aa-product-title"><a href="/catalog/type?id=<?php echo $id ?>"><?php echo $name ?></a></h4>
+                                        <h4 class="aa-product-title"><a href="/actions/bestbefore">Истекающие сроки</a></h4>
                                     </figcaption>
                                   </figure>                         
                                 </li> 
-                                <?php
-                                }
-                                ?>
+                                <li class="col-sm-3 good">
+                                  <figure>
+                                    <a class="aa-product-img" href="/actions/discounts"><img src="/images/news/news0.png" alt="Истекающие сроки"></a>
+                                    <figcaption>
+                                        <h4 class="aa-product-title"><a href="/actions/discounts">Скидки</a></h4>
+                                    </figcaption>
+                                  </figure>                         
+                                </li> 
                             </ul>
                         </div>
                     </div>

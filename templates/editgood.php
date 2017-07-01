@@ -207,136 +207,74 @@ if ($goodId) {
                     <th>Цена</th>
                     <th>Артикул</th>
                     <th>На складе</th>
-                    <th>Скидка</th>
+                    <!--th>Скидка</th-->
+                    <th>Срок годности</th>
+                    <th>Цена СГ</th>
                 </tr>
             </thead>
             <tbody>
+                <?php
+                if ($good)
+                    $sizes = array_values($good->sizes);
+                for ($i = 0; $i < 3; $i++) {
+                ?>
+                    <tr>
+                        <td>
+                            <input class="form-control" type="hidden" id="sizeId<?php echo $i+1 ?>" name="sizeId<?php echo $i+1 ?>" value="<?php 
+                            if ($good) {
+                                echo $sizes[$i]->id;
+                            }?>">
+                            <input class="form-control" type="text" id="size<?php echo $i+1 ?>" name="size<?php echo $i+1 ?>" value='<?php 
+                            if ($good) {
+                                echo $sizes[$i]->size;
+                            }?>' maxlength="10">
+                        </td>
+                        <td>
+                            <input class="form-control" type="number" id="price<?php echo $i+1 ?>" name="price<?php echo $i+1 ?>" value='<?php 
+                            if ($good) {
+                                echo $sizes[$i]->price;
+                            }?>'>
+                        </td>
+                        <td>
+                            <input class="form-control" type="text" id="code<?php echo $i+1 ?>" name="code<?php echo $i+1 ?>" value='<?php 
+                            if ($good) {
+                                echo $sizes[$i]->code;
+                            }?>' maxlength="10">
+                        </td>
+                        <td>
+                            <input class="form-control" type="number" id="instock<?php echo $i+1 ?>" name="instock<?php echo $i+1 ?>" value='<?php 
+                            if ($good and $sizes[$i]) {
+                                echo $sizes[$i]->instock;
+                            }else {
+                                echo 0;
+                            } ?>'>
+                        <!--/td-->
+                        <!--td-->
+                        <input class="form-control" type="hidden" id="sale<?php echo $i+1 ?>" name="sale<?php echo $i+1 ?>" value='<?php 
+                            if ($good and $sizes[$i]) {
+                                echo $sizes[$i]->sale;
+                            }else {
+                                echo 0;
+                            } ?>'>
+                        </td>
+                        <td>
+                            <input class="form-control" type="date" id="bbsize<?php echo $i+1 ?>" name="bbsize<?php echo $i+1 ?>" value='<?php 
+                            if ($good and $sizes[$i]) {
+                                echo $sizes[$i]->bestbefore;
+                            }?>'>
+                        </td>
+                        <td>
+                            <input class="form-control" type="number" id="bbprice<?php echo $i+1 ?>" name="bbprice<?php echo $i+1 ?>" value='<?php 
+                            if ($good) {
+                                echo $sizes[$i]->bbprice;
+                            }?>'>
+                        </td>
+                    </tr>
+                <?php
+                }
+                ?>
                 <tr>
-                    <td>
-                        <?php 
-                        if ($good)
-                            $sizes = array_values($good->sizes);
-                        ?>
-                        <input class="form-control" type="hidden" id="sizeId1" name="sizeId1" value="<?php 
-                        if ($good) {
-                            echo $sizes[0]->id;
-                        }?>">
-                        <input class="form-control" type="text" id="size1" name="size1" value='<?php 
-                        if ($good) {
-                            echo $sizes[0]->size;
-                        }?>' maxlength="10">
-                    </td>
-                    <td>
-                        <input class="form-control" type="number" id="price1" name="price1" value='<?php 
-                        if ($good) {
-                            echo $sizes[0]->price;
-                        }?>'>
-                    </td>
-                    <td>
-                        <input class="form-control" type="text" id="code1" name="code1" value='<?php 
-                        if ($good) {
-                            echo $sizes[0]->code;
-                        }?>' maxlength="10">
-                    </td>
-                    <td>
-                        <input class="form-control" type="number" id="instock1" name="instock1" value='<?php 
-                        if ($good and $sizes[0]) {
-                            echo $sizes[0]->instock;
-                        }else {
-                            echo 0;
-                        } ?>'>
-                    </td>
-                    <td>
-                        <input class="form-control" type="number" id="sale1" name="sale1" value='<?php 
-                        if ($good and $sizes[0]) {
-                            echo $sizes[0]->sale;
-                        }else {
-                            echo 0;
-                        } ?>'>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input class="form-control" type="hidden" id="sizeId2" name="sizeId2" value="<?php 
-                        if ($good) {
-                            echo $sizes[1]->id;
-                        }?>">
-                        <input class="form-control" type="text" id="size2" name="size2" value='<?php 
-                        if ($good) {
-                            echo $sizes[1]->size;
-                        }?>' maxlength="10">
-                    </td>
-                    <td>
-                        <input class="form-control" type="number" id="price2" name="price2" value='<?php 
-                        if ($good) {
-                            echo $sizes[1]->price;
-                        }?>'>
-                    </td>
-                    <td>
-                        <input class="form-control" type="text" id="code2" name="code2" value='<?php 
-                        if ($good) {
-                            echo $sizes[1]->code;
-                        }?>' maxlength="10">
-                    </td>
-                    <td>
-                        <input class="form-control" type="number" id="instock2" name="instock2" value='<?php 
-                        if ($good and $sizes[1]) {
-                            echo $sizes[1]->instock;
-                        }else {
-                            echo 0;
-                        } ?>'>
-                    </td>
-                    <td>
-                        <input class="form-control" type="number" id="sale2" name="sale2" value='<?php 
-                        if ($good and $sizes[1]) {
-                            echo $sizes[1]->sale;
-                        }else {
-                            echo 0;
-                        } ?>'>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input class="form-control" type="hidden" id="sizeId3" name="sizeId3" value="<?php 
-                        if ($good) {
-                            echo $sizes[2]->id;
-                        }?>">
-                        <input class="form-control" type="text" id="size3" name="size3" value='<?php 
-                        if ($good) {
-                            echo $sizes[2]->size;
-                        }?>' maxlength="10">
-                    </td>
-                    <td>
-                        <input class="form-control" type="number" id="price3" name="price3" value='<?php 
-                        if ($good) {
-                            echo $sizes[2]->price;
-                        }?>'>
-                    </td>
-                    <td>
-                        <input class="form-control" type="text" id="code3" name="code3" value='<?php 
-                        if ($good) {
-                            echo $sizes[2]->code;
-                        }?>' maxlength="10">
-                    </td>
-                    <td>
-                        <input class="form-control" type="number" id="instock3" name="instock3" value='<?php 
-                        if ($good and $sizes[2]) {
-                            echo $sizes[2]->instock;
-                        }else {
-                            echo 0;
-                        } ?>'>
-                    </td>
-                    <td>
-                        <input class="form-control" type="number" id="sale3" name="sale3" value='<?php 
-                        if ($good and $sizes[2]) {
-                            echo $sizes[2]->sale;
-                        }else {
-                            echo 0;
-                        } ?>'>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="5">
+                    <td colspan="6">
                     </td>
                 </tr>    
             </tbody>

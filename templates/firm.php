@@ -6,50 +6,10 @@ include 'header.php';
     <div class="container">
         <div class="row">
             <div class="aa-product-header">
-                <h1><?php 
-                if ($showFirm)
-                    echo $showFirm->name; 
-                else 
-                    echo 'Наши бренды';
-                ?></h1>
-                <p><?php
-                if ($showFirm)
-                    echo $showFirm->description;
-                else
-                    echo 'Мы торгуем только товарами проверенных годами брендов';
-                ?></p>
+                <h1>Наши бренды</h1>
+                <p>Мы торгуем только товарами проверенных годами фирм</p>
             </div>
 
-            <?php 
-            if ($showFirm) {
-            ?>
-            <div class="col-lg-9 col-md-9 col-sm-8 col-md-push-3">
-                <div class="aa-product-catg-content">
-                    <div class="aa-product-area">
-                        <?php
-                        include 'sort.php';
-                        ?>
-                        <div class="aa-product-catg-body">
-                            <ul class="aa-product-catg">
-                                <?php
-                                foreach($showFirm->goods as $good) {
-                                    $good->showInCatalog();
-                                }
-                                ?>
-                            </ul>
-                            <div id="empty-catg" class="aa-empty-catg" hidden>Мы не нашли товаров, удовлетворяющих вашему запросу</div>
-                        </div>
-                    </div>  
-                    <?php
-                    include 'modalgood.php';
-                    ?>
-                </div>
-            </div>
-            <?php
-                $hideFilterFirm = true;
-                include 'filter.php';
-            } else {
-            ?>
             <div class="col-md-12">
                 <div class="row">
                     <div class="aa-product-area">
@@ -74,9 +34,6 @@ include 'header.php';
                     </div>
                 </div>
             </div>
-            <?php    
-            }
-            ?>
         </div>
     </div>
 </section>

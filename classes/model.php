@@ -464,12 +464,12 @@ Class Model {
     }
     
     function getGoodSizes($goodId) {
-        $sqlSelect = $this->db->prepare('SELECT gs.id, gs.size, w.price, w.instock, w.onhold, gs.code, gs.sale FROM `goods-sizes` gs LEFT JOIN warehouse w ON gs.Id=w.psId WHERE gs.goodId=:goodId ORDER BY w.price');
+        $sqlSelect = $this->db->prepare('SELECT gs.id, gs.size, w.price, w.instock, w.onhold, w.bestbefore, w.bbprice, gs.code, gs.sale FROM `goods-sizes` gs LEFT JOIN warehouse w ON gs.Id=w.psId WHERE gs.goodId=:goodId ORDER BY w.price');
         $sqlSelect->bindParam(':goodId', $goodId);
         $this->executeQuery($sqlSelect, 'Error when selecting sizes for product ' . $goodId);
         $sizes = array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $size = new Size($data['id'], $data['size'], $data['price'], $data['sale'], $data['code'], $data['instock'], $data['onhold']);
+            $size = new Size($data['id'], $data['size'], $data['price'], $data['sale'], $data['code'], $data['instock'], $data['onhold'], $data['bestbefore'], $data['bbprice']);
             $sizes[$data['id']]=$size;
         }
         $sqlSelect->closeCursor();
@@ -605,7 +605,7 @@ Class Model {
         return $goods;        
     }
     
-    function addGoodSize($goodId, $gsId, $size, $price, $code, $instock, $sale) {
+    function addGoodSize($goodId, $gsId, $size, $price, $code, $instock, $sale, $bbsize, $bbprice) {
         if (!$code)
             $code = null;
         if ($gsId) {
@@ -628,12 +628,18 @@ Class Model {
         $warId = $sqlSelect->fetchColumn();
         $sqlSelect->closeCursor();
         if ($warId)
-            $sqlQuery2 = $this->db->prepare('UPDATE warehouse SET price=:price, instock=:instock WHERE psId=:gsId');
+            $sqlQuery2 = $this->db->prepare('UPDATE warehouse SET price=:price, instock=:instock, bestbefore=:bbsize, bbprice=:bbprice WHERE psId=:gsId');
         else 
-            $sqlQuery2 = $this->db->prepare('INSERT INTO warehouse(psId, price, instock) VALUES (:gsId, :price, :instock)');
+            $sqlQuery2 = $this->db->prepare('INSERT INTO warehouse(psId, price, instock, bestbefore, bbprice) VALUES (:gsId, :price, :instock, :bbsize, :bbprice)');
         $sqlQuery2->bindParam(':gsId', $gsId);
         $sqlQuery2->bindParam(':price', $price);
         $sqlQuery2->bindParam(':instock', $instock);
+        if ($bbsize)
+            $sqlQuery2->bindParam(':bbsize', $bbsize);
+        else
+            $sqlQuery2->bindValue (':bbsize', null, PDO::PARAM_INT);
+        $sqlQuery2->bindParam(':bbprice', $bbprice);
+        
         $this->executeQuery($sqlQuery2, 'Error when updating/inserting warehouse data for goodsize '.$gsId);
         $sqlQuery2->closeCursor();
     }
@@ -697,12 +703,9 @@ Class Model {
         $sqlInsert = $this->db->prepare('INSERT INTO `orders-goods`(sizeId, quantity, price, orderId) VALUES(:sizeId, :quantity, :price, :orderId)');
         $sqlInsert->bindParam(':orderId', $orderId);
         foreach ($_SESSION['cart'] as $cartItem) {
-            $good = $this->registry['model']->getGood($cartItem->goodId);
-            $size = $good->sizes[$cartItem->sizeId];
-            $price = $size->getPrice($good->sale) * $cartItem->quantity;
             $sqlInsert->bindParam(':sizeId', $cartItem->sizeId);
             $sqlInsert->bindParam(':quantity', $cartItem->quantity);
-            $sqlInsert->bindParam(':price', $price);
+            $sqlInsert->bindParam(':price', $cartItem->price);
             $this->executeQuery($sqlInsert, 'Error when saving ordered goods');
             $sqlInsert->closeCursor();
         }    

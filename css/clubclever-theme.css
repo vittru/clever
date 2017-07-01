@@ -336,6 +336,11 @@ a.btn:focus {
     pointer-events: none !important;
     cursor: default;
 }
+
+.orange {
+    color: #DF5600;
+}
+
 .aa-cartbox-info h4 {
     color: black;
 }

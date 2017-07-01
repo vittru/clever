@@ -174,7 +174,6 @@ include 'header.php';
                                                   foreach ($_SESSION['cart'] as $cartItem) {
                                                     $good = $this->registry['model']->getGood($cartItem->goodId);
                                                     $size = $good->sizes[$cartItem->sizeId];
-                                                    $price = $size->getPrice($good->sale);
                                                 ?>  
                         
                                                 <div class="row">
@@ -185,7 +184,7 @@ include 'header.php';
                                                     </div>                            
                                                     <div class="col-md-4">
                                                         <div class="aa-checkout-single-bill">
-                                                            <?php echo $cartItem->quantity * $price . " руб."; ?>
+                                                            <?php echo $cartItem->quantity * $cartItem->price . " руб."; ?>
                                                         </div>                             
                                                     </div>
                                                 </div> 

@@ -96,14 +96,12 @@ $(document).on("change", ".aa-cart-quantity", function() {
 
 $(document).on("click", ".aa-add-card-btn", function () {
     $(this).text('ДОБАВЛЕНО');
-    //$(this).css("background-color","#1DA93C");
-    var id = $(this).attr("id"),
-        sid = $(this).attr("value");
         
     var obj = {};
-    obj['goodId'] = id;
-    obj['sizeId'] = sid;
+    obj['goodId'] = $(this).attr("id");
+    obj['sizeId'] = $(this).attr("value");
     obj['count'] = 1;
+    obj['price'] = $(this).attr("data-price");
     var sizes=[obj];
 
     $.ajax({

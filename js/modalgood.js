@@ -1,6 +1,6 @@
 function modifyBasket() {
     var canBeBought = false;
-    $('.quantity').each(function() {
+    $('.quantity:visible').each(function() {
         if ($(this).val() > 0) {
             canBeBought = true;
         };
@@ -13,12 +13,13 @@ $(document).ready(modifyBasket());
 $('.aa-add-to-cart-btn').click(function e(){
     var pId = $('#pId').text();
     var sizes = [];
-    $('.quantity').each(function() {
+    $('.quantity:visible').each(function() {
         if ($(this).val() > 0) {
             var obj = {};
             obj['goodId'] = pId;
             obj['sizeId'] = $(this).prop("id").substring(3);
             obj['count'] = $(this).val();
+            obj['price'] = $(this).attr("data-price");
             sizes.push(obj);
         };
     });
@@ -30,4 +31,9 @@ $('.aa-add-to-cart-btn').click(function e(){
             $("#cartbox").load(location.href + " #cartbox>*","");
         }    
     });
-});		
+});
+
+$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+  var target = $(e.target).attr("href") // activated tab
+  modifyBasket();
+});

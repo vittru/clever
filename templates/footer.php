@@ -59,6 +59,7 @@
                                             <!--a target="_blank" href="http://facebook.com"><span class="fa fa-facebook"></span></a-->
                                             <a target="_blank" href="https://vk.com/clubcleverru"><span class="fa fa-vk"></span></a>
                                             <a target="_blank" href="http://www.instagram.com/clubclever.ru/"><span class="fa fa-instagram"></span></a>
+                                            <a target="_blank" href="https://www.youtube.com/channel/UCZqTkI8X0KQGyINHpblqhfg"><span class="fa fa-youtube"></span></a>
                                         </div>
                                     </div>
                                 </div>

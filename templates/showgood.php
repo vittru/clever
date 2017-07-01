@@ -75,47 +75,110 @@
                         <div class="firm"><b>Бренд:</b> <a href="/catalog/firm/<?php echo $firm->url; ?>"><?php echo $firm->name ?></a></div>  
                     <?php
                     }
+                    if ($showGood->hasBB()) {
                     ?>
-                    <div class="aa-price-block">
-                        <?php
-                        if (sizeof($showGood->sizes) > 0) { 
-                        ?>
-                        <table class="table">
-                            <th>Артикул</th>
-                            <th>Размер</th>
-                            <th>Цена</th>
-                            <th>Количество</th>
-                            <th>Наличие</th>
-                            <?php
-                            foreach($showGood->sizes as $sizeId=>$size) { 
-                            ?>
-                            <tr>
-                                <td><?php echo $size->code; ?></td>
-                                <td><?php echo $size->size; ?></td>
-                                <td><?php echo $size->getWebPrice($showGood->sale); ?></td>
-                                <td>
-                                    <input class="quantity form-control" type="number" id="sel<?php echo $sizeId; ?>" value="<?php if (sizeof($showGood->sizes)==1 and $size->isAvailable()) echo '1'; else echo '0';  ?>" <?php if (!$size->isAvailable()) echo 'disabled' ?> onchange="modifyBasket()">
-                                </td>
-                                <td>
-                                    <?php 
-                                    if ($size->isAvailable()) 
-                                        echo '<span class="available">В наличии</span>';
-                                    else
-                                        echo '<span class="unavailable">Нет на складе</span>';
+                    <ul class="nav nav-tabs price-tabs">
+                        <li <?php if (!$bb) echo 'class="active"'?>><a href="#main" data-toggle="tab">Основной товар</a></li>
+                        <li <?php if ($bb) echo 'class="active"'?>><a href="#bb" data-toggle="tab">Скидки</a>
+                    </ul>
+                    <?php
+                    }
+                    ?>
+                    <div class="tab-content">
+                        <div class="tab-pane fade in <?php if (!$bb) echo 'active'?>" id="main">
+                            <div class="aa-price-block">
+                                <?php
+                                if (sizeof($showGood->sizes) > 0) { 
+                                ?>
+                                <table class="table">
+                                    <th>Артикул</th>
+                                    <th>Размер</th>
+                                    <th>Цена</th>
+                                    <th>Количество</th>
+                                    <?php
+                                    foreach($showGood->sizes as $sizeId=>$size) { 
                                     ?>
-                                </td>
-                            </tr> 
-                            <?php
-                            }
-                            ?>
-                            <tr><td colspan="5"></td></tr>
-                        </table>
+                                    <tr>
+                                        <td><?php echo $size->code; ?></td>
+                                        <td><?php echo $size->size; ?></td>
+                                        <td><?php echo $size->getWebPrice($showGood->sale); ?></td>
+                                        <td>
+                                            <?php
+                                            if ($size->isAvailable()) {
+                                            ?>
+                                                <input class="quantity form-control" data-price="<?php echo $size->getPrice($showGood->sale); ?>" type="number" id="sel<?php echo $sizeId; ?>" value="<?php if (sizeof($showGood->sizes)==1 and $size->isAvailable()) echo '1'; else echo '0';  ?>" <?php if (!$size->isAvailable()) echo 'disabled' ?> onchange="modifyBasket()">
+                                            <?php
+                                            } else
+                                                echo '<span class="unavailable">Нет на складе</span>'
+                                            ?>
+                                        </td>
+                                    </tr> 
+                                    <?php
+                                    }
+                                    ?>
+                                    <tr><td colspan="4"></td></tr>
+                                </table>
+                                <?php
+                                }    
+                                else {
+                                    $canBeBought = false;
+                                ?>
+                                <p>К сожалению данного товара нет в наличии</p>
+                                <?php
+                                }
+                                ?>
+                            </div>
+                        </div>
                         <?php
-                        }    
-                        else {
-                            $canBeBought = false;
+                        if ($showGood->hasBB()) {
                         ?>
-                        <p>К сожалению данного товара нет в наличии</p>
+                        <div class="tab-pane fade in <?php if ($bb) echo 'active'?>" id="bb">
+                            <div class="aa-price-block">
+                                <?php
+                                if (sizeof($showGood->sizes) > 0) { 
+                                ?>
+                                <table class="table">
+                                    <th>Артикул</th>
+                                    <th>Размер</th>
+                                    <th>Срок годности</th>
+                                    <th>Цена</th>
+                                    <th>Количество</th>
+                                    <?php
+                                    foreach($showGood->sizes as $sizeId=>$size) 
+                                        if ($size->isBB()){ 
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $size->code;?></td>
+                                        <td><?php echo $size->size; ?></td>
+                                        <td class="orange"><?php echo strftime('%e/%m/%G', strtotime($size->bestbefore)); ?></td>
+                                        <td><?php echo $size->getWebBBPrice($showGood->sale); ?></td>
+                                        <td>
+                                            <?php
+                                            if ($size->isAvailable()) {
+                                            ?>
+                                                <input class="quantity form-control" data-price="<?php echo $size->bbprice; ?>" type="number" id="sel<?php echo $sizeId; ?>" value="<?php if (sizeof($showGood->sizes)==1 and $size->isAvailable()) echo '1'; else echo '0';  ?>" <?php if (!$size->isAvailable()) echo 'disabled' ?> onchange="modifyBasket()">
+                                            <?php
+                                            } else
+                                                echo '<span class="unavailable">Нет на складе</span>'
+                                            ?>
+                                        </td>
+                                    </tr> 
+                                    <?php
+                                    }
+                                    ?>
+                                    <tr><td colspan="5"></td></tr>
+                                </table>
+                                <?php
+                                }    
+                                else {
+                                    $canBeBought = false;
+                                ?>
+                                <p>К сожалению данного товара нет в наличии</p>
+                                <?php
+                                }
+                                ?>
+                            </div>
+                        </div>
                         <?php
                         }
                         ?>

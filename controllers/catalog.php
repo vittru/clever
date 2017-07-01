@@ -10,10 +10,17 @@ Class Controller_Catalog Extends Controller_Base {
     private function showFirm($firmId) {
         $this->registry['model']->logVisit(3, $firmId);
         $firm = $this->registry['model']->getFirm($firmId);
-        if ($firm)
-            $this->registry['template']->set('showFirm', $firm);        
-        else
+        if ($firm) {
+            $this->registry['template']->set('pageHeader', $firm->name);        
+            $this->registry['template']->set('pageSubHeader', $firm->description);
+            $this->registry['template']->set('catalogGoods', $firm->goods);
+            $this->registry['template']->set('bestBefore', false);
+            $this->registry['template']->set('hideFilterFirm', true);
+            $this->registry['template']->show('catalog');
+        } else {
             $this->registry['template']->set('firms', $this->registry['firms']);
+            $this->registry['template']->show('firm');
+        }    
     }
     
     function firm() {
@@ -28,30 +35,25 @@ Class Controller_Catalog Extends Controller_Base {
             else {
                 $this->registry['model']->logVisit(3);
                 $this->registry['template']->set('firms', $this->registry['firms']);
+                $this->registry['template']->show('firm');
             }    
         }    
-        $this->registry['template']->show('firm');
     }
     
     function type() {
         $typeId=$_GET['id'];
         if ($typeId) {
-            $firms = $this->registry['model']->getTypeFirms($typeId);
-            $selectedFirms = array();
-            foreach($this->registry['firms'] as $id=>$firm) {
-                if (in_array($id, $firms))
-                    $selectedFirms[$id] = $firm->name;
-            } 
-            $this->registry['template']->set('firms', $selectedFirms);
-            $this->registry['template']->set('type', $this->registry['types'][$typeId]);
-            $this->registry['template']->set('goods', $this->registry['model']->getGoodsByType($typeId));
+            $this->registry['template']->set('pageHeader', 'Товары ' . mb_strtolower($this->registry['types'][$typeId]));
+            $this->registry['template']->set('catalogGoods', $this->registry['model']->getGoodsByType($typeId));
+            $this->registry['template']->set('bestBefore', false);
+            $this->registry['template']->set('hideFilterType', true);
             $this->registry['model']->logVisit(4, $typeId);
-
+            $this->registry['template']->show('catalog');
         } else {
             $this->registry['template']->set('types', $this->registry['types']);
             $this->registry['model']->logVisit(4);
+            $this->registry['template']->show('type');
         }    
-        $this->registry['template']->show('type');
     }
 
     function category() {
@@ -60,13 +62,17 @@ Class Controller_Catalog Extends Controller_Base {
         $category = $this->registry['model']->getCategoryByUrl($route);
         if ($category) {
             $this->registry['model']->logVisit(5, $category->id);
-            $category->goods = $this->registry['model']->getCategoryGoods($category->id);
-            $this->registry['template']->set('showCategory', $category);
+            $this->registry['template']->set('catalogGoods', $this->registry['model']->getCategoryGoods($category->id));
+            $this->registry['template']->set('pageHeader', $category->name);
+            $this->registry['template']->set('pageSubHeader', $category->description);
+            $this->registry['template']->set('bestBefore', false);
+            $this->registry['template']->set('hideFilterCat', true);
+            $this->registry['template']->show('catalog');
         } else {
             $this->registry['model']->logVisit(5);
             $this->registry['template']->set('categories', $this->registry['model']->getCategories());
+            $this->registry['template']->show('category');
         }
-        $this->registry['template']->show('category');
     }
 }
 

@@ -29,6 +29,11 @@ Class Controller_Showgood Extends Controller_Base {
         else 
             $pm = false;
         $this->registry['template']->set('pm', $pm);
+        if (isset($_GET['bb']))
+            $bb = true;
+        else 
+            $bb = false;
+        $this->registry['template']->set('bb', $bb);
         $this->registry['template']->set('showGood', $good);
         $this->registry['template']->set('hasProblems', $good->hasProblems());
         $this->registry['template']->set('hasEffects', $good->hasEffects());

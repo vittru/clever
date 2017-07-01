@@ -79,7 +79,9 @@ Class Good {
         return ($total > 0);
     }
     
-    function showInCatalog() {
+    function showInCatalog($bb) {
+        if (!isset($bb))
+            $bb = false;
         echo '<li class="col-sm-3 good">';
         foreach ($this->types as $id=>$type) {
             echo '<div hidden class="type_'. $id . '"></div>';
@@ -106,6 +108,8 @@ Class Good {
         echo '<figure>';
         echo '<a class="aa-product-img" data-toggle2="tooltip" data-placement="top" data-toggle="modal" data-target="#single-product" href="/showgood?pm&id=';
         echo $this->id;
+        if ($bb)
+            echo '&bb';
         echo '"><img src="';
         echo $this->getImage();
         echo '" alt="';
@@ -116,6 +120,11 @@ Class Good {
             echo $this->id;
             echo '" value="';
             echo $this->getFirstAvailSize();
+            echo '" data-price="';
+            if ($bb)
+                echo $this->getBBPrice();
+            else
+                echo $this->getPrice();
             echo '"><span class="fa fa-shopping-cart"></span>В корзину</a>';
         }
         echo '<figcaption>';
@@ -125,11 +134,17 @@ Class Good {
         echo $this->name;
         echo '</a></h4>';
         echo '<span class="aa-product-price" value=';
-        echo $this->getPrice();
+        if ($bb)
+            echo $this->getBBPrice();
+        else 
+            echo $this->getPrice();
         echo '>';
-        echo $this->getWebPrice();
+        if ($bb)
+            echo $this->getWebBBPrice();
+        else 
+            echo $this->getWebPrice();
         echo '</span>';
-        if ($this->sale > 0) {
+        if ($this->isAvailable() && $this->sale > 0) {
             echo '<span class="aa-product-price"><del>';
             echo $this->getWebOldPrice();
             echo '</del></span>';
@@ -141,7 +156,7 @@ Class Good {
         //    <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>
         //    <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#single-product"><span class="fa fa-search"></span></a>                          
         //</div -->
-        if ($this->sale > 0) {
+        if ($this->sale > 0 && !$bb) {
             echo '<span class="aa-badge aa-sale">Скидка!</span> ';
         }
         if (!$this->isAvailable()) {
@@ -251,6 +266,35 @@ Class Good {
         if ($this->hasHairtypes()){
             return '<p><b>Типы волос: </b></p>';
         } else return '';    
-    }    
+    }
+
+    function hasBB() {
+        $bb = false;
+        foreach ($this->sizes as $id=>$size) {
+            if ($size->isBB())
+                $bb = true;
+        }
+        return $bb;
+    }
+    
+    function getBBPrice() {
+        if ($this->hasBB()){
+            foreach ($this->sizes as $id=>$size) {
+                if ($size->isBB())
+                    return $size->bbprice;
+            }
+        } else
+            return null;
+    }
+
+    function getWebBBPrice() {
+        if ($this->hasBB()){
+            foreach ($this->sizes as $id=>$size) {
+                if ($size->isBB())
+                    return $size->getWebBBPrice();
+            }
+        } else
+            return null;
+    }
 }
 
