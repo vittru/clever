@@ -108,7 +108,8 @@
 <script src="/js/custom.js"></script> 
 <script src="/js/jquery.validate.js"></script>
 <script src="/js/auth-form.js"></script>
-<script src="/js/clubclever.js"></script>
+<script src="/js/clubclever.js?<?php echo '20170701'//filemtime('/js/clubclever.js'); ?>"></script>
+<!--script src="/js/clubclever.js"></script-->
 <script src="/js/lightbox.js"></script> 
 
 </body>

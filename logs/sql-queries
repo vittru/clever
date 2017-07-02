@@ -65,3 +65,55 @@ left outer join users u on v.userid = u.id
 where u.useragent not like '%bot%' and u.useragent not like '%Megaindex%' and u.useragent not like '%Yahoo%' and u.useragent not like '%spider%' and u.useragent not like '%Crawler%' and u.useragent not like '%validator%' and u.useragent not like '%vkShare%' and u.useragent not like '%DataMiner%' and u.useragent not like '%Daum%' and u.useragent not like '%Dataprovider.com%' and u.useragent not like '%Stratagems Kumo%' and u.useragent not like '%Go-http-client/1.1%'
 and  (u.profile not in (12, 13, 14) or u.profile is null) and v.pageid<>404
 order by 1 desc
+
+//Статистика по пользователям и страницам по дням
+select DATE(v.time) "День", count(v.id) "Страница", count(distinct v.userid) "Пользователь"
+from visits v join users u on v.userid = u.id
+where u.useragent not like '%bot%' and u.useragent not like '%Megaindex%' and u.useragent not like '%Yahoo%' and u.useragent not like '%spider%' and u.useragent not like '%Crawler%' and u.useragent not like '%validator%' and u.useragent not like '%vkShare%' and u.useragent not like '%DataMiner%' and u.useragent not like '%Daum%' and u.useragent not like '%Dataprovider.com%' and u.useragent not like '%Stratagems Kumo%' and u.useragent not like '%Go-http-client/1.1%'
+and  (u.profile not in (12, 13, 14) or u.profile is null) and v.pageid<>404
+group by 1
+order by 1 descselect DATE(v.time) "День", count(v.id) "Страница", count(distinct v.userid) "Пользователь"
+from visits v join users u on v.userid = u.id
+where u.useragent not like '%bot%' and u.useragent not like '%Megaindex%' and u.useragent not like '%Yahoo%' and u.useragent not like '%spider%' and u.useragent not like '%Crawler%' and u.useragent not like '%validator%' and u.useragent not like '%vkShare%' and u.useragent not like '%DataMiner%' and u.useragent not like '%Daum%' and u.useragent not like '%Dataprovider.com%' and u.useragent not like '%Stratagems Kumo%' and u.useragent not like '%Go-http-client/1.1%'
+and  (u.profile not in (12, 13, 14) or u.profile is null) and v.pageid<>404
+group by 1
+order by 1 desc
+
+//Статистика по месяцам
+select EXTRACT( YEAR_MONTH FROM v.time ) "Месяц", count(v.id) "Страницы", count(distinct v.userid) "Пользователи"
+from visits v join users u on v.userid = u.id
+where u.useragent not like '%bot%' and u.useragent not like '%Megaindex%' and u.useragent not like '%Yahoo%' and u.useragent not like '%spider%' and u.useragent not like '%Crawler%' and u.useragent not like '%validator%' and u.useragent not like '%vkShare%' and u.useragent not like '%DataMiner%' and u.useragent not like '%Daum%' and u.useragent not like '%Dataprovider.com%' and u.useragent not like '%Stratagems Kumo%' and u.useragent not like '%Go-http-client/1.1%'
+and  (u.profile not in (12, 13, 14) or u.profile is null) and v.pageid<>404
+group by 1
+order by 1 descselect EXTRACT( YEAR_MONTH FROM v.time ) "Месяц", count(v.id) "Страницы", count(distinct v.userid) "Пользователи"
+from visits v join users u on v.userid = u.id
+where u.useragent not like '%bot%' and u.useragent not like '%Megaindex%' and u.useragent not like '%Yahoo%' and u.useragent not like '%spider%' and u.useragent not like '%Crawler%' and u.useragent not like '%validator%' and u.useragent not like '%vkShare%' and u.useragent not like '%DataMiner%' and u.useragent not like '%Daum%' and u.useragent not like '%Dataprovider.com%' and u.useragent not like '%Stratagems Kumo%' and u.useragent not like '%Go-http-client/1.1%'
+and  (u.profile not in (12, 13, 14) or u.profile is null) and v.pageid<>404
+group by 1
+order by 1 desc
+
+//Страница-Месяц
+select EXTRACT( YEAR_MONTH FROM v.time ) "Месяц", p.pagename 'Страница', count(v.id) "Посещения"
+from visits v join users u on v.userid = u.id
+left outer join pages p on v.pageid=p.id
+where u.useragent not like '%bot%' and u.useragent not like '%Megaindex%' and u.useragent not like '%Yahoo%' and u.useragent not like '%spider%' and u.useragent not like '%Crawler%' and u.useragent not like '%validator%' and u.useragent not like '%vkShare%' and u.useragent not like '%DataMiner%' and u.useragent not like '%Daum%' and u.useragent not like '%Dataprovider.com%' and u.useragent not like '%Stratagems Kumo%' and u.useragent not like '%Go-http-client/1.1%'
+and  (u.profile not in (12, 13, 14) or u.profile is null) and v.pageid<>404
+group by 1,2
+order by 1 desc,3 descselect EXTRACT( YEAR_MONTH FROM v.time ) "Месяц", p.pagename 'Страница', count(v.id) "Посещения"
+from visits v join users u on v.userid = u.id
+left outer join pages p on v.pageid=p.id
+where u.useragent not like '%bot%' and u.useragent not like '%Megaindex%' and u.useragent not like '%Yahoo%' and u.useragent not like '%spider%' and u.useragent not like '%Crawler%' and u.useragent not like '%validator%' and u.useragent not like '%vkShare%' and u.useragent not like '%DataMiner%' and u.useragent not like '%Daum%' and u.useragent not like '%Dataprovider.com%' and u.useragent not like '%Stratagems Kumo%' and u.useragent not like '%Go-http-client/1.1%'
+and  (u.profile not in (12, 13, 14) or u.profile is null) and v.pageid<>404
+group by 1,2
+order by 1 desc,3 desc
+
+//Фирма-месяц
+select EXTRACT( YEAR_MONTH FROM v.time ) "Месяц", f.name 'Фирма', count(v.id) "Посещения"
+from visits v join users u on v.userid = u.id
+left outer join firms f on v.good=f.id
+where u.useragent not like '%bot%' and u.useragent not like '%Megaindex%' and u.useragent not like '%Yahoo%' and u.useragent not like '%spider%' and u.useragent not like '%Crawler%' and u.useragent not like '%validator%' and u.useragent not like '%vkShare%' and u.useragent not like '%DataMiner%' and u.useragent not like '%Daum%' and u.useragent not like '%Dataprovider.com%' and u.useragent not like '%Stratagems Kumo%' and u.useragent not like '%Go-http-client/1.1%'
+and  (u.profile not in (12, 13, 14) or u.profile is null) and v.pageid=3 and v.good is not null
+group by 1,2
+order by 1 desc,3 desc
+
+//Товар-месяц
