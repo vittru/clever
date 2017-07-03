@@ -144,7 +144,6 @@ Class Controller_Buy Extends Controller_Base {
                 '<li><a href="https://vk.com/clubcleverru">http://vk.com/clubcleverru</a></li>' . 
                 '<li><a href="http://www.instagram.com/clubclever.ru/">http://www.instagram.com/clubclever.ru</a></li></ul></body></html>';
 
-        $this->registry['logger']->lwrite($message);
         $this->sendMail($to, $subject, $message);
     }
 

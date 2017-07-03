@@ -9,14 +9,14 @@ $showGoods = sizeof($catalogGoods);
             <div class="col-md-12">
                 <div class="row">
                     <div class="aa-product-header">
-                    <h1><?php echo $pageHeader ?></h1>
-                    <p><?php echo $pageSubHeader ?></p>
-                    <h4><?php 
-                        if (!$showGoods)
-                            echo 'Сейчас у нас нет таких товаров';
-                        else
-                            echo $pageSecondHeader;
-                    ?></h4>
+                        <h1><?php echo $pageHeader ?></h1>
+                        <p><?php echo $pageSubHeader ?></p>
+                        <h4><?php 
+                            if (!$showGoods)
+                                echo 'Сейчас у нас нет таких товаров';
+                            else
+                                echo $pageSecondHeader;
+                        ?></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -45,11 +45,10 @@ $showGoods = sizeof($catalogGoods);
                             ?>
                         </div>
                     </div>
-                <?php
-                    //$hideFilterCat = true;
+                    <?php
                     include 'filter.php';
-                } 
-                ?>
+                    } 
+                    ?>
                 </div>
             </div>    
         </div>

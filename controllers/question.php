@@ -29,7 +29,6 @@ Class Controller_Question Extends Controller_Base {
                 "<p><b>Пользователь:</b> " . $name . "</p>" . 
                 "<p><b>Email:</b> " . $email . "</p>" . 
                 "<p><b>Вопрос:</b> " . $question . "</p></body></html>";
-        $this->registry['logger']->lwrite($message);
         $this->sendMail($to, $subject, $message);        
     }
 }

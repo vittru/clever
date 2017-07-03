@@ -685,7 +685,6 @@ Class Model {
             $bonus=0;
         $sqlInsert->bindParam(':bonus', $bonus);
         $sqlInsert->bindParam(':card', $paymentCard);
-        $this->registry['logger']->lwrite('order is ready to save');
         $this->executeQuery($sqlInsert, 'Error when saving order');
         try{
             $orderId = $this->db->lastInsertId();
@@ -1054,7 +1053,6 @@ Class Model {
         $sqlSelect->bindParam(':orderId', $orderId);
         $this->executeQuery($sqlSelect, 'Error when getting total for order '.$orderId);
         $total = $sqlSelect->fetchColumn();
-        $this->registry['logger']->lwrite('Total: '.$total);
         $sqlSelect->closeCursor();
         $sqlSelect = $this->db->prepare('SELECT p.amount, p.percent FROM promos p, orders o WHERE p.id=o.promoid AND o.id=:orderId');
         $sqlSelect->bindParam(':orderId', $orderId);
@@ -1063,10 +1061,8 @@ Class Model {
         $sqlSelect->closeCursor();
         $total = $total - $data['amount'] - floor($total * $data['percent']/100);
         $newBonus = floor($total / 10);
-        $this->registry['logger']->lwrite('New bonus: '.$newBonus);
         $sqlUpdate = $this->db->prepare('UPDATE profiles SET bonus=:bonus WHERE id in (SELECT profileId FROM orders WHERE id=:orderId)');
         $bonus += $newBonus;
-        $this->registry['logger']->lwrite('New total bonus: '. $bonus);
         $sqlUpdate->bindParam(':bonus', $bonus);
         $sqlUpdate->bindParam(':orderId', $orderId);
         $this->executeQuery($sqlUpdate, 'Error when updating bonuses for order '.$orderId);

@@ -20,20 +20,11 @@ function __autoload($class_name) {
 
 function getBaseUrl() 
 {
- // output: /myproject/index.php
- $currentPath = $_SERVER['PHP_SELF']; 
- 
- // output: Array ( [dirname] => /myproject [basename] => index.php [extension] => php [filename] => index ) 
- $pathInfo = pathinfo($currentPath); 
- 
- // output: localhost
- $hostName = $_SERVER['HTTP_HOST']; 
- 
- // output: http://
- $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"],0,5))=='https://'?'https://':'http://';
- 
- // return: http://localhost/myproject/
- return $protocol.$hostName.$pathInfo['dirname']."/";
+    $currentPath = $_SERVER['PHP_SELF']; 
+    $pathInfo = pathinfo($currentPath); 
+    $hostName = $_SERVER['HTTP_HOST']; 
+    $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"],0,5))=='https://'?'https://':'http://';
+    return $protocol.$hostName.$pathInfo['dirname']."/";
 }
 
 $registry = new Registry;
@@ -57,7 +48,6 @@ if (isset($_COOKIE['user'])) {
 }    
 else {
     $userId="";
-    $registry['logger']->lwrite('Cookie is not set');
 };
 
 if (!isset($_SESSION['user'])) {
@@ -65,5 +55,3 @@ if (!isset($_SESSION['user'])) {
 } else {
     $_SESSION['user']->id = $userId;
 }    
-
-

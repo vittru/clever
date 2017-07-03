@@ -115,7 +115,6 @@ Class Controller_Account Extends Controller_Base {
                     '<ul><li><a href="www.clubclever.ru">www.cluclever.ru</a></li>' .
                     '<li><a href="https://vk.com/clubcleverru">http://vk.com/clubcleverru</a></li>' . 
                     '<li><a href="http://www.instagram.com/clubclever.ru/">http://www.instagram.com/clubclever.ru</a></li></body></html>';;
-            $this->registry['logger']->lwrite($message);
             $this->sendMail($to, $subject, $message);
         } else
             $this->registry['template']->show('404');
