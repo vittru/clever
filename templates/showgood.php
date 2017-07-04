@@ -1,5 +1,5 @@
 <?php
-    $canBeBought = true;
+    $canBeBought = false;
 
     if (!$pm) {
         include 'header.php';
@@ -106,7 +106,7 @@
                                             <?php
                                             if ($size->isAvailable()) {
                                             ?>
-                                                <input class="quantity form-control" data-price="<?php echo $size->getPrice($showGood->sale); ?>" type="number" id="sel<?php echo $sizeId; ?>" value="<?php if (sizeof($showGood->sizes)==1 and $size->isAvailable()) echo '1'; else echo '0';  ?>" <?php if (!$size->isAvailable()) echo 'disabled' ?> onchange="modifyBasket()">
+                                                <input class="quantity form-control" data-price="<?php echo $size->getPrice($showGood->sale); ?>" type="number" id="sel<?php echo $sizeId; ?>" value="<?php if (sizeof($showGood->sizes) == 1) { echo '1'; if (!$bb) $canBeBought = true;} else echo '0';  ?>" onchange="modifyBasket()">
                                             <?php
                                             } else
                                                 echo '<span class="unavailable">Нет на складе</span>'
@@ -121,7 +121,6 @@
                                 <?php
                                 }    
                                 else {
-                                    $canBeBought = false;
                                 ?>
                                 <p>К сожалению данного товара нет в наличии</p>
                                 <?php
@@ -156,7 +155,7 @@
                                             <?php
                                             if ($size->isAvailable()) {
                                             ?>
-                                                <input class="quantity form-control" data-price="<?php echo $size->bbprice; ?>" type="number" id="sel<?php echo $sizeId; ?>" value="<?php if (sizeof($showGood->sizes)==1 and $size->isAvailable()) echo '1'; else echo '0';  ?>" <?php if (!$size->isAvailable()) echo 'disabled' ?> onchange="modifyBasket()">
+                                                <input class="quantity form-control" data-price="<?php echo $size->bbprice; ?>" type="number" id="sel<?php echo $sizeId; ?>" value="<?php if (sizeof($showGood->sizes)==1) {echo '1'; if ($bb) $canBeBought = true;} else echo '0';  ?>" onchange="modifyBasket()">
                                             <?php
                                             } else
                                                 echo '<span class="unavailable">Нет на складе</span>'
@@ -171,7 +170,6 @@
                                 <?php
                                 }    
                                 else {
-                                    $canBeBought = false;
                                 ?>
                                 <p>К сожалению данного товара нет в наличии</p>
                                 <?php
@@ -291,4 +289,3 @@ if (!$pm) {
 }
 ?>
 <script src="/js/modalgood.js"></script> 
-

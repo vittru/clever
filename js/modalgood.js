@@ -8,7 +8,7 @@ function modifyBasket() {
     $('.aa-add-to-cart-btn').attr('disabled', !canBeBought);
 }
 
-$(document).ready(modifyBasket());
+//$(document).ready(modifyBasket());
 
 $('.aa-add-to-cart-btn').click(function e(){
     var pId = $('#pId').text();
@@ -34,6 +34,6 @@ $('.aa-add-to-cart-btn').click(function e(){
 });
 
 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-  var target = $(e.target).attr("href") // activated tab
+  var target = $(e.target).attr("href"); // activated tab
   modifyBasket();
 });

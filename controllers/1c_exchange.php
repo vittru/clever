@@ -152,7 +152,7 @@ Class Controller_1c_exchange Extends Controller_Base {
                         $doc->addChild ( "Курс", "1" );
                         $doc->addChild ( "Сумма", $order->total);
                         $doc->addChild ( "Время",  $date->format('H:i:s'));
-                        $doc->addChild ( "Комментарий", "Заказ на сайте clubclever.ru");
+                        $doc->addChild ( "Комментарий", "Заказ на сайте ecomarketclever.ru");
 
                         // Контрагенты
                         $k1 = $doc->addChild ( 'Контрагенты' );

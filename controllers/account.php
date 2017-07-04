@@ -110,9 +110,9 @@ Class Controller_Account Extends Controller_Base {
                     . '<p>Статус вашего заказа изменен.</p>' .
                     '<p><b>Статус:</b> ' . $order->status . '</p>' . 
                     '<p>' . $order->statusdesc . '</p>' . 
-                    '<p>Отследить заказ Вы также можете на <a href="www.clubclever.ru/account/orders?id='. $orderid . '">нашем сайте</a></p>' .
+                    '<p>Отследить заказ Вы также можете на <a href="www.ecomarketclever.ru/account/orders?id='. $orderid . '">нашем сайте</a></p>' .
                     '<p>Больше информации о наших акциях и товарах:</p>'.
-                    '<ul><li><a href="www.clubclever.ru">www.cluclever.ru</a></li>' .
+                    '<ul><li><a href="www.ecomarketclever.ru">www.ecomarketclever.ru</a></li>' .
                     '<li><a href="https://vk.com/clubcleverru">http://vk.com/clubcleverru</a></li>' . 
                     '<li><a href="http://www.instagram.com/clubclever.ru/">http://www.instagram.com/clubclever.ru</a></li></body></html>';;
             $this->sendMail($to, $subject, $message);
