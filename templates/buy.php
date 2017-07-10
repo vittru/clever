@@ -24,40 +24,37 @@ include 'header.php';
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="aa-checkout-single-bill">
-                                                            <input class="order-form form-control" type="text" placeholder="Ваше имя*" name="name" value="<?php if ($_SESSION['user']->name) echo $_SESSION['user']->name; ?>">
+                                                            <input class="order-form form-control required" type="text" placeholder="Ваше имя*" name="name" value="<?php if ($_SESSION['user']->name) echo $_SESSION['user']->name; ?>">
                                                         </div>                             
                                                     </div>                            
                                                 </div>  
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="aa-checkout-single-bill">
-                                                            <input class="order-form form-control" type="email" placeholder="Email*" name="email" value="<?php if ($_SESSION['user']->email) echo $_SESSION['user']->email; ?>">
+                                                            <input class="order-form form-control required" type="email" placeholder="Email*" name="email" value="<?php if ($_SESSION['user']->email) echo $_SESSION['user']->email; ?>">
                                                         </div>                             
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="aa-checkout-single-bill">
-                                                            <input class="order-form form-control" type="tel" placeholder="Телефон*" name="phone" value="<?php if ($_SESSION['user']->phone) echo $_SESSION['user']->phone; ?>">
+                                                            <input class="order-form form-control required" type="tel" placeholder="Телефон*" name="phone" value="<?php if ($_SESSION['user']->phone) echo $_SESSION['user']->phone; ?>">
                                                         </div>
                                                     </div>
                                                 </div> 
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="panel-group" id="accordion">
-                                        <div class="panel panel-default aa-checkout-billaddress">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                                                        Самовывоз
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseFour" class="panel-collapse collapse in">
+                                    <div class="panel">
+                                        <ul class="nav nav-tabs aa-checkout-billaddress">
+                                            <li class="active"><a href="#delivery" data-toggle="tab">Доставка курьером</a></li>
+                                            <li><a href="#pickup" data-toggle="tab">Самовывоз</a></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade in" id="pickup">
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="aa-checkout-single-bill">
-                                                                <select name="branch" id="branch" class="form-control">
+                                                                <select name="branch" id="branch" class="form-control required">
                                                                     <option value="0" disabled selected>Выберите точку*</option>
                                                                     <?php
                                                                     foreach ($this->registry['branches'] as $id=>$branch) {
@@ -73,27 +70,18 @@ include 'header.php';
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="aa-checkout-single-bill">
-                                                                <input class="order-form form-control" type="text" placeholder="Желаемая дата*" name="takeDate">
+                                                                <input class="order-form form-control" type="text" placeholder="Желаемая дата" name="takeDate">
                                                             </div>                             
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="aa-checkout-single-bill">
-                                                                <input class="order-form form-control" type="text" placeholder="Желаемое время*" name="takeTime">
+                                                                <input class="order-form form-control" type="text" placeholder="Желаемое время" name="takeTime">
                                                             </div>
                                                         </div>
                                                     </div>   
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="panel panel-default aa-checkout-billaddress">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                                        Доставка курьером
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseThree" class="panel-collapse collapse">
+                                            <div class="tab-pane fade in active" id="delivery">
                                                 <div class="panel-body">
                                                     <div class="row" id="delivery-info" <?php if ($total > $this->registry['freeDelivery']) echo "hidden" ?>>
                                                         <div class="col-md-12">
@@ -107,22 +95,13 @@ include 'header.php';
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="aa-checkout-single-bill">
-                                                                <!--input class="order-form form-control" type="text" placeholder="Населенный пункт*"-->
-                                                                <!--select class="order-form form-control" name="city">
-                                                                    <option selected>Самара</option>
+                                                                <select class="order-form form-control required" name="city" id="city" data-placeholder="Город*">
+                                                                    <option>Самара</option>
                                                                     <option>Алексеевка</option>
                                                                     <option>Кинель</option>
                                                                     <option>Новокуйбышевск</option>
                                                                     <option>Тольятти</option>
-                                                                </select-->
-                                                                <input class="order-form form-control" type="text" list="cities" name="city"/>
-                                                                <datalist id="cities">
-                                                                  <option>Самара</option>
-                                                                  <option>Алексеевка</option>
-                                                                  <option>Кинель</option>
-                                                                  <option>Новокуйбышевск</option>
-                                                                  <option>Тольятти</option>
-                                                                </datalist>
+                                                                </select>
                                                             </div>                             
                                                         </div>                            
                                                     </div>  
@@ -136,11 +115,11 @@ include 'header.php';
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> 
                                     <div class="panel panel-default aa-checkout-billaddress">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
-                                                Способ оплаты
+                                                Пожелания по заказу
                                             </h4>
                                         </div>
                                         <div class="panel-collapse collapse in">
@@ -148,8 +127,7 @@ include 'header.php';
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="aa-checkout-single-bill">
-                                                            <label class="radio-inline"><input type="radio" name="payment" value="card" id="payment_card" checked style="width: auto;">Картой онлайн</label>
-                                                            <label class="radio-inline"><input type="radio" name="payment" value="cash" id="payment_cash" style="width: auto;">Наличными при получении</label>
+                                                            <textarea class="order-form form-control" cols="8" rows="2" name="remarks" placeholder="Комментарии и пожелания"></textarea>
                                                         </div>                             
                                                     </div>                            
                                                 </div>  
@@ -223,65 +201,74 @@ include 'header.php';
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="panel-group" id="accordionRight" <?php if ($this->registry['globalsale']) echo "hidden" ?>>
-                                        <div class="panel panel-default aa-checkout-billaddress">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <?php
-                                                    if ($user->name and $user->bonus) {
-                                                    ?>    
-                                                    <a data-toggle="collapse" data-parent="#accordionRight" href="#collapsePromo">
-                                                    <?php 
-                                                    }
-                                                    ?>    
-                                                        Промо-код
-                                                    <?php
-                                                    if ($user->name and $user->bonus) {
-                                                    ?>    
-                                                    </a>
-                                                    <?php 
-                                                    }
-                                                    ?>    
-                                                </h4>
-                                            </div>
-                                            <div id="collapsePromo" class="panel-collapse collapse in">
+                                    <div class="panel">
+                                        <ul class="nav nav-tabs aa-checkout-billaddress">
+                                            <li class="active"><a href="#promoTab" data-toggle="tab">Промо</a></li>
+                                            <?php
+                                            if ($user->name and $user->bonus) {
+                                            ?>
+                                            <li><a href="#bonusTab" data-toggle="tab">Бонус</a></li>
+                                            <?php
+                                            }
+                                            ?>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade in active " id="promoTab">
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <div id="promo-error" class="error" hidden></div>
-                                                            <input type="text" placeholder="Промо-код" id="promo" name="promo" class="form-control">
+                                                            <div class="aa-checkout-single-bill">
+                                                                <div id="promo-error" class="error" hidden></div>
+                                                                <input type="text" placeholder="Промо-код" id="promo" name="promo" class="form-control">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <?php
-                                        if ($user->name and $user->bonus) {
-                                        ?>
-                                        <div class="panel panel-default aa-checkout-billaddress">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordionRight" href="#collapseBonus" id="panel-bonus">Бонусы</a>
-                                                </h4>
-                                            </div>  
-                                            <div id="collapseBonus" class="panel-collapse collapse">
+                                            <?php
+                                            if ($user->name and $user->bonus) {
+                                            ?>
+                                            <div class="tab-pane fade in" id="bonusTab">
                                                 <div class="panel-body">
                                                     <div class="row">                                                                                            
                                                         <div class="col-md-12">
                                                             <div class="aa-checkout-single-bill">Всего бонусов: <?php echo $user->bonus ?></div>
                                                             <div class="aa-checkout-single-bill">Можно использовать: <?php echo min(floor($total * 0.3), $user->bonus)?></div>
-                                                            <div id="bonus-error" class="error" hidden></div>
-                                                            <input class="form-control" id="bonus" name="bonus" type="number" value="<?php echo min(floor($total * 0.3), $user->bonus)?>">
-                                                            <button id="use-bonus" class="orange-button" type="button">Использовать</button>
+                                                            <div class="aa-checkout-single-bill">
+                                                                <div id="bonus-error" class="error" hidden></div>
+                                                                <input class="form-control" id="bonus" name="bonus" type="number" value="<?php echo min(floor($total * 0.3), $user->bonus)?>">
+                                                                <button id="use-bonus" class="orange-button" type="button">Использовать</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>    
+                                            </div>   
+                                            <?php
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>   
+                                    <div class="panel panel-default aa-checkout-billaddress">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                Способ оплаты
+                                            </h4>
+                                        </div>
+                                        <div class="panel-collapse collapse in">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="aa-checkout-single-bill">
+                                                            <label class="radio-inline"><input type="radio" name="payment" value="card" id="payment_card" checked style="width: auto;">Картой онлайн</label>
+                                                            <label class="radio-inline"><input type="radio" name="payment" value="cash" id="payment_cash" style="width: auto;">Наличными при получении</label>
+                                                        </div>                             
+                                                    </div>                            
+                                                </div>  
                                             </div>
-                                        </div>    
-                                        <?php
-                                        }
-                                        ?>
+                                        </div>
                                     </div>
+                                    
+                                    
                                     <div id="order-error" class="error" hidden>Не все обязательные поля заполнены</div>
                                     <input type="submit" value="Заказать и оплатить" class="green-button" id='make_order'>                
                                 </div>

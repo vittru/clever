@@ -137,11 +137,11 @@ $('#order-form').submit(function(e) {
     if (!$("#bonus-error").is(":hidden") || $("#bonus").is(":hidden")){
         $("#bonus").val('');
     }
-    $('input.order-form').each(function(){
+    $('input.required').each(function(){
         if(!$(this).is(":hidden") && !$(this).val().trim())
             submit = false;
      });
-    $('textarea.order-form').each(function(){
+    $('textarea.required').each(function(){
         if(!$(this).is(":hidden") && !$(this).val().trim())
             submit = false;
      });
@@ -331,4 +331,31 @@ $("input[name=payment]").on('change', function () {
 
 $(document).ready(function () {
     $('.SlectBox').SumoSelect({captionFormat: '{0} выбрано', captionFormatAllSelected:'Все {0} выбраны'});
+    $('#city').editableSelect();
+});
+
+$("#subscribe-form").submit(function(e) { 
+    e.preventDefault(); 
+    var email=$("#subscribe-email").val();
+    $.ajax({
+        type: "POST",
+        url: "subscribe",
+        data: "userEmail=" + email,
+        dataType: "html",
+        dataFilter: function(a) {
+            return $(a).filter("#error").html();
+        },
+        success: function(a) {
+            if (a == null) {
+                window.location.reload();
+            }else {
+                $("#subscribe-error").show();
+                $("#subscribe-error").html(a);
+            }
+        }
+    });
+});
+
+$("#subscribe-email").focus(function(){
+    $('#subscribe-error').hide();
 });

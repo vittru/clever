@@ -19,7 +19,7 @@ Class Controller_Buy Extends Controller_Base {
                 $card = 1;
             else
                 $card = 0;
-            $orderId = $this->registry['model']->saveOrder($_SESSION['user']->id, htmlspecialchars($_POST['name']), htmlspecialchars($_POST['email']), htmlspecialchars($_POST['phone']), htmlspecialchars($_POST['branch']), htmlspecialchars($_POST['takeDate']), htmlspecialchars($_POST['takeTime']), htmlspecialchars($_POST['city']." ".$_POST['address']), htmlspecialchars(trim($_POST['promo'])), $_POST['bonus'], $card);
+            $orderId = $this->registry['model']->saveOrder($_SESSION['user']->id, htmlspecialchars($_POST['name']), htmlspecialchars($_POST['email']), htmlspecialchars($_POST['phone']), htmlspecialchars($_POST['branch']), htmlspecialchars($_POST['takeDate']), htmlspecialchars($_POST['takeTime']), htmlspecialchars($_POST['city']." ".$_POST['address']), htmlspecialchars(trim($_POST['promo'])), $_POST['bonus'], $card, $_POST['remarks']);
             $this->registry['model']->logVisit(26, $orderId);
 
             //Inform manager by email
@@ -80,7 +80,8 @@ Class Controller_Buy Extends Controller_Base {
                 "<p><b>Телефон:</b> " . htmlspecialchars($parameters['phone']) . "</p>" . 
                 $this->getGoodsForLetter($parameters['promo'], $parameters['bonus']) .
                 $this->getDeliveryForLetter($parameters) . 
-                '<p><b>Оплата:</b> ' . $payment . '</p></body></html>';
+                '<p><b>Оплата:</b> ' . $payment . '</p>'.
+                '<p><b>Пожелания по заказу:</b> ' . htmlspecialchars($parameters['remarks']) . '</p></body></html>';
         $this->sendMail($to, $subject, $message);
     }   
     
@@ -139,6 +140,7 @@ Class Controller_Buy Extends Controller_Base {
                 "<p><b>Телефон:</b> " . $parameters['phone'] . "</p>" .
                 $this->getGoodsForLetter($parameters['promo'], $parameters['bonus']) .
                 $this->getDeliveryForLetter($parameters) . 
+                '<p><b>Пожелания по заказу:</b> ' . htmlspecialchars($parameters['remarks']) . 
                 '<p>Больше информации о наших акциях и товарах:</p>'.
                 '<ul><li><a href="www.ecomarketclever.ru">www.ecomarketclever.ru</a></li>' .
                 '<li><a href="https://vk.com/clubcleverru">http://vk.com/clubcleverru</a></li>' . 

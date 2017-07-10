@@ -656,8 +656,8 @@ Class Model {
         return $catsArray;       
     }
     
-    function saveOrder($userId, $name, $email, $phone, $branch, $takeDate, $takeTime, $address, $promo, $bonus, $paymentCard) {
-        $sqlInsert = $this->db->prepare('INSERT INTO orders(userId, name, email, phone, date, branchId, day, time, address, promoid, profileId, bonus, card) VALUES(:userId, :name, :email, :phone, :date, :branch, :takeDate, :takeTime, :address, :promo, :profileId, :bonus, :card)');
+    function saveOrder($userId, $name, $email, $phone, $branch, $takeDate, $takeTime, $address, $promo, $bonus, $paymentCard, $remarks) {
+        $sqlInsert = $this->db->prepare('INSERT INTO orders(userId, name, email, phone, date, branchId, day, time, address, promoid, profileId, bonus, card, remarks) VALUES(:userId, :name, :email, :phone, :date, :branch, :takeDate, :takeTime, :address, :promo, :profileId, :bonus, :card, :remarks)');
         $sqlInsert->bindParam(':userId', $userId);
         $sqlInsert->bindParam(':name', $name);
         $sqlInsert->bindParam(':email', $email);
@@ -685,6 +685,7 @@ Class Model {
             $bonus=0;
         $sqlInsert->bindParam(':bonus', $bonus);
         $sqlInsert->bindParam(':card', $paymentCard);
+        $sqlInsert->bindParam(':remarks', $remarks);
         $this->executeQuery($sqlInsert, 'Error when saving order');
         try{
             $orderId = $this->db->lastInsertId();
@@ -890,12 +891,12 @@ Class Model {
     }
     
     function getUserOrders($userId) {
-        $sqlSelect = $this->db->prepare('SELECT o.id, o.name, o.date, o.email, o.phone, s.name status, s.description statusdesc, p.name promo, IF (o.branchId=0, "Доставка", "Самовывоз") type FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id WHERE o.userId=:userId');
+        $sqlSelect = $this->db->prepare('SELECT o.id, o.name, o.date, o.email, o.phone, s.name status, s.description statusdesc, p.name promo, IF (o.branchId=0, "Доставка", "Самовывоз") type, o.remarks FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id WHERE o.userId=:userId');
         $sqlSelect->bindParam(':userId', $userId);
         $this->executeQuery($sqlSelect, 'Error when getting orders for user '.$userId);
         $orders = array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $order = New Order($data['id'], $data['date'], $data['status'], $data['type'], $data['promo'], $userId, 0, $data['statusdesc'], $data['email'],0, $data['name'], $data['phone']);
+            $order = New Order($data['id'], $data['date'], $data['status'], $data['type'], $data['promo'], $userId, 0, $data['statusdesc'], $data['email'],0, $data['name'], $data['phone'], $data['remarks']);
             array_push($orders, $order);
         }    
         $sqlSelect->closeCursor();
@@ -903,12 +904,12 @@ Class Model {
         //If a user has profile then we get all orders for it
         $profile = $this->checkProfile();
         if ($profile) {
-            $sqlSelect = $this->db->prepare('SELECT o.id, o.name, o.date, o.email, o.phone, s.name status, s.description statusdesc, p.name promo, IF (o.branchId=0, "Доставка", "Самовывоз") type FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id WHERE o.profileId=:profileId AND o.userId <> :userId');
+            $sqlSelect = $this->db->prepare('SELECT o.id, o.name, o.date, o.email, o.phone, s.name status, s.description statusdesc, p.name promo, IF (o.branchId=0, "Доставка", "Самовывоз") type, o.remarks FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id WHERE o.profileId=:profileId AND o.userId <> :userId');
             $sqlSelect->bindParam(':userId', $userId);
             $sqlSelect->bindParam(':profileId', $profile);
             $this->executeQuery($sqlSelect, 'Error when getting orders for user '.$userId);
             while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-                $order = New Order($data['id'], $data['date'], $data['status'], $data['type'], $data['promo'], $userId, $profile, $data['statusdesc'], $data['email'], 0, $data['name'], data['phone']);
+                $order = New Order($data['id'], $data['date'], $data['status'], $data['type'], $data['promo'], $userId, $profile, $data['statusdesc'], $data['email'], 0, $data['name'], data['phone'], data['remarks']);
                 array_push($orders, $order);
             }    
             $sqlSelect->closeCursor();
@@ -921,7 +922,7 @@ Class Model {
     }
     
     function getOrder($orderId) {
-        $sqlSelect = $this->db->prepare('SELECT o.id, o.name, o.date, o.email, o.phone, s.name status, s.description statusdesc, p.amount promoAmount, p.percent promoPercent, IF (o.branchId is null, "Доставка", "Самовывоз") type, SUM(og.price * og.quantity) total, o.userId, pr.name profileId, o.bonus FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id LEFT JOIN `orders-goods` og ON o.id=og.orderid LEFT JOIN profiles pr ON o.profileId=pr.id WHERE o.id=:orderId');
+        $sqlSelect = $this->db->prepare('SELECT o.id, o.name, o.date, o.email, o.phone, s.name status, s.description statusdesc, p.amount promoAmount, p.percent promoPercent, IF (o.branchId is null, "Доставка", "Самовывоз") type, SUM(og.price * og.quantity) total, o.userId, pr.name profileId, o.bonus, o.remarks FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id LEFT JOIN `orders-goods` og ON o.id=og.orderid LEFT JOIN profiles pr ON o.profileId=pr.id WHERE o.id=:orderId');
         $sqlSelect->bindParam(':orderId', $orderId);
         $this->executeQuery($sqlSelect, 'Error when getting details for order '.$orderId);
         $data = $sqlSelect->fetch();
@@ -935,7 +936,7 @@ Class Model {
             $promo = floor($data['total'] * $data['promoPercent']/100);
         else
             $promo=0;
-        $order = new Order($data['id'], $data['date'], $data['status'], $data['type'], $promo, $data['userId'], $data['profileId'], $data['statusdesc'], $data['email'], $data['bonus'], $data['name'], $data['phone']);
+        $order = new Order($data['id'], $data['date'], $data['status'], $data['type'], $promo, $data['userId'], $data['profileId'], $data['statusdesc'], $data['email'], $data['bonus'], $data['name'], $data['phone'], $data['remarks']);
         $order->total = $data['total'] - $promo - $data['bonus'];
         $sqlSelect->closeCursor();
         $order->goods = $this->getOrderGoods($orderId);

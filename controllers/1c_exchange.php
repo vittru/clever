@@ -16,7 +16,7 @@ Class Controller_1c_exchange Extends Controller_Base {
             $max_exec_time = 30;
 
 
-        if($_GET['type'] == 'sale' && $_GET['mode'] == 'checkauth') {
+        if(($_GET['type'] == 'sale' || $_GET['type'] == 'catalog') && $_GET['mode'] == 'checkauth') {
             $this->registry['model']->logVisit(2000);
             print "success\n";
             print session_name()."\n";
@@ -24,7 +24,7 @@ Class Controller_1c_exchange Extends Controller_Base {
             $this->registry['model']->setExportSession(session_id());
         }
 
-        if($_GET['type'] == 'sale' && $_GET['mode'] == 'init') {
+        if(($_GET['type'] == 'sale' || $_GET['type'] == 'catalog') && $_GET['mode'] == 'init') {
             if ($_COOKIE['PHPSESSID'] == $this->registry['model']->getExportSession()) {
                 $this->registry['model']->logVisit(2001);
                 print "zip=no\n";
