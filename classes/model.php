@@ -553,12 +553,12 @@ Class Model {
     }
     
     function getFirm($firmId) {
-        $sqlSelect = $this->db->prepare('SELECT name, description, url FROM firms WHERE id=:firmId');
+        $sqlSelect = $this->db->prepare('SELECT * FROM firms WHERE id=:firmId');
         $sqlSelect->bindParam(':firmId', $firmId);
         $this->executeQuery($sqlSelect, 'Error when getting a firm with id=' . $firmId);
         $data = $sqlSelect->fetch();
         if ($data) {
-            $firm = new Firm($firmId, $data['name'], $data['description'], data['url']);
+            $firm = new Firm($firmId, $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription'], $data['metaKeywords']);
             $firm->goods = $this->getGoodsByFirm($firmId);
             $firm->categories = $this->prepareArray($this->getFirmCats($firmId));
         }    
@@ -840,7 +840,7 @@ Class Model {
         $this->executeQuery($sqlSelect, 'Error when getting firms');
         $firms = array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $firm = New Firm($data['id'], $data['name'], $data['description'], $data['url']);
+            $firm = New Firm($data['id'], $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription'], $data['metaKeywords']);
             $firms[$data['id']] = $firm;
         }
         $sqlSelect->closeCursor();
@@ -1199,4 +1199,13 @@ Class Model {
         $sqlUpdate->closeCursor();
     }
 
+    function getTypeMeta($typeId) {
+        $sqlSelect = $this->db->prepare('SELECT metaTitle, metaDescription, metaKeywords FROM types WHERE id=:typeId');
+        $sqlSelect->bindParam(':typeId', $typeId);
+        $this->executeQuery($sqlSelect, 'Error when getting meta tags for type ' . $typeId);
+        $data = $sqlSelect->fetch();
+        $sqlSelect->closeCursor();
+        return $data;
+        
+    }
 }

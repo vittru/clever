@@ -14,6 +14,9 @@ Class Controller_Catalog Extends Controller_Base {
             $this->registry['template']->set('pageHeader', $firm->name);        
             $this->registry['template']->set('pageSubHeader', $firm->description);
             $this->registry['template']->set('catalogGoods', $firm->goods);
+            $this->registry['template']->set('metaTitle', $firm->metaTitle);
+            $this->registry['template']->set('metaDescription', $firm->metaDescription);
+            $this->registry['template']->set('metaKeywords', $firm->metaKeywords);
             $this->registry['template']->set('bestBefore', false);
             $this->registry['template']->set('hideFilterFirm', true);
             $this->registry['template']->show('catalog');
@@ -43,10 +46,14 @@ Class Controller_Catalog Extends Controller_Base {
     function type() {
         $typeId=$_GET['id'];
         if ($typeId) {
+            $metaData = $this->registry['model']->getTypeMeta($typeId);
             $this->registry['template']->set('pageHeader', 'Товары ' . mb_strtolower($this->registry['types'][$typeId]));
             $this->registry['template']->set('catalogGoods', $this->registry['model']->getGoodsByType($typeId));
             $this->registry['template']->set('bestBefore', false);
             $this->registry['template']->set('hideFilterType', true);
+            $this->registry['template']->set('metaTitle', $metaData['metaTitle']);
+            $this->registry['template']->set('metaDescription', $metaData['metaDescription']);
+            $this->registry['template']->set('metaKeywords', $metaData['metaKeywords']);
             $this->registry['model']->logVisit(4, $typeId);
             $this->registry['template']->show('catalog');
         } else {

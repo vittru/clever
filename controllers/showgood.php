@@ -35,6 +35,12 @@ Class Controller_Showgood Extends Controller_Base {
             $bb = false;
         $this->registry['template']->set('bb', $bb);
         $this->registry['template']->set('showGood', $good);
+        $h1 = str_replace('"', '\'', $good->name);
+        $h1 = str_replace('&nbsp;', ' ', $h1);
+        $this->registry['template']->set('metaTitle', $h1 . ' – купить в Самаре, цены, описание | интернет-магазин Клевер');
+        $this->registry['template']->set('metaDescription', 'Продажа эко косметики — ' . $h1 . '. Купить в экомаркете Клевер с доставкой в Самаре.');
+        $this->registry['template']->set('metaKeywords', $h1);
+        
         $this->registry['template']->set('hasProblems', $good->hasProblems());
         $this->registry['template']->set('hasEffects', $good->hasEffects());
         $this->registry['template']->set('hasSkintypes', $good->hasSkintypes());

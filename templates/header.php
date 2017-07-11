@@ -4,6 +4,23 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <?php
+        if ($metaTitle) {
+        ?>
+            <meta name="title" content="<?php echo $metaTitle ?>">
+        <?php
+        }
+        if ($metaDescription) {
+        ?>
+            <meta name="description" content="<?php echo $metaDescription ?>">
+        <?php
+        }
+        if ($metaKeywords) {
+        ?>
+            <meta name="keywords" content="<?php echo $metaKeywords ?>">
+        <?php
+        }
+        ?>
         <title>Клевер экомаркет</title>
 
         <link rel="icon" href="/images/icon.png">

@@ -1,1 +1,10 @@
 
+[11/Jul/2017:07:52:05] (index) Error when getting meta tags for type 2
+[11/Jul/2017:07:52:05] (index) exception 'PDOException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'clubclever.type' doesn't exist' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:75
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(75): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(1205): Model->executeQuery(Object(PDOStatement), 'Error when gett...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/catalog.php(49): Model->getTypeMeta('2')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Catalog->type()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(30): Router->delegate()
+#5 {main}getMessage

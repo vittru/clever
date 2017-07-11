@@ -9,12 +9,18 @@ Class Firm {
     public $goods;
     public $categories;
     public $url;
+    public $metaTitle;
+    public $metaDescription;
+    public $metaKeywords;
 
-    function __construct($id, $name, $description, $url) {
+    function __construct($id, $name, $description, $url, $metaTitle, $metaDescription, $metaKeywords) {
        $this->id = $id;
        $this->name = $name;
        $this->description = $description;
        $this->url = $url;
+       $this->metaTitle = $metaTitle;
+       $this->metaDescription = $metaDescription;
+       $this->metaKeywords = $metaKeywords;
     }
     
 }
