@@ -39,11 +39,22 @@ $showGoods = sizeof($catalogGoods);
                                     </ul>
                                     <div id="empty-catg" class="aa-empty-catg" hidden>Мы не нашли товаров, удовлетворяющих вашему запросу</div>
                                 </div>
-                            </div>  
+                            </div>
                             <?php
                             include 'modalgood.php';
                             ?>
                         </div>
+                        <?php
+                        if ($descAfter) {
+                        ?>
+                            <div class="aa-product-desc">
+                                <?php
+                                echo $descAfter;
+                                ?>
+                            </div>  
+                        <?php
+                        }
+                        ?>
                     </div>
                     <?php
                     include 'filter.php';

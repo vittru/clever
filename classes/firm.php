@@ -12,8 +12,9 @@ Class Firm {
     public $metaTitle;
     public $metaDescription;
     public $metaKeywords;
+    public $descAfter;
 
-    function __construct($id, $name, $description, $url, $metaTitle, $metaDescription, $metaKeywords) {
+    function __construct($id, $name, $description, $url, $metaTitle, $metaDescription, $metaKeywords, $descAfter) {
        $this->id = $id;
        $this->name = $name;
        $this->description = $description;
@@ -21,7 +22,6 @@ Class Firm {
        $this->metaTitle = $metaTitle;
        $this->metaDescription = $metaDescription;
        $this->metaKeywords = $metaKeywords;
+       $this->descAfter = $descAfter;
     }
-    
 }
-

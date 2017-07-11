@@ -792,6 +792,16 @@ h2 {
   padding-bottom: 35px;
 }
 
+#aa-product .aa-product-desc {
+    padding-bottom: 35px;
+}
+#aa-product .aa-product-desc li {
+    list-style: square;
+    margin-bottom: 5px;
+    text-align: justify;
+    margin-left: 20px;
+}
+
 .aa-product-nav {
   display: inline-block;
   text-align: center;

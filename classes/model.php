@@ -558,7 +558,7 @@ Class Model {
         $this->executeQuery($sqlSelect, 'Error when getting a firm with id=' . $firmId);
         $data = $sqlSelect->fetch();
         if ($data) {
-            $firm = new Firm($firmId, $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription'], $data['metaKeywords']);
+            $firm = new Firm($firmId, $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription'], $data['metaKeywords'], $data['descAfter']);
             $firm->goods = $this->getGoodsByFirm($firmId);
             $firm->categories = $this->prepareArray($this->getFirmCats($firmId));
         }    
@@ -840,7 +840,7 @@ Class Model {
         $this->executeQuery($sqlSelect, 'Error when getting firms');
         $firms = array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $firm = New Firm($data['id'], $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription'], $data['metaKeywords']);
+            $firm = New Firm($data['id'], $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription'], $data['metaKeywords'], $data['descAfter']);
             $firms[$data['id']] = $firm;
         }
         $sqlSelect->closeCursor();

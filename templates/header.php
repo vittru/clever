@@ -40,7 +40,7 @@
         <!--link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'-->
        
         <!-- Yandex.Metrika counter -->
-        <!--script type="text/javascript">
+        <script type="text/javascript">
             (function (d, w, c) {
                 (w[c] = w[c] || []).push(function() {
                     try {
@@ -366,7 +366,6 @@
                                     ?>  
                                 </ul>
                             </li>
-                            <li><a href="/catalog/category/toys">Игрушки</a></li>
                             <li><a href="/catalog/category/presents">Подарки</a></li>
                             <li><a href="/catalog/category/suit">Наборы</a></li>
                             <li><a href="/catalog/firm">Бренды<span class="caret"></span></a>
