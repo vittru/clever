@@ -46,20 +46,20 @@
                     $colsm = 6;
                 ?>
                 <a href="<?php echo $firstImage; ?>" data-lightbox="lightbox" data-title='<?php echo $showGood->name ?>' class="col-sm-<?php echo $colsm ?>">
-                    <img src="<?php echo $firstImage; ?>" class="img-responsive">
+                    <img src="<?php echo $firstImage; ?>" class="img-responsive image-good">
                 </a>    
                 <?php 
                 if ($secondImage) {
                 ?>
                 <a href="<?php echo $secondImage ?>" data-lightbox="lightbox" data-title='<?php echo $showGood->name ?>'  class="col-sm-<?php echo $colsm ?>">
-                    <img src="<?php echo $secondImage ?>" class="img-responsive">
+                    <img src="<?php echo $secondImage ?>" class="img-responsive image-good">
                 </a>    
                 <?php
                 }
                 if ($thirdImage) {
                 ?>
                 <a href="<?php echo $thirdImage ?>" data-lightbox="lightbox" data-title='<?php echo $showGood->name ?>' class="col-sm-<?php echo $colsm ?>">
-                    <img src="<?php echo $thirdImage ?>" class="img-responsive">
+                    <img src="<?php echo $thirdImage ?>" class="img-responsive image-good">
                 </a>    
                 <?php 
                 }
@@ -91,7 +91,7 @@
                                 if (sizeof($showGood->sizes) > 0) { 
                                 ?>
                                 <table class="table">
-                                    <th>Артикул</th>
+                                    <th class="hidden-xs">Артикул</th>
                                     <th>Размер</th>
                                     <th>Цена</th>
                                     <th>Количество</th>
@@ -99,7 +99,7 @@
                                     foreach($showGood->sizes as $sizeId=>$size) { 
                                     ?>
                                     <tr>
-                                        <td><?php echo $size->code; ?></td>
+                                        <td class="hidden-xs"><?php echo $size->code; ?></td>
                                         <td><?php echo $size->size; ?></td>
                                         <td><?php echo $size->getWebPrice($showGood->sale); ?></td>
                                         <td>
@@ -137,7 +137,7 @@
                                 if (sizeof($showGood->sizes) > 0) { 
                                 ?>
                                 <table class="table">
-                                    <th>Артикул</th>
+                                    <th class="hidden-xs">Артикул</th>
                                     <th>Размер</th>
                                     <th>Срок годности</th>
                                     <th>Цена</th>
@@ -147,7 +147,7 @@
                                         if ($size->isBB()){ 
                                     ?>
                                     <tr>
-                                        <td><?php echo $size->code;?></td>
+                                        <td class="hidden-xs"><?php echo $size->code;?></td>
                                         <td><?php echo $size->size; ?></td>
                                         <td class="orange"><?php echo strftime('%e/%m/%G', strtotime($size->bestbefore)); ?></td>
                                         <td><?php echo $size->getWebBBPrice($showGood->sale); ?></td>

@@ -803,6 +803,10 @@ h2 {
     margin-left: 20px;
 }
 
+.image-good {
+    max-width: 200px;
+}
+
 .aa-product-nav {
   display: inline-block;
   text-align: center;
