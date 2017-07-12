@@ -10,7 +10,7 @@
                                     <h2>Главное меню</h2>
                                     <ul class="aa-footer-nav">
                                         <li><a href="/catalog/type">Каталог</a></li>
-                                        <li><a href="/catalog/category/toys">Игрушки</a></li>
+                                        <li><a href="/catalog/category/presents">Подарки</a></li>
                                         <li><a href="/catalog/firms">Бренды</a></li>
                                         <li><a href="/actions">Акции</a></li>
                                         <li><a href="/news">Новости</a></li>
