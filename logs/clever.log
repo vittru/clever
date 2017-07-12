@@ -1,10 +1,14 @@
+[11/Jul/2017:09:42:23] (index) Desc After: 
+[11/Jul/2017:09:43:04] (index) Desc After: <h2>Большой ассортимент детских косметических средств в магазине Клевер</h2>
 
-[11/Jul/2017:07:52:05] (index) Error when getting meta tags for type 2
-[11/Jul/2017:07:52:05] (index) exception 'PDOException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'clubclever.type' doesn't exist' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:75
-Stack trace:
-#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(75): PDOStatement->execute()
-#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(1205): Model->executeQuery(Object(PDOStatement), 'Error when gett...')
-#2 /Applications/MAMP/htdocs/ClubClever/controllers/catalog.php(49): Model->getTypeMeta('2')
-#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Catalog->type()
-#4 /Applications/MAMP/htdocs/ClubClever/index.php(30): Router->delegate()
-#5 {main}getMessage
+<p>В каталоге раздела сайта представлен большой ассортимент разновидностей косметики :<p>
+<ul>
+<li>жидких шампуней (“Без эфирных масел Шик”, “Нежный возраст”, “Шоколад” и пр.);</li>
+<li>твердых шампуней (“Розмариновый”);</li>
+<li>туалетных мыл(“Откровение”,“Апельсин”,“Лаванда” и пр.) </li>
+<li>эфирных масел для купания и ингаляций (душица, ваниль, ель, чайное дерево и пр.);</li>
+<li>бальзамы для губ ( “Заботливый с облепихой”, “Заботливый с лавандой ”</li>
+<li>зубные порошки (“Отбеливание”,“Очищение”,“Укрепление”)</li>
+</ul>
+<p>Косметика из натуральных компонентов имеет приятный запах, что особо радует детей в процессе применения.</p>
+[12/Jul/2017:08:23:51] (index) Description: <p>Мамы ищут безопасные, полезные и доступные средства для ухода и гигиены малышей. Мы сделала выбор в пользу натуральной детской косметики 0+ российских производителей МиКо и Мастерской Олеси Мустаевой. Календула и масло бораго составляют основу продуктов серии “Нежный возраст”. Для деток склонных к аллергии подойдет серия “Шик” без эфирных масел. В составе мыла на козьем молоке только гипоаллергенные компоненты. Молочный протеин, масло карите и оливы мягко очищают чувствительную кожу. </p>

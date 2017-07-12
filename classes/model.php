@@ -1200,7 +1200,7 @@ Class Model {
     }
 
     function getTypeMeta($typeId) {
-        $sqlSelect = $this->db->prepare('SELECT metaTitle, metaDescription, metaKeywords FROM types WHERE id=:typeId');
+        $sqlSelect = $this->db->prepare('SELECT description, metaTitle, metaDescription, metaKeywords, descAfter FROM types WHERE id=:typeId');
         $sqlSelect->bindParam(':typeId', $typeId);
         $this->executeQuery($sqlSelect, 'Error when getting meta tags for type ' . $typeId);
         $data = $sqlSelect->fetch();

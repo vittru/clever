@@ -765,6 +765,7 @@ h2 {
 }
 #aa-product .aa-product-header p {
     letter-spacing: 0.5px;
+    text-align: justify;
 }
 #aa-product .aa-product-area {
   display: inline;

@@ -21,7 +21,7 @@
         <?php
         }
         ?>
-        <title>Клевер экомаркет</title>
+        <!--title>Клевер экомаркет</title-->
 
         <link rel="icon" href="/images/icon.png">
 
