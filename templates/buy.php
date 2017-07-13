@@ -201,6 +201,9 @@ include 'header.php';
                                             </div>
                                         </div>
                                     </div>
+                                    <?php
+                                    if (!$this->registry['globalsale']) {
+                                    ?>
                                     <div class="panel">
                                         <ul class="nav nav-tabs aa-checkout-billaddress">
                                             <li class="active"><a href="#promoTab" data-toggle="tab">Промо</a></li>
@@ -248,6 +251,9 @@ include 'header.php';
                                             ?>
                                         </div>
                                     </div>   
+                                    <?php
+                                    }
+                                    ?>
                                     <div class="panel panel-default aa-checkout-billaddress">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
