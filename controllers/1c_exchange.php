@@ -178,29 +178,34 @@ Class Controller_1c_exchange Extends Controller_Base {
                         $cont = $contacts->addChild ( 'Контакт' );
                         $cont->addChild ( 'Тип', 'Почта' );
                         $cont->addChild ( 'Значение', $order->email );
+                        
+                        if ($order->promo || $order->bonus) {
+                            $discount = max($order->promo, $order->bonus);
+                            $total = $order->total + $discount;
+                        }
 
                         $t1 = $doc->addChild ( 'Товары' );
                         foreach($order->goods as $good) {
                             $id = $good->code;
                             $t1_1 = $t1->addChild ( 'Товар' );
-                            if($id)
+                            if ($id)
                                 $t1_2 = $t1_1->addChild ( "Ид", $id);
                             $t1_2 = $t1_1->addChild ( "Артикул", $id);
 
                             $name = str_replace('&nbsp;', ' ', $good->name);
-                            if($order->size)
+                            if ($order->size)
                                 $name .= " $order->size";
                             $t1_2 = $t1_1->addChild ( "Наименование", $name);
-                            //$t1_2 = $t1_1->addChild ( "ЦенаЗаЕдиницу", $purchase->price*(100-$order->discount)/100);
+                            $t1_2 = $t1_1->addChild ( "ЦенаЗаЕдиницу", $good->price);
                             $t1_2 = $t1_1->addChild ( "Количество", $good->quantity );
-                            $t1_2 = $t1_1->addChild ( "Сумма", $good->price);
+                            $t1_2 = $t1_1->addChild ( "Сумма", $good->price * $good->quantity);
 
-                            /*
-                            $t1_2 = $t1_1->addChild ( "Скидки" );
-                            $t1_3 = $t1_2->addChild ( "Скидка" );
-                            $t1_4 = $t1_3->addChild ( "Сумма", $purchase->amount*$purchase->price*(100-$order->discount)/100);
-                            $t1_4 = $t1_3->addChild ( "УчтеноВСумме", "true" );
-                            */
+                            if ($order->promo || $order->bonus) {
+                                $t1_2 = $t1_1->addChild ( "Скидки" );
+                                $t1_3 = $t1_2->addChild ( "Скидка" );
+                                $t1_4 = $t1_3->addChild ( "Сумма", floor(($good->price * $good->quantity)/$total*$discount));
+                                $t1_4 = $t1_3->addChild ( "УчтеноВСумме", "false" );
+                            }
 
                             $t1_2 = $t1_1->addChild ( "ЗначенияРеквизитов" );
                             $t1_3 = $t1_2->addChild ( "ЗначениеРеквизита" );
@@ -282,7 +287,7 @@ Class Controller_1c_exchange Extends Controller_Base {
         }
 
         if($_GET['type'] == 'sale' && $_GET['mode'] == 'success') {
-            //$simpla->settings->last_1c_orders_export_date = date("Y-m-d H:i:s");
+            $this->registry['model']->setLastExportDate(date("Y-m-d H:i:s"));
         }
     }
 }
