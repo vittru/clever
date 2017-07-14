@@ -1,7 +1,4 @@
-<?php
-    include 'header.php';
-?>
-  
+<?php    include 'header.php';?>  
 <section id="aa-error">
     <div class="container">
         <div class="row">

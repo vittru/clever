@@ -52,7 +52,6 @@ Class Controller_Catalog Extends Controller_Base {
             $this->registry['template']->set('catalogGoods', $this->registry['model']->getGoodsByType($typeId));
             $this->registry['template']->set('bestBefore', false);
             $this->registry['template']->set('hideFilterType', true);
-            $this->registry['logger']->lwrite('Description: ' . $metaData['description']);
             $this->registry['template']->set('pageSubHeader', $metaData['description']);
             $this->registry['template']->set('metaTitle', $metaData['metaTitle']);
             $this->registry['template']->set('metaDescription', $metaData['metaDescription']);

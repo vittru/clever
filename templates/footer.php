@@ -61,6 +61,7 @@
                                             <a target="_blank" href="http://www.instagram.com/clubclever.ru/"><span class="fa fa-instagram"></span></a>
                                             <a target="_blank" href="https://www.youtube.com/channel/UCZqTkI8X0KQGyINHpblqhfg"><span class="fa fa-youtube"></span></a>
                                         </div>
+                                        <div><a href="http://seoprostor.ru" target="_blank">Продвижение сайта</a> - «SEO Простор»</div>
                                     </div>
                                 </div>
                             </div>

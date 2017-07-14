@@ -68,7 +68,7 @@ include 'header.php';
                                         </div>
                                         <div class="row">
                                             <div class="col-md-2">
-                                                <button class="green-button">Задать</button>
+                                                <button class="green-button" onclick="yaCounter44412517.reachGoal('VOPROS'); return true;">Задать</button>
                                             </div>    
                                             <div id="question-error" class="col-md-8 error" hidden></div>
                                         </div>

@@ -558,7 +558,7 @@ Class Model {
         $this->executeQuery($sqlSelect, 'Error when getting a firm with id=' . $firmId);
         $data = $sqlSelect->fetch();
         if ($data) {
-            $firm = new Firm($firmId, $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription'], $data['metaKeywords'], $data['descAfter']);
+            $firm = new Firm($firmId, $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription'], $data['metaKeywords'], $data['descAfter'], $data['h1']);
             $firm->goods = $this->getGoodsByFirm($firmId);
             $firm->categories = $this->prepareArray($this->getFirmCats($firmId));
         }    
@@ -840,7 +840,7 @@ Class Model {
         $this->executeQuery($sqlSelect, 'Error when getting firms');
         $firms = array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $firm = New Firm($data['id'], $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription'], $data['metaKeywords'], $data['descAfter']);
+            $firm = New Firm($data['id'], $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription'], $data['metaKeywords'], $data['descAfter'], $data['h1']);
             $firms[$data['id']] = $firm;
         }
         $sqlSelect->closeCursor();
@@ -1208,4 +1208,29 @@ Class Model {
         return $data;
         
     }
+	
+	/*function getTypeMeta($typeId) {
+	$sqlSelect = $this->db->prepare('SELECT * FROM types WHERE id=:typeId');
+        $sqlSelect->bindParam(':typeId', $typeId);
+        $this->executeQuery($sqlSelect, 'Error when getting a type with id=' . $typeId);
+        $data = $sqlSelect->fetch();
+        if ($data) {
+            $type = new Types($typeId, $data['name'], $data['description'], $data['metaTitle'], $data['metaDescription'], $data['metaKeywords'], $data['descAfter']);
+        }    
+        $sqlSelect->closeCursor();
+        return $type;
+		}
+		
+	function getTypesMeta() {
+        $sqlSelect = $this->db->prepare('SELECT * FROM type ORDER BY name');
+        $this->executeQuery($sqlSelect, 'Error when getting types');
+        $types = array();
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $type = New Firm($data['id'], $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription'], $data['metaKeywords'], $data['descAfter'], $data['h1']);
+            $types[$data['id']] = $type;
+        }
+        $sqlSelect->closeCursor();
+        return $types;
+    }	
+	*/
 }
