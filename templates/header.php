@@ -5,11 +5,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?php
-        if ($metaTitle) {
-        ?>
-            <meta name="title" content="<?php echo $metaTitle ?>">
-        <?php
-        }
         if ($metaDescription) {
         ?>
             <meta name="description" content="<?php echo $metaDescription ?>">
@@ -20,8 +15,16 @@
             <meta name="keywords" content="<?php echo $metaKeywords ?>">
         <?php
         }
+        if ($metaTitle) {
         ?>
-        <!--title>Клевер экомаркет</title-->
+            <title><?php echo $metaTitle ?></title>
+        <?php
+        } else {
+        ?>
+            <title>Экомаркет Клевер</title>
+        <?php 
+        }
+        ?>
 
         <link rel="icon" href="/images/icon.png">
 
