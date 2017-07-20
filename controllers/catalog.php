@@ -39,6 +39,8 @@ Class Controller_Catalog Extends Controller_Base {
             else {
                 $this->registry['model']->logVisit(3);
                 $this->registry['template']->set('firms', $this->registry['firms']);
+                $this->registry['template']->set('metaTitle', 'Бренды натуральной косметики — интернет-магазин экологической косметики');
+                $this->registry['template']->set('metaDescription', 'Популярные производители эко косметики.');
                 $this->registry['template']->show('firm');
             }    
         }    
@@ -61,6 +63,8 @@ Class Controller_Catalog Extends Controller_Base {
             $this->registry['template']->show('catalog');
         } else {
             $this->registry['template']->set('types', $this->registry['types']);
+            $this->registry['template']->set('metaTitle', 'Экологическая косметика для взрослых и детей — интернет магазин Клевер');
+            $this->registry['template']->set('metaDescription', 'Каталог эко коcметики');
             $this->registry['model']->logVisit(4);
             $this->registry['template']->show('type');
         }    

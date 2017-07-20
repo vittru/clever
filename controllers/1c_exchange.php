@@ -4,13 +4,10 @@ Class Controller_1c_exchange Extends Controller_Base {
                     
     function index() {
 
-        // Папка для хранения временных файлов синхронизации
         $dir = '/tmp/';
-        // Обновлять все данные при каждой синхронизации
-        $full_update = true;
+        //$full_update = true;
 
-        // Название параметра товара, используемого как бренд
-        $start_time = microtime(true);
+        //$start_time = microtime(true);
         $max_exec_time = min(30, @ini_get("max_execution_time"));
         if(empty($max_exec_time))
             $max_exec_time = 30;
@@ -27,6 +24,11 @@ Class Controller_1c_exchange Extends Controller_Base {
         if(($_GET['type'] == 'sale' || $_GET['type'] == 'catalog') && $_GET['mode'] == 'init') {
             if ($_COOKIE['PHPSESSID'] == $this->registry['model']->getExportSession()) {
                 $this->registry['model']->logVisit(2001);
+                $tmp_files = glob($dir.'*.*');
+                if(is_array($tmp_files))
+                    foreach($tmp_files as $v) {
+                        unlink($v);
+                    }        
                 print "zip=no\n";
                 print "file_limit=1000000\n";
             } else {
@@ -36,97 +38,103 @@ Class Controller_1c_exchange Extends Controller_Base {
         }
 
         if($_GET['type'] == 'sale' && $_GET['mode'] == 'file') {
-            $filename = $simpla->request->get('filename');
+            if ($_COOKIE['PHPSESSID'] == $this->registry['model']->getExportSession()) {
+                $filename = $_GET('filename');
 
-            $f = fopen($dir.$filename, 'ab');
-            fwrite($f, file_get_contents('php://input'));
-            fclose($f);
-            $xml = simplexml_load_file($dir.$filename);	
-            foreach($xml->Документ as $xml_order) {
-                $order = new stdClass;
-                $order->id = $xml_order->Номер;
-                $existed_order = $simpla->orders->get_order(intval($order->id));
+                $f = fopen($dir.$filename, 'ab');
+                fwrite($f, file_get_contents('php://input'));
+                fclose($f);
 
-                $order->date = $xml_order->Дата.' '.$xml_order->Время;
-                $order->name = $xml_order->Контрагенты->Контрагент->Наименование;
-                if(isset($xml_order->ЗначенияРеквизитов->ЗначениеРеквизита))
-                    foreach($xml_order->ЗначенияРеквизитов->ЗначениеРеквизита as $r) {
-                        switch ($r->Наименование) {
-                            case 'Проведен':
-                                $proveden = ($r->Значение == 'true');
-                                break;
-                            case 'ПометкаУдаления':
-                                $udalen = ($r->Значение == 'true');
-                                break;
+/*                $xml = simplexml_load_file($dir.$filename);	
+                foreach($xml->Документ as $xml_order) {
+                    $order = new stdClass;
+                    $order->id = $xml_order->Номер;
+                    $existed_order = $simpla->orders->get_order(intval($order->id));
+
+                    $order->date = $xml_order->Дата.' '.$xml_order->Время;
+                    $order->name = $xml_order->Контрагенты->Контрагент->Наименование;
+                    if(isset($xml_order->ЗначенияРеквизитов->ЗначениеРеквизита))
+                        foreach($xml_order->ЗначенияРеквизитов->ЗначениеРеквизита as $r) {
+                            switch ($r->Наименование) {
+                                case 'Проведен':
+                                    $proveden = ($r->Значение == 'true');
+                                    break;
+                                case 'ПометкаУдаления':
+                                    $udalen = ($r->Значение == 'true');
+                                    break;
+                            }
                         }
+
+                    if($udalen)
+                        $order->status = 3;
+                    elseif($proveden)
+                        $order->status = 1;
+                    elseif(!$proveden)
+                        $order->status = 0;
+
+                    if($existed_order) {
+                        $simpla->orders->update_order($order->id, $order);
+                    } else {
+                        $order->id = $simpla->orders->add_order($order);
                     }
 
-                if($udalen)
-                    $order->status = 3;
-                elseif($proveden)
-                    $order->status = 1;
-                elseif(!$proveden)
-                    $order->status = 0;
+                    $purchases_ids = array();
+                    // Товары
+                    foreach($xml_order->Товары->Товар as $xml_product) {
+                        $purchase = null;
+                        //  Id товара и варианта (если есть) по 1С
+                        $product_1c_id = $variant_1c_id = '';
+                        @list($product_1c_id, $variant_1c_id) = explode('#', $xml_product->Ид);
+                        if(empty($product_1c_id))
+                            $product_1c_id = '';
+                        if(empty($variant_1c_id))
+                            $variant_1c_id = '';
 
-                if($existed_order) {
-                    $simpla->orders->update_order($order->id, $order);
-                } else {
-                    $order->id = $simpla->orders->add_order($order);
-                }
+                        // Ищем товар
+                        $simpla->db->query('SELECT id FROM __products WHERE external_id=?', $product_1c_id);
+                        $product_id = $simpla->db->result('id');
+                        $simpla->db->query('SELECT id FROM __variants WHERE external_id=? AND product_id=?', $variant_1c_id, $product_id);
+                        $variant_id = $simpla->db->result('id');
 
-                $purchases_ids = array();
-                // Товары
-                foreach($xml_order->Товары->Товар as $xml_product) {
-                    $purchase = null;
-                    //  Id товара и варианта (если есть) по 1С
-                    $product_1c_id = $variant_1c_id = '';
-                    @list($product_1c_id, $variant_1c_id) = explode('#', $xml_product->Ид);
-                    if(empty($product_1c_id))
-                        $product_1c_id = '';
-                    if(empty($variant_1c_id))
-                        $variant_1c_id = '';
+                        $purchase = new stdClass;		
+                        $purchase->order_id = $order->id;
+                        $purchase->product_id = $product_id;
+                        $purchase->variant_id = $variant_id;
 
-                    // Ищем товар
-                    $simpla->db->query('SELECT id FROM __products WHERE external_id=?', $product_1c_id);
-                    $product_id = $simpla->db->result('id');
-                    $simpla->db->query('SELECT id FROM __variants WHERE external_id=? AND product_id=?', $variant_1c_id, $product_id);
-                    $variant_id = $simpla->db->result('id');
+                        $purchase->sku = $xml_product->Артикул;			
+                        $purchase->product_name = $xml_product->Наименование;
+                        $purchase->amount = $xml_product->Количество;
+                        $purchase->price = floatval($xml_product->ЦенаЗаЕдиницу);
 
-                    $purchase = new stdClass;		
-                    $purchase->order_id = $order->id;
-                    $purchase->product_id = $product_id;
-                    $purchase->variant_id = $variant_id;
+                        if(isset($xml_product->Скидки->Скидка)) {
+                            $discount = $xml_product->Скидки->Скидка->Процент;
+                            $purchase->price = $purchase->price*(100-$discount)/100;
+                        }
 
-                    $purchase->sku = $xml_product->Артикул;			
-                    $purchase->product_name = $xml_product->Наименование;
-                    $purchase->amount = $xml_product->Количество;
-                    $purchase->price = floatval($xml_product->ЦенаЗаЕдиницу);
-
-                    if(isset($xml_product->Скидки->Скидка)) {
-                        $discount = $xml_product->Скидки->Скидка->Процент;
-                        $purchase->price = $purchase->price*(100-$discount)/100;
+                        $simpla->db->query('SELECT id FROM __purchases WHERE order_id=? AND product_id=? AND variant_id=?', $order->id, $product_id, $variant_id);
+                        $purchase_id = $simpla->db->result('id');
+                        if(!empty($purchase_id))
+                            $purchase_id = $simpla->orders->update_purchase($purchase_id, $purchase);
+                        else
+                            $purchase_id = $simpla->orders->add_purchase($purchase);
+                        $purchases_ids[] = $purchase_id;
+                    }
+                    // Удалим покупки, которых нет в файле
+                    foreach($simpla->orders->get_purchases(array('order_id'=>intval($order->id))) as $purchase) {
+                        if(!in_array($purchase->id, $purchases_ids))
+                            $simpla->orders->delete_purchase($purchase->id);
                     }
 
-                    $simpla->db->query('SELECT id FROM __purchases WHERE order_id=? AND product_id=? AND variant_id=?', $order->id, $product_id, $variant_id);
-                    $purchase_id = $simpla->db->result('id');
-                    if(!empty($purchase_id))
-                        $purchase_id = $simpla->orders->update_purchase($purchase_id, $purchase);
-                    else
-                        $purchase_id = $simpla->orders->add_purchase($purchase);
-                    $purchases_ids[] = $purchase_id;
-                }
-                // Удалим покупки, которых нет в файле
-                foreach($simpla->orders->get_purchases(array('order_id'=>intval($order->id))) as $purchase) {
-                    if(!in_array($purchase->id, $purchases_ids))
-                        $simpla->orders->delete_purchase($purchase->id);
+                    $simpla->db->query('UPDATE __orders SET discount=0, total_price=? WHERE id=? LIMIT 1', $xml_order->Сумма, $order->id);
+
                 }
 
-                $simpla->db->query('UPDATE __orders SET discount=0, total_price=? WHERE id=? LIMIT 1', $xml_order->Сумма, $order->id);
-
+                print "success";
+                $simpla->settings->last_1c_orders_export_date = date("Y-m-d H:i:s");*/
+            } else {
+                $this->registry['model']->logVisit(404, false, $_SERVER['QUERY_STRING']);
+                $this->registry['template']->show('404');
             }
-
-            print "success";
-            $simpla->settings->last_1c_orders_export_date = date("Y-m-d H:i:s");
         }
 
         if($_GET['type'] == 'sale' && $_GET['mode'] == 'query') {
@@ -289,5 +297,14 @@ Class Controller_1c_exchange Extends Controller_Base {
         if($_GET['type'] == 'sale' && $_GET['mode'] == 'success') {
             $this->registry['model']->setLastExportDate(date("Y-m-d H:i:s"));
         }
+        
+        if($_GET['type'] == 'catalog' && $_GET['mode'] == 'file') {
+            $filename = basename($_GET['filename']);
+            $f = fopen($dir.$filename, 'ab');
+            fwrite($f, file_get_contents('php://input'));
+            fclose($f);
+            print "success\n";
+        } 
+        
     }
 }

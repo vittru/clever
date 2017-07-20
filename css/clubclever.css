@@ -795,6 +795,7 @@ h2 {
 
 #aa-product .aa-product-desc {
     padding-bottom: 35px;
+    text-align: justify;
 }
 #aa-product .aa-product-desc li {
     list-style: square;

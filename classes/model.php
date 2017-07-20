@@ -1113,10 +1113,10 @@ Class Model {
     }
     
     function getBlogEntries() {
-        $sqlSelect = $this->db->prepare("SELECT id, name, date, text, author, url FROM blogentries ORDER BY date DESC LIMIT 10");
+        $sqlSelect = $this->db->prepare("SELECT * FROM blogentries ORDER BY date DESC");
         $this->executeQuery($sqlSelect, 'Error when getting blog entries');
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $entry = new Blog($data['id'], $data['name'], $data['author'], $data['url'], $data['text'], $data['date']);
+            $entry = new Blog($data['id'], $data['name'], $data['author'], $data['url'], $data['text'], $data['date'], $data['metaTitle'], $data['metaDescription']);
             if (!isset($entries))
                 $entries = [$entry];
             else
@@ -1132,7 +1132,7 @@ Class Model {
         $this->executeQuery($sqlSelect, 'Error when getting blog entry with id=' . $entryId);
         $entry = $sqlSelect->fetch();
         $sqlSelect->closeCursor();
-        $blog = new Blog($entry['id'], $entry['name'], $entry['author'], $entry['url'], $entry['text'], $entry['date']);
+        $blog = new Blog($entry['id'], $entry['name'], $entry['author'], $entry['url'], $entry['text'], $entry['date'], $entry['metaTitle'], $entry['metaDescription']);
         return $blog;
     }
 

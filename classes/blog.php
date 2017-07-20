@@ -9,8 +9,10 @@ Class Blog {
     public $url; 
     public $text;
     public $date;
+    public $metaTitle;
+    public $metaDescription;
    
-    function __construct($id, $name, $author, $url, $text, $date) {
+    function __construct($id, $name, $author, $url, $text, $date, $metaTitle, $metaDescription) {
         $this->id = $id;
         $this->name = $name;
         setlocale(LC_TIME, "ru_RU.UTF-8");
@@ -18,6 +20,8 @@ Class Blog {
         $this->text = $text;
         $this->author = $author;
         $this->url = $url;
+        $this->metaTitle = $metaTitle;
+        $this->metaDescription = $metaDescription;
     }
     
     function getImage() {

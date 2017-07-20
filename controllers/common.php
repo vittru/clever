@@ -8,16 +8,22 @@ Class Controller_Common Extends Controller_Base {
     }
 
     function delivery() {
+        $this->registry['template']->set('metaTitle', 'Доставка в магазине Клевер');
+        $this->registry['template']->set('metaDescription', 'Доставка в интернет-магазине Клевер в Самаре и Самарской области осуществляется в течение 1-3 дней с момента подтверждения полной комплектации заказа с 9:00 до 24:00.');
         $this->registry['model']->logVisit(12);
         $this->registry['template']->show('delivery');
     }
 
     function payment() {
+        $this->registry['template']->set('metaTitle', 'Оплата в интернет-магазине Клевер');
+        $this->registry['template']->set('metaDescription', 'Информация об оплате в интернет-магазине Клевер.');
         $this->registry['model']->logVisit(13);
         $this->registry['template']->show('payment');
     }
     
     function moneyback() {
+        $this->registry['template']->set('metaTitle', 'Возврат товаров в интернет-магазине Клевер');
+        $this->registry['template']->set('metaDescription', 'Информация о возврате товаров в интернет-магазине Клевер.');
         $this->registry['model']->logVisit(15);
         $this->registry['template']->show('moneyback');
     }
@@ -40,6 +46,8 @@ Class Controller_Common Extends Controller_Base {
     }
     
     function bonus() {
+        $this->registry['template']->set('metaTitle', 'Бонусы от магазина Клевер');
+        $this->registry['template']->set('metaDescription', 'Информация о бонусах в магазине Клевер.');
         $this->registry['model']->logVisit(32);
         $this->registry['template']->show('bonus');
     }
@@ -51,6 +59,8 @@ Class Controller_Common Extends Controller_Base {
             if ($entry->name) {
                 $this->registry['model']->logVisit(33, $entryId);
                 $this->registry['template']->set('entry', $entry);
+                $this->registry['template']->set('metaTitle', $entry->metaTitle);
+                $this->registry['template']->set('metaDescription', $entry->metaDescription);
                 $this->registry['template']->show('blog');
             } else {
                 $this->registry['model']->logVisit(404, false, $_SERVER['QUERY_STRING']);
@@ -59,6 +69,8 @@ Class Controller_Common Extends Controller_Base {
         } else { 
             $this->registry['model']->logVisit(33);
             $this->registry['template']->set('entries', $this->registry['model']->getBlogEntries());
+            $this->registry['template']->set('metaTitle', 'Статьи о косметическом уходе');
+            $this->registry['template']->set('metaDescription', 'Полезные статьи об уходе');
             $this->registry['template']->show('blog');
         }    
     }
