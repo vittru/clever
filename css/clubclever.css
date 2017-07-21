@@ -961,9 +961,12 @@ h2 {
   margin-right: 5px;
 }
 .aa-product-catg li .aa-product-title {
-  color: #333;
-  margin-bottom: 5px;
-  font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: 500;
+    line-height: 1.1;
 }
 .aa-product-catg li .aa-product-title a {
   color: #333;

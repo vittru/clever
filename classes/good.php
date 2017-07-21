@@ -128,11 +128,11 @@ Class Good {
             echo '"><span class="fa fa-shopping-cart"></span>В корзину</a>';
         }
         echo '<figcaption>';
-        echo '<h4 class="aa-product-title"><a href="/showgood?pm&id=';
+        echo '<div class="aa-product-title"><a href="/showgood?pm&id=';
         echo $this->id;
         echo '" data-toggle2="tooltip" data-placement="top" data-toggle="modal" data-target="#single-product">';
         echo $this->name;
-        echo '</a></h4>';
+        echo '</a></div>';
         echo '<span class="aa-product-price" value=';
         if ($bb)
             echo $this->getBBPrice();
