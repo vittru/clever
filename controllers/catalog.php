@@ -79,6 +79,8 @@ Class Controller_Catalog Extends Controller_Base {
             $this->registry['template']->set('catalogGoods', $this->registry['model']->getCategoryGoods($category->id));
             $this->registry['template']->set('pageHeader', $category->name);
             $this->registry['template']->set('pageSubHeader', $category->description);
+            $this->registry['template']->set('metaTitle', $category->metaTitle);
+            $this->registry['template']->set('metaDescription', $category->metaDescription);
             $this->registry['template']->set('bestBefore', false);
             $this->registry['template']->set('hideFilterCat', true);
             $this->registry['template']->show('catalog');

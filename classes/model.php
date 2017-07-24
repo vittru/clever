@@ -971,7 +971,9 @@ Class Model {
         $data = $sqlSelect->fetch();
         $sqlSelect->closeCursor();
         if ($data) {
-            $category = new Category($data['id'], $data['name'], $data['description'], $data['url']);
+            $this->registry['logger']->lwrite($data['metaTitle']);
+            $this->registry['logger']->lwrite($data['metaDescription']);
+            $category = new Category($data['id'], $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription']);
         }
         return $category;
     }
@@ -995,7 +997,7 @@ Class Model {
         $sqlSelect = $this->db->prepare('SELECT * FROM categories ORDER BY name');
         $this->executeQuery($sqlSelect, 'Error when getting categories');
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $category = New Category($data['id'], $data['name'], $data['description'], $data['url']);
+            $category = New Category($data['id'], $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription']);
             if (!isset($categories))
                 $categories = [$category];
             else

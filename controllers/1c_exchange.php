@@ -24,11 +24,11 @@ Class Controller_1c_exchange Extends Controller_Base {
         if(($_GET['type'] == 'sale' || $_GET['type'] == 'catalog') && $_GET['mode'] == 'init') {
             if ($_COOKIE['PHPSESSID'] == $this->registry['model']->getExportSession()) {
                 $this->registry['model']->logVisit(2001);
-                $tmp_files = glob($dir.'*.*');
-                if(is_array($tmp_files))
-                    foreach($tmp_files as $v) {
-                        unlink($v);
-                    }        
+                //$tmp_files = glob($dir.'*.*');
+                //if(is_array($tmp_files))
+                //    foreach($tmp_files as $v) {
+                //        unlink($v);
+                //    }        
                 print "zip=no\n";
                 print "file_limit=1000000\n";
             } else {
