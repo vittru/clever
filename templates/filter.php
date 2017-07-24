@@ -4,7 +4,7 @@
         if (!$hideFilterFirm) {
         ?>
         <div class="aa-sidebar-widget">
-            <h3>Бренд</h3>
+            <div class="filter-header">Бренд</div>
             <select multiple="multiple" class="SlectBox" placeholder="Все бренды">
                 <?php
                 foreach ($this->registry['firms'] as $id=>$firmit) {
@@ -18,7 +18,7 @@
         if (!$hideFilterType) {
         ?>
         <div class="aa-sidebar-widget">
-            <h3>Для кого</h3>
+            <div class="filter-header">Для кого</div>
             <select multiple="multiple" class="SlectBox" placeholder="Для всех">
                 <?php
                 foreach ($this->registry['types'] as $id=>$type) {
@@ -32,7 +32,7 @@
         if (!$hideFilterCat) {
         ?>
         <div class="aa-sidebar-widget">
-            <h3>Что</h3>
+            <div class="filter-header">Что</div>
             <select multiple="multiple" class="SlectBox" placeholder="Все товары">
                 <?php
                 foreach ($this->registry['supercats'] as $id=>$supercat) {
@@ -45,7 +45,7 @@
         }
         ?>
         <div class="aa-sidebar-widget">
-            <h3>От чего</h3>
+            <div class="filter-header">От чего</div>
             <select multiple="multiple" class="SlectBox" placeholder="От любой проблемы">
                 <?php
                 foreach ($this->registry['problems'] as $id=>$problem) {
@@ -55,7 +55,7 @@
             </select>
         </div>
         <div class="aa-sidebar-widget">
-            <h3>Для чего</h3>
+            <div class="filter-header">Для чего</div>
             <select multiple="multiple" class="SlectBox" placeholder="Любой эффект">
                 <?php
                 foreach ($this->registry['effects'] as $id=>$effect) {
@@ -65,7 +65,7 @@
             </select>
         </div>
         <div class="aa-sidebar-widget">
-            <h3>По типу кожи</h3>
+            <div class="filter-header">По типу кожи</div>
             <select multiple="multiple" class="SlectBox" placeholder="Все типы">
                 <?php
                 foreach ($this->registry['skintypes'] as $id=>$skintype) {
@@ -75,7 +75,7 @@
             </select>
         </div>
         <div class="aa-sidebar-widget">
-            <h3>По типу волос</h3>
+            <div class="filter-header">По типу волос</div>
             <select multiple="multiple" class="SlectBox" placeholder="Все типы">
                 <?php
                 foreach ($this->registry['hairtypes'] as $id=>$hairtype) {

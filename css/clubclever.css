@@ -1015,6 +1015,23 @@ h2 {
     list-style: square;    
 }
 
+.footer-header {
+    font-size: 20px;
+    color: #51A512;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+.filter-header {
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;    
+    font-weight: 500;
+    line-height: 1.1;
+}
+
 .aa-product-catg li .aa-badge {
   position: absolute;
   top: 5%;

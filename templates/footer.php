@@ -7,7 +7,7 @@
                         <div class="row">
                             <div class="col-md-3 col-sm-6">
                                 <div class="aa-footer-widget">
-                                    <h2>Главное меню</h2>
+                                    <div class="footer-header">Главное меню</div>
                                     <ul class="aa-footer-nav">
                                         <li><a href="/catalog/type">Каталог</a></li>
                                         <li><a href="/catalog/category/presents">Подарки</a></li>
@@ -20,7 +20,7 @@
                             <div class="col-md-3 col-sm-6">
                                 <div class="aa-footer-widget">
                                     <div class="aa-footer-widget">
-                                        <h2>Информация</h2>
+                                        <div class="footer-header">Информация</div>
                                         <ul class="aa-footer-nav">
                                             <!--li><a href="/about">О нас</a></li-->
                                             <li><a href="/common/delivery">Доставка</a></li>
@@ -35,7 +35,7 @@
                             <div class="col-md-3 col-sm-6">
                                 <div class="aa-footer-widget">
                                     <div class="aa-footer-widget">
-                                        <h2>Материалы</h2>
+                                        <div class="footer-header">Материалы</div>
                                         <ul class="aa-footer-nav">
                                             <li><a target="_blank" href="https://www.biobeauty.ru/">БиоБьюти</a></li>
                                             <li><a target="_blank" href="http://master-om.com/">Мастерская Олеси Мустаевой</a></li>
@@ -48,7 +48,7 @@
                             <div class="col-md-3 col-sm-6">
                                 <div class="aa-footer-widget">
                                     <div class="aa-footer-widget">
-                                        <h2>Наши контакты</h2>
+                                        <div class="footer-header">Наши контакты</div>
                                         <address>
                                             <p><span class="fa fa-phone"></span>+7-996-725-00-61</p>
                                             <p><span class="fa fa-phone"></span>+7-996-725-00-62</p>

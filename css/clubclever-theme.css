@@ -146,7 +146,7 @@ a.btn:focus {
 #aa-catg-head-banner .aa-catg-head-banner-area .aa-catg-head-banner-content .breadcrumb .active {
   color: #51A512;
 }
-#aa-product .aa-sidebar .aa-sidebar-widget h3 {
+#aa-product .aa-sidebar .aa-sidebar-widget .filter-header {
   color: #51A512;
   border-bottom: 1px solid #51A512;
 }
