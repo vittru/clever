@@ -11,7 +11,11 @@ Class Controller_Catalog Extends Controller_Base {
         $this->registry['model']->logVisit(3, $firmId);
         $firm = $this->registry['model']->getFirm($firmId);
         if ($firm) {
-            $this->registry['template']->set('pageHeader', $firm->name);        
+            if ($firm->h1)
+                $header = $firm->h1;
+            else
+                $header = $firm->name;
+            $this->registry['template']->set('pageHeader', $header);        
             $this->registry['template']->set('pageSubHeader', $firm->description);
             $this->registry['template']->set('catalogGoods', $firm->goods);
             $this->registry['template']->set('metaTitle', $firm->metaTitle);
