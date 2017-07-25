@@ -11,7 +11,7 @@ Class Controller_Search Extends Controller_Base {
             if (!empty($value) and $key!="route") {
                 switch ($key) {
                     case "type":
-                        $pageSubHeader .= "<tr><td></td><td class=\"bold\">Товары ".mb_strtolower($this->registry['types'][$value])."</td></tr>";
+                        $pageSubHeader .= "<tr><td></td><td class=\"bold\">Товары ".mb_strtolower($this->registry['types'][$value]->name)."</td></tr>";
                         break;
                     case "name":
                         $pageSubHeader .= "<tr><td>Название:</td><td class=\"bold\">".$value."</td></tr>";

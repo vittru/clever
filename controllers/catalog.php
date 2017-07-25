@@ -37,7 +37,7 @@ Class Controller_Catalog Extends Controller_Base {
         } else {          
             $rt=explode('/', $_GET['route']);
             $route=$rt[(count($rt)-1)];
-            $firmId = $this->registry['model']->getFirmIdByUrl($route);
+            $firmId = $this->registry['model']->getObjectIdByUrl('firms', $route);
             if ($firmId)
                 $this->showFirm($firmId);
             else {
@@ -50,27 +50,37 @@ Class Controller_Catalog Extends Controller_Base {
         }    
     }
     
+    private function showType($typeId) {
+        $metaData = $this->registry['model']->getTypeMeta($typeId);
+        $this->registry['template']->set('pageHeader', 'Товары ' . mb_strtolower($this->registry['types'][$typeId]->name));
+        $this->registry['template']->set('catalogGoods', $this->registry['model']->getGoodsByType($typeId));
+        $this->registry['template']->set('bestBefore', false);
+        $this->registry['template']->set('hideFilterType', true);
+        $this->registry['template']->set('pageSubHeader', $metaData['description']);
+        $this->registry['template']->set('metaTitle', $metaData['metaTitle']);
+        $this->registry['template']->set('metaDescription', $metaData['metaDescription']);
+        $this->registry['template']->set('metaKeywords', $metaData['metaKeywords']);
+        $this->registry['template']->set('descAfter', $metaData['descAfter']);
+        $this->registry['model']->logVisit(4, $typeId);
+        $this->registry['template']->show('catalog');
+    }
+    
     function type() {
-        $typeId=$_GET['id'];
-        if ($typeId) {
-            $metaData = $this->registry['model']->getTypeMeta($typeId);
-            $this->registry['template']->set('pageHeader', 'Товары ' . mb_strtolower($this->registry['types'][$typeId]));
-            $this->registry['template']->set('catalogGoods', $this->registry['model']->getGoodsByType($typeId));
-            $this->registry['template']->set('bestBefore', false);
-            $this->registry['template']->set('hideFilterType', true);
-            $this->registry['template']->set('pageSubHeader', $metaData['description']);
-            $this->registry['template']->set('metaTitle', $metaData['metaTitle']);
-            $this->registry['template']->set('metaDescription', $metaData['metaDescription']);
-            $this->registry['template']->set('metaKeywords', $metaData['metaKeywords']);
-            $this->registry['template']->set('descAfter', $metaData['descAfter']);
-            $this->registry['model']->logVisit(4, $typeId);
-            $this->registry['template']->show('catalog');
-        } else {
-            $this->registry['template']->set('types', $this->registry['types']);
-            $this->registry['template']->set('metaTitle', 'Экологическая косметика для взрослых и детей — интернет магазин Клевер');
-            $this->registry['template']->set('metaDescription', 'Каталог эко коcметики');
-            $this->registry['model']->logVisit(4);
-            $this->registry['template']->show('type');
+        if (isset($_GET['id']))
+            $this->showType ($_GET['id']);
+        else {
+            $rt=explode('/', $_GET['route']);
+            $route=$rt[(count($rt)-1)];
+            $typeId = $this->registry['model']->getObjectIdByUrl('types', $route);
+            if ($typeId)
+                $this->showType($typeId);
+            else {
+                $this->registry['template']->set('types', $this->registry['types']);
+                $this->registry['template']->set('metaTitle', 'Экологическая косметика для взрослых и детей — интернет магазин Клевер');
+                $this->registry['template']->set('metaDescription', 'Каталог эко коcметики');
+                $this->registry['model']->logVisit(4);
+                $this->registry['template']->show('type');
+            }    
         }    
     }
 

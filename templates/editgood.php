@@ -58,9 +58,9 @@ if ($goodId) {
                         <label class="col-md-2">Для кого:</label>
                         <div class="col-md-10">
                         <?php
-                        foreach ($this->registry['types'] as $key => $value) {
+                        foreach ($this->registry['types'] as $id => $type) {
                         ?>
-                            <label class="checkbox-inline" style="margin: 0 10px 0 10px;"><input type="checkbox" value="" name="mentype<?php echo $key ?>" <?php if (in_array($value, $good->types)) echo "checked" ?>><?php echo $value ?></label>
+                            <label class="checkbox-inline" style="margin: 0 10px 0 10px;"><input type="checkbox" value="" name="mentype<?php echo $id ?>" <?php if (in_array($type->name, $good->types)) echo "checked" ?>><?php echo $type->name ?></label>
                         <?php
                         }
                         ?>

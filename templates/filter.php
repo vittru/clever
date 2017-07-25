@@ -22,7 +22,7 @@
             <select multiple="multiple" class="SlectBox" placeholder="Для всех">
                 <?php
                 foreach ($this->registry['types'] as $id=>$type) {
-                    echo '<option id="type_'.$id.'"/> ' . $type . '</option>';
+                    echo '<option id="type_'.$id.'"/> ' . $type->name . '</option>';
                 }
                 ?>
             </select>

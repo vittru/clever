@@ -13,7 +13,7 @@ Class Controller_Showgood Extends Controller_Base {
         } else {    
             $rt=explode('/', $_GET['route']);
             $route=$rt[(count($rt)-1)];
-            $goodId = $this->registry['model']->getGoodIdByUrl($route);
+            $goodId = $this->registry['model']->getObjectIdByUrl('goods', $route);
             if (!$goodId)
                 $this->registry['template']->show('404');
             else {

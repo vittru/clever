@@ -847,7 +847,28 @@ Class Model {
         return $firms;
     }
     
-    function getFirmIdByUrl($url) {
+    function getTypes() {
+        $sqlSelect = $this->db->prepare('SELECT * FROM types ORDER BY name');
+        $this->executeQuery($sqlSelect, 'Error when getting types');
+        $types = array();
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $type = New Firm($data['id'], $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription'], $data['metaKeywords'], $data['descAfter'], '');
+            $types[$data['id']] = $type;
+        }
+        $sqlSelect->closeCursor();
+        return $types;        
+    }
+    
+    function getObjectIdByUrl($object, $url) {
+        $sqlSelect = $this->db->prepare('SELECT id FROM '.$object.' WHERE url=:url');
+        $sqlSelect->bindParam(':url', $url);
+        $this->executeQuery($sqlSelect, 'Error when getting '.$object.' with url='.$url);
+        $firmId = $sqlSelect->fetchColumn();
+        $sqlSelect->closeCursor();
+        return $firmId;
+    }
+
+    /*    function getFirmIdByUrl($url) {
         $sqlSelect = $this->db->prepare('SELECT id FROM firms WHERE url=:url');
         $sqlSelect->bindParam(':url', $url);
         $this->executeQuery($sqlSelect, 'Error when getting firm with url='.$url);
@@ -863,7 +884,7 @@ Class Model {
         $goodId = $sqlSelect->fetchColumn();
         $sqlSelect->closeCursor();
         return $goodId;
-    }
+    }*/
     
     function logout($userId) {
         $sqlUpdate = $this->db->prepare('UPDATE users SET profile=NULL WHERE id=:userId');
@@ -971,8 +992,6 @@ Class Model {
         $data = $sqlSelect->fetch();
         $sqlSelect->closeCursor();
         if ($data) {
-            $this->registry['logger']->lwrite($data['metaTitle']);
-            $this->registry['logger']->lwrite($data['metaDescription']);
             $category = new Category($data['id'], $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription']);
         }
         return $category;
@@ -1208,31 +1227,5 @@ Class Model {
         $data = $sqlSelect->fetch();
         $sqlSelect->closeCursor();
         return $data;
-        
     }
-	
-	/*function getTypeMeta($typeId) {
-	$sqlSelect = $this->db->prepare('SELECT * FROM types WHERE id=:typeId');
-        $sqlSelect->bindParam(':typeId', $typeId);
-        $this->executeQuery($sqlSelect, 'Error when getting a type with id=' . $typeId);
-        $data = $sqlSelect->fetch();
-        if ($data) {
-            $type = new Types($typeId, $data['name'], $data['description'], $data['metaTitle'], $data['metaDescription'], $data['metaKeywords'], $data['descAfter']);
-        }    
-        $sqlSelect->closeCursor();
-        return $type;
-		}
-		
-	function getTypesMeta() {
-        $sqlSelect = $this->db->prepare('SELECT * FROM type ORDER BY name');
-        $this->executeQuery($sqlSelect, 'Error when getting types');
-        $types = array();
-        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $type = New Firm($data['id'], $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription'], $data['metaKeywords'], $data['descAfter'], $data['h1']);
-            $types[$data['id']] = $type;
-        }
-        $sqlSelect->closeCursor();
-        return $types;
-    }	
-	*/
 }

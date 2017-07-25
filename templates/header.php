@@ -227,8 +227,8 @@
                                                             <select class="form-control" name="type">
                                                                 <option value="0" disabled selected>Для кого</option>
                                                                 <?php
-                                                                foreach($this->registry['types'] as $key=>$value) {
-                                                                    echo "<option value=".$key.">".$value."</option>";
+                                                                foreach($this->registry['types'] as $id=>$type) {
+                                                                    echo "<option value=".$id.">".$type->name."</option>";
                                                                 }
                                                                 ?>
                                                             </select>
@@ -357,11 +357,11 @@
                             <li><a href="/catalog/type">Каталог<span class="caret"></a>
                                 <ul class="dropdown-menu">
                                     <?php 
-                                    foreach ($this->registry['types'] as $key => $value) {
+                                    foreach ($this->registry['types'] as $id => $type) {
                                     ?>
                                         <li>
-                                            <a href="/catalog/type?id=<?php echo $key; ?>">
-                                                <?php echo $value; ?>
+                                            <a href="/catalog/type/<?php echo $type->url; ?>">
+                                                <?php echo $type->name; ?>
                                             </a>
                                         </li>        
                                     <?php        

@@ -12,7 +12,7 @@
     $registry->set('categories', $model->getCatalog('categories'));
     $registry->set('firms', $model->getFirms());
     $registry->set('effects', $model->getCatalog('effects'));
-    $registry->set('types', $model->getCatalog('types'));
+    $registry->set('types', $model->getTypes());
     $registry->set('problems', $model->getCatalog('problems'));
     $registry->set('branches', $model->getBranches());
     $registry->set('supercats', $model->getCatalog('supercats'));

@@ -66,10 +66,10 @@ if ($banners->valid()) {
                             <ul class="nav nav-tabs aa-products-tab">
                                 <?php 
                                 $i=1;
-                                foreach($this->registry['types'] as $typeId=>$typeName) {
+                                foreach($this->registry['types'] as $typeId=>$type) {
                                 ?>
                                     <li <?php if ($i==1) echo 'class="active"' ?>>
-                                        <a href="#type<?php echo $typeId ?>" data-toggle="tab"><?php echo $typeName ?></a>
+                                        <a href="#type<?php echo $typeId ?>" data-toggle="tab"><?php echo $type->name ?></a>
                                     </li>
                                     <?php
                                     $i++;
@@ -79,7 +79,7 @@ if ($banners->valid()) {
                             <div class="tab-content">
                                 <?php 
                                 $i=0;
-                                foreach($this->registry['types'] as $typeId=>$typeName) {
+                                foreach($this->registry['types'] as $typeId=>$type) {
                                     $i++
                                 ?>
                                 <!-- Category -->
@@ -91,7 +91,7 @@ if ($banners->valid()) {
                                         }
                                         ?>
                                         </ul>
-                                        <a class="aa-browse-btn green-button" href="/catalog/type?id=<?php echo $typeId ?>">Больше товаров <?php echo mb_strtolower($typeName) ?><span class="fa fa-long-arrow-right"></span></a>
+                                        <a class="aa-browse-btn green-button" href="/catalog/type/<?php echo $type->url ?>">Больше товаров <?php echo mb_strtolower($type->name) ?><span class="fa fa-long-arrow-right"></span></a>
 
                                     </div>
                                 <?php
