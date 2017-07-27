@@ -330,7 +330,7 @@ img {
   width: 55%;
   font-size: 14px;
 }
-#aa-header .aa-header-bottom .aa-cartbox .aa-cartbox-summary ul li .aa-cartbox-info h4 {
+#aa-header .aa-header-bottom .aa-cartbox .aa-cartbox-summary ul li .aa-cartbox-info .cart-good {
   font-size: 14px;
   margin-bottom: 20px;
   margin-top: 0;

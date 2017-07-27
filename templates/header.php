@@ -168,14 +168,14 @@
                                         <li>
                                             <img class="aa-cartbox-img" src="/images/goods/present.jpg" alt="Подарок">
                                             <div class="aa-cartbox-info">
-                                                <h4>
+                                                <div class="cart-good">
                                                 <?php
                                                 if ($total >= $this->registry['presentSum'])
                                                     echo 'Ваш личный подарок от Экомаркет "Клевер"';
                                                 else
                                                     echo 'Оформите заказ на&nbsp;' . $this->registry['presentSum'] . ' рублей и&nbsp;получите подарок!';
                                                 ?>
-                                                </h4>
+                                                </div>
                                             </div>
                                         </li>
                                         <?php
@@ -187,7 +187,7 @@
                                                 <li>
                                                     <a class="aa-cartbox-img" href="/showgood?id=<?php echo $good->id ?>"><img src="<?php echo $good->getImage() ?>" alt="<?php echo $good->name ?>"></a>
                                                     <div class="aa-cartbox-info">
-                                                        <a href="/showgood?id=<?php echo $good->id; ?>"><h4><?php echo $good->name ?> <?php echo $size->size ?></h4></a>
+                                                        <a href="/showgood?id=<?php echo $good->id; ?>"><div class="cart-good"><?php echo $good->name ?> <?php echo $size->size ?></div></a>
                                                         <p><?php echo $cartItem->quantity ?> x <?php echo $cartItem->price . ' руб.' ?></p>
                                                     </div>
                                                     <a class="aa-remove-product" id="<?php echo $cartItem->goodId; ?>" value="<?php echo $cartItem->sizeId; ?>"><span class="fa fa-times"></span></a>

@@ -37,10 +37,10 @@
                                     <div class="aa-footer-widget">
                                         <div class="footer-header">Материалы</div>
                                         <ul class="aa-footer-nav">
-                                            <li><a target="_blank" href="https://www.biobeauty.ru/">БиоБьюти</a></li>
-                                            <li><a target="_blank" href="http://master-om.com/">Мастерская Олеси Мустаевой</a></li>
-                                            <li><a target="_blank" href="http://www.mi-ko.org/">МиКо</a></li>
-                                            <li><a href="/common/certs">Сертификаты</a></li>
+                                            <li><a target="_blank" rel="nofollow" href="https://www.biobeauty.ru/">БиоБьюти</a></li>
+                                            <li><a target="_blank" rel="nofollow" href="http://master-om.com/">Мастерская Олеси Мустаевой</a></li>
+                                            <li><a target="_blank" rel="nofollow" href="http://www.mi-ko.org/">МиКо</a></li>
+                                            <li><a rel="nofollow" href="/common/certs">Сертификаты</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -57,11 +57,11 @@
                                         </address>
                                         <div class="aa-footer-social">
                                             <!--a target="_blank" href="http://facebook.com"><span class="fa fa-facebook"></span></a-->
-                                            <a target="_blank" href="https://vk.com/clubcleverru"><span class="fa fa-vk"></span></a>
-                                            <a target="_blank" href="http://www.instagram.com/clubclever.ru/"><span class="fa fa-instagram"></span></a>
-                                            <a target="_blank" href="https://www.youtube.com/channel/UCZqTkI8X0KQGyINHpblqhfg"><span class="fa fa-youtube"></span></a>
+                                            <a target="_blank" rel="nofollow" href="https://vk.com/clubcleverru"><span class="fa fa-vk"></span></a>
+                                            <a target="_blank" rel="nofollow" href="http://www.instagram.com/clubclever.ru/"><span class="fa fa-instagram"></span></a>
+                                            <a target="_blank" rel="nofollow" href="https://www.youtube.com/channel/UCZqTkI8X0KQGyINHpblqhfg"><span class="fa fa-youtube"></span></a>
                                         </div>
-                                        <div><a href="http://seoprostor.ru" target="_blank">Продвижение сайта</a> - «SEO Простор»</div>
+                                        <div><a href="http://seoprostor.ru" rel="nofollow" target="_blank">Продвижение сайта</a> - «SEO Простор»</div>
                                     </div>
                                 </div>
                             </div>

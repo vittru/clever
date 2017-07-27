@@ -341,10 +341,10 @@ a.btn:focus {
     color: #DF5600;
 }
 
-.aa-cartbox-info h4 {
+.aa-cartbox-info .cart-good {
     color: black;
 }
-.aa-cartbox-info h4:hover {
+.aa-cartbox-info .cart-good:hover {
     color: #51A512;
 }
 .aa-remove-product {
