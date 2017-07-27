@@ -58,7 +58,7 @@ if ($banners->valid()) {
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="center">Популярные товары</h1>
+                <h2 class="center">Популярные товары</h2>
                 <div class="row">
                     <div class="aa-product-area">
                         <div class="aa-product-inner">
@@ -106,6 +106,7 @@ if ($banners->valid()) {
                 </div>
                 <div class="row">
                     <div class="aa-product-desc">
+                        <h1 class="center">Интернет-магазин натуральной (ЭКО) косметики в Самаре</h1>
                         <p>Натуральная косметика способна преобразить Вашу внешность и при этом оказать положительное влияние на здоровье. Органическая косметика обладает рядом преимуществ в отличии от стандартной современной косметики, представленной на полках магазинов.</p>
                         <ul>
                             <li><b>Компоненты натуральной косметики знакомы нашей коже, а значит – организм легче воспринимает экосредства.</b> При использовании природной (эко) косметики не наступает эффекта привыкания. Эко косметика не скрывает недостатки под слоем крема, а помогает коже бороться с причинами.</li>
@@ -136,7 +137,7 @@ if ($banners->valid()) {
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="center">Наши бренды</h1>
+                <h2 class="center">Наши бренды</h2>
                 <div class="aa-client-brand-area">
                     <ul class="aa-client-brand-slider">
                         <?php 
