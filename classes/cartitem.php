@@ -6,6 +6,7 @@ Class CartItem {
     public $quantity;
     public $sizeId;
     public $price;
+    public $sale;
 
 }
 

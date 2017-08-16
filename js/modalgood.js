@@ -20,6 +20,7 @@ $('.aa-add-to-cart-btn').click(function e(){
             obj['sizeId'] = $(this).prop("id").substring(3);
             obj['count'] = $(this).val();
             obj['price'] = $(this).attr("data-price");
+            obj['sale'] = $(this).attr("data-sale")
             sizes.push(obj);
         };
     });

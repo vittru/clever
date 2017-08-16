@@ -34,4 +34,21 @@ Class Order {
         $this->phone = $phone;
         $this->remarks = $remarks;
     }
+    
+    function getTotalNoSale() {
+        $total = 0;
+        foreach ($this->goods as $good) {
+            if (!$good->sale)
+                $total = $total + $good->quantity * $good->price;
+        }
+        return $total;
+    }
+    
+    function getTotal() {
+        $total = 0;
+        foreach ($this->goods as $good) {
+            $total = $total + $good->quantity * $good->price;
+        }
+        return $total;
+    }
 }

@@ -106,7 +106,7 @@
                                             <?php
                                             if ($size->isAvailable()) {
                                             ?>
-                                                <input class="quantity form-control" data-price="<?php echo $size->getPrice($showGood->sale); ?>" type="number" id="sel<?php echo $sizeId; ?>" value="<?php if (sizeof($showGood->sizes) == 1) { echo '1'; if (!$bb) $canBeBought = true;} else echo '0';  ?>" onchange="modifyBasket()">
+                                                <input class="quantity form-control" data-price="<?php echo $size->getPrice($showGood->sale); ?>" data-sale="<?php if ($showGood->sale) echo "1"; else echo "0"; ?>" type="number" id="sel<?php echo $sizeId; ?>" value="<?php if (sizeof($showGood->sizes) == 1) { echo '1'; if (!$bb) $canBeBought = true;} else echo '0';  ?>" onchange="modifyBasket()">
                                             <?php
                                             } else
                                                 echo '<span class="unavailable">Нет на складе</span>'
@@ -155,7 +155,7 @@
                                             <?php
                                             if ($size->isAvailable()) {
                                             ?>
-                                                <input class="quantity form-control" data-price="<?php echo $size->bbprice; ?>" type="number" id="sel<?php echo $sizeId; ?>" value="<?php if (sizeof($showGood->sizes)==1) {echo '1'; if ($bb) $canBeBought = true;} else echo '0';  ?>" onchange="modifyBasket()">
+                                                <input class="quantity form-control" data-price="<?php echo $size->bbprice; ?>" data-sale="1" type="number" id="sel<?php echo $sizeId; ?>" value="<?php if (sizeof($showGood->sizes)==1) {echo '1'; if ($bb) $canBeBought = true;} else echo '0';  ?>" onchange="modifyBasket()">
                                             <?php
                                             } else
                                                 echo '<span class="unavailable">Нет на складе</span>'
@@ -288,4 +288,4 @@ if (!$pm) {
 <?php
 }
 ?>
-<script src="/js/modalgood.js"></script> 
+<script src="/js/modalgood.js?20170815"></script> 

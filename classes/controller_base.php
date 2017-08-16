@@ -9,6 +9,7 @@ Abstract Class Controller_Base {
         $this->registry = $registry;
         $this->registry['template']->set('user', $_SESSION['user'], true);
         $this->registry['template']->set('total', $this->getCartTotal(), true);
+        $this->registry['template']->set('totalNoSale', $this->getCartNoSaleTotal(), true);
         $this->registry['template']->set('isadmin', $this->registry['isadmin'], true);
     }
 
@@ -42,5 +43,17 @@ Abstract Class Controller_Base {
             }         
         }
         return $total;
+    }
+    
+    function getCartNoSaleTotal() {
+        $total = 0;
+        if (isset($_SESSION['cart'])) {
+            foreach ($_SESSION['cart'] as $cartItem) {
+                if (!$cartItem->sale) {
+                    $total = $total + $cartItem->quantity * $cartItem->price; 
+                }    
+            }         
+        }
+        return $total;        
     }
 }

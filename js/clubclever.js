@@ -102,6 +102,7 @@ $(document).on("click", ".aa-add-card-btn", function () {
     obj['sizeId'] = $(this).attr("value");
     obj['count'] = 1;
     obj['price'] = $(this).attr("data-price");
+    obj['sale'] = $(this).attr("data-sale");
     var sizes=[obj];
 
     $.ajax({

@@ -125,6 +125,11 @@ Class Good {
                 echo $this->getBBPrice();
             else
                 echo $this->getPrice();
+            echo '" data-sale="';
+            if ($bb or $this->sale)
+                echo "1";
+            else 
+                echo "0";
             echo '"><span class="fa fa-shopping-cart"></span>В корзину</a>';
         }
         echo '<figcaption>';

@@ -19,6 +19,7 @@ Class Controller_Cart Extends Controller_Base {
             $cartItem->quantity = $d['count'];
             $cartItem->sizeId = $d['sizeId'];
             $cartItem->price = $d['price'];
+            $cartItem->sale = $d['sale'];
             $index = -1;
             foreach ($_SESSION['cart'] as $cI) {
                 if ($cI->goodId == $cartItem->goodId and $cI->sizeId == $cartItem->sizeId and $cI->price == $cartItem->price) {

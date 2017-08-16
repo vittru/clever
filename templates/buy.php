@@ -149,15 +149,22 @@ include 'header.php';
                                             <div class="panel-body">
                                                 <?php
                                                 if (isset($_SESSION['cart'])){
-                                                  foreach ($_SESSION['cart'] as $cartItem) {
-                                                    $good = $this->registry['model']->getGood($cartItem->goodId);
-                                                    $size = $good->sizes[$cartItem->sizeId];
+                                                    $salegoods = false;
+                                                    foreach ($_SESSION['cart'] as $cartItem) {
+                                                        $good = $this->registry['model']->getGood($cartItem->goodId);
+                                                        $size = $good->sizes[$cartItem->sizeId];
                                                 ?>  
                         
                                                 <div class="row">
                                                     <div class="col-md-8">
                                                         <div class="aa-checkout-single-bill">
                                                             <?php echo $good->name." ".$size->size; ?><strong>&nbsp;&nbsp;x&nbsp;&nbsp;<?php echo $cartItem->quantity ?></strong>
+                                                            <?php 
+                                                            if ($cartItem->sale) {
+                                                                echo "*";
+                                                                $salegoods = true;
+                                                            }    
+                                                            ?>
                                                         </div>                             
                                                     </div>                            
                                                     <div class="col-md-4">
@@ -202,7 +209,7 @@ include 'header.php';
                                         </div>
                                     </div>
                                     <?php
-                                    if (!$this->registry['globalsale']) {
+                                    if ($bonusAvailable) {
                                     ?>
                                     <div class="panel">
                                         <ul class="nav nav-tabs aa-checkout-billaddress">
@@ -226,6 +233,13 @@ include 'header.php';
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <?php
+                                                    if ($salegoods) {
+                                                    ?>
+                                                    <div class="aa-checkout-single-bill">Промо-коды не распространяются на товары помеченные *</div>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </div>
                                             </div>
                                             <?php
@@ -236,21 +250,29 @@ include 'header.php';
                                                     <div class="row">                                                                                            
                                                         <div class="col-md-12">
                                                             <div class="aa-checkout-single-bill">Всего бонусов: <?php echo $user->bonus ?></div>
-                                                            <div class="aa-checkout-single-bill">Можно использовать: <?php echo min(floor($total * 0.3), $user->bonus)?></div>
+                                                            <div class="aa-checkout-single-bill">Можно использовать: <?php echo min(floor($totalNoSale * 0.3), $user->bonus)?></div>
                                                             <div class="aa-checkout-single-bill">
                                                                 <div id="bonus-error" class="error" hidden></div>
-                                                                <input class="form-control" id="bonus" name="bonus" type="number" value="<?php echo min(floor($total * 0.3), $user->bonus)?>">
+                                                                <input class="form-control" id="bonus" name="bonus" type="number" value="<?php echo min(floor($totalNoSale * 0.3), $user->bonus)?>">
                                                                 <button id="use-bonus" class="orange-button" type="button">Использовать</button>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <?php
+                                                    if ($salegoods) {
+                                                    ?>
+                                                    <div class="aa-checkout-single-bill">Бонусы не распространяются на товары помеченные *</div>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </div>    
                                             </div>   
                                             <?php
                                             }
                                             ?>
                                         </div>
-                                    </div>   
+                                    </div>  
+                                    
                                     <?php
                                     }
                                     ?>

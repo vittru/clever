@@ -5,6 +5,7 @@ Class Controller_Buy Extends Controller_Base {
     function index() {
         if (isset($_SESSION['cart']) and sizeof($_SESSION['cart']) > 0) {
             $this->registry['model']->logVisit(25);
+            $this->registry['template']->set("bonusAvailable", $this->getCartNoSaleTotal() > 0);
             $this->registry['template']->show('buy');
         } else {
             $this->registry['model']->logVisit(404, false, $_SERVER['QUERY_STRING']);
@@ -164,12 +165,12 @@ Class Controller_Buy Extends Controller_Base {
             $error = 'Вы уже использовали этот промокод';
             $discount = 0;
         };
-        $total = $this->getCartTotal();
-        if ($discount['amount'] > $total * 0.3) {
+        $totalNoSale = $this->getCartNoSaleTotal();
+        if ($discount['amount'] > $totalNoSale * 0.3) {
             $discount['percent'] = 30;
             $discount['amount'] = 0;
         }
-        $total = $total - $discount['amount'] - floor($total * $discount['percent'] / 100);
+        $total = $this->getCartTotal() - $discount['amount'] - floor($totalNoSale * $discount['percent'] / 100);
         if ($total < 0)
             $total = 0;
         $arr = array('error' => $error, 'discount' => $discount['amount'], 'percent' => $discount['percent'], 'total' => $total);
@@ -180,10 +181,11 @@ Class Controller_Buy Extends Controller_Base {
         $error = '';
         $discount = 0;
         $bonus = $_GET['bonus'];
+        $total = $this->getCartNoSaleTotal();
         if ($bonus) {
             if ($bonus > $_SESSION['user']->bonus)
                 $error = 'У вас нет столько бонусов';
-            else if ($bonus > floor($this->getCartTotal() * 0.3))
+            else if ($bonus > floor($total * 0.3))
                 $error = 'Бонусами можно оплатить только 30% покупки';
             if (!$error) {
                 $discount = $bonus;
@@ -197,5 +199,4 @@ Class Controller_Buy Extends Controller_Base {
         $arr = array('error' => $error, 'discount' => $discount, 'percent' => 0, 'total' => $total);
         echo json_encode($arr);
     }    
-}    
-
+}
