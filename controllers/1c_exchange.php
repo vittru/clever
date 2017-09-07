@@ -4,7 +4,7 @@ Class Controller_1c_exchange Extends Controller_Base {
                     
     function index() {
 
-        $dir = '/tmp/';
+        $dir = '/temp/';
         //$full_update = true;
 
         //$start_time = microtime(true);
@@ -40,10 +40,11 @@ Class Controller_1c_exchange Extends Controller_Base {
         if($_GET['type'] == 'sale' && $_GET['mode'] == 'file') {
             if ($_COOKIE['PHPSESSID'] == $this->registry['model']->getExportSession()) {
                 $filename = $_GET('filename');
-
+                $this->registry['logger']->lwrite("Received order file: " . $filename);
                 $f = fopen($dir.$filename, 'ab');
                 fwrite($f, file_get_contents('php://input'));
                 fclose($f);
+                print "success";
 
 /*                $xml = simplexml_load_file($dir.$filename);	
                 foreach($xml->Документ as $xml_order) {
@@ -299,11 +300,17 @@ Class Controller_1c_exchange Extends Controller_Base {
         }
         
         if($_GET['type'] == 'catalog' && $_GET['mode'] == 'file') {
-            $filename = basename($_GET['filename']);
-            $f = fopen($dir.$filename, 'ab');
-            fwrite($f, file_get_contents('php://input'));
-            fclose($f);
-            print "success\n";
+            if ($_COOKIE['PHPSESSID'] == $this->registry['model']->getExportSession()) {
+                $this->registry['model']->logVisit(2003);
+                $filename = basename($_GET['filename']);
+                $f = fopen($dir.$filename, 'ab');
+                fwrite($f, file_get_contents('php://input'));
+                fclose($f);
+                print "success\n";
+            } else {
+                $this->registry['model']->logVisit(404, false, $_SERVER['QUERY_STRING']);
+                $this->registry['template']->show('404');
+            }    
         } 
         
     }

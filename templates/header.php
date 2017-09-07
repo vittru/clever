@@ -43,15 +43,16 @@
         <!--link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'-->
        
         <!-- Yandex.Metrika counter -->
-        <script type="text/javascript">
+        <script type="text/javascript" >
             (function (d, w, c) {
                 (w[c] = w[c] || []).push(function() {
                     try {
-                        w.yaCounter44412517 = new Ya.Metrika({
+                        w.yaCounter44412517 = new Ya.Metrika2({
                             id:44412517,
                             clickmap:true,
                             trackLinks:true,
-                            accurateTrackBounce:true
+                            accurateTrackBounce:true,
+                            webvisor:true
                         });
                     } catch(e) { }
                 });
@@ -61,12 +62,12 @@
                     f = function () { n.parentNode.insertBefore(s, n); };
                 s.type = "text/javascript";
                 s.async = true;
-                s.src = "https://mc.yandex.ru/metrika/watch.js";
+                s.src = "https://mc.yandex.ru/metrika/tag.js";
 
                 if (w.opera == "[object Opera]") {
                     d.addEventListener("DOMContentLoaded", f, false);
                 } else { f(); }
-            })(document, window, "yandex_metrika_callbacks");
+            })(document, window, "yandex_metrika_callbacks2");
         </script>
         <noscript><div><img src="https://mc.yandex.ru/watch/44412517" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
         <!-- /Yandex.Metrika counter -->
