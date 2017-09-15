@@ -24,9 +24,9 @@ Class Controller_Showgood Extends Controller_Base {
     
     private function showGood($good) {
         $this->registry['model']->logVisit(30, $good->id);
-        if (isset($_GET['pm']))
-            $pm = true;
-        else 
+        //if (isset($_GET['pm']))
+        //    $pm = true;
+        //else 
             $pm = false;
         $this->registry['template']->set('pm', $pm);
         if (isset($_GET['bb']))

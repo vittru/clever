@@ -106,7 +106,7 @@ Class Good {
         };
         echo '<div hidden class="firm_' . $this->firmId . '"></div>';
         echo '<figure>';
-        echo '<a class="aa-product-img" data-toggle2="tooltip" data-placement="top" data-toggle="modal" data-target="#single-product" href="/showgood?pm&id=';
+        echo '<a class="aa-product-img" data-toggle2="tooltip" data-placement="top" data-target="#single-product" href="/showgood?id=';
         echo $this->id;
         if ($bb)
             echo '&bb';
@@ -133,9 +133,9 @@ Class Good {
             echo '"><span class="fa fa-shopping-cart"></span>В корзину</a>';
         }
         echo '<figcaption>';
-        echo '<div class="aa-product-title"><a href="/showgood?pm&id=';
+        echo '<div class="aa-product-title"><a href="/showgood?id=';
         echo $this->id;
-        echo '" data-toggle2="tooltip" data-placement="top" data-toggle="modal" data-target="#single-product">';
+        echo '" data-toggle2="tooltip" data-placement="top" data-target="#single-product">';
         echo $this->name;
         echo '</a></div>';
         echo '<span class="aa-product-price" value=';
