@@ -24,7 +24,7 @@ class Size {
     }
     
     public function getPrice($sale) {
-        return ($this->price * (100-$sale)/100);
+        return ceil($this->price * (100-$sale)/100);
     }
     
     public function getWebPrice($sale) {
