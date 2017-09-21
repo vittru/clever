@@ -38,6 +38,17 @@ if ($goodId) {
             <tr>
                 <td>  
                     <div class="form-group">
+                        <label class="col-md-2" for="description">Скрытый:</label>
+                        <?php
+                        $hidden = $this->registry['model']->isGoodHidden($good->id)
+                        ?>
+                        <label class="checkbox-inline" style="margin: -20px 10px 0 10px;"><input type="checkbox" value="" name="hidden" <?php if ($hidden) echo "checked" ?>> </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>  
+                    <div class="form-group">
                         <label for="brand" class="col-md-2">Бренд:</label>
                         <select class="form-control inline col-md-10" id="brand" name="brand">
                             <option value="firm0" <?php if (!$good or !$good->firmId) echo 'selected' ?>>Нет бренда</option> 

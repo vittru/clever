@@ -1,0 +1,70 @@
+[21/Sep/2017:07:20:08] (index) Error when getting popular goods of type 1
+[21/Sep/2017:07:20:08] (index) exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'v.pageid=30 AND v.good IS NOT NULL AND gt.typeId='1' AND w.instock > w.onhold AN' at line 1' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:75
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(75): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(1044): Model->executeQuery(Object(PDOStatement), 'Error when gett...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/index.php(10): Model->getPopularGoods(1)
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Index->index()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(30): Router->delegate()
+#5 {main}getMessage
+[21/Sep/2017:07:20:08] (index) Error when getting popular goods of type 2
+[21/Sep/2017:07:20:08] (index) exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'v.pageid=30 AND v.good IS NOT NULL AND gt.typeId='2' AND w.instock > w.onhold AN' at line 1' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:75
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(75): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(1044): Model->executeQuery(Object(PDOStatement), 'Error when gett...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/index.php(10): Model->getPopularGoods(2)
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Index->index()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(30): Router->delegate()
+#5 {main}getMessage
+[21/Sep/2017:07:20:08] (index) Error when getting popular goods of type 3
+[21/Sep/2017:07:20:08] (index) exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'v.pageid=30 AND v.good IS NOT NULL AND gt.typeId='3' AND w.instock > w.onhold AN' at line 1' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:75
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(75): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(1044): Model->executeQuery(Object(PDOStatement), 'Error when gett...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/index.php(10): Model->getPopularGoods(3)
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Index->index()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(30): Router->delegate()
+#5 {main}getMessage
+[21/Sep/2017:07:20:08] (index) Error when getting popular goods of type 4
+[21/Sep/2017:07:20:08] (index) exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'v.pageid=30 AND v.good IS NOT NULL AND gt.typeId='4' AND w.instock > w.onhold AN' at line 1' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:75
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(75): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(1044): Model->executeQuery(Object(PDOStatement), 'Error when gett...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/index.php(10): Model->getPopularGoods(4)
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Index->index()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(30): Router->delegate()
+#5 {main}getMessage
+[21/Sep/2017:08:02:55] (index) Hidden 1
+[21/Sep/2017:08:02:55] (index) Hidden 1
+[21/Sep/2017:08:02:55] (index) Hidden 1
+[21/Sep/2017:08:02:55] (index) Hidden 1
+[21/Sep/2017:08:02:55] (index) Hidden 1
+[21/Sep/2017:08:02:55] (index) Hidden 1
+[21/Sep/2017:08:02:55] (index) Hidden 1
+[21/Sep/2017:08:02:55] (index) Hidden 1
+[21/Sep/2017:08:02:55] (index) Hidden 1
+[21/Sep/2017:08:02:55] (index) Hidden 1
+[21/Sep/2017:08:02:55] (index) Hidden 1
+[21/Sep/2017:08:02:55] (index) Hidden 1
+[21/Sep/2017:08:02:55] (index) Hidden 1
+[21/Sep/2017:08:02:55] (index) Hidden 1
+[21/Sep/2017:08:02:55] (index) Hidden 1
+[21/Sep/2017:08:02:55] (index) Hidden 1
+[21/Sep/2017:08:02:56] (index) Hidden 1
+[21/Sep/2017:08:02:56] (index) Hidden 1
+[21/Sep/2017:08:02:56] (index) Hidden 1
+[21/Sep/2017:08:02:56] (index) Hidden 1
+[21/Sep/2017:08:02:56] (index) Hidden 1
+[21/Sep/2017:08:02:56] (index) Hidden 1
+[21/Sep/2017:08:02:56] (index) Hidden 1
+[21/Sep/2017:08:02:56] (index) Hidden 1
+[21/Sep/2017:08:02:56] (index) Hidden 1
+[21/Sep/2017:08:02:56] (index) Hidden 1
+[21/Sep/2017:08:02:56] (index) Hidden 1
+[21/Sep/2017:08:02:56] (index) Hidden 1
+[21/Sep/2017:08:02:56] (index) Hidden 1
+[21/Sep/2017:08:02:56] (index) Hidden 1
+[21/Sep/2017:08:02:56] (index) Hidden 1
+[21/Sep/2017:08:02:56] (index) Hidden 1
+[21/Sep/2017:08:02:56] (index) Hidden 1
+[21/Sep/2017:08:02:56] (index) Hidden 1

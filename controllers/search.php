@@ -125,7 +125,7 @@ Class Controller_Search Extends Controller_Base {
                     break;
                 }    
             }
-            if ($found) {
+            if ($found and !$good->hidden) {
                 $foundgoods[$goodId] = $good;
             }
         }

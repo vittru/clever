@@ -35,8 +35,8 @@ Class Model {
     private $getNonClientNews = "SELECT * FROM news WHERE forClients=0 ORDER BY time DESC";
     private $addQuestion = "INSERT INTO questions(user, question, date) VALUES(:userId, :question, NOW())";
     private $selectCatalog = "SELECT id, name FROM ";
-    private $updateGood = "UPDATE goods SET name=:name, description=:description, shortdesc=:shortdesc, firmId=:firmId, sale=:sale, howTo=:howTo, madeOf=:madeOf, problem=:problem, bestbefore=:bestbefore, precaution=:precaution WHERE id=:id";
-    private $addGood = "INSERT INTO goods (name, description, shortdesc, firmId, sale, howTo, madeOf, problem, bestbefore, precaution) VALUES (:name, :description, :shortdesc, :firmId, :sale, :howTo, :madeOf, :problem, :bestbefore, :precaution)";
+    private $updateGood = "UPDATE goods SET name=:name, description=:description, shortdesc=:shortdesc, firmId=:firmId, sale=:sale, howTo=:howTo, madeOf=:madeOf, problem=:problem, bestbefore=:bestbefore, precaution=:precaution, hidden=:hidden WHERE id=:id";
+    private $addGood = "INSERT INTO goods (name, description, shortdesc, firmId, sale, howTo, madeOf, problem, bestbefore, precaution, hidden) VALUES (:name, :description, :shortdesc, :firmId, :sale, :howTo, :madeOf, :problem, :bestbefore, :precaution, :hidden)";
     private $linkGoodCat = "INSERT INTO `goods-categories` (goodId, categoryId) VALUES(:goodId, :catId)";
     private $linkGoodType = "INSERT INTO `goods-types` (goodId, typeId) VALUES(:goodId, :typeId)";
     private $linkGoodEff = "INSERT INTO `goods-effects` (goodId, effectId) VALUES(:goodId, :effId)";
@@ -337,7 +337,7 @@ Class Model {
         return $preparedArray;
     }
     
-    function addGood($id, $name, $description, $shortdesc, $firmId, $sale, $madeOf, $howTo, $problem, $bestbefore, $precaution) {
+    function addGood($id, $name, $description, $shortdesc, $firmId, $sale, $madeOf, $howTo, $problem, $bestbefore, $precaution, $hidden) {
         if ($id) {
             $sqlInsert = $this->db->prepare($this->updateGood);
             $sqlInsert->bindParam(':id', $id);
@@ -357,6 +357,7 @@ Class Model {
         $sqlInsert->bindParam(':problem', $problem);
         $sqlInsert->bindParam(':bestbefore', $bestbefore);
         $sqlInsert->bindParam(':precaution', $precaution);
+        $sqlInsert->bindParam(':hidden', $hidden);
         $this->executeQuery($sqlInsert, 'Error when adding/updating a good');
         if ($id) {
             $goodId=$id;
@@ -420,8 +421,13 @@ Class Model {
         $sqlSelect->bindParam(':goodId', $goodId);
         $this->executeQuery($sqlSelect, 'Error when getting a product: ' . $goodId);
         $data = $sqlSelect->fetch();
-        $sqlSelect->closeCursor();    
-        $good=new Good($data['id'], trim($data['name']), trim($data['description']), trim($data['shortdesc']), trim($data['howTo']), trim($data['madeOf']), $data['sale'], $data['firmId'], trim($data['problem']), trim($data['bestbefore']), trim($data['precaution']), trim($data['url']));
+        $sqlSelect->closeCursor(); 
+        //Admin should see all goods
+        if ($this->registry['isadmin'])
+            $hidden = 0;
+        else
+            $hidden = $data['hidden'];
+        $good=new Good($data['id'], trim($data['name']), trim($data['description']), trim($data['shortdesc']), trim($data['howTo']), trim($data['madeOf']), $data['sale'], $data['firmId'], trim($data['problem']), trim($data['bestbefore']), trim($data['precaution']), trim($data['url']), $hidden);
         $good->cats = $this->getGoodCats($goodId);
         $good->supercats = $this->getGoodSuperCats($good);
         $good->effs = $this->getGoodEffs($goodId);
@@ -1034,7 +1040,8 @@ Class Model {
                 . 'FROM visits v JOIN `goods-types` gt ON v.good=gt.goodId '
                 . 'JOIN `goods-sizes` gs ON v.good=gs.goodid '
                 . 'JOIN warehouse w ON w.psid = gs.id '
-                . 'WHERE v.pageid=30 AND v.good IS NOT NULL AND gt.typeId=:typeId AND w.instock > w.onhold AND v.time >=DATE_SUB(curdate(), INTERVAL 1 MONTH) '
+                . 'JOIN goods g ON v.good=g.id '
+                . 'WHERE v.pageid=30 AND v.good IS NOT NULL AND gt.typeId=:typeId AND w.instock > w.onhold AND v.time >=DATE_SUB(curdate(), INTERVAL 1 MONTH) AND g.hidden=0 '
                 . 'GROUP BY 1 '
                 . 'ORDER BY 2 DESC '
                 . 'LIMIT 8');
@@ -1230,5 +1237,14 @@ Class Model {
         $data = $sqlSelect->fetch();
         $sqlSelect->closeCursor();
         return $data;
+    }
+    
+    function isGoodHidden($goodid) {
+        $sqlSelect = $this->db->prepare('SELECT hidden FROM goods WHERE id=:goodid');
+        $sqlSelect->bindParam(':goodid', $goodid);
+        $this->executeQuery($sqlSelect, 'Error when getting hidden status for good ' . $goodid);
+        $data = $sqlSelect->fetch();
+        $sqlSelect->closeCursor();
+        return $data['hidden'];
     }
 }

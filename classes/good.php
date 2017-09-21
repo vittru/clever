@@ -23,8 +23,9 @@ Class Good {
     public $precaution;
     public $url;
     public $supercats;
+    public $hidden;
     
-    function __construct($id, $name, $description, $shortdesc, $howTo, $madeOf, $sale, $firmId, $problem, $bestbefore, $precaution, $url) {
+    function __construct($id, $name, $description, $shortdesc, $howTo, $madeOf, $sale, $firmId, $problem, $bestbefore, $precaution, $url, $hidden) {
        $this->id = $id;
        $this->name = $name;
        $this->description = $description;
@@ -37,6 +38,7 @@ Class Good {
        $this->bestbefore = $bestbefore;
        $this->precaution = $precaution;
        $this->url = $url;
+       $this->hidden = $hidden;
     }
     
     function getFirstAvailSize() {
@@ -82,92 +84,94 @@ Class Good {
     function showInCatalog($bb) {
         if (!isset($bb))
             $bb = false;
-        echo '<li class="col-sm-3 good">';
-        foreach ($this->types as $id=>$type) {
-            echo '<div hidden class="type_'. $id . '"></div>';
-        };
-        foreach ($this->problems as $problem) {
-            echo '<div hidden class="problem_' . $problem . '"></div>';
-        };
-        foreach ($this->effs as $effect) {
-            echo '<div hidden class="effect_' . $effect . '"></div>';
-        };
-        foreach ($this->supercats as $id => $supercat) {
-            if ($id)
-                echo '<div hidden class="supercat_' . $id . '"></div>';
-        };
-        foreach ($this->skintypes as $skintype) {
-            if ($id)
-                echo '<div hidden class="skintype_' . $skintype . '"></div>';
-        };
-        foreach ($this->hairtypes as $hairtype) {
-            if ($id)
-                echo '<div hidden class="hairtype_' . $hairtype . '"></div>';
-        };
-        echo '<div hidden class="firm_' . $this->firmId . '"></div>';
-        echo '<figure>';
-        echo '<a class="aa-product-img" data-toggle2="tooltip" data-placement="top" data-target="#single-product" href="/showgood?id=';
-        echo $this->id;
-        if ($bb)
-            echo '&bb';
-        echo '"><img src="';
-        echo $this->getImage();
-        echo '" alt="';
-        echo $this->name;
-        echo'"></a>';
-        if ($this->isAvailable()) {
-            echo '<a class="aa-add-card-btn orange-button" id="';
+        if (!$this->hidden) {
+            echo '<li class="col-sm-3 good">';
+            foreach ($this->types as $id=>$type) {
+                echo '<div hidden class="type_'. $id . '"></div>';
+            };
+            foreach ($this->problems as $problem) {
+                echo '<div hidden class="problem_' . $problem . '"></div>';
+            };
+            foreach ($this->effs as $effect) {
+                echo '<div hidden class="effect_' . $effect . '"></div>';
+            };
+            foreach ($this->supercats as $id => $supercat) {
+                if ($id)
+                    echo '<div hidden class="supercat_' . $id . '"></div>';
+            };
+            foreach ($this->skintypes as $skintype) {
+                if ($id)
+                    echo '<div hidden class="skintype_' . $skintype . '"></div>';
+            };
+            foreach ($this->hairtypes as $hairtype) {
+                if ($id)
+                    echo '<div hidden class="hairtype_' . $hairtype . '"></div>';
+            };
+            echo '<div hidden class="firm_' . $this->firmId . '"></div>';
+            echo '<figure>';
+            echo '<a class="aa-product-img" data-toggle2="tooltip" data-placement="top" data-target="#single-product" href="/showgood?id=';
             echo $this->id;
-            echo '" value="';
-            echo $this->getFirstAvailSize();
-            echo '" data-price="';
+            if ($bb)
+                echo '&bb';
+            echo '"><img src="';
+            echo $this->getImage();
+            echo '" alt="';
+            echo $this->name;
+            echo'"></a>';
+            if ($this->isAvailable()) {
+                echo '<a class="aa-add-card-btn orange-button" id="';
+                echo $this->id;
+                echo '" value="';
+                echo $this->getFirstAvailSize();
+                echo '" data-price="';
+                if ($bb)
+                    echo $this->getBBPrice();
+                else
+                    echo $this->getPrice();
+                echo '" data-sale="';
+                if ($bb or $this->sale)
+                    echo "1";
+                else 
+                    echo "0";
+                echo '"><span class="fa fa-shopping-cart"></span>В корзину</a>';
+            }
+            echo '<figcaption>';
+            echo '<div class="aa-product-title"><a href="/showgood?id=';
+            echo $this->id;
+            echo '" data-toggle2="tooltip" data-placement="top" data-target="#single-product">';
+            echo $this->name;
+            echo '</a></div>';
+            echo '<span class="aa-product-price" value=';
             if ($bb)
                 echo $this->getBBPrice();
-            else
-                echo $this->getPrice();
-            echo '" data-sale="';
-            if ($bb or $this->sale)
-                echo "1";
             else 
-                echo "0";
-            echo '"><span class="fa fa-shopping-cart"></span>В корзину</a>';
-        }
-        echo '<figcaption>';
-        echo '<div class="aa-product-title"><a href="/showgood?id=';
-        echo $this->id;
-        echo '" data-toggle2="tooltip" data-placement="top" data-target="#single-product">';
-        echo $this->name;
-        echo '</a></div>';
-        echo '<span class="aa-product-price" value=';
-        if ($bb)
-            echo $this->getBBPrice();
-        else 
-            echo $this->getPrice();
-        echo '>';
-        if ($bb)
-            echo $this->getWebBBPrice();
-        else 
-            echo $this->getWebPrice();
-        echo '</span>';
-        if ($this->isAvailable() && $this->sale > 0) {
-            echo '<span class="aa-product-price"><del>';
-            echo $this->getWebOldPrice();
-            echo '</del></span>';
-        }
-        echo '</figcaption>';
-        echo '</figure>';
-        //<!-- div class="aa-product-hvr-content">
-        //    <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
-        //    <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>
-        //    <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#single-product"><span class="fa fa-search"></span></a>                          
-        //</div -->
-        if ($this->sale > 0 && !$bb) {
-            echo '<span class="aa-badge aa-sale">Скидка!</span> ';
-        }
-        if (!$this->isAvailable()) {
-            echo '<span class="aa-badge aa-sold-out">Нет в наличии</span>';
-        }
-        echo '</li>';
+                echo $this->getPrice();
+            echo '>';
+            if ($bb)
+                echo $this->getWebBBPrice();
+            else 
+                echo $this->getWebPrice();
+            echo '</span>';
+            if ($this->isAvailable() && $this->sale > 0) {
+                echo '<span class="aa-product-price"><del>';
+                echo $this->getWebOldPrice();
+                echo '</del></span>';
+            }
+            echo '</figcaption>';
+            echo '</figure>';
+            //<!-- div class="aa-product-hvr-content">
+            //    <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
+            //    <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>
+            //    <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#single-product"><span class="fa fa-search"></span></a>                          
+            //</div -->
+            if ($this->sale > 0 && !$bb) {
+                echo '<span class="aa-badge aa-sale">Скидка!</span> ';
+            }
+            if (!$this->isAvailable()) {
+                echo '<span class="aa-badge aa-sold-out">Нет в наличии</span>';
+            }
+            echo '</li>';
+        }    
     }
     
     function getImage() {
