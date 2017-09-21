@@ -32,7 +32,7 @@ Class Controller_Cart Extends Controller_Base {
                 array_push($_SESSION['cart'], $cartItem);
             }    
         }
-    }    
+    } 
     
     function remove() {
         $this->registry['model']->logVisit(22);

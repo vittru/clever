@@ -2040,6 +2040,9 @@ input.es-input.open {
     width: 100%;
 }
 
+.error {
+    border-color: red;
+}
 
 #aa-error {
     display: inline;

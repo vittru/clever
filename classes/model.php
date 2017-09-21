@@ -1247,4 +1247,18 @@ Class Model {
         $sqlSelect->closeCursor();
         return $data['hidden'];
     }
+    
+    function getSpamEmails() {
+        $sqlSelect = $this->db->prepare('SELECT email FROM profiles WHERE spam=1');
+        $this->executeQuery($sqlSelect, 'Error when getting hidden status for good ' . $goodid);
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            if (!isset($emails))
+                $emails = [$data['email']];
+            else
+                array_push($emails, $data['email']);
+        }
+        $sqlSelect->closeCursor();
+        return $emails;
+    }
+    
 }
