@@ -18,7 +18,7 @@ Class Controller_Mailout Extends Controller_Base {
             $message = $_POST['text'];
             foreach ($emails as $to) {
                 $this->registry['logger']->lwrite('Sending mail to '.$to);
-                $this->sendMail($to, $topic, $message);
+                //$this->sendMail($to, $topic, $message);
             }    
             header("LOCATION: /");
         } else 

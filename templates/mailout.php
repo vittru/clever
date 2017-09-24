@@ -25,12 +25,6 @@ include 'header.php';
             </tr>
             <tr>
                 <td>
-                    <label class="col-md-2" for="image">Картинка</label>
-                    <input class="form-control col-md-10 text" type="file" name="image" id="image"> 
-                </td>
-            </tr>
-            <tr>
-                <td>
                 </td>
             </tr>
         </table>
