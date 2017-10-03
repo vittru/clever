@@ -15,4 +15,21 @@ Class Controller_Subscribe Extends Controller_Base {
         }
         echo $error;
     }
+    
+    function stop() {
+        if (isset($_GET['id'])) {
+            $profileId = $_GET['id'];
+            if ($this->registry['model']->profileExists($profileId)) {
+                $this->registry['model']->logVisit(36);
+                $this->registry['model']->unsubscribe($profileId);
+                $this->registry['template']->set('mainMessage', 'Вы успешно отписались от рассылки');
+                $this->registry['template']->set('secondMessage', 'Больше мы не будем посылать вам наши акции и интересные предложения');
+                $this->registry['template']->show('logout');
+            }
+            else
+                $this->registry['template']->show('404');
+        }
+        else
+            $this->registry['template']->show('404');
+    }
 }

@@ -1261,4 +1261,19 @@ Class Model {
         return $emails;
     }
     
+    function profileExists($id) {
+        $sqlSelect = $this->db->prepare('SELECT count(*) FROM profiles WHERE id=:id');
+        $sqlSelect->bindParam(':id', $id);
+        $this->executeQuery($sqlSelect, 'Error when checking profile with id=' . $id);
+        $exists = $sqlSelect->fetchColumn();
+        $sqlSelect->closeCursor();
+        return $exists;
+    }
+    
+    function unsubscribe($id) {
+        $sqlUpdate = $this->db->prepare('UPDATE profiles SET spam=0 WHERE id=:id');
+        $sqlUpdate->bindParam(':id', $id);
+        $this->executeQuery($sqlUpdate, 'Error when unsubscribing profile with id=' . $id);
+        $sqlUpdate->closeCursor();
+    }
 }

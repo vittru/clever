@@ -7,8 +7,8 @@ include 'header.php';
         <div class="row">
             <div class="col-md-12">
                 <div class="aa-error-area">
-                    <h1>Спасибо, что были с нами.</h1>
-                    <span>И ждем вас снова.</span>
+                    <h1><?php echo $mainMessage ?></h1>
+                    <span><?php echo $secondMessage ?></span>
                     <a href="/" class="green-button"> На главную</a>
                 </div>
             </div>

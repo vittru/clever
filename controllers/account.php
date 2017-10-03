@@ -19,6 +19,8 @@ Class Controller_Account Extends Controller_Base {
         $this->registry['model']->logVisit(28);
         $this->registry['model']->logout($_SESSION['user']->id);
         $_SESSION['user']->name = '';
+        $this->registry['template']->set('mainMessage', 'Спасибо, что были с нами');
+        $this->registry['template']->set('secondMessage', 'И ждем вас снова');
         $this->registry['template']->show('logout');
     }
     
