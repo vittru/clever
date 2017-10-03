@@ -874,24 +874,6 @@ Class Model {
         $sqlSelect->closeCursor();
         return $firmId;
     }
-
-    /*    function getFirmIdByUrl($url) {
-        $sqlSelect = $this->db->prepare('SELECT id FROM firms WHERE url=:url');
-        $sqlSelect->bindParam(':url', $url);
-        $this->executeQuery($sqlSelect, 'Error when getting firm with url='.$url);
-        $firmId = $sqlSelect->fetchColumn();
-        $sqlSelect->closeCursor();
-        return $firmId;
-    }
-    
-    function getGoodIdByUrl($url) {
-        $sqlSelect = $this->db->prepare('SELECT id FROM goods WHERE url=:url');
-        $sqlSelect->bindParam(':url', $url);
-        $this->executeQuery($sqlSelect, 'Error when getting good with url='.$url);
-        $goodId = $sqlSelect->fetchColumn();
-        $sqlSelect->closeCursor();
-        return $goodId;
-    }*/
     
     function logout($userId) {
         $sqlUpdate = $this->db->prepare('UPDATE users SET profile=NULL WHERE id=:userId');
@@ -1249,13 +1231,11 @@ Class Model {
     }
     
     function getSpamEmails() {
-        $sqlSelect = $this->db->prepare('SELECT email FROM profiles WHERE spam=1');
+        $sqlSelect = $this->db->prepare('SELECT id, email FROM profiles WHERE spam=1');
         $this->executeQuery($sqlSelect, 'Error when getting hidden status for good ' . $goodid);
+        $emails = array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            if (!isset($emails))
-                $emails = [$data['email']];
-            else
-                array_push($emails, $data['email']);
+            $emails[$data['id']]=$data['email'];
         }
         $sqlSelect->closeCursor();
         return $emails;
