@@ -269,6 +269,12 @@ jQuery(function($){
       } else {
         $('.scrollToTop').fadeOut();
       }
+      var $pathTop = $('#menu').position().top + $('#menu').outerHeight(true) + 10;
+      if ($(this).scrollTop() < $pathTop) {
+          $('#path').css('top', $pathTop - $(this).scrollTop());
+      } else {
+          $('#path').css('top', 10);
+      }
     });
      
     //Click event to scroll to top

@@ -142,7 +142,7 @@
                             <!-- logo  -->
                             <div class="aa-logo">
                                 <a href="/">
-                                    <img src="/images/logo.png" height='80px' alt="Экомаркет Клевер">  
+                                    <img src="/images/logo.png" alt="Экомаркет Клевер">  
                                 </a>
                             </div>
                             <!-- / logo  -->
@@ -410,3 +410,11 @@
         </div>
     </section>
     <!-- / menu -->
+    
+    <?php
+    if ($pagePath) {
+    ?>
+        <a id="path" class="green-button" href="<?php echo $pagePath ?>" title="Назад к списку товаров"><i class="fa fa-chevron-left"></i></a>
+    <?php
+    }
+    ?>

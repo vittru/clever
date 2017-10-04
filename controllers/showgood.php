@@ -3,6 +3,7 @@
 Class Controller_Showgood Extends Controller_Base {
         
     function index() {
+        
         if (isset($_GET['id'])) {
             $good = $this->registry['model']->getGood($_GET['id']);
             if (!$good) {
@@ -23,6 +24,7 @@ Class Controller_Showgood Extends Controller_Base {
     }
     
     private function showGood($good) {
+        $pagePath = $_SERVER['HTTP_REFERER'];
         $this->registry['model']->logVisit(30, $good->id);
         //if (isset($_GET['pm']))
         //    $pm = true;
@@ -45,6 +47,7 @@ Class Controller_Showgood Extends Controller_Base {
         $this->registry['template']->set('hasEffects', $good->hasEffects());
         $this->registry['template']->set('hasSkintypes', $good->hasSkintypes());
         $this->registry['template']->set('hasHairtypes', $good->hasHairtypes());
+        $this->registry['template']->set('pagePath', $pagePath);
         $this->registry['template']->show('showgood');        
     }
 }    

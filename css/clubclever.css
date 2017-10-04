@@ -199,6 +199,9 @@ img {
   letter-spacing: 1.5px;
   text-transform: uppercase;
 }
+#aa-header .aa-header-bottom .aa-header-bottom-area .aa-logo img {
+    height: 80px;
+}
 #aa-header .aa-header-bottom .aa-header-bottom-area .aa-search-box input[type="text"] {
   font-size: 14px;
   font-family: "Raleway", sans-serif;
@@ -509,6 +512,19 @@ h2 {
   font-size: 16px;
   padding: 3px 20px;
   text-transform: uppercase;
+}
+
+#path {
+    opacity: 0.5;
+    top: 190px;
+    /*display: none;*/
+    font-size: 23px;
+    height: 50px;
+    line-height: 45px;
+    position: fixed;
+    right: 20px;
+    width: 50px;
+    z-index: 999;
 }
 
 .scrollToTop {
@@ -2505,6 +2521,10 @@ input.es-input.open {
     font-size: 12px;
   }
 
+  #aa-header .aa-header-bottom .aa-header-bottom-area .aa-logo img {
+    height: 50px;
+  }
+
   .seq .seq-next, .seq .seq-prev {
     font-size: 30px;
     line-height: 35px;
@@ -2554,6 +2574,13 @@ input.es-input.open {
   }
 
   .scrollToTop {
+    font-size: 20px;
+    height: 40px;
+    line-height: 35px;
+    width: 40px;
+  }
+
+  #path {
     font-size: 20px;
     height: 40px;
     line-height: 35px;
@@ -2650,9 +2677,8 @@ input.es-input.open {
   #aa-header .aa-header-bottom .aa-header-bottom-area .aa-logo {
     margin-bottom: 10px;
     text-align: center;
-    width: 100%;
   }
-
+  
   #aa-header .aa-header-bottom .aa-header-bottom-area .aa-logo a {
     display: inline-block;
   }
@@ -2660,10 +2686,12 @@ input.es-input.open {
   #aa-header .aa-header-bottom .aa-header-bottom-area .aa-logo a p {
     text-align: left;
   }
+    #aa-header .aa-header-bottom .aa-header-bottom-area .aa-logo img {
+        height: 50px;
+    }
 
   #aa-header .aa-header-bottom .aa-cartbox {
     text-align: center;
-    width: 100%;
   }
 
   #aa-header .aa-header-bottom .aa-cartbox .aa-cart-link {
@@ -2852,6 +2880,10 @@ input.es-input.open {
     padding: 6px 1px;
     font-size: 10px;
   }
+  
+      #aa-header .aa-header-bottom .aa-header-bottom-area .aa-logo img {
+        height: 40px;
+    }
 
   #aa-product-category .aa-product-catg-content .aa-product-catg-head .aa-product-catg-head-left .aa-show-form {
     margin-left: 5px;
