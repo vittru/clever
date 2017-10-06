@@ -361,3 +361,18 @@ $("#subscribe-form").submit(function(e) {
 $("#subscribe-email").focus(function(){
     $('#subscribe-error').hide();
 });
+
+
+$('#sendTestEmail').click(function() {
+    var mysave =  $('#description').summernote('code');
+    $('#text').val(mysave);
+    $.post('/mailout/testEmail',
+    {
+        header: $('#header').val(),
+        text: $('#text').val(),
+        email: $('#testEmail').val()
+    },
+    function(data, status){
+        alert(data);
+    });
+});

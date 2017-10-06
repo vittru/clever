@@ -25,6 +25,14 @@ include 'header.php';
             </tr>
             <tr>
                 <td>
+                    <div class="form-group">
+                        <div class="col-md-2 green-button" for="text" id="sendTestEmail">Послать пример на:</div>
+                        <input class="form-control col-md-10 text" id="testEmail" name="textHtml" value="<?php echo $user->email ?>"></input>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
                 </td>
             </tr>
         </table>
