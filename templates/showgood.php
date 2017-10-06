@@ -183,7 +183,7 @@
                     </div>
                 </div>
                 <div class="aa-prod-view-bottom">
-                    <a class="aa-add-to-cart-btn green-button" data-dismiss="modal" <?php if (!$canBeBought) echo 'disabled' ?>><span class="fa fa-shopping-cart"></span>В корзину</a>
+                    <a class="aa-add-to-cart-btn green-button" <?php if (!$canBeBought) echo 'disabled' ?> data-toggle="popover" title="Товар добавлен в корзину" data-content="Оформить заказ"><span class="fa fa-shopping-cart"></span>В корзину</a>
                     <?php
                     if ($isadmin) {
                     ?>
@@ -288,4 +288,4 @@ if (!$pm) {
 <?php
 }
 ?>
-<script src="/js/modalgood.js?20170815"></script> 
+<script src="/js/modalgood.js?20171006"></script> 

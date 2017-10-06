@@ -96,6 +96,7 @@ $(document).on("change", ".aa-cart-quantity", function() {
 
 $(document).on("click", ".aa-add-card-btn", function () {
     $(this).text('ДОБАВЛЕНО');
+    yaCounter44412517.reachGoal('INCART');
         
     var obj = {};
     obj['goodId'] = $(this).attr("id");

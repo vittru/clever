@@ -11,6 +11,9 @@ function modifyBasket() {
 //$(document).ready(modifyBasket());
 
 $('.aa-add-to-cart-btn').click(function e(){
+    $(this).text('Добавлено');
+    yaCounter44412517.reachGoal('INCART');
+
     var pId = $('#pId').text();
     var sizes = [];
     $('.quantity:visible').each(function() {
@@ -32,6 +35,10 @@ $('.aa-add-to-cart-btn').click(function e(){
             $("#cartbox").load(location.href + " #cartbox>*","");
         }    
     });
+});
+
+$(document).on("mouseleave", ".aa-add-to-cart-btn", function() {
+    $(this).parent().find(".aa-add-to-cart-btn").html('<span class="fa fa-shopping-cart"></span>В корзину');
 });
 
 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {

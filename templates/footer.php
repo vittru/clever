@@ -61,7 +61,6 @@
                                             <a target="_blank" rel="nofollow" href="http://www.instagram.com/clubclever.ru/"><span class="fa fa-instagram"></span></a>
                                             <a target="_blank" rel="nofollow" href="https://www.youtube.com/channel/UCZqTkI8X0KQGyINHpblqhfg"><span class="fa fa-youtube"></span></a>
                                         </div>
-                                        <div><a href="http://seoprostor.ru" rel="nofollow" target="_blank">Продвижение сайта</a> - «SEO Простор»</div>
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +109,7 @@
 <script src="/js/custom.js"></script> 
 <script src="/js/jquery.validate.js"></script>
 <script src="/js/auth-form.js"></script>
-<script src="/js/clubclever.js?<?php echo '20170815'//filemtime('/js/clubclever.js'); ?>"></script>
+<script src="/js/clubclever.js?<?php echo '20171006'//filemtime('/js/clubclever.js'); ?>"></script>
 <!--script src="/js/clubclever.js"></script-->
 <script src="/js/lightbox.js"></script> 
 
