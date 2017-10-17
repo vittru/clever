@@ -1396,6 +1396,10 @@ h2 {
   text-indent: 0;
   list-style: square;
 }
+#single-product .aa-product-info-tab ol {
+  margin-left: 60px;
+  text-indent: 0;
+}
 
 #cart-view {
   display: inline;

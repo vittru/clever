@@ -147,7 +147,10 @@ if ($goodId) {
                 <td>  
                     <div class="form-group">
                         <label class="col-md-2" for="madeOf">Состав:</label>
-                        <textarea class="form-control col-md-10 text" rows="3" id="madeOf" name="madeOf"><?php if ($good) echo $good->madeOf ?></textarea>
+                        <div class="col-md-10">
+                            <div class="form-control text" id="madeOfHTML" name="madeOfHtml"><?php if ($good) echo $good->madeOf ?></div>
+                            <textarea hidden id="madeOf" name="madeOf"></textarea>
+                        </div>    
                     </div>
                 </td>
             </tr>
@@ -155,7 +158,10 @@ if ($goodId) {
                 <td>  
                     <div class="form-group">
                         <label class="col-md-2" for="howTo">Способ применения:</label>
-                        <textarea class="form-control col-md-10 text" rows="3" id="howTo" name="howTo"><?php if ($good) echo $good->howTo ?></textarea>
+                        <div class="col-md-10">
+                            <div class="form-control text" id="howToHTML" name="howToHtml"><?php if ($good) echo $good->howTo ?></div>
+                            <textarea hidden id="howTo" name="howTo"></textarea>
+                        </div>    
                     </div>
                 </td>
             </tr>
@@ -357,10 +363,32 @@ if ($goodId) {
                 </td>
             </tr>
         </table>
-        <button type="submit" style="margin-bottom: 40px;" class="btn green-button">Сохранить</button>
+        <button type="submit" style="margin-bottom: 40px;" class="btn green-button" id="save">Сохранить</button>
     
     </form>
 </section>
 
 <?php
 include 'footer.php';
+
+?>
+
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
+
+<script>
+$(document).ready(function() {
+  $('#howToHTML').summernote();
+  $('#madeOfHTML').summernote();
+});
+
+$(function(){
+    $('#save').click(function () {
+        var mysave =  $('#howToHTML').summernote('code');
+        $('#howTo').val(mysave);
+        mysave =  $('#madeOfHTML').summernote('code');
+        $('#madeOf').val(mysave);
+    });
+});
+</script>
