@@ -71,7 +71,8 @@ Class Controller_Editgood Extends Controller_Base {
             $this->registry['template']->set('hasSkintypes', $good->hasSkintypes());
             $this->registry['template']->set('hasHairtypes', $good->hasHairtypes());
             $this->registry['model']->logVisit(1001, $goodId);
-            $this->registry['template']->show('showgood'); 
+//            $this->registry['template']->show('showgood'); 
+            header("LOCATION: ../showgood?id=" . $goodId);
         } else 
             $this->registry['template']->show('404'); 
     }
