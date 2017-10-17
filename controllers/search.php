@@ -12,39 +12,51 @@ Class Controller_Search Extends Controller_Base {
                 switch ($key) {
                     case "type":
                         $pageSubHeader .= "<tr><td></td><td class=\"bold\">Товары ".mb_strtolower($this->registry['types'][$value]->name)."</td></tr>";
+                        $this->registry['template']->set('search_type', $value);
                         break;
                     case "name":
                         $pageSubHeader .= "<tr><td>Название:</td><td class=\"bold\">".$value."</td></tr>";
+                        $this->registry['template']->set('search_text', $value);
                         break;
                     case "supercat":
                         $pageSubHeader .= "<tr><td>Тип:</td><td class=\"bold\">".$this->registry['supercats'][$value]."</td></tr>";
+                        $this->registry['template']->set('search_supercat', $value);
                         break;
                     case "effect":
                         $pageSubHeader .= "<tr><td>Эффект:</td><td class=\"bold\">".$this->registry['effects'][$value]."</td></tr>";
+                        $this->registry['template']->set('search_effect', $value);
                         break;
                     case "hairtype":
                         $pageSubHeader .= "<tr><td>Тип волос:</td><td class=\"bold\">".$this->registry['hairtypes'][$value]."</td></tr>";
+                        $this->registry['template']->set('search_hairType', $value);
                         break;
                     case "skintype":
                         $pageSubHeader .= "<tr><td>Тип кожи:</td><td class=\"bold\">".$this->registry['skintypes'][$value]."</td></tr>";
+                        $this->registry['template']->set('search_skinType', $value);
                         break;
                     case "firm":    
                         $pageSubHeader .= "<tr><td>Бренд:</td><td class=\"bold\">".$this->registry['firms'][$value]->name."</td></tr>";
+                        $this->registry['template']->set('search_firm', $value);
                         break;
                     case "problem":    
                         $pageSubHeader .= "<tr><td>Проблема:</td><td class=\"bold\">".$this->registry['problems'][$value]."</td></tr>";
+                        $this->registry['template']->set('search_problem', $value);
                         break;
                     case "description":
                         $pageSubHeader .= "<tr><td>Описание:</td><td class=\"bold\">".$value."</td></tr>";
+                        $this->registry['template']->set('search_desc', $value);
                         break;                        
                     case "howTo":
                         $pageSubHeader .= "<tr><td>Способ применения:</td><td class=\"bold\">".$value."</td></tr>";
+                        $this->registry['template']->set('search_howTo', $value);
                         break;
                     case "madeOf":
                         $pageSubHeader .= "<tr><td>Состав:</td><td class=\"bold\">".$value."</td></tr>";
+                        $this->registry['template']->set('search_madeOf', $value);
                         break;
                     case "category":
                         $pageSubHeader .= "<tr><td>Категория:</td><td class=\"bold\">".$this->registry['categories'][$value]."</td></tr>";
+                        $this->registry['template']->set('search_category', $value);
                         break;
                 }
             }
