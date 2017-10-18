@@ -116,7 +116,9 @@ Class Good {
             echo '"><img src="';
             echo $this->getImage();
             echo '" alt="';
-            echo $this->name;
+            echo str_replace('"', "'", $this->name);
+            echo '" title="';
+            echo str_replace('"', "'", $this->name);
             echo'"></a>';
             if ($this->isAvailable()) {
                 echo '<a class="aa-add-card-btn orange-button" id="';
