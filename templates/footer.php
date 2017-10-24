@@ -75,10 +75,12 @@
 <!-- Login Modal -->  
 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">                      
-            <div class="modal-body">
+        <div class="modal-content">  
+            <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 id="auth-header">Войти</h4>
+            </div>
+            <div class="modal-body">
                 <form class="aa-login-form" action="" id="auth-form">
                     <input type="text" placeholder="Имя*" id="auth-name" class="nologin form-control" name="userName" maxlength="30">   
                     <input type="text" placeholder="Почта*" id="auth-email" name="userEmail" class="form-control" maxlength="40" value="<?php echo $user->email ?>">
@@ -90,11 +92,11 @@
                     <div id="auth-error" class="error"></div>
                     <input type="hidden" id="auth-action" name="userAction">
                     <button class="aa-login-btn green-button" type="submit" id="auth-submit">ОК</button>
-                    <div class="modal-footer">
-                        <div class="aa-register-now"></div>
-                    </div>
                 </form>
-            </div>                        
+            </div> 
+            <div class="modal-footer">
+                <div class="aa-register-now"></div>
+            </div>    
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>    
@@ -109,7 +111,7 @@
 <script src="/js/custom.js"></script> 
 <script src="/js/jquery.validate.js"></script>
 <script src="/js/auth-form.js"></script>
-<script src="/js/clubclever.js?<?php echo '20171006'//filemtime('/js/clubclever.js'); ?>"></script>
+<script src="/js/clubclever.js?<?php echo '20171024'//filemtime('/js/clubclever.js'); ?>"></script>
 <!--script src="/js/clubclever.js"></script-->
 <script src="/js/lightbox.js"></script> 
 

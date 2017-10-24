@@ -45,3 +45,48 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
   var target = $(e.target).attr("href"); // activated tab
   modifyBasket();
 });
+
+$("#emailMeBtn").click(function(){
+    $('#emailMe').modal('show');
+});
+
+$("input[name=emailMeRAddr]").on('change', function () {
+    if (this.value === 'phone') {
+        $('#emailMePhone').removeAttr('disabled');
+    } else {
+        $('#emailMePhone').attr({'disabled': 'disabled'});
+    }    
+});
+
+$('#emailMeSubmit').click(function() {
+    var address;
+    if ($('#emailMeAddr').length) 
+        address = $('#emailMeAddr').val().trim();
+    else {
+        if ($('input[name=emailMeRAddr]:checked').val() === 'email') {
+            address = $("label[for=emailMeREmail]").text().trim();
+        } else
+            if ($('#emailMePhone').length)
+                address = $('#emailMePhone').val().trim();
+            else
+                address = $("label[for=emailMeRPhone]").text().trim();
+    }
+    if (address) {
+        $.ajax({
+            type: "GET",
+            url: "/showgood/emailMe",
+            data: {
+                address: address,
+                good: $('#pId').text()
+            },
+            success: function() {
+                location.reload();
+            }    
+        });
+    } else {
+        if ($('#emailMeAddr').length) 
+            $('#emailMeAddr').addClass('error');
+        if ($('#emailMePhone').length && !$('#emailMePhone').attr('disabled'))
+            $('#emailMePhone').addClass('error');
+    }    
+});

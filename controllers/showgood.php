@@ -50,5 +50,19 @@ Class Controller_Showgood Extends Controller_Base {
         $this->registry['template']->set('pagePath', $pagePath);
         $this->registry['template']->show('showgood');        
     }
+    
+    function emailMe() {
+        if (isset($_GET['good']) and isset($_GET['address'])) {
+            $good = $_GET['good'];
+            $address = $_GET['address'];
+            $this->registry['model']->logVisit(37, $good);
+            $to      = $this->registry['mainemail'];
+            $subject = 'Сообщить о поступлении товара';
+            $message = '<html><body><h2>Сообщить о поступлении товара</h2>' .
+                    "<p>Пользователь " . $_SESSION['user']->name . " настойчиво просит сообщить ему/ей о поступлении товара <a href='www.ecomarketclever.ru/showgood?id=" . $good ."'>" . $this->registry['model']->getGood($good)->name ."</a> на склад.</p>" . 
+                    "<p>Сообщить необходимо по следующему адресу: " . htmlspecialchars($address) . "</p></body></html>";
+            $this->sendMail($to, $subject, $message);
+        }    
+    }
 }    
 

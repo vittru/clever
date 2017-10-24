@@ -28,10 +28,7 @@ img {
 }
 
 .aa-login-btn {
-    display: block;
-    margin: auto;
-    width: 100%;
-    padding: 12px 18px;
+
 }
 
 .aa-browse-btn {
@@ -44,12 +41,12 @@ img {
   margin-left: 5px;
 }
 
-.aa-add-to-cart-btn {
+.aa-prod-view-bottom .green-button {
   display: inline-block;
   margin-top: 5px;
   padding: 10px 15px;
 }
-.aa-add-to-cart-btn span {
+.aa-prod-view-bottom .green-button span {
   margin-right: 5px;
 }
 
@@ -1762,53 +1759,58 @@ input.es-input.open {
     margin-bottom: 30px;
 }
 
-.aa-login-form input[type="text"],
-.aa-login-form input[type="password"],
-.aa-login-form input[type="number"]{
+.modal-dialog input[type="text"],
+.modal-dialog input[type="password"],
+.modal-dialog input[type="number"]{
   height: 40px;
   margin-bottom: 15px;
   padding: 10px;
   width: 100%;
 }
-.aa-login-form label {
-  /*font-weight: normal;*/
+.modal-dialog label {
+  font-weight: normal;
   margin-top: 8px;
   width: 100%;
+  font-size: 14px;
 }
-.aa-login-form label span {
+.modal-dialog label span {
   color: red;
 }
 .aa-login-form input[type="checkbox"] {
   margin-top: 5px;
 }
-.aa-login-form button {
+.modal-dialog button:not(.close) {
     padding: 8px 20px;
     margin-right: 5px;
     margin-top: 10px;
-    float: left;
+    display: block;
+    width: 100%;
 }
 
-#login-modal .modal-content {
+.modal-content {
   border-radius: 0;
 }
-#login-modal .modal-dialog {
+.modal-dialog {
   margin: 100px auto;
   width: 320px;
 }
-#login-modal .modal-dialog h4 {
-  border-bottom: 1px solid #ccc;
-  color: #666;
-  font-weight: bold;
-  padding-bottom: 10px;
+.modal-dialog h4 {
+    color: #51A512;
+    font-weight: bold;
+    margin-bottom: 0;
+    margin-top: 0;
+  
 }
-#login-modal .modal-dialog .aa-register-now {
-  border-top: 1px solid #ccc;
-  margin-top: 56px;
-  font-size: 14px;
-  padding-top: 5px;
+.modal-dialog .aa-register-now {
+    font-size: 14px;
 }
-#login-modal .modal-dialog .aa-register-now a {
-  margin-left: 5px;
+.modal-dialog .aa-register-now a {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.modal-dialog .modal-footer .green-button {
+    margin: 5px;
+    height: 40px;
 }
 
 #aa-contact {

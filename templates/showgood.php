@@ -183,11 +183,19 @@
                     </div>
                 </div>
                 <div class="aa-prod-view-bottom">
-                    <a class="aa-add-to-cart-btn green-button" <?php if (!$canBeBought) echo 'disabled' ?> data-toggle="popover" title="Товар добавлен в корзину" data-content="Оформить заказ"><span class="fa fa-shopping-cart"></span>В корзину</a>
+                    <?php 
+                    if (!$showGood->isAvailable()) {
+                    ?>
+                        <a class="green-button" id="emailMeBtn"><span class="fa fa-envelope" data-toggle="modal" data-target="#emailMe"></span>Сообщить о наличии</a>
                     <?php
+                    } else {
+                    ?>
+                        <a class="aa-add-to-cart-btn green-button" <?php if (!$canBeBought) echo 'disabled' ?> title="Товар добавлен в корзину" data-content="Оформить заказ"><span class="fa fa-shopping-cart"></span>В корзину</a>
+                    <?php
+                    }
                     if ($isadmin) {
                     ?>
-                        <a class="green-button" style="padding: 12px 15px;" href="/editgood?good=<?php echo $showGood->id ?>">Редактировать</a>
+                        <a class="green-button" href="/editgood?good=<?php echo $showGood->id ?>">Редактировать</a>
                     <?php
                     }    
                     ?>
@@ -278,7 +286,50 @@
     <?php
     }
     ?>
-    
+
+<!-- Modal -->
+<div class="modal fade" id="emailMe" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Сообщить о поступлении</h4>
+            </div>
+            <div class="modal-body">
+                <?php 
+                if ($user->name) {
+                ?>    
+                    <div>Как Вам сообщить о поступлении товара?</div>
+                    <div class="radio">
+                        <label for="emailMeREmail"><input id="emailMeREmail" type="radio" name="emailMeRAddr" value="email" checked><?php echo $user->email ?></label>
+                    </div>
+                    <div class="radio">
+                        <label for="emailMeRPhone"><input id="emailMeRPhone" type="radio" name="emailMeRAddr" value="phone">
+                        <?php
+                        if ($user->phone)
+                            echo $user->phone;
+                        else {    
+                        ?>
+                            <input id="emailMePhone" type="text" placeholder="телефон" class="form-control" disabled>
+                        <?php
+                        }
+                        ?>
+                        </label>
+                    </div>
+                <?php    
+                } else {
+                ?>
+                    <div>Оставьте свой контакт, и мы сообщим Вам когда товар будет в наличии</div>
+                    <input type="text" placeholder="email или телефон*" id="emailMeAddr" class="form-control">
+                <?php
+                }
+                ?>
+                <button type="button" class="green-button" id="emailMeSubmit">Сообщить</button>
+            </div>    
+        </div>
+    </div>
+</div>   
+        
 <?php
 if (!$pm) {
     include 'footer.php';
@@ -288,4 +339,4 @@ if (!$pm) {
 <?php
 }
 ?>
-<script src="/js/modalgood.js?20171006"></script> 
+<script src="/js/modalgood.js?20171024"></script> 
