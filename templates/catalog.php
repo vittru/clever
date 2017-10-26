@@ -1,6 +1,12 @@
 <?php
 include 'header.php';
 $showGoods = sizeof($catalogGoods);
+function cmp($a, $b)
+{
+    return strcmp($b->isAvailable(), $a->isAvailable());
+}
+
+usort($catalogGoods, "cmp");
 ?>
 
 <section id="aa-product">
