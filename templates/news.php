@@ -30,7 +30,7 @@ include 'header.php';
                     <img class="news-image" src=<?php echo $image; ?>>
 
                     <div class="col-md-12">
-                        <p><?php echo $new->getWebText(); ?></p>
+                        <p><?php echo $new->text; ?></p>
                         <p>
                             <?php
                             if ($isadmin) {

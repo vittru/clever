@@ -24,7 +24,10 @@ if ($newsId) {
                 <td>  
                     <div class="form-group">
                         <label class="col-md-2" for="text">Текст:</label>
-                        <textarea class="form-control col-md-10 text" rows="5" id="description" name="text"><?php if ($news) echo $news->text ?></textarea>
+                        <div class="col-md-10">
+                            <div class="form-control text" id="descriptionHtml" name="textHtml"><?php if ($news) echo $news->text ?></div>
+                            <textarea hidden id="description" name="text"></textarea>
+                        </div>    
                     </div>
                 </td>
             </tr>
@@ -115,10 +118,29 @@ if ($newsId) {
                 </td>
             </tr>
         </table>
-        <button type="submit" style="margin-bottom: 40px;" class="btn green-button">Сохранить</button>
+        <button id="save" type="submit" style="margin-bottom: 40px;" class="btn green-button">Сохранить</button>
     
     </form>
 </section>
 
 <?php
 include 'footer.php';
+
+?>
+
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
+
+<script>
+$(document).ready(function() {
+  $('#descriptionHtml').summernote();
+});
+
+$(function(){
+    $('#save').click(function () {
+        var mysave =  $('#descriptionHtml').summernote('code');
+        $('#description').val(mysave);
+    });
+});
+</script>
