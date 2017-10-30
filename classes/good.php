@@ -121,7 +121,7 @@ Class Good {
             echo str_replace('"', "'", $this->name);
             echo'"></a>';
             if ($this->isAvailable()) {
-                echo '<a class="aa-add-card-btn orange-button" id="';
+                echo '<a class="aa-action-btn aa-add-card-btn orange-button" id="';
                 echo $this->id;
                 echo '" value="';
                 echo $this->getFirstAvailSize();
@@ -136,6 +136,10 @@ Class Good {
                 else 
                     echo "0";
                 echo '"><span class="fa fa-shopping-cart"></span>В корзину</a>';
+            } else {
+                echo '<a class="aa-action-btn aa-emailme-btn green-button" id="emailMeBtn';
+                //echo $this->id;
+                echo '"><span class="fa fa-envelope"></span>Заказать</a>';
             }
             echo '<figcaption>';
             echo '<div class="aa-product-title"><a href="/showgood?id=';
@@ -170,7 +174,7 @@ Class Good {
                 echo '<span class="aa-badge aa-sale">Скидка!</span> ';
             }
             if (!$this->isAvailable()) {
-                echo '<span class="aa-badge aa-sold-out">Нет в наличии</span>';
+                echo '<span class="aa-badge aa-sold-out">Под заказ</span>';
             }
             echo '</li>';
         }    

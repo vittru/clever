@@ -99,7 +99,51 @@
             </div>    
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
-</div>    
+</div>  
+
+<!-- Email Me Modal -->
+<div class="modal fade" id="emailMe" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Сообщить о поступлении</h4>
+            </div>
+            <div class="modal-body">
+                <?php 
+                if ($user->name) {
+                ?>    
+                    <div>Как Вам сообщить о поступлении товара?</div>
+                    <div class="radio">
+                        <label for="emailMeREmail"><input id="emailMeREmail" type="radio" name="emailMeRAddr" value="email" checked><?php echo $user->email ?></label>
+                    </div>
+                    <div class="radio">
+                        <label for="emailMeRPhone"><input id="emailMeRPhone" type="radio" name="emailMeRAddr" value="phone">
+                        <?php
+                        if ($user->phone)
+                            echo $user->phone;
+                        else {    
+                        ?>
+                            <input id="emailMePhone" type="text" placeholder="телефон" class="form-control" disabled>
+                        <?php
+                        }
+                        ?>
+                        </label>
+                    </div>
+                <?php    
+                } else {
+                ?>
+                    <div>Оставьте свой контакт, и мы сообщим Вам когда товар будет в наличии</div>
+                    <input type="text" placeholder="email или телефон*" id="emailMeAddr" class="form-control">
+                <?php
+                }
+                ?>
+                <button type="button" class="green-button" id="emailMeSubmit">Сообщить</button>
+            </div>    
+        </div>
+    </div>
+</div>   
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="/js/bootstrap.js"></script>  
@@ -111,7 +155,7 @@
 <script src="/js/custom.js"></script> 
 <script src="/js/jquery.validate.js"></script>
 <script src="/js/auth-form.js"></script>
-<script src="/js/clubclever.js?<?php echo '20171024'//filemtime('/js/clubclever.js'); ?>"></script>
+<script src="/js/clubclever.js?<?php echo '20171030'//filemtime('/js/clubclever.js'); ?>"></script>
 <!--script src="/js/clubclever.js"></script-->
 <script src="/js/lightbox.js"></script> 
 
