@@ -18,23 +18,14 @@ include 'header.php';
                                         <p><b>Студия красоты Аллы Пелевиной</b></p>
                                         <p><b>ул. Ново-Садовая, 271</b></p>
                                         <div class="map"><script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=3Z04yabmOvp2FZ3pW8QyO_fTbB6Y_MFy&amp;width=320&amp;height=240&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script></div>
-                                        <p class="worktime">в будни с 10.00 до 20.00</p>
-                                        <p class="worktime">по выходным с 10.00 до 18.00</p>
+                                        <p><span class="fa fa-clock-o"></span>в будни с 10.00 до 20.00</p>
+                                        <p><span class="fa fa-clock-o"></span>по выходным с 10.00 до 18.00</p>
                                     </div>    
                                     <div class="col-md-6 branch">
-                                        <p><b>Салон красоты "Каролина"</b></p>
-                                        <p><b>ул. Стара-Загора, 168</b></p>
-                                        <div class="map"><script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=X_vOb2NXN7WVSnIiUtq5RbhTy3EdzSa4&amp;width=320&amp;height=240&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script></div>
-                                        <p class="worktime">ежедневно с 10.00 до 20.00</p>
-                                        <p></p>
-                                    </div>  
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 branch">
-                                        <p><b>Салон красоты</b></p>
+                                        <p><b>Салон красоты "Красивые люди"</b></p>
                                         <p><b>ул. Георгия Димитрова, 112</b></p>
                                         <div class="map"><script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=GrArh56-A8ES1kTZdADZ7tgWcLvkOgSq&amp;width=320&amp;height=240&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script></div>
-                                        <p class="worktime">ежедневно с 10.00 до 21.00</p>
+                                        <p><span class="fa fa-clock-o"></span>ежедневно с 10.00 до 21.00</p>
                                         <p></p>
                                     </div>    
                                 </div>
@@ -80,12 +71,11 @@ include 'header.php';
                                     <address>
                                         <h2>Клевер</h2>
                                         <h5>МАГАЗИН НАТУРАЛЬНОЙ КОСМЕТИКИ</h5>
-                                        <!--p><span class="fa fa-home"></span>443011, Самара</p>
-                                        <p><span class="fa fa-home"></span>ул. Ново-Садовая, 271</p-->
+                                        <p>ООО "Клевер"</p>
+                                        <p>ИНН 6315011857</p>
                                         <p><span class="fa fa-phone"></span>+7-996-725-00-61</p>
                                         <p><span class="fa fa-phone"></span>+7-996-725-00-62</p>
-                                        <p><span class="fa fa-phone"></span>+7-996-730-46-22</p>
-                                        <p><span class="fa fa-envelope"></span><?php echo $this->registry['mainemail'] ?></p>
+                                        <p><span class="fa fa-envelope"></span><a href="mailto: <?php echo $this->registry['mainemail'] ?>"><?php echo $this->registry['mainemail'] ?></a></p>
                                     </address>
                                 </div>
                             </div>

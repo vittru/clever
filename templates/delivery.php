@@ -54,8 +54,8 @@ include 'header.php';
                     <div class="col-md-6 branch">
                         <b><?php echo $branch->address; ?></b>
                         <div class="map"><?php echo $branch->map ?></div>
-                        <p class="worktime"><?php echo $branch->open ?></p>
-                        <div class="cash" data-toggle="tooltip" title="Оплата наличными"></div>
+                        <p><span class="fa fa-clock-o"></span><?php echo $branch->open ?></p>
+                        <!--div class="cash" data-toggle="tooltip" title="Оплата наличными"></div-->
                         <?php
                         if ($branch->card) {
                         ?>

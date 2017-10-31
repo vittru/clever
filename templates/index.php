@@ -62,45 +62,13 @@ if ($banners->valid()) {
                 <div class="row">
                     <div class="aa-product-area">
                         <div class="aa-product-inner">
-                        <!-- start product navigation -->
-                            <ul class="nav nav-tabs aa-products-tab">
-                                <?php 
-                                $i=1;
-                                foreach($this->registry['types'] as $typeId=>$type) {
-                                ?>
-                                    <li <?php if ($i==1) echo 'class="active"' ?>>
-                                        <a href="#type<?php echo $typeId ?>" data-toggle="tab"><?php echo $type->name ?></a>
-                                    </li>
-                                    <?php
-                                    $i++;
-                                }?>
-                            </ul>
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <?php 
-                                $i=0;
-                                foreach($this->registry['types'] as $typeId=>$type) {
-                                    $i++
-                                ?>
-                                <!-- Category -->
-                                    <div class="tab-pane fade <?php if ($i==1) echo 'in active' ?>" id="type<?php echo $typeId ?>">
-                                        <ul class="aa-product-catg">
-                                        <?php
-                                        foreach($pgoods[$typeId] as $good) {
-                                            $good->showInCatalog();
-                                        }
-                                        ?>
-                                        </ul>
-                                        <a class="aa-browse-btn green-button" href="/catalog/type/<?php echo $type->url ?>">Больше товаров <?php echo mb_strtolower($type->name) ?><span class="fa fa-long-arrow-right"></span></a>
-
-                                    </div>
+                            <ul class="aa-product-catg">
                                 <?php
+                                foreach($pgoods as $good) {
+                                    $good->showInCatalog();
                                 }
                                 ?>
-                            </div>  
-                            <?php
-                            include 'modalgood.php';
-                            ?>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -179,9 +147,9 @@ if ($banners->valid()) {
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <div class="aa-support-single">
-                            <span class="fa fa-rub"></span>
-                            <h4>Возврат</h4>
-                            <P>Если что-то пошло не так, мы готовы обменять товар обратно на деньги.</P>
+                            <span class="fa fa-percent"></span>
+                            <h4>Скидки</h4>
+                            <P>Разнообразные акции для экономных покупок.</P>
                         </div>
                     </div>
                 </div>

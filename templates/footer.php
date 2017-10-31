@@ -50,9 +50,10 @@
                                     <div class="aa-footer-widget">
                                         <div class="footer-header">Наши контакты</div>
                                         <address>
+                                            <p>ООО "Клевер"</p>
+                                            <p>ИНН 6315011857</p>
                                             <p><span class="fa fa-phone"></span>+7-996-725-00-61</p>
                                             <p><span class="fa fa-phone"></span>+7-996-725-00-62</p>
-                                            <p><span class="fa fa-phone"></span>+7-996-730-46-22</p>
                                             <p><span class="fa fa-envelope"></span><?php echo $this->registry['mainemail'] ?></p>
                                         </address>
                                         <div class="aa-footer-social">

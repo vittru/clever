@@ -1017,18 +1017,16 @@ Class Model {
         return $categories;
     }
     
-    function getPopularGoods($typeId) {
+    function getPopularGoods() {
         $sqlSelect = $this->db->prepare('SELECT v.good, COUNT(DISTINCT v.id) '
-                . 'FROM visits v JOIN `goods-types` gt ON v.good=gt.goodId '
-                . 'JOIN `goods-sizes` gs ON v.good=gs.goodid '
+                . 'FROM visits v JOIN `goods-sizes` gs ON v.good=gs.goodid '
                 . 'JOIN warehouse w ON w.psid = gs.id '
                 . 'JOIN goods g ON v.good=g.id '
-                . 'WHERE v.pageid=30 AND v.good IS NOT NULL AND gt.typeId=:typeId AND w.instock > w.onhold AND v.time >=DATE_SUB(curdate(), INTERVAL 1 MONTH) AND g.hidden=0 '
+                . 'WHERE v.pageid=30 AND v.good IS NOT NULL AND w.instock > w.onhold AND v.time >=DATE_SUB(curdate(), INTERVAL 1 MONTH) AND g.hidden=0 '
                 . 'GROUP BY 1 '
                 . 'ORDER BY 2 DESC '
                 . 'LIMIT 8');
-        $sqlSelect->bindParam(':typeId', $typeId);
-        $this->executeQuery($sqlSelect, 'Error when getting popular goods of type '.$typeId);
+        $this->executeQuery($sqlSelect, 'Error when getting popular goods');
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $good = $this->getGood($data['good']);
             if (!isset($goods))
