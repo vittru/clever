@@ -111,7 +111,7 @@ if ($banners->valid()) {
                         <?php 
                         foreach ($firms as $id=>$firm) {
                         ?>
-                            <li><a href="/catalog/firm/<?php echo $firm->url; ?>"><img src="/images/firms/firm<?php echo $id; ?>.png" alt="<?php echo $firm->name; ?>"></a></li>
+                            <li><a href="/catalog/firm/<?php echo $firm->url; ?>"><img src="/images/firm/firm<?php echo $id; ?>.png" alt="<?php echo $firm->name; ?>"></a></li>
                         <?php
                         }
                         ?>

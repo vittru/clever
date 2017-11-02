@@ -63,7 +63,7 @@ onmouseout="this.src='/images/certs/cert.png'" alt="<?php echo $fileinfo->getFil
                                         ?>    
                                         <li class="col-sm-3 good">
                                           <figure>
-                                            <a class="aa-product-img" href="/common/certs?firm=<?php echo $id ?>"><img src="/images/firms/firm<?php echo $id ?>.png" alt="<?php echo $firm->name ?>"></a>
+                                            <a class="aa-product-img" href="/common/certs?firm=<?php echo $id ?>"><img src="/images/firm/firm<?php echo $id ?>.png" alt="<?php echo $firm->name ?>"></a>
                                             <figcaption>
                                                 <h4 class="aa-product-title"><a href="/common/certs?firm=<?php echo $id ?>"><?php echo $firm->name ?></a></h4>
                                             </figcaption>

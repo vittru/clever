@@ -976,10 +976,10 @@ Class Model {
         $sqlUpdate->closeCursor();
     }
     
-    function getCategoryByUrl($url) {
-        $sqlSelect = $this->db->prepare('SELECT * FROM categories WHERE url=:url');
-        $sqlSelect->bindParam(':url', $url);
-        $this->executeQuery($sqlSelect, 'Error when getting category with url='.$url);
+    function getCategory($id) {
+        $sqlSelect = $this->db->prepare('SELECT * FROM categories WHERE id=:id');
+        $sqlSelect->bindParam(':id', $id);
+        $this->executeQuery($sqlSelect, 'Error when getting category with id=' . $id);
         $data = $sqlSelect->fetch();
         $sqlSelect->closeCursor();
         if ($data) {
@@ -1003,8 +1003,13 @@ Class Model {
         return $goods;
     }
     
-    function getCategories() {
-        $sqlSelect = $this->db->prepare('SELECT * FROM categories ORDER BY name');
+    function getCategories($scId) {
+        if ($scId) {
+            $sqlSelect = $this->db->prepare('SELECT * FROM categories WHERE supercatid=:scId ORDER BY name');
+            $sqlSelect->bindParam(':scId', $scId);
+        } else
+            $sqlSelect = $this->db->prepare('SELECT * FROM categories ORDER BY name');
+        
         $this->executeQuery($sqlSelect, 'Error when getting categories');
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $category = New Category($data['id'], $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription']);
@@ -1017,6 +1022,20 @@ Class Model {
         return $categories;
     }
     
+    function getSuperCats() {
+        $sqlSelect = $this->db->prepare('SELECT * FROM supercats WHERE hidden=0 ORDER BY name');
+        $this->executeQuery($sqlSelect, 'Error when getting super cats');
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $category = New Category($data['id'], $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription']);
+            if (!isset($categories))
+                $categories = [$category];
+            else
+                array_push($categories, $category);
+        }   
+        $sqlSelect->closeCursor();
+        return $categories;
+    }
+
     function getPopularGoods() {
         $sqlSelect = $this->db->prepare('SELECT v.good, COUNT(DISTINCT v.id) '
                 . 'FROM visits v JOIN `goods-sizes` gs ON v.good=gs.goodid '
