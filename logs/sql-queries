@@ -69,16 +69,14 @@ order by 1 desc
 //Статистика по пользователям и страницам по дням
 select DATE(v.time) "День", count(v.id) "Страница", count(distinct v.userid) "Пользователь"
 from visits v join users u on v.userid = u.id
-where u.useragent not like '%bot%' and u.useragent not like '%Megaindex%' and u.useragent not like '%Yahoo%' and u.useragent not like '%spider%' and u.useragent not like '%Crawler%' and u.useragent not like '%validator%' and u.useragent not like '%vkShare%' and u.useragent not like '%DataMiner%' and u.useragent not like '%Daum%' and u.useragent not like '%Dataprovider.com%' and u.useragent not like '%Stratagems Kumo%' and u.useragent not like '%Go-http-client/1.1%' and u.useragent not like '%1C+Enterprise/8.3%' and u.ip <> '46.0.197.132' and u.ip <> '104.144.209.45' and u.useragent not like '%BegunAdvertising%'
-and  (u.profile not in (12, 13, 14) or u.profile is null) and v.pageid<>404
+where u.bot=0 and v.pageid<>404
 group by 1
 order by 1 desc
 
 //Статистика по месяцам
 select EXTRACT( YEAR_MONTH FROM v.time ) "Месяц", count(v.id) "Страницы", count(distinct v.userid) "Пользователи"
 from visits v join users u on v.userid = u.id
-where u.useragent not like '%bot%' and u.useragent not like '%Megaindex%' and u.useragent not like '%Yahoo%' and u.useragent not like '%spider%' and u.useragent not like '%Crawler%' and u.useragent not like '%validator%' and u.useragent not like '%vkShare%' and u.useragent not like '%DataMiner%' and u.useragent not like '%Daum%' and u.useragent not like '%Dataprovider.com%' and u.useragent not like '%Stratagems Kumo%' and u.useragent not like '%Go-http-client/1.1%' and u.useragent not like '%1C+Enterprise/8.3%' and u.ip <> '46.0.197.132' and u.ip <> '104.144.209.45' and u.useragent not like '%BegunAdvertising%'
-and  (u.profile not in (12, 13, 14) or u.profile is null) and v.pageid<>404
+where u.bot=0 and v.pageid<>404
 group by 1
 order by 1 desc
 
@@ -86,8 +84,7 @@ order by 1 desc
 select EXTRACT( YEAR_MONTH FROM v.time ) "Месяц", p.pagename 'Страница', count(v.id) "Посещения"
 from visits v join users u on v.userid = u.id
 left outer join pages p on v.pageid=p.id
-where u.useragent not like '%bot%' and u.useragent not like '%Megaindex%' and u.useragent not like '%Yahoo%' and u.useragent not like '%spider%' and u.useragent not like '%Crawler%' and u.useragent not like '%validator%' and u.useragent not like '%vkShare%' and u.useragent not like '%DataMiner%' and u.useragent not like '%Daum%' and u.useragent not like '%Dataprovider.com%' and u.useragent not like '%Stratagems Kumo%' and u.useragent not like '%Go-http-client/1.1%' and u.useragent not like '%1C+Enterprise/8.3%' and u.ip <> '46.0.197.132' and u.ip <> '104.144.209.45' and u.useragent not like '%BegunAdvertising%'
-and  (u.profile not in (12, 13, 14) or u.profile is null) and v.pageid<>404
+where u.bot=0 and v.pageid<>404
 group by 1,2
 order by 1 desc,3 desc
 
@@ -95,8 +92,7 @@ order by 1 desc,3 desc
 select EXTRACT( YEAR_MONTH FROM v.time ) "Месяц", f.name 'Фирма', count(v.id) "Посещения"
 from visits v join users u on v.userid = u.id
 left outer join firms f on v.good=f.id
-where u.useragent not like '%bot%' and u.useragent not like '%Megaindex%' and u.useragent not like '%Yahoo%' and u.useragent not like '%spider%' and u.useragent not like '%Crawler%' and u.useragent not like '%validator%' and u.useragent not like '%vkShare%' and u.useragent not like '%DataMiner%' and u.useragent not like '%Daum%' and u.useragent not like '%Dataprovider.com%' and u.useragent not like '%Stratagems Kumo%' and u.useragent not like '%Go-http-client/1.1%' and u.useragent not like '%1C+Enterprise/8.3%' and u.ip <> '46.0.197.132' and u.ip <> '104.144.209.45' and u.useragent not like '%BegunAdvertising%'
-and  (u.profile not in (12, 13, 14) or u.profile is null) and v.pageid=3 and v.good is not null
+where u.bot=0 and v.pageid=3 and v.good is not null
 group by 1,2
 order by 1 desc,3 desc
 
@@ -104,19 +100,31 @@ order by 1 desc,3 desc
 select EXTRACT( YEAR_MONTH FROM v.time ) "Месяц", g.name 'Товар', count(v.id) "Посещения"
 from visits v join users u on v.userid = u.id
 left outer join goods g on v.good=g.id
-where u.useragent not like '%bot%' and u.useragent not like '%Megaindex%' and u.useragent not like '%Yahoo%' and u.useragent not like '%spider%' and u.useragent not like '%Crawler%' and u.useragent not like '%validator%' and u.useragent not like '%vkShare%' and u.useragent not like '%DataMiner%' and u.useragent not like '%Daum%' and u.useragent not like '%Dataprovider.com%' and u.useragent not like '%Stratagems Kumo%' and u.useragent not like '%Go-http-client/1.1%' and u.useragent not like '%1C+Enterprise/8.3%' and u.ip <> '46.0.197.132' and u.ip <> '104.144.209.45' and u.useragent not like '%BegunAdvertising%'
-and  (u.profile not in (12, 13, 14) or u.profile is null) and v.pageid=30 and v.good is not null
+where u.bot=0 and v.pageid=30 and v.good is not null
 group by 1,2
 order by 1 desc,3 desc
 
 //Распределение визитов за месяц
 select a.visits, count(a.id) from 
-(select u.id, p.email, u.useragent, u.ip, count(v.id) visits
+(select u.id, count(v.id) visits
 from users u left join visits v on u.id=v.userid 
-left join profiles p on u.profile=p.id
-where v.time >= '2017-09-01 00:00:00' and v.time <'2017-10-01 00:00:00'
-and u.useragent not like '%bot%' and u.useragent not like '%Megaindex%' and u.useragent not like '%Yahoo%' and u.useragent not like '%spider%' and u.useragent not like '%Crawler%' and u.useragent not like '%validator%' and u.useragent not like '%vkShare%' and u.useragent not like '%DataMiner%' and u.useragent not like '%Daum%' and u.useragent not like '%Dataprovider.com%' and u.useragent not like '%Stratagems Kumo%' and u.useragent not like '%Go-http-client/1.1%' and u.useragent not like '%1C+Enterprise/8.3%' and u.ip <> '46.0.197.132' and u.ip <> '104.144.209.45' and u.useragent not like '%BegunAdvertising%'
-and (u.profile not in (12,13,14) or u.profile is NULL)
-group by 1,2,3,4) a
+where v.time >= '2017-10-01 00:00:00' and v.time <'2017-11-01 00:00:00'
+and u.bot=0 and v.pageid<>404
+group by 1) a
 group by 1
 order by 1
+
+//Top 20
+select u.id, u.ip, u.useragent, p.email, count(v.id)
+from users u join visits v on u.id=v.userid
+LEFT OUTER JOIN profiles p on u.profile=p.id
+where u.bot=0 and v.time >= '2017-10-01 00:00:00' and v.time < '2017-11-01'
+group by 1,2,3,4
+order by 5 desc
+limit 20
+
+
+//Установка ботов
+update users u
+set bot=1
+where  (u.useragent like '%bot%' or u.useragent like '%Megaindex%' or u.useragent like '%Yahoo%' or u.useragent  like '%spider%' or u.useragent  like '%Crawler%' or u.useragent  like '%validator%' or u.useragent  like '%vkShare%' or u.useragent  like '%DataMiner%' or u.useragent  like '%Daum%' OR u.useragent  like '%Dataprovider.com%' or u.useragent  like '%Stratagems Kumo%' or u.useragent  like '%Go-http-client/1.1%' or u.useragent  like '%1C+Enterprise/8.3%' or u.useragent  like '%BegunAdvertising%')

@@ -1,4 +1,6 @@
-<?php    include 'header.php';?>  
+<?php 
+http_response_code(404);
+include 'header.php';?>  
 <section id="aa-error">
     <div class="container">
         <div class="row">
