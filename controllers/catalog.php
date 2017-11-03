@@ -117,14 +117,33 @@ Class Controller_Catalog Extends Controller_Base {
         $scId = $this->registry['model']->getObjectIdByUrl('supercats', $route);
         if ($scId) {
             $this->registry['model']->logVisit(6, $scId);
-//            $this->registry['template']->set('catalogGoods', $this->registry['model']->getCategoryGoods($category->id));
-//            $this->registry['template']->set('pageHeader', $category->name);
-//            $this->registry['template']->set('pageSubHeader', $category->description);
-//            $this->registry['template']->set('metaTitle', $category->metaTitle);
-//            $this->registry['template']->set('metaDescription', $category->metaDescription);
+            foreach ($this->registry['supercats'] as $sc) {
+                if ($sc->id == $scId) {
+                    $supercat = $sc;
+                    break;
+                }    
+            }
+            $categories = $this->registry['model']->getCategories($scId);
+            //If there are several categories then we show them
+            if (sizeof($categories) > 1) {
+                $this->registry['template']->set('objects' , $categories);
+                $this->registry['template']->set('otype' , 'category');
+                $this->registry['template']->set('pageHeader' , $supercat->name);
+                $this->registry['template']->set('pageSubHeader' , $supercat->description);
+                $this->registry['template']->set('metaTitle', $supercat->metaTitle);
+                $this->registry['template']->set('metaDescription', $supercat->metaDescription);
+                $this->registry['template']->show('catalog_top');
+            //Other wise we show goods    
+            } else {
+            $this->registry['template']->set('catalogGoods', $this->registry['model']->getCategoryGoods(current($categories)->id));
+            $this->registry['template']->set('pageHeader', $supercat->name);
+            $this->registry['template']->set('pageSubHeader', $supercat->description);
+            $this->registry['template']->set('metaTitle', $supercat->metaTitle);
+            $this->registry['template']->set('metaDescription', $supercat->metaDescription);
             $this->registry['template']->set('bestBefore', false);
             $this->registry['template']->set('hideFilterCat', true);
             $this->registry['template']->show('catalog');
+            }    
         } else {
             $this->registry['model']->logVisit(6);
             $this->registry['template']->set('objects' , $this->registry['model']->getSuperCats());

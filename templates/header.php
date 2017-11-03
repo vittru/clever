@@ -257,11 +257,11 @@
                                                             <select class="form-control" name="supercat">
                                                                 <option value="0" <?php if (!isset($search_supercat)) echo 'selected disabled' ?>>Тип</option>
                                                                 <?php
-                                                                foreach($this->registry['supercats'] as $id=>$name) {
-                                                                    echo "<option value=".$id;
-                                                                    if (isset($search_supercat) and $search_supercat == $id)
+                                                                foreach($this->registry['supercats'] as $sc) {
+                                                                    echo "<option value=".$sc->id;
+                                                                    if (isset($search_supercat) and $search_supercat == $sc->id)
                                                                         echo " selected";
-                                                                    echo ">" . $name . "</option>";
+                                                                    echo ">" . $sc->name . "</option>";
                                                                 }
                                                                 ?>
                                                             </select>
@@ -380,14 +380,14 @@
                     <div class="navbar-collapse collapse">
                         <!-- Left nav -->
                         <ul class="nav navbar-nav">
-                            <li><a href="/catalog/type">Каталог<span class="caret"></a>
+                            <li><a href="/catalog/sc">Каталог<span class="caret"></a>
                                 <ul class="dropdown-menu">
                                     <?php 
-                                    foreach ($this->registry['types'] as $id => $type) {
+                                    foreach ($this->registry['supercats'] as $sc) {
                                     ?>
                                         <li>
-                                            <a href="/catalog/type/<?php echo $type->url; ?>">
-                                                <?php echo $type->name; ?>
+                                            <a href="/catalog/sc/<?php echo $sc->url; ?>">
+                                                <?php echo $sc->name; ?>
                                             </a>
                                         </li>        
                                     <?php        
@@ -395,8 +395,6 @@
                                     ?>  
                                 </ul>
                             </li>
-                            <li><a href="/catalog/category/presents">Подарки</a></li>
-                            <li><a href="/catalog/category/suit">Наборы</a></li>
                             <li><a href="/catalog/firm">Бренды<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <?php 

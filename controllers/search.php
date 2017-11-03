@@ -19,8 +19,12 @@ Class Controller_Search Extends Controller_Base {
                         $this->registry['template']->set('search_text', $value);
                         break;
                     case "supercat":
-                        $pageSubHeader .= "<tr><td>Тип:</td><td class=\"bold\">".$this->registry['supercats'][$value]."</td></tr>";
-                        $this->registry['template']->set('search_supercat', $value);
+                        foreach($this->registry['supercats'] as $sc) {
+                            if ($sc->id == $value) {
+                                $pageSubHeader .= "<tr><td>Тип:</td><td class=\"bold\">".$sc->name."</td></tr>";
+                                $this->registry['template']->set('search_supercat', $value);
+                            }    
+                        }
                         break;
                     case "effect":
                         $pageSubHeader .= "<tr><td>Эффект:</td><td class=\"bold\">".$this->registry['effects'][$value]."</td></tr>";

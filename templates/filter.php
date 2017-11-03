@@ -35,8 +35,8 @@
             <div class="filter-header">Что</div>
             <select multiple="multiple" class="SlectBox" placeholder="Все товары">
                 <?php
-                foreach ($this->registry['supercats'] as $id=>$supercat) {
-                    echo '<option id="supercat_'.$id.'"/> ' . $supercat . '</option>';
+                foreach ($this->registry['supercats'] as $supercat) {
+                    echo '<option id="supercat_'.$supercat->id.'"/> ' . $supercat->name . '</option>';
                 }
                 ?>
             </select>
