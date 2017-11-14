@@ -27,8 +27,11 @@ img {
   border: none;
 }
 
-.aa-login-btn {
+button {
+    border-radius: 0;
+}
 
+.aa-login-btn {
 }
 
 .aa-browse-btn {
@@ -1705,6 +1708,10 @@ input.es-input.open {
   float: left;
   width: 100%;
   padding-bottom: 30px;
+}
+#aa-myaccount .change-profile {
+    display: block;
+    padding: 8px 20px;
 }
 #aa-myaccount .aa-myaccount-area {
   display: inline;

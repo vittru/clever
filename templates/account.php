@@ -26,7 +26,7 @@ include 'header.php';
                                     <label for="auth-spam"><input type="checkbox" id="auth-spam" name="isSpam" <?php if ($user->spam) echo "checked" ?>> Подписаться на рассылку? </label>
                                     <input type="hidden" id="auth-action" name="userAction" value="update">
                                     <div hidden id="auth-error" class="error"></div>
-                                    <button type="submit" class="green-button">Изменить профиль</button>
+                                    <button type="submit" class="green-button change-profile">Изменить профиль</button>
                                 </form>
                             </div>
                         </div>
