@@ -65,7 +65,7 @@ if ($banners->valid()) {
                             <ul class="aa-product-catg">
                                 <?php
                                 foreach($pgoods as $good) {
-                                    $good->showInCatalog();
+                                    $good->showInCatalog(false);
                                 }
                                 ?>
                             </ul>

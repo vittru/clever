@@ -120,7 +120,7 @@ Class Good {
             echo '" title="';
             echo str_replace('"', "'", $this->name);
             echo'"></a>';
-            if ($this->isAvailable()) {
+            if ($bb or $this->isAvailable()) {
                 echo '<a class="aa-action-btn aa-add-card-btn orange-button" id="';
                 echo $this->id;
                 echo '" value="';
@@ -173,7 +173,7 @@ Class Good {
             if ($this->sale > 0 && !$bb) {
                 echo '<span class="aa-badge aa-sale">Скидка!</span> ';
             }
-            if (!$this->isAvailable()) {
+            if (!$bb and !$this->isAvailable()) {
                 echo '<span class="aa-badge aa-sold-out">Под заказ</span>';
             }
             echo '</li>';

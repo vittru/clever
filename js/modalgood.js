@@ -44,5 +44,13 @@ $(document).on("mouseleave", ".aa-add-to-cart-btn", function() {
 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
   var target = $(e.target).attr("href"); // activated tab
   modifyBasket();
+  if (target === "#bb") {
+      $('.aa-add-to-cart-btn').show();
+      $('#emailMeBtn').hide();
+  } else {
+      if (!$('.quantity:visible').length) {
+        $('.aa-add-to-cart-btn').hide();
+        $('#emailMeBtn').show();
+      }
+  }
 });
-

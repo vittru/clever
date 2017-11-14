@@ -1273,4 +1273,24 @@ Class Model {
         $this->executeQuery($sqlUpdate, 'Error when unsubscribing profile with id=' . $id);
         $sqlUpdate->closeCursor();
     }
+    
+    function getUsersWithoutGeo() {
+        $sqlSelect = $this->db->prepare('SELECT * FROM users WHERE country IS NULL AND bot=0 ORDER BY id DESC');
+        $this->executeQuery($sqlSelect, 'Error when selecting non-geo users');
+        $users = array();
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $users[$data['id']]=$data['ip'];
+        }
+        $sqlSelect->closeCursor();
+        return $users;
+    }
+    
+    function updateGeoUser($id, $country, $city) {
+        $sqlUpdate = $this->db->prepare('UPDATE users SET country=:country, city=:city WHERE id=:id');
+        $sqlUpdate->bindParam(':id', $id);
+        $sqlUpdate->bindParam(':country', $country);
+        $sqlUpdate->bindParam(':city', $city);
+        $this->executeQuery($sqlUpdate, 'Error when updating geo for user with id=' . $id);
+        $sqlUpdate->closeCursor();
+    }
 }

@@ -128,3 +128,16 @@ limit 20
 update users u
 set bot=1
 where  (u.useragent like '%bot%' or u.useragent like '%Megaindex%' or u.useragent like '%Yahoo%' or u.useragent  like '%spider%' or u.useragent  like '%Crawler%' or u.useragent  like '%validator%' or u.useragent  like '%vkShare%' or u.useragent  like '%DataMiner%' or u.useragent  like '%Daum%' OR u.useragent  like '%Dataprovider.com%' or u.useragent  like '%Stratagems Kumo%' or u.useragent  like '%Go-http-client/1.1%' or u.useragent  like '%1C+Enterprise/8.3%' or u.useragent  like '%BegunAdvertising%')
+
+
+SELECT u.id, u.ip, u.city, u.useragent, count(v.id)
+from users u join visits v on u.id=v.userid
+where u.country='Ukraine'
+group by 1,2,3,4
+order by 5 desc
+
+select u.country, u.city, count(v.id)
+from users u join visits v on u.id=v.userid
+where u.country is not null and u.bot=0
+group by 1,2
+order by 3 desc

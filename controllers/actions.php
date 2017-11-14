@@ -18,7 +18,7 @@ Class Controller_Actions Extends Controller_Base {
         $this->registry['model']->logVisit(34);
         $catalogGoods=array();
         foreach ($this->registry['model']->getAllGoods() as $goodId=>$good) {
-            if ($good->hasBB() && $good->isAvailable()) {
+            if ($good->hasBB()) {
                 $catalogGoods[$goodId] = $good;
             }
         }
@@ -26,7 +26,7 @@ Class Controller_Actions Extends Controller_Base {
         $this->registry['template']->set('bestBefore', true);
         $this->registry['template']->set('pageHeader', 'Товары с истекающим сроком годности');
         $this->registry['template']->set('metaTitle', 'Скидки на эко товары с истекающим сроком годности');
-        $this->registry['template']->set('metaDescription', 'Натуральная косметика можно купить с хорошей скидкой в интернет-магазине Клевер.');
+        $this->registry['template']->set('metaDescription', 'Натуральную косметику можно купить с хорошей скидкой в интернет-магазине Клевер.');
         $this->registry['template']->show('catalog');
         
     }

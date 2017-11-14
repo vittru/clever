@@ -153,12 +153,12 @@
                                         <td><?php echo $size->getWebBBPrice($showGood->sale); ?></td>
                                         <td>
                                             <?php
-                                            if ($size->isAvailable()) {
+                                            //if ($size->isAvailable()) {
                                             ?>
                                                 <input class="quantity form-control" data-price="<?php echo $size->bbprice; ?>" data-sale="1" type="number" id="sel<?php echo $sizeId; ?>" value="<?php if (sizeof($showGood->sizes)==1) {echo '1'; if ($bb) $canBeBought = true;} else echo '0';  ?>" onchange="modifyBasket()">
                                             <?php
-                                            } else
-                                                echo '<span class="unavailable">Нет на складе</span>'
+                                            //} else
+                                            //    echo '<span class="unavailable">Нет на складе</span>'
                                             ?>
                                         </td>
                                     </tr> 
@@ -183,16 +183,9 @@
                     </div>
                 </div>
                 <div class="aa-prod-view-bottom">
-                    <?php 
-                    if (!$showGood->isAvailable()) {
-                    ?>
-                        <a class="green-button" id="emailMeBtn"><span class="fa fa-envelope" data-toggle="modal" data-target="#emailMe"></span>Сообщить о наличии</a>
+                    <a class="green-button" id="emailMeBtn" <?php if ($bb or $showGood->isAvailable() ) echo 'style="display:none;" ' ?>><span class="fa fa-envelope" data-toggle="modal" data-target="#emailMe"></span>Сообщить о наличии</a>
+                    <a class="aa-add-to-cart-btn green-button" <?php if (!$canBeBought) echo 'disabled '; if (!$bb and !$showGood->isAvailable()) echo 'style="display:none;" ' ?> title="Товар добавлен в корзину" data-content="Оформить заказ"><span class="fa fa-shopping-cart"></span>В корзину</a>
                     <?php
-                    } else {
-                    ?>
-                        <a class="aa-add-to-cart-btn green-button" <?php if (!$canBeBought) echo 'disabled' ?> title="Товар добавлен в корзину" data-content="Оформить заказ"><span class="fa fa-shopping-cart"></span>В корзину</a>
-                    <?php
-                    }
                     if ($isadmin) {
                     ?>
                         <a class="green-button" href="/editgood?good=<?php echo $showGood->id ?>">Редактировать</a>
@@ -295,4 +288,4 @@
     <?php
     }
     ?>
-    <script src="/js/modalgood.js?20171024"></script> 
+    <script src="/js/modalgood.js?20171114"></script> 
