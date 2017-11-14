@@ -983,7 +983,7 @@ Class Model {
         $data = $sqlSelect->fetch();
         $sqlSelect->closeCursor();
         if ($data) {
-            $category = new Category($data['id'], $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription']);
+            $category = new Category($data['id'], $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription'], $data['metaKeywords']);
         }
         return $category;
     }
@@ -1012,7 +1012,7 @@ Class Model {
         
         $this->executeQuery($sqlSelect, 'Error when getting categories');
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $category = New Category($data['id'], $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription']);
+            $category = New Category($data['id'], $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription'], $data['metaKeywords']);
             if (!isset($categories))
                 $categories = [$category];
             else
@@ -1026,7 +1026,7 @@ Class Model {
         $sqlSelect = $this->db->prepare('SELECT * FROM supercats WHERE hidden=0 ORDER BY name');
         $this->executeQuery($sqlSelect, 'Error when getting super cats');
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $category = New Category($data['id'], $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription']);
+            $category = New Category($data['id'], $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription'], $data['metaKeywords']);
             if (!isset($categories))
                 $categories = [$category];
             else

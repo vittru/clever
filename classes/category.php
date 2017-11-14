@@ -9,14 +9,16 @@ Class Category {
     public $goods;
     public $metaTitle;
     public $metaDescription;
+    public $metaKeywords;
 
-    function __construct($id, $name, $description, $url, $metaTitle, $metaDescription) {
+    function __construct($id, $name, $description, $url, $metaTitle, $metaDescription, $metaKeywords) {
        $this->id = $id;
        $this->name = $name;
        $this->description = $description;
        $this->url = $url;
        $this->metaTitle = $metaTitle;
        $this->metaDescription = $metaDescription;
+       $this->metaKeywords = $metaKeywords;
     }    
 }
 

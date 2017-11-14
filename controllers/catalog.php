@@ -98,6 +98,7 @@ Class Controller_Catalog Extends Controller_Base {
             $this->registry['template']->set('pageSubHeader', $category->description);
             $this->registry['template']->set('metaTitle', $category->metaTitle);
             $this->registry['template']->set('metaDescription', $category->metaDescription);
+            $this->registry['template']->set('metaKeywords', $category->metaKeywords);
             $this->registry['template']->set('bestBefore', false);
             $this->registry['template']->set('hideFilterCat', true);
             $this->registry['template']->show('catalog');
@@ -132,6 +133,7 @@ Class Controller_Catalog Extends Controller_Base {
                 $this->registry['template']->set('pageSubHeader' , $supercat->description);
                 $this->registry['template']->set('metaTitle', $supercat->metaTitle);
                 $this->registry['template']->set('metaDescription', $supercat->metaDescription);
+                $this->registry['template']->set('metaKeywords', $supercat->metaKeywords);
                 $this->registry['template']->show('catalog_top');
             //Other wise we show goods    
             } else {
@@ -140,6 +142,7 @@ Class Controller_Catalog Extends Controller_Base {
             $this->registry['template']->set('pageSubHeader', $supercat->description);
             $this->registry['template']->set('metaTitle', $supercat->metaTitle);
             $this->registry['template']->set('metaDescription', $supercat->metaDescription);
+            $this->registry['template']->set('metaKeywords', $supercat->metaKeywords);
             $this->registry['template']->set('bestBefore', false);
             $this->registry['template']->set('hideFilterCat', true);
             $this->registry['template']->show('catalog');
@@ -148,12 +151,14 @@ Class Controller_Catalog Extends Controller_Base {
             $this->registry['model']->logVisit(6);
             $this->registry['template']->set('objects' , $this->registry['model']->getSuperCats());
             $this->registry['template']->set('otype' , 'sc');
+            $this->registry['template']->set('metaTitle', 'Эко косметика в Самаре | Интернет магазин натуральной косметики');
+            $this->registry['template']->set('metaKeywords', 'натуральная косметика, интернет магазин, эко косметика, купить, самара, декоративная косметика, масла, наборы, подарки, уход за волосами, уход за телом, уход за лицом');
+            $this->registry['template']->set('metaDescription', 'Каталог интернет магазина натуральной косметики: декоративная косметика, масла, наборы, уход за волосами, уход за лицом и телом. Купить в Самаре по низкой цене');
             $this->registry['template']->set('pageHeader' , 'Каталог товаров');
             $this->registry['template']->set('pageSubHeader' , 'В нашем каталоге Вы найдете товары на любой вкус.');
             $this->registry['template']->show('catalog_top');
         }
     }
-
-        }
+}
 
 

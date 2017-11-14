@@ -75,7 +75,7 @@ include 'header.php';
                                         <p>ИНН 6315011857</p>
                                         <p><span class="fa fa-phone"></span>+7-996-725-00-61</p>
                                         <p><span class="fa fa-phone"></span>+7-996-725-00-62</p>
-                                        <p><span class="fa fa-envelope"></span><a href="mailto: <?php echo $this->registry['mainemail'] ?>"><?php echo $this->registry['mainemail'] ?></a></p>
+                                        <p><span class="fa fa-envelope"></span><a onclick="yaCounter44412517.reachGoal('SEND_EMAIL'); return true;" href="mailto: <?php echo $this->registry['mainemail'] ?>"><?php echo $this->registry['mainemail'] ?></a></p>
                                     </address>
                                 </div>
                             </div>
