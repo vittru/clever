@@ -910,6 +910,7 @@ h2 {
 }
 
 .aa-product-catg {
+    margin-left: 0;
 }
 .aa-product-catg li {
   display: block;
