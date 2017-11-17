@@ -53,7 +53,6 @@ onmouseout="this.src='/images/certs/cert.png'" alt="<?php echo $fileinfo->getFil
                                 ?>
                                 </ul>
                             <?php
-                            include 'modalgood.php';
                             } else {
                             ?>
                                 <ul class="aa-product-catg">

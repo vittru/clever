@@ -56,4 +56,33 @@ Abstract Class Controller_Base {
         }
         return $total;        
     }
+    
+    function getBreadcrumbs($supercat, $category, $good) {
+        $crumbs['Каталог'] = '/catalog/sc';
+        if ($supercat) {
+            $crumbs[$supercat->name] = NULL;
+        } else if ($category) {
+            foreach ($this->registry['supercats'] as $sc) {
+                if ($sc->id == $category->supercatId) {
+                    $superc = $sc;
+                    break;
+                }    
+            }            
+            $crumbs[$superc->name] = '/catalog/sc/' . $superc->url;
+            $crumbs[$category->name] = NULL;
+        } else if ($good) {
+            $categoryId = array_values($good->cats)[0];
+            $categ = $this->registry['model']->getCategory($categoryId); 
+            foreach ($this->registry['supercats'] as $sc) {
+                if ($sc->id == $categ->supercatId) {
+                    $superc = $sc;
+                    break;
+                }    
+            }
+            $crumbs[$superc->name] = '/catalog/sc/' . $superc->url;
+            $crumbs[$categ->name] = '/catalog/category/' . $categ->url;
+            $crumbs[$good->name] = NULL;
+        }    
+        return $crumbs;
+    }
 }

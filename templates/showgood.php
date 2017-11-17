@@ -20,7 +20,28 @@
     ?>  
         <section id="single-product">
         <div class="container">
-    <?php    
+        <?php        
+        if (sizeof($breadcrumbs)) {
+        ?>
+            <div class="row">
+                <ul class="breadcrumb">
+                    <?php
+                    foreach ($breadcrumbs as $name=>$url) {
+                        echo '<li>';
+                        if ($url) {
+                            echo '<a href="'. $url . '">';
+                        }
+                        echo $name;
+                        if ($url) {
+                            echo '</a>';
+                        }
+                        echo '</li>';
+                    }
+                    ?>
+                </ul>    
+            </div>
+        <?php    
+        }
     }
     ?>
         <h1 class="modal-title"><?php echo $showGood->name ?></h1>

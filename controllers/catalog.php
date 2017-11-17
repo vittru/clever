@@ -93,6 +93,7 @@ Class Controller_Catalog Extends Controller_Base {
         $category = $this->registry['model']->getCategory($this->registry['model']->getObjectIdByUrl('categories', $route));
         if ($category) {
             $this->registry['model']->logVisit(5, $category->id);
+            $this->registry['template']->set('breadcrumbs', $this->getBreadcrumbs(NULL, $category, NULL));
             $this->registry['template']->set('catalogGoods', $this->registry['model']->getCategoryGoods($category->id));
             $this->registry['template']->set('pageHeader', $category->name);
             $this->registry['template']->set('pageSubHeader', $category->description);
@@ -104,6 +105,7 @@ Class Controller_Catalog Extends Controller_Base {
             $this->registry['template']->show('catalog');
         } else {
             $this->registry['model']->logVisit(5);
+            $this->registry['template']->set('breadcrumbs', $this->getBreadcrumbs(NULL, NULL, NULL));
             $this->registry['template']->set('objects' , $this->registry['model']->getCategories());
             $this->registry['template']->set('otype' , 'category');
             $this->registry['template']->set('pageHeader' , 'Категории товаров');
@@ -125,27 +127,23 @@ Class Controller_Catalog Extends Controller_Base {
                 }    
             }
             $categories = $this->registry['model']->getCategories($scId);
+            $this->registry['template']->set('breadcrumbs', $this->getBreadcrumbs($supercat, NULL, NULL));
+            $this->registry['template']->set('pageHeader' , $supercat->name);
+            $this->registry['template']->set('pageSubHeader' , $supercat->description);
+            $this->registry['template']->set('metaTitle', $supercat->metaTitle);
+            $this->registry['template']->set('metaDescription', $supercat->metaDescription);
+            $this->registry['template']->set('metaKeywords', $supercat->metaKeywords);
             //If there are several categories then we show them
             if (sizeof($categories) > 1) {
                 $this->registry['template']->set('objects' , $categories);
                 $this->registry['template']->set('otype' , 'category');
-                $this->registry['template']->set('pageHeader' , $supercat->name);
-                $this->registry['template']->set('pageSubHeader' , $supercat->description);
-                $this->registry['template']->set('metaTitle', $supercat->metaTitle);
-                $this->registry['template']->set('metaDescription', $supercat->metaDescription);
-                $this->registry['template']->set('metaKeywords', $supercat->metaKeywords);
                 $this->registry['template']->show('catalog_top');
-            //Other wise we show goods    
+            //Otherwise we show goods    
             } else {
-            $this->registry['template']->set('catalogGoods', $this->registry['model']->getCategoryGoods(current($categories)->id));
-            $this->registry['template']->set('pageHeader', $supercat->name);
-            $this->registry['template']->set('pageSubHeader', $supercat->description);
-            $this->registry['template']->set('metaTitle', $supercat->metaTitle);
-            $this->registry['template']->set('metaDescription', $supercat->metaDescription);
-            $this->registry['template']->set('metaKeywords', $supercat->metaKeywords);
-            $this->registry['template']->set('bestBefore', false);
-            $this->registry['template']->set('hideFilterCat', true);
-            $this->registry['template']->show('catalog');
+                $this->registry['template']->set('catalogGoods', $this->registry['model']->getCategoryGoods(current($categories)->id));
+                $this->registry['template']->set('bestBefore', false);
+                $this->registry['template']->set('hideFilterCat', true);
+                $this->registry['template']->show('catalog');
             }    
         } else {
             $this->registry['model']->logVisit(6);

@@ -13,16 +13,42 @@ usort($catalogGoods, "cmp");
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                <?php
+                if (sizeof($breadcrumbs)) {
+                ?>
+                <div class="row">
+                    <ul class="breadcrumb">
+                        <?php
+                        foreach ($breadcrumbs as $name=>$url) {
+                            echo '<li>';
+                            if ($url) {
+                                echo '<a href="'. $url . '">';
+                            }
+                            echo $name;
+                            if ($url) {
+                                echo '</a>';
+                            }
+                            echo '</li>';
+                        }
+                        ?>
+                    </ul>    
+                </div>
+                <?php    
+                }
+                ?>
                 <div class="row">
                     <div class="aa-product-header">
+                        
                         <h1><?php echo $pageHeader ?></h1>
                         <p><?php echo $pageSubHeader ?></p>
                         <h4><?php 
-                            if (!$showGoods)
+                            if (!$showGoods) {
                                 echo 'Сейчас у нас нет таких товаров';
-                            else
+                            } else {
                                 echo $pageSecondHeader;
-                        ?></h4>
+                            }
+                            ?>
+                        </h4>
                     </div>
                 </div>
                 <div class="row">
@@ -46,9 +72,6 @@ usort($catalogGoods, "cmp");
                                     <div id="empty-catg" class="aa-empty-catg" hidden>Мы не нашли товаров, удовлетворяющих вашему запросу</div>
                                 </div>
                             </div>
-                            <?php
-                            include 'modalgood.php';
-                            ?>
                         </div>
                         <?php
                         if ($descAfter) {

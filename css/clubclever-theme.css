@@ -143,7 +143,7 @@ a.btn:focus {
 #aa-footer .aa-footer-bottom .aa-footer-bottom-area > p a:hover, #aa-footer .aa-footer-bottom .aa-footer-bottom-area > p a:focus {
   color: #51A512;
 }
-#aa-catg-head-banner .aa-catg-head-banner-area .aa-catg-head-banner-content .breadcrumb .active {
+#aa-product .breadcrumb .active {
   color: #51A512;
 }
 #aa-product .aa-sidebar .aa-sidebar-widget .filter-header {

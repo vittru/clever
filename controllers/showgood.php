@@ -37,6 +37,7 @@ Class Controller_Showgood Extends Controller_Base {
             $bb = false;
         $this->registry['template']->set('bb', $bb);
         $this->registry['template']->set('showGood', $good);
+        $this->registry['template']->set('breadcrumbs', $this->getBreadcrumbs(NULL, NULL, $good));
         $h1 = str_replace('"', '\'', $good->name);
         $h1 = str_replace('&nbsp;', ' ', $h1);
         $this->registry['template']->set('metaTitle', $h1 . ' – купить в Самаре, цены, описание | интернет-магазин Клевер');
