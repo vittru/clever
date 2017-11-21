@@ -9,8 +9,7 @@
                                 <div class="aa-footer-widget">
                                     <div class="footer-header">Главное меню</div>
                                     <ul class="aa-footer-nav">
-                                        <li><a href="/catalog/type">Каталог</a></li>
-                                        <li><a href="/catalog/category/presents">Подарки</a></li>
+                                        <li><a href="/catalog/sc">Каталог</a></li>
                                         <li><a href="/catalog/firms">Бренды</a></li>
                                         <li><a href="/actions">Акции</a></li>
                                         <li><a href="/news">Новости</a></li>
@@ -52,8 +51,8 @@
                                         <address>
                                             <p>ООО "Клевер"</p>
                                             <p>ИНН 6315011857</p>
-                                            <p><span class="fa fa-phone"></span>+7-996-725-00-61</p>
-                                            <p><span class="fa fa-phone"></span>+7-996-725-00-62</p>
+                                            <p><span class="fa fa-phone"></span><span class="ya-phone">+7-996-725-00-61</span></p>
+                                            <p><span class="fa fa-phone"></span><span class="ya-phone">+7-996-725-00-62</span></p>
                                             <p><span class="fa fa-envelope"></span><?php echo $this->registry['mainemail'] ?></p>
                                         </address>
                                         <div class="aa-footer-social">
