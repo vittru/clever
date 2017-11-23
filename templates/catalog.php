@@ -76,7 +76,7 @@ usort($catalogGoods, "cmp");
                         <?php
                         if ($descAfter) {
                         ?>
-                            <div class="aa-product-desc">
+                            <div class="aa-product-desc desc-after">
                                 <?php
                                 echo $descAfter;
                                 ?>

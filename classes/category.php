@@ -11,8 +11,9 @@ Class Category {
     public $metaDescription;
     public $metaKeywords;
     public $supercatId;
+    public $descAfter;
 
-    function __construct($id, $name, $description, $url, $metaTitle, $metaDescription, $metaKeywords, $supercatId) {
+    function __construct($id, $name, $description, $url, $metaTitle, $metaDescription, $metaKeywords, $supercatId, $descAfter) {
        $this->id = $id;
        $this->name = $name;
        $this->description = $description;
@@ -21,6 +22,7 @@ Class Category {
        $this->metaDescription = $metaDescription;
        $this->metaKeywords = $metaKeywords;
        $this->supercatId = $supercatId;
+       $this->descAfter = $descAfter;
     }    
 }
 

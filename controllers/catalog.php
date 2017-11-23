@@ -100,17 +100,20 @@ Class Controller_Catalog Extends Controller_Base {
             $this->registry['template']->set('metaTitle', $category->metaTitle);
             $this->registry['template']->set('metaDescription', $category->metaDescription);
             $this->registry['template']->set('metaKeywords', $category->metaKeywords);
+            $this->registry['logger']->lwrite($category->descAfter);
+            $this->registry['template']->set('descAfter', $category->descAfter);
             $this->registry['template']->set('bestBefore', false);
             $this->registry['template']->set('hideFilterCat', true);
             $this->registry['template']->show('catalog');
         } else {
-            $this->registry['model']->logVisit(5);
-            $this->registry['template']->set('breadcrumbs', $this->getBreadcrumbs(NULL, NULL, NULL));
+            $this->registry['model']->logVisit(404,$route);
+            $this->registry['template']->show('404');
+/*            $this->registry['template']->set('breadcrumbs', $this->getBreadcrumbs(NULL, NULL, NULL));
             $this->registry['template']->set('objects' , $this->registry['model']->getCategories());
             $this->registry['template']->set('otype' , 'category');
             $this->registry['template']->set('pageHeader' , 'Категории товаров');
             $this->registry['template']->set('pageSubHeader' , 'Мы постоянно стараемся расширить наш ассортимент');
-            $this->registry['template']->show('catalog_top');
+            $this->registry['template']->show('catalog_top');*/
         }
     }
 
@@ -138,7 +141,7 @@ Class Controller_Catalog Extends Controller_Base {
                 $this->registry['template']->set('objects' , $categories);
                 $this->registry['template']->set('otype' , 'category');
                 $this->registry['template']->show('catalog_top');
-            //Otherwise we show goods    
+            //Otherwise we show goods from single category   
             } else {
                 $this->registry['template']->set('catalogGoods', $this->registry['model']->getCategoryGoods(current($categories)->id));
                 $this->registry['template']->set('bestBefore', false);
