@@ -18,15 +18,19 @@ include 'header.php';
                 <td>  
                     <div class="form-group">
                         <label class="col-md-2" for="text">Текст:</label>
-                        <div class="form-control col-md-10 text" id="description" name="textHtml"></div>
-                        <textarea hidden id="text" name="text"></textarea>
+                        <div class="col-md-10" style="padding-left:0">
+                            <div class="form-control text" id="description" name="textHtml"></div>
+                            <textarea hidden id="text" name="text"></textarea>
+                        </div>    
                     </div>
                 </td>
             </tr>
             <tr>
                 <td>
                     <div class="form-group">
-                        <div class="col-md-2 green-button" for="text" id="sendTestEmail">Послать пример на:</div>
+                        <div class="col-md-2">
+                            <div class="green-button" style="padding: 5px 5px" for="text" id="sendTestEmail">Послать пример на:</div>
+                        </div>   
                         <input class="form-control col-md-10 text" id="testEmail" name="textHtml" value="<?php echo $user->email ?>"></input>
                     </div>
                 </td>
