@@ -63,5 +63,5 @@ Class Controller_Cart Extends Controller_Base {
                 break;
             }    
         }    
-    }    
-}
+    }  
+    }

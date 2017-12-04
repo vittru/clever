@@ -74,4 +74,12 @@ Class Controller_Common Extends Controller_Base {
             $this->registry['template']->show('blog');
         }    
     }
+    
+    function vocabulary() {
+        $this->registry['model']->logVisit(38);
+        $this->registry['template']->set('metaTitle', 'Словарь натуральной косметики');
+        $this->registry['template']->set('metaDescription', 'Основные термины, используемые в натуральной косметике');
+        $this->registry['template']->set('words', $this->registry['model']->getVocabulary());
+        $this->registry['template']->show('vocabulary');
+    }
 }

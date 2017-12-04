@@ -8,7 +8,7 @@ Class Controller_Editblog Extends Controller_Base {
             $this->registry['template']->show('editblog');
         } else 
             $this->registry['template']->show('404');
-    }
+        }
     
     function remove() {
         if ($this->registry['isadmin']) {

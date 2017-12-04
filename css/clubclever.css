@@ -1361,6 +1361,10 @@ h2 {
     width: 120px;
 }
 
+.seq-screen ul {
+    margin-left: 0;
+}
+
 .aa-product-catg-head {
     background-color: #f3f3f3;
     display: inline;

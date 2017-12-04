@@ -1293,4 +1293,55 @@ Class Model {
         $this->executeQuery($sqlUpdate, 'Error when updating geo for user with id=' . $id);
         $sqlUpdate->closeCursor();
     }
+    
+    function getVocabulary() {
+        $sqlSelect = $this->db->prepare('SELECT * FROM vocabulary ORDER BY name');
+        $this->executeQuery($sqlSelect, 'Error when getting vocabulary items');
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            if (!isset($words)) {
+                $words = [$data];
+            } else {
+                array_push($words, $data);
+            }
+        }   
+        $sqlSelect->closeCursor();
+        return $words;
+    }
+    
+    function getVoc($id) {
+        $sqlSelect = $this->db->prepare('SELECT * FROM vocabulary WHERE id=:id');
+        $sqlSelect->bindParam(':id', $id);
+        $this->executeQuery($sqlSelect, 'Error when getting vocabulary item with id='.$id);
+        $data = $sqlSelect->fetch(PDO::FETCH_ASSOC);
+        $sqlSelect->closeCursor();
+        return $data;
+    }
+    
+    function addVoc($id, $name, $text) {
+        if ($id) {
+            $sqlInsert = $this->db->prepare('UPDATE vocabulary SET name=:name, value=:value WHERE id=:id');
+            $sqlInsert->bindParam(':id', $id);
+        } else {
+            $sqlInsert = $this->db->prepare('INSERT INTO vocabulary(name, value) VALUES (:name, :value)');
+        }
+        $sqlInsert->bindParam(':name', $name);
+        $sqlInsert->bindParam(':value', $text);
+        $this->executeQuery($sqlInsert, 'Error when adding/updating a word to vocabulary');
+        if ($id) {
+            $vocId=$id;
+        } else {
+            $vocId = $this->db->lastInsertId();
+        }
+        $sqlInsert->closeCursor();
+        return $vocId;
+    }
+
+    function removeVoc($id) {
+        $sqlDelete = $this->db->prepare('DELETE FROM vocabulary WHERE id=:id');
+        $sqlDelete->bindParam(':id', $id);
+        $this->executeQuery($sqlDelete, 'Error when deleting vocabulary entry with id='.$id);
+        $sqlDelete->closeCursor();
+    }
+  
+    
 }
