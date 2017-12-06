@@ -51,7 +51,7 @@ Class Good {
     
     function getMinSizePrice() {
         foreach($this->sizes as $size) {
-            if ($size->isAvailable())
+            //if ($size->isAvailable())
                 return $size->price;
         }    
         return 0;        
