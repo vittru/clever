@@ -21,12 +21,14 @@ include 'header.php';
                         echo '<h2>' . $currentLetter . '</h2>';
                     }
                 ?>    
-                    <p><b><?php echo $word['name']?></b> - <?php echo $word['value'];?>
+                <p id="<?php echo preg_replace('/\s+/', '', $word['name']);?>"><b><?php echo $word['name']?></b> - <?php echo $word['value'];?>
                     <?php
                     if ($isadmin) {
-                    ?>    
+                    ?>  
+                    <div style="border-bottom:solid; height:40px">
                         <a class="orange-button" style="padding: 1px 10px;margin:5px;float:right" href="/editvoc/remove?voc=<?php echo $word['id'] ?>">Удалить</a>
                         <a class="green-button" style="padding: 1px 10px;margin:5px;float:right" href="/editvoc?voc=<?php echo $word['id'] ?>">Редактировать</a>
+                    </div>  
                     <?php    
                     }
                     ?>

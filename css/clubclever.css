@@ -39,6 +39,14 @@ button {
     border-radius: 0;
 }
 
+p:target{
+  border: 2px solid #51A512;
+  padding: 5px;
+}
+p:target b {
+    color: #DF5600;
+}
+
 .aa-login-btn {
 }
 
