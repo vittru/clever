@@ -98,16 +98,13 @@
                             <div class="aa-header-top-left">
                                 <a class="btn" href="/common/delivery" type="button">Доставка</a>
                                 <a class="btn" href="/common/payment" type="button">Оплата</a>
-                                <a class="btn hidden-xs hidden-sm" href="/common/bonus" type="button">Бонусы</a>
                                 <a class="btn hidden-xs" href="/common/moneyback" type="button">Возврат</a>
                                 <a class="btn hidden-xs hidden-sm hidden-md" href="/common/blog" type="button">Блог</a>
                                 <a class="btn" href="/contacts" type="button">Контакты</a>
+                                <a class="btn hidden-xs hidden-sm" href="/common/vocabulary" type="button">Словарь</a>
 
                                 <div class="cellphone hidden-xs">
-                                    <p><span class="fa fa-phone"></span>+7-996-725-00-61</p>
-                                </div>
-                                <div class="cellphone hidden-xs hidden-sm hidden-md">
-                                    <p><span class="fa fa-phone"></span>+7-996-725-00-62</p>
+                                    <p><span class="fa fa-phone"></span><span class="ya-phone">8 (846) 252 39 11</span></p>
                                 </div>
                             </div>    
                             <div class="aa-header-top-right">
@@ -424,6 +421,7 @@
                                     </li>        
                                 </ul>
                             </li>
+                            <li><a href="/common/bonus">Бонусы</a></li>
                             <li><a href="/news">Новости</a></li>
                         </ul>
                     </div>
