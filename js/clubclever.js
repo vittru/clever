@@ -425,3 +425,15 @@ $('#emailMeSubmit').click(function() {
             $('#emailMePhone').addClass('error');
     }    
 });
+
+//$(document).ready(function(){
+//    $('[data-toggle="popover"]').popover(); 
+//});
+
+$('[data-toggle=popover]').popover({
+  trigger:"click"
+});
+
+$('[data-toggle=popover]').on('click', function (e) {
+   $('[data-toggle=popover]').not(this).popover('hide');
+});

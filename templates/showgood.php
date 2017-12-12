@@ -260,7 +260,7 @@
                     <?php
                     if ($showGood->madeOf) {
                     ?>
-                    <div class="tab-pane fade aa-product-info-tab" id="madeOf"><?php echo $showGood->getWebMadeOf(); ?></div>
+                        <div class="tab-pane fade aa-product-info-tab" id="madeOf"><?php echo $this->registry['model']->insertVoc($showGood->getWebMadeOf()); ?></div>
                     <?php 
                     } 
                     if ($showGood->howTo) {

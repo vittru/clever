@@ -43,8 +43,9 @@ Class Good {
     
     function getFirstAvailSize() {
         foreach($this->sizes as $size) {
-            if ($size->isAvailable())
+            if ($size->isAvailable()) {
                 return $size->id;
+            }
         }    
         return 0;         
     }    
@@ -63,10 +64,11 @@ Class Good {
     
     function getWebPrice() {
         $price = $this->getPrice();
-        if ($price > 0)
+        if ($price > 0) {
             return $price . " руб.";
-        else
+        } else {
             return "";
+        }
     }
     
     function getWebOldPrice() {
@@ -82,37 +84,42 @@ Class Good {
     }
     
     function showInCatalog($bb) {
-        if (!isset($bb))
+        if (!isset($bb)) {
             $bb = false;
+        }
         if (!$this->hidden) {
             echo '<li class="col-sm-3 good">';
             foreach ($this->types as $id=>$type) {
                 echo '<div hidden class="type_'. $id . '"></div>';
-            };
+            }
             foreach ($this->problems as $problem) {
                 echo '<div hidden class="problem_' . $problem . '"></div>';
-            };
+            }
             foreach ($this->effs as $effect) {
                 echo '<div hidden class="effect_' . $effect . '"></div>';
-            };
+            }
             foreach ($this->supercats as $id => $supercat) {
-                if ($id)
+                if ($id) {
                     echo '<div hidden class="supercat_' . $id . '"></div>';
-            };
+                }
+            }
             foreach ($this->skintypes as $skintype) {
-                if ($id)
+                if ($id) {
                     echo '<div hidden class="skintype_' . $skintype . '"></div>';
-            };
+                }
+            }
             foreach ($this->hairtypes as $hairtype) {
-                if ($id)
+                if ($id) {
                     echo '<div hidden class="hairtype_' . $hairtype . '"></div>';
-            };
+                }
+            }
             echo '<div hidden class="firm_' . $this->firmId . '"></div>';
             echo '<figure>';
             echo '<a class="aa-product-img" data-toggle2="tooltip" data-placement="top" data-target="#single-product" href="/showgood?id=';
             echo $this->id;
-            if ($bb)
+            if ($bb) {
                 echo '&bb';
+            }
             echo '"><img src="';
             echo $this->getImage();
             echo '" alt="';
@@ -126,15 +133,17 @@ Class Good {
                 echo '" value="';
                 echo $this->getFirstAvailSize();
                 echo '" data-price="';
-                if ($bb)
+                if ($bb) {
                     echo $this->getBBPrice();
-                else
+                } else {
                     echo $this->getPrice();
+                }
                 echo '" data-sale="';
-                if ($bb or $this->sale)
+                if ($bb or $this->sale) {
                     echo "1";
-                else 
+                } else {
                     echo "0";
+                }
                 echo '"><span class="fa fa-shopping-cart"></span>В корзину</a>';
             } else {
                 echo '<a class="aa-action-btn aa-emailme-btn green-button" id="emailMeBtn';
@@ -148,15 +157,17 @@ Class Good {
             echo $this->name;
             echo '</a></div>';
             echo '<span class="aa-product-price" value=';
-            if ($bb)
+            if ($bb) {
                 echo $this->getBBPrice();
-            else 
+            } else {
                 echo $this->getPrice();
+            }
             echo '>';
-            if ($bb)
+            if ($bb) {
                 echo $this->getWebBBPrice();
-            else 
+            } else {
                 echo $this->getWebPrice();
+            }
             echo '</span>';
             if ($this->isAvailable() && $this->sale > 0) {
                 echo '<span class="aa-product-price"><del>';
@@ -259,35 +270,42 @@ Class Good {
     
     function getWebBestBefore() {
         if ($this->bestbefore) {
-            return $this->getWebProperty('<b>Срок и условия хранения: </b>'.$this->bestbefore);
-        }else
+            return $this->getWebProperty('<b>Срок и условия хранения: </b>' . $this->bestbefore);
+        } else {
             return '';
+        }
     }
 
     function getWebPrecaution() {
-        if ($this->precaution) 
-            return $this->getWebProperty('<b>Противопоказания: </b>'.$this->precaution);
-        else
+        if ($this->precaution) {
+            return $this->getWebProperty('<b>Противопоказания: </b>' . $this->precaution);
+        } else {
             return '';
+        }
     }    
     
     function getWebSkinTypes() {
-        if ($this->hasSkintypes()){
+        if ($this->hasSkintypes()) {
             return '<p><b>Типы кожи: </b>';
-        } else return '';    
+        } else {
+            return '';
+        }
     }
 
     function getWebHairTypes() {
-        if ($this->hasHairtypes()){
+        if ($this->hasHairtypes()) {
             return '<p><b>Типы волос: </b></p>';
-        } else return '';    
+        } else {
+            return '';
+        }
     }
 
     function hasBB() {
         $bb = false;
         foreach ($this->sizes as $id=>$size) {
-            if ($size->isBB())
+            if ($size->isBB()) {
                 $bb = true;
+            }
         }
         return $bb;
     }
@@ -295,21 +313,23 @@ Class Good {
     function getBBPrice() {
         if ($this->hasBB()){
             foreach ($this->sizes as $id=>$size) {
-                if ($size->isBB())
+                if ($size->isBB()) {
                     return $size->bbprice;
+                }
             }
         } else
             return null;
     }
 
     function getWebBBPrice() {
-        if ($this->hasBB()){
-            foreach ($this->sizes as $id=>$size) {
-                if ($size->isBB())
+        if ($this->hasBB()) {
+            foreach ($this->sizes as $id => $size) {
+                if ($size->isBB()) {
                     return $size->getWebBBPrice();
+                }
             }
-        } else
+        } else {
             return null;
+        }
     }
 }
-

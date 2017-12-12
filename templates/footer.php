@@ -51,8 +51,7 @@
                                         <address>
                                             <p>ООО "Клевер"</p>
                                             <p>ИНН 6315011857</p>
-                                            <p><span class="fa fa-phone"></span><span class="ya-phone">+7-996-725-00-61</span></p>
-                                            <p><span class="fa fa-phone"></span><span class="ya-phone">+7-996-725-00-62</span></p>
+                                            <p><span class="fa fa-phone"></span><span class="ya-phone">+7 (846) 300-20-36</span></p>
                                             <p><span class="fa fa-envelope"></span><?php echo $this->registry['mainemail'] ?></p>
                                         </address>
                                         <div class="aa-footer-social">
@@ -155,8 +154,7 @@
 <script src="/js/custom.js"></script> 
 <script src="/js/jquery.validate.js"></script>
 <script src="/js/auth-form.js"></script>
-<script src="/js/clubclever.js?<?php echo '20171030'//filemtime('/js/clubclever.js'); ?>"></script>
-<!--script src="/js/clubclever.js"></script-->
+<script src="/js/clubclever.js?<?php echo '20171212'//filemtime('/js/clubclever.js'); ?>"></script>
 <script src="/js/lightbox.js"></script> 
 
 </body>

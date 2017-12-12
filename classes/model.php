@@ -1343,5 +1343,14 @@ Class Model {
         $sqlDelete->closeCursor();
     }
   
-    
+    function insertVoc($string) {
+        $newString = $string;
+        $vocabulary = $this->getVocabulary();
+        foreach($vocabulary as $word) {
+            if (mb_stripos($newString, $word['name'], 0, 'UTF-8') !== false) {
+                $newString = preg_replace('#'. mb_strtoupper($word['name']) . '#ius', '<a class="apopover" href="javascript:void(0);" data-toggle="popover" title="' . $word['name'] .'" data-content="' . strip_tags($word['value']) .'">' . $word['name'] . '</a>', $newString);
+            }
+        }
+        return $newString;
+    }
 }
