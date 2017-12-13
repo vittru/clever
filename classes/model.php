@@ -1026,7 +1026,7 @@ Class Model {
         $sqlSelect = $this->db->prepare('SELECT * FROM supercats WHERE hidden=0 ORDER BY name');
         $this->executeQuery($sqlSelect, 'Error when getting super cats');
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $category = New Category($data['id'], $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription'], $data['metaKeywords'], NULL, NULL);
+            $category = New Category($data['id'], $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription'], $data['metaKeywords'], NULL, $data['descAfter']);
             if (!isset($categories))
                 $categories = [$category];
             else

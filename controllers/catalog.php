@@ -100,7 +100,6 @@ Class Controller_Catalog Extends Controller_Base {
             $this->registry['template']->set('metaTitle', $category->metaTitle);
             $this->registry['template']->set('metaDescription', $category->metaDescription);
             $this->registry['template']->set('metaKeywords', $category->metaKeywords);
-            $this->registry['logger']->lwrite($category->descAfter);
             $this->registry['template']->set('descAfter', $category->descAfter);
             $this->registry['template']->set('bestBefore', false);
             $this->registry['template']->set('hideFilterCat', true);
@@ -136,6 +135,7 @@ Class Controller_Catalog Extends Controller_Base {
             $this->registry['template']->set('metaTitle', $supercat->metaTitle);
             $this->registry['template']->set('metaDescription', $supercat->metaDescription);
             $this->registry['template']->set('metaKeywords', $supercat->metaKeywords);
+            $this->registry['template']->set('descAfter', $supercat->descAfter);
             //If there are several categories then we show them
             if (sizeof($categories) > 1) {
                 $this->registry['template']->set('objects' , $categories);

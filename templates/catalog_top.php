@@ -64,6 +64,18 @@ include 'header.php';
                                 ?>
                             </ul>
                         </div>
+                        <?php
+                        if ($descAfter) {
+                        ?>
+                            <div class="aa-product-desc desc-after">
+                                <?php
+                                echo $descAfter;
+                                ?>
+                            </div>  
+                        <?php
+                        }
+                        ?>
+
                     </div>    
                 </div>
             </div>
