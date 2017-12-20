@@ -19,7 +19,7 @@ include 'header.php';
                             <ul class="aa-product-catg">
                                 <li class="col-sm-3 good">
                                   <figure>
-                                    <a class="aa-product-img" href="/actions/bestbefore"><img src="/images/news/news0.png" alt="Истекающие сроки"></a>
+                                      <a class="aa-product-img" href="/actions/bestbefore"><img src="/images/design/bestbefore.png" alt="Истекающие сроки"></a>
                                     <figcaption>
                                         <h4 class="aa-product-title"><a href="/actions/bestbefore">Истекающие сроки</a></h4>
                                     </figcaption>
@@ -27,7 +27,7 @@ include 'header.php';
                                 </li> 
                                 <li class="col-sm-3 good">
                                   <figure>
-                                    <a class="aa-product-img" href="/actions/discounts"><img src="/images/news/news0.png" alt="Истекающие сроки"></a>
+                                      <a class="aa-product-img" href="/actions/discounts"><img src="/images/design/discount.png" alt="Скидки"></a>
                                     <figcaption>
                                         <h4 class="aa-product-title"><a href="/actions/discounts">Скидки</a></h4>
                                     </figcaption>
