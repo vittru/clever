@@ -88,6 +88,7 @@
                     <input type="password" placeholder="Повторите пароль*" id="auth-confirm" class="nologin form-control" name="userConfirm" maxlength="30">
                     <input type="number" placeholder="Номер сертификата" id="auth-flyer" class="nologin form-control" name="userFlyer" maxlength="6">   
                     <label for="auth-spam" class="nologin"><input type="checkbox" id="auth-spam" name="isSpam"> Подписаться на рассылку? </label>
+                    <div class="forget-password"><a id="forget-password" onclick="showPasswordForm()">Забыли пароль?</a></div>
                     <div id="auth-error" class="error"></div>
                     <input type="hidden" id="auth-action" name="userAction">
                     <button class="aa-login-btn green-button" type="submit" id="auth-submit">ОК</button>
@@ -153,7 +154,7 @@
 <script src="/js/jquery-editable-select.js"></script>
 <script src="/js/custom.js"></script> 
 <script src="/js/jquery.validate.js"></script>
-<script src="/js/auth-form.js"></script>
+<script src="/js/auth-form.js?<?php echo '20171228' ?>"></script>
 <script src="/js/clubclever.js?<?php echo '20171212'//filemtime('/js/clubclever.js'); ?>"></script>
 <script src="/js/lightbox.js"></script> 
 

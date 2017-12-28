@@ -215,17 +215,34 @@ Class Model {
             $sqlUpdate->closeCursor();
             //If user has changed his password
             if ($user->password != $this->default) {
-                $sqlUpdate = $this->db->prepare('UPDATE profiles SET password=:password, salt=:salt WHERE id = (SELECT profile FROM users WHERE id = :userId)');
-                $sqlUpdate->bindParam(':userId', $user->id);
-                $salt = $this->generateSalt();
-                $sqlUpdate->bindParam(':salt', $salt);
-                $sqlUpdate->bindParam(':password', $this->hashPassword($salt, $user->password));
-                $this->executeQuery($sqlUpdate, 'Error when updating password for user ' . $user->id);
-                $sqlUpdate->closeCursor();
+                $this->setNewPassword($user->id, NULL, $user->password);
                 $user->password = $this->default;
             }
         }
         return $user;
+    }
+    
+    function updatePassword($userEmail) {
+        $id = $this->getProfile($userEmail)['id'];
+        $password = substr(md5(uniqid('some_prefix', true)), 1, 5);
+        $this->registry['logger']->lwrite($id . '-' . $password);
+        $this->setNewPassword(NULL,$id, $password);
+        return $password;
+    }
+    
+    private function setNewPassword($userId, $profileId, $password) {
+        if ($userId) {
+            $sqlUpdate = $this->db->prepare('UPDATE profiles SET password=:password, salt=:salt WHERE id = (SELECT profile FROM users WHERE id = :userId)');
+            $sqlUpdate->bindParam(':userId', $userId);
+        } else {
+            $sqlUpdate = $this->db->prepare('UPDATE profiles SET password=:password, salt=:salt WHERE id = :userId');
+            $sqlUpdate->bindParam(':userId', $profileId);
+        }    
+        $salt = $this->generateSalt();
+        $sqlUpdate->bindParam(':salt', $salt);
+        $sqlUpdate->bindParam(':password', $this->hashPassword($salt, $password));
+        $this->executeQuery($sqlUpdate, 'Error when updating password for user ' . $id);
+        $sqlUpdate->closeCursor();
     }
     
     function checkEmailExists($userEmail) {
@@ -240,12 +257,17 @@ Class Model {
         return false;
     }
     
-    function login($user) {
+    private function getProfile($email) {
         $sqlSelect = $this->db->prepare($this->selectProfileEmail);
-        $sqlSelect->bindParam(":userEmail", $user->email);
-        $this->executeQuery($sqlSelect, 'Error when selecting profile by email: ' . $user->email);
+        $sqlSelect->bindParam(":userEmail", $email);
+        $this->executeQuery($sqlSelect, 'Error when selecting profile by email: ' . $email);
         $data = $sqlSelect->fetch();
         $sqlSelect->closeCursor();
+        return $data;
+    }
+    
+    function login($user) {
+        $data = $this->getProfile($user->email);
         $user->name = $data['name'];
         $user->client = $data['client'];
         $user->spam = $data['spam'];

@@ -1844,6 +1844,9 @@ ul.nav-tabs {
     margin: 5px;
     height: 40px;
 }
+.modal-dialog .forget-password {
+    font-size: 14px;
+}
 
 #aa-contact {
   display: inline;
