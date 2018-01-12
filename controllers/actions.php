@@ -6,14 +6,10 @@ Class Controller_Actions Extends Controller_Base {
         $this->registry['model']->logVisit(19);
         $this->registry['template']->set('metaTitle', 'Акции экомаркета Клевер');
         $this->registry['template']->set('metaDescription', 'Выгодные предложения от магазина эко косметики Клевер.');
+        $this->registry['template']->set('news', $this->registry['model']->getNews(1));
         $this->registry['template']->show('actions');
     }
     
-    function karolina2016() {
-        $this->registry['model']->logVisit(19);
-        $this->registry['template']->show('karolina2016');
-    }
-        
     function bestbefore() {
         $this->registry['model']->logVisit(34);
         $catalogGoods=array();

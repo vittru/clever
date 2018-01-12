@@ -13,6 +13,16 @@ if ($newsId) {
         <table class="table">
             <tr>
                 <td>  
+                    <div class="form-group">
+                        <label class="col-md-2">Акция:</label> 
+                        <div class="col-md-10 columns">
+                            <label class="checkbox-inline"><input type="checkbox" value="" name="action" <?php if ($news and $news->action) echo "checked" ?>>Акция</label>
+                        </div>    
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>  
                     <input hidden name='id' value='<?php echo $newsId ?>'>
                     <div class="form-group">
                         <label class="col-md-2" for="header">Заголовок:</label>

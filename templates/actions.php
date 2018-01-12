@@ -8,12 +8,6 @@ include 'header.php';
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
-                    <div class="aa-product-header">
-                        <h1>Наши акции</h1>
-                        <p></p>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="aa-product-area">
                         <div class="aa-product-inner">
                             <ul class="aa-product-catg">
@@ -41,8 +35,21 @@ include 'header.php';
         </div>
     </div>
 </section>
-
 <?php
+if (sizeof($news)) {
+?>
+<section id="aa-text">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Акции</h1>
+                <?php
+                include 'listnews.php';
+                ?>
+            </div>
+        </div>
+    </div>
+</section>    
+<?php
+}
 include 'footer.php';
-
-

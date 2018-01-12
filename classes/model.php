@@ -31,8 +31,8 @@ Class Model {
             . "WHERE email = :userEmail AND password = :userPassword";
     private $selectProfileEmail = "SELECT * FROM profiles "
             . "WHERE email = :userEmail";
-    private $getAllNews = "SELECT * FROM news ORDER BY time DESC";
-    private $getNonClientNews = "SELECT * FROM news WHERE forClients=0 ORDER BY time DESC";
+    private $getAllNews = "SELECT * FROM news WHERE action=:action ORDER BY time DESC LIMIT 10";
+    private $getNonClientNews = "SELECT * FROM news WHERE forClients=0 AND action=:action ORDER BY time DESC LIMIT 10";
     private $addQuestion = "INSERT INTO questions(user, question, date) VALUES(:userId, :question, NOW())";
     private $selectCatalog = "SELECT id, name FROM ";
     private $updateGood = "UPDATE goods SET name=:name, description=:description, shortdesc=:shortdesc, firmId=:firmId, sale=:sale, howTo=:howTo, madeOf=:madeOf, problem=:problem, bestbefore=:bestbefore, precaution=:precaution, hidden=:hidden WHERE id=:id";
@@ -43,8 +43,8 @@ Class Model {
     private $linkGoodProblem = "INSERT INTO `goods-problems` (goodId, problemId) VALUES(:goodId, :probId)";
     private $linkGoodST = "INSERT INTO `goods-skintypes` (goodId, skintypeId) VALUES(:goodId, :skintypeId)";
     private $linkGoodHT = "INSERT INTO `goods-hairtypes` (goodId, hairtypeId) VALUES(:goodId, :hairtypeId)";
-    private $updateNews = "UPDATE news SET header=:header, text=:text, time=:time, forClients=:forClients, banner=:banner, end=:end, bannerlink=:bannerlink WHERE id=:id";
-    private $addNews = "INSERT INTO news (header, text, time, forClients, banner, end, bannerlink) VALUES (:header, :text, :time, :forClients, :banner, :end, :bannerlink)";
+    private $updateNews = "UPDATE news SET header=:header, text=:text, time=:time, forClients=:forClients, banner=:banner, end=:end, bannerlink=:bannerlink, action=:action WHERE id=:id";
+    private $addNews = "INSERT INTO news (header, text, time, forClients, banner, end, bannerlink, action) VALUES (:header, :text, :time, :forClients, :banner, :end, :bannerlink, :action)";
     private $updateBlog = "UPDATE blogentries SET name=:name, text=:text, date=:date, author=:author, url=:url WHERE id=:id";
     private $addBlog = "INSERT INTO blogentries (name, text, date, author, url) VALUES (:name, :text, :date, :author, :url)";
     public $default = "cccccccccc";
@@ -295,14 +295,15 @@ Class Model {
         return false;
     }
     
-    function getNews() {
+    function getNews($action) {
         if ($this->registry['isClient'])
             $sqlSelect = $this->db->prepare($this->getAllNews);
         else 
             $sqlSelect = $this->db->prepare($this->getNonClientNews);
+        $sqlSelect->bindValue (':action', $action);
         $this->executeQuery($sqlSelect, 'Error when getting news from DB');
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $news = new News($data['id'], $data['header'], $data['time'], $data['text'], $data['forClients'], $data['banner'], $data['end'], $data['bannerlink']);
+            $news = new News($data['id'], $data['header'], $data['time'], $data['text'], $data['forClients'], $data['banner'], $data['end'], $data['bannerlink'], $data['action']);
             if (!$newsArray)
                 $newsArray = [$news];
             else
@@ -318,7 +319,7 @@ Class Model {
         $this->executeQuery($sqlSelect, 'Error when getting news with id=' . $newsId);
         $data = $sqlSelect->fetch();
         $sqlSelect->closeCursor();
-        return new News($data['id'], $data['header'], $data['time'], $data['text'], $data['forClients'], $data['banner'], $data['end'], $data['bannerlink']);
+        return new News($data['id'], $data['header'], $data['time'], $data['text'], $data['forClients'], $data['banner'], $data['end'], $data['bannerlink'], $data['action']);
     }    
     
     function addQuestion($userId, $question) {
@@ -754,7 +755,7 @@ Class Model {
         return $firms;
     }   
        
-    function addNews($id, $header, $text, $time, $forClients, $banner, $end, $bannerlink) {
+    function addNews($id, $header, $text, $time, $forClients, $banner, $end, $bannerlink, $action) {
         if ($id) {
             $sqlInsert = $this->db->prepare($this->updateNews);
             $sqlInsert->bindParam(':id', $id);
@@ -771,6 +772,7 @@ Class Model {
         else
             $sqlInsert->bindValue (':end', null, PDO::PARAM_INT);
         $sqlInsert->bindParam(':bannerlink', $bannerlink);
+        $sqlInsert->bindParam(':action', $action);
         $this->executeQuery($sqlInsert, 'Error when adding/updating a news record');
         if ($id) {
             $newsId=$id;

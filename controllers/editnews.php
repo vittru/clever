@@ -25,23 +25,32 @@ Class Controller_Editnews Extends Controller_Base {
     function save() {
         if ($this->registry['isadmin']) {
 
-            if (isset($_POST['forClients']))
-                $forClients=1;
-            else $forClients=0;        
-            
-            if (isset($_POST['banner']))
-                $banner = 1;
-            else
-                $banner = 0;
+            if (isset($_POST['forClients'])) {
+                $forClients = 1;
+            } else {
+                $forClients = 0;
+            }
 
-            $newsId = $this->registry['model']->addNews($_POST['id'], $_POST['header'], $_POST['text'], $_POST['time'], $forClients, $banner, $_POST['end'], $_POST['bannerlink']);
+            if (isset($_POST['banner'])) {
+                $banner = 1;
+            } else {
+                $banner = 0;
+            }
+
+            if (isset($_POST['action'])) {
+                $action = 1;
+            } else {
+                $action = 0;
+            }
+            $newsId = $this->registry['model']->addNews($_POST['id'], $_POST['header'], $_POST['text'], $_POST['time'], $forClients, $banner, $_POST['end'], $_POST['bannerlink'], $action);
             $this->registry['model']->logVisit(1003, $newsId);
 
             $this->loadNewsImage($_FILES["image"], $newsId, $banner);
-    
+
             header("LOCATION: ../news");
-        } else 
-            $this->registry['template']->show('404');            
+        } else {
+            $this->registry['template']->show('404');
+        }
     }
     
     private function loadNewsImage($image, $newsId, $banner) {
