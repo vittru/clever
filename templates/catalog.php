@@ -14,27 +14,7 @@ usort($catalogGoods, "cmp");
         <div class="row">
             <div class="col-md-12">
                 <?php
-                if (sizeof($breadcrumbs)) {
-                ?>
-                <div class="row">
-                    <ul class="breadcrumb">
-                        <?php
-                        foreach ($breadcrumbs as $name=>$url) {
-                            echo '<li>';
-                            if ($url) {
-                                echo '<a href="'. $url . '">';
-                            }
-                            echo $name;
-                            if ($url) {
-                                echo '</a>';
-                            }
-                            echo '</li>';
-                        }
-                        ?>
-                    </ul>    
-                </div>
-                <?php    
-                }
+                include 'breadcrumbs.php';
                 ?>
                 <div class="row">
                     <div class="aa-product-header">

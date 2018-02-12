@@ -204,8 +204,9 @@
                     </div>
                 </div>
                 <div class="aa-prod-view-bottom">
-                    <a class="green-button" id="emailMeBtn" <?php if ($bb or $showGood->isAvailable() ) echo 'style="display:none;" ' ?>><span class="fa fa-envelope" data-toggle="modal" data-target="#emailMe"></span>Сообщить о наличии</a>
-                    <a class="aa-add-to-cart-btn green-button" <?php if (!$canBeBought) echo 'disabled '; if (!$bb and !$showGood->isAvailable()) echo 'style="display:none;" ' ?> title="Товар добавлен в корзину" data-content="Оформить заказ"><span class="fa fa-shopping-cart"></span>В корзину</a>
+                    <a class="green-button" id="emailMeBtn" data-toggle="modal" data-target="#emailMe" <?php if ($bb or $showGood->isAvailable() ) echo 'style="display:none;" ' ?>><span class="fa fa-envelope"></span>Сообщить о наличии</a>
+                    <a class="aa-add-to-cart-btn orange-button" <?php if (!$canBeBought) echo 'disabled '; if (!$bb and !$showGood->isAvailable()) echo 'style="display:none;" ' ?> title="Товар добавлен в корзину" data-content="Оформить заказ"><span class="fa fa-shopping-cart"></span>В корзину</a>
+                    <!--a class="aa-quick-order-btn green-button" data-toggle="modal" data-target="#quickOrder" data-goodid="<?php //echo $showGood->id ?>" <?php //if (!$canBeBought) echo 'disabled '; if (!$bb and !$showGood->isAvailable()) echo 'style="display:none;" ' ?> title="Заказ оформлен" data-content="Заказать"><span class="fa fa-bolt"></span>Купить в 1 клик</a-->
                     <?php
                     if ($isadmin) {
                     ?>
@@ -309,4 +310,4 @@
     <?php
     }
     ?>
-    <script src="/js/modalgood.js?20171114"></script> 
+    <script src="/js/modalgood.js?20180116"></script> 

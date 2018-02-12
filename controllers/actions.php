@@ -18,6 +18,9 @@ Class Controller_Actions Extends Controller_Base {
                 $catalogGoods[$goodId] = $good;
             }
         }
+        $breadcrumbs['Акции'] = '/actions';
+        $breadcrumbs['Истекающие сроки'] = NULL;
+        $this->registry['template']->set('breadcrumbs', $breadcrumbs);
         $this->registry['template']->set('catalogGoods', $catalogGoods);
         $this->registry['template']->set('bestBefore', true);
         $this->registry['template']->set('pageHeader', 'Товары с истекающим сроком годности');
@@ -31,10 +34,14 @@ Class Controller_Actions Extends Controller_Base {
         $this->registry['model']->logVisit(35);
         $catalogGoods=array();
         foreach ($this->registry['model']->getAllGoods() as $goodId=>$good) {
-            if ($good->sale && $good->isAvailable()) {
+            //We don't show presents and sets in discounts
+            if ($good->sale && $good->isAvailable() && !in_array(21, $good->cats) && !in_array(34, $good->cats)) {
                 $catalogGoods[$goodId] = $good;
             }
         }
+        $breadcrumbs['Акции'] = '/actions';
+        $breadcrumbs['Скидки'] = NULL;
+        $this->registry['template']->set('breadcrumbs', $breadcrumbs);
         $this->registry['template']->set('catalogGoods', $catalogGoods);
         $this->registry['template']->set('bestBefore', false);
         $this->registry['template']->set('pageHeader', 'Товары со скидками');

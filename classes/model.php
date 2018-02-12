@@ -1226,8 +1226,9 @@ Class Model {
         $sqlSelect->closeCursor();
         if (!$date['1c_last_date']) {
             $returnDate = new DateTime('2000-01-01');
-        } else
+        } else {
             $returnDate = new DateTime($date['1c_last_date']);
+        }
         return $returnDate->format('Y-m-d H:i:s');
     }
     

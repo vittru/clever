@@ -6,6 +6,7 @@ function modifyBasket() {
         };
     });
     $('.aa-add-to-cart-btn').attr('disabled', !canBeBought);
+    $('.aa-quick-order-btn').attr('disabled', !canBeBought);
 }
 
 //$(document).ready(modifyBasket());
@@ -23,7 +24,7 @@ $('.aa-add-to-cart-btn').click(function e(){
             obj['sizeId'] = $(this).prop("id").substring(3);
             obj['count'] = $(this).val();
             obj['price'] = $(this).attr("data-price");
-            obj['sale'] = $(this).attr("data-sale")
+            obj['sale'] = $(this).attr("data-sale");
             sizes.push(obj);
         };
     });
@@ -46,10 +47,12 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
   modifyBasket();
   if (target === "#bb") {
       $('.aa-add-to-cart-btn').show();
+      $('.aa-quick-order-btn').show();
       $('#emailMeBtn').hide();
   } else {
       if (!$('.quantity:visible').length) {
         $('.aa-add-to-cart-btn').hide();
+        $('.aa-quick-order-btn').hide();
         $('#emailMeBtn').show();
       }
   }

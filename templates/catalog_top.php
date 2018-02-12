@@ -7,27 +7,7 @@ include 'header.php';
         <div class="row">
             <div class="col-md-12">
                 <?php
-                if (sizeof($breadcrumbs)) {
-                ?>
-                <div class="row">
-                    <ul class="breadcrumb">
-                        <?php
-                        foreach ($breadcrumbs as $name=>$url) {
-                            echo '<li>';
-                            if ($url) {
-                                echo '<a href="'. $url . '">';
-                            }
-                            echo $name;
-                            if ($url) {
-                                echo '</a>';
-                            }
-                            echo '</li>';
-                        }
-                        ?>
-                    </ul>    
-                </div>
-                <?php    
-                }
+                include 'breadcrumbs.php';
                 ?>
                 <div class="row">
                     <div class="aa-product-header">
@@ -51,7 +31,7 @@ include 'header.php';
                                     else
                                         $oimage = "/" . $oimage;
                                 ?>    
-                                <li class="col-sm-3 good">
+                                <li class="col-sm-3 category">
                                   <figure>
                                     <a class="aa-product-img" href="<?php echo $ourl ?>"><img src="<?php echo $oimage; ?>" alt="<?php echo $object->name ?>"></a>
                                     <figcaption>
@@ -64,18 +44,13 @@ include 'header.php';
                                 ?>
                             </ul>
                         </div>
-                        <?php
-                        if ($descAfter) {
-                        ?>
-                            <div class="aa-product-desc desc-after">
-                                <?php
+                        <div class="aa-product-desc desc-after">
+                            <?php
+                            if ($descAfter) {
                                 echo $descAfter;
-                                ?>
-                            </div>  
-                        <?php
-                        }
-                        ?>
-
+                            }  
+                            ?>
+                        </div>  
                     </div>    
                 </div>
             </div>

@@ -6,6 +6,9 @@ include 'header.php';
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                <?php
+                include 'breadcrumbs.php';
+                ?>
                 <h1><?php 
                 if ($entries)
                     echo 'Блог';
@@ -29,7 +32,7 @@ include 'header.php';
                 ?>
                 <div class="aa-blog-archive-area">
                     <div class="row">
-                        <div class="col-md-9">
+                        <!--div class="col-md-9"-->
                             <div class="aa-blog-content <?php //if ($entry) echo 'blog-details' ?>">
                                 <?php
                                 if ($entry) {
@@ -57,12 +60,12 @@ include 'header.php';
                                 <?php
                                 } else {
                                 ?>
-                                <div class="row">
+                                <!--div class="row"-->
                                     <?php 
                                     if ($entries) 
                                         foreach ($entries as $singleentry) {
                                     ?>
-                                    <div class="col-md-4 col-sm-4">
+                                    <div class="col-md-3 col-sm-3">
                                         <article class="aa-blog-content-single">                        
                                             <h2><a href="/common/blog?entry=<?php echo $singleentry->id ?>"><?php echo $singleentry->name ?></a></h2>
                                             <div class="aa-article-bottom">
@@ -90,12 +93,12 @@ include 'header.php';
                                     <?php
                                     }
                                     ?>
-                                </div>
+                                <!--/div-->
                                 <?php
                                 }
                                 ?>
                             </div>
-                        </div>
+                        <!--/div-->
                     </div>
                 </div>
             </div>

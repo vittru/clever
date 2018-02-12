@@ -11,7 +11,7 @@ include 'header.php';
                     <div class="aa-product-area">
                         <div class="aa-product-inner">
                             <ul class="aa-product-catg">
-                                <li class="col-sm-3 good">
+                                <li class="col-sm-3 category">
                                   <figure>
                                       <a class="aa-product-img" href="/actions/bestbefore"><img src="/images/design/bestbefore.png" alt="Истекающие сроки"></a>
                                     <figcaption>
@@ -19,7 +19,7 @@ include 'header.php';
                                     </figcaption>
                                   </figure>                         
                                 </li> 
-                                <li class="col-sm-3 good">
+                                <li class="col-sm-3 category">
                                   <figure>
                                       <a class="aa-product-img" href="/actions/discounts"><img src="/images/design/discount.png" alt="Скидки"></a>
                                     <figcaption>

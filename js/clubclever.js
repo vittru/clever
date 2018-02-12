@@ -95,7 +95,7 @@ $(document).on("change", ".aa-cart-quantity", function() {
 });    
 
 $(document).on("click", ".aa-add-card-btn", function () {
-    $(this).text('ДОБАВЛЕНО');
+    $(this).text('Добавлено');
     yaCounter44412517.reachGoal('INCART');
         
     var obj = {};
@@ -116,7 +116,7 @@ $(document).on("click", ".aa-add-card-btn", function () {
     });
 });
 
-$(document).on("mouseleave", ".aa-product-img", function() {
+$(document).on("mouseleave", "li.good", function() {
     $(this).parent().find(".aa-add-card-btn").html('<span class="fa fa-shopping-cart"></span>В корзину');
 });
 
@@ -381,9 +381,9 @@ $(document).on("click", ".aa-emailme-btn", function () {
     $('#emailMe').modal('show');
 });
 
-$("#emailMeBtn").click(function(){
-    $('#emailMe').modal('show');
-});
+//$("#emailMeBtn").click(function(){
+//    $('#emailMe').modal('show');
+//});
 
 $("input[name=emailMeRAddr]").on('change', function () {
     if (this.value === 'phone') {
@@ -426,14 +426,35 @@ $('#emailMeSubmit').click(function() {
     }    
 });
 
-//$(document).ready(function(){
-//    $('[data-toggle="popover"]').popover(); 
-//});
-
 $('[data-toggle=popover]').popover({
   trigger:"click"
 });
 
 $('[data-toggle=popover]').on('click', function (e) {
    $('[data-toggle=popover]').not(this).popover('hide');
+});
+
+$('.aa-quick-order-btn').on('click', function() {
+    $('#quickOrderCount').val(1);
+    if ($('.image-good').length) {
+        $('#quickOrderImage').attr('src',$('.image-good').attr('src'));
+        $('#quickOrderGood').html($('.modal-title').html());
+    } else {
+        $('#quickOrderImage').attr('src',$(this).offsetParent().find('img').attr('src'));
+        $('#quickOrderGood').html($(this).offsetParent().find('div.aa-product-title a').html());
+        $('#quickOrderQuantity').html('1');
+        $('#quickOrderPrice').html($(this).offsetParent().find('.aa-product-price').html());
+    }    
+    var sizes = [];
+    $('.quantity:visible').each(function() {
+        if ($(this).val() > 0) {
+            var obj = {};
+            obj['goodId'] = $('#pId').val();
+            obj['sizeId'] = $(this).prop("id").substring(3);
+            obj['count'] = $(this).val();
+            obj['price'] = $(this).attr("data-price");
+            obj['sale'] = $(this).attr("data-sale");
+            sizes.push(obj);
+        };
+    });
 });

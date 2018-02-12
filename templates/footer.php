@@ -119,21 +119,21 @@
                     </div>
                     <div class="radio">
                         <label for="emailMeRPhone"><input id="emailMeRPhone" type="radio" name="emailMeRAddr" value="phone">
-                        <?php
-                        if ($user->phone)
-                            echo $user->phone;
-                        else {    
-                        ?>
-                            <input id="emailMePhone" type="text" placeholder="телефон" class="form-control" disabled>
-                        <?php
-                        }
-                        ?>
+                            <?php
+                            if ($user->phone) {
+                                echo $user->phone;
+                            } else {
+                                ?>
+                                <input id="emailMePhone" type="text" placeholder="телефон" class="form-control" disabled>
+                                <?php
+                            }
+                            ?>
                         </label>
                     </div>
                 <?php    
                 } else {
                 ?>
-                    <div>Оставьте свой контакт, и мы сообщим Вам когда товар будет в наличии</div>
+                    <div>Оставьте свой контакт, и мы сообщим Вам, когда товар будет в наличии</div>
                     <input type="text" placeholder="email или телефон*" id="emailMeAddr" class="form-control">
                 <?php
                 }
@@ -143,6 +143,43 @@
         </div>
     </div>
 </div>   
+
+<!-- Quick Order Modal -->
+<div class="modal fade" id="quickOrder" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="quickOrderGood"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <img src="" id="quickOrderImage"/>
+                    </div>
+                    <div class="col-sm-6">
+                        <span id="quickOrderQuantity"></span> x <span id="quickOrderPrice"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <input id="quickOrderId" name="quickOrderId" hidden>
+                        <input id="quickOrderCount" name="quickOrderCount" hidden>
+                        <input id="quickOrderEmail" type="text" name="quickOrderAddr" checked placeholder="Почта*" <?php echo 'value="' . $user->email .'"' ?> >
+                        <input id="quickOrderPhone" type="text" name="quickOrderPhone" placeholder="Телефон*" <?php echo 'value="' . $user->phone . '"' ?>>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <button type="button" class="green-button" id="quickOrderSubmit">Заказать</button>
+                    </div>    
+                </div>    
+            </div>    
+        </div>
+    </div>
+</div>   
+
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

@@ -360,7 +360,7 @@ a.btn:focus {
 }
 .aa-remove-product:hover, .aa-remove-product:focus {
     color: #333;
-    border-color: #51A512;
+    /*border-color: #51A512;*/
 }
 
 input.form-control {

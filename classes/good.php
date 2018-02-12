@@ -83,12 +83,15 @@ Class Good {
         return ($total > 0);
     }
     
-    function showInCatalog($bb) {
+    function showInCatalog($bb, $row = null) {
         if (!isset($bb)) {
             $bb = false;
-        }
+        };
+        if (!isset ($row)) {
+            $row=4;
+        };
         if (!$this->hidden) {
-            echo '<li class="col-sm-3 good">';
+            echo '<li class="col-sm-'.$row.' good">';
             foreach ($this->types as $id=>$type) {
                 echo '<div hidden class="type_'. $id . '"></div>';
             }
@@ -127,7 +130,7 @@ Class Good {
             echo '" title="';
             echo str_replace('"', "'", $this->name);
             echo'"></a>';
-            if ($bb or $this->isAvailable()) {
+            /*if ($bb or $this->isAvailable()) {
                 echo '<a class="aa-action-btn aa-add-card-btn orange-button" id="';
                 echo $this->id;
                 echo '" value="';
@@ -147,12 +150,14 @@ Class Good {
                 echo '"><span class="fa fa-shopping-cart"></span>В корзину</a>';
             } else {
                 echo '<a class="aa-action-btn aa-emailme-btn green-button" id="emailMeBtn';
-                //echo $this->id;
                 echo '"><span class="fa fa-envelope"></span>Заказать</a>';
-            }
+            }*/
             echo '<figcaption>';
             echo '<div class="aa-product-title"><a href="/showgood?id=';
             echo $this->id;
+            if ($bb) {
+                echo '&bb';
+            }            
             echo '" data-toggle2="tooltip" data-placement="top" data-target="#single-product">';
             echo $this->name;
             echo '</a></div>';
@@ -169,18 +174,48 @@ Class Good {
                 echo $this->getWebPrice();
             }
             echo '</span>';
-            if ($this->isAvailable() && $this->sale > 0) {
+            if ($this->isAvailable() && $this->sale > 0 && !$bb) {
                 echo '<span class="aa-product-price"><del>';
                 echo $this->getWebOldPrice();
                 echo '</del></span>';
             }
+            if ($bb && $this->getPrice() > $this->getBBPrice()) {
+                echo '<span class="aa-product-price"><del>';
+                echo $this->getWebPrice();
+                echo '</del></span>';            }
+            echo '<div class="aa-product-title">';
+            if ($bb or $this->isAvailable()) {
+                echo '<div class="green-button good-button aa-add-card-btn" id="';
+                echo $this->id;
+                echo '" value="';
+                echo $this->getFirstAvailSize();
+                echo '" data-price="';
+                if ($bb) {
+                    echo $this->getBBPrice();
+                } else {
+                    echo $this->getPrice();
+                }
+                echo '" data-sale="';
+                if ($bb or $this->sale) {
+                    echo "1";
+                } else {
+                    echo "0";
+                }
+                
+                echo '"><span class="fa fa-shopping-cart"></span>В корзину</div>';
+                //echo '<div class="green-button good-button aa-quick-order-btn" data-toggle="modal" data-target="#quickOrder"><span class="fa fa-bolt"></span>Купить в 1 клик</div>';
+            } else {
+                echo '<div class="aa-emailme-btn green-button good-button" id="emailMeBtn';
+                echo '"><span class="fa fa-envelope"></span>Заказать</div>';
+            }    
+            echo '</div>';
             echo '</figcaption>';
             echo '</figure>';
-            //<!-- div class="aa-product-hvr-content">
-            //    <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
-            //    <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>
-            //    <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#single-product"><span class="fa fa-search"></span></a>                          
-            //</div -->
+            //echo '<div class="aa-product-hvr-content">';
+            //echo '<a href="#" data-toggle="tooltip" data-placement="top" title="В корзину"><span class="fa fa-shopping-cart"></span></a>';
+            //echo '<a href="#" data-toggle="tooltip" data-placement="top" title="Купить в 1 клик"><span class="fa fa-bolt"></span></a>';
+            //echo '<a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#single-product"><span class="fa fa-search"></span></a>'                          
+            //echo '</div>';
             if ($this->sale > 0 && !$bb) {
                 echo '<span class="aa-badge aa-sale">Скидка!</span> ';
             }
@@ -311,14 +346,15 @@ Class Good {
     }
     
     function getBBPrice() {
-        if ($this->hasBB()){
-            foreach ($this->sizes as $id=>$size) {
+        if ($this->hasBB()) {
+            foreach ($this->sizes as $id => $size) {
                 if ($size->isBB()) {
                     return $size->bbprice;
                 }
             }
-        } else
+        } else {
             return null;
+        }
     }
 
     function getWebBBPrice() {

@@ -58,6 +58,9 @@ Class Controller_Common Extends Controller_Base {
             $entry = $this->registry['model']->getBlogEntry($entryId);
             if ($entry->name) {
                 $this->registry['model']->logVisit(33, $entryId);
+                $breadcrumbs['Блоги'] = '/common/blog';
+                $breadcrumbs[$entry->name] = NULL;
+                $this->registry['template']->set('breadcrumbs', $breadcrumbs);
                 $this->registry['template']->set('entry', $entry);
                 $this->registry['template']->set('metaTitle', $entry->metaTitle);
                 $this->registry['template']->set('metaDescription', $entry->metaDescription);
