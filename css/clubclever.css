@@ -946,6 +946,7 @@ h2 {
   position: relative;
   overflow: hidden;
   padding-top: 15px;
+  padding-bottom: 15px;
 }
 .aa-product-catg li.category {
     height: auto;
@@ -1441,6 +1442,11 @@ h2 {
     display: inline-block;
     padding: 0 5px;
     height: 27px;
+}
+button.sort {
+    border-style: solid;
+    border-width: 1px;
+    border-color: darkgray;
 }
 
 #single-product .aa-product-info-tab {
