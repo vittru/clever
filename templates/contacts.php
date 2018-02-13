@@ -13,7 +13,7 @@ include 'header.php';
                             <div class="col-md-12">
                                 <h1>Наши контакты</h1>
                                 <h2>Посмотреть и приобрести наши товары можно по следующим адресам в Самаре</h2>
-                                <div class="row" style="display: flex">
+                                <div class="row bonus-row">
                                     <div class="col-md-6 branch">
                                         <p><b>Студия красоты Аллы Пелевиной</b></p>
                                         <p><b>ул. Ново-Садовая, 271</b></p>

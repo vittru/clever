@@ -1281,9 +1281,15 @@ h2 {
     border-style: solid;
     border-width: 1px;
     border-radius: 10px;
-    margin: 0 15px 20px 15px;
-    padding: 0 20px 5px 20px;
+    margin-bottom: 20px;
+    padding: 0 20px 10px 20px;
     text-align: justify;
+    height: 95%;
+}
+.bonus-row {
+    margin: 0 -15px 0 -15px;
+    display: flex;
+    flex-wrap: wrap;    
 }
 .row-eq-height {
     display: -webkit-box;
