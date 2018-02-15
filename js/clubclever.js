@@ -379,6 +379,7 @@ $('#sendTestEmail').click(function() {
 
 $(document).on("click", ".aa-emailme-btn", function () {
     $('#emailMe').modal('show');
+    $('#emailGoodId').val($(this).offsetParent().find('.aa-product-img').attr('href').substring(13,20));
 });
 
 //$("#emailMeBtn").click(function(){
@@ -406,13 +407,18 @@ $('#emailMeSubmit').click(function() {
             else
                 address = $("label[for=emailMeRPhone]").text().trim();
     }
+    if ($('#pId').length) {
+        goodEmail = $('#pId').text();
+    } else {
+        goodEmail = $('#emailGoodId').val();
+    }
     if (address) {
         $.ajax({
             type: "GET",
             url: "/showgood/emailMe",
             data: {
                 address: address,
-                good: $('#pId').text()
+                good: goodEmail 
             },
             success: function() {
                 location.reload();

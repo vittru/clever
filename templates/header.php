@@ -392,6 +392,8 @@
                                     ?>  
                                 </ul>
                             </li>
+                            <li><a href="/catalog/type?id=3">Для мужчин</a></li>
+                            <li><a href="/catalog/type?id=2">Для детей</a></li>
                             <li><a href="/catalog/firm">Бренды<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <?php 

@@ -110,6 +110,7 @@
                 <h4 class="modal-title" id="myModalLabel">Сообщить о поступлении</h4>
             </div>
             <div class="modal-body">
+                <input id="emailGoodId" hidden>
                 <?php 
                 if ($user->name) {
                 ?>    
@@ -192,7 +193,7 @@
 <script src="/js/custom.js"></script> 
 <script src="/js/jquery.validate.js"></script>
 <script src="/js/auth-form.js?<?php echo '20171228' ?>"></script>
-<script src="/js/clubclever.js?<?php echo '20171212'//filemtime('/js/clubclever.js'); ?>"></script>
+<script src="/js/clubclever.js?<?php echo '20180214'//filemtime('/js/clubclever.js'); ?>"></script>
 <script src="/js/lightbox.js"></script> 
 
 </body>
