@@ -208,14 +208,11 @@ include 'header.php';
                                             </div>
                                         </div>
                                     </div>
-                                    <?php
-                                    if ($bonusAvailable) {
-                                    ?>
                                     <div class="panel">
                                         <ul class="nav nav-tabs aa-checkout-billaddress">
                                             <li class="active"><a href="#promoTab" data-toggle="tab">Промо</a></li>
                                             <?php
-                                            if ($user->name and $user->bonus) {
+                                            if ($user->name and $user->bonus and $bonusAvailable) {
                                             ?>
                                             <li><a href="#bonusTab" data-toggle="tab">Бонус</a></li>
                                             <?php
@@ -272,10 +269,6 @@ include 'header.php';
                                             ?>
                                         </div>
                                     </div>  
-                                    
-                                    <?php
-                                    }
-                                    ?>
                                     <div class="panel panel-default aa-checkout-billaddress">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">

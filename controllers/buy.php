@@ -16,10 +16,11 @@ Class Controller_Buy Extends Controller_Base {
     function complete() {
         if (isset($_SESSION['cart']) and sizeof($_SESSION['cart']) > 0 and $_SERVER['REQUEST_METHOD'] == 'POST') {
             //Save the order in DB
-            if ($_POST['payment'] == 'card')
+            if ($_POST['payment'] == 'card') {
                 $card = 1;
-            else
+            } else {
                 $card = 0;
+            }
             $orderId = $this->registry['model']->saveOrder($_SESSION['user']->id, htmlspecialchars($_POST['name']), htmlspecialchars($_POST['email']), htmlspecialchars($_POST['phone']), htmlspecialchars($_POST['branch']), htmlspecialchars($_POST['takeDate']), htmlspecialchars($_POST['takeTime']), htmlspecialchars($_POST['city']." ".$_POST['address']), htmlspecialchars(trim($_POST['promo'])), $_POST['bonus'], $card, $_POST['remarks']);
             $this->registry['model']->logVisit(26, $orderId);
 
@@ -44,10 +45,12 @@ Class Controller_Buy Extends Controller_Base {
             //@TODO
 
             //Update user info
-            if (!$_SESSION['user']->email) 
+            if (!$_SESSION['user']->email) {
                 $_SESSION['user']->email = $_POST['email'];
-            if (!$_SESSION['user']->phone)
+            }
+            if (!$_SESSION['user']->phone) {
                 $_SESSION['user']->phone = $_POST['phone'];
+            }
             $_SESSION['user'] = $this->registry['model']->updateUser($_SESSION['user']);
 
             //Clear the cart box
@@ -68,10 +71,11 @@ Class Controller_Buy Extends Controller_Base {
     }
     
     private function informManager($orderId, $parameters) {
-        if ($parameters['payment'] == 'cash')
+        if ($parameters['payment'] == 'cash') {
             $payment = 'наличными при получении';
-        else 
+        } else {
             $payment = 'картой онлайн';
+        }
         $to      = $this->registry['mainemail'];
         $subject = 'Новый заказ №'.$orderId;
         $message = '<html><body><h2>На сайте новый заказ</h2>' .
@@ -103,14 +107,18 @@ Class Controller_Buy Extends Controller_Base {
             $message .= "<p><b>Промо-код:</b> " . htmlspecialchars($promo) . "</p>";
             $promoId = $this->registry['model']->getPromoId(trim($promo));
             $promoAmount = $this->registry['model']->getPromoAmount($promoId);
+            $total = $this->getTotalWithPromo($promo, $promoAmount);
         }
         if ($bonus) {
             $message .= "<p><b>Использованные бонусы:</b> " . $bonus . "</p>";
-        } else 
+            $total = $this->getCartTotal() - $bonus;
+        } else {
             $bonus = 0;
-        $total = $this->getCartTotal() - $promoAmount['amount'] - floor(($this->getCartTotal() * $promoAmount['percent'] / 100)) - $bonus;
-        if ($total < 0)
+            $total = $this->getCartTotal();
+        }
+        if ($total < 0) {
             $total = 0;
+        }
         $message .= "<p><b>Сумма заказа:</b> " . $total . " руб. </p>";
         return $message;
     }
@@ -120,8 +128,9 @@ Class Controller_Buy Extends Controller_Base {
         if ($parameters['branch']) {
             $branch = $this->registry['branches'][$parameters['branch']];
             $message .= "<p><b>Самовывоз из:</b> " . $branch->address . "</p>";
-            if ($parameters['takeDate'])
-                $message .= "<p><b>Желаемое время самовывоза:</b> " . htmlspecialchars ($parameters['takeDate']) . " " . htmlspecialchars ($parameters['takeTime']) . '</p>';
+            if ($parameters['takeDate']) {
+                $message .= "<p><b>Желаемое время самовывоза:</b> " . htmlspecialchars($parameters['takeDate']) . " " . htmlspecialchars($parameters['takeTime']) . '</p>';
+            }
         } else {
             $message = $message . "<p><b>Доставка курьером по адресу:</b> " . htmlspecialchars($parameters['city']) . ", " . htmlspecialchars($parameters['address']) . '</p>';
         }
@@ -156,26 +165,38 @@ Class Controller_Buy Extends Controller_Base {
         $promo = $_GET['promo'];
         if ($promo) {
             $discount = $this->registry['model']->checkPromo(htmlspecialchars($promo));
-            if ($discount == 0)
+            if ($discount == 0) {
                 $error = 'Такого промокода у нас нет';
+            }
         } else {
             $discount = 0;
         }    
         if ($discount == -1) {
             $error = 'Вы уже использовали этот промокод';
             $discount = 0;
-        };
-        $totalNoSale = $this->getCartNoSaleTotal();
+        }
+        $total = $this->getTotalWithPromo($promo, $discount);
+        $arr = array('error' => $error, 'discount' => $discount['amount'], 'percent' => $discount['percent'], 'total' => $total);
+        echo json_encode($arr);
+    }    
+    
+    private function getTotalWithPromo($promo, $discount) {
+        //For INSTA promo-code we ignore other sales
+        if (strcasecmp($promo, 'INSTA') == 0) {
+            $totalNoSale = $this->getCartTotal();
+        } else {
+            $totalNoSale = $this->getCartNoSaleTotal();
+        }    
         if ($discount['amount'] > $totalNoSale * 0.3) {
             $discount['percent'] = 30;
             $discount['amount'] = 0;
         }
         $total = $this->getCartTotal() - $discount['amount'] - floor($totalNoSale * $discount['percent'] / 100);
-        if ($total < 0)
+        if ($total < 0) {
             $total = 0;
-        $arr = array('error' => $error, 'discount' => $discount['amount'], 'percent' => $discount['percent'], 'total' => $total);
-        echo json_encode($arr);
-    }    
+        }
+        return $total;
+    }
 
     function checkbonus() {
         $error = '';
@@ -183,10 +204,11 @@ Class Controller_Buy Extends Controller_Base {
         $bonus = $_GET['bonus'];
         $total = $this->getCartNoSaleTotal();
         if ($bonus) {
-            if ($bonus > $_SESSION['user']->bonus)
+            if ($bonus > $_SESSION['user']->bonus) {
                 $error = 'У вас нет столько бонусов';
-            else if ($bonus > floor($total * 0.3))
+            } else if ($bonus > floor($total * 0.3)) {
                 $error = 'Бонусами можно оплатить только 30% покупки';
+            }
             if (!$error) {
                 $discount = $bonus;
             }
@@ -194,8 +216,9 @@ Class Controller_Buy Extends Controller_Base {
             $discount = 0;
         }    
         $total = $this->getCartTotal() - $discount;
-        if ($total < 0)
+        if ($total < 0) {
             $total = 0;
+        }
         $arr = array('error' => $error, 'discount' => $discount, 'percent' => 0, 'total' => $total);
         echo json_encode($arr);
     }    

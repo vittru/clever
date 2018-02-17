@@ -38,8 +38,9 @@ Class Order {
     function getTotalNoSale() {
         $total = 0;
         foreach ($this->goods as $good) {
-            if (!$good->sale)
+            if (!$good->sale) {
                 $total = $total + $good->quantity * $good->price;
+            }
         }
         return $total;
     }

@@ -148,14 +148,16 @@ Class Model {
         $sqlLog->bindParam(':userId', $_SESSION['user']->id);
         $sqlLog->bindParam(':pageId', $pageId);
         $sqlLog->bindParam(':time', $time); 
-        if ($goodId)
-            $sqlLog->bindParam (':goodId', $goodId);
-        else
-            $sqlLog->bindValue (':goodId', null, PDO::PARAM_INT);
-        if ($url)
-            $sqlLog->bindParam (':url', urldecode ($url));
-        else
-            $sqlLog->bindValue (':url', null, PDO::PARAM_INT);
+        if ($goodId) {
+            $sqlLog->bindParam(':goodId', $goodId);
+        } else {
+            $sqlLog->bindValue(':goodId', null, PDO::PARAM_INT);
+        }
+        if ($url) {
+            $sqlLog->bindParam(':url', urldecode($url));
+        } else {
+            $sqlLog->bindValue(':url', null, PDO::PARAM_INT);
+        }
         $this->executeQuery($sqlLog, 'Error when logging a visit to DB');
         $sqlLog->closeCursor();
     }
@@ -241,7 +243,7 @@ Class Model {
         $salt = $this->generateSalt();
         $sqlUpdate->bindParam(':salt', $salt);
         $sqlUpdate->bindParam(':password', $this->hashPassword($salt, $password));
-        $this->executeQuery($sqlUpdate, 'Error when updating password for user ' . $id);
+        $this->executeQuery($sqlUpdate, 'Error when updating password for user ' . $userId);
         $sqlUpdate->closeCursor();
     }
     
@@ -296,18 +298,20 @@ Class Model {
     }
     
     function getNews($action) {
-        if ($this->registry['isClient'])
+        if ($this->registry['isClient']) {
             $sqlSelect = $this->db->prepare($this->getAllNews);
-        else 
+        } else {
             $sqlSelect = $this->db->prepare($this->getNonClientNews);
+        }
         $sqlSelect->bindValue (':action', $action);
         $this->executeQuery($sqlSelect, 'Error when getting news from DB');
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $news = new News($data['id'], $data['header'], $data['time'], $data['text'], $data['forClients'], $data['banner'], $data['end'], $data['bannerlink'], $data['action']);
-            if (!$newsArray)
+            if (!$newsArray) {
                 $newsArray = [$news];
-            else
+            } else {
                 array_push($newsArray, $news);
+            }
         }
         $sqlSelect->closeCursor();
         return $newsArray;
@@ -356,7 +360,9 @@ Class Model {
             }    
         }
         asort($preparedArray);
-        if(isset($keyAll)) $preparedArray[$keyAll]=$valueAll;
+        if (isset($keyAll)) {
+            $preparedArray[$keyAll] = $valueAll;
+        }
         return $preparedArray;
     }
     
@@ -370,10 +376,11 @@ Class Model {
         $sqlInsert->bindParam(':name', $name);
         $sqlInsert->bindParam(':description', $description);
         $sqlInsert->bindParam(':shortdesc', $shortdesc);
-        if ($firmId == 0)
-            $sqlInsert->bindValue (':firmId', null, PDO::PARAM_INT);
-        else     
+        if ($firmId == 0) {
+            $sqlInsert->bindValue(':firmId', null, PDO::PARAM_INT);
+        } else {
             $sqlInsert->bindParam(':firmId', $firmId);
+        }
         $sqlInsert->bindParam(':sale', $sale);
         $sqlInsert->bindParam(':howTo', $howTo);
         $sqlInsert->bindParam(':madeOf', $madeOf);
@@ -447,10 +454,11 @@ Class Model {
             $data = $sqlSelect->fetch();
             $sqlSelect->closeCursor(); 
             //Admin should see all goods
-            if ($this->registry['isadmin'])
+            if ($this->registry['isadmin']) {
                 $hidden = 0;
-            else
+            } else {
                 $hidden = $data['hidden'];
+            }
             $good=new Good($data['id'], trim($data['name']), trim($data['description']), trim($data['shortdesc']), trim($data['howTo']), trim($data['madeOf']), $data['sale'], $data['firmId'], trim($data['problem']), trim($data['bestbefore']), trim($data['precaution']), trim($data['url']), $hidden);
             $good->cats = $this->getGoodCats($goodId);
             $good->supercats = $this->getGoodSuperCats($good);
@@ -606,10 +614,11 @@ Class Model {
         $this->executeQuery($sqlSelect, 'Error when getting goods of firm with id=' . $firmId);
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $good = $this->getGood($data['id']);
-            if (!isset($goods))
+            if (!isset($goods)) {
                 $goods = [$good];
-            else
+            } else {
                 array_push($goods, $good);
+            }
         }
         $sqlSelect->closeCursor();
         return $goods;
@@ -640,8 +649,9 @@ Class Model {
     }
     
     function addGoodSize($goodId, $gsId, $size, $price, $code, $instock, $sale, $bbsize, $bbprice) {
-        if (!$code)
+        if (!$code) {
             $code = null;
+        }
         if ($gsId) {
             $sqlQuery = $this->db->prepare('UPDATE `goods-sizes` SET goodId=:goodId, size=:size, code=:code, sale=:sale WHERE id=:gsId');
             $sqlQuery->bindParam(':gsId', $gsId);
@@ -653,25 +663,28 @@ Class Model {
         $sqlQuery->bindParam(':code', $code);
         $sqlQuery->bindParam(':sale', $sale);
         $this->executeQuery($sqlQuery, 'Error when updating/inserting size ' . $size .' for good '.$goodId);
-        if (!$gsId)
+        if (!$gsId) {
             $gsId = $this->db->lastInsertId();
+        }
         $sqlQuery->closeCursor();
         $sqlSelect = $this->db->prepare('SELECT id FROM warehouse WHERE psId=:gsId');
         $sqlSelect->bindParam(':gsId', $gsId);
         $sqlSelect->execute();
         $warId = $sqlSelect->fetchColumn();
         $sqlSelect->closeCursor();
-        if ($warId)
+        if ($warId) {
             $sqlQuery2 = $this->db->prepare('UPDATE warehouse SET price=:price, instock=:instock, bestbefore=:bbsize, bbprice=:bbprice WHERE psId=:gsId');
-        else 
+        } else {
             $sqlQuery2 = $this->db->prepare('INSERT INTO warehouse(psId, price, instock, bestbefore, bbprice) VALUES (:gsId, :price, :instock, :bbsize, :bbprice)');
+        }
         $sqlQuery2->bindParam(':gsId', $gsId);
         $sqlQuery2->bindParam(':price', $price);
         $sqlQuery2->bindParam(':instock', $instock);
-        if ($bbsize)
+        if ($bbsize) {
             $sqlQuery2->bindParam(':bbsize', $bbsize);
-        else
-            $sqlQuery2->bindValue (':bbsize', null, PDO::PARAM_INT);
+        } else {
+            $sqlQuery2->bindValue(':bbsize', null, PDO::PARAM_INT);
+        }
         $sqlQuery2->bindParam(':bbprice', $bbprice);
         
         $this->executeQuery($sqlQuery2, 'Error when updating/inserting warehouse data for goodsize '.$gsId);
@@ -696,10 +709,11 @@ Class Model {
         $sqlInsert->bindParam(':name', $name);
         $sqlInsert->bindParam(':email', $email);
         $sqlInsert->bindParam(':phone', $phone);
-        if ($branch)
+        if ($branch) {
             $sqlInsert->bindParam(':branch', $branch);
-        else
-            $sqlInsert->bindValue (':branch', null, PDO::PARAM_INT);
+        } else {
+            $sqlInsert->bindValue(':branch', null, PDO::PARAM_INT);
+        }
         $sqlInsert->bindParam(':takeDate', $takeDate);
         $sqlInsert->bindParam(':takeTime', $takeTime);
         $sqlInsert->bindParam(':address', $address);
@@ -710,13 +724,15 @@ Class Model {
             $sqlInsert->bindValue(':promo', null, PDO::PARAM_INT);
         }
         $profile = $this->checkProfile();
-        if ($profile == 0)
-            $sqlInsert->bindValue (':profileId', null, PDO::PARAM_INT);
-        else
-            $sqlInsert->bindParam (':profileId', $profile);
+        if ($profile == 0) {
+            $sqlInsert->bindValue(':profileId', null, PDO::PARAM_INT);
+        } else {
+            $sqlInsert->bindParam(':profileId', $profile);
+        }
         $sqlInsert->bindParam(':date',  date('Y-m-d H:i:s', time()));
-        if (!$bonus)
-            $bonus=0;
+        if (!$bonus) {
+            $bonus = 0;
+        }
         $sqlInsert->bindParam(':bonus', $bonus);
         $sqlInsert->bindParam(':card', $paymentCard);
         $sqlInsert->bindParam(':remarks', $remarks);
@@ -725,11 +741,13 @@ Class Model {
             $orderId = $this->db->lastInsertId();
         } catch (Exception $e) {
             $this->registry['logger']->lwrite('Error when getting new order ID');
+            $this->registry['logger']->lwrite($e);
             $orderId=0;
         }  
         $sqlInsert->closeCursor();
-        if ($orderId)
+        if ($orderId) {
             $this->saveOrderedGoods($orderId);
+        }
         return $orderId;
     }    
     
@@ -751,10 +769,11 @@ Class Model {
         $sqlSelect->bindParam(':typeId', $typeId);
         $this->executeQuery($sqlSelect, 'Error when getting firms of type ' . $typeId);
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            if (!isset($firms))
+            if (!isset($firms)) {
                 $firms = [$data['firmId']];
-            else
+            } else {
                 array_push($firms, $data['firmId']);
+            }
         }        
         $sqlSelect->closeCursor();
         return $firms;
@@ -772,10 +791,11 @@ Class Model {
         $sqlInsert->bindParam(':time', $time);
         $sqlInsert->bindParam(':forClients', $forClients);
         $sqlInsert->bindParam(':banner', $banner);
-        if ($end)
+        if ($end) {
             $sqlInsert->bindParam(':end', $end);
-        else
-            $sqlInsert->bindValue (':end', null, PDO::PARAM_INT);
+        } else {
+            $sqlInsert->bindValue(':end', null, PDO::PARAM_INT);
+        }
         $sqlInsert->bindParam(':bannerlink', $bannerlink);
         $sqlInsert->bindParam(':action', $action);
         $this->executeQuery($sqlInsert, 'Error when adding/updating a news record');
@@ -840,10 +860,11 @@ Class Model {
         $sqlSelect->bindParam(':profile', $profile);
         $this->executeQuery($sqlSelect, 'Error when getting users for profile ' . $profile);
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            if (!$users)
+            if (!$users) {
                 $users = [$data['id']];
-            else
-                array_push($users, $data['id']); 
+            } else {
+                array_push($users, $data['id']);
+            }
         }
         $sqlSelect->closeCursor();
         return $users;
@@ -853,20 +874,21 @@ Class Model {
         $promoId = $this->getPromoId($promo);
         if ($promoId) {
             $userId = $_SESSION['user']->id;
-            $promoCount = $this->getPromoCount($promoId);
-            $promoCount = $promoCount - $this->getUserPromos($promoId, $userId);
+            $promoCount = $this->getPromoCount($promoId) - $this->getUserPromos($promoId, $userId);
             $profile = $this->checkProfile();
             if ($profile) {
                 $users = $this->getProfileUsers($profile);
                 foreach($users as $user) {
-                    if ($user <> $userId)
+                    if ($user <> $userId) {
                         $promoCount = $promoCount - $this->getUserPromos($promoId, $user);
+                    }
                 }
             }
-            if ($promoCount > 0) 
+            if ($promoCount > 0) {
                 return $this->getPromoAmount($promoId);
-            else 
+            } else {
                 return -1;
+            }
         }    
         return 0;
     } 
@@ -961,22 +983,31 @@ Class Model {
     }
     
     function getOrder($orderId) {
-        $sqlSelect = $this->db->prepare('SELECT o.id, o.name, o.date, o.email, o.phone, s.name status, s.description statusdesc, p.amount promoAmount, p.percent promoPercent, IF (o.branchId is null, "Доставка", "Самовывоз") type, o.userId, pr.name profileId, o.bonus, o.remarks FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id LEFT JOIN `orders-goods` og ON o.id=og.orderid LEFT JOIN profiles pr ON o.profileId=pr.id WHERE o.id=:orderId');
+        $sqlSelect = $this->db->prepare('SELECT o.id, o.name, o.date, o.email, o.phone, s.name status, s.description statusdesc, p.name promo, p.amount promoAmount, p.percent promoPercent, IF (o.branchId is null, "Доставка", "Самовывоз") type, o.userId, pr.name profileId, o.bonus, o.remarks FROM orders o LEFT JOIN statuses s ON o.status = s.id LEFT JOIN promos p ON o.promoId = p.id LEFT JOIN `orders-goods` og ON o.id=og.orderid LEFT JOIN profiles pr ON o.profileId=pr.id WHERE o.id=:orderId');
         $sqlSelect->bindParam(':orderId', $orderId);
         $this->executeQuery($sqlSelect, 'Error when getting details for order '.$orderId);
         $data = $sqlSelect->fetch();
         $order = new Order($data['id'], $data['date'], $data['status'], $data['type'], 0, $data['userId'], $data['profileId'], $data['statusdesc'], $data['email'], $data['bonus'], $data['name'], $data['phone'], $data['remarks']);
         $order->goods = $this->getOrderGoods($orderId);
-        if ($data['promoAmount'])
+        //For INSTA promo-code we do not care about sale
+        if (strcasecmp($data['promo'], 'INSTA') == 0) {
+            $total = $order->getTotal();
+        } else {
+            $total = $order->getTotalNoSale();
+        }
+        if ($data['promoAmount']) {
             //If promo amount is more than 30% then it's 30%
-            if ($data['promoAmount'] > $order->getTotalNoSale() * 0.3)
-                $promo = floor($order->getTotalNoSale() * 0.3);
-            else 
+            if ($data['promoAmount'] > $total * 0.3) {
+                $promo = floor($total * 0.3);
+            } else {
                 $promo = $data['promoAmount'];
-        else if ($data['promoPercent'])
-            $promo = floor($order->getTotalNoSale() * $data['promoPercent']/100);
-        else
-            $promo=0;
+            }
+        }
+        else if ($data['promoPercent']) {
+            $promo = floor($total * $data['promoPercent'] / 100);
+        } else {
+            $promo = 0;
+        }
         $order->promo = $promo;
         $order->total = $order->getTotal() - $promo - $data['bonus'];
         $sqlSelect->closeCursor();
@@ -1020,13 +1051,14 @@ Class Model {
     function getCategoryGoods($categoryId) {
         $sqlSelect = $this->db->prepare('SELECT DISTINCT goodid FROM `goods-categories` WHERE categoryId=:categoryId');
         $sqlSelect->bindParam(':categoryId', $categoryId);
-        $this->executeQuery($sqlSelect, 'Error when getting goods of category with id=' . $ategoryId);
+        $this->executeQuery($sqlSelect, 'Error when getting goods of category with id=' . $categoryId);
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $good = $this->getGood($data['goodid']);
-            if (!isset($goods))
+            if (!isset($goods)) {
                 $goods = [$good];
-            else
+            } else {
                 array_push($goods, $good);
+            }
         }
         $sqlSelect->closeCursor();
         return $goods;
@@ -1036,16 +1068,18 @@ Class Model {
         if ($scId) {
             $sqlSelect = $this->db->prepare('SELECT * FROM categories WHERE supercatid=:scId ORDER BY name');
             $sqlSelect->bindParam(':scId', $scId);
-        } else
+        } else {
             $sqlSelect = $this->db->prepare('SELECT * FROM categories ORDER BY name');
-        
+        }
+
         $this->executeQuery($sqlSelect, 'Error when getting categories');
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $category = New Category($data['id'], $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription'], $data['metaKeywords'], $data['supercatid'], $data['descAfter']);
-            if (!isset($categories))
+            if (!isset($categories)) {
                 $categories = [$category];
-            else
+            } else {
                 array_push($categories, $category);
+            }
         }   
         $sqlSelect->closeCursor();
         return $categories;
@@ -1056,10 +1090,11 @@ Class Model {
         $this->executeQuery($sqlSelect, 'Error when getting super cats');
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $category = New Category($data['id'], $data['name'], $data['description'], $data['url'], $data['metaTitle'], $data['metaDescription'], $data['metaKeywords'], NULL, $data['descAfter']);
-            if (!isset($categories))
+            if (!isset($categories)) {
                 $categories = [$category];
-            else
+            } else {
                 array_push($categories, $category);
+            }
         }   
         $sqlSelect->closeCursor();
         return $categories;
@@ -1077,10 +1112,11 @@ Class Model {
         $this->executeQuery($sqlSelect, 'Error when getting popular goods');
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $good = $this->getGood($data['good']);
-            if (!isset($goods))
+            if (!isset($goods)) {
                 $goods = [$good];
-            else
+            } else {
                 array_push($goods, $good);
+            }
         }   
         $sqlSelect->closeCursor();
         return $goods;
@@ -1092,10 +1128,11 @@ Class Model {
         $this->executeQuery($sqlSelect, 'Error when getting goods for type ' . $typeId);
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $good = $this->getGood($data['id']);
-            if (!isset($goods))
+            if (!isset($goods)) {
                 $goods = [$good];
-            else
+            } else {
                 array_push($goods, $good);
+            }
         }   
         $sqlSelect->closeCursor();
         return $goods;
@@ -1176,10 +1213,11 @@ Class Model {
         $this->executeQuery($sqlSelect, 'Error when getting blog entries');
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $entry = new Blog($data['id'], $data['name'], $data['author'], $data['url'], $data['text'], $data['date'], $data['metaTitle'], $data['metaDescription']);
-            if (!isset($entries))
+            if (!isset($entries)) {
                 $entries = [$entry];
-            else
+            } else {
                 array_push($entries, $entry);
+            }
         }   
         $sqlSelect->closeCursor();
         return $entries;
@@ -1279,7 +1317,7 @@ Class Model {
     
     function getSpamEmails() {
         $sqlSelect = $this->db->prepare('SELECT id, email FROM profiles WHERE spam=1');
-        $this->executeQuery($sqlSelect, 'Error when getting hidden status for good ' . $goodid);
+        $this->executeQuery($sqlSelect, 'Error when getting spam emails');
         $emails = array();
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             $emails[$data['id']]=$data['email'];
