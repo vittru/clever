@@ -443,23 +443,28 @@ Class Model {
         $sqlSelect = $this->db->prepare("SELECT * FROM goods WHERE id=:goodId");
         $sqlSelect->bindParam(':goodId', $goodId);
         $this->executeQuery($sqlSelect, 'Error when getting a product: ' . $goodId);
-        $data = $sqlSelect->fetch();
-        $sqlSelect->closeCursor(); 
-        //Admin should see all goods
-        if ($this->registry['isadmin'])
-            $hidden = 0;
-        else
-            $hidden = $data['hidden'];
-        $good=new Good($data['id'], trim($data['name']), trim($data['description']), trim($data['shortdesc']), trim($data['howTo']), trim($data['madeOf']), $data['sale'], $data['firmId'], trim($data['problem']), trim($data['bestbefore']), trim($data['precaution']), trim($data['url']), $hidden);
-        $good->cats = $this->getGoodCats($goodId);
-        $good->supercats = $this->getGoodSuperCats($good);
-        $good->effs = $this->getGoodEffs($goodId);
-        $good->skintypes = $this->getGoodSTs($goodId);
-        $good->hairtypes = $this->getGoodHTs($goodId);
-        $good->sizes = $this->getGoodSizes($goodId);
-        $good->types = $this->getGoodTypes($goodId);
-        $good->problems = $this->getGoodProblems($goodId);
-        return $good;
+        if ($sqlSelect->rowCount() > 0) {
+            $data = $sqlSelect->fetch();
+            $sqlSelect->closeCursor(); 
+            //Admin should see all goods
+            if ($this->registry['isadmin'])
+                $hidden = 0;
+            else
+                $hidden = $data['hidden'];
+            $good=new Good($data['id'], trim($data['name']), trim($data['description']), trim($data['shortdesc']), trim($data['howTo']), trim($data['madeOf']), $data['sale'], $data['firmId'], trim($data['problem']), trim($data['bestbefore']), trim($data['precaution']), trim($data['url']), $hidden);
+            $good->cats = $this->getGoodCats($goodId);
+            $good->supercats = $this->getGoodSuperCats($good);
+            $good->effs = $this->getGoodEffs($goodId);
+            $good->skintypes = $this->getGoodSTs($goodId);
+            $good->hairtypes = $this->getGoodHTs($goodId);
+            $good->sizes = $this->getGoodSizes($goodId);
+            $good->types = $this->getGoodTypes($goodId);
+            $good->problems = $this->getGoodProblems($goodId);
+            return $good;
+        } else {
+            $sqlSelect->closeCursor(); 
+            return NULL;
+        }    
     }
     
     function getGoodSuperCats($good) {
