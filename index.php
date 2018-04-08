@@ -5,6 +5,7 @@
     $registry->set('freeDelivery', 700);
     $registry->set('presentSum', 0);
     $registry->set('globalsale', false);
+    define('currency', ' руб.');
     $model->getUser();
     //$_SESSION['user']->lastvisit = $model->getLastVisit();
     $registry->set('skintypes', $model->getCatalog('skintypes'));

@@ -28,7 +28,7 @@ class Size {
     }
     
     public function getWebPrice($sale) {
-        return $this->getPrice($sale) . " руб.";
+        return $this->getPrice($sale) . currency;
     }
     
     public function isAvailable() {
@@ -40,7 +40,7 @@ class Size {
     }
     
     public function getWebBBPrice() {
-        return $this->bbprice . " руб.";
+        return $this->bbprice . currency;
     }
     
 }

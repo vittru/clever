@@ -48,7 +48,7 @@ include 'header.php';
                                         <td><a class="aa-cart-title" href="/showgood?id=<?php echo $good->id ?>"><?php echo $good->name ?> <?php echo $size->size ?></a></td>
                                         <td><?php echo $cartItem->price ?></td>
                                         <td><input class="aa-cart-quantity form-control" type="number" value="<?php echo $cartItem->quantity ?>"></td>
-                                        <td><?php echo $cartItem->quantity * $cartItem->price.' руб.' ?></td>
+                                        <td><?php echo $cartItem->quantity * $cartItem->price . currency ?></td>
                                     </tr>
                                     <?php
                                         }
@@ -56,7 +56,7 @@ include 'header.php';
                                     ?>
                                     <tr>
                                         <td colspan="5">Всего товаров на сумму:</td>
-                                        <td><?php echo $total . ' руб.' ?></td>
+                                        <td><?php echo $total . currency ?></td>
                                     </tr>                      
                                     <tr>
                                         <td colspan="6" class="aa-cart-view-bottom">

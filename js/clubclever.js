@@ -442,6 +442,7 @@ $('[data-toggle=popover]').on('click', function (e) {
 
 $('.aa-quick-order-btn').on('click', function() {
     $('#quickOrderCount').val(1);
+    $('#quickOrderError').hide();
     if ($('.image-good').length) {
         $('#quickOrderImage').attr('src',$('.image-good').attr('src'));
         $('#quickOrderGood').html($('.modal-title').html());
@@ -451,16 +452,4 @@ $('.aa-quick-order-btn').on('click', function() {
         $('#quickOrderQuantity').html('1');
         $('#quickOrderPrice').html($(this).offsetParent().find('.aa-product-price').html());
     }    
-    var sizes = [];
-    $('.quantity:visible').each(function() {
-        if ($(this).val() > 0) {
-            var obj = {};
-            obj['goodId'] = $('#pId').val();
-            obj['sizeId'] = $(this).prop("id").substring(3);
-            obj['count'] = $(this).val();
-            obj['price'] = $(this).attr("data-price");
-            obj['sale'] = $(this).attr("data-sale");
-            sizes.push(obj);
-        };
-    });
 });

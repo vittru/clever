@@ -187,7 +187,7 @@
                                                     <a class="aa-cartbox-img" href="/showgood?id=<?php echo $good->id ?>"><img src="<?php echo $good->getImage() ?>" alt="<?php echo $good->name ?>"></a>
                                                     <div class="aa-cartbox-info">
                                                         <a href="/showgood?id=<?php echo $good->id; ?>"><div class="cart-good"><?php echo $good->name ?> <?php echo $size->size ?></div></a>
-                                                        <p><?php echo $cartItem->quantity ?> x <?php echo $cartItem->price . ' руб.' ?></p>
+                                                        <p><?php echo $cartItem->quantity ?> x <?php echo $cartItem->price . currency ?></p>
                                                     </div>
                                                     <a class="aa-remove-product" id="<?php echo $cartItem->goodId; ?>" value="<?php echo $cartItem->sizeId; ?>"><span class="fa fa-times"></span></a>
                                                 </li>
@@ -198,7 +198,7 @@
                                         <li>
                                             <span class="aa-cartbox-total-title">Всего покупок</span>
                                             <span class="aa-cartbox-total-price">
-                                                <?php echo $total ?> руб.
+                                                <?php echo $total . currency ?>
                                             </span>
                                         </li>
                                     </ul>
@@ -439,4 +439,3 @@
         <a id="path" class="green-button" href="<?php echo $pagePath ?>" title="Назад к списку товаров"><i class="fa fa-chevron-left"></i></a>
     <?php
     }
-    ?>

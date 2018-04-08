@@ -85,10 +85,10 @@ include 'header.php';
                                                 <div class="panel-body">
                                                     <div class="row" id="delivery-info" <?php if ($total > $this->registry['freeDelivery']) echo "hidden" ?>>
                                                         <div class="col-md-12">
-                                                            Стоимость доставки по Самаре - 350 руб. 
+                                                            Стоимость доставки по Самаре - 350<?php echo currency ?> 
                                                         </div>
                                                         <div class="col-md-12">
-                                                            Добавьте в заказ товаров на <span id="amount-left"><?php echo $this->registry['freeDelivery']-$total ?></span> руб., и доставка будет бесплатной.
+                                                            Добавьте в заказ товаров на <span id="amount-left"><?php echo $this->registry['freeDelivery']-$total ?></span><?php echo currency ?>, и доставка будет бесплатной.
                                                         </div>  
                                                         <div id='freeDelivery' hidden><?php echo $this->registry['freeDelivery'] ?></div>
                                                     </div>    
@@ -169,7 +169,7 @@ include 'header.php';
                                                     </div>                            
                                                     <div class="col-md-4">
                                                         <div class="aa-checkout-single-bill">
-                                                            <?php echo $cartItem->quantity * $cartItem->price . " руб."; ?>
+                                                            <?php echo $cartItem->quantity * $cartItem->price . currency; ?>
                                                         </div>                             
                                                     </div>
                                                 </div> 
@@ -198,7 +198,7 @@ include 'header.php';
                                                     </div>                            
                                                     <div class="col-md-4">
                                                         <div class="aa-checkout-single-bill" id="total">
-                                                            <?php echo $total . " руб." ?>
+                                                            <?php echo $total . currency ?>
                                                         </div>                             
                                                     </div>
                                                 </div> 

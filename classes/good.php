@@ -65,14 +65,14 @@ Class Good {
     function getWebPrice() {
         $price = $this->getPrice();
         if ($price > 0) {
-            return $price . " руб.";
+            return $price . currency;
         } else {
             return "";
         }
     }
     
     function getWebOldPrice() {
-        return $this->getMinSizePrice() . " руб.";
+        return $this->getMinSizePrice() . currency;
     }
     
     function isAvailable() {

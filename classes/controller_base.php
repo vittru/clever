@@ -8,8 +8,8 @@ Abstract Class Controller_Base {
     function __construct($registry) {
         $this->registry = $registry;
         $this->registry['template']->set('user', $_SESSION['user'], true);
-        $this->registry['template']->set('total', $this->getCartTotal(), true);
-        $this->registry['template']->set('totalNoSale', $this->getCartNoSaleTotal(), true);
+        $this->registry['template']->set('total', $this->getCartTotal($_SESSION['cart']), true);
+        $this->registry['template']->set('totalNoSale', $this->getCartNoSaleTotal($_SESSION['cart']), true);
         $this->registry['template']->set('isadmin', $this->registry['isadmin'], true);
     }
 
@@ -27,6 +27,15 @@ Abstract Class Controller_Base {
         return $error;
     }
     
+    //Check that the property is not empty
+    function checkEmpty($property, $message) {
+	if (trim($property) == "") {
+            return $message . "<br>";
+        } else {
+            return "";
+        }       
+    }
+    
     function sendMail($to, $subject, $message) {
         $headers = "From: 'Экомаркет Клевер' <" . $this->registry['mainemail'] . "> \r\n" .
             'Reply-To: ' . $this->registry['mainemail'] . "\r\n" .
@@ -37,20 +46,20 @@ Abstract Class Controller_Base {
         mail($to, $subject, $message, $headers);
     }  
     
-    function getCartTotal() {
+    function getCartTotal($goods) {
         $total = 0;
-        if (isset($_SESSION['cart'])) {
-            foreach ($_SESSION['cart'] as $cartItem) {
+        if (isset($goods)) {
+            foreach ($goods as $cartItem) {
                 $total = $total + $cartItem->quantity * $cartItem->price; 
             }         
         }
         return $total;
     }
     
-    function getCartNoSaleTotal() {
+    function getCartNoSaleTotal($goods) {
         $total = 0;
-        if (isset($_SESSION['cart'])) {
-            foreach ($_SESSION['cart'] as $cartItem) {
+        if ($goods) {
+            foreach ($goods as $cartItem) {
                 if (!$cartItem->sale) {
                     $total = $total + $cartItem->quantity * $cartItem->price; 
                 }    

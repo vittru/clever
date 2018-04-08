@@ -151,31 +151,67 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="quickOrderGood"></h4>
+                <h4 class="modal-title">Быстрый заказ</h4>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <img src="" id="quickOrderImage"/>
+                <div id="quickOrderOrder">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <img src="" id="quickOrderImage"/>
+                        </div>
+                        <div class="col-sm-6">
+                            <h4 id="quickOrderGood"></h4>
+                            <input id="quickOrderGoodId" name="quickOrderGoodId" hidden>
+                        </div>    
                     </div>
-                    <div class="col-sm-6">
-                        <span id="quickOrderQuantity"></span> x <span id="quickOrderPrice"></span>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <input id="quickOrderSizeId1" name="quickOrderSizeId1" hidden>
+                            <input id="quickOrderSizeSale1" hidden>
+                            <div><span id="quickOrderSize1"></span>: <span id="quickOrderQuantity1"></span> x <span id="quickOrderPrice1"></span> <?php echo currency ?></div>
+                            <input id="quickOrderSizeId2" name="quickOrderSizeId2" hidden>
+                            <input id="quickOrderSizeSale2" hidden>
+                            <div hidden><span id="quickOrderSize2"></span>: <span id="quickOrderQuantity2"></span> x <span id="quickOrderPrice2"></span> <?php echo currency ?></div>
+                            <input id="quickOrderSizeId3" name="quickOrderSizeId3" hidden>
+                            <input id="quickOrderSizeSale3" hidden>
+                            <div hidden><span id="quickOrderSize3"></span>: <span id="quickOrderQuantity3"></span> x <span id="quickOrderPrice3"></span> <?php echo currency ?></div>
+                        </div>
                     </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-12">
-                        <input id="quickOrderId" name="quickOrderId" hidden>
-                        <input id="quickOrderCount" name="quickOrderCount" hidden>
-                        <input id="quickOrderEmail" type="text" name="quickOrderAddr" checked placeholder="Почта*" <?php echo 'value="' . $user->email .'"' ?> >
-                        <input id="quickOrderPhone" type="text" name="quickOrderPhone" placeholder="Телефон*" <?php echo 'value="' . $user->phone . '"' ?>>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div>Стоимость заказа: <b><span id="quickOrderTotalPrice"></span> <?php echo currency ?></b></div>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <button type="button" class="green-button" id="quickOrderSubmit">Заказать</button>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div>Пожалуйста, укажите свои контакты, и наш менеджер свяжется с Вами по поводу доставки заказа.</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <input id="quickOrderEmail" type="text" name="quickOrderAddr" checked placeholder="Почта*" maxlength="40" <?php echo 'value="' . $user->email .'"' ?> >
+                            <input id="quickOrderPhone" type="text" name="quickOrderPhone" placeholder="Телефон*" maxlength="20" <?php echo 'value="' . $user->phone . '"' ?>>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div id="quickOrderError" hidden class="error"></div>
+                        </div>    
                     </div>    
-                </div>    
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" class="green-button" id="quickOrderSubmit">Заказать</button>
+                        </div>    
+                    </div>    
+                </div>
+                <div id="quickOrderComplete" hidden>
+                    <h4>Номер вашего заказа: <span id="quickOrderId"></span></h4>
+                    <p>Наш менеджер свяжется с Вами в ближайшее время, чтобы уточнить детали</p>
+                    <p></p>
+                    <p>Спасибо за шоппинг с нами.</p>
+                    <h4>Ваш Клевер!</h4>
+                    <button class="green-button" data-dismiss="modal">Закрыть</button>
+                </div>
             </div>    
         </div>
     </div>
@@ -193,7 +229,7 @@
 <script src="/js/custom.js"></script> 
 <script src="/js/jquery.validate.js"></script>
 <script src="/js/auth-form.js?<?php echo '20171228' ?>"></script>
-<script src="/js/clubclever.js?<?php echo '20180214'//filemtime('/js/clubclever.js'); ?>"></script>
+<script src="/js/clubclever.js?<?php echo '20180406'//filemtime('/js/clubclever.js'); ?>"></script>
 <script src="/js/lightbox.js"></script> 
 
 </body>

@@ -5,7 +5,7 @@ Class Controller_Buy Extends Controller_Base {
     function index() {
         if (isset($_SESSION['cart']) and sizeof($_SESSION['cart']) > 0) {
             $this->registry['model']->logVisit(25);
-            $this->registry['template']->set("bonusAvailable", $this->getCartNoSaleTotal() > 0);
+            $this->registry['template']->set("bonusAvailable", $this->getCartNoSaleTotal($_SESSION['cart']) > 0);
             $this->registry['template']->show('buy');
         } else {
             $this->registry['model']->logVisit(404, false, $_SERVER['QUERY_STRING']);
@@ -21,14 +21,14 @@ Class Controller_Buy Extends Controller_Base {
             } else {
                 $card = 0;
             }
-            $orderId = $this->registry['model']->saveOrder($_SESSION['user']->id, htmlspecialchars($_POST['name']), htmlspecialchars($_POST['email']), htmlspecialchars($_POST['phone']), htmlspecialchars($_POST['branch']), htmlspecialchars($_POST['takeDate']), htmlspecialchars($_POST['takeTime']), htmlspecialchars($_POST['city']." ".$_POST['address']), htmlspecialchars(trim($_POST['promo'])), $_POST['bonus'], $card, $_POST['remarks']);
             $this->registry['model']->logVisit(26, $orderId);
+            $orderId = $this->registry['model']->saveOrder($_SESSION['user']->id, htmlspecialchars($_POST['name']), htmlspecialchars($_POST['email']), htmlspecialchars($_POST['phone']), htmlspecialchars($_POST['branch']), htmlspecialchars($_POST['takeDate']), htmlspecialchars($_POST['takeTime']), htmlspecialchars($_POST['city']." ".$_POST['address']), htmlspecialchars(trim($_POST['promo'])), $_POST['bonus'], $card, $_POST['remarks'], $_SESSION['cart']);
 
             //Inform manager by email
-            $this->informManager($orderId, $_POST);
+            $this->informManager($orderId, $_POST, $_SESSION['cart']);
 
             //Send email to client
-            $this->informClient($orderId, $_POST);
+            $this->informClient($orderId, $_POST, $_SESSION['cart']);
             
             //Update bonuses
             if ($_SESSION['user']->name and !$_POST['bonus'] and !$_POST['promo']) {
@@ -69,8 +69,8 @@ Class Controller_Buy Extends Controller_Base {
             $this->registry['template']->show('404');
         }    
     }
-    
-    private function informManager($orderId, $parameters) {
+        
+    private function informManager($orderId, $parameters, $goods) {
         if ($parameters['payment'] == 'cash') {
             $payment = 'наличными при получении';
         } else {
@@ -83,23 +83,27 @@ Class Controller_Buy Extends Controller_Base {
                 "<p><b>Покупатель:</b> " . htmlspecialchars($parameters['name']) . "</p>" . 
                 "<p><b>Email:</b> " . htmlspecialchars($parameters['email']) . "</p>" . 
                 "<p><b>Телефон:</b> " . htmlspecialchars($parameters['phone']) . "</p>" . 
-                $this->getGoodsForLetter($parameters['promo'], $parameters['bonus']) .
-                $this->getDeliveryForLetter($parameters) . 
-                '<p><b>Оплата:</b> ' . $payment . '</p>'.
+                $this->getGoodsForLetter($goods, $parameters['promo'], $parameters['bonus']) .
+                $this->getDeliveryForLetter($parameters);
+        if ($parameters['payment']) {
+            $message = $message . '<p><b>Оплата:</b> ' . $payment . '</p>' .
                 '<p><b>Пожелания по заказу:</b> ' . htmlspecialchars($parameters['remarks']) . '</p></body></html>';
+        } else {
+            $message = $message . '<p>Заказ в один клик</p>' . '</body></html>';
+        }
         $this->sendMail($to, $subject, $message);
     }   
     
-    private function getGoodsForLetter($promo, $bonus) {
+    private function getGoodsForLetter($goods, $promo, $bonus) {
         $message = "<h3>Товары</h3>";
         
         $message .= "<table width=100% border=1><tr><th>Артикул</th><th>Имя</th><th>Количество</th><th>Цена</th></tr>";
-        foreach($_SESSION['cart'] as $cartItem) {
+        foreach($goods as $cartItem) {
             $good = $this->registry['model']->getGood($cartItem->goodId);
             $size = $good->sizes[$cartItem->sizeId];
             $price = $cartItem->price * $cartItem->quantity;
             $message .= "<tr><td>" . $size->code . "</td><td>" . str_replace('&nbsp;', ' ' , $good->name) . " " 
-                    . str_replace('&nbsp;', ' ' , $size->size) . "</td><td>".$cartItem->quantity . "</td><td>" . $price . " руб. </td></tr>";
+                    . str_replace('&nbsp;', ' ' , $size->size) . "</td><td>".$cartItem->quantity . "</td><td>" . $price . currency . "</td></tr>";
         }    
         $message .= "</table>";
         $promoAmount = 0;
@@ -111,15 +115,15 @@ Class Controller_Buy Extends Controller_Base {
         }
         if ($bonus) {
             $message .= "<p><b>Использованные бонусы:</b> " . $bonus . "</p>";
-            $total = $this->getCartTotal() - $bonus;
+            $total = $this->getCartTotal($goods) - $bonus;
         } else {
             $bonus = 0;
-            $total = $this->getCartTotal();
+            $total = $this->getCartTotal($goods);
         }
         if ($total < 0) {
             $total = 0;
         }
-        $message .= "<p><b>Сумма заказа:</b> " . $total . " руб. </p>";
+        $message .= "<p><b>Сумма заказа:</b> " . $total . currency . " </p>";
         return $message;
     }
     
@@ -131,26 +135,27 @@ Class Controller_Buy Extends Controller_Base {
             if ($parameters['takeDate']) {
                 $message .= "<p><b>Желаемое время самовывоза:</b> " . htmlspecialchars($parameters['takeDate']) . " " . htmlspecialchars($parameters['takeTime']) . '</p>';
             }
-        } else {
+        } else if ($parameters['city']){
             $message = $message . "<p><b>Доставка курьером по адресу:</b> " . htmlspecialchars($parameters['city']) . ", " . htmlspecialchars($parameters['address']) . '</p>';
+        } else {
+            $message = '';
         }
         return $message;
     }
     
-    private function informClient($orderId, $parameters) {
+    private function informClient($orderId, $parameters, $goods) {
         $to      = $parameters['email'];
-        $subject = 'Clever. Заказ №'.$orderId;
+        $subject = 'Экомаркет "Клевер". Заказ №'.$orderId;
         $message = '<html><body><h2>Заказ №' . $orderId . '</h2>' .
-                '<p>Ваш заказ добавлен на сайт www.ecomarketclever.ru. Менеджер свяжется с вами в ближайшее время.</p><p></p>' .
-                '<p>Мы будем информировать Вас о статусе заказа по email.</p>' .
-                '<p>Отследить заказ Вы также можете на <a href="www.ecomarketclever.ru/account/orders?id='. $orderId . '">нашем сайте</a></p>' .
+                '<p>Благодарим Вас за заказ в Экомаркете "Клевер". Наш менеджер свяжется с вами в ближайшее время.</p><p></p>' .
+                '<p>Отследить заказ Вы можете на <a href="www.ecomarketclever.ru/account/orders?id='. $orderId . '">нашем сайте</a></p>' .
                 "<h3>Информация о заказе</h3>" .
                 "<p><b>Покупатель:</b> " . $parameters['name'] . "</p>" . 
                 "<p><b>Email:</b> " . $parameters['email'] . "</p>" . 
                 "<p><b>Телефон:</b> " . $parameters['phone'] . "</p>" .
-                $this->getGoodsForLetter($parameters['promo'], $parameters['bonus']) .
+                $this->getGoodsForLetter($goods, $parameters['promo'], $parameters['bonus']) .
                 $this->getDeliveryForLetter($parameters) . 
-                '<p><b>Пожелания по заказу:</b> ' . htmlspecialchars($parameters['remarks']) . 
+                '<p><b>Пожелания по заказу:</b> ' . htmlspecialchars($parameters['remarks']) . '</p>' . 
                 '<p>Больше информации о наших акциях и товарах:</p>'.
                 '<ul><li><a href="www.ecomarketclever.ru">www.ecomarketclever.ru</a></li>' .
                 '<li><a href="https://vk.com/clubcleverru">http://vk.com/clubcleverru</a></li>' . 
@@ -183,15 +188,15 @@ Class Controller_Buy Extends Controller_Base {
     private function getTotalWithPromo($promo, $discount) {
         //For INSTA promo-code we ignore other sales
         if (strcasecmp($promo, 'INSTA') == 0) {
-            $totalNoSale = $this->getCartTotal();
+            $totalNoSale = $this->getCartTotal($_SESSION['cart']);
         } else {
-            $totalNoSale = $this->getCartNoSaleTotal();
+            $totalNoSale = $this->getCartNoSaleTotal($_SESSION['cart']);
         }    
         if ($discount['amount'] > $totalNoSale * 0.3) {
             $discount['percent'] = 30;
             $discount['amount'] = 0;
         }
-        $total = $this->getCartTotal() - $discount['amount'] - floor($totalNoSale * $discount['percent'] / 100);
+        $total = $this->getCartTotal($_SESSION['cart']) - $discount['amount'] - floor($totalNoSale * $discount['percent'] / 100);
         if ($total < 0) {
             $total = 0;
         }
@@ -202,7 +207,7 @@ Class Controller_Buy Extends Controller_Base {
         $error = '';
         $discount = 0;
         $bonus = $_GET['bonus'];
-        $total = $this->getCartNoSaleTotal();
+        $total = $this->getCartNoSaleTotal($_SESSION['cart']);
         if ($bonus) {
             if ($bonus > $_SESSION['user']->bonus) {
                 $error = 'У вас нет столько бонусов';
@@ -215,11 +220,47 @@ Class Controller_Buy Extends Controller_Base {
         } else {
             $discount = 0;
         }    
-        $total = $this->getCartTotal() - $discount;
+        $total = $this->getCartTotal($_SESSION['cart']) - $discount;
         if ($total < 0) {
             $total = 0;
         }
         $arr = array('error' => $error, 'discount' => $discount, 'percent' => 0, 'total' => $total);
         echo json_encode($arr);
-    }    
+    }  
+    
+    function quick() {
+        $error = $this->checkEmail($_POST['email']) . 
+            $this->checkEmpty($_POST['phone'], 'Пустой телефон');
+        $this->registry['logger']->lwrite('Error: '. $error);
+        
+        if ($error == '') {
+            $this->registry['model']->logVisit(39);
+            $data = json_decode($_POST['data'], true);
+            foreach ($data as $d) {
+                $cartItem = new CartItem();
+                $cartItem->goodId = $d['goodId'];
+                $cartItem->quantity = $d['count'];
+                $cartItem->sizeId = $d['sizeId'];
+                $cartItem->price = $d['price'];
+                $cartItem->sale = $d['sale'];
+                if (!$cartItems) {
+                    $cartItems = [$cartItem];
+                } else {
+                    array_push($cartItems, $cartItem);
+                }
+            }
+            $orderId = $this->registry['model']->saveOrder($_SESSION['user']->id, $_SESSION['user']->name, htmlspecialchars($_POST['email']), htmlspecialchars($_POST['phone']), NULL, NULL, NULL, NULL, NULL, NULL, 0, 'Заказ в 1 клик', $cartItems);
+            //Inform manager by email
+            $this->informManager($orderId, $_POST, $cartItems);
+
+            //Send email to client
+            $this->informClient($orderId, $_POST, $cartItems);
+            
+            //Show the results
+            echo $orderId;
+        } else {
+            echo $error;
+        }
+    }
+    
 }

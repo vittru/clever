@@ -127,11 +127,11 @@
                                             <?php
                                             if ($size->isAvailable()) {
                                             ?>
-                                                <input class="quantity form-control" data-price="<?php echo $size->getPrice($showGood->sale); ?>" data-sale="<?php if ($showGood->sale) echo "1"; else echo "0"; ?>" type="number" id="sel<?php echo $sizeId; ?>" value="<?php if (sizeof($showGood->sizes) == 1) { echo '1'; if (!$bb) $canBeBought = true;} else echo '0';  ?>" onchange="modifyBasket()">
+                                                <input class="quantity form-control" data-size="<?php echo $size->size; ?>" data-price="<?php echo $size->getPrice($showGood->sale); ?>" data-sale="<?php if ($showGood->sale) echo "1"; else echo "0"; ?>" type="number" id="sel<?php echo $sizeId; ?>" value="<?php if (sizeof($showGood->sizes) == 1) { echo '1'; if (!$bb) $canBeBought = true;} else echo '0';  ?>" onchange="modifyBasket()">
                                             <?php
-                                            } else
-                                                echo '<span class="unavailable">Нет на складе</span>'
-                                            ?>
+                                            } else {
+                                                echo '<span class="unavailable">Нет на складе</span>';
+                                            } ?>
                                         </td>
                                     </tr> 
                                     <?php
@@ -176,7 +176,7 @@
                                             <?php
                                             //if ($size->isAvailable()) {
                                             ?>
-                                                <input class="quantity form-control" data-price="<?php echo $size->bbprice; ?>" data-sale="1" type="number" id="sel<?php echo $sizeId; ?>" value="<?php if (sizeof($showGood->sizes)==1) {echo '1'; if ($bb) $canBeBought = true;} else echo '0';  ?>" onchange="modifyBasket()">
+                                                <input class="quantity form-control" data-size="<?php echo $size->size; ?>" data-price="<?php echo $size->bbprice; ?>" data-sale="1" type="number" id="sel<?php echo $sizeId; ?>" value="<?php if (sizeof($showGood->sizes)==1) {echo '1'; if ($bb) $canBeBought = true;} else echo '0';  ?>" onchange="modifyBasket()">
                                             <?php
                                             //} else
                                             //    echo '<span class="unavailable">Нет на складе</span>'
@@ -204,9 +204,9 @@
                     </div>
                 </div>
                 <div class="aa-prod-view-bottom">
-                    <a class="green-button" id="emailMeBtn" data-toggle="modal" data-target="#emailMe" <?php if ($bb or $showGood->isAvailable() ) echo 'style="display:none;" ' ?>><span class="fa fa-envelope"></span>Сообщить о наличии</a>
-                    <a class="aa-add-to-cart-btn orange-button" <?php if (!$canBeBought) echo 'disabled '; if (!$bb and !$showGood->isAvailable()) echo 'style="display:none;" ' ?> title="Товар добавлен в корзину" data-content="Оформить заказ"><span class="fa fa-shopping-cart"></span>В корзину</a>
-                    <!--a class="aa-quick-order-btn green-button" data-toggle="modal" data-target="#quickOrder" data-goodid="<?php //echo $showGood->id ?>" <?php //if (!$canBeBought) echo 'disabled '; if (!$bb and !$showGood->isAvailable()) echo 'style="display:none;" ' ?> title="Заказ оформлен" data-content="Заказать"><span class="fa fa-bolt"></span>Купить в 1 клик</a-->
+                    <a class="green-button" id="emailMeBtn" data-toggle="modal" data-target="#emailMe" <?php if ($bb or $showGood->isAvailable()) { echo 'style="display:none;" ';} ?>><span class="fa fa-envelope"></span>Сообщить о наличии</a>
+                    <a class="aa-add-to-cart-btn orange-button" <?php if (!$canBeBought) { echo 'disabled ';} if (!$bb and !$showGood->isAvailable()) { echo 'style="display:none;" ';} ?> title="Товар добавлен в корзину" data-content="Оформить заказ"><span class="fa fa-shopping-cart"></span>В корзину</a>
+                    <a class="aa-quick-order-btn green-button" data-toggle="modal" data-target="#quickOrder" data-goodid="<?php echo $showGood->id ?>" <?php if (!$canBeBought) { echo 'disabled ';} if (!$bb and !$showGood->isAvailable()) { echo 'style="display:none;" ';} ?> title="Заказ оформлен" data-content="Заказать"><span class="fa fa-bolt"></span>Купить в 1 клик</a>
                     <?php
                     if ($isadmin) {
                     ?>
@@ -223,7 +223,8 @@
                     if ($showGood->madeOf) {
                     ?>
                     <li><a href="#madeOf" data-toggle="tab">Состав</a></li>
-                    <?php }
+                    <?php 
+                    }
                     if ($showGood->howTo) {
                     ?>
                     <li><a href="#howTo" data-toggle="tab">Способ применения</a></li>
@@ -232,7 +233,9 @@
                     if ($hasProblems or $hasEffects) {
                     ?>
                         <li><a href="#effect" data-toggle="tab">Эффект</a></li>
-                    <?php } ?>    
+                    <?php 
+                    } 
+                    ?>    
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade in active aa-product-info-tab" id="description">
@@ -241,7 +244,9 @@
                             $toEnd = count($showGood->skintypes);
                             foreach($showGood->skintypes as $st) { 
                                 echo mb_strtolower($this->registry['skintypes'][$st]);
-                                if (0 !== --$toEnd) echo ", ";
+                                if (0 !== --$toEnd) {
+                                    echo ", ";
+                                }
                             } 
                             echo '</p>';
                         }?>
@@ -250,13 +255,15 @@
                             $toEnd = count($showGood->hairtypes);
                             foreach($showGood->hairtypes as $ht) { 
                                 echo mb_strtolower($this->registry['hairtypes'][$ht]); 
-                                if (0 !== --$toEnd) echo ", ";
+                                if (0 !== --$toEnd) {
+                                    echo ", ";
+                                }
                             } 
                             echo '</p>';
-                        }?>
-                        <?php echo $showGood->getWebDescription(); ?>
-                        <?php echo $showGood->getWebBestbefore(); ?>
-                        <?php echo $showGood->getWebPrecaution(); ?>
+                        }
+                        echo $showGood->getWebDescription();
+                        echo $showGood->getWebBestbefore();
+                        echo $showGood->getWebPrecaution(); ?>
                     </div>
                     <?php
                     if ($showGood->madeOf) {
@@ -310,4 +317,4 @@
     <?php
     }
     ?>
-    <script src="/js/modalgood.js?20180116"></script> 
+    <script src="/js/modalgood.js?20180406"></script> 

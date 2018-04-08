@@ -31,8 +31,8 @@ Class Model {
             . "WHERE email = :userEmail AND password = :userPassword";
     private $selectProfileEmail = "SELECT * FROM profiles "
             . "WHERE email = :userEmail";
-    private $getAllNews = "SELECT * FROM news WHERE action=:action ORDER BY time DESC LIMIT 10";
-    private $getNonClientNews = "SELECT * FROM news WHERE forClients=0 AND action=:action ORDER BY time DESC LIMIT 10";
+    private $getAllNews = "SELECT * FROM news WHERE action=:action ORDER BY time DESC";
+    private $getNonClientNews = "SELECT * FROM news WHERE forClients=0 AND action=:action ORDER BY time DESC";
     private $addQuestion = "INSERT INTO questions(user, question, date) VALUES(:userId, :question, NOW())";
     private $selectCatalog = "SELECT id, name FROM ";
     private $updateGood = "UPDATE goods SET name=:name, description=:description, shortdesc=:shortdesc, firmId=:firmId, sale=:sale, howTo=:howTo, madeOf=:madeOf, problem=:problem, bestbefore=:bestbefore, precaution=:precaution, hidden=:hidden WHERE id=:id";
@@ -703,7 +703,7 @@ Class Model {
         return $catsArray;       
     }
     
-    function saveOrder($userId, $name, $email, $phone, $branch, $takeDate, $takeTime, $address, $promo, $bonus, $paymentCard, $remarks) {
+    function saveOrder($userId, $name, $email, $phone, $branch, $takeDate, $takeTime, $address, $promo, $bonus, $paymentCard, $remarks, $goods) {
         $sqlInsert = $this->db->prepare('INSERT INTO orders(userId, name, email, phone, date, branchId, day, time, address, promoid, profileId, bonus, card, remarks) VALUES(:userId, :name, :email, :phone, :date, :branch, :takeDate, :takeTime, :address, :promo, :profileId, :bonus, :card, :remarks)');
         $sqlInsert->bindParam(':userId', $userId);
         $sqlInsert->bindParam(':name', $name);
@@ -746,15 +746,15 @@ Class Model {
         }  
         $sqlInsert->closeCursor();
         if ($orderId) {
-            $this->saveOrderedGoods($orderId);
+            $this->saveOrderedGoods($orderId, $goods);
         }
         return $orderId;
     }    
     
-    function saveOrderedGoods($orderId) {
+    function saveOrderedGoods($orderId, $cart) {
         $sqlInsert = $this->db->prepare('INSERT INTO `orders-goods`(sizeId, quantity, price, orderId, sale) VALUES(:sizeId, :quantity, :price, :orderId, :sale)');
         $sqlInsert->bindParam(':orderId', $orderId);
-        foreach ($_SESSION['cart'] as $cartItem) {
+        foreach ($cart as $cartItem) {
             $sqlInsert->bindParam(':sizeId', $cartItem->sizeId);
             $sqlInsert->bindParam(':quantity', $cartItem->quantity);
             $sqlInsert->bindParam(':price', $cartItem->price);

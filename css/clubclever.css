@@ -1901,6 +1901,10 @@ ul.nav-tabs {
     font-size: 14px;
 }
 
+.modal-dialog .row {
+    margin-top: 10px;
+}
+
 #aa-contact {
   display: inline;
   float: left;

@@ -84,15 +84,7 @@ Class Controller_Account Extends Controller_Base {
         $this->registry['logger']->lwrite($error);
         echo $error;
     }
-   
-    //Check that the property is not empty
-    private function checkEmpty($property, $message) {
-	if (trim($property) == "") {
-            return $message . "<br>";
-        } else {
-            return "";
-        }       
-    }
+
     
     //For login action we just check that email and password aren't epmpty and the user exists
     private function isLoginCorrect() {
