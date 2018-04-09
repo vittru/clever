@@ -105,7 +105,7 @@ Class Controller_Cart Extends Controller_Base {
     private function makDiscounts() {
         $discount = false;
         foreach ($_SESSION['cart'] as $cartItem) {
-            if ($cartItem->goodId==547) {
+            if ($cartItem->goodId == 547) {
                 $discount = true;
                 break;
             }
