@@ -73,8 +73,7 @@ include 'header.php';
                                         <h5>МАГАЗИН НАТУРАЛЬНОЙ КОСМЕТИКИ</h5>
                                         <p>ООО "Клевер"</p>
                                         <p>ИНН 6315011857</p>
-                                        <p><span class="fa fa-phone"></span>+7-996-725-00-61</p>
-                                        <p><span class="fa fa-phone"></span>+7-996-725-00-62</p>
+                                        <p><span class="fa fa-phone"></span><span class="ya-phone">8 (846) 252 39 11</span></p>
                                         <p><span class="fa fa-envelope"></span><a onclick="yaCounter44412517.reachGoal('SEND_EMAIL'); return true;" href="mailto: <?php echo $this->registry['mainemail'] ?>"><?php echo $this->registry['mainemail'] ?></a></p>
                                     </address>
                                 </div>

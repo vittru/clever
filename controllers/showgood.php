@@ -40,7 +40,7 @@ Class Controller_Showgood Extends Controller_Base {
         $this->registry['template']->set('breadcrumbs', $this->getBreadcrumbs(NULL, NULL, $good));
         $h1 = str_replace('"', '\'', $good->name);
         $h1 = str_replace('&nbsp;', ' ', $h1);
-        $this->registry['template']->set('metaTitle', $h1 . ' – купить в Самаре, цены, описание | интернет-магазин Клевер');
+        $this->registry['template']->set('metaTitle', $h1 . ' в Самаре - купить, цена, фото | Экомаркет Клевер');
         $this->registry['template']->set('metaDescription', 'Продажа эко косметики — ' . $h1 . '. Купить в экомаркете Клевер с доставкой в Самаре.');
         $this->registry['template']->set('metaKeywords', $h1);
         
