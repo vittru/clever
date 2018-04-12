@@ -31,7 +31,7 @@ Class Controller_Buy Extends Controller_Base {
             $this->informClient($orderId, $_POST, $_SESSION['cart']);
             
             //Update bonuses
-            if ($_SESSION['user']->name and !$_POST['bonus'] and !$_POST['promo']) {
+            if ($_SESSION['user']->name /*and !$_POST['bonus'] and !$_POST['promo']*/) {
                 $bonus = $this->registry['model']->updateBonus($orderId, $_SESSION['user']->bonus);
                 $_SESSION['user']->bonus += $bonus;
             }
