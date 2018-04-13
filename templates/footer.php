@@ -220,17 +220,20 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="/js/bootstrap.js"></script>  
-<script type="text/javascript" src="/js/jquery.smartmenus.js"></script>
-<script type="text/javascript" src="/js/jquery.smartmenus.bootstrap.js"></script>  
-<script type="text/javascript" src="/js/slick.js"></script>
-<script src="/js/jquery.sumoselect.js"></script>
+
+
+
+<script src="/js/bootstrap.min.js"></script>  
+<script type="text/javascript" src="/js/jquery.smartmenus.min.js"></script>
+<script type="text/javascript" src="/js/jquery.smartmenus.bootstrap.min.js"></script>  
+<script type="text/javascript" src="/js/slick.min.js"></script>
+<script src="/js/jquery.sumoselect.min.js"></script>
 <script src="/js/jquery-editable-select.js"></script>
-<script src="/js/custom.js"></script> 
-<script src="/js/jquery.validate.js"></script>
-<script src="/js/auth-form.js?<?php echo '20171228' ?>"></script>
-<script src="/js/clubclever.js?<?php echo '20180406'//filemtime('/js/clubclever.js'); ?>"></script>
-<script src="/js/lightbox.js"></script> 
+<script src="/js/custom.min.js"></script> 
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/auth-form.min.js?<?php echo '20171228' ?>"></script>
+<script src="/js/clubclever.min.js?<?php echo '20180406' ?>"></script>
+<script src="/js/lightbox.min.js"></script> 
 
 </body>
 </html>

@@ -5,7 +5,7 @@ include 'header.php';
 if ($payment) {
 ?>
     <script src="https://securepay.tinkoff.ru/html/payForm/js/tinkoff.js" defer></script>
-    <script src="/js/payment.js" defer></script>
+    <script src="/js/payment.min.js" defer></script>
 <?php
 } else {
 ?>

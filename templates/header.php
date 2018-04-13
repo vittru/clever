@@ -28,15 +28,15 @@
 
         <link rel="icon" href="/images/icon.png">
 
-        <link href="/css/search.css" rel="stylesheet">
+        <link href="/css/search.min.css" rel="stylesheet">
 
         <link href="/css/font-awesome.css" rel="stylesheet">
         <link href="/css/bootstrap.css" rel="stylesheet">   
         <link href="/css/jquery.smartmenus.bootstrap.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/css/slick.css">
-        <link id="switcher" href="/css/clubclever-theme.css" rel="stylesheet">
+        <link id="switcher" href="/css/clubclever-theme.min.css" rel="stylesheet">
         <link href="/css/sequence-theme.modern-slide-in.css" rel="stylesheet" media="all">
-        <link href="/css/clubclever.css" rel="stylesheet">    
+        <link href="/css/clubclever.min.css" rel="stylesheet">    
         <link href="/css/sumoselect.css" rel="stylesheet">    
         
         <!--link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'-->

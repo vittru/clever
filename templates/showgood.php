@@ -317,4 +317,4 @@
     <?php
     }
     ?>
-    <script src="/js/modalgood.js?20180406"></script> 
+    <script src="/js/modalgood.min.js?20180406"></script> 

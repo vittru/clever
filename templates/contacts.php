@@ -93,5 +93,4 @@ include 'header.php';
 include 'footer.php';
 ?>
 
-<script src="/js/subscribe.js"></script>
-<script src="/js/question.js"></script>
+<script src="/js/question.min.js"></script>
