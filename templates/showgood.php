@@ -18,7 +18,7 @@
     <?php
     } else {
     ?>  
-        <section id="single-product">
+        <section id="single-product" itemscope itemtype="http://schema.org/Product">
         <div class="container">
         <?php        
         if (sizeof($breadcrumbs)) {
@@ -44,7 +44,7 @@
         }
     }
     ?>
-        <h1 class="modal-title"><?php echo $showGood->name ?></h1>
+        <h1 class="modal-title" itemprop="name"><?php echo $showGood->name ?></h1>
         <div hidden="" id="pId"><?php echo $showGood->id ?></div>
     <?php
     if ($pm) {
@@ -67,20 +67,20 @@
                     $colsm = 6;
                 ?>
                 <a href="<?php echo $firstImage; ?>" data-lightbox="lightbox" data-title='<?php echo $showGood->name ?>' class="col-sm-<?php echo $colsm ?>">
-                    <img src="<?php echo $firstImage; ?>" class="img-responsive image-good">
+                    <img src="<?php echo $firstImage; ?>" class="img-responsive image-good" itemprop="image">
                 </a>    
                 <?php 
                 if ($secondImage) {
                 ?>
                 <a href="<?php echo $secondImage ?>" data-lightbox="lightbox" data-title='<?php echo $showGood->name ?>'  class="col-sm-<?php echo $colsm ?>">
-                    <img src="<?php echo $secondImage ?>" class="img-responsive image-good">
+                    <img src="<?php echo $secondImage ?>" class="img-responsive image-good" itemprop="image">
                 </a>    
                 <?php
                 }
                 if ($thirdImage) {
                 ?>
                 <a href="<?php echo $thirdImage ?>" data-lightbox="lightbox" data-title='<?php echo $showGood->name ?>' class="col-sm-<?php echo $colsm ?>">
-                    <img src="<?php echo $thirdImage ?>" class="img-responsive image-good">
+                    <img src="<?php echo $thirdImage ?>" class="img-responsive image-good" itemprop="image">
                 </a>    
                 <?php 
                 }
@@ -88,7 +88,7 @@
             </div>
             <div class="col-md-8 col-sm-8 col-xs-12">
                 <div class="aa-product-view-content">
-                    <div class="short-desc"><?php echo $showGood->shortdesc ?></div>
+                    <div class="short-desc" itemprop="description"><?php echo $showGood->shortdesc ?></div>
                     <?php
                     $firm = $this->registry['firms'][$showGood->firmId];
                     if ($firm) {
@@ -107,7 +107,7 @@
                     ?>
                     <div class="tab-content">
                         <div class="tab-pane fade in <?php if (!$bb) echo 'active'?>" id="main">
-                            <div class="aa-price-block">
+                            <div class="aa-price-block" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                                 <?php
                                 if (sizeof($showGood->sizes) > 0) { 
                                 ?>
@@ -122,7 +122,7 @@
                                     <tr>
                                         <td class="hidden-xs"><?php echo $size->code; ?></td>
                                         <td><?php echo $size->size; ?></td>
-                                        <td><?php echo $size->getWebPrice($showGood->sale); ?></td>
+                                        <td itemprop="price"><?php echo $size->getWebPrice($showGood->sale); ?></td>
                                         <td>
                                             <?php
                                             if ($size->isAvailable()) {
@@ -153,7 +153,7 @@
                         if ($showGood->hasBB()) {
                         ?>
                         <div class="tab-pane fade in <?php if ($bb) echo 'active'?>" id="bb">
-                            <div class="aa-price-block">
+                            <div class="aa-price-block" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                                 <?php
                                 if (sizeof($showGood->sizes) > 0) { 
                                 ?>
@@ -164,14 +164,14 @@
                                     <th>Цена</th>
                                     <th>Количество</th>
                                     <?php
-                                    foreach($showGood->sizes as $sizeId=>$size) 
+                                    foreach($showGood->sizes as $sizeId=>$size) { 
                                         if ($size->isBB()){ 
                                     ?>
                                     <tr>
                                         <td class="hidden-xs"><?php echo $size->code;?></td>
                                         <td><?php echo $size->size; ?></td>
                                         <td class="orange"><?php echo strftime('%e/%m/%G', strtotime($size->bestbefore)); ?></td>
-                                        <td><?php echo $size->getWebBBPrice($showGood->sale); ?></td>
+                                        <td itemprop="price"><?php echo $size->getWebBBPrice($showGood->sale); ?></td>
                                         <td>
                                             <?php
                                             //if ($size->isAvailable()) {
@@ -184,6 +184,7 @@
                                         </td>
                                     </tr> 
                                     <?php
+                                    }
                                     }
                                     ?>
                                     <tr><td colspan="5"></td></tr>
