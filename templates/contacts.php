@@ -5,7 +5,7 @@ include 'header.php';
 <!-- start contact section -->
 <section id="aa-contact">
     <div class="container">
-        <div class="row" id="aa-text">
+        <div class="row" id="aa-text" itemscope itemtype="http://schema.org/Organization">
             <div class="col-md-12">
                 <div class="aa-contact-area">
                     <div class="aa-contact-address">
@@ -16,14 +16,14 @@ include 'header.php';
                                 <div class="row bonus-row">
                                     <div class="col-md-6 branch">
                                         <p><b>Студия красоты Аллы Пелевиной</b></p>
-                                        <p><b>ул. Ново-Садовая, 271</b></p>
+                                        <p itemprop="streetAddress"><b>ул. Ново-Садовая, 271</b></p>
                                         <div class="map"><script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=3Z04yabmOvp2FZ3pW8QyO_fTbB6Y_MFy&amp;width=320&amp;height=240&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script></div>
                                         <p><span class="fa fa-clock-o"></span>в будни с 10.00 до 20.00</p>
                                         <p><span class="fa fa-clock-o"></span>по выходным с 10.00 до 18.00</p>
                                     </div>    
                                     <div class="col-md-6 branch">
                                         <p><b>Салон красоты "Красивые люди"</b></p>
-                                        <p><b>ул. Георгия Димитрова, 112</b></p>
+                                        <p itemprop="streetAddress"><b>ул. Георгия Димитрова, 112</b></p>
                                         <div class="map"><script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=GrArh56-A8ES1kTZdADZ7tgWcLvkOgSq&amp;width=320&amp;height=240&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script></div>
                                         <p><span class="fa fa-clock-o"></span>ежедневно с 10.00 до 21.00</p>
                                         <p></p>
@@ -69,12 +69,12 @@ include 'header.php';
                             <div class="col-md-4">
                                 <div class="aa-contact-address-right">
                                     <address>
-                                        <h2>Клевер</h2>
+                                        <h2 itemprop="name">Клевер</h2>
                                         <h5>МАГАЗИН НАТУРАЛЬНОЙ КОСМЕТИКИ</h5>
                                         <p>ООО "Клевер"</p>
                                         <p>ИНН 6315011857</p>
-                                        <p><span class="fa fa-phone"></span><span class="ya-phone">8 (846) 252 39 11</span></p>
-                                        <p><span class="fa fa-envelope"></span><a onclick="yaCounter44412517.reachGoal('SEND_EMAIL'); return true;" href="mailto: <?php echo $this->registry['mainemail'] ?>"><?php echo $this->registry['mainemail'] ?></a></p>
+                                        <p><span class="fa fa-phone"></span><span class="ya-phone" itemprop="telephone">8 (846) 252 39 11</span></p>
+                                        <p><span class="fa fa-envelope"></span><a onclick="yaCounter44412517.reachGoal('SEND_EMAIL'); return true;" href="mailto: <?php echo $this->registry['mainemail'] ?>" itemprop="email"><?php echo $this->registry['mainemail'] ?></a></p>
                                     </address>
                                 </div>
                             </div>

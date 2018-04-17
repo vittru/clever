@@ -51,7 +51,7 @@
                                         <address>
                                             <p>ООО "Клевер"</p>
                                             <p>ИНН 6315011857</p>
-                                            <p><span class="fa fa-phone"></span><span class="ya-phone">+7 (846) 300-20-36</span></p>
+                                            <p><span class="fa fa-phone"></span><span class="ya-phone">8 (846) 252 39 11</span></p>
                                             <p><span class="fa fa-envelope"></span><?php echo $this->registry['mainemail'] ?></p>
                                         </address>
                                         <div class="aa-footer-social">
