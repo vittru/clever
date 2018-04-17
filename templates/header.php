@@ -376,14 +376,14 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <!-- Left nav -->
-                        <ul class="nav navbar-nav">
-                            <li><a href="/catalog/sc">Каталог<span class="caret"></a>
+                        <ul class="nav navbar-nav" itemscope itemtype="http://www.schema.org/SiteNavigationElement">
+                            <li itemprop="name"><a itemprop="url" href="/catalog/sc">Каталог<span class="caret"></a>
                                 <ul class="dropdown-menu">
                                     <?php 
                                     foreach ($this->registry['supercats'] as $sc) {
                                     ?>
-                                        <li>
-                                            <a href="/catalog/sc/<?php echo $sc->url; ?>">
+                                        <li itemprop="name">
+                                            <a itemprop="url" href="/catalog/sc/<?php echo $sc->url; ?>">
                                                 <?php echo $sc->name; ?>
                                             </a>
                                         </li>        
@@ -392,15 +392,15 @@
                                     ?>  
                                 </ul>
                             </li>
-                            <li><a href="/catalog/type?id=3">Для мужчин</a></li>
-                            <li><a href="/catalog/type?id=2">Для детей</a></li>
-                            <li><a href="/catalog/firm">Бренды<span class="caret"></span></a>
+                            <li itemprop="name"><a itemprop="url" href="/catalog/type?id=3">Для мужчин</a></li>
+                            <li itemprop="name"><a itemprop="url" href="/catalog/type?id=2">Для детей</a></li>
+                            <li itemprop="name"><a itemprop="url" href="/catalog/firm">Бренды<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <?php 
                                     foreach ($this->registry['firms'] as $id => $firm) {
                                     ?>
-                                        <li>
-                                            <a href="/catalog/firm/<?php echo $firm->url; ?>">
+                                        <li itemprop="name">
+                                            <a itemprop="url" href="/catalog/firm/<?php echo $firm->url; ?>">
                                                 <?php echo $firm->name; ?>
                                             </a>
                                         </li>        
@@ -409,22 +409,22 @@
                                     ?>  
                                 </ul>
                             </li>
-                            <li><a href="/actions">Акции<span class="caret"></span></a>
+                            <li itemprop="name"><a itemprop="url" href="/actions">Акции<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="/actions/bestbefore">
+                                    <li itemprop="name">
+                                        <a itemprop="url" href="/actions/bestbefore">
                                             Истекающие сроки
                                         </a>
                                     </li>        
-                                    <li>
-                                        <a href="/actions/discounts">
+                                    <li itemprop="name">
+                                        <a itemprop="url" href="/actions/discounts">
                                             Скидки
                                         </a>
                                     </li>        
                                 </ul>
                             </li>
-                            <li><a href="/common/bonus">Бонусы</a></li>
-                            <li><a href="/news">Новости</a></li>
+                            <li itemprop="name"><a itemprop="url" href="/common/bonus">Бонусы</a></li>
+                            <li itemprop="name"><a itemprop="url" href="/news">Новости</a></li>
                         </ul>
                     </div>
                 </div>
