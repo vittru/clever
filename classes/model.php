@@ -506,7 +506,7 @@ Class Model {
     }
     
     function getGoodSizes($goodId) {
-        $sqlSelect = $this->db->prepare('SELECT gs.id, gs.size, w.price, w.instock, w.onhold, w.bestbefore, w.bbprice, gs.code, gs.sale FROM `goods-sizes` gs LEFT JOIN warehouse w ON gs.Id=w.psId WHERE gs.goodId=:goodId ORDER BY w.price');
+        $sqlSelect = $this->db->prepare('SELECT gs.id, gs.size, w.price, w.instock, w.onhold, w.bestbefore, w.bbprice, gs.code, gs.sale FROM `goods-sizes` gs LEFT JOIN warehouse w ON gs.Id=w.psId WHERE gs.goodId=:goodId AND gs.hidden=0 ORDER BY w.price');
         $sqlSelect->bindParam(':goodId', $goodId);
         $this->executeQuery($sqlSelect, 'Error when selecting sizes for product ' . $goodId);
         $sizes = array();
@@ -1105,7 +1105,7 @@ Class Model {
                 . 'FROM visits v JOIN `goods-sizes` gs ON v.good=gs.goodid '
                 . 'JOIN warehouse w ON w.psid = gs.id '
                 . 'JOIN goods g ON v.good=g.id '
-                . 'WHERE v.pageid=30 AND v.good IS NOT NULL AND w.instock > w.onhold AND v.time >=DATE_SUB(curdate(), INTERVAL 1 MONTH) AND g.hidden=0 '
+                . 'WHERE v.pageid=30 AND v.good IS NOT NULL AND w.instock > w.onhold AND v.time >=DATE_SUB(curdate(), INTERVAL 1 MONTH) AND g.hidden=0 AND gs.hidden=0 '
                 . 'GROUP BY 1 '
                 . 'ORDER BY 2 DESC '
                 . 'LIMIT 8');
