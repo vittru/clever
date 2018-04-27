@@ -14,6 +14,7 @@ function submitForm(){
         confirm = $("#auth-confirm").val(),
         phone = $("#auth-phone").val(),
         //client = $("#auth-client").prop('checked'),
+        birthday = $('#auth-birthday').val(),
         flyer = $("#auth-flyer").val(),
         spam = $("#auth-spam").prop('checked'),
         action = $("#auth-action").val();
@@ -21,7 +22,7 @@ function submitForm(){
     $.ajax({ 
         type: "POST",   
         url: "/account/register",   
-        data: "userName=" + name + "&userEmail=" + email + "&userPassword=" + pass + "&userConfirm=" + confirm + "&isSpam=" + spam + "&userAction=" + action + "&userPhone=" + phone + "&userFlyer=" + flyer,   
+        data: "userName=" + name + "&userEmail=" + email + "&userPassword=" + pass + "&userConfirm=" + confirm + "&isSpam=" + spam + "&userAction=" + action + "&userPhone=" + phone + "&userFlyer=" + flyer + "&userBirthday=" + birthday,   
         dataType: "html",   
         dataFilter: function(a) {   
             return $(a).filter("#error").html(); 

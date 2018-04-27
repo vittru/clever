@@ -19,6 +19,8 @@ include 'header.php';
                                     <input type="text" placeholder="Почта" id="auth-email" name="userEmail" class="form-control" value="<?php echo $user->email ?>" maxlength="40">
                                     <label for="">Телефон</label>
                                     <input type="text" placeholder="Телефон" id="auth-phone" name="userPhone" class="form-control" value="<?php echo $user->phone ?>" maxlength="20">
+                                    <label for="">Дата рождения</label>
+                                    <input type="date" placeholder="Дата рождения" id="auth-birthday" name="userBirthday" class="form-control" value="<?php if ($user->birthday) echo date('Y-m-d',strtotime(str_replace('/', '-', trim($user->birthday)))) ?>" maxlength="20">
                                     <label for="">Пароль<span>*</span></label>
                                     <input type="password" placeholder="Пароль" id="auth-password" name="userPassword" class="form-control" value="<?php echo $user->password ?>" maxlength="30">
                                     <label for="">Подтверждение пароля<span>*</span></label>

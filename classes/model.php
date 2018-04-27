@@ -18,12 +18,12 @@ Class Model {
             . "WHERE userid=:userId";
     private $profileExists = "SELECT p.id FROM profiles p, users u "
             . "WHERE p.id = u.profile AND u.id = :userId";
-    private $createProfile = "INSERT INTO profiles(name, email, client, password, spam, phone, salt) "
-            . "VALUES(:userName, :userEmail, :isClient, :userPassword, :spam, :phone, :salt)";
+    private $createProfile = "INSERT INTO profiles(name, email, client, password, spam, phone, salt, birthday) "
+            . "VALUES(:userName, :userEmail, :isClient, :userPassword, :spam, :phone, :salt, :birthday)";
     private $linkProfile = "UPDATE users SET profile = :profileId "
             . "WHERE id = :userId";
     private $updateProfile = "UPDATE profiles "
-            . "SET name = :userName, email = :userEmail, client = :isClient, spam=:spam, phone=:phone "
+            . "SET name = :userName, email = :userEmail, client = :isClient, spam=:spam, phone=:phone, birthday = :birthday "
             . "WHERE id = (SELECT profile FROM users WHERE id = :userId)"; 
     private $emailExists = "SELECT count(*) FROM profiles "
             . "WHERE email = :userEmail AND name IS NOT NULL";
@@ -123,6 +123,7 @@ Class Model {
             $user->spam = $data['spam'];
             $user->phone = $data['phone'];
             $user->bonus = $data['bonus'];
+            $user->birthday = $data['birthday'];
             $sqlSelect->closeCursor();
         }
         $user->id = $userId;
@@ -192,6 +193,7 @@ Class Model {
             $user->password = $this->default;
             $sqlCreate->bindParam(':phone', $user->phone);
             $sqlCreate->bindParam(':salt', $salt);
+            $sqlCreate->bindParam(':birthday', $user->birthday);
             if (!$user->spam){
                 $user->spam = 0;
             }
@@ -213,6 +215,8 @@ Class Model {
             $sqlUpdate->bindParam(':spam', $user->spam, PDO::PARAM_INT);
             $sqlUpdate->bindParam(':phone', $user->phone);
             $sqlUpdate->bindParam(':userId', $user->id);
+            $this->registry['logger']->lwrite("Birthday is " . $user->birthday);
+            $sqlUpdate->bindParam(':birthday', $user->birthday);
             $this->executeQuery($sqlUpdate, 'Error when updating user in DB');
             $sqlUpdate->closeCursor();
             //If user has changed his password
@@ -274,6 +278,7 @@ Class Model {
         $user->client = $data['client'];
         $user->spam = $data['spam'];
         $user->phone = $data['phone'];
+        $user->birthday = $data['birthday'];
         $user->password = $this->default;
         $sqlLink = $this->db->prepare($this->linkProfile);
         $sqlLink->bindParam(":userId", $user->id);

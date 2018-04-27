@@ -84,6 +84,7 @@
                     <input type="text" placeholder="Имя*" id="auth-name" class="nologin form-control" name="userName" maxlength="30">   
                     <input type="text" placeholder="Почта*" id="auth-email" name="userEmail" class="form-control" maxlength="40" value="<?php echo $user->email ?>">
                     <input type="text" placeholder="Телефон" id="auth-phone" name="userPhone" class="nologin form-control" maxlength="20" value="<?php echo $user->phone ?>">
+                    <input type="text" onfocus="(this.type='date')" placeholder="Дата рождения" id="auth-birthday" name="userBirthday" class="nologin form-control" maxlength="20" value="<?php echo $user->birthday ?>">
                     <input type="password" placeholder="Пароль*" id="auth-password" name="userPassword" class="form-control" maxlength="30">
                     <input type="password" placeholder="Повторите пароль*" id="auth-confirm" class="nologin form-control" name="userConfirm" maxlength="30">
                     <input type="number" placeholder="Номер сертификата" id="auth-flyer" class="nologin form-control" name="userFlyer" maxlength="6">   

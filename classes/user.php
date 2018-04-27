@@ -7,6 +7,7 @@ class User {
     public $email;
     public $phone;
     public $client;
+    public $birthday;
     public $spam;
     public $password;
     public $bonus;

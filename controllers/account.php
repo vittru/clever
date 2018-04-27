@@ -5,10 +5,11 @@ Class Controller_Account Extends Controller_Base {
     function index() {
         if ($_SESSION['user']->name) {
             $this->registry['model']->logVisit(27);
-            if ($this->registry['isadmin'])
+            if ($this->registry['isadmin']) {
                 $this->registry['template']->set('orders', $this->registry['model']->getAllOrders());
-            else
+            } else {
                 $this->registry['template']->set('orders', $this->registry['model']->getUserOrders($_SESSION['user']->id));
+            }
             $this->registry['template']->show('account');
         } else {
             $this->registry['template']->show('404');
@@ -29,6 +30,9 @@ Class Controller_Account Extends Controller_Base {
         $_SESSION['user']->email = htmlspecialchars(trim($_POST['userEmail']));
         if (isset($_POST['userPhone'])) {
             $_SESSION['user']->phone = $_POST['userPhone'];
+        }
+        if (isset($_POST['userBirthday'])) {
+            $_SESSION['user']->birthday = $_POST['userBirthday'];
         }
         if (isset($_POST['userPassword']) && $_POST['userPassword'] != "") {
             $_SESSION['user']->password = $_POST['userPassword'];
@@ -81,7 +85,6 @@ Class Controller_Account Extends Controller_Base {
         } else {
             $error = "<div id='error'>" . $error . "</div>";
         }
-        $this->registry['logger']->lwrite($error);
         echo $error;
     }
 
