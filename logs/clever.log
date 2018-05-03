@@ -1,65 +1,126 @@
-
-[02/Apr/2018:15:05:32] (index) Error: Ваша почта кажется нам подозрительной<br>
-[02/Apr/2018:15:05:38] (index) Error: 
-[02/Apr/2018:15:06:02] (index) Error: Пустая почта<br>
-[02/Apr/2018:15:06:04] (index) Error: Пустая почта<br>Пустой телефон<br>
-[02/Apr/2018:15:19:06] (index) Error: Пустая почта<br>Пустой телефон<br>
-[02/Apr/2018:15:20:06] (index) Error: 
-[03/Apr/2018:11:53:15] (index) Error: 
-[03/Apr/2018:11:59:30] (index) Error: 
-[03/Apr/2018:12:04:36] (index) Error: 
-[06/Apr/2018:13:32:39] (index) Error: 
-[06/Apr/2018:13:36:47] (index) Error: 
-[06/Apr/2018:13:37:13] (index) Error: 
-[06/Apr/2018:13:41:42] (index) Error: 
-[06/Apr/2018:13:42:26] (index) Error: 
-[06/Apr/2018:14:08:10] (index) Error: Ваша почта кажется нам подозрительной<br>
-[06/Apr/2018:14:08:18] (index) Error: Ваша почта кажется нам подозрительной<br>Пустой телефон<br>
-[06/Apr/2018:14:08:22] (index) Error: Ваша почта кажется нам подозрительной<br>Пустой телефон<br>
-[06/Apr/2018:14:08:24] (index) Error: Ваша почта кажется нам подозрительной<br>
-[06/Apr/2018:14:08:27] (index) Error: Пустая почта<br>
-[06/Apr/2018:14:12:33] (index) Error: Ваша почта кажется нам подозрительной<br>
-[06/Apr/2018:14:14:23] (index) Error: Пустая почта<br>
-[06/Apr/2018:14:16:59] (index) 
-[06/Apr/2018:14:17:31] (index) Error: 
-[06/Apr/2018:14:19:41] (index) Error: 
-[06/Apr/2018:14:20:19] (index) Error: Ваша почта кажется нам подозрительной<br>
-[06/Apr/2018:14:22:25] (index) Error: 
-[06/Apr/2018:14:28:56] (index) Error: 
-[06/Apr/2018:14:30:34] (index) Error: 
-[06/Apr/2018:14:32:09] (index) Error: 
-[06/Apr/2018:14:32:37] (index) Error: 
-[06/Apr/2018:14:33:08] (index) Error: 
-[06/Apr/2018:14:34:03] (index) Error: 
-[06/Apr/2018:14:34:31] (index) Error: 
-[08/Apr/2018:20:32:26] (index) Updating good 232
-[08/Apr/2018:20:32:26] (index) Old price is 460
-[08/Apr/2018:20:32:26] (index) New price is 382
-[08/Apr/2018:20:32:26] (index) Updating good 450
-[08/Apr/2018:20:32:26] (index) Old price is 980
-[08/Apr/2018:20:32:26] (index) New price is 814
-[08/Apr/2018:20:32:26] (index) Updating good 126
-[08/Apr/2018:20:32:26] (index) Old price is 640
-[08/Apr/2018:20:32:26] (index) New price is 532
-[08/Apr/2018:20:35:35] (index) Error: 
-[12/Apr/2018:09:48:18] (index) Updating good 258
-[12/Apr/2018:09:48:18] (index) Old price is 310
-[12/Apr/2018:09:48:18] (index) New price is 258
-[13/Apr/2018:09:01:17] (index) Error: 
-[13/Apr/2018:09:13:31] (index) 
-[26/Apr/2018:15:10:53] (index) 
-[26/Apr/2018:15:22:22] (index) 
-[27/Apr/2018:14:25:37] (index) 
-[27/Apr/2018:14:26:16] (index) 
-[27/Apr/2018:14:29:56] (index) 
-[27/Apr/2018:14:32:05] (index) 
-[27/Apr/2018:14:34:51] (index) Birthday is 
-[27/Apr/2018:14:34:51] (index) 
-[27/Apr/2018:14:35:45] (index) Birthday is 
-[27/Apr/2018:14:35:45] (index) 
-[27/Apr/2018:14:36:47] (index) Birthday is 
-[27/Apr/2018:14:37:29] (index) Birthday is 
-[27/Apr/2018:14:38:06] (index) Birthday is 2018-04-06
-[27/Apr/2018:14:38:39] (index) Birthday is 2018-04-03
-[27/Apr/2018:14:39:20] (index) Birthday is 2018-01-01
-[27/Apr/2018:14:50:24] (index) Birthday is 1979-11-30
+[03/May/2018:20:50:53] (index) Updating good 587
+[03/May/2018:20:50:53] (index) Old price is 180
+[03/May/2018:20:50:53] (index) New price is 108
+[03/May/2018:20:51:07] (index) Updating good 587
+[03/May/2018:20:51:07] (index) Old price is 108
+[03/May/2018:20:51:07] (index) New price is 180
+[03/May/2018:20:51:16] (index) Updating good 587
+[03/May/2018:20:51:16] (index) Old price is 180
+[03/May/2018:20:51:16] (index) New price is 108
+[03/May/2018:20:51:30] (index) Updating good 127
+[03/May/2018:20:51:30] (index) Old price is 240
+[03/May/2018:20:51:30] (index) New price is 144
+[03/May/2018:20:51:43] (index) Updating good 149
+[03/May/2018:20:51:43] (index) Old price is 120
+[03/May/2018:20:51:43] (index) New price is 72
+[03/May/2018:21:05:20] (index) Updating good 149
+[03/May/2018:21:05:20] (index) Old price is 72
+[03/May/2018:21:05:20] (index) New price is 120
+[03/May/2018:21:05:31] (index) Updating good 123
+[03/May/2018:21:05:31] (index) Old price is 180
+[03/May/2018:21:05:31] (index) New price is 108
+[03/May/2018:21:05:31] (index) Updating good 127
+[03/May/2018:21:05:31] (index) Old price is 240
+[03/May/2018:21:05:31] (index) New price is 240
+[03/May/2018:21:05:40] (index) Updating good 123
+[03/May/2018:21:05:40] (index) Old price is 108
+[03/May/2018:21:05:40] (index) New price is 65
+[03/May/2018:21:05:40] (index) Updating good 127
+[03/May/2018:21:05:40] (index) Old price is 240
+[03/May/2018:21:05:40] (index) New price is 240
+[03/May/2018:21:05:40] (index) Updating good 356
+[03/May/2018:21:05:40] (index) Old price is 495
+[03/May/2018:21:05:40] (index) New price is 297
+[03/May/2018:21:17:53] (index) Updating good 127
+[03/May/2018:21:17:53] (index) Old price is 240
+[03/May/2018:21:17:53] (index) New price is 144
+[03/May/2018:21:18:14] (index) Updating good 587
+[03/May/2018:21:18:14] (index) Old price is 180
+[03/May/2018:21:18:14] (index) New price is 108
+[03/May/2018:21:18:23] (index) Updating good 587
+[03/May/2018:21:18:23] (index) Old price is 108
+[03/May/2018:21:18:23] (index) New price is 65
+[03/May/2018:21:18:23] (index) Updating good 127
+[03/May/2018:21:18:23] (index) Old price is 240
+[03/May/2018:21:18:23] (index) New price is 144
+[03/May/2018:21:19:42] (index) Updating good 587
+[03/May/2018:21:19:42] (index) Old price is 109
+[03/May/2018:21:19:42] (index) New price is 66
+[03/May/2018:21:19:58] (index) Updating good 587
+[03/May/2018:21:19:58] (index) Old price is 180
+[03/May/2018:21:19:58] (index) New price is 108
+[03/May/2018:21:20:05] (index) Updating good 123
+[03/May/2018:21:20:05] (index) Old price is 180
+[03/May/2018:21:20:05] (index) New price is 108
+[03/May/2018:21:20:05] (index) Updating good 587
+[03/May/2018:21:20:05] (index) Old price is 180
+[03/May/2018:21:20:05] (index) New price is 108
+[03/May/2018:21:20:13] (index) Updating good 123
+[03/May/2018:21:20:13] (index) Old price is 180
+[03/May/2018:21:20:13] (index) New price is 108
+[03/May/2018:21:20:13] (index) Updating good 587
+[03/May/2018:21:20:13] (index) Old price is 180
+[03/May/2018:21:20:13] (index) New price is 108
+[03/May/2018:21:20:13] (index) Updating good 127
+[03/May/2018:21:20:13] (index) Old price is 240
+[03/May/2018:21:20:13] (index) New price is 144
+[03/May/2018:21:20:40] (index) Updating good 123
+[03/May/2018:21:20:40] (index) Old price is 180
+[03/May/2018:21:20:40] (index) New price is 108
+[03/May/2018:21:20:40] (index) Updating good 587
+[03/May/2018:21:20:40] (index) Old price is 180
+[03/May/2018:21:20:40] (index) New price is 108
+[03/May/2018:21:20:40] (index) Updating good 127
+[03/May/2018:21:20:40] (index) Old price is 240
+[03/May/2018:21:20:40] (index) New price is 144
+[03/May/2018:21:20:56] (index) Updating good 123
+[03/May/2018:21:20:56] (index) Old price is 180
+[03/May/2018:21:20:56] (index) New price is 108
+[03/May/2018:21:20:56] (index) Updating good 587
+[03/May/2018:21:20:56] (index) Old price is 180
+[03/May/2018:21:20:56] (index) New price is 108
+[03/May/2018:21:20:56] (index) Updating good 127
+[03/May/2018:21:20:56] (index) Old price is 240
+[03/May/2018:21:20:56] (index) New price is 144
+[03/May/2018:21:21:48] (index) Updating good 587
+[03/May/2018:21:21:48] (index) Old price is 180
+[03/May/2018:21:21:48] (index) New price is 108
+[03/May/2018:21:22:01] (index) Updating good 123
+[03/May/2018:21:22:01] (index) Old price is 180
+[03/May/2018:21:22:01] (index) New price is 108
+[03/May/2018:21:22:07] (index) Updating good 587
+[03/May/2018:21:22:07] (index) Old price is 180
+[03/May/2018:21:22:07] (index) New price is 108
+[03/May/2018:21:22:07] (index) Updating good 123
+[03/May/2018:21:22:07] (index) Old price is 180
+[03/May/2018:21:22:07] (index) New price is 108
+[03/May/2018:21:22:12] (index) Updating good 587
+[03/May/2018:21:22:12] (index) Old price is 180
+[03/May/2018:21:22:12] (index) New price is 108
+[03/May/2018:21:22:12] (index) Updating good 123
+[03/May/2018:21:22:12] (index) Old price is 180
+[03/May/2018:21:22:12] (index) New price is 108
+[03/May/2018:21:22:12] (index) Updating good 127
+[03/May/2018:21:22:12] (index) Old price is 240
+[03/May/2018:21:22:12] (index) New price is 144
+[03/May/2018:21:22:18] (index) Updating good 587
+[03/May/2018:21:22:18] (index) Old price is 180
+[03/May/2018:21:22:18] (index) New price is 108
+[03/May/2018:21:22:18] (index) Updating good 123
+[03/May/2018:21:22:18] (index) Old price is 180
+[03/May/2018:21:22:18] (index) New price is 108
+[03/May/2018:21:22:22] (index) Updating good 587
+[03/May/2018:21:22:22] (index) Old price is 180
+[03/May/2018:21:22:22] (index) New price is 108
+[03/May/2018:21:22:29] (index) Updating good 354
+[03/May/2018:21:22:29] (index) Old price is 240
+[03/May/2018:21:22:29] (index) New price is 144
+[03/May/2018:21:22:38] (index) Updating good 149
+[03/May/2018:21:22:38] (index) Old price is 120
+[03/May/2018:21:22:38] (index) New price is 72
+[03/May/2018:21:22:44] (index) Updating good 149
+[03/May/2018:21:22:44] (index) Old price is 120
+[03/May/2018:21:22:44] (index) New price is 72
+[03/May/2018:21:22:44] (index) Updating good 587
+[03/May/2018:21:22:44] (index) Old price is 180
+[03/May/2018:21:22:44] (index) New price is 108

@@ -142,7 +142,7 @@ group by 1,2
 order by 3 desc
 
 
-//Sale 15% for goods for children
+//Sale 15% for goods for home
 update goods 
 set sale=15
-where id not in (select distinct goodid from `goods-categories` where categoryid=21) and id in (select distinct goodid from `goods-types` where typeid=2)
+where id not in (select distinct goodid from `goods-categories` where categoryid in (21, 34)) and id in (select distinct goodid from `goods-types` where typeid=4)

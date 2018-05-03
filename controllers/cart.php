@@ -68,7 +68,7 @@ Class Controller_Cart Extends Controller_Base {
     }  
     
     private function applyDiscounts() {
-        $this->makDiscounts();
+        $this->soapDiscount();
     }
     
     private function bubbleBallDiscounts() {
@@ -132,5 +132,51 @@ Class Controller_Cart Extends Controller_Base {
             }
         }
     }
-
+    
+    private function soapDiscount() {
+        $flag = false;
+        $discount = false;
+        $maxPrice = 0;
+        foreach ($_SESSION['cart'] as $cartItem) {
+            $good = $this->registry['model']->getGood($cartItem->goodId);
+            if (in_array(11, $good->cats)) {
+                if ($flag) {
+                    $discount = true;
+                } else {
+                    $flag = true;
+                }
+                //Initially we remove all soap sales
+                if ($cartItem->sale) {
+                    $cartItem->price = ceil($cartItem->price * 100 / (100 - $cartItem->sale));
+                    $cartItem->sale = 0;
+                }
+                $maxPrice = max($maxPrice, $cartItem->price);
+            }
+        }
+        if ($discount) {
+            $nosale = false;
+            foreach ($_SESSION['cart'] as $cartItem) {
+                $good = $this->registry['model']->getGood($cartItem->goodId);
+                if (in_array(11, $good->cats)) {
+                    if ($cartItem->price == $maxPrice) {
+                        if (!$nosale) {
+                            $nosale = true;
+                        } else {
+                            $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
+                            $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
+                            $cartItem->sale = 40;
+                            $cartItem->price = ceil($cartItem->price * 0.6);
+                            $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
+                        }    
+                    } else {
+                        $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
+                        $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
+                        $cartItem->sale = 40;
+                        $cartItem->price = ceil($cartItem->price * 0.6);
+                        $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
+                    }    
+                }
+            }
+        } 
+    }
 }
