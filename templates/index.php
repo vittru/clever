@@ -3,8 +3,18 @@ include 'header.php';
 
 $bannersdir='images/banners';
 
-$banners = new FilesystemIterator($bannersdir);
-if ($banners->valid()) {
+$banners = array();
+$dir = new DirectoryIterator($bannersdir);
+foreach ($dir as $fileinfo) {  
+    if (!$fileinfo->isDot()) { 
+        $banners[$fileinfo->getMTime()] = $fileinfo->getFilename();
+    }    
+}
+
+krsort($banners);
+
+//$banners = new FilesystemIterator($bannersdir);
+if (sizeof($banners) > 0) {
 ?>
 
 <!-- Start slider -->
@@ -12,14 +22,13 @@ if ($banners->valid()) {
     <div class="aa-slider-area">
         <div id="sequence" class="seq">
             <div class="seq-screen">
-                <ul <?php if (iterator_count($banners) >1) echo 'class="seq-canvas"' ?>>
+                <ul <?php if (sizeof($banners) > 1) echo 'class="seq-canvas"' ?>>
                     <?php
-                    $dir = new DirectoryIterator($bannersdir);
+                    //$dir = new DirectoryIterator($bannersdir);
                     $ind = 1;
-                    foreach ($dir as $fileinfo) {
-                        if (!$fileinfo->isDot()) {
-                            $newsId = filter_var($fileinfo->getFilename(), FILTER_SANITIZE_NUMBER_INT); 
-                            $newsItem = $this->registry['model']->getNewsItem($newsId);
+                    foreach ($banners as $date=>$banner) {
+                        $newsId = filter_var($banner, FILTER_SANITIZE_NUMBER_INT); 
+                        $newsItem = $this->registry['model']->getNewsItem($newsId);
                         ?>  
                             <li <?php if ($ind == 1) echo 'class="seq-in"' ?>>
                                 <div class="seq-model">
@@ -27,7 +36,7 @@ if ($banners->valid()) {
                                     if ($newsItem->bannerlink)
                                         echo '<a href="' . $newsItem->bannerlink . '">';
                                     ?>
-                                    <img data-seq src="<?php echo '/'.$bannersdir.'/'.$fileinfo->getFilename() ?>" alt="<?php $fileinfo->getFilename() ?>" />
+                                    <img data-seq src="<?php echo '/'.$bannersdir.'/'.$banner ?>" alt="<?php $banner ?>" />
                                     <?php
                                     if ($newsItem->bannerlink)
                                         echo "</a>";    
@@ -36,7 +45,6 @@ if ($banners->valid()) {
                             </li>
                         <?php
                         $ind++;
-                        }        
                     }
                     ?>
                 </ul>
