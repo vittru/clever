@@ -24,6 +24,7 @@ Class Good {
     public $url;
     public $supercats;
     public $hidden;
+    public $rating;
     
     function __construct($id, $name, $description, $shortdesc, $howTo, $madeOf, $sale, $firmId, $problem, $bestbefore, $precaution, $url, $hidden) {
        $this->id = $id;

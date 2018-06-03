@@ -44,7 +44,31 @@
         }
     }
     ?>
-        <h1 class="modal-title" itemprop="name"><?php echo $showGood->name ?></h1>
+            <h1 class="modal-title" itemprop="name"><?php echo $showGood->name ?>
+                <?php
+                if ($showGood->rating) {
+                    ?>
+                    <span class="good-rating" data-toggle="tooltip" title="Рейтинг товара: <?php echo number_format($showGood->rating, 2) ?>">
+                    <?php
+                        for ($i = 1; $i <= floor($showGood->rating); $i++) {
+                            echo '<span class="orange-clover"></span>';
+                        }
+                        if ($showGood->rating - floor($showGood->rating) >= 0.5) {
+                            echo '<span class="half-clover"></span>';
+                        } else {
+                            if ($showGood->rating < 5) {
+                                echo '<span class="grey-clover"></span>';
+                            }    
+                        }
+                        for ($i = floor($showGood->rating) + 1; $i < 5; $i++) {
+                            echo '<span class="grey-clover"></span>';
+                        }
+                    ?>
+                    </span>
+                <?php
+                }
+                ?>
+            </h1>
         <div hidden="" id="pId"><?php echo $showGood->id ?></div>
     <?php
     if ($pm) {
@@ -235,8 +259,9 @@
                     ?>
                         <li><a href="#effect" data-toggle="tab">Эффект</a></li>
                     <?php 
-                    } 
+                    }
                     ?>    
+                        <li><a href="#reviews" data-toggle="tab">Отзывы {<?php echo count($reviews) ?>}</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade in active aa-product-info-tab" id="description">
@@ -298,6 +323,50 @@
                         <?php }?>
                     </div>
                     <?php } ?>
+                    <div class="tab-pane fade aa-product-info-tab" id="reviews">
+                        <?php
+                        foreach ($reviews as $review) {
+                        ?>
+                        <div class="bonus-item">
+                            <div class="aa-post-date">
+                                <?php echo $review['date'] ?>
+                            </div>
+                            <?php
+                            if ($review['clovers']) {
+                            ?>
+                            <span class="good-rating" data-toggle="tooltip" title="Оценка товара: <?php echo number_format($review['clovers'],2) ?>">
+                                <?php
+                                    for ($i = 1; $i <= $review['clovers']; $i++) {
+                                        echo '<span class="orange-clover"></span>';
+                                    }
+                                    for ($i = $review['clovers'] + 1; $i <= 5; $i++) {
+                                        echo '<span class="grey-clover"></span>';
+                                    }
+                                ?>
+                                </span>
+                            <?php
+                            }
+                            ?>
+                            <div class="aa-post-author">
+                                <?php if ($review['author']) echo '<b>Автор:</b> ' . $review['author']; ?>
+                            </div>
+                            <div><?php echo $showGood->getWebProperty($review['text']) ?></div>
+                            <?php
+                            if ($isadmin) {
+                            ?>
+                            <div>
+                                <div class="green-button review-button editReview" data-toggle="modal" data-target="#review" data-review="<?php echo $review['id']?>" data-clovers="<?php echo $review['clovers']?>" data-author="<?php echo $review['author']?>" data-text="<?php echo $review['text']?>" data-date="<?php echo $review['date'] ?>">Редактировать</div>                                
+                                <div class="orange-button review-button deleteReview" data-review="<?php echo $review['id']?>">Удалить</div>                                
+                            </div>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                        <div class="green-button review-button" id="addReview" data-toggle="modal" data-target="#review">Добавить отзыв/оценку</div>
+                    </div>    
                 </div>    
             </div>
         </div>
@@ -318,4 +387,4 @@
     <?php
     }
     ?>
-    <script src="/js/modalgood.min.js?20180406"></script> 
+    <script src="/js/modalgood.min.js?20180531"></script> 

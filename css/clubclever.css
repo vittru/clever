@@ -1176,6 +1176,27 @@ h2 {
     padding-bottom: 20px;
     font-size: 22px;
 }
+.good-rating {
+    width: 7em;
+    height: 32px;
+}
+.good-rating > span {
+    width: 20px;
+    height: 21px;
+    background-repeat: no-repeat;
+    background-position: center;  
+    background-size: 60% 60%;
+    display: inline-block;
+}
+.good-rating .orange-clover {
+    background-image: url(/images/logo-review-orange.png);
+}
+.good-rating .grey-clover {
+    background-image: url(/images/logo-review-grey.png);
+}
+.good-rating .half-clover {
+    background-image: url(/images/logo-review-half-orange.png);
+}
 #single-product .aa-product-view-content h4 {
   font-weight: bold;
   letter-spacing: 1px;
@@ -1285,6 +1306,9 @@ h2 {
     padding: 0 20px 10px 20px;
     text-align: justify;
     height: 95%;
+}
+.bonus-item .aa-post-date {
+    display: inline;
 }
 .bonus-row {
     margin: 0 -15px 0 -15px;
@@ -2303,6 +2327,42 @@ ul.aa-footer-nav {
 }
 #aa-footer .aa-footer-bottom .aa-footer-bottom-area .aa-footer-payment span:hover {
   color: #fff;
+}
+
+.review-button {
+    padding: 10px 15px;
+    display: inline-block;
+    text-indent: 0;
+}
+
+.star-rating {
+    display:flex;
+    flex-direction: row-reverse;
+    font-size:1.5em;
+    justify-content:space-around;
+    padding:0 .2em;
+    text-align:center;
+    width:7em;
+    text-indent: 0px;
+    margin-bottom: 10px;
+}
+.star-rating input {
+  display:none;
+}
+.star-rating label {
+    width: 30px;
+    height: 32px;
+    cursor:pointer;
+    background-repeat: no-repeat;
+    background-position: center;     
+    background-image: url(/images/logo-review-grey.png);
+}
+.star-rating :checked ~ label {
+    background-image: url(/images/logo-review-orange.png);
+}
+.star-rating label:hover,
+.star-rating input:hover ~ label {
+  background-image: url(/images/logo-review.png);
 }
 
 @media (max-width: 1199px) {

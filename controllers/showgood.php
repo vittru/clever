@@ -49,6 +49,7 @@ Class Controller_Showgood Extends Controller_Base {
         $this->registry['template']->set('hasSkintypes', $good->hasSkintypes());
         $this->registry['template']->set('hasHairtypes', $good->hasHairtypes());
         $this->registry['template']->set('pagePath', $pagePath);
+        $this->registry['template']->set('reviews', $this->registry['model']->getGoodReviews($good->id));
         $this->registry['template']->show('showgood');        
     }
     
@@ -60,10 +61,26 @@ Class Controller_Showgood Extends Controller_Base {
             $to      = $this->registry['mainemail'];
             $subject = 'Сообщить о поступлении товара';
             $message = '<html><body><h2>Сообщить о поступлении товара</h2>' .
-                    "<p>Пользователь " . $_SESSION['user']->name . " настойчиво просит сообщить ему/ей о поступлении товара <a href='www.ecomarketclever.ru/showgood?id=" . $good ."'>" . $this->registry['model']->getGood($good)->name ."</a> на склад.</p>" . 
+                    "<p>Пользователь " . $_SESSION['user']->name . " настойчиво просит сообщить ему/ей о поступлении товара <a href='" . siteName . "/showgood?id=" . $good ."'>" . $this->registry['model']->getGood($good)->name ."</a> на склад.</p>" . 
                     "<p>Сообщить необходимо по следующему адресу: " . htmlspecialchars($address) . "</p></body></html>";
             $this->sendMail($to, $subject, $message);
         }    
     }
+    
+    function review() {
+        if (isset($_POST['goodId'])) {
+            $this->registry['model']->logVisit(40, $_POST['goodId']);
+            if ($_POST['clovers'] || trim($_POST['text'])) {
+                $this->registry['model']->addReview($_POST['goodId'], $_POST['reviewId'], $_POST['clovers'], htmlspecialchars($_POST['author']), htmlspecialchars($_POST['text']), $_POST['reviewDate']);
+            } else {
+                echo 'Пожалуйста оцените товар или напишите отзыв'; 
+            }
+        }
+    }
+    
+    function deletereview() {
+        if (isset($_POST['reviewId'])) {
+            $this->registry['model']->deleteReview($_POST['reviewId']);
+        }
+    }
 }    
-

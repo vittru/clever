@@ -59,10 +59,10 @@ Class Controller_Account Extends Controller_Base {
                 case 'password':
                     $password = $this->registry['model']->updatePassword($_POST['userEmail']);
                     $message = '<html><body><h2>Новый пароль для Экомаркета "Клевер"</h2>' .
-                            '<p>Вы запросили восстановление пароля на сайте <a href="www.ecomarketclever.ru">www.ecomarketclever.ru</a>.</p>' .
+                            '<p>Вы запросили восстановление пароля на сайте <a href="' . siteName . '">' . siteName . '</a>.</p>' .
                             '<p>Ваш новый пароль: <b>' . $password . '</b></p>' .
                             '<p>Рекомендуем изменить его сразу после захода на сайт</p>' .
-                            '<p>Если Вы не запрашивали восстановление пароля, пожалуйста напишите нам на <a href="mailto:clever@ecomarketclever.ru">clever@ecomarketclever.ru</a> или позвоните +7-846-252-39-11 </p>' .
+                            '<p>Если Вы не запрашивали восстановление пароля, пожалуйста напишите нам на <a href="mailto:' . $this->registry['mainemail'] . '">' . $this->registry['mainemail'] . '</a> или позвоните +7-846-252-39-11 </p>' .
                             '</body></html>';
                     $this->sendMail($_POST['userEmail'], 'Экомаркет Клевер - восстановление пароля', $message);
                     break;
@@ -182,9 +182,9 @@ Class Controller_Account Extends Controller_Base {
                     . '<p>Статус вашего заказа изменен.</p>' .
                     '<p><b>Статус:</b> ' . $order->status . '</p>' .
                     '<p>' . $order->statusdesc . '</p>' .
-                    '<p>Отследить заказ Вы также можете на <a href="www.ecomarketclever.ru/account/orders?id=' . $orderid . '">нашем сайте</a></p>' .
+                    '<p>Отследить заказ Вы также можете на <a href="' . siteName . '/account/orders?id=' . $orderid . '">нашем сайте</a></p>' .
                     '<p>Больше информации о наших акциях и товарах:</p>' .
-                    '<ul><li><a href="www.ecomarketclever.ru">www.ecomarketclever.ru</a></li>' .
+                    '<ul><li><a href="' . siteName . '">' . siteName . '</a></li>' .
                     '<li><a href="https://vk.com/clubcleverru">http://vk.com/clubcleverru</a></li>' .
                     '<li><a href="http://www.instagram.com/clubclever.ru/">http://www.instagram.com/clubclever.ru</a></li></body></html>';
             $this->sendMail($to, $subject, $message);

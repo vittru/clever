@@ -38,6 +38,18 @@ $('.aa-add-to-cart-btn').click(function e(){
     });
 });
 
+$(document).ready(function e() {
+    var url = document.location.toString(); // select current url shown in browser.
+    if (url.match('#')) {
+        $('.nav-tabs a[href=#' + url.split('#')[1] + ']').tab('show'); // activate current tab after reload page.
+    }
+});   
+    // Change hash for page-reload
+$('.nav-tabs a').on('shown', function (e) { // this function call when we change tab.
+    window.location.hash = e.target.hash; // to change hash location in url.
+    alert(window.location.hash);
+});
+
 $('.aa-quick-order-btn').click(function e(){
     $('#quickOrderOrder').show();
     $('#quickOrderComplete').hide();
@@ -108,7 +120,7 @@ $('#quickOrderSubmit').click(function e(){
             }
         }    
     });
-})
+});
 
 $(document).on("mouseleave", ".aa-add-to-cart-btn", function() {
     $(this).parent().find(".aa-add-to-cart-btn").html('<span class="fa fa-shopping-cart"></span>В корзину');
@@ -128,4 +140,63 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         $('#emailMeBtn').show();
       }
   }
+});
+
+$('#addReview').click(function a() {
+    $('#reviewGoodId').val($('#pId').text());
+});
+
+$('#reviewSubmit').click(function a(){
+    var clovers = 0;
+    $('.clovers').each(function() {
+        if ($(this).is(':checked')) {
+            clovers = $(this).val();
+        }
+    });
+    var reviewDate = new Date().toJSON().slice(0,10);
+    if ($('#reviewDate').length) {
+        reviewDate = $('#reviewDate').val();
+    }
+    $.ajax({
+        type: "POST",
+        url: "/showgood/review",
+        data: {author : $('#reviewAuthor').val(),
+        text: $('#reviewText').val(),
+        goodId: $('#pId').text(),
+        reviewId: $('#reviewId').val(),
+        reviewDate: reviewDate,
+        clovers: clovers},
+        success: function(a) {
+            if (!isNaN(a)) {
+                window.location.hash='#reviews';
+                location.reload();
+            } else {
+                $("#reviewError").show();
+                $("#reviewError").html(a);
+            }
+        }    
+    });
+});
+
+$('.deleteReview').click(function a() {
+    if (confirm('Удалить отзыв?')) {
+        $.ajax({
+            type: 'POST',
+            url: '/showgood/deletereview',
+            data: {reviewId: $(this).attr('data-review')}
+        });
+        window.location.hash='#reviews';
+        location.reload();
+    };
+});
+
+$('.editReview').click(function a() {
+    $('#reviewId').val($(this).attr('data-review'));
+    $('#reviewAuthor').val($(this).attr('data-author'));
+    $('#reviewText').val($(this).attr('data-text'));
+    $('#reviewDate').val($(this).attr('data-date'));
+    var clovers = $(this).attr('data-clovers');
+    if (clovers) {
+        $('#' +clovers + '-clovers').prop("checked", true);
+    }
 });

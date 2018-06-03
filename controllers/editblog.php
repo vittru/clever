@@ -6,18 +6,20 @@ Class Controller_Editblog Extends Controller_Base {
         if ($this->registry['isadmin']) {
             $this->registry['model']->logVisit(1004);
             $this->registry['template']->show('editblog');
-        } else 
+        } else {
             $this->registry['template']->show('404');
         }
+    }
     
     function remove() {
         if ($this->registry['isadmin']) {
-            unlink('images/blog/blog'.$_GET['blog'].'.png');
-            unlink('images/blog/blog'.$_GET['blog'].'.jpg');
+            unlink('images/blog/blog' . $_GET['blog'] . '.png');
+            unlink('images/blog/blog' . $_GET['blog'] . '.jpg');
             $this->registry['model']->removeBlog($_GET['blog']);
             header("LOCATION: ../common/blog");
-        } else 
-            $this->registry['template']->show('404');            
+        } else {
+            $this->registry['template']->show('404');
+        }
     }
     
     function save() {

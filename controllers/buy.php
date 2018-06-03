@@ -148,7 +148,7 @@ Class Controller_Buy Extends Controller_Base {
         $subject = 'Экомаркет "Клевер". Заказ №'.$orderId;
         $message = '<html><body><h2>Заказ №' . $orderId . '</h2>' .
                 '<p>Благодарим Вас за заказ в Экомаркете "Клевер". Наш менеджер свяжется с вами в ближайшее время.</p><p></p>' .
-                '<p>Отследить заказ Вы можете на <a href="www.ecomarketclever.ru/account/orders?id='. $orderId . '">нашем сайте</a></p>' .
+                '<p>Отследить заказ Вы можете на <a href="' . siteName . '/account/orders?id='. $orderId . '">нашем сайте</a></p>' .
                 "<h3>Информация о заказе</h3>" .
                 "<p><b>Покупатель:</b> " . $parameters['name'] . "</p>" . 
                 "<p><b>Email:</b> " . $parameters['email'] . "</p>" . 
@@ -157,7 +157,7 @@ Class Controller_Buy Extends Controller_Base {
                 $this->getDeliveryForLetter($parameters) . 
                 '<p><b>Пожелания по заказу:</b> ' . htmlspecialchars($parameters['remarks']) . '</p>' . 
                 '<p>Больше информации о наших акциях и товарах:</p>'.
-                '<ul><li><a href="www.ecomarketclever.ru">www.ecomarketclever.ru</a></li>' .
+                '<ul><li><a href="' . siteName . '">' . siteName . '</a></li>' .
                 '<li><a href="https://vk.com/clubcleverru">http://vk.com/clubcleverru</a></li>' . 
                 '<li><a href="http://www.instagram.com/clubclever.ru/">http://www.instagram.com/clubclever.ru</a></li></ul></body></html>';
 

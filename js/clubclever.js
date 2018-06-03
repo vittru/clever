@@ -382,9 +382,6 @@ $(document).on("click", ".aa-emailme-btn", function () {
     $('#emailGoodId').val($(this).offsetParent().find('.aa-product-img').attr('href').substring(13,20));
 });
 
-//$("#emailMeBtn").click(function(){
-//    $('#emailMe').modal('show');
-//});
 
 $("input[name=emailMeRAddr]").on('change', function () {
     if (this.value === 'phone') {

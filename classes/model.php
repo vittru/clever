@@ -473,6 +473,7 @@ Class Model {
             $good->sizes = $this->getGoodSizes($goodId);
             $good->types = $this->getGoodTypes($goodId);
             $good->problems = $this->getGoodProblems($goodId);
+            $good->rating = $this->getGoodRating($goodId);
             return $good;
         } else {
             $sqlSelect->closeCursor(); 
@@ -1425,5 +1426,58 @@ Class Model {
             }
         }
         return $newString;
+    }
+    
+    function getGoodReviews($id) {
+        $sqlSelect = $this->db->prepare('SELECT * FROM reviews WHERE goodid=:id ORDER BY date DESC,id DESC');
+        $sqlSelect->bindParam(':id', $id);
+        $this->executeQuery($sqlSelect, 'Error when getting reviews for good with id='.$id);
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            if (!isset($reviews)) {
+                $reviews = [$data];
+            } else {
+                array_push($reviews, $data);
+            }
+        }   
+        $sqlSelect->closeCursor();
+        return $reviews;
+    }
+    
+    function getGoodRating($id) {
+        $sqlSelect = $this->db->prepare('SELECT AVG(clovers) FROM reviews WHERE goodid=:id');
+        $sqlSelect->bindParam(':id', $id);
+        $this->executeQuery($sqlSelect, 'Error when getting rating for good with id='.$id);
+        $data = $sqlSelect->fetchColumn();
+        $sqlSelect->closeCursor();
+        return $data;
+        
+    }
+    
+    function addReview($goodId, $reviewId, $clovers, $author, $text, $date) {
+        if ($reviewId) {
+            $sqlQuery = $this->db->prepare('UPDATE reviews SET clovers=:clovers, author=:author, text=:text, date=:date WHERE id = :reviewId');
+            $sqlQuery->bindParam(':reviewId', $reviewId);
+        } else {
+            $sqlQuery = $this->db->prepare('INSERT INTO reviews(goodid, userid, text, author, date, clovers) VALUES (:goodId, :userId, :text, :author, :date, :clovers)');
+            $sqlQuery->bindParam(':userId', $_SESSION['user']->id);
+            $sqlQuery->bindParam(':goodId', $goodId);
+        }
+        if ($clovers) {
+            $sqlQuery->bindParam(':clovers', $clovers);
+        } else {
+            $sqlQuery->bindValue(':clovers', null, PDO::PARAM_INT);
+        }    
+        $sqlQuery->bindParam(':date', date('Y-m-d', strtotime($date)));
+        $sqlQuery->bindParam(':author', $author);
+        $sqlQuery->bindParam(':text', $text);
+        $this->executeQuery($sqlQuery, 'Error when adding/updating a review for good with id='.$goodId);
+        $sqlQuery->closeCursor();
+    }
+    
+    function deleteReview($reviewId) {
+        $sqlDelete = $this->db->prepare('DELETE FROM reviews WHERE id=:reviewId');
+        $sqlDelete->bindParam(':reviewId', $reviewId);
+        $this->executeQuery($sqlDelete, 'Error when deleting review with id=' . $reviewId);
+        $sqlDelete->closeCursor();
     }
 }

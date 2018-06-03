@@ -218,6 +218,70 @@
     </div>
 </div>   
 
+<!-- Review Modal -->
+<div class="modal fade" id="review" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Отзыв</h4>
+            </div>
+            <div class="modal-body">
+                <input id="reviewId" hidden value="">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div>Оцените товар:</div>
+                        <div class="star-rating">
+                            <input type="radio" id="5-clovers" class="clovers" name="rating" value="5" />
+                            <label for="5-clovers" class="star" data-toggle="tooltip" title="Отличный"></label>
+                            <input type="radio" id="4-clovers" class="clovers" name="rating" value="4" />
+                            <label for="4-clovers" class="star" data-toggle="tooltip" title="Хороший"></label>
+                            <input type="radio" id="3-clovers" class="clovers" name="rating" value="3" />
+                            <label for="3-clovers" class="star" data-toggle="tooltip" title="Средний"></label>
+                            <input type="radio" id="2-clovers" class="clovers" name="rating" value="2" />
+                            <label for="2-clovers" class="star" data-toggle="tooltip" title="Так себе"></label>
+                            <input type="radio" id="1-clovers" class="clovers" name="rating" value="1" />
+                            <label for="1-clovers" class="star" data-toggle="tooltip" title="Плохой"></label>
+                        </div>
+                    </div>
+                </div>    
+                <div class="row">
+                    <?php
+                    if ($isadmin) {
+                    ?>
+                    <div class="col-sm-12">
+                        <input id="reviewDate" type="date" placeholder="Дата" class="form-control" value="">
+                        <script>
+                            document.getElementById('reviewDate').valueAsDate = new Date();
+                        </script>
+                    </div>
+                    <?php
+                    }
+                    ?>
+                    <div class="col-sm-12">
+                        <input id="reviewAuthor" type="text" placeholder="Ваше имя" class="form-control" value="<?php echo $user->name ?>">
+                    </div>
+                </div>    
+                <div class="row">
+                    <div class="col-sm-12">
+                        <textarea type="text" rows="3" placeholder="Отзыв" id="reviewText" class="form-control" value=""></textarea>
+                    </div>
+                </div>    
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div id="reviewError" class="error" hidden></div>
+                    </div>
+                </div>    
+                <div class="row">
+                    <div class="col-sm-12">
+                        <button type="button" class="green-button" id="reviewSubmit">Сохранить</button>
+                    </div>
+                </div>    
+            </div>    
+        </div>
+    </div>
+</div>   
+
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
