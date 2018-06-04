@@ -68,6 +68,7 @@ Class Controller_Cart Extends Controller_Base {
     }  
     
     private function applyDiscounts() {
+        $this->shampooDiscount();
     }
     
     private function bubbleBallDiscounts() {
@@ -178,4 +179,38 @@ Class Controller_Cart Extends Controller_Base {
             }
         } 
     }
+    
+    private function shampooDiscount() {
+        $discount = false;
+        foreach ($_SESSION['cart'] as $cartItem) {
+            $good = $this->registry['model']->getGood($cartItem->goodId);
+            if (in_array(7, $good->cats)) {
+                $discount = true;
+                break;
+            }
+        }
+        if ($discount) {
+            foreach ($_SESSION['cart'] as $cartItem) {
+                $good = $this->registry['model']->getGood($cartItem->goodId);
+                if (array_key_exists(1, $good->supercats) and (!in_array(7, $good->cats)) and !$cartItem->sale) {
+                    $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
+                    $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
+                    $cartItem->sale = 30;
+                    $cartItem->price = ceil($cartItem->price * (0.7));
+                    $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
+                }
+            }
+        } else {
+            foreach ($_SESSION['cart'] as $cartItem) {
+                if (array_key_exists(1, $good->supercats) and (!in_array(7, $good->cats)) and $cartItem->sale == 30) {
+                    $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
+                    $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
+                    $cartItem->price = ceil($cartItem->price * 100 / (100 - $cartItem->sale));
+                    $cartItem->sale = 0;
+                    $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
+                }
+            }
+        }
+    }
+
 }
