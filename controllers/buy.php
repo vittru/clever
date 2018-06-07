@@ -185,7 +185,7 @@ Class Controller_Buy Extends Controller_Base {
         echo json_encode($arr);
     }    
     
-    private function getTotalWithPromo($promo, $discount) {
+    private function getTotalWithPromo($promo, &$discount) {
         //For INSTA promo-code we ignore other sales
         if (strcasecmp($promo, 'INSTA') == 0) {
             $totalNoSale = $this->getCartTotal($_SESSION['cart']);
