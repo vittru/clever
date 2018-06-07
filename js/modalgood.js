@@ -13,8 +13,10 @@ function modifyBasket() {
 
 $('.aa-add-to-cart-btn').click(function e(){
     $(this).text('Добавлено');
-    yaCounter44412517.reachGoal('INCART');
-
+    if (window.location.hostname !== "localhost") {
+        yaCounter44412517.reachGoal('INCART');
+    }    
+        
     var pId = $('#pId').text();
     var sizes = [];
     $('.quantity:visible').each(function() {

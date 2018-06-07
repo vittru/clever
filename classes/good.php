@@ -369,4 +369,13 @@ Class Good {
             return null;
         }
     }
+    
+    function hasSizeNames() {
+        foreach ($this->sizes as $id =>$size) {
+            if ($size->size) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

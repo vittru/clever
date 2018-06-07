@@ -137,7 +137,13 @@
                                 ?>
                                 <table class="table">
                                     <th class="hidden-xs">Артикул</th>
-                                    <th>Размер</th>
+                                    <?php
+                                    if ($showGood->hasSizeNames()) {
+                                    ?>
+                                        <th>Размер</th>
+                                    <?php
+                                    }
+                                    ?>
                                     <th>Цена</th>
                                     <th>Количество</th>
                                     <?php
@@ -145,7 +151,13 @@
                                     ?>
                                     <tr>
                                         <td class="hidden-xs"><?php echo $size->code; ?></td>
-                                        <td><?php echo $size->size; ?></td>
+                                        <?php
+                                        if ($showGood->hasSizeNames()) {
+                                        ?>
+                                            <td><?php echo $size->size; ?></td>
+                                        <?php
+                                        }
+                                        ?>
                                         <td itemprop="price"><?php echo $size->getWebPrice($showGood->sale); ?></td>
                                         <td>
                                             <?php
@@ -183,7 +195,13 @@
                                 ?>
                                 <table class="table">
                                     <th class="hidden-xs">Артикул</th>
-                                    <th>Размер</th>
+                                    <?php
+                                    if ($showGood->hasSizeNames()) {
+                                    ?>
+                                        <th>Размер</th>
+                                    <?php
+                                    }
+                                    ?>
                                     <th>Срок годности</th>
                                     <th>Цена</th>
                                     <th>Количество</th>
@@ -193,7 +211,13 @@
                                     ?>
                                     <tr>
                                         <td class="hidden-xs"><?php echo $size->code;?></td>
-                                        <td><?php echo $size->size; ?></td>
+                                        <?php
+                                        if ($showGood->hasSizeNames()) {
+                                        ?>
+                                            <td><?php echo $size->size; ?></td>
+                                        <?php
+                                        }
+                                        ?>
                                         <td class="orange"><?php echo strftime('%e/%m/%G', strtotime($size->bestbefore)); ?></td>
                                         <td itemprop="price"><?php echo $size->getWebBBPrice($showGood->sale); ?></td>
                                         <td>
