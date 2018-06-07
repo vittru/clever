@@ -269,12 +269,12 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#description" data-toggle="tab">Описание</a></li>
                     <?php
-                    if ($showGood->madeOf) {
+                    if (strip_tags($showGood->madeOf)) {
                     ?>
                     <li><a href="#madeOf" data-toggle="tab">Состав</a></li>
                     <?php 
                     }
-                    if ($showGood->howTo) {
+                    if (strip_tags($showGood->howTo)) {
                     ?>
                     <li><a href="#howTo" data-toggle="tab">Способ применения</a></li>
                     <?php
