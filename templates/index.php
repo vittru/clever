@@ -33,13 +33,20 @@ if (sizeof($banners) > 0) {
                             <li <?php if ($ind == 1) echo 'class="seq-in"' ?>>
                                 <div class="seq-model">
                                     <?php
-                                    if ($newsItem->bannerlink)
-                                        echo '<a href="' . $newsItem->bannerlink . '">';
+                                    if ($newsItem->bannerlink) {
+                                        if (substr($newsItem->bannerlink, strlen($newsItem->bannerlink) - 8) == '/actions') {
+                                            $link = $newsItem->bannerlink . '#news' . $newsId;
+                                        } else {
+                                            $link = $newsItem->bannerlink;
+                                        }
+                                        echo '<a href="' . $link . '">';
+                                    }    
                                     ?>
                                     <img data-seq src="<?php echo '/'.$bannersdir.'/'.$banner ?>" alt="<?php $banner ?>" />
                                     <?php
-                                    if ($newsItem->bannerlink)
-                                        echo "</a>";    
+                                    if ($newsItem->bannerlink) {
+                                        echo "</a>";
+                                    }
                                     ?>
                                 </div>
                             </li>

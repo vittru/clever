@@ -8,7 +8,7 @@ foreach ($news as $new) {
     $image = $new->getImage();
 ?>
 <div class="row news">
-    <h2><?php echo $new->header; ?></h2>
+    <h2 id="news<?php echo $new->id; ?>"><?php echo $new->header; ?></h2>
     <div class="col-md-12 newstime">
         <?php 
         echo $new->time; 
