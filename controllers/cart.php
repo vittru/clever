@@ -68,7 +68,7 @@ Class Controller_Cart Extends Controller_Base {
     }  
     
     private function applyDiscounts() {
-        $this->fiveGoodsDiscount();
+        //$this->fiveGoodsDiscount();
     }
     
     private function bubbleBallDiscounts() {
