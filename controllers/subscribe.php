@@ -10,6 +10,7 @@ Class Controller_Subscribe Extends Controller_Base {
                 $_SESSION['user']->email = htmlspecialchars(trim($_POST['userEmail']));
             }    
             $_SESSION['user']->spam = 1;
+            $this->sendMail($this->registry['mainemail'], 'Новая подписка', 'Пользователь ' . $_SESSION['user']->email . ' подписался на нашу рассылку');
             //$this->registry->set('isClient', '0');
             $_SESSION['user'] = $this->registry['model']->updateUser($_SESSION['user']);
         } else {

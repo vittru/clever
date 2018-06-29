@@ -73,6 +73,9 @@ Class Controller_Account Extends Controller_Base {
                 case 'register':
                     $this->updateSession();
                     $_SESSION['user'] = $this->registry['model']->updateUser($_SESSION['user']);
+                    if ($_SESSION['user']->spam) {
+                        $this->sendMail($this->registry['mainemail'], 'Новая подписка', 'Пользователь ' . $_SESSION['user']->email . ' зарегистрировался и подписался на нашу рассылку');
+                    }
                     if (isset($_POST['userFlyer'])) {
                         $this->registry['model']->applyFlyer($_SESSION['user']->id, $_POST['userFlyer']);
                     }    
