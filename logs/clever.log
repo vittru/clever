@@ -110,3 +110,12 @@
 [18/Jun/2018:09:20:43] (index) Old price is 135
 [18/Jun/2018:09:20:43] (index) New price is 180
 [29/Jun/2018:08:28:02] (index) Birthday is 
+[23/Jul/2018:10:25:41] (index) Error when adding/updating a review for good with id=
+[23/Jul/2018:10:25:41] (index) PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`reviews`, CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`goodid`) REFERENCES `goods` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) in /Applications/MAMP/htdocs/ClubClever/classes/model.php:75
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(75): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(1477): Model->executeQuery(Object(PDOStatement), 'Error when addi...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/showgood.php(74): Model->addReview('', '', '0', 'ccc', 'cvcvcvcv', '2018-07-23')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Showgood->review()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(32): Router->delegate()
+#5 {main}getMessage

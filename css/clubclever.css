@@ -395,6 +395,21 @@ p:target b {
     display: inline-block;
 }
 
+.carousel-control {
+  height: 40px;
+ /* padding-top: 10%;*/
+  width: 40px;
+  font-size: 20px;
+  color: white;
+  opacity: 1;
+}
+.carousel-control .left,
+.carousel-control .right {
+    background-image: none;
+}
+.carousel-inner {
+    padding: 20px 50px 0 50px;
+}
 h1 {
     font-size: 25px;
     font-weight: 700;

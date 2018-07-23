@@ -1429,8 +1429,12 @@ Class Model {
     }
     
     function getGoodReviews($id) {
-        $sqlSelect = $this->db->prepare('SELECT * FROM reviews WHERE goodid=:id ORDER BY date DESC,id DESC');
-        $sqlSelect->bindParam(':id', $id);
+        if ($id) {
+            $sqlSelect = $this->db->prepare('SELECT * FROM reviews WHERE goodid=:id ORDER BY date DESC,id DESC');
+            $sqlSelect->bindParam(':id', $id);
+        } else {
+            $sqlSelect = $this->db->prepare('SELECT * FROM reviews WHERE goodid is NULL ORDER BY date DESC,id DESC');
+        }    
         $this->executeQuery($sqlSelect, 'Error when getting reviews for good with id='.$id);
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
             if (!isset($reviews)) {
@@ -1460,7 +1464,11 @@ Class Model {
         } else {
             $sqlQuery = $this->db->prepare('INSERT INTO reviews(goodid, userid, text, author, date, clovers) VALUES (:goodId, :userId, :text, :author, :date, :clovers)');
             $sqlQuery->bindParam(':userId', $_SESSION['user']->id);
-            $sqlQuery->bindParam(':goodId', $goodId);
+            if ($goodId) {
+                $sqlQuery->bindParam(':goodId', $goodId);
+            } else {
+                $sqlQuery->bindValue(':goodId', null, PDO::PARAM_INT);
+            }    
         }
         if ($clovers) {
             $sqlQuery->bindParam(':clovers', $clovers);

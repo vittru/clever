@@ -115,6 +115,74 @@ if (sizeof($banners) > 0) {
     </div>
 </section>  
 
+<section id="aa-reviews">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="center" id="reviews">Отзывы наших клиентов</h2>
+                
+                <!--div class="well"-->
+                <div id="slideCarousel" class="carousel slide">
+                    <div class="carousel-inner">
+                    <?php
+                    $active = false;
+                    foreach ($reviews as $review) {
+                    ?>                        
+                        <div class="item <?php if (!$active) {echo "active"; $active = true; } ?> bonus-item">
+                            <div class="aa-post-date">
+                                <?php echo $review['date'] ?>
+                            </div>
+                            <?php
+                            if ($review['clovers']) {
+                            ?>
+                            <span class="good-rating" data-toggle="tooltip" title="Оценка товара: <?php echo number_format($review['clovers'],2) ?>">
+                                <?php
+                                    for ($i = 1; $i <= $review['clovers']; $i++) {
+                                        echo '<span class="orange-clover"></span>';
+                                    }
+                                    for ($i = $review['clovers'] + 1; $i <= 5; $i++) {
+                                        echo '<span class="grey-clover"></span>';
+                                    }
+                                ?>
+                                </span>
+                            <?php
+                            }
+                            ?>
+                            <div class="aa-post-author">
+                                <?php if ($review['author']) echo '<b>Автор:</b> ' . $review['author']; ?>
+                            </div>
+                            <div>
+                                <?php 
+                                $text = $review['text'];
+                                foreach (array("\r", "\n", "\r\n", "\n\r") as $token) {
+                                    $text = str_replace($token, "</p><p>",  $text);
+                                }
+                                echo "<p>" . $text . "</p>";
+                                ?>
+                            </div>
+                            <?php
+                            if ($isadmin) {
+                            ?>
+                            <div>
+                                <div class="green-button review-button editReview" data-toggle="modal" data-target="#review" data-review="<?php echo $review['id']?>" data-clovers="<?php echo $review['clovers']?>" data-author="<?php echo $review['author']?>" data-text="<?php echo $review['text']?>" data-date="<?php echo $review['date'] ?>">Редактировать</div>                                
+                                <div class="orange-button review-button deleteReview" data-review="<?php echo $review['id']?>">Удалить</div>                                
+                            </div>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                    </div>
+                    <a class="left carousel-control green-button" href="#slideCarousel" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
+                    <a class="right carousel-control green-button" href="#slideCarousel" data-slide="next"><i class="fa fa-chevron-right"></i></a>
+                </div>
+                <div class="green-button review-button center" id="addReview" data-toggle="modal" data-target="#review">Добавить отзыв/оценку</div>
+            </div>
+        </div>
+    </div>
+</section>
   <!-- Client Brand -->
 <section id="aa-client-brand">
     <div class="container">

@@ -230,7 +230,7 @@
                 <input id="reviewId" hidden value="">
                 <div class="row">
                     <div class="col-sm-6">
-                        <div>Оцените товар:</div>
+                        <div>Ваша оценка:</div>
                         <div class="star-rating">
                             <input type="radio" id="5-clovers" class="clovers" name="rating" value="5" />
                             <label for="5-clovers" class="star" data-toggle="tooltip" title="Отличный"></label>
@@ -297,7 +297,7 @@
 <script src="/js/custom.min.js"></script> 
 <script src="/js/jquery.validate.min.js"></script>
 <script src="/js/auth-form.min.js?<?php echo '20171228' ?>"></script>
-<script src="/js/clubclever.min.js?<?php echo '20180406' ?>"></script>
+<script src="/js/clubclever.min.js?<?php echo '20180723' ?>"></script>
 <script src="/js/lightbox.min.js"></script> 
 
 </body>
