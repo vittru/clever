@@ -6,8 +6,9 @@ Class Controller_Editgood Extends Controller_Base {
         if ($this->registry['isadmin']) {
             $this->registry['model']->logVisit(1000);
             $this->registry['template']->show('editgood');
-        } else 
+        } else {
             $this->registry['template']->show('404');
+        }
     }
     
     function save() {
@@ -17,11 +18,18 @@ Class Controller_Editgood Extends Controller_Base {
                     $firmId=substr($val, 4);
                 }
             }
-            if (isset($_POST['hidden']))
+            if (isset($_POST['hidden'])) {
                 $hidden = 1;
-            else 
+            } else {
                 $hidden = 0;
-            $goodId = $this->registry['model']->addGood($_POST['id'], $_POST['name'], $_POST['description'], $_POST['shortdesc'], $firmId, $_POST['sale'], $_POST['madeOf'], $_POST['howTo'], $_POST['problem'], $_POST['bestbefore'], $_POST['precaution'], $hidden);
+            }
+            if (isset($_POST['popular'])) {
+                $popular = 1;
+            } else {
+                $popular = 0;
+            }
+
+            $goodId = $this->registry['model']->addGood($_POST['id'], $_POST['name'], $_POST['description'], $_POST['shortdesc'], $firmId, $_POST['sale'], $_POST['madeOf'], $_POST['howTo'], $_POST['problem'], $_POST['bestbefore'], $_POST['precaution'], $hidden, $popular);
             $this->registry['model']->deleteGoodCat($goodId);
             foreach ($_POST as $name => $val) {
                 if (strpos($name, 'mentype') !== false){

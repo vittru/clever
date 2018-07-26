@@ -35,8 +35,8 @@ Class Model {
     private $getNonClientNews = "SELECT * FROM news WHERE forClients=0 AND action=:action ORDER BY time DESC";
     private $addQuestion = "INSERT INTO questions(user, question, date) VALUES(:userId, :question, NOW())";
     private $selectCatalog = "SELECT id, name FROM ";
-    private $updateGood = "UPDATE goods SET name=:name, description=:description, shortdesc=:shortdesc, firmId=:firmId, sale=:sale, howTo=:howTo, madeOf=:madeOf, problem=:problem, bestbefore=:bestbefore, precaution=:precaution, hidden=:hidden WHERE id=:id";
-    private $addGood = "INSERT INTO goods (name, description, shortdesc, firmId, sale, howTo, madeOf, problem, bestbefore, precaution, hidden) VALUES (:name, :description, :shortdesc, :firmId, :sale, :howTo, :madeOf, :problem, :bestbefore, :precaution, :hidden)";
+    private $updateGood = "UPDATE goods SET name=:name, description=:description, shortdesc=:shortdesc, firmId=:firmId, sale=:sale, howTo=:howTo, madeOf=:madeOf, problem=:problem, bestbefore=:bestbefore, precaution=:precaution, hidden=:hidden, popular=:popular WHERE id=:id";
+    private $addGood = "INSERT INTO goods (name, description, shortdesc, firmId, sale, howTo, madeOf, problem, bestbefore, precaution, hidden, popular) VALUES (:name, :description, :shortdesc, :firmId, :sale, :howTo, :madeOf, :problem, :bestbefore, :precaution, :hidden, :popular)";
     private $linkGoodCat = "INSERT INTO `goods-categories` (goodId, categoryId) VALUES(:goodId, :catId)";
     private $linkGoodType = "INSERT INTO `goods-types` (goodId, typeId) VALUES(:goodId, :typeId)";
     private $linkGoodEff = "INSERT INTO `goods-effects` (goodId, effectId) VALUES(:goodId, :effId)";
@@ -48,6 +48,7 @@ Class Model {
     private $updateBlog = "UPDATE blogentries SET name=:name, text=:text, date=:date, author=:author, url=:url WHERE id=:id";
     private $addBlog = "INSERT INTO blogentries (name, text, date, author, url) VALUES (:name, :text, :date, :author, :url)";
     public $default = "cccccccccc";
+    private $selectPopularGoods = "SELECT DISTINCT id FROM (SELECT id FROM goods WHERE popular=1 ORDER BY RAND() LIMIT 3) manual UNION ALL SELECT tab.good AS id FROM (SELECT v.good, COUNT(DISTINCT v.id) FROM visits v JOIN `goods-sizes` gs ON v.good=gs.goodid JOIN warehouse w ON w.psid = gs.id JOIN goods g ON v.good=g.id WHERE v.pageid=30 AND v.good IS NOT NULL AND w.instock > w.onhold AND v.time >=DATE_SUB(curdate(), INTERVAL 1 MONTH) AND g.hidden=0 AND gs.hidden=0 GROUP BY 1 ORDER BY 2 DESC LIMIT 8) tab LIMIT 8";
     
     function __construct($registry) {
         $this->registry = $registry;
@@ -371,7 +372,7 @@ Class Model {
         return $preparedArray;
     }
     
-    function addGood($id, $name, $description, $shortdesc, $firmId, $sale, $madeOf, $howTo, $problem, $bestbefore, $precaution, $hidden) {
+    function addGood($id, $name, $description, $shortdesc, $firmId, $sale, $madeOf, $howTo, $problem, $bestbefore, $precaution, $hidden, $popular) {
         if ($id) {
             $sqlInsert = $this->db->prepare($this->updateGood);
             $sqlInsert->bindParam(':id', $id);
@@ -393,6 +394,7 @@ Class Model {
         $sqlInsert->bindParam(':bestbefore', $bestbefore);
         $sqlInsert->bindParam(':precaution', $precaution);
         $sqlInsert->bindParam(':hidden', $hidden);
+        $sqlInsert->bindParam(':popular', $popular);
         $this->executeQuery($sqlInsert, 'Error when adding/updating a good');
         if ($id) {
             $goodId=$id;
@@ -464,7 +466,7 @@ Class Model {
             } else {
                 $hidden = $data['hidden'];
             }
-            $good=new Good($data['id'], trim($data['name']), trim($data['description']), trim($data['shortdesc']), trim($data['howTo']), trim($data['madeOf']), $data['sale'], $data['firmId'], trim($data['problem']), trim($data['bestbefore']), trim($data['precaution']), trim($data['url']), $hidden);
+            $good=new Good($data['id'], trim($data['name']), trim($data['description']), trim($data['shortdesc']), trim($data['howTo']), trim($data['madeOf']), $data['sale'], $data['firmId'], trim($data['problem']), trim($data['bestbefore']), trim($data['precaution']), trim($data['url']), $hidden, $data['popular']);
             $good->cats = $this->getGoodCats($goodId);
             $good->supercats = $this->getGoodSuperCats($good);
             $good->effs = $this->getGoodEffs($goodId);
@@ -1107,17 +1109,10 @@ Class Model {
     }
 
     function getPopularGoods() {
-        $sqlSelect = $this->db->prepare('SELECT v.good, COUNT(DISTINCT v.id) '
-                . 'FROM visits v JOIN `goods-sizes` gs ON v.good=gs.goodid '
-                . 'JOIN warehouse w ON w.psid = gs.id '
-                . 'JOIN goods g ON v.good=g.id '
-                . 'WHERE v.pageid=30 AND v.good IS NOT NULL AND w.instock > w.onhold AND v.time >=DATE_SUB(curdate(), INTERVAL 1 MONTH) AND g.hidden=0 AND gs.hidden=0 '
-                . 'GROUP BY 1 '
-                . 'ORDER BY 2 DESC '
-                . 'LIMIT 8');
+        $sqlSelect = $this->db->prepare($this->selectPopularGoods);
         $this->executeQuery($sqlSelect, 'Error when getting popular goods');
         while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
-            $good = $this->getGood($data['good']);
+            $good = $this->getGood($data['id']);
             if (!isset($goods)) {
                 $goods = [$good];
             } else {

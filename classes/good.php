@@ -25,8 +25,9 @@ Class Good {
     public $supercats;
     public $hidden;
     public $rating;
+    public $popular;
     
-    function __construct($id, $name, $description, $shortdesc, $howTo, $madeOf, $sale, $firmId, $problem, $bestbefore, $precaution, $url, $hidden) {
+    function __construct($id, $name, $description, $shortdesc, $howTo, $madeOf, $sale, $firmId, $problem, $bestbefore, $precaution, $url, $hidden, $popular) {
        $this->id = $id;
        $this->name = $name;
        $this->description = $description;
@@ -40,6 +41,7 @@ Class Good {
        $this->precaution = $precaution;
        $this->url = $url;
        $this->hidden = $hidden;
+       $this->popular = $popular;
     }
     
     function getFirstAvailSize() {
