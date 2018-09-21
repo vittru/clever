@@ -195,5 +195,14 @@ Class Controller_Account Extends Controller_Base {
             $this->registry['template']->show('404');
         }
     }
+    
+    function orderlink() {
+        if ($this->registry['isadmin'] && isset($_GET['id'])) {
+            $link = $this->registry['model']->setOrderLink($_GET['id']);
+            echo '/buy/link?id=' . $link;
+        } else {
+            echo "";
+        }
+    }
 }
 

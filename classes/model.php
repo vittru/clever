@@ -1483,4 +1483,27 @@ Class Model {
         $this->executeQuery($sqlDelete, 'Error when deleting review with id=' . $reviewId);
         $sqlDelete->closeCursor();
     }
+    
+    function setOrderLink($id) {
+        $sqlUpdate = $this->db->prepare('UPDATE orders SET link=:link WHERE id=:id');
+        $sqlUpdate->bindParam(':id', $id);
+        $rand = substr(md5(microtime()),rand(0,26),5);
+        $sqlUpdate->bindParam(':link', $rand);
+        $this->executeQuery($sqlUpdate, 'Error when setting a link for order id=' . $id);
+        $sqlUpdate->closeCursor();
+        return $rand;
+    }
+    
+    function getOrderByLink($link) {
+        $sqlSelect = $this->db->prepare('SELECT id FROM orders WHERE link=:link');
+        $sqlSelect->bindParam(':link', $link);
+        $this->executeQuery($sqlSelect, 'Error when getting order with link=' . $link);
+        $data = $sqlSelect->fetchColumn();
+        $sqlSelect->closeCursor();
+        if ($data) {
+            return $this->getOrder($data);
+        } else {
+            return null;
+        }
+    }
 }

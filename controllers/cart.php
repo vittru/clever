@@ -333,9 +333,9 @@ Class Controller_Cart Extends Controller_Base {
                 $discount = true;
             }
             if (in_array(11, $good->cats)) {
-                $minprice = min($minprice, $cartItem->price);
+                    $minprice = min($minprice, $cartItem->price);
+                }   
             }
-        }
         if ($discount) {
             if ($minprice > 0) {
                 foreach ($_SESSION['cart'] as $cartItem) {

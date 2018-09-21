@@ -3,7 +3,13 @@
 Class Controller_Buy Extends Controller_Base {
     
     function index() {
-        if (isset($_SESSION['cart']) and sizeof($_SESSION['cart']) > 0) {
+      /*  if (isset($_GET['id'])) {
+            $order = $this->registry['model']->getOrder($_GET['id']);
+            $this->registry['template']->set('order', $order);
+            $this->registry['template']->set("bonusAvailable", $this->getCartNoSaleTotal($_SESSION['cart']) > 0);
+            $this->registry['model']->logVisit(41);
+            $this->registry['template']->show('buy');
+        } else*/ if (isset($_SESSION['cart']) and sizeof($_SESSION['cart']) > 0) {
             $this->registry['model']->logVisit(25);
             $this->registry['template']->set("bonusAvailable", $this->getCartNoSaleTotal($_SESSION['cart']) > 0);
             $this->registry['template']->show('buy');
@@ -263,4 +269,24 @@ Class Controller_Buy Extends Controller_Base {
         }
     }
     
+    function link() {
+        if (isset($_GET['id'])) {
+            $order = $this->registry['model']->getOrderByLink($_GET['id']);
+            if ($order) {
+                $this->registry['model']->logVisit(41);
+                $this->registry['template']->set('orderId', $order->id);
+
+                $this->registry['template']->set('payment', true);
+                $this->registry['template']->set('sum', $order->total);
+                $this->registry['template']->show('complete');
+
+            } else {
+                $this->registry['model']->logVisit(404, false, $_SERVER['QUERY_STRING']);
+                $this->registry['template']->show('404');
+            }
+        } else {
+            $this->registry['model']->logVisit(404, false, $_SERVER['QUERY_STRING']);
+            $this->registry['template']->show('404');
+        }
+    }
 }

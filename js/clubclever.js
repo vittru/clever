@@ -509,3 +509,18 @@ $('.editReview').click(function a() {
         $('#' +clovers + '-clovers').prop("checked", true);
     }
 });
+
+$('.order-link').click(function a() {
+    $.ajax({
+        type: 'GET',
+        url: '/account/orderlink',
+        data: "id=" + $(this).attr('data-id'),
+        success: function(e) {
+            if (e) {
+                alert(window.location.host + e);
+            } else {
+                alert('Произошла ошибка!');
+            }
+        }    
+    });
+});

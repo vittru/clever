@@ -73,7 +73,16 @@ include 'header.php';
                                             <td><?php echo $order->id?></td>
                                             <td><?php echo strftime('%e/%m/%G', strtotime($order->date))?></td>
                                             <td> <span class="dotted" data-toggle="tooltip" title="<?php echo $order->statusdesc; ?>"><?php echo $order->status?></span></td>
-                                            <td><a class="green-button order-details" href="/account/orders?id=<?php echo $order->id ?>">Детали</a></td>
+                                            <td>
+                                                <a class="green-button order-details" href="/account/orders?id=<?php echo $order->id ?>">Детали</a>
+                                                <?php
+                                                if ($isadmin) {
+                                                ?>
+                                                <a class="green-button order-details order-link" data-id="<?php echo $order->id ?>">Ссылка на оплату</button>
+                                                <?php
+                                                }
+                                                ?>
+                                            </td>
                                         </tr>
                                         <?php
                                         }
