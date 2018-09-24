@@ -68,7 +68,7 @@ Class Controller_Cart Extends Controller_Base {
     }  
     
     private function applyDiscounts() {
-        //$this->scrubSoap0();
+        $this->crystallThird();
     }
     
     private function bubbleBallDiscounts() {
@@ -353,6 +353,53 @@ Class Controller_Cart Extends Controller_Base {
             foreach ($_SESSION['cart'] as $cartItem) {
                 $good = $this->registry['model']->getGood($cartItem->goodId);
                 if (in_array(11, $good->cats) and $cartItem->price == 0) {
+                    $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
+                    $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
+                    $cartItem->price = $good->getPrice();
+                    $cartItem->sale = 0;
+                    $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
+                }
+            }
+        }
+    }
+    
+    //Каждый третий товар Кристалл Декор стоит 1 рубль.
+    private function crystallThird() {
+        $crystalGoods = [];
+        foreach ($_SESSION['cart'] as $cartItem) {
+            $good = $this->registry['model']->getGood($cartItem->goodId);
+            if ($good->firmId == 8) {
+                array_push($crystalGoods, $good);
+            }
+        }
+        if (sizeof($crystalGoods) >= 3) {
+            function cmp($a, $b) {
+                return $a->getPrice() < $b->getPrice();
+            }
+            usort($crystalGoods, "cmp");
+            foreach ($_SESSION['cart'] as $cartItem) {
+                $good = $this->registry['model']->getGood($cartItem->goodId);
+                if ($good->firmId == 8) {
+                    //We consider only 3rd and 6th goods. I doubt if anybody will add more than 6 Crystall goods to cart
+                    if ($good->id == $crystalGoods[2]->id || (sizeof($crystalGoods) >= 6 && $good->id == $crystalGoods[5]->id)) {
+                        $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
+                        $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
+                        $cartItem->sale = 100;
+                        $cartItem->price = 1;
+                        $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
+                    } else if ($cartItem->price == 1 && ($good->id != $crystalGoods[2]->id || (sizeof($crystalGoods) >= 6 && $good->id == $crystalGoods[5]->id))) {
+                        $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
+                        $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
+                        $cartItem->price = $good->getPrice();
+                        $cartItem->sale = 0;
+                        $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
+                    }   
+                }
+            }
+        } else {
+            foreach ($_SESSION['cart'] as $cartItem) {
+                $good = $this->registry['model']->getGood($cartItem->goodId);
+                if ($good->firmId == 8 and $cartItem->price == 1) {
                     $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
                     $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
                     $cartItem->price = $good->getPrice();

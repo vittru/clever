@@ -1,0 +1,201 @@
+[24/Sep/2018:13:04:30] (index) Adding good 324 to shortlist
+[24/Sep/2018:13:04:30] (index) Adding good 413 to shortlist
+[24/Sep/2018:13:04:30] (index) Adding good 408 to shortlist
+[24/Sep/2018:13:05:26] (index) Adding good 324 to shortlist
+[24/Sep/2018:13:05:26] (index) Adding good 413 to shortlist
+[24/Sep/2018:13:05:26] (index) Size 2
+[24/Sep/2018:13:05:28] (index) Adding good 324 to shortlist
+[24/Sep/2018:13:05:28] (index) Adding good 413 to shortlist
+[24/Sep/2018:13:05:28] (index) Adding good 391 to shortlist
+[24/Sep/2018:13:05:28] (index) Size 3
+[24/Sep/2018:13:06:20] (index) Adding good 324 to shortlist
+[24/Sep/2018:13:06:20] (index) Adding good 391 to shortlist
+[24/Sep/2018:13:06:20] (index) Size 2
+[24/Sep/2018:13:06:26] (index) Adding good 324 to shortlist
+[24/Sep/2018:13:06:26] (index) Adding good 391 to shortlist
+[24/Sep/2018:13:06:26] (index) Adding good 325 to shortlist
+[24/Sep/2018:13:06:26] (index) Size 3
+[24/Sep/2018:13:07:27] (index) Adding good 324 to shortlist
+[24/Sep/2018:13:07:27] (index) Adding good 325 to shortlist
+[24/Sep/2018:13:07:27] (index) Size 2
+[24/Sep/2018:13:07:28] (index) Adding good 324 to shortlist
+[24/Sep/2018:13:07:28] (index) Adding good 325 to shortlist
+[24/Sep/2018:13:07:28] (index) Adding good 408 to shortlist
+[24/Sep/2018:13:07:28] (index) Size 3
+[24/Sep/2018:13:07:28] (index) Discounted good price: 1030
+[24/Sep/2018:13:07:55] (index) Adding good 324 to shortlist
+[24/Sep/2018:13:07:55] (index) Adding good 325 to shortlist
+[24/Sep/2018:13:07:55] (index) Size 2
+[24/Sep/2018:13:07:56] (index) Adding good 324 to shortlist
+[24/Sep/2018:13:07:56] (index) Adding good 325 to shortlist
+[24/Sep/2018:13:07:56] (index) Adding good 408 to shortlist
+[24/Sep/2018:13:07:56] (index) Size 3
+[24/Sep/2018:13:07:56] (index) Discounted good price: 400
+[24/Sep/2018:13:09:22] (index) Adding good 324 to shortlist
+[24/Sep/2018:13:09:22] (index) Adding good 325 to shortlist
+[24/Sep/2018:13:09:22] (index) Size 2
+[24/Sep/2018:13:09:26] (index) Adding good 324 to shortlist
+[24/Sep/2018:13:09:26] (index) Adding good 325 to shortlist
+[24/Sep/2018:13:09:26] (index) Adding good 393 to shortlist
+[24/Sep/2018:13:09:26] (index) Size 3
+[24/Sep/2018:13:09:26] (index) Discounted good price: 400
+[24/Sep/2018:13:09:26] (index) Updating good 393
+[24/Sep/2018:13:09:26] (index) Old price is 400
+[24/Sep/2018:13:09:26] (index) New price is 1
+[24/Sep/2018:13:09:31] (index) Adding good 324 to shortlist
+[24/Sep/2018:13:09:31] (index) Adding good 393 to shortlist
+[24/Sep/2018:13:09:31] (index) Size 2
+[24/Sep/2018:13:09:31] (index) Updating good 393
+[24/Sep/2018:13:09:31] (index) Old price is 1
+[24/Sep/2018:13:09:31] (index) New price is 400
+[24/Sep/2018:13:09:35] (index) Adding good 324 to shortlist
+[24/Sep/2018:13:09:35] (index) Adding good 393 to shortlist
+[24/Sep/2018:13:09:35] (index) Size 2
+[24/Sep/2018:13:09:45] (index) Adding good 324 to shortlist
+[24/Sep/2018:13:09:45] (index) Adding good 393 to shortlist
+[24/Sep/2018:13:09:45] (index) Adding good 325 to shortlist
+[24/Sep/2018:13:09:45] (index) Size 3
+[24/Sep/2018:13:09:45] (index) Discounted good price: 400
+[24/Sep/2018:13:09:45] (index) Updating good 393
+[24/Sep/2018:13:09:45] (index) Old price is 400
+[24/Sep/2018:13:09:45] (index) New price is 1
+[24/Sep/2018:13:09:53] (index) Adding good 324 to shortlist
+[24/Sep/2018:13:09:53] (index) Adding good 325 to shortlist
+[24/Sep/2018:13:09:53] (index) Size 2
+[24/Sep/2018:13:09:59] (index) Adding good 324 to shortlist
+[24/Sep/2018:13:09:59] (index) Adding good 325 to shortlist
+[24/Sep/2018:13:09:59] (index) Adding good 413 to shortlist
+[24/Sep/2018:13:09:59] (index) Size 3
+[24/Sep/2018:13:09:59] (index) Discounted good price: 790
+[24/Sep/2018:13:09:59] (index) Updating good 413
+[24/Sep/2018:13:09:59] (index) Old price is 790
+[24/Sep/2018:13:09:59] (index) New price is 1
+[24/Sep/2018:13:12:20] (index) Updating good 413
+[24/Sep/2018:13:12:20] (index) Old price is 1
+[24/Sep/2018:13:12:20] (index) New price is 790
+[24/Sep/2018:13:12:29] (index) Updating good 401
+[24/Sep/2018:13:12:29] (index) Old price is 400
+[24/Sep/2018:13:12:29] (index) New price is 1
+[24/Sep/2018:13:12:30] (index) Updating good 401
+[24/Sep/2018:13:12:30] (index) Old price is 1
+[24/Sep/2018:13:12:30] (index) New price is 1
+[24/Sep/2018:13:12:35] (index) Updating good 401
+[24/Sep/2018:13:12:35] (index) Old price is 1
+[24/Sep/2018:13:12:35] (index) New price is 1
+[24/Sep/2018:13:12:36] (index) Updating good 401
+[24/Sep/2018:13:12:36] (index) Old price is 1
+[24/Sep/2018:13:12:36] (index) New price is 1
+[24/Sep/2018:13:12:36] (index) Updating good 391
+[24/Sep/2018:13:12:36] (index) Old price is 400
+[24/Sep/2018:13:12:36] (index) New price is 1
+[24/Sep/2018:13:13:29] (index) Updating good 402
+[24/Sep/2018:13:13:29] (index) Old price is 400
+[24/Sep/2018:13:13:29] (index) New price is 1
+[24/Sep/2018:13:13:34] (index) Updating good 402
+[24/Sep/2018:13:13:34] (index) Old price is 1
+[24/Sep/2018:13:13:34] (index) New price is 1
+[24/Sep/2018:13:13:36] (index) Updating good 391
+[24/Sep/2018:13:13:36] (index) Old price is 1
+[24/Sep/2018:13:13:36] (index) New price is 1
+[24/Sep/2018:13:13:38] (index) Updating good 391
+[24/Sep/2018:13:13:38] (index) Old price is 1
+[24/Sep/2018:13:13:38] (index) New price is 400
+[24/Sep/2018:13:14:24] (index) Updating good 408
+[24/Sep/2018:13:14:24] (index) Old price is 400
+[24/Sep/2018:13:14:24] (index) New price is 1
+[24/Sep/2018:13:14:28] (index) Updating good 408
+[24/Sep/2018:13:14:28] (index) Old price is 1
+[24/Sep/2018:13:14:28] (index) New price is 1
+[24/Sep/2018:13:14:29] (index) Updating good 408
+[24/Sep/2018:13:14:29] (index) Old price is 1
+[24/Sep/2018:13:14:29] (index) New price is 1
+[24/Sep/2018:13:14:35] (index) Updating good 408
+[24/Sep/2018:13:14:35] (index) Old price is 1
+[24/Sep/2018:13:14:35] (index) New price is 1
+[24/Sep/2018:13:14:41] (index) Updating good 393
+[24/Sep/2018:13:14:41] (index) Old price is 400
+[24/Sep/2018:13:14:41] (index) New price is 1
+[24/Sep/2018:13:14:50] (index) Updating good 392
+[24/Sep/2018:13:14:50] (index) Old price is 400
+[24/Sep/2018:13:14:50] (index) New price is 1
+[24/Sep/2018:13:15:00] (index) Updating good 404
+[24/Sep/2018:13:15:00] (index) Old price is 400
+[24/Sep/2018:13:15:00] (index) New price is 1
+[24/Sep/2018:13:15:03] (index) Updating good 392
+[24/Sep/2018:13:15:03] (index) Old price is 1
+[24/Sep/2018:13:15:03] (index) New price is 400
+[24/Sep/2018:13:15:03] (index) Updating good 404
+[24/Sep/2018:13:15:03] (index) Old price is 1
+[24/Sep/2018:13:15:03] (index) New price is 400
+[24/Sep/2018:13:17:17] (index) Updating good 408
+[24/Sep/2018:13:17:17] (index) Old price is 400
+[24/Sep/2018:13:17:17] (index) New price is 1
+[24/Sep/2018:13:17:21] (index) Updating good 408
+[24/Sep/2018:13:17:21] (index) Old price is 1
+[24/Sep/2018:13:17:21] (index) New price is 1
+[24/Sep/2018:13:17:22] (index) Updating good 408
+[24/Sep/2018:13:17:22] (index) Old price is 1
+[24/Sep/2018:13:17:22] (index) New price is 1
+[24/Sep/2018:13:17:26] (index) Updating good 408
+[24/Sep/2018:13:17:26] (index) Old price is 1
+[24/Sep/2018:13:17:26] (index) New price is 400
+[24/Sep/2018:13:17:26] (index) Updating good 393
+[24/Sep/2018:13:17:26] (index) Old price is 400
+[24/Sep/2018:13:17:26] (index) New price is 1
+[24/Sep/2018:13:17:30] (index) Updating good 393
+[24/Sep/2018:13:17:30] (index) Old price is 1
+[24/Sep/2018:13:17:30] (index) New price is 1
+[24/Sep/2018:13:17:34] (index) Updating good 408
+[24/Sep/2018:13:17:34] (index) Old price is 400
+[24/Sep/2018:13:17:34] (index) New price is 1
+[24/Sep/2018:13:17:34] (index) Updating good 393
+[24/Sep/2018:13:17:34] (index) Old price is 1
+[24/Sep/2018:13:17:34] (index) New price is 400
+[24/Sep/2018:13:17:39] (index) Updating good 404
+[24/Sep/2018:13:17:39] (index) Old price is 400
+[24/Sep/2018:13:17:39] (index) New price is 1
+[24/Sep/2018:13:17:39] (index) Updating good 408
+[24/Sep/2018:13:17:39] (index) Old price is 1
+[24/Sep/2018:13:17:39] (index) New price is 400
+[24/Sep/2018:13:17:46] (index) Updating good 404
+[24/Sep/2018:13:17:46] (index) Old price is 1
+[24/Sep/2018:13:17:46] (index) New price is 400
+[24/Sep/2018:13:17:46] (index) Updating good 341
+[24/Sep/2018:13:17:46] (index) Old price is 930
+[24/Sep/2018:13:17:46] (index) New price is 1
+[24/Sep/2018:13:17:53] (index) Updating good 341
+[24/Sep/2018:13:17:53] (index) Old price is 1
+[24/Sep/2018:13:17:53] (index) New price is 1
+[24/Sep/2018:13:19:06] (index) Updating good 341
+[24/Sep/2018:13:19:06] (index) Old price is 1
+[24/Sep/2018:13:19:06] (index) New price is 1
+[24/Sep/2018:13:19:08] (index) Updating good 341
+[24/Sep/2018:13:19:08] (index) Old price is 1
+[24/Sep/2018:13:19:08] (index) New price is 1
+[24/Sep/2018:13:19:12] (index) Updating good 341
+[24/Sep/2018:13:19:12] (index) Old price is 1
+[24/Sep/2018:13:19:12] (index) New price is 1
+[24/Sep/2018:13:19:13] (index) Updating good 341
+[24/Sep/2018:13:19:13] (index) Old price is 1
+[24/Sep/2018:13:19:13] (index) New price is 1
+[24/Sep/2018:13:19:14] (index) Updating good 341
+[24/Sep/2018:13:19:14] (index) Old price is 1
+[24/Sep/2018:13:19:14] (index) New price is 1
+[24/Sep/2018:13:19:14] (index) Updating good 393
+[24/Sep/2018:13:19:14] (index) Old price is 400
+[24/Sep/2018:13:19:14] (index) New price is 1
+[24/Sep/2018:13:19:20] (index) Updating good 341
+[24/Sep/2018:13:19:20] (index) Old price is 1
+[24/Sep/2018:13:19:20] (index) New price is 930
+[24/Sep/2018:13:19:20] (index) Updating good 408
+[24/Sep/2018:13:19:20] (index) Old price is 400
+[24/Sep/2018:13:19:20] (index) New price is 1
+[24/Sep/2018:13:19:20] (index) Updating good 393
+[24/Sep/2018:13:19:20] (index) Old price is 1
+[24/Sep/2018:13:19:20] (index) New price is 400
+[24/Sep/2018:13:19:26] (index) Updating good 408
+[24/Sep/2018:13:19:26] (index) Old price is 1
+[24/Sep/2018:13:19:26] (index) New price is 1
+[24/Sep/2018:13:19:26] (index) Updating good 398
+[24/Sep/2018:13:19:26] (index) Old price is 400
+[24/Sep/2018:13:19:26] (index) New price is 1
