@@ -68,7 +68,7 @@ Class Controller_Cart Extends Controller_Base {
     }  
     
     private function applyDiscounts() {
-        $this->scrubSoap0();
+        //$this->scrubSoap0();
     }
     
     private function bubbleBallDiscounts() {
