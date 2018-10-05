@@ -48,7 +48,7 @@ Class Model {
     private $updateBlog = "UPDATE blogentries SET name=:name, text=:text, date=:date, author=:author, url=:url WHERE id=:id";
     private $addBlog = "INSERT INTO blogentries (name, text, date, author, url) VALUES (:name, :text, :date, :author, :url)";
     public $default = "cccccccccc";
-    private $selectPopularGoods = "SELECT DISTINCT id FROM (SELECT id FROM goods WHERE popular=1 ORDER BY RAND() LIMIT 3) manual UNION ALL SELECT tab.good AS id FROM (SELECT v.good, COUNT(DISTINCT v.id) FROM visits v JOIN `goods-sizes` gs ON v.good=gs.goodid JOIN warehouse w ON w.psid = gs.id JOIN goods g ON v.good=g.id WHERE v.pageid=30 AND v.good IS NOT NULL AND w.instock > w.onhold AND v.time >=DATE_SUB(curdate(), INTERVAL 1 MONTH) AND g.hidden=0 AND gs.hidden=0 GROUP BY 1 ORDER BY 2 DESC LIMIT 8) tab LIMIT 8";
+    private $selectPopularGoods = "SELECT DISTINCT id FROM (SELECT id FROM goods WHERE popular=1 ORDER BY RAND() LIMIT 3) manual UNION SELECT tab.good AS id FROM (SELECT v.good, COUNT(DISTINCT v.id) FROM visits v JOIN `goods-sizes` gs ON v.good=gs.goodid JOIN warehouse w ON w.psid = gs.id JOIN goods g ON v.good=g.id WHERE v.pageid=30 AND v.good IS NOT NULL AND w.instock > w.onhold AND v.time >=DATE_SUB(curdate(), INTERVAL 1 MONTH) AND g.hidden=0 AND gs.hidden=0 GROUP BY 1 ORDER BY 2 DESC) tab LIMIT 8";
     
     function __construct($registry) {
         $this->registry = $registry;
