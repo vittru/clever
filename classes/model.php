@@ -1506,4 +1506,71 @@ Class Model {
             return null;
         }
     }
+    
+    function setSale($sale, $firms, $mentypes, $supercats, $cats) {
+        $strUpdate = 'UPDATE goods SET sale = :sale ';
+        $where = false;
+        if (sizeof($firms)) {
+            $strWhereFirms = 'firmid IN (';
+            foreach ($firms as $id) {
+                $strWhereFirms = $strWhereFirms . $id .',';
+            }
+            $strWhereFirms = rtrim($strWhereFirms, ", ") . ')';
+            $where = true;
+            $strUpdate = $strUpdate . ' WHERE ' . $strWhereFirms;
+        }
+        if (sizeof($supercats)) {
+            $strWhereSC = 'id IN (SELECT DISTINCT goodid FROM `goods-categories` gc JOIN categories c ON gc.categoryid=c.id WHERE c.supercatid IN (';
+            foreach ($supercats as $id) {
+                $strWhereSC = $strWhereSC . $id .',';
+            }
+            $strWhereSC = rtrim($strWhereSC, ", ") . '))';
+            if ($where) {
+                $strUpdate = $strUpdate . ' AND ' . $strWhereSC;
+            } else {
+                $strUpdate = $strUpdate . ' WHERE ' . $strWhereSC;
+                $where = true;
+            }
+        }
+        if (sizeof($mentypes)) {
+            $strWhereTypes = 'id IN (SELECT DISTINCT goodid FROM `goods-types` WHERE typeid IN (';
+            foreach ($mentypes as $id) {
+                $strWhereTypes = $strWhereTypes . $id .',';
+            }
+            $strWhereTypes = rtrim($strWhereTypes, ", ") . '))';
+            if ($where) {
+                $strUpdate = $strUpdate . ' AND ' . $strWhereTypes;
+            } else {
+                $strUpdate = $strUpdate . ' WHERE ' . $strWhereTypes;
+                $where = true;
+            }
+        }
+        if (sizeof($cats)) {
+            $strWhereCats = 'id IN (SELECT DISTINCT goodid FROM `goods-categories` WHERE categoryid IN (';
+            foreach ($cats as $id) {
+                $strWhereCats = $strWhereCats . $id .',';
+            }
+            $strWhereCats = rtrim($strWhereCats, ", ") . '))';
+            if ($where) {
+                $strUpdate = $strUpdate . ' AND ' . $strWhereCats;
+            } else {
+                $strUpdate = $strUpdate . ' WHERE ' . $strWhereCats;
+                $where = true;
+            }
+        }
+        if (!in_array(21, $cats) && !in_array(34, $cats)) {
+            if ($where) {
+                $strUpdate = $strUpdate . ' AND id not in (select distinct goodid from `goods-categories` where categoryid in (21, 34))';
+            } else {
+                $strUpdate = $strUpdate . ' WHERE id not in (select distinct goodid from `goods-categories` where categoryid in (21, 34))';
+            }
+        }    
+        $this->registry['logger']->lwrite($strUpdate);
+        $sqlUpdate = $this->db->prepare($strUpdate);
+        $sqlUpdate->bindParam(':sale', $sale);
+        $this->executeQuery($sqlUpdate, 'Error when setting sale by the following query: ' . $strUpdate);
+        $data = $sqlUpdate->rowCount();
+        $sqlUpdate->closeCursor();
+        return $data;
+    }
 }

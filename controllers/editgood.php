@@ -14,8 +14,8 @@ Class Controller_Editgood Extends Controller_Base {
     function save() {
         if ($this->registry['isadmin']) {
             foreach ($_POST as $name => $val) {
-                if ($name === 'brand'){
-                    $firmId=substr($val, 4);
+                if ($name === 'brand') {
+                    $firmId = substr($val, 4);
                 }
             }
             if (isset($_POST['hidden'])) {
@@ -32,37 +32,37 @@ Class Controller_Editgood Extends Controller_Base {
             $goodId = $this->registry['model']->addGood($_POST['id'], $_POST['name'], $_POST['description'], $_POST['shortdesc'], $firmId, $_POST['sale'], $_POST['madeOf'], $_POST['howTo'], $_POST['problem'], $_POST['bestbefore'], $_POST['precaution'], $hidden, $popular);
             $this->registry['model']->deleteGoodCat($goodId);
             foreach ($_POST as $name => $val) {
-                if (strpos($name, 'mentype') !== false){
-                    $typeId=substr($name, 7);
+                if (strpos($name, 'mentype') !== false) {
+                    $typeId = substr($name, 7);
                     $this->registry['model']->linkGoodType($goodId, $typeId);
                 }
-                if (strpos($name, 'cat') !== false){
-                    $catId=substr($name, 3);
+                if (strpos($name, 'cat') !== false) {
+                    $catId = substr($name, 3);
                     $this->registry['model']->linkGoodCat($goodId, $catId);
                 }
-                if (strpos($name, 'eff') !== false){
-                    $effId=substr($name, 3);
+                if (strpos($name, 'eff') !== false) {
+                    $effId = substr($name, 3);
                     $this->registry['model']->linkGoodEff($goodId, $effId);
                 }
-                if (strpos($name, 'prolist') !== false){
-                    $probId=substr($name, 7);
+                if (strpos($name, 'prolist') !== false) {
+                    $probId = substr($name, 7);
                     $this->registry['model']->linkGoodProblem($goodId, $probId);
                 }
-                if (strpos($name, 'skintype') !== false){
-                    $skintypeId=substr($name, 8);
+                if (strpos($name, 'skintype') !== false) {
+                    $skintypeId = substr($name, 8);
                     $this->registry['model']->linkGoodST($goodId, $skintypeId);
                 }
-                if (strpos($name, 'hairtype') !== false){
-                    $hairtypeId=substr($name, 8);
+                if (strpos($name, 'hairtype') !== false) {
+                    $hairtypeId = substr($name, 8);
                     $this->registry['model']->linkGoodHT($goodId, $hairtypeId);
                 }
-                if ($name=='size1' and $val!=""){
+                if ($name == 'size1' and $val != "") {
                     $this->registry['model']->addGoodSize($goodId, $_POST['sizeId1'], $val, $_POST['price1'], $_POST['code1'], $_POST['instock1'], $_POST['sale1'], $_POST['bbsize1'], $_POST['bbprice1']);
                 }
-                if ($name=='size2' and $val!=""){
+                if ($name == 'size2' and $val != "") {
                     $this->registry['model']->addGoodSize($goodId, $_POST['sizeId2'], $val, $_POST['price2'], $_POST['code2'], $_POST['instock2'], $_POST['sale2'], $_POST['bbsize2'], $_POST['bbprice2']);
                 }
-                if ($name=='size3' and $val!=""){
+                if ($name == 'size3' and $val != "") {
                     $this->registry['model']->addGoodSize($goodId, $_POST['sizeId3'], $val, $_POST['price3'], $_POST['code3'], $_POST['instock3'], $_POST['sale3'], $_POST['bbsize3'], $_POST['bbprice3']);
                 }
             }
@@ -81,8 +81,9 @@ Class Controller_Editgood Extends Controller_Base {
             $this->registry['model']->logVisit(1001, $goodId);
 //            $this->registry['template']->show('showgood'); 
             header("LOCATION: ../showgood?id=" . $goodId);
-        } else 
-            $this->registry['template']->show('404'); 
+        } else {
+            $this->registry['template']->show('404');
+        }
     }
     
     private function loadImage($image, $number, $goodId) {

@@ -233,3 +233,15 @@
 [22/Oct/2018:13:14:44] (index) Updating good 358
 [22/Oct/2018:13:14:44] (index) Old price is 392
 [22/Oct/2018:13:14:44] (index) New price is 490
+[24/Oct/2018:21:47:40] (index) UPDATE goods SET sale = :sale  WHERE firmid IN (5) AND id IN (SELECT DISTINCT goodid FROM `goods-categories` gc JOIN categories c ON gc.categoryid=c.id WHERE c.supercatid IN (4)) AND id IN (SELECT DISTINCT goodid FROM `goods-types` WHERE typeid IN 2) AND id IN (SELECT DISTINCT goodid FROM `goods-categories` WHERE categoryid IN 10)
+[24/Oct/2018:21:52:34] (index) UPDATE goods SET sale = :sale  WHERE firmid IN (1) AND id IN (SELECT DISTINCT goodid FROM `goods-categories` gc JOIN categories c ON gc.categoryid=c.id WHERE c.supercatid IN (2)) AND id IN (SELECT DISTINCT goodid FROM `goods-types` WHERE typeid IN (1)) AND id IN (SELECT DISTINCT goodid FROM `goods-categories` WHERE categoryid IN (12))
+[24/Oct/2018:21:55:06] (index) UPDATE goods SET sale = :sale  WHERE id not in (select distinct goodid from `goods-categories` where categoryid in (21, 34))
+[25/Oct/2018:08:47:22] (index) UPDATE goods SET sale = :sale  WHERE firmid IN (3) AND id not in (select distinct goodid from `goods-categories` where categoryid in (21, 34))
+[25/Oct/2018:08:47:58] (index) UPDATE goods SET sale = :sale  WHERE firmid IN (3) AND id not in (select distinct goodid from `goods-categories` where categoryid in (21, 34))
+[25/Oct/2018:08:48:31] (index) UPDATE goods SET sale = :sale  WHERE id IN (SELECT DISTINCT goodid FROM `goods-categories` WHERE categoryid IN (21)) AND id not in (select distinct goodid from `goods-categories` where categoryid in (21, 34))
+[25/Oct/2018:08:50:52] (index) UPDATE goods SET sale = :sale  WHERE id IN (SELECT DISTINCT goodid FROM `goods-categories` WHERE categoryid IN (21)) AND id not in (select distinct goodid from `goods-categories` where categoryid in (21, 34))
+[25/Oct/2018:08:52:34] (index) UPDATE goods SET sale = :sale  WHERE id IN (SELECT DISTINCT goodid FROM `goods-categories` WHERE categoryid IN (21))
+[25/Oct/2018:08:53:54] (index) UPDATE goods SET sale = :sale  WHERE firmid IN (1) AND id not in (select distinct goodid from `goods-categories` where categoryid in (21, 34))
+[25/Oct/2018:08:54:58] (index) UPDATE goods SET sale = :sale  WHERE id not in (select distinct goodid from `goods-categories` where categoryid in (21, 34))
+[25/Oct/2018:08:58:21] (index) UPDATE goods SET sale = :sale  WHERE firmid IN (2) AND id IN (SELECT DISTINCT goodid FROM `goods-categories` gc JOIN categories c ON gc.categoryid=c.id WHERE c.supercatid IN (2)) AND id IN (SELECT DISTINCT goodid FROM `goods-types` WHERE typeid IN (1)) AND id not in (select distinct goodid from `goods-categories` where categoryid in (21, 34))
+[25/Oct/2018:08:58:31] (index) UPDATE goods SET sale = :sale  WHERE firmid IN (2) AND id IN (SELECT DISTINCT goodid FROM `goods-categories` gc JOIN categories c ON gc.categoryid=c.id WHERE c.supercatid IN (2)) AND id IN (SELECT DISTINCT goodid FROM `goods-types` WHERE typeid IN (1)) AND id not in (select distinct goodid from `goods-categories` where categoryid in (21, 34))
