@@ -245,3 +245,63 @@
 [25/Oct/2018:08:54:58] (index) UPDATE goods SET sale = :sale  WHERE id not in (select distinct goodid from `goods-categories` where categoryid in (21, 34))
 [25/Oct/2018:08:58:21] (index) UPDATE goods SET sale = :sale  WHERE firmid IN (2) AND id IN (SELECT DISTINCT goodid FROM `goods-categories` gc JOIN categories c ON gc.categoryid=c.id WHERE c.supercatid IN (2)) AND id IN (SELECT DISTINCT goodid FROM `goods-types` WHERE typeid IN (1)) AND id not in (select distinct goodid from `goods-categories` where categoryid in (21, 34))
 [25/Oct/2018:08:58:31] (index) UPDATE goods SET sale = :sale  WHERE firmid IN (2) AND id IN (SELECT DISTINCT goodid FROM `goods-categories` gc JOIN categories c ON gc.categoryid=c.id WHERE c.supercatid IN (2)) AND id IN (SELECT DISTINCT goodid FROM `goods-types` WHERE typeid IN (1)) AND id not in (select distinct goodid from `goods-categories` where categoryid in (21, 34))
+[29/Oct/2018:16:58:34] (index) Updating good 683
+[29/Oct/2018:16:58:34] (index) Old price is 340
+[29/Oct/2018:16:58:34] (index) New price is 272
+[29/Oct/2018:16:58:34] (index) Updating good 259
+[29/Oct/2018:16:58:34] (index) Old price is 310
+[29/Oct/2018:16:58:34] (index) New price is 248
+[29/Oct/2018:16:58:49] (index) Updating good 683
+[29/Oct/2018:16:58:49] (index) Old price is 272
+[29/Oct/2018:16:58:49] (index) New price is 340
+[29/Oct/2018:16:58:49] (index) Updating good 259
+[29/Oct/2018:16:58:49] (index) Old price is 248
+[29/Oct/2018:16:58:49] (index) New price is 310
+[29/Oct/2018:16:58:57] (index) Updating good 683
+[29/Oct/2018:16:58:57] (index) Old price is 340
+[29/Oct/2018:16:58:57] (index) New price is 272
+[29/Oct/2018:16:58:57] (index) Updating good 259
+[29/Oct/2018:16:58:57] (index) Old price is 310
+[29/Oct/2018:16:58:57] (index) New price is 248
+[29/Oct/2018:16:58:58] (index) Updating good 258
+[29/Oct/2018:16:58:58] (index) Old price is 310
+[29/Oct/2018:16:58:58] (index) New price is 248
+[29/Oct/2018:16:59:09] (index) Updating good 35
+[29/Oct/2018:16:59:09] (index) Old price is 170
+[29/Oct/2018:16:59:09] (index) New price is 136
+[29/Oct/2018:16:59:51] (index) Updating good 683
+[29/Oct/2018:16:59:51] (index) Old price is 272
+[29/Oct/2018:16:59:51] (index) New price is 340
+[29/Oct/2018:16:59:51] (index) Updating good 259
+[29/Oct/2018:16:59:51] (index) Old price is 248
+[29/Oct/2018:16:59:51] (index) New price is 310
+[29/Oct/2018:16:59:51] (index) Updating good 258
+[29/Oct/2018:16:59:51] (index) Old price is 248
+[29/Oct/2018:16:59:51] (index) New price is 310
+[29/Oct/2018:16:59:51] (index) Updating good 35
+[29/Oct/2018:16:59:51] (index) Old price is 136
+[29/Oct/2018:16:59:51] (index) New price is 170
+[29/Oct/2018:17:00:03] (index) Updating good 683
+[29/Oct/2018:17:00:03] (index) Old price is 340
+[29/Oct/2018:17:00:03] (index) New price is 272
+[29/Oct/2018:17:00:03] (index) Updating good 259
+[29/Oct/2018:17:00:03] (index) Old price is 310
+[29/Oct/2018:17:00:03] (index) New price is 248
+[29/Oct/2018:17:00:03] (index) Updating good 258
+[29/Oct/2018:17:00:03] (index) Old price is 310
+[29/Oct/2018:17:00:03] (index) New price is 248
+[29/Oct/2018:17:00:03] (index) Updating good 35
+[29/Oct/2018:17:00:03] (index) Old price is 170
+[29/Oct/2018:17:00:03] (index) New price is 136
+[29/Oct/2018:17:00:07] (index) Updating good 683
+[29/Oct/2018:17:00:07] (index) Old price is 272
+[29/Oct/2018:17:00:07] (index) New price is 340
+[29/Oct/2018:17:00:07] (index) Updating good 259
+[29/Oct/2018:17:00:07] (index) Old price is 248
+[29/Oct/2018:17:00:07] (index) New price is 310
+[29/Oct/2018:17:00:07] (index) Updating good 258
+[29/Oct/2018:17:00:07] (index) Old price is 248
+[29/Oct/2018:17:00:07] (index) New price is 310
+[29/Oct/2018:17:00:07] (index) Updating good 35
+[29/Oct/2018:17:00:07] (index) Old price is 136
+[29/Oct/2018:17:00:07] (index) New price is 170
