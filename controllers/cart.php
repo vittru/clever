@@ -68,7 +68,7 @@ Class Controller_Cart Extends Controller_Base {
     }  
     
     private function applyDiscounts() {
-        $this->gingerDiscount();
+        $this->brokkoliDiscount();
     }
     
     private function bubbleBallDiscounts() {
@@ -477,6 +477,37 @@ Class Controller_Cart Extends Controller_Base {
         } else {
             foreach ($_SESSION['cart'] as $cartItem) {
                 if (array_key_exists(2, $good->supercats) and $cartItem->sale == 20) {
+                    $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
+                    $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
+                    $cartItem->price = ceil($cartItem->price * 100 / (100 - $cartItem->sale));
+                    $cartItem->sale = 0;
+                    $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
+                }
+            }
+        }
+    }
+    
+    //При покупке бальзама с маслом брокколи скидка на все 20%
+    private function brokkoliDiscount() {
+        $discount = false;
+        foreach ($_SESSION['cart'] as $cartItem) {
+            if ($cartItem->goodId == 51) {
+                $discount = true;
+            }
+        }
+        if ($discount) {
+            foreach ($_SESSION['cart'] as $cartItem) {
+                if (!$cartItem->sale and $cartItem->goodId != 51) {
+                    $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
+                    $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
+                    $cartItem->sale = 20;
+                    $cartItem->price = ceil($cartItem->price * (0.8));
+                    $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
+                }
+            }
+        } else {
+            foreach ($_SESSION['cart'] as $cartItem) {
+                if ($cartItem->goodId != 51 and $cartItem->sale == 20) {
                     $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
                     $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
                     $cartItem->price = ceil($cartItem->price * 100 / (100 - $cartItem->sale));

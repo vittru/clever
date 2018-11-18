@@ -28,7 +28,7 @@ include 'header.php';
                                     <label for="auth-spam"><input type="checkbox" id="auth-spam" name="isSpam" <?php if ($user->spam) echo "checked" ?>> Подписаться на рассылку? </label>
                                     <input type="hidden" id="auth-action" name="userAction" value="update">
                                     <div hidden id="auth-error" class="error"></div>
-                                    <button type="submit" class="green-button change-profile">Изменить профиль</button>
+                                    <button type="submit" class="green button change-profile">Изменить профиль</button>
                                 </form>
                             </div>
                         </div>
@@ -74,11 +74,11 @@ include 'header.php';
                                             <td><?php echo strftime('%e/%m/%G', strtotime($order->date))?></td>
                                             <td> <span class="dotted" data-toggle="tooltip" title="<?php echo $order->statusdesc; ?>"><?php echo $order->status?></span></td>
                                             <td>
-                                                <a class="green-button order-details" href="/account/orders?id=<?php echo $order->id ?>">Детали</a>
+                                                <a class="green button order-details" href="/account/orders?id=<?php echo $order->id ?>">Детали</a>
                                                 <?php
                                                 if ($isadmin) {
                                                 ?>
-                                                <a class="green-button order-details order-link" data-id="<?php echo $order->id ?>">Ссылка на оплату</button>
+                                                <a class="green button order-details order-link" data-id="<?php echo $order->id ?>">Ссылка на оплату</button>
                                                 <?php
                                                 }
                                                 ?>
@@ -101,7 +101,7 @@ include 'header.php';
                     </div>
                     <div class="row">
                         <div class="col-md-2">
-                            <a href="/account/logout" id="logout" class="orange-button">Выйти</a>
+                            <a href="/account/logout" id="logout" class="orange button">Выйти</a>
                         </div>
                     </div>    
                 </div>

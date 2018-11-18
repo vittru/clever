@@ -13,7 +13,7 @@ include 'header.php';
                             <form method="GET" action="/account/orders">
                                 <label class="order-parameters-header">Номер заказа:</label>
                                 <input class="form-control" type="number" maxlength="5" name="id" value="<?php if ($order->id) echo $order->id ?>">
-                                <button class="green-button show-details" type="submit">Показать</button>
+                                <button class="green button show-details" type="submit">Показать</button>
                             </form>
                             <?php
                             if ($order->id) {
@@ -35,7 +35,7 @@ include 'header.php';
                                             <option value="7" <?php if ($order->status == "Не выдан") echo "selected"; ?>>Не выдан</option>
                                             <option value="8" <?php if ($order->status == "Отменен") echo "selected"; ?>>Отменен</option>
                                         </select>
-                                    <button class="green-button show-details" id="change-order-status">Изменить</button>
+                                    <button class="green button show-details" id="change-order-status">Изменить</button>
                                     </div>
                                 <?php
                                 } else {

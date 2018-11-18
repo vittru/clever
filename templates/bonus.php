@@ -1,7 +1,7 @@
 <?php
 include 'header.php';
 ?>
-<section id="aa-text">
+<section class="aa-text">
     <div class='container'>
         <div class='row'>
             <div class="col-md-12">

@@ -371,7 +371,7 @@ if ($goodId) {
                 </td>
             </tr>
         </table>
-        <button type="submit" style="margin-bottom: 40px;" class="btn green-button" id="save">Сохранить</button>
+        <button type="submit" style="margin-bottom: 40px;" class="btn green button" id="save">Сохранить</button>
     
     </form>
 </section>
@@ -380,6 +380,8 @@ if ($goodId) {
 include 'footer.php';
 
 ?>
+
+<link href="/css/clubclever-admin.min.css" rel="stylesheet">
 
 <!-- include summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css" rel="stylesheet">

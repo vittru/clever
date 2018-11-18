@@ -34,7 +34,7 @@ jQuery(function($){
     
      jQuery(".aa-cartbox").hover(function(){
         /*We do not expand the cart in cart and buy pages*/
-        if (window.location.pathname !== "/cart" && window.location.pathname !== "/buy") {
+        if (window.location.pathname !== "/cart" && window.location.pathname !== "/buy" && jQuery(".aa-cart-notify").length) {
             jQuery(this).find(".aa-cartbox-summary").fadeIn(500);
         }    
     }

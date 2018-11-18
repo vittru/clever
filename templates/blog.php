@@ -19,12 +19,12 @@ include 'header.php';
                 if ($isadmin) {
                     if ($entries) {
                 ?>
-                        <a class="green-button" style="padding: 12px 15px;" href="/editblog">Добавить запись</a>
+                        <a class="green button" style="padding: 12px 15px;" href="/editblog">Добавить запись</a>
                 <?php
                     } else {
                 ?>
-                        <a class="orange-button" style="padding: 12px 15px;margin:5px;float:right" href="/editblog/remove?blog=<?php echo $entry->id ?>">Удалить</a>
-                        <a class="green-button" style="padding: 12px 15px;margin:5px;float:right" href="/editblog?blog=<?php echo $entry->id ?>">Редактировать</a>
+                        <a class="orange button" style="padding: 12px 15px;margin:5px;float:right" href="/editblog/remove?blog=<?php echo $entry->id ?>">Удалить</a>
+                        <a class="green button" style="padding: 12px 15px;margin:5px;float:right" href="/editblog?blog=<?php echo $entry->id ?>">Редактировать</a>
 
                 <?php
                     }

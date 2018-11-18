@@ -9,7 +9,7 @@ include 'header.php';
                 <div class="aa-error-area">
                     <h1><?php echo $mainMessage ?></h1>
                     <span><?php echo $secondMessage ?></span>
-                    <a href="/" class="green-button"> На главную</a>
+                    <a href="/" class="green button"> На главную</a>
                 </div>
             </div>
         </div>

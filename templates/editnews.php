@@ -128,7 +128,7 @@ if ($newsId) {
                 </td>
             </tr>
         </table>
-        <button id="save" type="submit" style="margin-bottom: 40px;" class="btn green-button">Сохранить</button>
+        <button id="save" type="submit" style="margin-bottom: 40px;" class="btn green button">Сохранить</button>
     
     </form>
 </section>

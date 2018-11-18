@@ -4,7 +4,7 @@ Class Controller_Editgood Extends Controller_Base {
         
     function index() {
         if ($this->registry['isadmin']) {
-            $this->registry['model']->logVisit(1000);
+            $this->registry['model']->logVisit(1000, $_GET['good']);
             $this->registry['template']->show('editgood');
         } else {
             $this->registry['template']->show('404');

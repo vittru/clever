@@ -1,68 +1,50 @@
-<footer id="aa-footer">
-    <div class="aa-footer-top">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="aa-footer-top-area">
-                        <div class="row">
-                            <div class="col-md-3 col-sm-6">
-                                <div class="aa-footer-widget">
-                                    <div class="footer-header">Главное меню</div>
-                                    <ul class="aa-footer-nav">
-                                        <li><a href="/catalog/sc">Каталог</a></li>
-                                        <li><a href="/catalog/firms">Бренды</a></li>
-                                        <li><a href="/actions">Акции</a></li>
-                                        <li><a href="/news">Новости</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-sm-6">
-                                <div class="aa-footer-widget">
-                                    <div class="aa-footer-widget">
-                                        <div class="footer-header">Информация</div>
-                                        <ul class="aa-footer-nav">
-                                            <!--li><a href="/about">О нас</a></li-->
-                                            <li><a href="/common/delivery">Доставка</a></li>
-                                            <li><a href="/common/payment">Оплата</a></li>
-                                            <li><a href="/common/moneyback">Возврат</a></li>
-                                            <li><a href="/contacts">Контакты</a></li>
-                                            <li><a href="/common/offer">Оферта</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-sm-6">
-                                <div class="aa-footer-widget">
-                                    <div class="aa-footer-widget">
-                                        <div class="footer-header">Материалы</div>
-                                        <ul class="aa-footer-nav">
-                                            <li><a target="_blank" rel="nofollow" href="https://www.biobeauty.ru/">БиоБьюти</a></li>
-                                            <li><a target="_blank" rel="nofollow" href="http://master-om.com/">Мастерская Олеси Мустаевой</a></li>
-                                            <li><a target="_blank" rel="nofollow" href="http://www.mi-ko.org/">МиКо</a></li>
-                                            <li><a rel="nofollow" href="/common/certs">Сертификаты</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-sm-6">
-                                <div class="aa-footer-widget">
-                                    <div class="aa-footer-widget">
-                                        <div class="footer-header">Наши контакты</div>
-                                        <address>
-                                            <p>ООО "Клевер"</p>
-                                            <p>ИНН 6315011857</p>
-                                            <p><span class="fa fa-phone"></span><span class="ya-phone">8 (846) 252 39 11</span></p>
-                                            <p><span class="fa fa-envelope"></span><?php echo $this->registry['mainemail'] ?></p>
-                                        </address>
-                                        <div class="aa-footer-social">
-                                            <!--a target="_blank" href="http://facebook.com"><span class="fa fa-facebook"></span></a-->
-                                            <a target="_blank" rel="nofollow" href="https://vk.com/clubcleverru"><span class="fa fa-vk"></span></a>
-                                            <a target="_blank" rel="nofollow" href="http://www.instagram.com/clubclever.ru/"><span class="fa fa-instagram"></span></a>
-                                            <a target="_blank" rel="nofollow" href="https://www.youtube.com/channel/UCZqTkI8X0KQGyINHpblqhfg"><span class="fa fa-youtube"></span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+<footer id="aa-footer" class="left">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="footer-header">Главное меню</div>
+                        <ul class="aa-footer-nav">
+                            <li><a href="/catalog/sc">Каталог</a></li>
+                            <li><a href="/catalog/firms">Бренды</a></li>
+                            <li><a href="/actions">Акции</a></li>
+                            <li><a href="/news">Новости</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="footer-header">Информация</div>
+                        <ul class="aa-footer-nav">
+                            <!--li><a href="/about">О нас</a></li-->
+                            <li><a href="/common/delivery">Доставка</a></li>
+                            <li><a href="/common/payment">Оплата</a></li>
+                            <li><a href="/common/moneyback">Возврат</a></li>
+                            <li><a href="/contacts">Контакты</a></li>
+                            <li><a href="/common/offer">Оферта</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="footer-header">Материалы</div>
+                        <ul class="aa-footer-nav">
+                            <li><a target="_blank" rel="nofollow" href="https://www.biobeauty.ru/">БиоБьюти</a></li>
+                            <li><a target="_blank" rel="nofollow" href="http://master-om.com/">Мастерская Олеси Мустаевой</a></li>
+                            <li><a target="_blank" rel="nofollow" href="http://www.mi-ko.org/">МиКо</a></li>
+                            <li><a rel="nofollow" href="/common/certs">Сертификаты</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="footer-header">Наши контакты</div>
+                        <address>
+                            <p>ООО "Клевер"</p>
+                            <p>ИНН 6315011857</p>
+                            <p><span class="fa fa-phone"></span><span class="ya-phone"><?php echo phoneNumber ?></span></p>
+                            <p><span class="fa fa-envelope"></span><a href="mailto:<?php echo $this->registry['mainemail'] ?>"><?php echo $this->registry['mainemail'] ?></a></p>
+                        </address>
+                        <div class="aa-footer-social">
+                            <!--a target="_blank" href="http://facebook.com"><span class="fa fa-facebook"></span></a-->
+                            <a target="_blank" rel="nofollow" href="https://vk.com/clubcleverru"><span class="fa fa-vk"></span></a>
+                            <a target="_blank" rel="nofollow" href="http://www.instagram.com/clubclever.ru/"><span class="fa fa-instagram"></span></a>
+                            <a target="_blank" rel="nofollow" href="https://www.youtube.com/channel/UCZqTkI8X0KQGyINHpblqhfg"><span class="fa fa-youtube"></span></a>
                         </div>
                     </div>
                 </div>
@@ -92,7 +74,7 @@
                     <div class="forget-password"><a id="forget-password" onclick="showPasswordForm()">Забыли пароль?</a></div>
                     <div id="auth-error" class="error"></div>
                     <input type="hidden" id="auth-action" name="userAction">
-                    <button class="aa-login-btn green-button" type="submit" id="auth-submit">ОК</button>
+                    <button class="aa-login-btn green button" type="submit" id="auth-submit">ОК</button>
                 </form>
             </div> 
             <div class="modal-footer">
@@ -140,7 +122,7 @@
                 <?php
                 }
                 ?>
-                <button type="button" class="green-button" id="emailMeSubmit">Сообщить</button>
+                <button type="button" class="green button" id="emailMeSubmit">Сообщить</button>
             </div>    
         </div>
     </div>
@@ -201,7 +183,7 @@
                     </div>    
                     <div class="row">
                         <div class="col-sm-12">
-                            <button type="button" class="green-button" id="quickOrderSubmit">Заказать</button>
+                            <button type="button" class="green button" id="quickOrderSubmit">Заказать</button>
                         </div>    
                     </div>    
                 </div>
@@ -211,7 +193,7 @@
                     <p></p>
                     <p>Спасибо за шоппинг с нами.</p>
                     <h4>Ваш Клевер!</h4>
-                    <button class="green-button" data-dismiss="modal">Закрыть</button>
+                    <button class="green button" data-dismiss="modal">Закрыть</button>
                 </div>
             </div>    
         </div>
@@ -274,7 +256,7 @@
                 </div>    
                 <div class="row">
                     <div class="col-sm-12">
-                        <button type="button" class="green-button" id="reviewSubmit">Сохранить</button>
+                        <button type="button" class="green button" id="reviewSubmit">Сохранить</button>
                     </div>
                 </div>    
             </div>    
@@ -294,7 +276,7 @@
 <script type="text/javascript" src="/js/slick.min.js"></script>
 <script src="/js/jquery.sumoselect.min.js"></script>
 <script src="/js/jquery-editable-select.js"></script>
-<script src="/js/custom.min.js"></script> 
+<script src="/js/custom.min.js?20181101"></script> 
 <script src="/js/jquery.validate.min.js"></script>
 <script src="/js/auth-form.min.js?<?php echo '20171228' ?>"></script>
 <script src="/js/clubclever.min.js?<?php echo '20180723' ?>"></script>

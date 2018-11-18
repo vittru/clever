@@ -1,7 +1,7 @@
 <?php
 if ($isadmin) {
 ?>
-    <a class="green-button" style="padding: 12px 15px;" href="/editnews">Добавить новость</a>
+    <a class="green button" style="padding: 12px 15px;" href="/editnews">Добавить новость</a>
 <?php
 }    
 foreach ($news as $new) {
@@ -25,8 +25,8 @@ foreach ($news as $new) {
             <?php
             if ($isadmin) {
             ?>
-                <a class="green-button" style="padding: 12px 15px;" href="/editnews?news=<?php echo $new->id ?>">Редактировать</a>
-                <a class="orange-button" style="padding: 12px 15px;" href="/editnews/remove?news=<?php echo $new->id ?>">Удалить</a>
+                <a class="green button" href="/editnews?news=<?php echo $new->id ?>">Редактировать</a>
+                <a class="orange button" href="/editnews/remove?news=<?php echo $new->id ?>">Удалить</a>
             <?php
             }    
             ?>

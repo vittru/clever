@@ -89,10 +89,10 @@ Class Good {
     function showInCatalog($bb, $row = null) {
         if (!isset($bb)) {
             $bb = false;
-        };
+        }
         if (!isset ($row)) {
             $row=4;
-        };
+        }
         if (!$this->hidden) {
             echo '<li class="col-sm-'.$row.' good">';
             foreach ($this->types as $id=>$type) {
@@ -134,7 +134,7 @@ Class Good {
             echo str_replace('"', "'", $this->name);
             echo'"></a>';
             /*if ($bb or $this->isAvailable()) {
-                echo '<a class="aa-action-btn aa-add-card-btn orange-button" id="';
+                echo '<a class="aa-action-btn aa-add-card-btn orange button" id="';
                 echo $this->id;
                 echo '" value="';
                 echo $this->getFirstAvailSize();
@@ -188,7 +188,7 @@ Class Good {
                 echo '</del></span>';            }
             echo '<div class="aa-product-title">';
             if ($bb or $this->isAvailable()) {
-                echo '<div class="green-button good-button aa-add-card-btn" id="';
+                echo '<div class="green button good-button aa-add-card-btn" id="';
                 echo $this->id;
                 echo '" value="';
                 echo $this->getFirstAvailSize();
@@ -208,7 +208,7 @@ Class Good {
                 echo '"><span class="fa fa-shopping-cart"></span>В корзину</div>';
                 //echo '<div class="green-button good-button aa-quick-order-btn" data-toggle="modal" data-target="#quickOrder"><span class="fa fa-bolt"></span>Купить в 1 клик</div>';
             } else {
-                echo '<div class="aa-emailme-btn green-button good-button" id="emailMeBtn';
+                echo '<div class="aa-emailme-btn green button good-button" id="emailMeBtn';
                 echo '"><span class="fa fa-envelope"></span>Заказать</div>';
             }    
             echo '</div>';

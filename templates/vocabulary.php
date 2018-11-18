@@ -2,7 +2,7 @@
 include 'header.php';
 ?>
 
-<section id="aa-text">
+<section class="aa-text">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -10,7 +10,7 @@ include 'header.php';
                 <?php
                 if ($isadmin) {
                 ?>
-                <p><a class="green-button" style="padding: 5px 10px;" href="/editvoc">Добавить слово</a></p>
+                <p><a class="green button" href="/editvoc">Добавить слово</a></p>
                 <?php
                 } 
                 $currentLetter = "";
@@ -20,17 +20,17 @@ include 'header.php';
                         $currentLetter = $firstLetter;
                         echo '<h2>' . $currentLetter . '</h2>';
                     }
-                ?>    
-                <p id="<?php echo preg_replace('/\s+/', '', $word['name']);?>"><b><?php echo $word['name']?></b> - <?php echo $word['value'];?>
-                    <?php
-                    if ($isadmin) {
-                    ?>  
-                    <div style="border-bottom:solid; height:40px">
-                        <a class="orange-button" style="padding: 1px 10px;margin:5px;float:right" href="/editvoc/remove?voc=<?php echo $word['id'] ?>">Удалить</a>
-                        <a class="green-button" style="padding: 1px 10px;margin:5px;float:right" href="/editvoc?voc=<?php echo $word['id'] ?>">Редактировать</a>
-                    </div>  
-                    <?php    
-                    }
+                    ?>    
+                        <p id="<?php echo preg_replace('/\s+/', '', $word['name']);?>"><b><?php echo $word['name']?></b> - <?php echo $word['value'];?>
+                        <?php
+                        if ($isadmin) {
+                        ?>  
+                        <div style="border-bottom:solid; height:40px">
+                            <a class="orange button" href="/editvoc/remove?voc=<?php echo $word['id'] ?>">Удалить</a>
+                            <a class="green button" href="/editvoc?voc=<?php echo $word['id'] ?>">Редактировать</a>
+                        </div>  
+                        <?php    
+                        }
                     ?>
                     </p>
                     <?php    

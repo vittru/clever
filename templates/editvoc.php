@@ -31,7 +31,7 @@ include 'header.php';
                 </td>
             </tr>
         </table>
-        <button type="submit" style="margin-bottom: 40px;" class="btn green-button" id="save">Сохранить</button>
+        <button type="submit" style="margin-bottom: 40px;" class="green button" id="save">Сохранить</button>
     </form>
 </section>
 

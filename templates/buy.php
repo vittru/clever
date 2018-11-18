@@ -45,7 +45,7 @@ include 'header.php';
                                     </div>
                                     <div class="panel">
                                         <ul class="nav nav-tabs aa-checkout-billaddress">
-                                            <li class="active"><a href="#delivery" data-toggle="tab">Доставка курьером</a></li>
+                                            <li class="active"><a href="#delivery" data-toggle="tab">Доставка</a></li>
                                             <li><a href="#pickup" data-toggle="tab">Самовывоз</a></li>
                                         </ul>
                                         <div class="tab-content">
@@ -84,38 +84,32 @@ include 'header.php';
                                             <div class="tab-pane fade in active" id="delivery">
                                                 <div class="panel-body">
                                                     <div class="row" id="delivery-info" <?php if ($total > $this->registry['freeDelivery']) echo "hidden" ?>>
-                                                        <div class="col-md-12">
-                                                            Стоимость доставки по Самаре - 350<?php echo currency ?> 
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            Добавьте в заказ товаров на <span id="amount-left"><?php echo $this->registry['freeDelivery']-$total ?></span><?php echo currency ?>, и доставка будет бесплатной.
-                                                        </div>  
+                                                                <div class="col-md-12">
+                                                                    Стоимость доставки по Самаре - 350<?php echo currency ?> 
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                 Добавьте в заказ товаров на <span id="amount-left"><?php echo $this->registry['freeDelivery']-$total ?></span><?php echo currency ?>, и доставка будет бесплатной.
+                                                                </div>  
                                                         <div id='freeDelivery' hidden><?php echo $this->registry['freeDelivery'] ?></div>
-                                                    </div>    
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="aa-checkout-single-bill">
-                                                                <select class="order-form form-control required" name="city" id="city" data-placeholder="Город*">
-                                                                    <option>Самара</option>
-                                                                    <option>Алексеевка</option>
-                                                                    <option>Кинель</option>
-                                                                    <option>Новокуйбышевск</option>
-                                                                    <option>Тольятти</option>
-                                                                </select>
-                                                            </div>                             
-                                                        </div>                            
-                                                    </div>  
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="aa-checkout-single-bill">
+                                                            </div>    
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="aa-checkout-single-bill">
+                                                                        Доставка курьером осуществляется только по городу Самара. В другие города мы доставляем транспортными компаниями.
+                                                                    </div>                             
+                                                                </div>                            
+                                                            </div>  
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="aa-checkout-single-bill">
                                                                 <textarea class="order-form form-control" cols="8" rows="2" name="address" placeholder="Адрес*"></textarea>
-                                                            </div>                             
-                                                        </div>                            
-                                                    </div>   
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> 
+                                                                    </div>                             
+                                                                </div>                            
+                                                            </div>   
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                        </div>
                                     <div class="panel panel-default aa-checkout-billaddress">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
@@ -251,7 +245,7 @@ include 'header.php';
                                                             <div class="aa-checkout-single-bill">
                                                                 <div id="bonus-error" class="error" hidden></div>
                                                                 <input class="form-control" id="bonus" name="bonus" type="number" value="<?php echo min(floor($totalNoSale * 0.3), $user->bonus)?>">
-                                                                <button id="use-bonus" class="orange-button" type="button">Использовать</button>
+                                                                <button id="use-bonus" class="orange button" type="button">Использовать</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -291,7 +285,7 @@ include 'header.php';
                                     
                                     
                                     <div id="order-error" class="error" hidden>Не все обязательные поля заполнены</div>
-                                    <input type="submit" value="Заказать и оплатить" class="green-button" id='make_order'>                
+                                    <input type="submit" value="Заказать и оплатить" class="green button" id='make_order'>                
                                 </div>
                             </div>
                         </div>

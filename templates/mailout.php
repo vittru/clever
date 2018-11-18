@@ -29,7 +29,7 @@ include 'header.php';
                 <td>
                     <div class="form-group">
                         <div class="col-md-2">
-                            <div class="green-button" style="padding: 5px 5px" for="text" id="sendTestEmail">Послать пример на:</div>
+                            <div class="green button" style="padding: 5px 5px" for="text" id="sendTestEmail">Послать пример на:</div>
                         </div>   
                         <input class="form-control col-md-10 text" id="testEmail" name="textHtml" value="<?php echo $user->email ?>"></input>
                     </div>
@@ -40,7 +40,7 @@ include 'header.php';
                 </td>
             </tr>
         </table>
-        <button type="submit" style="margin-bottom: 40px;" class="btn green-button" id="send">Разослать</button>
+        <button type="submit" style="margin-bottom: 40px;" class="btn green button" id="send">Разослать</button>
     
     </form>
 </section>

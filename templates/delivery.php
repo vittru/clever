@@ -1,7 +1,7 @@
 <?php
 include 'header.php';
 ?>
-<section id="aa-text">
+<section class="aa-text">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -20,7 +20,7 @@ include 'header.php';
                 <ul>
                     <li>Срок доставки в пункт самовывоза 1-7 дней с момента отправки заказа.</li>
                     <li>Заказ следует забрать в течение 3 дней после уведомления о поступлении заказа.</li>
-                    <li>Если Вы не успеваете, сообщите, пожалуйста, по телефону +7 996 725 00 61 и заберите позже.</li>
+                    <li>Если Вы не успеваете, сообщите, пожалуйста, по телефону <?php echo phoneNumber ?> и заберите позже.</li>
                 </ul>
                 <h3>Пункты самовывоза</h3>
                 <div class="row">
@@ -31,14 +31,6 @@ include 'header.php';
                         <b><?php echo $branch->address; ?></b>
                         <div class="map"><?php echo $branch->map ?></div>
                         <p><span class="fa fa-clock-o"></span><?php echo $branch->open ?></p>
-                        <!--div class="cash" data-toggle="tooltip" title="Оплата наличными"></div-->
-                        <?php
-                        if ($branch->card) {
-                        ?>
-                            <div class="card" data-toggle="tooltip" title="Оплата банковской картой"></div>
-                        <?php
-                        }
-                        ?>
                     </div>    
                 <?php    
                 }    
@@ -49,7 +41,7 @@ include 'header.php';
                 <p>Удобно получать заказы рядом с домом?! Поэтому мы работаем с несколькими транспортными компаниями. При оформлении заказа выберите удобный для себя пункт выдачи заказов наших партнеров:</p>
                 <ul>
                     <li><a href="https://boxberry.ru/find_an_office/" target="blank">Boxberry</a></li>
-                    <li><a href="https://www.cdek.ru/contacts.html" target="blank">СДЭК</a> (только оплаченые заказы)</li>
+                    <li><a href="https://www.cdek.ru/contacts.html" target="blank">СДЭК</a></li>
                     <li><a href="https://www.dpd.ru/dpd/chooser.do2" target="blank">DPD</a></li>
                 </ul>
                 <p>Для новых клиентов доставка в пункты выдачи заказов возможна только по полной предоплате.</p>

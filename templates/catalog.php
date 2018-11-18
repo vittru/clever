@@ -9,71 +9,69 @@ function cmp($a, $b)
 usort($catalogGoods, "cmp");
 ?>
 
-<section id="aa-product">
+<section class="aa-text">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <?php
                 include 'breadcrumbs.php';
                 ?>
-                <div class="row">
-                    <div class="aa-product-header">
-                        
-                        <h1><?php echo $pageHeader ?></h1>
-                        <p><?php echo $pageSubHeader ?></p>
-                        <h4><?php 
-                            if (!$showGoods) {
-                                echo 'Сейчас у нас нет таких товаров';
-                            } else {
-                                echo $pageSecondHeader;
-                            }
-                            ?>
-                        </h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <?php
-                    if ($showGoods) {
+                <h1 class="center"><?php echo $pageHeader ?></h1>
+                <p><?php echo $pageSubHeader ?></p>
+                <h4 class="center"><?php 
+                    if (!$showGoods) {
+                        echo 'Сейчас у нас нет таких товаров';
+                    } else {
+                        echo $pageSecondHeader;
+                    }
                     ?>
-                    <div class="col-md-9 col-md-push-3 col-xs-12">
-                        <div class="aa-product-catg-content">
-                            <div class="aa-product-area">
-                                <?php
-                                include 'sort.php';
-                                ?>                                
-                                <div class="aa-product-catg-body">
-                                    <ul class="aa-product-catg">
-                                        <?php
-                                        foreach($catalogGoods as $goodId=>$good) {
-                                            $good->showInCatalog($bestBefore);
-                                        }
-                                        ?>
-                                    </ul>
-                                    <div id="empty-catg" class="aa-empty-catg" hidden>Мы не нашли товаров, удовлетворяющих вашему запросу</div>
-                                </div>
-                            </div>
-                        </div>
+                </h4>
+            </div>
+        </div>    
+    </div>
+</section>
+<section id="aa-product">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <?php
+                if ($showGoods) {
+                ?>
+                <div class="col-md-9 col-md-push-3 col-xs-12">
+                    <?php
+                    include 'sort.php';
+                    ?>                                
+                    <ul class="aa-product-catg">
                         <?php
-                        if ($descAfter) {
-                        ?>
-                            <div class="aa-product-desc desc-after">
-                                <?php
-                                echo $descAfter;
-                                ?>
-                            </div>  
-                        <?php
+                        foreach($catalogGoods as $goodId=>$good) {
+                            $good->showInCatalog($bestBefore);
                         }
                         ?>
-                    </div>
-                    <?php
-                    include 'filter.php';
-                    } 
-                    ?>
+                    </ul>
+                    <div id="empty-catg" class="aa-empty-catg" hidden>Мы не нашли товаров, удовлетворяющих вашему запросу</div>
                 </div>
+                <?php
+                include 'filter.php';
+                } 
+                ?>
             </div>    
         </div>
     </div>
 </section>
-
 <?php
+if ($descAfter) {
+?>
+<section class="aa-text">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <?php
+                echo $descAfter;
+                ?>
+            </div>
+        </div>    
+    </div>  
+</section>    
+<?php
+}
 include 'footer.php';

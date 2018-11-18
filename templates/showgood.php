@@ -218,7 +218,7 @@
                                         <?php
                                         }
                                         ?>
-                                        <td class="orange"><?php echo strftime('%e/%m/%G', strtotime($size->bestbefore)); ?></td>
+                                        <td class="orange-text"><?php echo strftime('%e/%m/%G', strtotime($size->bestbefore)); ?></td>
                                         <td itemprop="price"><?php echo $size->getWebBBPrice($showGood->sale); ?></td>
                                         <td>
                                             <?php
@@ -253,13 +253,13 @@
                     </div>
                 </div>
                 <div class="aa-prod-view-bottom">
-                    <a class="green-button" id="emailMeBtn" data-toggle="modal" data-target="#emailMe" <?php if ($bb or $showGood->isAvailable()) { echo 'style="display:none;" ';} ?>><span class="fa fa-envelope"></span>Сообщить о наличии</a>
-                    <a class="aa-add-to-cart-btn orange-button" <?php if (!$canBeBought) { echo 'disabled ';} if (!$bb and !$showGood->isAvailable()) { echo 'style="display:none;" ';} ?> title="Товар добавлен в корзину" data-content="Оформить заказ"><span class="fa fa-shopping-cart"></span>В корзину</a>
-                    <a class="aa-quick-order-btn green-button" data-toggle="modal" data-target="#quickOrder" data-goodid="<?php echo $showGood->id ?>" <?php if (!$canBeBought) { echo 'disabled ';} if (!$bb and !$showGood->isAvailable()) { echo 'style="display:none;" ';} ?> title="Заказ оформлен" data-content="Заказать"><span class="fa fa-bolt"></span>Купить в 1 клик</a>
+                    <a class="green button" id="emailMeBtn" data-toggle="modal" data-target="#emailMe" <?php if ($bb or $showGood->isAvailable()) { echo 'style="display:none;" ';} ?>><span class="fa fa-envelope"></span>Сообщить о наличии</a>
+                    <a class="aa-add-to-cart-btn orange button" <?php if (!$canBeBought) { echo 'disabled ';} if (!$bb and !$showGood->isAvailable()) { echo 'style="display:none;" ';} ?> title="Товар добавлен в корзину" data-content="Оформить заказ"><span class="fa fa-shopping-cart"></span>В корзину</a>
+                    <a class="aa-quick-order-btn green button" data-toggle="modal" data-target="#quickOrder" data-goodid="<?php echo $showGood->id ?>" <?php if (!$canBeBought) { echo 'disabled ';} if (!$bb and !$showGood->isAvailable()) { echo 'style="display:none;" ';} ?> title="Заказ оформлен" data-content="Заказать"><span class="fa fa-bolt"></span>Купить в 1 клик</a>
                     <?php
                     if ($isadmin) {
                     ?>
-                        <a class="green-button" href="/editgood?good=<?php echo $showGood->id ?>">Редактировать</a>
+                        <a class="green button" href="/editgood?good=<?php echo $showGood->id ?>">Редактировать</a>
                     <?php
                     }    
                     ?>
@@ -379,8 +379,8 @@
                             if ($isadmin) {
                             ?>
                             <div>
-                                <div class="green-button review-button editReview" data-toggle="modal" data-target="#review" data-review="<?php echo $review['id']?>" data-clovers="<?php echo $review['clovers']?>" data-author="<?php echo $review['author']?>" data-text="<?php echo $review['text']?>" data-date="<?php echo $review['date'] ?>">Редактировать</div>                                
-                                <div class="orange-button review-button deleteReview" data-review="<?php echo $review['id']?>">Удалить</div>                                
+                                <div class="green button review-button editReview" data-toggle="modal" data-target="#review" data-review="<?php echo $review['id']?>" data-clovers="<?php echo $review['clovers']?>" data-author="<?php echo $review['author']?>" data-text="<?php echo $review['text']?>" data-date="<?php echo $review['date'] ?>">Редактировать</div>                                
+                                <div class="orange button review-button deleteReview" data-review="<?php echo $review['id']?>">Удалить</div>                                
                             </div>
                             <?php
                             }
@@ -389,7 +389,7 @@
                         <?php
                         }
                         ?>
-                        <div class="green-button review-button" id="addReview" data-toggle="modal" data-target="#review">Добавить отзыв/оценку</div>
+                        <div class="green button review-button" id="addReview" data-toggle="modal" data-target="#review">Добавить отзыв/оценку</div>
                     </div>    
                 </div>    
             </div>

@@ -72,6 +72,16 @@ Class Controller_Showgood Extends Controller_Base {
             $this->registry['model']->logVisit(40, $_POST['goodId']);
             if ($_POST['clovers'] || trim($_POST['text'])) {
                 $this->registry['model']->addReview($_POST['goodId'], $_POST['reviewId'], $_POST['clovers'], htmlspecialchars($_POST['author']), htmlspecialchars($_POST['text']), $_POST['reviewDate']);
+                if ($_POST['goodId']) {
+                    $message = "<html><body><h2>Новый отзыв о товаре " . $this->registry['model']->getGood($_POST['goodId'])->name . "</h2>";
+                } else {
+                    $message = "<html><body><h2>Новый отзыв о сайте</h2>";
+            }
+                $message .= "<p><b>Пользователь:</b> " . $_POST['author'] . "</p>" . 
+                        "<p><b>Оценка:</b> " . $_POST['clovers'] . "</p>" . 
+                        "<p><b>Дата:</b> " . $_POST['reviewDate'] . "</p>" . 
+                        "<p><b>Текст:</b> " . htmlspecialchars($_POST['text']) . "</p></body></html>";
+                $this->sendMail($this->registry['mainemail'], 'На сайте новый отзыв', $message);
             } else {
                 echo 'Пожалуйста оцените товар или напишите отзыв'; 
             }

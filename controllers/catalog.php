@@ -69,22 +69,22 @@ Class Controller_Catalog Extends Controller_Base {
     }
     
     function type() {
-        if (isset($_GET['id']))
-            $this->showType ($_GET['id']);
-        else {
-            $rt=explode('/', $_GET['route']);
-            $route=$rt[(count($rt)-1)];
+        if (isset($_GET['id'])) {
+            $this->showType($_GET['id']);
+        } else {
+            $rt = explode('/', $_GET['route']);
+            $route = $rt[(count($rt) - 1)];
             $typeId = $this->registry['model']->getObjectIdByUrl('types', $route);
-            if ($typeId)
+            if ($typeId) {
                 $this->showType($typeId);
-            else {
+            } else {
                 $this->registry['template']->set('types', $this->registry['types']);
                 $this->registry['template']->set('metaTitle', 'Экологическая косметика для взрослых и детей — интернет магазин Клевер');
                 $this->registry['template']->set('metaDescription', 'Каталог эко коcметики');
                 $this->registry['model']->logVisit(4);
                 $this->registry['template']->show('type');
-            }    
-        }    
+            }
+        }
     }
 
     function category() {

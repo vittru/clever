@@ -7,6 +7,7 @@
     $registry->set('globalsale', false);
     define('currency', ' руб.');
     define('siteName', 'www.clubclever.ru');
+    define('phoneNumber', '8 (846) 252 39 11');
     $model->getUser();
     //$_SESSION['user']->lastvisit = $model->getLastVisit();
     $registry->set('skintypes', $model->getCatalog('skintypes'));

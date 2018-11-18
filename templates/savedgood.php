@@ -2,7 +2,7 @@
 include 'header.php';
 ?>
 
-<section id="aa-text">
+<section class="aa-text">
     <div class='container'>
         <div class='row'>
             <?php
