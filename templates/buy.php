@@ -241,10 +241,10 @@ include 'header.php';
                                                     <div class="row">                                                                                            
                                                         <div class="col-md-12">
                                                             <div class="aa-checkout-single-bill">Всего бонусов: <?php echo $user->bonus ?></div>
-                                                            <div class="aa-checkout-single-bill">Можно использовать: <?php echo min(floor($totalNoSale * 0.3), $user->bonus)?></div>
+                                                            <div class="aa-checkout-single-bill">Можно использовать: <?php echo min(floor($totalNoSale * 0.25), $user->bonus)?></div>
                                                             <div class="aa-checkout-single-bill">
                                                                 <div id="bonus-error" class="error" hidden></div>
-                                                                <input class="form-control" id="bonus" name="bonus" type="number" value="<?php echo min(floor($totalNoSale * 0.3), $user->bonus)?>">
+                                                                <input class="form-control" id="bonus" name="bonus" type="number" value="<?php echo min(floor($totalNoSale * 0.25), $user->bonus)?>">
                                                                 <button id="use-bonus" class="orange button" type="button">Использовать</button>
                                                             </div>
                                                         </div>
