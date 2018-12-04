@@ -141,8 +141,8 @@ Class Controller_Buy Extends Controller_Base {
             if ($parameters['takeDate']) {
                 $message .= "<p><b>Желаемое время самовывоза:</b> " . htmlspecialchars($parameters['takeDate']) . " " . htmlspecialchars($parameters['takeTime']) . '</p>';
             }
-        } else if ($parameters['city']){
-            $message = $message . "<p><b>Доставка курьером по адресу:</b> " . htmlspecialchars($parameters['city']) . ", " . htmlspecialchars($parameters['address']) . '</p>';
+        } else if ($parameters['address']){
+            $message = $message . "<p><b>Доставка курьером по адресу:</b> " . htmlspecialchars($parameters['address']) . '</p>';
         } else {
             $message = '';
         }
