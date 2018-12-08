@@ -68,7 +68,7 @@ Class Controller_Cart Extends Controller_Base {
     }  
     
     private function applyDiscounts() {
-        //$this->brokkoliDiscount();
+        $this->progressiveCountDiscount();
     }
     
     private function bubbleBallDiscounts() {
@@ -241,9 +241,9 @@ Class Controller_Cart Extends Controller_Base {
         }
     }
 
-    //Если в корзине 2 товара, то скидка 20%, если больше - то 30%
+    //Если в корзине >=3 товаров, то скидка 20%, если 5 и больше - то 30%
     private function progressiveCountDiscount() {
-        if (sizeof($_SESSION['cart']) == 2) {
+        if (sizeof($_SESSION['cart']) >= 3 && sizeof($_SESSION['cart']) < 5) {
             foreach ($_SESSION['cart'] as $cartItem) {
                 if (!$cartItem->sale || $cartItem->sale == 30) {
                     $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
@@ -255,7 +255,7 @@ Class Controller_Cart Extends Controller_Base {
                 }
             }
         } else 
-            if (sizeof($_SESSION['cart']) > 2) {
+            if (sizeof($_SESSION['cart']) >= 5) {
                 foreach ($_SESSION['cart'] as $cartItem) {
                     if (!$cartItem->sale || $cartItem->sale == 20) {
                         $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
@@ -267,7 +267,7 @@ Class Controller_Cart Extends Controller_Base {
                     }
                 }
             } else 
-                if (sizeof ($_SESSION['cart']) < 2){
+                if (sizeof ($_SESSION['cart']) < 3){
                     foreach ($_SESSION['cart'] as $cartItem) {
                         if ($cartItem->sale == 20 || $cartItem->sale == 30) {
                             $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
