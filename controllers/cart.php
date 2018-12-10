@@ -528,7 +528,7 @@ Class Controller_Cart Extends Controller_Base {
             foreach ($_SESSION['cart'] as $cartItem) {
                 $good = $this->registry['model']->getGood($cartItem->goodId);
                 //We consider only 3rd and 6th goods. I doubt if anybody will add more than 6 goods to cart
-                if ($good->id == $_SESSION['cart'][2]->goodId || (sizeof($_SESSION['cart']) >= 6 && $good->id == $_SESSION['cart'][5]->goodId)) {
+                if ($good->id == $_SESSION['cart'][2]->goodId || (sizeof($_SESSION['cart']) >= 6 && $good->id == $_SESSION['cart'][5]->goodId) && $cartItem->sale = 0) {
                     $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
                     $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
                     $cartItem->sale = 100;
