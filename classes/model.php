@@ -1573,4 +1573,52 @@ Class Model {
         $sqlUpdate->closeCursor();
         return $data;
     }
+    
+    function getSizeByCode($code) {
+        $sqlSelect = $this->db->prepare('SELECT gs.id, gs.size, w.price, w.instock, w.onhold, w.bestbefore, w.bbprice, gs.code, gs.sale FROM `goods-sizes` gs LEFT JOIN warehouse w ON gs.Id=w.psId WHERE gs.code=:code ORDER BY w.price');
+        $sqlSelect->bindParam(':code', $code);
+        $this->executeQuery($sqlSelect, 'Error when selecting sizes with code ' . $code);
+        $data = $sqlSelect->fetch();
+        $sqlSelect->closeCursor();
+        if ($data) {
+            return new Size($data['id'], $data['size'], $data['price'], $data['sale'], $data['code'], $data['instock'], $data['onhold'], $data['bestbefore'], $data['bbprice']);
+        } else {
+            return null;
+        }
+    }
+
+    function getSizeByExternalId($code) {
+        $sqlSelect = $this->db->prepare('SELECT gs.id, gs.size, w.price, w.instock, w.onhold, w.bestbefore, w.bbprice, gs.code, gs.sale FROM `goods-sizes` gs LEFT JOIN warehouse w ON gs.Id=w.psId WHERE gs.external_id=:code ORDER BY w.price');
+        $sqlSelect->bindParam(':code', $code);
+        $this->executeQuery($sqlSelect, 'Error when selecting sizes with external_id ' . $code);
+        $data = $sqlSelect->fetch();
+        $sqlSelect->closeCursor();
+        if ($data) {
+            return new Size($data['id'], $data['size'], $data['price'], $data['sale'], $data['code'], $data['instock'], $data['onhold'], $data['bestbefore'], $data['bbprice']);
+        } else {
+            return null;
+        }
+    }
+
+    function updateExternalId($sizeId, $externalId) {
+        $sqlUpdate = $this->db->prepare('UPDATE `goods-sizes` SET external_id=:externalId WHERE id=:sizeId');
+        $sqlUpdate->bindParam(':sizeId', $sizeId);
+        $sqlUpdate->bindParam(':externalId', $externalId);
+        $this->executeQuery($sqlUpdate, 'Error when setting external id ' . $externalId .' for size ' . $sizeId);
+        $sqlUpdate->closeCursor();
+    }
+    
+    function updateWarehouse($sizeId, $price, $quantity) {
+        if ($quantity < 0) {
+            $quantity = 0;
+        }
+        $sqlUpdate = $this->db->prepare('UPDATE warehouse SET price=:price, instock=:quantity WHERE psId=:sizeId');
+        $sqlUpdate->bindParam(':sizeId', $sizeId);
+        $sqlUpdate->bindParam(':price', $price);
+        $sqlUpdate->bindParam(':quantity', $quantity);
+        $this->executeQuery($sqlUpdate, 'Error when updating size ' . $sizeId .' setting price=' . $price . ' and quanity=' . $quantity);
+        $sqlUpdate->closeCursor();
+    }
+        
 }
+

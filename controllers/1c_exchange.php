@@ -4,7 +4,7 @@ Class Controller_1c_exchange Extends Controller_Base {
                     
     function index() {
 
-        $dir = '/temp/';
+        $dir = 'temp/';
         //$full_update = true;
 
         //$start_time = microtime(true);
@@ -30,13 +30,13 @@ Class Controller_1c_exchange Extends Controller_Base {
                 //        unlink($v);
                 //    }        
                 print "zip=no\n";
-                print "file_limit=1000000\n";
+                print "file_limit=20000000\n";
             } else {
                 $this->registry['model']->logVisit(404, false, $_SERVER['QUERY_STRING']);
                 $this->registry['template']->show('404');
             }    
         }
-
+        
         if($_GET['type'] == 'sale' && $_GET['mode'] == 'file') {
             if ($_COOKIE['PHPSESSID'] == $this->registry['model']->getExportSession()) {
                 $filename = $_GET('filename');
@@ -303,15 +303,75 @@ Class Controller_1c_exchange Extends Controller_Base {
             if ($_COOKIE['PHPSESSID'] == $this->registry['model']->getExportSession()) {
                 $this->registry['model']->logVisit(2003);
                 $filename = basename($_GET['filename']);
-                $f = fopen($dir.$filename, 'ab');
-                fwrite($f, file_get_contents('php://input'));
-                fclose($f);
+                $this->registry['logger']->lwrite("Received file: " . $filename);
+                file_put_contents($dir.$filename, file_get_contents('php://input'));
                 print "success\n";
+                if ($filename === 'import.xml') {
+                    $this->registry['logger']->lwrite("Updating goods");
+                    $z = new XMLReader;
+                    $z->open($dir.$filename);
+
+                    while ($z->read() && $z->name !== 'Товар');
+
+                    while($z->name === 'Товар') {
+                        $xml = new SimpleXMLElement($z->readOuterXML());
+                        // Товары
+                        $this->import_good($xml);
+
+                        $z->next('Товар');
+                    }
+                    $z->close();
+                }
+                elseif ($filename === 'offers.xml') {
+                    $this->registry['logger']->lwrite("Updating prices and quantities");
+                    $z = new XMLReader;
+                    $z->open($dir.$filename);
+
+                    while ($z->read() && $z->name !== 'Предложение');
+
+                    while ($z->name === 'Предложение') {
+                        $xml = new SimpleXMLElement($z->readOuterXML());
+                        // Варианты
+                        $this->import_size($xml);
+
+                        $z->next('Предложение');
+                    }
+                    $z->close();
+                }
             } else {
                 $this->registry['model']->logVisit(404, false, $_SERVER['QUERY_STRING']);
                 $this->registry['template']->show('404');
             }    
         } 
+    }
+    
+    private function import_good($xml) {
+        $this->registry['logger']->lwrite("Updating good " . (string)$xml->Ид);
+        $this->registry['logger']->lwrite("Code: " . (string)$xml->Артикул);
         
+        $size = $this->registry['model']->getSizeByExternalId((string)$xml->Ид);
+        if (!$size) {
+            $size = $this->registry['model']->getSizeByCode((string)$xml->Артикул);
+            if ($size) {
+                $this->registry['logger']->lwrite("Updating external Id for size ID: " . $size->id);
+                $this->registry['model']->updateExternalId($size->id, (string)$xml->Ид);
+            }
+        } else {
+            $this->registry['logger']->lwrite("External ID already set for size ID: " . $size->id);
+        }   
+        if (!$size) {
+            $this->registry['logger']->lwrite("No size with code:" . (string)$xml->Артикул);
+        }
+    }
+    
+    private function import_size($xml) {
+        $this->registry['logger']->lwrite("Updating prices for " . (string)$xml->Ид);
+        $this->registry['logger']->lwrite("Price: " . $xml->Цены->Цена->ЦенаЗаЕдиницу . " Quantity: " . $xml->Количество);
+        $size = $this->registry['model']->getSizeByExternalId((string)$xml->Ид);
+        if ($size) {
+            $this->registry['model']->updateWarehouse($size->id, $xml->Цены->Цена->ЦенаЗаЕдиницу, $xml->Количество);
+        } else {
+            $this->registry['logger']->lwrite("No size with external id:" . (string)$xml->Ид);
+        }
     }
 }
