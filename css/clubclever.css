@@ -446,7 +446,7 @@ button.sort {
     border: 1px solid transparent;
 }
 .aa-product-catg li.category {
-    min-height: 280px;
+    min-height: 290px;
 }    
 .aa-product-catg li:hover {
     border: solid 1px #51A512;
