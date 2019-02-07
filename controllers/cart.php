@@ -570,29 +570,31 @@ Class Controller_Cart Extends Controller_Base {
                 return $a->getPrice() < $b->getPrice();
             }
             usort($crystalGoods, "cmp");
+            $size = sizeof($crystalGoods);
             foreach ($_SESSION['cart'] as $cartItem) {
                 $good = $this->registry['model']->getGood($cartItem->goodId);
                 if ($good->firmId == 3) {
                     //We consider only 3rd and 6th goods. I doubt if anybody will add more than 6 Crystall goods to cart
-                    if ($good->id == $crystalGoods[2]->id || (sizeof($crystalGoods) >= 6 && $good->id == $crystalGoods[5]->id)) {
+                    if ($good->id == $crystalGoods[$size - 1]->id || ($size >= 6 && $good->id == $crystalGoods[$size - 2]->id)) {
                         $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
                         $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
                         $cartItem->sale = 100;
                         $cartItem->price = 1;
                         $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
-                    } else if ($cartItem->price == 1 && ($good->id != $crystalGoods[2]->id || (sizeof($crystalGoods) >= 6 && $good->id == $crystalGoods[5]->id))) {
+                    } else if ($cartItem->price == 1 && ($good->id != $crystalGoods[$size - 1]->id || ($size >= 6 && $good->id == $crystalGoods[$size - 2]->id))) {
                         $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
                         $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
                         $cartItem->price = $good->getPrice();
                         $cartItem->sale = 0;
                         $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
-                    }   
+                    } 
+                    $cartItem->sale = 1;
                 }
             }
         } else {
             foreach ($_SESSION['cart'] as $cartItem) {
                 $good = $this->registry['model']->getGood($cartItem->goodId);
-                if ($good->firmId == 3 and $cartItem->price == 1) {
+                if ($good->firmId == 3) {
                     $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
                     $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
                     $cartItem->price = $good->getPrice();
