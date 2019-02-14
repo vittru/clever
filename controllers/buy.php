@@ -198,8 +198,8 @@ Class Controller_Buy Extends Controller_Base {
         } else {
             $totalNoSale = $this->getCartNoSaleTotal($_SESSION['cart']);
         }    
-        if ($discount['amount'] > $totalNoSale * 0.3) {
-            $discount['percent'] = 30;
+        if ($discount['amount'] > $totalNoSale * 0.25) {
+            $discount['percent'] = 25;
             $discount['amount'] = 0;
         }
         $total = $this->getCartTotal($_SESSION['cart']) - $discount['amount'] - floor($totalNoSale * $discount['percent'] / 100);
