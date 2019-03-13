@@ -13,9 +13,9 @@ function modifyBasket() {
 
 $('.aa-add-to-cart-btn').click(function e(){
     $(this).text('Добавлено');
-    if (window.location.hostname !== "localhost") {
+    /*if (window.location.hostname !== "localhost") {
         yaCounter44412517.reachGoal('INCART');
-    }    
+    } */   
         
     var pId = $('#pId').text();
     var sizes = [];

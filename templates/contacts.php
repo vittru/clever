@@ -56,7 +56,7 @@ include 'header.php';
                         </div>
                         <div class="row">
                             <div class="col-md-2">
-                                <button class="green button" onclick="yaCounter44412517.reachGoal('VOPROS'); return true;">Задать</button>
+                                <button class="green button" onclick="//yaCounter44412517.reachGoal('VOPROS'); return true;">Задать</button>
                             </div>    
                             <div id="question-error" class="col-md-8 error" hidden></div>
                         </div>
@@ -71,7 +71,7 @@ include 'header.php';
                         <p>ООО "Клевер"</p>
                         <p>ИНН 6315011857</p>
                         <p><span class="fa fa-phone"></span><span class="ya-phone" itemprop="telephone"><?php echo phoneNumber ?></span></p>
-                        <p><span class="fa fa-envelope"></span><a onclick="yaCounter44412517.reachGoal('SEND_EMAIL'); return true;" href="mailto: <?php echo $this->registry['mainemail'] ?>" itemprop="email"><?php echo $this->registry['mainemail'] ?></a></p>
+                        <p><span class="fa fa-envelope"></span><a onclick="//yaCounter44412517.reachGoal('SEND_EMAIL'); return true;" href="mailto: <?php echo $this->registry['mainemail'] ?>" itemprop="email"><?php echo $this->registry['mainemail'] ?></a></p>
                     </address>
                 </div>
             </div>

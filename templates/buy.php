@@ -9,7 +9,7 @@ include 'header.php';
             <div class="col-md-12">
                 <h1>Оформление заказа</h1>
                 <div class="checkout-area">
-                    <form action="/buy/complete" method="POST" id="order-form" onsubmit="yaCounter44412517.reachGoal('ORDERYES'); return true;">
+                    <form action="/buy/complete" method="POST" id="order-form" onsubmit="//yaCounter44412517.reachGoal('ORDERYES'); return true;">
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="checkout-left">
