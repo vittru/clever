@@ -411,4 +411,4 @@
     <?php
     }
     ?>
-    <script src="/js/modalgood.min.js?20180723"></script> 
+    <script src="/js/modalgood.min.js?20190314"></script> 
