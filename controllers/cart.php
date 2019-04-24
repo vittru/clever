@@ -68,7 +68,7 @@ Class Controller_Cart Extends Controller_Base {
     }  
     
     private function applyDiscounts() {
-        $this->thirdFree();
+        $this->handsCreamDiscount();
     }
     
     private function bubbleBallDiscounts() {
@@ -545,7 +545,10 @@ Class Controller_Cart Extends Controller_Base {
                     $cartItem->price = $good->getPrice();
                     $cartItem->sale = 0;
                     $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
-                }   
+                } 
+                if ($cartItem->sale != 100) {
+                    $cartItem->sale = 1;
+                }
             }
         } else {
             foreach ($_SESSION['cart'] as $cartItem) {
@@ -609,5 +612,44 @@ Class Controller_Cart Extends Controller_Base {
             }
         }
     }
+    
+    //При покупке крема для рук скидка на все 15%
+    private function handsCreamDiscount() {
+        $discount = false;
+        foreach ($_SESSION['cart'] as $cartItem) {
+            $good = $this->registry['model']->getGood($cartItem->goodId);
+            if (in_array(1, $good->cats)) {
+                $discount = true;
+            }
+        }
+        if ($discount) {
+            foreach ($_SESSION['cart'] as $cartItem) {
+                $good = $this->registry['model']->getGood($cartItem->goodId);
+                if (!$cartItem->sale){ 
+                    if (!in_array(1, $good->cats)) {
+                        $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
+                        $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
+                        $cartItem->sale = 15;
+                        $cartItem->price = ceil($cartItem->price * (0.85));
+                        $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
+                    } else {
+                        $cartItem->sale=1;
+                    }    
+                }
+            }
+        } else {
+            foreach ($_SESSION['cart'] as $cartItem) {
+                if ($cartItem->sale == 15 || $cartItem->sale == 1) {
+                    $good = $this->registry['model']->getGood($cartItem->goodId);
+                    $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
+                    $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
+                    $cartItem->price = $good->getPrice();
+                    $cartItem->sale = 0;
+                    $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
+                }
+            }
+        }
+    }
+
     
 }

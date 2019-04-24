@@ -12,8 +12,8 @@ include 'header.php';
                 <div class="row bonus-row">
                     <div class="col-md-6 branch">
                         <p></p>
-                        <p itemprop="streetAddress"><b>ул. Ново-Садовая, 271</b></p>
-                        <div class="map"><script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=3Z04yabmOvp2FZ3pW8QyO_fTbB6Y_MFy&amp;width=320&amp;height=240&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script></div>
+                        <p itemprop="streetAddress"><b>ул. Революционная, 7</b></p>
+                        <div class="map"><script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3AX_vOb2NXN7WVSnIiUtq5RbhTy3EdzSa4&amp;width=320&amp;height=240&amp;lang=ru_RU&amp;scroll=true"></script></div>
                         <p><span class="fa fa-clock-o"></span>в будни с 10.00 до 20.00</p>
                         <p><span class="fa fa-clock-o"></span>по выходным с 10.00 до 18.00</p>
                     </div>    
