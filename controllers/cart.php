@@ -68,7 +68,7 @@ Class Controller_Cart Extends Controller_Base {
     }  
     
     private function applyDiscounts() {
-        $this->handsCreamDiscount();
+        $this->bioBeuatyCDSecond();
     }
     
     private function bubbleBallDiscounts() {
@@ -241,35 +241,35 @@ Class Controller_Cart Extends Controller_Base {
         }
     }
 
-    //Если в корзине >=3 товаров, то скидка 20%, если 5 и больше - то 30%
+    //Если в корзине >=3 товаров, то скидка 10%, если 6 и больше - то 20%
     private function progressiveCountDiscount() {
-        if (sizeof($_SESSION['cart']) >= 3 && sizeof($_SESSION['cart']) < 5) {
+        if (sizeof($_SESSION['cart']) >= 3 && sizeof($_SESSION['cart']) < 6) {
             foreach ($_SESSION['cart'] as $cartItem) {
-                if (!$cartItem->sale || $cartItem->sale == 30) {
+                if (!$cartItem->sale || $cartItem->sale == 20) {
                     $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
                     $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
                     $cartItem->price = ceil($cartItem->price * 100 / (100 - $cartItem->sale));
-                    $cartItem->sale = 20;
-                    $cartItem->price = ceil($cartItem->price * (0.8));
+                    $cartItem->sale = 10;
+                    $cartItem->price = ceil($cartItem->price * (0.9));
                     $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
                 }
             }
         } else 
-            if (sizeof($_SESSION['cart']) >= 5) {
+            if (sizeof($_SESSION['cart']) >= 6) {
                 foreach ($_SESSION['cart'] as $cartItem) {
-                    if (!$cartItem->sale || $cartItem->sale == 20) {
+                    if (!$cartItem->sale || $cartItem->sale == 10) {
                         $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
                         $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
                         $cartItem->price = ceil($cartItem->price * 100 / (100 - $cartItem->sale));
-                        $cartItem->sale = 30;
-                        $cartItem->price = ceil($cartItem->price * (0.7));
+                        $cartItem->sale = 20;
+                        $cartItem->price = ceil($cartItem->price * (0.8));
                         $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
                     }
                 }
             } else 
                 if (sizeof ($_SESSION['cart']) < 3){
                     foreach ($_SESSION['cart'] as $cartItem) {
-                        if ($cartItem->sale == 20 || $cartItem->sale == 30) {
+                        if ($cartItem->sale == 10 || $cartItem->sale == 20) {
                             $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
                             $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
                             $cartItem->price = ceil($cartItem->price * 100 / (100 - $cartItem->sale));
@@ -651,5 +651,54 @@ Class Controller_Cart Extends Controller_Base {
         }
     }
 
+    //Каждый второй товар БиоБьюти и Кристалл Декор стоит 1 рубль.
+    private function bioBeuatyCDSecond() {
+        $saleGoods = [];
+        foreach ($_SESSION['cart'] as $cartItem) {
+            $good = $this->registry['model']->getGood($cartItem->goodId);
+            if ($good->firmId == 2 || $good->firmId == 8) {
+                array_push($saleGoods, $good);
+            }
+        }
+        if (sizeof($saleGoods) >= 2) {
+            function cmp($a, $b) {
+                return $a->getPrice() < $b->getPrice();
+            }
+            usort($saleGoods, "cmp");
+            $size = sizeof($saleGoods);
+            foreach ($_SESSION['cart'] as $cartItem) {
+                $good = $this->registry['model']->getGood($cartItem->goodId);
+                if ($good->firmId == 2 || $good->firmId == 8) {
+                    //We consider only 2nd and 4th goods. I doubt if anybody will add more than 4 goods to cart
+                    if ($good->id == $saleGoods[$size - 1]->id || ($size >= 4 && $good->id == $saleGoods[$size - 2]->id)) {
+                        $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
+                        $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
+                        $cartItem->sale = 100;
+                        $cartItem->price = 1;
+                        $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
+                    } else if ($cartItem->price == 1 && ($good->id != $saleGoods[$size - 1]->id || ($size >= 4 && $good->id == $saleGoods[$size - 2]->id))) {
+                        $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
+                        $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
+                        $cartItem->price = $good->getPrice();
+                        $cartItem->sale = 0;
+                        $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
+                    } 
+                    $cartItem->sale = 1;
+                }
+            }
+        } else {
+            foreach ($_SESSION['cart'] as $cartItem) {
+                $good = $this->registry['model']->getGood($cartItem->goodId);
+                if ($good->firmId == 2 || $good->firmId == 8) {
+                    $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
+                    $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
+                    $cartItem->price = $good->getPrice();
+                    $cartItem->sale = 0;
+                    $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
+                }
+            }
+        }
+    }
+    
     
 }
