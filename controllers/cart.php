@@ -68,7 +68,7 @@ Class Controller_Cart Extends Controller_Base {
     }  
     
     private function applyDiscounts() {
-        $this->bioBeuatyCDSecond();
+        $this->secondHalf();
     }
     
     private function bubbleBallDiscounts() {
@@ -690,6 +690,52 @@ Class Controller_Cart Extends Controller_Base {
             foreach ($_SESSION['cart'] as $cartItem) {
                 $good = $this->registry['model']->getGood($cartItem->goodId);
                 if ($good->firmId == 2 || $good->firmId == 8) {
+                    $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
+                    $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
+                    $cartItem->price = $good->getPrice();
+                    $cartItem->sale = 0;
+                    $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
+                }
+            }
+        }
+    }
+    
+    //Второй и четвертый товары за полцены
+    private function secondHalf() {
+        $size = sizeof($_SESSION['cart']);
+        if ($size >= 2) {
+            $goods = [];
+            foreach ($_SESSION['cart'] as $cartItem) {
+                array_push($goods, $this->registry['model']->getGood($cartItem->goodId));
+            }
+            function cmp($a, $b) {
+                return $a->getPrice() < $b->getPrice();
+            }
+            usort($goods, "cmp");
+            foreach ($_SESSION['cart'] as $cartItem) {
+                //We consider only 3rd and 6th goods. I doubt if anybody will add more than 6 goods to cart
+                if ($cartItem->sale != 50 && ($cartItem->goodId == $goods[$size - 1]->id || ($size >= 4 && $cartItem->goodId == $goods[$size - 2]->id))) {
+                    $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
+                    $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
+                    $cartItem->sale = 50;
+                    $cartItem->price = ceil($cartItem->price * (0.5));;
+                    $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
+                } else if ($cartItem->sale == 50 && ($cartItem->goodId != $goods[$size - 1]->id || ($size >= 4 && $cartItem->goodId == $goods[$size - 2]->id))) {
+                    $good = $this->registry['model']->getGood($cartItem->goodId);
+                    $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
+                    $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
+                    $cartItem->price = $good->getPrice();
+                    $cartItem->sale = 0;
+                    $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
+                } 
+                if ($cartItem->sale != 50) {
+                    $cartItem->sale = 1;
+                }
+            }
+        } else {
+            foreach ($_SESSION['cart'] as $cartItem) {
+                $good = $this->registry['model']->getGood($cartItem->goodId);
+                if ($cartItem->sale == 50) {
                     $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
                     $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
                     $cartItem->price = $good->getPrice();
