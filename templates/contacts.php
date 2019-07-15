@@ -10,13 +10,13 @@ include 'header.php';
                 <h1>Наши контакты</h1>
                 <p>Посмотреть и приобрести наши товары можно по следующим адресам в Самаре</p>
                 <div class="row bonus-row">
-                    <div class="col-md-6 branch">
+                    <!--div class="col-md-6 branch">
                         <p></p>
                         <p itemprop="streetAddress"><b>ул. Революционная, 7</b></p>
                         <div class="map"><script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3AX_vOb2NXN7WVSnIiUtq5RbhTy3EdzSa4&amp;width=320&amp;height=240&amp;lang=ru_RU&amp;scroll=true"></script></div>
                         <p><span class="fa fa-clock-o"></span>в будни с 10.00 до 20.00</p>
                         <p><span class="fa fa-clock-o"></span>по выходным с 10.00 до 18.00</p>
-                    </div>    
+                    </div-->    
                     <div class="col-md-6 branch">
                         <p><b>Салон красоты "Красивые люди"</b></p>
                         <p itemprop="streetAddress"><b>ул. Георгия Димитрова, 112</b></p>

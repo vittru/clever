@@ -46,10 +46,10 @@ include 'header.php';
                                     <div class="panel">
                                         <ul class="nav nav-tabs aa-checkout-billaddress">
                                             <li class="active"><a href="#delivery" data-toggle="tab">Доставка</a></li>
-                                            <li><a href="#pickup" data-toggle="tab">Самовывоз</a></li>
+                                            <!--li><a href="#pickup" data-toggle="tab">Самовывоз</a></li-->
                                         </ul>
                                         <div class="tab-content">
-                                            <div class="tab-pane fade in" id="pickup">
+                                            <!--div class="tab-pane fade in" id="pickup">
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="col-md-12">
@@ -80,7 +80,7 @@ include 'header.php';
                                                         </div>
                                                     </div>   
                                                 </div>
-                                            </div>
+                                            </div-->
                                             <div class="tab-pane fade in active" id="delivery">
                                                 <div class="panel-body">
                                                     <div class="row" id="delivery-info" <?php if ($total > $this->registry['freeDelivery']) echo "hidden" ?>>
