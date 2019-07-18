@@ -9,8 +9,9 @@ Class Orderedgood {
     public $quantity;
     public $code;
     public $sale;
+    public $sizeId;
    
-    function __construct($id, $name, $size, $price, $quantity, $code, $sale) {
+    function __construct($id, $name, $size, $price, $quantity, $code, $sale, $sizeId) {
         $this->id = $id;
         $this->name = $name;
         $this->size = $size;
@@ -18,5 +19,6 @@ Class Orderedgood {
         $this->quantity = $quantity;
         $this->code = $code;
         $this->sale = $sale;
+        $this->sizeId = $sizeId;
     }
 }

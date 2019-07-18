@@ -204,5 +204,25 @@ Class Controller_Account Extends Controller_Base {
             echo "";
         }
     }
+    
+    function changeorder() {
+        if ($this->registry['isadmin'] && isset($_POST['id'])) {
+            foreach ($_POST as $name => $val) {
+                if (strpos($name, 'price') !== false) {
+                    $goodId = substr($name, 5);
+                    $this->registry['model']->updateOrderGoodPrice($_POST['id'],$goodId, $val);
+                }
+                if (strpos($name, 'quantity') !== false) {
+                    $goodId = substr($name, 8);
+                    $this->registry['model']->updateOrderGoodQuantity($_POST['id'],$goodId, $val);
+                }
+            }
+            $order = $this->registry['model']->getOrder($_POST['id']);
+            $this->registry['template']->set('order', $order);
+            $this->registry['template']->show('orders');
+        } else {
+            $this->registry['template']->show('404');
+        }
+    }
 }
 

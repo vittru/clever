@@ -17,8 +17,9 @@ Class Order {
     public $username;
     public $phone;
     public $remarks;
+    public $address;
    
-    function __construct($id, $date, $status, $type, $promo, $user, $profile, $statusdesc, $email, $bonus, $username, $phone, $remarks) {
+    function __construct($id, $date, $status, $type, $promo, $user, $profile, $statusdesc, $email, $bonus, $username, $phone, $remarks, $address) {
         $this->id = $id;
         $this->status = $status;
         setlocale(LC_TIME, "ru_RU.UTF-8");
@@ -33,6 +34,7 @@ Class Order {
         $this->username = $username;
         $this->phone = $phone;
         $this->remarks = $remarks;
+        $this->address = $address;
     }
     
     function getTotalNoSale() {

@@ -23,6 +23,14 @@ include 'header.php';
                                 <?php
                                 if ($isadmin) {
                                 ?>
+                                    <div><div class="order-parameters-header">Адрес доставки:</div><div class="order-parameters-value"><?php echo $order->address; ?></div> </div>
+                                    <div><div class="order-parameters-header">Почта:</div><div class="order-parameters-value"><?php echo $order->email; ?></div> </div>
+                                    <div><div class="order-parameters-header">Телефон:</div><div class="order-parameters-value"><?php echo $order->phone; ?></div> </div>
+                                    <?php if ($order->remarks) { ?>
+                                    <div><div class="order-parameters-header">Примечания:</div><div class="order-parameters-value"><?php echo $order->remarks; ?></div> </div>
+                                    <?php
+                                    }
+                                    ?>
                                     <div>
                                         <div class="order-parameters-header">Статус:</div>
                                         <select class="order-parameters-value form-control" id="status">
@@ -66,7 +74,7 @@ include 'header.php';
                             ?>
                         </div>
                         <?php
-                        if ($order->id and $user->name and $order->profile == $user->name) {
+                        if ($order->id and $user->name and $order->profile == $user->name and !$isadmin) {
                         ?>
                         <div class="col-md-12">
                             <h2>Товары</h2>
@@ -92,6 +100,70 @@ include 'header.php';
                                 </tr>
                             </table>    
                         </div>
+                        <?php
+                        }
+                        if ($order->id and $isadmin) {
+                        ?>
+                        <form method="post" action="/account/changeorder" enctype="multipart/form-data">
+                            <input hidden name='id' value='<?php echo $order->id ?>'>
+                            <div class="col-md-12">
+                                <h2>Товары</h2>
+                                <table class="table">
+                                    <tr>
+                                        <th>Название</th>
+                                        <th>Количество</th>
+                                        <th>Цена</th>
+                                    </tr>
+                                    <?php 
+                                    foreach ($order->goods as $goodO) {
+                                    ?>
+                                    <tr>
+                                        <td><a class="btn" href="/showgood?id=<?php echo $goodO->id ?>"><?php echo $goodO->name ?> <?php echo $goodO->size ?></a></td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="number" class="form-control col-md-9 inline" id="quantity<?php echo $goodO->sizeId ?>" name="quantity<?php echo $goodO->sizeId ?>" value='<?php echo $goodO->quantity ?>'>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="number" class="form-control col-md-9 inline" id="price<?php echo $goodO->sizeId ?>" name="price<?php echo $goodO->sizeId ?>" value='<?php echo $goodO->price ?>'>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                    }
+                                    if ($order->bonus) {
+                                    ?>
+                                    <tr>
+                                        <td></td>
+                                        <td>Использовано бонусов:</td>
+                                        <td><span id="bonus"><?php echo $order->bonus ?></span></td>
+                                    </tr>
+                                    <?php
+                                    }
+                                    if ($order->promo) {
+                                    ?>
+                                    <tr>
+                                        <td></td>
+                                        <td>Использован промо-код на сумму:</td>
+                                        <td><span id="promo"><?php echo $order->promo ?></span></td>
+                                    </tr>
+                                    <?php
+                                    }
+                                    ?>
+                                    <tr>
+                                        <td></td>
+                                        <td><b>Общая сумма заказа:</b></td>
+                                        <td><b><span id="total"><?php echo $order->getTotal() - $order->bonus - $order->promo ?></span></b></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <button class="green button" type="submit">Сохранить изменения</button>
+                                        </td>
+                                    </tr>
+                                </table>    
+                            </div>
+                        </form>    
                         <?php
                         }
                         ?>

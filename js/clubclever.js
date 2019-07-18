@@ -150,8 +150,8 @@ $('#order-form').submit(function(e) {
         if(!$(this).is(":hidden") && !$(this).val().trim())
             submit = false;
      });
-     if (!$('#branch').is(':hidden') && !$('#branch').val())
-         submit = false;
+     //if (!$('#branch').is(':hidden') && !$('#branch').val())
+     //    submit = false;
      if (!submit) {
          e.preventDefault();
          $('#order-error').show();
@@ -524,3 +524,16 @@ $('.order-link').click(function a() {
         }    
     });
 });
+
+$('[id^=price]').on('paste keyup change', updateTotal);
+$('[id^=quantity]').on('paste keyup change', updateTotal);
+
+function updateTotal() {
+    var total = 0;
+    $('[id^=price]').each(function e () {
+        total += $(this).val() * $('#quantity'+$(this).attr('id').substring(5)).val();
+    });    
+    total -= $('#bonus').text();
+    total -= $('#promo').text();
+    $('#total').text(total);
+}
