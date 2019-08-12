@@ -4,3 +4,30 @@
 [18/Jul/2019:10:53:02] (index) 0
 [18/Jul/2019:10:59:43] (index) updating order 714 setting quantity=1
 [18/Jul/2019:10:59:43] (index) deleting size 746 from order 714
+[12/Aug/2019:13:38:05] (index) Updating good 643
+[12/Aug/2019:13:38:05] (index) Old price is 280
+[12/Aug/2019:13:38:05] (index) New price is 196
+[12/Aug/2019:13:38:05] (index) Updating good 14
+[12/Aug/2019:13:38:05] (index) Old price is 440
+[12/Aug/2019:13:38:05] (index) New price is 308
+[12/Aug/2019:13:38:05] (index) Updating good 296
+[12/Aug/2019:13:38:05] (index) Old price is 500
+[12/Aug/2019:13:38:05] (index) New price is 350
+[12/Aug/2019:13:38:05] (index) Updating good 709
+[12/Aug/2019:13:38:05] (index) Old price is 410
+[12/Aug/2019:13:38:05] (index) New price is 287
+[12/Aug/2019:13:38:05] (index) Updating good 700
+[12/Aug/2019:13:38:05] (index) Old price is 90
+[12/Aug/2019:13:38:05] (index) New price is 63
+[12/Aug/2019:13:38:20] (index) Updating good 643
+[12/Aug/2019:13:38:20] (index) Old price is 196
+[12/Aug/2019:13:38:20] (index) New price is 280
+[12/Aug/2019:13:38:20] (index) Updating good 14
+[12/Aug/2019:13:38:20] (index) Old price is 308
+[12/Aug/2019:13:38:20] (index) New price is 440
+[12/Aug/2019:13:38:20] (index) Updating good 296
+[12/Aug/2019:13:38:20] (index) Old price is 350
+[12/Aug/2019:13:38:20] (index) New price is 500
+[12/Aug/2019:13:38:20] (index) Updating good 709
+[12/Aug/2019:13:38:20] (index) Old price is 287
+[12/Aug/2019:13:38:20] (index) New price is 410
