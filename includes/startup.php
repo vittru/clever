@@ -48,7 +48,7 @@ if (isset($_COOKIE['user'])) {
 }    
 else {
     $userId="";
-};
+}
 
 if (!isset($_SESSION['user'])) {
     $_SESSION['user'] = new User($userId);

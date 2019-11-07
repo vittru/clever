@@ -346,14 +346,14 @@ Class Controller_1c_exchange Extends Controller_Base {
     }
     
     private function import_good($xml) {
-        $this->registry['logger']->lwrite("Updating good " . (string)$xml->Ид);
-        $this->registry['logger']->lwrite("Code: " . (string)$xml->Артикул);
+        //$this->registry['logger']->lwrite("Updating good " . (string)$xml->Ид);
+        //$this->registry['logger']->lwrite("Code: " . (string)$xml->Артикул);
         
         $size = $this->registry['model']->getSizeByExternalId((string)$xml->Ид);
         if (!$size) {
             $size = $this->registry['model']->getSizeByCode((string)$xml->Артикул);
             if ($size) {
-                $this->registry['logger']->lwrite("Updating external Id for size ID: " . $size->id);
+                //$this->registry['logger']->lwrite("Updating external Id for size ID: " . $size->id);
                 $this->registry['model']->updateExternalId($size->id, (string)$xml->Ид);
             }
         } else {
@@ -365,8 +365,8 @@ Class Controller_1c_exchange Extends Controller_Base {
     }
     
     private function import_size($xml) {
-        $this->registry['logger']->lwrite("Updating prices for " . (string)$xml->Ид);
-        $this->registry['logger']->lwrite("Price: " . $xml->Цены->Цена->ЦенаЗаЕдиницу . " Quantity: " . $xml->Количество);
+        //$this->registry['logger']->lwrite("Updating prices for " . (string)$xml->Ид);
+        //$this->registry['logger']->lwrite("Price: " . $xml->Цены->Цена->ЦенаЗаЕдиницу . " Quantity: " . $xml->Количество);
         $size = $this->registry['model']->getSizeByExternalId((string)$xml->Ид);
         if ($size) {
             $this->registry['model']->updateWarehouse($size->id, $xml->Цены->Цена->ЦенаЗаЕдиницу, $xml->Количество);

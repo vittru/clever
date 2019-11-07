@@ -127,7 +127,7 @@ limit 20
 //Установка ботов
 update users u
 set bot=1
-where  (u.useragent like '%bot%' or u.useragent like '%Megaindex%' or u.useragent like '%Yahoo%' or u.useragent  like '%spider%' or u.useragent  like '%Crawler%' or u.useragent  like '%validator%' or u.useragent  like '%vkShare%' or u.useragent  like '%DataMiner%' or u.useragent  like '%Daum%' OR u.useragent  like '%Dataprovider.com%' or u.useragent  like '%Stratagems Kumo%' or u.useragent  like '%Go-http-client/1.1%' or u.useragent  like '%1C+Enterprise/8.3%' or u.useragent  like '%BegunAdvertising%' or u.useragent like '%BUbiNG%' or u.useragent like '%Barkrowler%' or u.useragent like '%GuzzleHttp%' or u.useragent like '%SafeDNSBot%') or `profile` in (12,13,14,116,236)
+where  (u.useragent like '%bot%' or u.useragent like '%Megaindex%' or u.useragent like '%Yahoo%' or u.useragent  like '%spider%' or u.useragent  like '%Crawler%' or u.useragent  like '%validator%' or u.useragent  like '%vkShare%' or u.useragent  like '%DataMiner%' or u.useragent  like '%Daum%' OR u.useragent  like '%Dataprovider.com%' or u.useragent  like '%Stratagems Kumo%' or u.useragent  like '%Go-http-client/1.1%' or u.useragent  like '%1C+Enterprise/8.3%' or u.useragent  like '%BegunAdvertising%' or u.useragent like '%BUbiNG%' or u.useragent like '%Barkrowler%' or u.useragent like '%GuzzleHttp%' or u.useragent like '%SafeDNSBot%' or u.useragent like '%Runet-Research-Crawler%') or `profile` in (12,13,14,116,236)
 
 SELECT u.id, u.ip, u.city, u.useragent, count(v.id)
 from users u join visits v on u.id=v.userid
@@ -153,3 +153,12 @@ order by 1 desc
 update goods 
 set sale=15
 where id not in (select distinct goodid from `goods-categories` where categoryid in (21, 34)) and id in (select distinct goodid from `goods-types` where typeid=4)
+
+
+update users 
+set bot=1
+where id in (select userid from (
+select userid, count(distinct pageid) vp, count(id) vv
+from visits
+group by userid
+having vp=1 and vv=2) a)

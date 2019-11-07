@@ -86,14 +86,16 @@ Class Model {
         $userId = $user->id;
         //If userId is not set we're trying to get User ID from DB by his ip and agent
         if (!$userId) {
-            if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])){
-                $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+            if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)){
+                $ip = end(array_values(array_filter(explode(',',$_SERVER['HTTP_X_FORWARDED_FOR']))));
+            }else if (array_key_exists('REMOTE_ADDR', $_SERVER)) { 
+                $ip = $_SERVER["REMOTE_ADDR"]; 
+            }else if (array_key_exists('HTTP_CLIENT_IP', $_SERVER)) {
+                $ip = $_SERVER["HTTP_CLIENT_IP"]; 
             }
-            else {
-                $ip = $_SERVER['REMOTE_ADDR'];
-            }
-
-            $agent = $_SERVER['HTTP_USER_AGENT'];
+            $ip=trim($ip);
+            
+            $agent = trim($_SERVER['HTTP_USER_AGENT']);
 
             $sqlSelect = $this->db->prepare($this->selectId);
             $sqlSelect->bindParam(':ip', $ip);
@@ -101,6 +103,9 @@ Class Model {
 
             $this->executeQuery($sqlSelect, 'Error when getting userId from DB');
             $userId = $sqlSelect->fetchColumn();
+            $this->registry['logger']->lwrite('Unable to find user by ip and agent');
+            $this->registry['logger']->lwrite($ip);
+            $this->registry['logger']->lwrite($agent);
             $sqlSelect->closeCursor();
         }
         //If user doesn't exist in DB we create it in Users table
