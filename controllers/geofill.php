@@ -3,7 +3,7 @@
 Class Controller_Geofill Extends Controller_Base {
 
     function index() {
-        if ($this->registry['isadmin']) {
+        if (isadmin) {
             $users = $this->registry['model']->getUsersWithoutGeo();
             foreach ($users as $id=>$ip) {
                 $json = file_get_contents("http://freegeoip.net/json/" . $ip);

@@ -445,6 +445,9 @@ button.sort {
     min-height: 370px;
     border: 1px solid transparent;
 }
+.aa-product-catg li.hidde {
+    background-color: lightgrey;
+}
 .aa-product-catg li.category {
     min-height: 290px;
 }    

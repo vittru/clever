@@ -3,7 +3,7 @@
 Class Controller_Editnews Extends Controller_Base {
         
     function index() {
-        if ($this->registry['isadmin']) {
+        if (isadmin) {
             $this->registry['model']->logVisit(1002);
             $this->registry['template']->show('editnews');
         } else 
@@ -11,7 +11,7 @@ Class Controller_Editnews Extends Controller_Base {
     }
     
     function remove() {
-        if ($this->registry['isadmin']) {
+        if (isadmin) {
             unlink('images/news/news'.$_GET['news'].'.png');
             unlink('images/news/news'.$_GET['news'].'.jpg');
             unlink('images/banners/news'.$_GET['news'].'.png');
@@ -23,7 +23,7 @@ Class Controller_Editnews Extends Controller_Base {
     }
     
     function save() {
-        if ($this->registry['isadmin']) {
+        if (isadmin) {
 
             if (isset($_POST['forClients'])) {
                 $forClients = 1;

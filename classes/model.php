@@ -466,11 +466,11 @@ Class Model {
             $data = $sqlSelect->fetch();
             $sqlSelect->closeCursor(); 
             //Admin should see all goods
-            if ($this->registry['isadmin']) {
-                $hidden = 0;
-            } else {
+//            if ($this->registry['isadmin']) {
+//                $hidden = 0;
+//            } else {
                 $hidden = $data['hidden'];
-            }
+//            }
             $good=new Good($data['id'], trim($data['name']), trim($data['description']), trim($data['shortdesc']), trim($data['howTo']), trim($data['madeOf']), $data['sale'], $data['firmId'], trim($data['problem']), trim($data['bestbefore']), trim($data['precaution']), trim($data['url']), $hidden, $data['popular']);
             $good->cats = $this->getGoodCats($goodId);
             $good->supercats = $this->getGoodSuperCats($good);
@@ -1649,6 +1649,28 @@ Class Model {
         $sqlUpdate->bindParam(':quantity', $quantity);
         $this->executeQuery($sqlUpdate, 'Error when updating size ' . $sizeId .' setting price=' . $price . ' and quanity=' . $quantity);
         $sqlUpdate->closeCursor();
+    }
+    
+    //Searches by substring and return goods that satisfy search
+    function searchGoods($field, $criteria) {
+        $sql = 'SELECT id FROM goods WHERE name LIKE :criteria';
+        if (!isadmin) {
+            $sql = $sql . ' AND hidden=0';
+        }
+        $sqlSelect = $this->db->prepare($sql);
+        //$sqlSelect->bindParam(':field', $field);
+        //str_replace("%", "", $criteria);
+        $criteria = "%".$criteria."%";
+        $this->registry['logger']->lwrite($criteria);
+        $sqlSelect->bindValue(':criteria', $criteria, PDO::PARAM_STR);
+        $this->executeQuery($sqlSelect, 'Error when searching goods by name including ' . $criteria);
+        $goods = array();
+        while ($data = $sqlSelect->fetch(PDO::FETCH_ASSOC)) {
+            $goods[$data['id']] = $this->getGood($data['id']);
+        }        
+        $sqlSelect->closeCursor();
+        $this->registry['logger']->lwrite(sizeof($goods));
+        return $goods;
     }
         
 }

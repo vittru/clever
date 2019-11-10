@@ -38,18 +38,18 @@ Class Controller_Catalog Extends Controller_Base {
             $rt=explode('/', $_GET['route']);
             $route=$rt[(count($rt)-1)];
             $firmId = $this->registry['model']->getObjectIdByUrl('firms', $route);
-            if ($firmId)
+            if ($firmId) {
                 $this->showFirm($firmId);
-            else {
+            } else {
                 $this->registry['model']->logVisit(3);
-                $this->registry['template']->set('objects' , $this->registry['firms']);
-                $this->registry['template']->set('otype' , 'firm');
-                $this->registry['template']->set('pageHeader' , 'Наши бренды');
-                $this->registry['template']->set('pageSubHeader' , 'Мы торгуем только товарами проверенных годами фирм');
+                $this->registry['template']->set('objects', $this->registry['firms']);
+                $this->registry['template']->set('otype', 'firm');
+                $this->registry['template']->set('pageHeader', 'Наши бренды');
+                $this->registry['template']->set('pageSubHeader', 'Мы торгуем только товарами проверенных годами фирм');
                 $this->registry['template']->set('metaTitle', 'Бренды натуральной косметики — интернет-магазин экологической косметики');
                 $this->registry['template']->set('metaDescription', 'Популярные производители эко косметики.');
                 $this->registry['template']->show('catalog_top');
-            }    
+            }
         }    
     }
     

@@ -49,7 +49,7 @@ include 'header.php';
                             </div>
                             <div class="aa-myaccount-orders">
                                 <h2><?php 
-                                    if ($this->registry['isadmin']) {
+                                    if (isadmin) {
                                         echo 'Заказы';
                                     } else {
                                         echo 'Мои заказы';

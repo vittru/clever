@@ -3,7 +3,7 @@
 Class Controller_Sale Extends Controller_Base {
 
     function index() {
-        if ($this->registry['isadmin']) {
+        if (isadmin) {
             $this->registry['template']->show('sale');
         } else {   
             $this->registry['template']->show('404');
@@ -11,7 +11,7 @@ Class Controller_Sale Extends Controller_Base {
     }
     
     function save() {
-        if ($this->registry['isadmin']) {
+        if (isadmin) {
             $mentypes = array();
             $cats = array();
             $firms = array();

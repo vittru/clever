@@ -3,7 +3,7 @@
 Class Controller_Mailout Extends Controller_Base {
 
     function index() {
-        if ($this->registry['isadmin']) {
+        if (isadmin) {
             //$this->registry['model']->logVisit(1000);
             //$this->registry['template']->set('emails', $this->registry['model']->getSpamEmails());
             $this->registry['template']->show('mailout');
@@ -13,7 +13,7 @@ Class Controller_Mailout Extends Controller_Base {
     }
     
     function send() {
-        if ($this->registry['isadmin']) {
+        if (isadmin) {
             $emails = $this->registry['model']->getSpamEmails();
             $topic = $_POST['header'];
             $message = $_POST['text'];
@@ -28,7 +28,7 @@ Class Controller_Mailout Extends Controller_Base {
     }
     
     function testEmail() {
-        if ($this->registry['isadmin']) {
+        if (isadmin) {
             $to = $_POST['email'];
             $topic = $_POST['header'];
             $message = $_POST['text'];

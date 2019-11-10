@@ -250,140 +250,12 @@
                                 <input id="search-text" type="text" class="form-control" name="name" placeholder="Поиск по каталогу" <?php if (isset($search_text)) echo 'value="'.$search_text.'"' ?> />
                                 <div class="input-group-btn">
                                     <div class="btn-group" role="group">
-                                        <div id="search-dropdown" class="dropdown dropdown-lg">
-                                            <!--button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button-->
-                                            <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                                <div class="row">
-                                                    <div class="form-group col-sm-6">
-                                                        <select class="form-control" name="type">
-                                                            <option value="0" <?php if (!isset($search_type)) echo 'selected disabled' ?>>Для кого</option>
-                                                            <?php
-                                                            foreach($this->registry['types'] as $id=>$type) {
-                                                                echo "<option value=" . $id;
-                                                                if (isset($search_type) and $search_type == $id)
-                                                                    echo " selected";
-                                                                echo ">" .$type->name . "</option>";
-                                                            }
-                                                            ?>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group col-sm-6">
-                                                        <select class="form-control" name="firm">
-                                                            <option value="0" <?php if (!isset($search_firm)) echo 'selected disabled' ?>>Бренд</option>
-                                                            <?php
-                                                            foreach($this->registry['firms'] as $id=>$firm) {
-                                                                echo "<option value=" . $id;
-                                                                if (isset($search_firm) and $search_firm == $id)
-                                                                    echo " selected";
-                                                                echo ">" . $firm->name . "</option>";
-                                                            }
-                                                            ?>
-                                                        </select>
-                                                    </div>
-                                                </div>    
-                                                <div class="row">
-                                                    <div class="form-group col-sm-6">
-                                                        <select class="form-control" name="supercat">
-                                                            <option value="0" <?php if (!isset($search_supercat)) echo 'selected disabled' ?>>Тип</option>
-                                                            <?php
-                                                            foreach($this->registry['supercats'] as $sc) {
-                                                                echo "<option value=".$sc->id;
-                                                                if (isset($search_supercat) and $search_supercat == $sc->id)
-                                                                    echo " selected";
-                                                                echo ">" . $sc->name . "</option>";
-                                                            }
-                                                            ?>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group col-sm-6">
-                                                        <select class="form-control" name="category">
-                                                            <option value="0" <?php if (!isset($search_category)) echo 'selected disabled' ?>>Категория</option>
-                                                            <?php
-                                                            foreach($this->registry['categories'] as $id=>$name) {
-                                                                echo "<option value=" . $id;
-                                                                if (isset($search_category) and $search_category == $id)
-                                                                    echo " selected";
-                                                                echo ">" . $name . "</option>";
-                                                            }
-                                                            ?>
-                                                        </select>
-                                                    </div>
-                                                </div>    
-                                                <div class="row">  
-                                                    <div class="form-group col-sm-6">
-                                                        <select class="form-control" name="problem">
-                                                            <option value="0" <?php if (!isset($search_problem)) echo 'selected disabled' ?>>Проблема</option>
-                                                            <?php
-                                                            foreach($this->registry['problems'] as $id=>$name) {
-                                                                echo "<option value=" . $id;
-                                                                if (isset($search_problem) and $search_problem == $id)
-                                                                    echo " selected";
-                                                                echo ">" . $name . "</option>";
-                                                            }
-                                                            ?>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group col-sm-6"> 
-                                                        <select class="form-control" name="effect">
-                                                            <option value="0" <?php if (!isset($search_effect)) echo 'selected disabled' ?>>Эффект</option>
-                                                            <?php
-                                                            foreach($this->registry['effects'] as $id=>$name) {
-                                                                echo "<option value=" . $id;
-                                                                if (isset($search_effect) and $search_effect == $id)
-                                                                    echo " selected";
-                                                                echo ">" . $name . "</option>";
-                                                            }
-                                                            ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="row">  
-                                                    <div class="form-group col-sm-6">
-                                                        <select class="form-control" name="skintype">
-                                                            <option value="0" <?php if (!isset($search_skinType)) echo 'selected disabled' ?>>Тип кожи</option>
-                                                            <?php
-                                                            foreach($this->registry['skintypes'] as $id=>$name) {
-                                                                echo "<option value=" . $id;
-                                                                if (isset($search_skinType) and $search_skinType == $id)
-                                                                    echo " selected";
-                                                                echo ">" . $name . "</option>";
-                                                            }
-                                                            ?>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group col-sm-6">
-                                                        <select class="form-control" name="hairtype">
-                                                            <option value="0" <?php if (!isset($search_hairType)) echo 'selected disabled' ?>>Тип волос</option>
-                                                            <?php
-                                                            foreach($this->registry['hairtypes'] as $id=>$name) {
-                                                                echo "<option value=" . $id;
-                                                                if (isset($search_hairType) and $search_hairType == $id)
-                                                                    echo " selected";
-                                                                echo ">" . $name . "</option>";
-                                                            }
-                                                            ?>
-                                                        </select>
-                                                    </div>
-                                                </div>    
-                                                <div class="form-group">
-                                                    <input class="form-control" type="text" name="description" placeholder="Описание" <?php if (isset($search_desc)) echo 'value="' . $search_desc . '"' ?> />
-                                                </div>
-                                                <div class="form-group">
-                                                    <input class="form-control" type="text" name="madeOf" placeholder="Состав" <?php if (isset($search_madeOf)) echo 'value="' . $search_madeOf . '"' ?> />
-                                                </div>
-                                                <div class="form-group">
-                                                    <input class="form-control" type="text" name="howTo" placeholder="Способ применения" <?php if (isset($search_howTo)) echo 'value="' . $search_howTo . '"' ?> />
-                                                </div>
-                                                <button type="submit" class="btn orange button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                            </div>
-                                        </div>
                                         <button type="submit" class="btn orange button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                                     </div>
                                 </div>
                             </div>
                         </form>
                     </div>
-                        <!-- / search box -->             
                 </div>
             </div>
         </div>
@@ -421,6 +293,7 @@
                         </li>
                         <li itemprop="name"><a itemprop="url" href="/catalog/type?id=3">Для мужчин</a></li>
                         <li itemprop="name"><a itemprop="url" href="/catalog/type?id=2">Для детей</a></li>
+                        <li itemprop="name"><a itemprop="url" href="/catalog/type?id=4">Для дома</a></li>
                         <li itemprop="name"><a itemprop="url" href="/catalog/firm">Бренды<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <?php 

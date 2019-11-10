@@ -3,7 +3,7 @@
 Class Controller_Editblog Extends Controller_Base {
         
     function index() {
-        if ($this->registry['isadmin']) {
+        if (isadmin) {
             $this->registry['model']->logVisit(1004);
             $this->registry['template']->show('editblog');
         } else {
@@ -12,7 +12,7 @@ Class Controller_Editblog Extends Controller_Base {
     }
     
     function remove() {
-        if ($this->registry['isadmin']) {
+        if (isadmin) {
             unlink('images/blog/blog' . $_GET['blog'] . '.png');
             unlink('images/blog/blog' . $_GET['blog'] . '.jpg');
             $this->registry['model']->removeBlog($_GET['blog']);
@@ -23,7 +23,7 @@ Class Controller_Editblog Extends Controller_Base {
     }
     
     function save() {
-        if ($this->registry['isadmin']) {
+        if (isadmin) {
 
             $blogId = $this->registry['model']->addBlogEntry($_POST['id'], $_POST['header'], $_POST['author'], $_POST['url'], $_POST['text'], $_POST['date']);
 

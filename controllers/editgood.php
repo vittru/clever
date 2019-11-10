@@ -3,7 +3,7 @@
 Class Controller_Editgood Extends Controller_Base {
         
     function index() {
-        if ($this->registry['isadmin']) {
+        if (isadmin) {
             $this->registry['model']->logVisit(1000, $_GET['good']);
             $this->registry['template']->show('editgood');
         } else {
@@ -12,7 +12,7 @@ Class Controller_Editgood Extends Controller_Base {
     }
     
     function save() {
-        if ($this->registry['isadmin']) {
+        if (isadmin) {
             foreach ($_POST as $name => $val) {
                 if ($name === 'brand') {
                     $firmId = substr($val, 4);

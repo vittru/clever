@@ -74,8 +74,21 @@ Class Controller_Search Extends Controller_Base {
         $this->registry['template']->show('catalog');
     }
     
-    function performSearch($criteria) {
+    private function performSearch($criteria) {
         $foundgoods=array();
+        foreach($criteria as $key => $value) {
+            if ($key == "name" and !empty($value)) {
+                $foundgoods = $this->registry['model']->searchGoods('name', $value);
+                $keywords = preg_split('/[\s]+/', $value);
+                if (sizeof($keywords) > 1) {
+                    foreach ($keywords as $key => $keyword){
+                        $addGoods = $this->registry['model']->searchGoods('name', $keyword);
+                        $foundgoods = $foundgoods + $addGoods;
+                    }
+                }
+            }
+        }
+        /*
         foreach ($this->registry['model']->getAllGoods() as $goodId=>$good) {
             $found = true;
             foreach($criteria as $key => $value){
@@ -144,7 +157,7 @@ Class Controller_Search Extends Controller_Base {
             if ($found and !$good->hidden) {
                 $foundgoods[$goodId] = $good;
             }
-        }
+        } */
         return $foundgoods;
     }
 

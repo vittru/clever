@@ -93,8 +93,12 @@ Class Good {
         if (!isset ($row)) {
             $row=4;
         }
-        if (!$this->hidden) {
-            echo '<li class="col-sm-'.$row.' good">';
+        if (isadmin or (!isadmin and !$this->hidden)) {
+            echo '<li class="col-sm-'.$row.' good';
+            if ($this->hidden) {
+                echo ' hidde ';
+            }        
+            echo '">';
             foreach ($this->types as $id=>$type) {
                 echo '<div hidden class="type_'. $id . '"></div>';
             }

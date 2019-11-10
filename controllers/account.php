@@ -5,7 +5,7 @@ Class Controller_Account Extends Controller_Base {
     function index() {
         if ($_SESSION['user']->name) {
             $this->registry['model']->logVisit(27);
-            if ($this->registry['isadmin']) {
+            if (isadmin) {
                 $this->registry['template']->set('orders', $this->registry['model']->getAllOrders());
             } else {
                 $this->registry['template']->set('orders', $this->registry['model']->getUserOrders($_SESSION['user']->id));
@@ -174,7 +174,7 @@ Class Controller_Account Extends Controller_Base {
     }
     
     function updateorder() {
-        if ($this->registry['isadmin']) {
+        if (isadmin) {
             $status = $_GET['status'];
             $orderid = $_GET['order'];
             $this->registry['model']->updateOrder($orderid, $status);
@@ -197,7 +197,7 @@ Class Controller_Account Extends Controller_Base {
     }
     
     function orderlink() {
-        if ($this->registry['isadmin'] && isset($_GET['id'])) {
+        if (isadmin && isset($_GET['id'])) {
             $link = $this->registry['model']->setOrderLink($_GET['id']);
             echo '/buy/link?id=' . $link;
         } else {
@@ -206,7 +206,7 @@ Class Controller_Account Extends Controller_Base {
     }
     
     function changeorder() {
-        if ($this->registry['isadmin'] && isset($_POST['id'])) {
+        if (isadmin && isset($_POST['id'])) {
             foreach ($_POST as $name => $val) {
                 if (strpos($name, 'price') !== false) {
                     $goodId = substr($name, 5);
