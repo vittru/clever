@@ -82,7 +82,9 @@ Class Controller_Search Extends Controller_Base {
                 $keywords = preg_split('/[\s]+/', $value);
                 if (sizeof($keywords) > 1) {
                     foreach ($keywords as $key => $keyword){
-                        $addGoods = $this->registry['model']->searchGoods('name', $keyword);
+                        if ($keyword and $keyword != 'и' and $keyword != 'для') {
+                            $addGoods = $this->registry['model']->searchGoods('name', $keyword);
+                        }    
                         $foundgoods = $foundgoods + $addGoods;
                     }
                 }

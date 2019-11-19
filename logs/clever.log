@@ -41,3 +41,102 @@
 [10/Nov/2019:12:52:57] (index) 7
 [10/Nov/2019:12:52:57] (index) %пена%
 [10/Nov/2019:12:52:57] (index) 2
+[12/Nov/2019:15:00:54] (index) Unable to find user by ip and agent
+[12/Nov/2019:15:00:54] (index) ::1
+[12/Nov/2019:15:00:54] (index) Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:70.0) Gecko/20100101 Firefox/70.0
+[12/Nov/2019:15:01:20] (index) Error when updating ip and useragent for userId=89659 to ip=::1 and agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:70.0) Gecko/20100101 Firefox/70.0
+[12/Nov/2019:15:01:20] (index) PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '::1-Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:70.0) Gecko' for key 'unique_user' in /Applications/MAMP/htdocs/ClubClever/classes/model.php:76
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(76): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(112): Model->executeQuery(Object(PDOStatement), 'Error when upda...')
+#2 /Applications/MAMP/htdocs/ClubClever/index.php(11): Model->getUser()
+#3 {main}getMessage
+[16/Nov/2019:13:58:45] (index) Error when logging a visit to DB
+[16/Nov/2019:13:58:45] (index) PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`visits`, CONSTRAINT `visits_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) in /Applications/MAMP/htdocs/ClubClever/classes/model.php:76
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(76): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(175): Model->executeQuery(Object(PDOStatement), 'Error when logg...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/index.php(6): Model->logVisit('1')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Index->index()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(34): Router->delegate()
+#5 {main}getMessage
+[16/Nov/2019:13:58:46] (index) Error when logging a visit to DB
+[16/Nov/2019:13:58:46] (index) PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`visits`, CONSTRAINT `visits_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) in /Applications/MAMP/htdocs/ClubClever/classes/model.php:76
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(76): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(175): Model->executeQuery(Object(PDOStatement), 'Error when logg...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/index.php(6): Model->logVisit('1')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Index->index()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(34): Router->delegate()
+#5 {main}getMessage
+[16/Nov/2019:13:58:52] (index) Error when logging a visit to DB
+[16/Nov/2019:13:58:52] (index) PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`visits`, CONSTRAINT `visits_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) in /Applications/MAMP/htdocs/ClubClever/classes/model.php:76
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(76): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(175): Model->executeQuery(Object(PDOStatement), 'Error when logg...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/search.php(6): Model->logVisit('10', false, 'route=search&na...')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Search->index()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(34): Router->delegate()
+#5 {main}getMessage
+[16/Nov/2019:13:58:52] (index) %тени для вес%
+[16/Nov/2019:13:58:52] (index) 0
+[16/Nov/2019:13:58:52] (index) %тени%
+[16/Nov/2019:13:58:52] (index) 41
+[16/Nov/2019:13:58:52] (index) %вес%
+[16/Nov/2019:13:58:52] (index) 0
+[16/Nov/2019:13:59:13] (index) Error when logging a visit to DB
+[16/Nov/2019:13:59:13] (index) PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`visits`, CONSTRAINT `visits_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) in /Applications/MAMP/htdocs/ClubClever/classes/model.php:76
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(76): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(175): Model->executeQuery(Object(PDOStatement), 'Error when logg...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/search.php(6): Model->logVisit('10', false, 'route=search&na...')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Search->index()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(34): Router->delegate()
+#5 {main}getMessage
+[16/Nov/2019:13:59:13] (index) %мед %
+[16/Nov/2019:13:59:13] (index) 1
+[16/Nov/2019:13:59:13] (index) %мед%
+[16/Nov/2019:13:59:13] (index) 11
+[16/Nov/2019:13:59:19] (index) Error when logging a visit to DB
+[16/Nov/2019:13:59:19] (index) PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`visits`, CONSTRAINT `visits_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) in /Applications/MAMP/htdocs/ClubClever/classes/model.php:76
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(76): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(175): Model->executeQuery(Object(PDOStatement), 'Error when logg...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/search.php(6): Model->logVisit('10', false, 'route=search&na...')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Search->index()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(34): Router->delegate()
+#5 {main}getMessage
+[16/Nov/2019:13:59:19] (index) %мед и%
+[16/Nov/2019:13:59:19] (index) 1
+[16/Nov/2019:13:59:19] (index) %мед%
+[16/Nov/2019:13:59:19] (index) 11
+[16/Nov/2019:13:59:25] (index) Error when logging a visit to DB
+[16/Nov/2019:13:59:25] (index) PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`visits`, CONSTRAINT `visits_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) in /Applications/MAMP/htdocs/ClubClever/classes/model.php:76
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(76): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(175): Model->executeQuery(Object(PDOStatement), 'Error when logg...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/search.php(6): Model->logVisit('10', false, 'route=search&na...')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Search->index()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(34): Router->delegate()
+#5 {main}getMessage
+[16/Nov/2019:13:59:25] (index) %мед и малин%
+[16/Nov/2019:13:59:25] (index) 1
+[16/Nov/2019:13:59:25] (index) %мед%
+[16/Nov/2019:13:59:25] (index) 11
+[16/Nov/2019:13:59:25] (index) %малин%
+[16/Nov/2019:13:59:25] (index) 10
+[16/Nov/2019:13:59:52] (index) Error when logging a visit to DB
+[16/Nov/2019:13:59:52] (index) PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`clubclever`.`visits`, CONSTRAINT `visits_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) in /Applications/MAMP/htdocs/ClubClever/classes/model.php:76
+Stack trace:
+#0 /Applications/MAMP/htdocs/ClubClever/classes/model.php(76): PDOStatement->execute()
+#1 /Applications/MAMP/htdocs/ClubClever/classes/model.php(175): Model->executeQuery(Object(PDOStatement), 'Error when logg...')
+#2 /Applications/MAMP/htdocs/ClubClever/controllers/search.php(6): Model->logVisit('10', false, 'route=search&na...')
+#3 /Applications/MAMP/htdocs/ClubClever/classes/router.php(35): Controller_Search->index()
+#4 /Applications/MAMP/htdocs/ClubClever/index.php(34): Router->delegate()
+#5 {main}getMessage
+[16/Nov/2019:13:59:52] (index) %мед и малинж%
+[16/Nov/2019:13:59:52] (index) 0
+[16/Nov/2019:13:59:52] (index) %мед%
+[16/Nov/2019:13:59:52] (index) 11
+[16/Nov/2019:13:59:52] (index) %малинж%
+[16/Nov/2019:13:59:52] (index) 0

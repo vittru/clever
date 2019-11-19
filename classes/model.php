@@ -84,32 +84,39 @@ Class Model {
     function getUser() {
         $user = $_SESSION['user'];
         $userId = $user->id;
+        if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)){
+            $ip = end(array_values(array_filter(explode(',',$_SERVER['HTTP_X_FORWARDED_FOR']))));
+        }else if (array_key_exists('REMOTE_ADDR', $_SERVER)) { 
+            $ip = $_SERVER["REMOTE_ADDR"]; 
+        }else if (array_key_exists('HTTP_CLIENT_IP', $_SERVER)) {
+            $ip = $_SERVER["HTTP_CLIENT_IP"]; 
+        }
+        $ip=trim($ip);
+        $agent = trim($_SERVER['HTTP_USER_AGENT']);
+
         //If userId is not set we're trying to get User ID from DB by his ip and agent
         if (!$userId) {
-            if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)){
-                $ip = end(array_values(array_filter(explode(',',$_SERVER['HTTP_X_FORWARDED_FOR']))));
-            }else if (array_key_exists('REMOTE_ADDR', $_SERVER)) { 
-                $ip = $_SERVER["REMOTE_ADDR"]; 
-            }else if (array_key_exists('HTTP_CLIENT_IP', $_SERVER)) {
-                $ip = $_SERVER["HTTP_CLIENT_IP"]; 
-            }
-            $ip=trim($ip);
-            
-            $agent = trim($_SERVER['HTTP_USER_AGENT']);
-
             $sqlSelect = $this->db->prepare($this->selectId);
             $sqlSelect->bindParam(':ip', $ip);
             $sqlSelect->bindParam(':userAgent', $agent);
 
             $this->executeQuery($sqlSelect, 'Error when getting userId from DB');
             $userId = $sqlSelect->fetchColumn();
-            $this->registry['logger']->lwrite('Unable to find user by ip and agent');
-            $this->registry['logger']->lwrite($ip);
-            $this->registry['logger']->lwrite($agent);
             $sqlSelect->closeCursor();
+        } else {
+            //If user identified by cookies we update his ip and useragent
+            $sqlUpdate = $this->db->prepare('UPDATE users SET ip=:ip,useragent=:agent WHERE id=:id');
+            $sqlUpdate->bindParam(':ip', $ip);
+            $sqlUpdate->bindParam(':agent', $agent);
+            $sqlUpdate->bindParam(':id', $userId);
+            $this->executeQuery($sqlUpdate, 'Error when updating ip and useragent for userId='.$userId.' to ip='.$ip.' and agent='.$agent);
+            $sqlUpdate->closeCursor();
         }
         //If user doesn't exist in DB we create it in Users table
         if (!$userId) {
+            $this->registry['logger']->lwrite('Unable to find user by ip and agent');
+            $this->registry['logger']->lwrite($ip);
+            $this->registry['logger']->lwrite($agent);
             $sqlInsert = $this->db->prepare($this->addUser);
             $sqlInsert->bindParam(':ip', $ip);
             $sqlInsert->bindParam(':userAgent', $agent);

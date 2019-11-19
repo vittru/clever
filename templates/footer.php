@@ -7,7 +7,7 @@
                         <div class="footer-header">Главное меню</div>
                         <ul class="aa-footer-nav">
                             <li><a href="/catalog/sc">Каталог</a></li>
-                            <li><a href="/catalog/firms">Бренды</a></li>
+                            <li><a href="/catalog/firm">Бренды</a></li>
                             <li><a href="/actions">Акции</a></li>
                             <li><a href="/news">Новости</a></li>
                         </ul>
