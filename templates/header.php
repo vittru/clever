@@ -218,7 +218,7 @@
                                             <li>
                                                 <a class="aa-cartbox-img" href="/showgood?id=<?php echo $good->id ?>"><img src="<?php echo $good->getImage() ?>" alt="<?php echo $good->name ?>"></a>
                                                 <div class="aa-cartbox-info">
-                                                    <a href="/showgood?id=<?php echo $good->id; ?>"><div class="cart-good"><?php echo $good->name ?> <?php echo $size->size ?></div></a>
+                                                    <a href="/showgood?id=<?php echo $good->id; ?>"><div class="cart-good"><?php echo $good->name ?></div></a>
                                                     <p><?php echo $cartItem->quantity ?> x <?php echo $cartItem->price . currency ?></p>
                                                 </div>
                                                 <a class="aa-remove-product" id="<?php echo $cartItem->goodId; ?>" value="<?php echo $cartItem->sizeId; ?>"><span class="fa fa-times"></span></a>

@@ -42,7 +42,7 @@ include 'header.php';
                                         <tr>
                                             <td><a class="aa-remove-product" id="<?php echo $cartItem->goodId; ?>" value="<?php echo $cartItem->sizeId; ?>"><fa class="fa fa-times"></fa></a></td>
                                             <td><a href="/showgood?id=<?php echo $good->id ?>"><img src="<?php echo $good->getImage() ?>" alt="<?php echo $good->name ?>"></a></td>
-                                            <td><a class="aa-cart-title" href="/showgood?id=<?php echo $good->id ?>"><?php echo $good->name ?> <?php echo $size->size ?></a></td>
+                                            <td><a class="aa-cart-title" href="/showgood?id=<?php echo $good->id ?>"><?php echo $good->name ?></a></td>
                                             <td><?php echo $cartItem->price ?></td>
                                             <td><input class="aa-cart-quantity form-control" type="number" value="<?php echo $cartItem->quantity ?>"></td>
                                             <td><?php echo $cartItem->quantity * $cartItem->price . currency ?></td>

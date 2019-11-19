@@ -152,7 +152,7 @@ include 'header.php';
                                                 <div class="row">
                                                     <div class="col-md-8">
                                                         <div class="aa-checkout-single-bill">
-                                                            <?php echo $good->name." ".$size->size; ?><strong>&nbsp;&nbsp;x&nbsp;&nbsp;<?php echo $cartItem->quantity ?></strong>
+                                                            <?php echo $good->name ?><strong>&nbsp;&nbsp;x&nbsp;&nbsp;<?php echo $cartItem->quantity ?></strong>
                                                             <?php 
                                                             if ($cartItem->sale) {
                                                                 echo "*";
