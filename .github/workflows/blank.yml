@@ -12,4 +12,5 @@ jobs:
         FTP_SERVER: ftp.c16483.nichost.ru
         FTP_USERNAME: c16483_ftp
         FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-        ARGS: --exclude=includes/startup.php --exclude=log/clever.log --exclude=css/clubclever-admin.css --exclude=css/clubclever-theme.css --exclude=css/clubclever.css --exclude=css/search.css --exclude=js/auth-form.js --exclude=js/bootstrap.js --exclude=js/clubclever.js --exclude=js/custom.js --exclude=jquery-editable-select.js --exclude=js/jquery.smartmenus.bootstrap.js --exclude-glob=*htaccess
+        REMOTE_DIR: clubclever.ru/docs
+        ARGS: --exclude=.git --exclude=.github --exclude-glob=images/* --exclude-glob=nbproject/* --exclude=logs/sql-queries --exclude=includes/startup.php --exclude=log/clever.log --exclude=css/clubclever-admin.css --exclude=css/clubclever-theme.css --exclude=css/clubclever.css --exclude=css/search.css --exclude=js/auth-form.js --exclude=js/bootstrap.js --exclude=js/clubclever.js --exclude=js/custom.js --exclude=jquery-editable-select.js --exclude=js/jquery.smartmenus.bootstrap.js --exclude-glob=*htaccess
