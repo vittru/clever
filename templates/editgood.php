@@ -192,7 +192,7 @@ if ($goodId) {
             <tr>
                 <td>  
                     <div class="form-group">
-                        <label class="col-md-2" for="bestbefore">Срок хранения:</label>
+                        <label class="col-md-2" for="bestbefore">Срок годности:</label>
                         <textarea class="form-control col-md-10 text" rows="3" id="bestbefore" name="bestbefore" maxlength="200"><?php if ($good) echo $good->bestbefore ?></textarea>
                     </div>
                 </td>
