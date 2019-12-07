@@ -7,9 +7,7 @@ Class Model {
     
     private $selectId = "SELECT id FROM users "
             . "WHERE ip=:ip AND useragent=:userAgent";
-    private $selectProfile = "SELECT p.* "
-            . "FROM profiles p, users u "
-            . "WHERE u.id = :userId AND u.profile = p.id";
+    private $selectProfile = "SELECT p.* FROM profiles p, users u WHERE u.id = :userId AND u.profile = p.id";
     private $addUser = "INSERT INTO users (ip, useragent)"
             . "VALUES(:ip, :userAgent)";
     private $addVisit = "INSERT INTO visits (userid, pageid, time, good, url)"
@@ -105,10 +103,14 @@ Class Model {
             $sqlSelect->closeCursor();
         } else {
             //If user identified by cookies we update his ip and useragent
-            $sqlUpdate = $this->db->prepare('UPDATE users SET ip=:ip,useragent=:agent WHERE id=:id');
+            if (is_numeric($userId)) {
+                $sqlUpdate = $this->db->prepare('UPDATE users SET ip=:ip,useragent=:agent WHERE id=:id');
+            } else {
+                $sqlUpdate = $this->db->prepare('UPDATE users SET ip=:ip,useragent=:agent WHERE uuid=:id');
+            }    
+            $sqlUpdate->bindParam(':id', $userId);
             $sqlUpdate->bindParam(':ip', $ip);
             $sqlUpdate->bindParam(':agent', $agent);
-            $sqlUpdate->bindParam(':id', $userId);
             $this->executeQuery($sqlUpdate, 'Error when updating ip and useragent for userId='.$userId.' to ip='.$ip.' and agent='.$agent);
             $sqlUpdate->closeCursor();
         }
@@ -125,6 +127,11 @@ Class Model {
             $sqlInsert->closeCursor();
         //If user exists we're getting his info from Profiles table    
         }else{
+            if (is_numeric($userId)) {
+                $sqlSelect = $this->db->prepare("SELECT p.* FROM profiles p, users u WHERE u.id = :userId AND u.profile = p.id");
+            } else {
+                $sqlSelect = $this->db->prepare("SELECT p.* FROM profiles p, users u WHERE u.uuid = :userId AND u.profile = p.id");
+            }
             $sqlSelect = $this->db->prepare($this->selectProfile);
             $sqlSelect->bindParam(':userId', $userId);
             $this->executeQuery($sqlSelect, 'Error when selecting user properties from DB');
@@ -139,12 +146,47 @@ Class Model {
             $user->birthday = $data['birthday'];
             $sqlSelect->closeCursor();
         }
-        $user->id = $userId;
+        if (!is_numeric($userId)) {
+            $user->id = $this->getId($userId);
+        } else {
+            $user->id = $userId;
+        }    
         $this->registry->remove('user');
         $this->registry->set('user', $user);
+        if (is_numeric($userId)) {
+            $userId = $this->getUUID($userId);
+        }
         setcookie('user', $userId, 60*24*60*60+time(), "/");
     }
     
+    function getUUID($userId) {
+        $sqlSelect = $this->db->prepare("SELECT uuid FROM users WHERE id=:id");
+        $sqlSelect->bindParam(':id', $userId);
+        $this->executeQuery($sqlSelect, 'Error when selecting uuid from DB');
+        $uuid = $sqlSelect->fetchColumn();
+        $sqlSelect->closeCursor();
+        if ($uuid) {
+            return $uuid;
+        } else {
+            $uuid = uniqid('', true);
+            $sqlUpdate = $this->db->prepare("UPDATE users SET uuid=:uuid WHERE id=:id");
+            $sqlUpdate->bindParam(':id', $userId);
+            $sqlUpdate->bindParam(':uuid', $uuid);
+            $this->executeQuery($sqlUpdate, 'Error when setting uuid');
+            $sqlUpdate->closeCursor();
+            return $uuid;
+        }
+    }
+    
+    function getId($uuid) {
+        $sqlSelect = $this->db->prepare("SELECT id FROM users WHERE uuid=:id");
+        $sqlSelect->bindParam(':id', $uuid);
+        $this->executeQuery($sqlSelect, 'Error when selecting id from DB');
+        $id = $sqlSelect->fetchColumn();
+        $sqlSelect->closeCursor();
+        return $id;
+    }
+
     //Gets user's last visit from DB
     function getLastVisit() {
         $sqlLastVisit = $this->db->prepare($this->lastVisit);
