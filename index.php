@@ -20,7 +20,7 @@
     $registry->set('problems', $model->getCatalog('problems'));
     $registry->set('branches', $model->getBranches());
 
-    $isAdmin = ($_SESSION['user']->email == 'Nataliya.zhirnova@gmail.com' or $_SESSION['user']->email == 'Tev0205@gmail.com');
+    $isAdmin = ($_SESSION['user']->email == 'Nataliya.zhirnova@gmail.com' or $_SESSION['user']->email == 'tev0205@gmail.com');
     define('isadmin', $isAdmin);
     //$registry->set('isadmin', $isAdmin);
 
