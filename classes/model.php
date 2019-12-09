@@ -132,7 +132,6 @@ Class Model {
             } else {
                 $sqlSelect = $this->db->prepare("SELECT p.* FROM profiles p, users u WHERE u.uuid = :userId AND u.profile = p.id");
             }
-            $sqlSelect = $this->db->prepare($this->selectProfile);
             $sqlSelect->bindParam(':userId', $userId);
             $this->executeQuery($sqlSelect, 'Error when selecting user properties from DB');
             $data = $sqlSelect->fetch();
