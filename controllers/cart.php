@@ -68,7 +68,7 @@ Class Controller_Cart Extends Controller_Base {
     }  
     
     private function applyDiscounts() {
-        //$this->fiveGoodsDiscount();
+        $this->thirdFree();
     }
     
     //При покупке шампуня скидка на средства для волос 30%
@@ -602,15 +602,21 @@ Class Controller_Cart Extends Controller_Base {
                 return $a->getPrice() < $b->getPrice();
             }
             usort($goods, "cmp");
+            $salegoods=$goods;
+            array_splice($salegoods,0,round($size/2));
+            $salegoodids = array();
+            foreach ($salegoods as $good) {
+                array_push($salegoodids, $good->id);
+            }
             foreach ($_SESSION['cart'] as $cartItem) {
                 //We consider only 3rd and 6th goods. I doubt if anybody will add more than 6 goods to cart
-                if ($cartItem->sale != 50 && ($cartItem->goodId == $goods[$size - 1]->id || ($size >= 4 && $cartItem->goodId == $goods[$size - 2]->id))) {
+                if ($cartItem->sale != 50 && in_array($cartItem->goodId, $salegoodids)) { // ($cartItem->goodId == $goods[$size - 1]->id || ($size >= 4 && $size < 6 && $cartItem->goodId == $goods[$size - 2]->id && $cartItem->goodId == $goods[$size - 1]->id) || ($size >= 6 && $cartItem->goodId == $goods[$size - 3]->id && $cartItem->goodId == $goods[$size - 2]->id && $cartItem->goodId == $goods[$size - 1]->id))) {
                     $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
                     $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
                     $cartItem->sale = 50;
                     $cartItem->price = ceil($cartItem->price * (0.5));;
                     $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
-                } else if ($cartItem->sale == 50 && ($cartItem->goodId != $goods[$size - 1]->id || ($size >= 4 && $cartItem->goodId == $goods[$size - 2]->id))) {
+                } else if ($cartItem->sale == 50 && !in_array($cartItem->goodId, $salegoodids)) {  //($cartItem->goodId != $goods[$size - 1]->id || ($size >= 4 && $size < 6 && $cartItem->goodId != $goods[$size - 2]->id && $cartItem->goodId != $goods[$size - 1]->id) || ($size >= 6 && $cartItem->goodId != $goods[$size - 3]->id && $cartItem->goodId != $goods[$size - 2]->id && $cartItem->goodId != $goods[$size - 1]->id))) {
                     $good = $this->registry['model']->getGood($cartItem->goodId);
                     $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
                     $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
