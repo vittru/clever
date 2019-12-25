@@ -293,7 +293,7 @@
                         </li>
                         <li itemprop="name"><a itemprop="url" href="/catalog/type?id=3">Для мужчин</a></li>
                         <li itemprop="name"><a itemprop="url" href="/catalog/type?id=2">Для детей</a></li>
-                        <li itemprop="name"><a itemprop="url" href="/catalog/type?id=4">Для дома</a></li>
+                        <li itemprop="name"><a itemprop="url" href="/catalog/sc/uhod-za-domom">Для дома</a></li>
                         <li itemprop="name"><a itemprop="url" href="/catalog/firm">Бренды<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <?php 
