@@ -201,7 +201,7 @@ if ($goodId) {
                 <td>  
                     <div class="form-group">
                         <label class="col-md-2" for="precaution">Противопоказания:</label>
-                        <textarea class="form-control col-md-10 text" rows="3" id="howTo" name="precaution" maxlength="200"><?php if ($good) echo $good->precaution ?></textarea>
+                        <textarea class="form-control col-md-10 text" rows="3" id="howTo" name="precaution" maxlength="200"><?php if ($good) {if ($good->precaution) {echo $good->precaution;} else {echo 'Индивидуальная непереносимость';} } else {echo 'Индивидуальная непереносимость';}?></textarea>
                     </div>
                 </td>
             </tr>
