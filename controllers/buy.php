@@ -37,7 +37,7 @@ Class Controller_Buy Extends Controller_Base {
             $this->informClient($orderId, $_POST, $_SESSION['cart']);
             
             //Update bonuses
-            if ($_SESSION['user']->name /*and !$_POST['bonus'] and !$_POST['promo']*/) {
+            if ($_SESSION['user']->name) {
                 $bonus = $this->registry['model']->updateBonus($orderId, $_SESSION['user']->bonus);
                 $_SESSION['user']->bonus += $bonus;
             }
@@ -217,9 +217,9 @@ Class Controller_Buy Extends Controller_Base {
         if ($bonus) {
             if ($bonus > $_SESSION['user']->bonus) {
                 $error = 'У вас нет столько бонусов';
-            } else if ($bonus > floor($total * 0.25)) {
-                $error = 'Бонусами можно оплатить только 25% покупки';
-            }
+            } //else if ($bonus > floor($total * 0.25)) {
+                //$error = 'Бонусами можно оплатить только 25% покупки';
+            //}
             if (!$error) {
                 $discount = $bonus;
             }

@@ -1231,13 +1231,15 @@ Class Model {
         $this->executeQuery($sqlSelect, 'Error when getting total for order '.$orderId);
         $total = $sqlSelect->fetchColumn();
         $sqlSelect->closeCursor();
-        $sqlSelect = $this->db->prepare('SELECT p.amount, p.percent FROM promos p, orders o WHERE p.id=o.promoid AND o.id=:orderId');
+        $sqlSelect = $this->db->prepare('SELECT o.bonus,COALESCE(p.amount,0) amount, COALESCE(p.percent,0) percent FROM orders o left join promos p on o.promoid=p.id where o.id=:orderId');
         $sqlSelect->bindParam(':orderId', $orderId);
         $this->executeQuery($sqlSelect, 'Error when getting promo for order '.$orderId);
         $data = $sqlSelect->fetch();
         $sqlSelect->closeCursor();
-        $total = $total - $data['amount'] - floor($total * $data['percent']/100);
-        $newBonus = floor($total / 10);
+        $this->registry['logger']->lwrite($data['bonus']);
+        $total = $total - $data['amount'] - floor($total * $data['percent']/100) - $data['bonus'];
+        $this->registry['logger']->lwrite($total);
+        $newBonus = floor($total / 20);
         $sqlUpdate = $this->db->prepare('UPDATE profiles SET bonus=:bonus WHERE id in (SELECT profileId FROM orders WHERE id=:orderId)');
         $bonus += $newBonus;
         $sqlUpdate->bindParam(':bonus', $bonus);

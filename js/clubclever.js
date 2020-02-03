@@ -128,7 +128,7 @@ $('.panel-heading a').on('click',function(e){
         e.stopPropagation();
     }
     e.preventDefault();
-})
+});
 
 $('#order-form').submit(function(e) {
     var submit = true;
