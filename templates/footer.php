@@ -279,7 +279,7 @@
 <script src="/js/custom.min.js?20181101"></script> 
 <script src="/js/jquery.validate.min.js"></script>
 <script src="/js/auth-form.min.js?<?php echo '20171228' ?>"></script>
-<script src="/js/clubclever.min.js?<?php echo '20190718' ?>"></script>
+<script src="/js/clubclever.min.js?<?php echo '20200206' ?>"></script>
 <script src="/js/lightbox.min.js"></script> 
 
 </body>

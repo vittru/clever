@@ -182,7 +182,9 @@ Class Good {
             }
             echo '</span>';
             if ($this->isAvailable() && $this->sale > 0 && !$bb) {
-                echo '<span class="aa-product-price"><del>';
+                echo '<span class="aa-product-price"><del value=';
+                echo $this->getMinSizePrice() - $this->getPrice();
+                echo '>';
                 echo $this->getWebOldPrice();
                 echo '</del></span>';
             }

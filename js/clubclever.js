@@ -8,6 +8,7 @@ $(document.body).on('hidden.bs.modal', function () {
 
 var nameAsc = true;
 var priceAsc = true;
+var discountAsc = true;
 
 function filter() {
     $("ul.aa-product-catg li.good").show();
@@ -48,6 +49,26 @@ $("#priceSortButton").on("click", function () {
     $("div.aa-product-catg-head").find(".sortDesc").hide();
     
     if (priceAsc) {
+        $(this).find(".sortAsc").show();
+    } else {
+        $(this).find(".sortDesc").show();
+    }    
+    $("ul.aa-product-catg").html(numericallyOrderedDivs);
+});
+
+$("#discountSortButton").on("click", function () {
+    var numericallyOrderedDivs = $("ul.aa-product-catg li.good").sort(function (a, b) {
+        var aD = parseInt($(a).find(".aa-product-price>del").attr('value'));
+        if (!aD) aD=0;
+        var bD = parseInt($(b).find(".aa-product-price>del").attr('value'));
+        if (!bD) bD=0;
+        return (discountAsc == (aD > bD)) ? 1 : -1;
+    });
+    discountAsc = discountAsc ? false : true;
+    $("div.aa-product-catg-head").find(".sortAsc").hide();
+    $("div.aa-product-catg-head").find(".sortDesc").hide();
+    
+    if (discountAsc) {
         $(this).find(".sortAsc").show();
     } else {
         $(this).find(".sortDesc").show();
