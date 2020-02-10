@@ -68,7 +68,7 @@ Class Controller_Cart Extends Controller_Base {
     }  
     
     private function applyDiscounts() {
-        $this->crystallShadows();
+        //$this->crystallShadows();
     }
     
     //При покупке шампуня скидка на средства для волос 30%
