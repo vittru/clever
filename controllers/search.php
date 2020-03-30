@@ -88,6 +88,13 @@ Class Controller_Search Extends Controller_Base {
                         $foundgoods = $foundgoods + $addGoods;
                     }
                 }
+                //Search by brand (we perform it only for whole srting)
+                foreach ($this->registry['firms'] as $firmId => $firm) {
+                    if (mb_stripos($firm->name, $value) !== false) {
+                        $firmGoods = $this->registry['model']->getGoodsByFirm($firmId);
+                        $foundgoods = $foundgoods + $firmGoods;
+                    }
+                }
             }
         }
         /*
