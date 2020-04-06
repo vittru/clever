@@ -68,7 +68,7 @@ Class Controller_Cart Extends Controller_Base {
     }  
     
     private function applyDiscounts() {
-        //$this->thirdFree();
+        $this->totalPriceDiscount();
     }
     
     //При покупке шампуня скидка на средства для волос 30%
@@ -834,4 +834,43 @@ Class Controller_Cart Extends Controller_Base {
             }
         }
     }
+    
+    //Если в корзине товаров на > 2300 рублей, то на все скидка 25%
+    private function totalPriceDiscount() {
+        if ($this->getCartT(25) >= 2300) {
+            foreach ($_SESSION['cart'] as $cartItem) {
+                if (!$cartItem->sale) {
+                    $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
+                    $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
+                    $cartItem->sale = 25;
+                    $cartItem->price = round($cartItem->price * (0.75));
+                    $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
+                }
+            }
+        } else {
+            foreach ($_SESSION['cart'] as $cartItem) {
+                if ($cartItem->sale == 25) {
+                    $this->registry['logger']->lwrite('Updating good ' . $cartItem->goodId);
+                    $this->registry['logger']->lwrite('Old price is ' . $cartItem->price);
+                    $cartItem->price = round($cartItem->price * 100 / (100 - $cartItem->sale));
+                    $cartItem->sale = 0;
+                    $this->registry['logger']->lwrite('New price is ' . $cartItem->price);
+                }
+            }
+            
+        }
+    }
+    
+    private function getCartT($discount) {
+        $total = 0;
+        foreach ($_SESSION['cart'] as $cartItem) {
+            if ($cartItem->sale == $discount) {
+                $total = $total + round($cartItem->price * 100 / (100 - $cartItem->sale)) * $cartItem->quantity;
+            } else if (!$cartItem->sale) {
+                $total = $total + $cartItem->price * $cartItem->quantity;
+            }
+        }
+        return $total;
+    }
+
 }
