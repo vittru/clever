@@ -68,7 +68,7 @@ Class Controller_Cart Extends Controller_Base {
     }  
     
     private function applyDiscounts() {
-        $this->homeSecondHalf();
+        $this->thirdFree();
     }
     
     //При покупке шампуня скидка на средства для волос 30%
