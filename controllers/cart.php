@@ -68,7 +68,7 @@ Class Controller_Cart Extends Controller_Base {
     }  
     
     private function applyDiscounts() {
-        //$this->thirdFree();
+        $this->mustaevaCream();
     }
     
     //При покупке шампуня скидка на средства для волос 30%
@@ -858,6 +858,42 @@ Class Controller_Cart Extends Controller_Base {
                 }
             }
             
+        }
+    }
+    
+    //Если в корзине товаров от Мустаевой больше 1000 рублей, то бесплатно добавляем крем детский
+    private function mustaevaCream() {
+        $mustaevaTotal = 0;
+        foreach ($_SESSION['cart'] as $cartItem) {
+            $good = $this->registry['model']->getGood($cartItem->goodId);
+            if ($good->id == 677 and $cartItem->price == 1) {
+                $already = true;
+                break;
+            }
+            if ($good->id <> 677 && $good->firmId == 1) {
+                $mustaevaTotal = $mustaevaTotal + $cartItem->price*$cartItem->quantity;
+            }
+        }
+        $sale = $mustaevaTotal > 1000;
+        if (!$already) {
+            if ($sale) {
+                $cream = new CartItem();
+                $cream->goodId = 677;
+                $cream->quantity = 1;
+                $cream->sizeId = 723;
+                $cream->price = 1;
+                $cream->sale = 100;
+                array_push($_SESSION['cart'], $cream);
+            }     
+        } else {
+            if (!$sale) {
+                foreach ($_SESSION['cart'] as $cartItem) {
+                    if ($cartItem->goodId == 677 && $cartItem->price == 1) {
+                        unset($_SESSION['cart'][array_search($cartItem, $_SESSION['cart'])]);
+                        break;
+                    }
+                }
+            } 
         }
     }
     
